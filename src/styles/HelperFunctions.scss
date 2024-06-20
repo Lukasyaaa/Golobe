@@ -1,0 +1,9 @@
+@function toRem($px){
+    @return $px / 16 * 1rem;
+}
+@function toEm($ch, $pr){
+    @return $ch / $pr * 1em;
+}
+@function toPercent($ch, $pr){
+    @return $ch / $pr * 100%;
+}

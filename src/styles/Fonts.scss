@@ -1,0 +1,197 @@
+@font-face {
+    font-family: TradeGothic;
+    src: url("../fonts/TradeGothic.woff2") format("woff2"), 
+        url("../fonts/TradeGothic.woff") format('woff');
+    font-style: normal;
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: Montserrat;
+    src: url("../fonts/Montserrat-Regular.woff2") format("woff2"), 
+        url("../fonts/Montserrat-Regular.woff") format('woff');
+    font-style: normal;
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: Montserrat;
+    src: url("../fonts/Montserrat-Medium.woff2") format("woff2"), 
+        url("../fonts/Montserrat-Medium.woff") format('woff');
+    font-style: normal;
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: Montserrat;
+    src: url("../fonts/Montserrat-SemiBold.woff2") format("woff2"), 
+        url("../fonts/Montserrat-SemiBold.woff") format('woff');
+    font-style: normal;
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: 'icomoon';
+    src:  url('../fonts/icomoon.woff2') format('woff2'),
+      url('../fonts/icomoon.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
+  
+[class^="_icon-"]::before, [class*=" _icon-"]::before {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: never;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+  
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+  
+._icon-plus:before {
+    content: "\e919";
+}
+._icon-plus_back:before {
+    content: "\e92e";
+}
+._icon-account:before {
+    content: "\e900";
+}
+._icon-appartment:before {
+    content: "\e901";
+}
+._icon-apple:before {
+    content: "\e902";
+}
+._icon-arrow-bottom:before {
+    content: "\e903";
+}
+._icon-bar:before {
+    content: "\e904";
+}
+._icon-bed:before {
+    content: "\e905";
+}
+._icon-change:before {
+    content: "\e906";
+}
+._icon-clock:before {
+    content: "\e907";
+}
+._icon-date:before {
+    content: "\e908";
+}
+._icon-delete:before {
+    content: "\e909";
+}
+._icon-facebook:before {
+    content: "\e90a";
+}
+._icon-favourites:before {
+    content: "\e90b";
+}
+._icon-favourites_transparent:before {
+    content: "\e90c";
+}
+._icon-fitness:before {
+    content: "\e90d";
+}
+._icon-flag:before {
+    content: "\e90e";
+}
+._icon-from-to:before {
+    content: "\e90f";
+}
+._icon-gate:before {
+    content: "\e910";
+}
+._icon-inst:before {
+    content: "\e911";
+}
+._icon-junk-food:before {
+    content: "\e912";
+}
+._icon-location:before {
+    content: "\e913";
+}
+._icon-log-out:before {
+    content: "\e914";
+}
+._icon-mail:before {
+    content: "\e915";
+}
+._icon-payment:before {
+    content: "\e916";
+}
+._icon-pen:before {
+    content: "\e917";
+}
+._icon-plane:before {
+    content: "\e918";
+}
+._icon-pool:before {
+    content: "\e91a";
+}
+._icon-restaurant:before {
+    content: "\e91b";
+}
+._icon-search:before {
+    content: "\e91c";
+}
+._icon-seats:before {
+    content: "\e91d";
+}
+._icon-send:before {
+    content: "\e91e";
+}
+._icon-service:before {
+    content: "\e91f";
+}
+._icon-settings:before {
+    content: "\e920";
+}
+._icon-share:before {
+    content: "\e921";
+}
+._icon-show:before {
+    content: "\e922";
+}
+._icon-spa:before {
+    content: "\e923";
+}
+._icon-star:before {
+    content: "\e924";
+}
+._icon-stars:before {
+    content: "\e925";
+}
+._icon-support:before {
+    content: "\e926";
+}
+._icon-tea:before {
+    content: "\e927";
+}
+._icon-twitter:before {
+    content: "\e928";
+}
+._icon-unshow:before {
+    content: "\e929";
+}
+._icon-upload:before {
+    content: "\e92a";
+}
+._icon-visa:before {
+    content: "\e92b";
+}
+._icon-wifi:before {
+    content: "\e92c";
+}
+._icon-youtube:before {
+    content: "\e92d";
+}
