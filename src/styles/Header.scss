@@ -1,0 +1,417 @@
+.header{
+    @media (min-width: toEm($headerContainer + 1, 16)) {
+        &:not(._scroll){
+            padding-top: toRem(30);
+        }
+    }
+    position: fixed;
+    z-index: 2;
+    left: 0;
+    top: 0;
+
+    width: 100%;
+    transition: padding-top 0.3s cubic-bezier(0.34, 0.03, 0, 0.99),
+    background-color 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
+
+    &._scroll{
+        background-color: #8DD3BB;
+    }
+
+    @media (max-width: toEm(768, 16)) {
+        &::after{
+            background-color: #112211;
+            content: "";
+
+            position: absolute;
+            z-index: 5;
+            right: -100%;
+            top: 0;
+            width: 100%;
+            height: 100%;
+
+            transition: right 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
+        }
+        &._active::after{
+            right: 0;
+        }
+    }
+
+    .container{
+        max-width: toRem($headerContainer);
+    
+        display: flex;
+    
+        min-height: toRem(96);
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    @media (max-width: toEm(992, 16)) {
+        .container{
+            min-height: toRem(86);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        .container{
+            min-height: toRem(76);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        .container{
+            justify-content: space-between;
+            min-height: toRem(66);
+        }
+    }
+
+    @media (min-width: toEm(769, 16)) {
+        &__nav{
+            flex: 0 1 50%;
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__menu{
+            background-color: rgba(141, 211, 187, 0.93);
+
+            position: fixed;
+            z-index: 4;
+            right: -100%;
+            top: 0;
+            width: 100%;
+            height: 100%;
+
+            overflow: auto;
+            padding: calc(toRem(76) + toRem(20)) 15px 0;
+
+            transition: right 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
+        }
+        &._active &__menu{
+            right: 0;
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__menu{
+            padding: calc(toRem(66) + toRem(10)) 15px 0;
+        }
+    }
+
+    &__logo{
+        display: flex;
+        align-items: center;
+        flex: 0 1 auto;
+
+        margin: 0 toRem(30);
+        transition: filter 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
+    }
+    &._scroll &__logo{
+        filter: drop-shadow(0 0 5px #fff);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__logo{
+            margin: 0 toRem(20);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__logo{
+            position: relative;
+            z-index: 6;
+            margin: 0 toRem(20) 0 0;
+        }
+    }
+
+    &__logo img{
+        max-width: 100%;
+    }
+
+    &__link span{
+        color: rgb(255, 255, 255);
+        font-family: Montserrat;
+        font-size: toRem(14);
+        font-weight: 600;
+        line-height: math.div(17, 14);
+    }
+
+    @media (min-width: toEm(481, 16)) {
+        &__buttons{
+            display: flex;
+            justify-content: flex-end;
+        }
+        @media (max-width: toEm(768, 16)) {
+            &__buttons{
+                position: relative;
+                z-index: 6;
+                flex: 1 1 auto;
+            }
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__buttons{
+            display: none;
+        }
+    }
+
+    @media (min-width: toEm(769, 16)) {
+        &__burger{
+            display: none;
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__burger{
+            background-color: transparent;
+
+            position: relative;
+            z-index: 6;
+            align-self: center;
+        
+            min-width: toRem(35);
+            height: toRem(27);
+        }
+        @media (min-width: toEm(481, 16)) {
+            &__burger{
+                margin-left: 1rem;
+            }
+        }
+    }
+}
+.menu-header{
+    @media (min-width: toEm(769, 16)) {
+        &__list, &__link a{
+            height: 100%;
+        }
+        &__list{
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 -1rem;
+        }
+        @media (max-width: toEm(992, 16)) {
+            &__list{
+                margin: 0 -0.5rem;
+            }
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__list, &__buttons, &__link{
+            position: relative;
+            z-index: 3;
+        }
+    }
+
+    @media (min-width: toEm(769, 16)) {
+        &__link{
+            padding: 0 1rem;
+        }
+        @media (max-width: toEm(992, 16)) {
+            &__link{
+                padding: 0 0.5rem;
+            }
+        }
+
+        &__link a{
+            display: flex;
+            align-items: center;
+        }
+        &__link a::before{
+            margin-right: toRem(5.5);
+        }
+    }
+    &__link a::before{
+        color: #fff;
+        font-size: toRem(22);
+    }
+    @media (any-hover: hover) {
+        &__link a{
+            transition: filter 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
+        }
+        &__link a:hover{
+            filter: drop-shadow(0 0 7px #121212);
+        }
+        @media (max-width: toEm(768, 16)) {
+            &__link a:hover{
+                filter: drop-shadow(0 0 7px #fff);
+            }
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__link{
+            text-align: center;
+            &:not(:last-child){
+                margin-bottom: 1rem;
+            }
+        }
+
+        &__link span{
+            display: block;
+            font-size: toRem(25);
+        }
+        &__link a::before{
+            font-size: toRem(35);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__link span{
+            font-size: toRem(20);
+        }
+        &__link a::before{
+            font-size: toRem(30);
+        }
+    }
+
+    @media (min-width: toEm(481, 16)) {
+        &__buttons{
+            display: none;
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__buttons{
+            margin-top: 1rem;
+        }
+        &__button{
+            color: #8DD3BB;
+            font-family: Montserrat;
+            font-size: toRem(20);
+            font-weight: 600;
+            line-height: math.div(17, 14);
+
+            background-color: #fff;
+            padding: toRem(15);
+
+            text-align: center;
+            display: block;
+        }
+        &__button:not(:last-child){
+            margin-bottom: 0.75rem;
+        }
+        @media (any-hover: hover) {
+            &__button{
+                transition: box-shadow 0.3s cubic-bezier(0.34, 0.03, 0, 0.99),
+                border-radius 0.3s cubic-bezier(0.34, 0.03, 0, 0.99),
+                text-shadow 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
+            }
+            &__button:hover{
+                border-radius: 15px;
+                box-shadow: 0 0 15px #fff;
+            }
+        }
+    }
+}
+.buttons-header{
+    @media (min-width: toEm(481, 16)) {
+        &__link{
+            text-align: center;
+            white-space: nowrap;
+        }
+        &__sign-in{
+            padding: toRem(15) toRem(24);
+            align-self: center;
+        }
+        @media (max-width: toEm(992, 16)) {
+            &__sign-in{
+                padding: toRem(15) toRem(20);
+            }
+        }
+        @media (any-hover: hover) {
+            &__link{
+                position: relative;
+                overflow: hidden;
+    
+                transition: left 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
+                span{
+                    position: relative;
+                    z-index: 2;
+    
+                    transition: color 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
+                }
+    
+                &::after{
+                    background-color: #fff;
+                    border-radius: 0.5rem;
+                    content: "";
+            
+                    position: absolute;
+                    z-index: 1;
+                    left: 0;
+                    top: 0;
+            
+                    width: 100%;
+                    height: 100%;
+    
+                    transition: left 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
+                }
+            }
+            &__login{
+                align-self: center;
+                padding: toRem(15) toRem(32);
+            }
+            @media (max-width: toEm(992, 16)) {
+                &__login{
+                    padding: toRem(15) toRem(16);
+                }
+            }
+    
+            &._right-active &__link:last-child span,
+            &._left-active &__link:first-child span{
+                color: #112211;
+            }
+        
+            &._right-active &__link:first-child::after{
+                left: 101%;
+            }
+            &._left-active &__link:last-child::after{
+                left: -101%;
+            }
+        }
+        @media (any-hover:none) {
+            &__login{
+                display: flex;
+                align-items: center;
+            }
+            &__sign-in{
+                span{
+                    color: #112211;
+                }
+                border-radius: 0.5rem;
+                background-color: #fff;
+                margin-left: toRem(32);
+            }
+            @media (max-width: toEm(992, 16)) {
+                &__sign-in{
+                    margin-left: 1rem;
+                }
+            }
+        }
+    }
+}
+.burger{
+    &::after,
+    &::before,
+    span{
+        content: "";
+        background-color: #8DD3BB;
+        position: absolute;
+        top: 0;
+        left: 0;
+
+        width: 100%;
+        height: toRem(4);
+
+        transition: all 0.3s cubic-bezier(0.42, 0, 0, 0.97);
+    }
+    span{
+        top: toPercent(11, 25);
+    }
+    &::before{
+        top: calc(100% - 0.25rem);
+    }
+
+    &._active{
+        span{
+            transform: scale(0);
+        }
+        &::after{
+            top: 50%;
+            transform: rotate(45deg);
+        }
+        &::before{
+            top: 50%;
+            transform: rotate(-45deg);
+        }
+    }
+}
