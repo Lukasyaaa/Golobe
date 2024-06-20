@@ -101,7 +101,7 @@
         margin: 0 toRem(30);
         transition: filter 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
     }
-    &._scroll &__logo{
+    &._scroll:not(._active) &__logo{
         filter: drop-shadow(0 0 5px #fff);
     }
     @media (max-width: toEm(992, 16)) {
@@ -154,6 +154,11 @@
         }
     }
     @media (max-width: toEm(768, 16)) {
+        &._scroll:not(._active) &__burger span,
+        &._scroll:not(._active) &__burger::after,
+        &._scroll:not(._active) &__burger::before{
+            background-color: #fff;
+        }
         &__burger{
             background-color: transparent;
 

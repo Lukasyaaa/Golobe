@@ -1,7 +1,38 @@
+.wrapper{
+    @media (min-width: toEm($headerContainer + 1, 16)) {
+        padding-top: toRem(30);
+    }
+}
+
 .container{
     max-width: toRem($container + 15 * 2);
     margin-left: auto;
     margin-right: auto;
     padding-left: 15px;
     padding-right: 15px;
+}
+
+%input{
+    color: rgb(28, 27, 31);
+    font-family: Montserrat;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: math.div(20, 16);
+
+    border-radius: toRem(4);
+    border: 1px solid rgb(121, 116, 126);
+
+    position: absolute;
+    z-index: 1;
+    left: 0;
+    bottom: 0;
+
+    width: 100%;
+    height: calc(100% - toRem(9));
+    padding: 0 toRem(20);
+
+    @media (max-width: toEm(768, 16)) {
+        font-size: toRem(14);
+        padding: 0 toRem(12);
+    }
 }

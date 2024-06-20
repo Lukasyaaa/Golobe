@@ -1,5 +1,5 @@
 import React, { useRef, forwardRef, ForwardRefRenderFunction, MouseEvent } from "react";
-import logo from "../img/main/header/logo.svg"
+import logo from "../assets/img/main/header/logo.svg"
 
 interface HeaderProps{
     appearMenu : (e : MouseEvent<HTMLButtonElement>) => void;
