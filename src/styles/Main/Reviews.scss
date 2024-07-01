@@ -1,0 +1,359 @@
+.reviews{
+    padding: toRem(71) 0 toRem(86);
+    @media (max-width: toEm(768, 16)) {
+        padding: toRem(50) 0 toRem(60);
+    }
+    @media (max-width: toEm(480, 16)) {
+        padding: toRem(35) 0 toRem(35);
+    }
+
+    &__header{
+        max-width: toRem($container + 30);
+        padding: 0 15px;
+        margin-left: auto;
+        margin-right: auto;
+
+        &:not(:last-child){
+            margin-bottom: toRem(40);
+        }
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__header:not(:last-child){
+            margin-bottom: toRem(30);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__header:not(:last-child){
+            margin-bottom: toRem(20);
+        }
+    }
+
+    &__items{
+        display: flex;
+        align-items: center;
+        overflow-x: auto;
+        padding: 0 calc(toRem(26) + 15px) toRem(24) calc((100% - $containerPx) / 2);
+    }
+    @media (max-width: toEm($container + 30, 16)) {
+        &__items{
+            padding: 0 calc(toRem(26) + 15px) toRem(24) 15px;
+        }
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__items{
+            padding: 0 calc(toRem(20) + 15px) toRem(18.5) 15px;
+        }
+    }
+    @media (max-width: toEm(489, 16)) {
+        &__items{
+            padding: 0 calc(toRem(15) + 15px) toRem(18.5) 15px;
+        }
+    }
+
+    &__item{
+        flex: 0 0 toRem(425);
+        position: relative;
+        z-index: 1;
+        &::after{
+            border-radius: toRem(20);
+            background: rgba(141, 211, 187, 0.4);
+
+            content: "";
+            position: absolute;
+            z-index: 1;
+            right: toRem(-26);
+            bottom: toRem(-24);
+
+            width: 100%;
+            height: 100%;
+        }
+        &:not(:last-child){
+            margin-right: toRem(50);
+        }
+    }
+    @media (max-width: toEm($container + 30, 16)) {
+        &__item{
+            flex: 0 0 toRem(375);
+        }
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__item{
+            flex: 0 0 toRem(325);
+            &::after{
+                right: toRem(-20);
+                bottom: toRem(-18.5);
+            }
+            &:not(:last-child){
+                margin-right: toRem(40);
+            }
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__item{
+            flex: 0 0 toRem(275);
+            &:not(:last-child){
+                margin-right: toRem(30);
+            }
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__item::after{
+            right: toRem(-15);
+            bottom: toRem(-15);
+        }
+    }
+}
+.item-reviews{
+    &__inner{
+        position: relative;
+        z-index: 2;
+
+        padding: toRem(24);
+        background: $whiteColor;
+        border-radius: toRem(20);
+        box-shadow: 2px 4px 16px 0px rgba(17, 34, 17, 0.1);
+
+        display: flex;
+        flex-direction: column;
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__inner{
+            padding: 1rem;
+        }
+    }
+
+    @media (min-width: toEm(769, 16)) {
+        &__title{
+            min-height: toRem(80);
+        }
+        @media (max-width: toEm(992, 16)) {
+            &__title{
+                min-height: toRem(60);
+            }
+        }
+    }
+    &__title{
+        color: $darkGreenColor;
+        font-family: "TradeGothic";
+        font-size: toRem(24);
+        font-weight: 700;
+        line-height: math.div(30, 24);
+
+        &:not(:last-child){
+            margin-bottom: 1rem;
+        }
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__title{
+            font-size: toRem(20);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__title{
+            font-size: toRem(18);
+            &:not(:last-child){
+                margin-bottom: toRem(10);
+            }
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__title{
+            font-size: 1rem;
+            &:not(:last-child){
+                margin-bottom: toRem(6);
+            }
+        }
+    }
+
+    &__info{
+        color: rgba(17, 34, 17, 0.5);
+        font-family: Montserrat;
+        font-size: toRem(14);
+        font-weight: 500;
+        line-height: math.div(17, 14);
+
+        height: toRem(37);
+        overflow: hidden;
+
+        transition: height 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__info{
+            font-size: toRem(12);
+        }
+    }
+
+    &__more{
+        align-self: flex-end;
+
+        color: $darkGreenColor;
+        font-family: "TradeGothic";
+        font-size: toRem(14);
+        font-weight: 700;
+        line-height: math.div(18, 14);
+        &:not(:first-child){
+            padding-top: toRem(12);
+        }
+        &:not(:last-child){
+            padding-bottom: 1rem;
+        }
+    }
+    @media (any-hover: hover) {
+        @keyframes scalling {
+            25%{
+                transform: scale(0.9);
+            }
+            75%{
+                transform: scale(1.1);
+            }
+        }
+
+        &__more{
+            animation: scalling 1.5s linear 0s infinite;
+            animation-play-state: paused;
+        }
+        &__more:hover{
+            animation-play-state: running;
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__more{
+            &:not(:first-child){
+                padding-top: toRem(10);
+            }
+            &:not(:last-child){
+                padding-bottom: toRem(10);
+            }
+        }
+    }
+
+    &__stars:not(:last-child){
+        margin-bottom: toRem(20);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__stars:not(:last-child){
+            margin-bottom: toRem(13);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__stars:not(:last-child){
+            margin-bottom: toRem(6);
+        }
+    }
+
+    &__star{
+        color: $yellowColor;
+        font-size: toRem(22.5);
+        &:not(:last-child){
+            margin-right: toRem(13.5);
+        }
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__star{
+            font-size: toRem(18);
+            &:not(:last-child){
+                margin-right: toRem(8);
+            }
+        }
+    }
+
+    @media (min-width: toEm(481, 16)) {
+        &__author:not(:last-child){
+            margin-bottom: toRem(4);
+        }
+    }
+    &__author{
+        color: $darkGreenColor;
+        font-family: "TradeGothic";
+        font-size: toRem(14);
+        font-weight: 700;
+        line-height: math.div(18, 14);
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__author{
+            font-size: toRem(12);
+        }
+    }
+
+    &__hotel{
+        color: $darkGreenColor;
+        font-family: Montserrat;
+        font-size: toRem(12);
+        font-weight: 500;
+        line-height: math.div(15, 12);
+    }
+
+    @media (min-width: toEm(769, 16)) {
+        &__hotel-link:not(:last-child){
+            margin-bottom: toRem(28);
+        }
+        @media (max-width: toEm(992, 16)) {
+            &__hotel-link:not(:last-child){
+                margin-bottom: toRem(15);
+            }
+        }
+    }
+    &__hotel-link{
+        align-self: flex-start;
+        display: flex;
+        align-items: center;
+        span{
+            color: rgba(17, 34, 17, 0.5);
+            font-family: "TradeGothic";
+            font-size: toRem(12);
+            font-weight: 700;
+            line-height: 15px;
+            letter-spacing: 0%;
+            text-align: left;
+            
+            &:not(:first-child){
+                margin-left: 0.5rem;
+            }
+        }
+        &:not(:first-child){
+            padding-top: toRem(12);
+        }
+        &:not(:last-child){
+            padding-bottom: toRem(12);
+        }
+    }
+    @media (any-hover: hover) {
+        &__hotel-link{
+            position: relative;
+            &::after{
+                background: linear-gradient(to right, #ea4335 25%, #fbbc05 25% 50%, #34a853 50% 75%, #4285f4 75% 100%);
+
+                content: "";
+                position: absolute;
+                left: 0;
+                bottom: 0;
+
+                width: 0;
+                height: 3px;
+
+                transition: all 0.3s linear;
+            }
+        }
+        &__hotel-link:hover.item-reviews__hotel-link::after{
+            width: 100%;
+        }
+    }
+
+    &__image{
+        width: 100%;
+        padding-bottom: toPercent(200, 377);
+        position: relative;
+        img{
+            position: absolute;
+            left: 0;
+            top: 0;
+
+            width: 100%;
+            height: 100%;
+
+            border-radius: toRem(20);
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+}

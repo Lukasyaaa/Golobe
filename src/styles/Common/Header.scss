@@ -14,12 +14,12 @@
     background-color 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
 
     &._scroll{
-        background-color: #8DD3BB;
+        background-color: $mintColor;
     }
 
     @media (max-width: toEm(768, 16)) {
         &::after{
-            background-color: #112211;
+            background-color: $darkGreenColor;
             content: "";
 
             position: absolute;
@@ -102,7 +102,7 @@
         transition: filter 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
     }
     &._scroll:not(._active) &__logo{
-        filter: drop-shadow(0 0 5px #fff);
+        filter: drop-shadow(0 0 5px $whiteColor);
     }
     @media (max-width: toEm(992, 16)) {
         &__logo{
@@ -122,7 +122,7 @@
     }
 
     &__link span{
-        color: rgb(255, 255, 255);
+        color: $whiteColor;
         font-family: Montserrat;
         font-size: toRem(14);
         font-weight: 600;
@@ -157,7 +157,7 @@
         &._scroll:not(._active) &__burger span,
         &._scroll:not(._active) &__burger::after,
         &._scroll:not(._active) &__burger::before{
-            background-color: #fff;
+            background-color: $whiteColor;
         }
         &__burger{
             background-color: transparent;
@@ -218,7 +218,7 @@
         }
     }
     &__link a::before{
-        color: #fff;
+        color: $whiteColor;
         font-size: toRem(22);
     }
     @media (any-hover: hover) {
@@ -226,11 +226,11 @@
             transition: filter 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
         }
         &__link a:hover{
-            filter: drop-shadow(0 0 7px #121212);
+            filter: drop-shadow(0 0 7px $darkPurpleColor);
         }
         @media (max-width: toEm(768, 16)) {
             &__link a:hover{
-                filter: drop-shadow(0 0 7px #fff);
+                filter: drop-shadow(0 0 7px $whiteColor);
             }
         }
     }
@@ -269,13 +269,13 @@
             margin-top: 1rem;
         }
         &__button{
-            color: #8DD3BB;
+            color: $mintColor;
             font-family: Montserrat;
             font-size: toRem(20);
             font-weight: 600;
             line-height: math.div(17, 14);
 
-            background-color: #fff;
+            background-color: $whiteColor;
             padding: toRem(15);
 
             text-align: center;
@@ -292,7 +292,7 @@
             }
             &__button:hover{
                 border-radius: 15px;
-                box-shadow: 0 0 15px #fff;
+                box-shadow: 0 0 15px $whiteColor;
             }
         }
     }
@@ -303,12 +303,12 @@
             text-align: center;
             white-space: nowrap;
         }
-        &__sign-in{
+        &__link:last-child{
             padding: toRem(15) toRem(24);
             align-self: center;
         }
         @media (max-width: toEm(992, 16)) {
-            &__sign-in{
+            &__link:last-child{
                 padding: toRem(15) toRem(20);
             }
         }
@@ -326,7 +326,7 @@
                 }
     
                 &::after{
-                    background-color: #fff;
+                    background-color: $whiteColor;
                     border-radius: 0.5rem;
                     content: "";
             
@@ -341,19 +341,19 @@
                     transition: left 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
                 }
             }
-            &__login{
+            &__link:first-child{
                 align-self: center;
                 padding: toRem(15) toRem(32);
             }
             @media (max-width: toEm(992, 16)) {
-                &__login{
+                &__link:first-child{
                     padding: toRem(15) toRem(16);
                 }
             }
     
             &._right-active &__link:last-child span,
             &._left-active &__link:first-child span{
-                color: #112211;
+                color: $darkGreenColor;
             }
         
             &._right-active &__link:first-child::after{
@@ -364,20 +364,20 @@
             }
         }
         @media (any-hover:none) {
-            &__login{
+            &__link:first-child{
                 display: flex;
                 align-items: center;
             }
-            &__sign-in{
+            &__link:last-child{
                 span{
-                    color: #112211;
+                    color: $darkGreenColor;
                 }
                 border-radius: 0.5rem;
-                background-color: #fff;
+                background-color: $whiteColor;
                 margin-left: toRem(32);
             }
             @media (max-width: toEm(992, 16)) {
-                &__sign-in{
+                &__link:last-child{
                     margin-left: 1rem;
                 }
             }
@@ -389,7 +389,7 @@
     &::before,
     span{
         content: "";
-        background-color: #8DD3BB;
+        background-color: $mintColor;
         position: absolute;
         top: 0;
         left: 0;

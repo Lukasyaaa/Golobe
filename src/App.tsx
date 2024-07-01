@@ -1,16 +1,22 @@
 import React, { FC, Fragment, MouseEvent, useRef, useEffect } from "react";
-import Header from "./components/Header";
-import Main from "./components/Main/Main";
 import "./styles/App.scss"
+import Header from "./components/Common/Header";
+import { Main } from "./pages/Main";
+import { Footer } from "./components/Common/Footer/Footer";
+import { useDispatch } from "react-redux";
+import { reviewsChangeIsActiveAction } from "./store/reviewsReducer";
+import { optionsChangeIsActiveAction } from "./store/optionsReducer";
+import { footerChangeIsActiveAction } from "./store/footerReducer";
 
 export const App : FC = () =>{
     let header = useRef<HTMLElement>(null);
-    let optionsItem = useRef<HTMLDivElement>(null);
+    const dispatch = useDispatch();
 
     const appearMenu = (e : MouseEvent<HTMLButtonElement>) : void =>{
         if(header.current){
             e.currentTarget.classList.toggle("_active");
             header.current.classList.toggle("_active");
+            document.body.classList.toggle("_locked");
         }
     }
 
@@ -25,14 +31,9 @@ export const App : FC = () =>{
     }
 
     const clickDocument = (e : Event) : void =>{
-        if(optionsItem.current){
-            optionsItem.current.childNodes.forEach((item : any) =>{
-                if(item.classList.contains("_active")){
-                    item.classList.remove("_active");
-                    item.childNodes[0].childNodes[1].childNodes[1].style.height = "";
-                }
-            })
-        }
+        dispatch(reviewsChangeIsActiveAction());
+        dispatch(optionsChangeIsActiveAction());
+        dispatch(footerChangeIsActiveAction());
     }
 
 
@@ -48,7 +49,8 @@ export const App : FC = () =>{
     return(
         <Fragment>
             <Header ref={header} appearMenu={appearMenu}/>
-            <Main ref={optionsItem} />
+            <Main />
+            <Footer />
         </Fragment>
     )
 }

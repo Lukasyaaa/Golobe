@@ -1,0 +1,214 @@
+.choice{
+    @media (min-width: toEm(769, 16)) {
+        .container{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: toRem(24);
+        }
+    }
+
+    @media (min-width: toEm(769, 16)) {
+        &__item{
+            min-height: toRem(559);
+        }
+        @media (max-width: toEm($container + 15*2, 16)) {
+            &__item{
+                min-height: toRem(475);
+            }
+        }
+        @media (max-width: toEm(992, 16)) {
+            &__item{
+                min-height: toRem(325);
+            }
+        }
+    }
+    &__item{
+        position: relative;
+        z-index: 1;
+        padding: toRem(25) toRem(15);
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__item{
+            &:not(:last-child){
+                margin-bottom: 0.6rem;
+            }
+            padding: toRem(20) toRem(15);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__item{
+            &:not(:last-child){
+                margin-bottom: toRem(12);
+            }
+            padding: toRem(15);
+        }
+    }
+}
+.item-choice{
+    &::after{
+        background: linear-gradient(180.00deg, rgba(0, 0, 0, 0),rgba(18, 18, 18, 0.75) 48.674%);
+        content: "";
+        position: absolute;
+        z-index: 2;
+        left: 0;
+        top: 0;
+        
+        width: 100%;
+        height: 100%;
+    }
+
+    &__image, img{
+        position: absolute;
+        z-index: 1;
+        left: 0;
+        top: 0;
+
+        width: 100%;
+        height: 100%;
+    }
+    img{
+        object-fit: cover;
+    }
+
+    img, &::after{
+        border-radius: toRem(24);
+    }
+
+    @media (min-width: toEm(769, 16)) {
+        &__subimage{
+            text-align: center;
+        }
+    }
+    &__subimage{
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        
+        position: relative;
+        z-index: 3;
+    }
+
+    &__heading{
+        color: $whiteColor;
+        font-family: "TradeGothic";
+        font-size: toRem(40);
+        font-weight: 700;
+        line-height: math.div(51,40);
+        &:not(:last-child){
+            margin-bottom: toEm(8, 40);
+        }
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__heading{
+            font-size: toRem(32);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__heading{
+            font-size: toRem(28);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__heading{
+            font-size: toRem(23);
+        }
+    }
+    
+    @media (min-width: toEm(769, 16)) {
+        &__info{
+            margin: 0 auto;
+        }
+    }
+    &__info{
+        color: $whiteColor;
+        font-family: Montserrat;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: math.div(20, 16);
+
+        max-width: toRem(389);
+        &:not(:last-child){
+            margin-bottom: 1em;
+        }
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__info{
+            font-size: toRem(14);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__info{
+            font-size: toRem(12);
+        }
+    }
+
+    @media (min-width: toEm(769, 16)) {
+        &__button{
+            align-self: center;
+        }
+    }
+    &__button{
+        display: flex;
+        align-items: center;
+        color: $darkGreenColor;
+        font-size: toRem(14);
+        span{
+            font-family: Montserrat;
+            font-weight: 500;
+            line-height: math.div(17, 14);
+            margin-left: toRem(5);
+        }
+     
+        padding: 1rem;
+        border-radius: toRem(4);
+        background: $mintColor;
+    }
+    @media (any-hover: hover) {
+        &__button{
+            position: relative;
+            z-index: 1;
+            &::after,&::before{
+                content: "";
+                border-radius: toRem(4);
+                position: absolute;
+            }
+            &::after{
+                background-color: $whiteColor;
+
+                z-index: 1;
+                left: 50%;
+                top: toRem(-4);
+                transform: translateX(-50%);
+
+                width: 0;
+                height: calc(100% + toRem(8));
+
+                transition: width 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
+            }
+            &::before{
+                background-color: $mintColor;
+
+                z-index: 2;
+                left: 0;
+                top: 0;
+
+                width: calc(100%);
+                height: calc(100%);
+            }
+            span{
+                position: relative;
+                z-index: 3;
+            }
+        }
+        &__button:hover.item-choice__button::after{
+            width: 70%;
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__button{
+            padding: toRem(12) 1rem;
+            justify-content: center;
+        }
+    }
+}

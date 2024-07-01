@@ -1,21 +1,23 @@
-import React, { forwardRef, ForwardRefRenderFunction } from "react";
-import Options from "../Options/Options";
+import React, { FC } from "react";
+import Options from "../Common/Options/Options";
+import { useTypedSelector } from "../../hooks/redux";
+import { introStart } from "../../types";
 
 interface IntroMainProps{
 
 }
 
-const IntroMain : ForwardRefRenderFunction<HTMLDivElement, IntroMainProps> = (props, ref) =>{
+export const IntroMain : FC<IntroMainProps> = () =>{
+    const intro = useTypedSelector<introStart>(store => store.another.intro.start);
+
     return(
         <section className="intro">
             <div className="container">
-                <div className="intro__subheading">Helping Others</div>
-                <h1 className="intro__heading">Live & Travel</h1>
-                <div className="intro__supheading">Special offers to suit your plan</div>
+                <div className="intro__subheading">{intro.supheading}</div>
+                <h1 className="intro__heading">{intro.heading}</h1>
+                <div className="intro__supheading">{intro.subheading}</div>
             </div>
-            <Options ref={ref} />
+            <Options />
         </section>
     );
 }
-
-export default forwardRef<HTMLDivElement, IntroMainProps>(IntroMain);

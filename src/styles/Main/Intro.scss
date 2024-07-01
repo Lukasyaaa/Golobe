@@ -9,7 +9,7 @@
 
         position: relative;
         z-index: 1;
-        background: url("../assets/img/main/intro/background.jpeg") center no-repeat;
+        background: url("../../assets/img/main/intro/background.jpeg") center no-repeat;
         background-size: cover;
         text-align: center; 
 
@@ -55,7 +55,7 @@
     }
 
     &__subheading{
-        color: rgb(255, 255, 255);
+        color: $whiteColor;
         font-family: TradeGothic;
         font-weight: 700;
         font-size: toRem(45);
@@ -82,7 +82,7 @@
     }
 
     &__heading{
-        color: rgb(255, 255, 255);
+        color: $whiteColor;
         font-family: TradeGothic;
         font-weight: 700;
         font-size: toRem(80);
@@ -109,7 +109,7 @@
     }
 
     &__supheading{
-        color: rgb(255, 255, 255);
+        color: $whiteColor;
         font-family: Montserrat;
         font-size: toRem(20);
         font-weight: 600;

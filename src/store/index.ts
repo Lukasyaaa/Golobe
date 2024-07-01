@@ -1,31 +1,16 @@
-import { legacy_createStore as createStore } from "redux";
-import { optionsItem, optionsItemType } from "../types/types";
+import { legacy_createStore as createStore, combineReducers } from "redux";
+import { optionsReducer } from "./optionsReducer";
+import { reviewsReducer } from "./reviewsReducer";
+import { footerReducer } from "./footerReducer";
+import { anotherReducer } from "./anotherReducer";
 
-interface store{
-    options : optionsItem[]
-}
+const rootReducer = combineReducers({
+    options : optionsReducer,
+    reviews : reviewsReducer,
+    another : anotherReducer,
+    footer : footerReducer,
+})
 
-const defaultStore : store  = {
-    options:[
-        {
-            title: "From - To", iconValue: "_icon-from-to", 
-            value: "Lahore - Karachi"
-        },
-        {
-            title: "Trip", iconValue: "_icon-arrow-bottom", 
-            value:[{value: "Depart", isDisabled: true}, {value: "Return", isDisabled: false}]
-        },
-        {
-            title: "Depart - Return", iconValue: null, 
-            value: "07 Nov 22 - 13 Nov 22"
-        },
-        {
-            title: "Passenger - Class", iconValue: null, 
-            value: "1 Passenger, Economy"
-        },
-    ]
-}
+export const store = createStore(rootReducer);
 
-export const store = createStore((store = defaultStore) => store);
-
-export type storeType = store;
+export type storeType = ReturnType<typeof rootReducer>;

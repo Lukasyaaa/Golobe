@@ -1,11 +1,15 @@
 @use 'sass:math';
 
-@import "./Fonts.scss";
-@import "./HelperFunctions.scss";
-@import "./Nulling.scss";
-@import "./Vars.scss";
-@import "./Generic.scss";
+@import "./Settings/Fonts.scss";
+@import "./Settings/HelperFunctions.scss";
+@import "./Settings/Nulling.scss";
+@import "./Settings/Vars.scss";
+@import "./Settings/Generic.scss";
 
-@import "./Header.scss";
-@import "./Intro.scss";
-@import "./Options.scss";
+@import "./Common/Header.scss";
+@import "./Main/Intro.scss";
+@import "./Common/Options.scss";
+@import "./Main/TripVariants.scss";
+@import "./Main/Choice.scss";
+@import "./Main/Reviews.scss";
+@import "./Common/Footer.scss";
