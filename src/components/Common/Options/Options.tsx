@@ -73,9 +73,12 @@ const Options : ForwardRefRenderFunction<HTMLDivElement, OptionsProps> = (props,
                 <div className="options__header header-options">
                     <ul className="header-options__list" ref={header}>
                         {optionsStore.header.map((headerLink, index) => (
-                            <li className={`header-options__link ${(headerLink.isActive) ? "_active" : ""}`}
-                            onMouseEnter={(e) => hoverHeaderLink(e)} onMouseLeave={(e) => unHoverHeaderLink(e)}
-                            onClick={(e) => makeActive(e, index)}>
+                            <li 
+                                key={index}
+                                className={`header-options__link ${(headerLink.isActive) ? "_active" : ""}`}
+                                onMouseEnter={(e) => hoverHeaderLink(e)} onMouseLeave={(e) => unHoverHeaderLink(e)}
+                                onClick={(e) => makeActive(e, index)}
+                            >
                                 <button className={headerLink.iconValue} type="button"><span>{headerLink.value}</span></button>
                             </li>
                         ))}

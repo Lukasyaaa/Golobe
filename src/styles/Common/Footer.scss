@@ -175,7 +175,16 @@
     
         background-color: $whiteColor;
         border-radius: 0.25rem;
-        padding-left: 1rem;
+        padding-left: toRem(13);
+    }
+    @media (any-hover: hover) {
+        &__input{
+            border: 3px solid $whiteColor;
+            transition: border-color 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
+        }
+        &__input:hover{
+            border: 3px solid $darkGreenColor;
+        }
     }
     @media (max-width: toEm(768, 16)) {
         &__input{
@@ -202,6 +211,45 @@
         background-color: $darkGreenColor;
         border-radius: 0.25rem;
         padding: 0.5rem toRem(16);
+    }
+    @media (any-hover: hover) {
+        &__button{
+            position: relative;
+            overflow: hidden;
+            span{
+                position: absolute;
+                left: 50%;
+                top: calc(50% - toRem(8.5));
+                transform: translateX(-50%);
+
+                transition: top 0.3s cubic-bezier(0.34, 0.03, 0, 0.99) 0.3s;
+            }
+            &::after{
+                content: attr(data-value);
+                color: $whiteColor;
+                font-family: Montserrat;
+                font-size: toRem(14);
+                font-weight: 600;
+                line-height: math.div(17, 14);
+
+                position: absolute;
+                left: 50%;
+                bottom: toRem(-17);
+                transform: translateX(-50%);
+
+                transition: bottom 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
+            }
+        }
+        &__button:hover{
+            span{
+                top: toRem(-17);
+                transition: top 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
+            }
+            &::after{
+                bottom: calc(50% - toRem(8.5));
+                transition: bottom 0.3s cubic-bezier(0.34, 0.03, 0, 0.99) 0.3s;
+            }
+        }
     }
     @media (max-width: toEm(768, 16)) {
         &__button{
@@ -300,6 +348,14 @@
         font-size: toRem(20);
         padding: toRem(2.5) toRem(6.5);
     }
+    @media (any-hover: hover) {
+        &__social{
+            transition: filter 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
+        }
+        &__social:hover{
+            filter: drop-shadow(0 0 5px $darkGreenColor);
+        }
+    }
 }
 .item-main-footer{
     &__title{
@@ -358,6 +414,14 @@
         font-size: toRem(14);
         font-weight: 500;
         line-height: math.div(18, 14);
+    }
+    @media (any-hover: hover) {
+        &__link{
+            transition: text-shadow 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
+        }
+        &__link:hover{
+            text-shadow: 0 0 5px $darkGreenColor;
+        }
     }
     @media (max-width: toEm(480, 16)) {
         &__link{

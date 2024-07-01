@@ -19,7 +19,13 @@ export const Footer : FC<FooterProps> = () =>{
                         <div className="post-footer__info">{footer.post.info}</div>
                         <div className="post-footer__row">
                             <input className="post-footer__input" type="email" placeholder={footer.post.input} />
-                            <button className="post-footer__button" type="submit">{footer.post.button}</button>
+                            <button 
+                                data-value={footer.post.button} 
+                                className="post-footer__button" 
+                                type="submit"
+                            >
+                                <span>{footer.post.button}</span>
+                            </button>
                         </div>
                     </div>
                 </div>

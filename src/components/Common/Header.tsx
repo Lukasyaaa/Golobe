@@ -32,15 +32,15 @@ const Header : ForwardRefRenderFunction<HTMLElement, HeaderProps> = (props, ref)
             <div className="container">
                 <nav className="header__menu menu-header header__nav">
                     <ul className="menu-header__list">
-                        {header.links.map(link => (
-                            <li className="header__link menu-header__link">
+                        {header.links.map((link, index) => (
+                            <li className="header__link menu-header__link" key={index}>
                                 <a className="_icon-plane" href={link.href}><span>{link.value}</span></a>
                             </li>
                         ))}
                     </ul>
                     <div className="menu-header__buttons">
-                        {header.buttons.map(button => (
-                            <a className="menu-header__button" href={button.href}><span>{button.value}</span></a>
+                        {header.buttons.map((button, index) => (
+                            <a key={index} className="menu-header__button" href={button.href}><span>{button.value}</span></a>
                         ))}
                     </div>
                 </nav>
@@ -50,6 +50,7 @@ const Header : ForwardRefRenderFunction<HTMLElement, HeaderProps> = (props, ref)
                 <nav ref={buttonParent} className="header__buttons buttons-header header__nav _right-active">
                     {header.buttons.map((button, index) => (
                         <a 
+                            key={index}
                             data-id={index}
                             className="header__link buttons-header__link" 
                             href={button.href} 
