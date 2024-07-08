@@ -8,19 +8,12 @@ interface ReviewsProps{
 }
 
 const Reviews : ForwardRefRenderFunction<HTMLDivElement, ReviewsProps> = (props, ref) =>{
-    const reviews = useTypedSelector(store => store.reviews);
+    const reviewsStore = useTypedSelector(store => store.reviews);
     return(
         <section className="reviews">
-            <BlockHeader parent="reviews" text={reviews.header} />
+            <BlockHeader parent="reviews" text={reviewsStore.header} />
             <div className="reviews__items" ref={ref}>
-                {reviews.items.map((review, index) => <Review 
-                    key={index} 
-                    id={index}
-                    text={review.text}
-                    image={review.image}
-                    hotelLink={review.hotelLink}
-                    isActive={review.isActive} 
-                />)}
+                {reviewsStore.items.map((review, index) => <Review key={index} id={index} about={review}/>)}
             </div>
         </section>
     )

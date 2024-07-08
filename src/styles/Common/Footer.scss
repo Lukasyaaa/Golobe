@@ -22,20 +22,6 @@
     }
 }
 .post-footer{
-    @media (min-width: toEm(993, 16)) {
-        &__inner::after{
-            content: "";
-            background: url("../../assets/img/footer/post.svg") no-repeat;
-            background-size: cover;
-            position: absolute;
-            z-index: 1;
-            right: toPercent(24, $container);
-            bottom: 0;
-    
-            width: toPercent(400, $container);
-            padding-bottom: toPercent(258, $container);
-        }
-    }
     &__inner{
         border-radius: toRem(20);
         box-shadow: 0px 4px 16px 0px rgba(17, 34, 17, 0.05);
@@ -52,6 +38,23 @@
     @media (max-width: toEm(480, 16)) {
         &__inner{
             padding: toRem(10);
+        }
+    }
+
+    @media (min-width: toEm(993, 16)) {
+        &__image{
+            position: absolute;
+            z-index: 1;
+            right: toPercent(24, $container);
+            bottom: 0;
+    
+            width: toPercent(400, $container);
+            padding-bottom: toPercent(258, $container);
+        }
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__image{
+            display: none;
         }
     }
 
@@ -174,16 +177,19 @@
         }
     
         background-color: $whiteColor;
+        border: toRem(3) solid $whiteColor;
         border-radius: 0.25rem;
         padding-left: toRem(13);
+
+        transition: border-color 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
+    }
+    &__input:focus{
+        outline: none;
+        border: toRem(3) solid $darkGreenColor;
     }
     @media (any-hover: hover) {
-        &__input{
-            border: 3px solid $whiteColor;
-            transition: border-color 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
-        }
         &__input:hover{
-            border: 3px solid $darkGreenColor;
+            border: toRem(3) solid $darkGreenColor;
         }
     }
     @media (max-width: toEm(768, 16)) {
@@ -209,37 +215,51 @@
         line-height: math.div(17, 14);
 
         background-color: $darkGreenColor;
+        border: toRem(3) solid transparent;
         border-radius: 0.25rem;
         padding: 0.5rem toRem(16);
+
+        position: relative;
+        overflow: hidden;
+
+        transition: box-shadow 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
+        span{
+            position: absolute;
+            left: 50%;
+            top: calc(50% - toRem(8.5));
+            transform: translateX(-50%);
+
+            transition: top 0.3s cubic-bezier(0.34, 0.03, 0, 0.99) 0.3s;
+        }
+        &::after{
+            content: attr(data-value);
+            color: $whiteColor;
+            font-family: Montserrat;
+            font-size: toRem(14);
+            font-weight: 600;
+            line-height: math.div(17, 14);
+
+            position: absolute;
+            left: 50%;
+            bottom: toRem(-17);
+            transform: translateX(-50%);
+
+            transition: bottom 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
+        }
+    }
+    &__button:focus{
+        box-shadow: 0 0 15px $darkGreenColor;
+        outline: none;
+        span{
+            top: toRem(-17);
+            transition: top 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
+        }
+        &::after{
+            bottom: calc(50% - toRem(8.5));
+            transition: bottom 0.3s cubic-bezier(0.34, 0.03, 0, 0.99) 0.3s;
+        }
     }
     @media (any-hover: hover) {
-        &__button{
-            position: relative;
-            overflow: hidden;
-            span{
-                position: absolute;
-                left: 50%;
-                top: calc(50% - toRem(8.5));
-                transform: translateX(-50%);
-
-                transition: top 0.3s cubic-bezier(0.34, 0.03, 0, 0.99) 0.3s;
-            }
-            &::after{
-                content: attr(data-value);
-                color: $whiteColor;
-                font-family: Montserrat;
-                font-size: toRem(14);
-                font-weight: 600;
-                line-height: math.div(17, 14);
-
-                position: absolute;
-                left: 50%;
-                bottom: toRem(-17);
-                transform: translateX(-50%);
-
-                transition: bottom 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
-            }
-        }
         &__button:hover{
             span{
                 top: toRem(-17);
@@ -347,11 +367,14 @@
         color: $darkGreenColor;
         font-size: toRem(20);
         padding: toRem(2.5) toRem(6.5);
+
+        transition: filter 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
+    }
+    &__social:focus{
+        outline: none;
+        filter: drop-shadow(0 0 5px $darkGreenColor);
     }
     @media (any-hover: hover) {
-        &__social{
-            transition: filter 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
-        }
         &__social:hover{
             filter: drop-shadow(0 0 5px $darkGreenColor);
         }
@@ -367,6 +390,12 @@
         font-size: 1rem;
         font-weight: 700;
         line-height: math.div(20, 16);
+
+        transition: text-shadow 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
+    }
+    &__title:focus{
+        outline: none;
+        text-shadow: 0 0 7px $darkGreenColor;
     }
     @media (max-width: toEm(768, 16)) {
         &__title, &__link{
@@ -414,12 +443,16 @@
         font-size: toRem(14);
         font-weight: 500;
         line-height: math.div(18, 14);
-    }
-    @media (any-hover: hover) {
-        &__link{
+        a{
             transition: text-shadow 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
         }
-        &__link:hover{
+    }
+    &__link a:focus{
+        outline: none;
+        text-shadow: 0 0 5px $darkGreenColor;
+    }
+    @media (any-hover: hover) {
+        &__link a:hover{
             text-shadow: 0 0 5px $darkGreenColor;
         }
     }

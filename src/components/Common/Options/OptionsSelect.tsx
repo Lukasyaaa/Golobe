@@ -1,7 +1,7 @@
-import React, { FC, useRef, useState, MouseEvent, useEffect } from "react";
+import React, { FC, useRef, useState, MouseEvent, FocusEvent, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { optionsSelectLink, optionIconPosition, optionsType } from "../../../types";
-import { optionsChangeIsActiveAction } from "../../../store/optionsReducer";
+import { optionsSwapIsActiveAction } from "../../../store/start/optionsReducer";
 
 
 interface OptionsSelectProps{
@@ -16,6 +16,7 @@ interface OptionsSelectProps{
 }
 
 export const OptionsSelect : FC<OptionsSelectProps> = ({id, title, iconValue, iconPosition, parentType, isBigger, links, isActive}) =>{
+    let parent = useRef<HTMLDivElement>(null);
     let [selectLinks, setSelectLinks] = useState<optionsSelectLink[]>(links);
     let activeSelectLink : optionsSelectLink[] = selectLinks.filter(selectLink => selectLink.isDisabled);
     let listInner = useRef<HTMLUListElement>(null);
@@ -58,16 +59,19 @@ export const OptionsSelect : FC<OptionsSelectProps> = ({id, title, iconValue, ic
         }
     }
 
-    const showSelect = (e : MouseEvent<HTMLButtonElement>) =>{
-        dispatch(optionsChangeIsActiveAction(id, parentType));
+    const showSelect = (e : MouseEvent<HTMLButtonElement> | FocusEvent<HTMLButtonElement>) =>{
+        dispatch(optionsSwapIsActiveAction(id, parentType));
     }
 
     return(
-        <div className={classesParent.join(" ")} onClick={(e) => e.stopPropagation()}>
+        <div className={classesParent.join(" ")} onClick={(e) => e.stopPropagation()} ref={parent}>
             <div className={classesInner.join(" ")}>
                 <div className="item-inputs-options__select select-options">
                     <button 
-                        className="select-options__opener" type="button" onClick={(e) => showSelect(e)}
+                        className="select-options__opener" type="button" 
+                        onClick={(e) => showSelect(e)} 
+                        onFocus={() => parent.current?.classList.add("_focus")}
+                        onBlur={() => parent.current?.classList.remove("_focus")}
                     >{activeSelectLink[0].value}</button>
                     <div className="select-options__list list-select-options" style={{
                         height: (listInner.current && isActive) ? listInner.current.offsetHeight : 0
@@ -76,7 +80,8 @@ export const OptionsSelect : FC<OptionsSelectProps> = ({id, title, iconValue, ic
                             {selectLinks.map((link, index) =>
                             <li className="list-select-options__link" key={index} id={String(index)} onClick={(e) => changeActive(e)}>
                                 {(link.isDisabled) ? 
-                                    <button disabled type="button">{link.value}</button> : <button type="button">{link.value}</button>}
+                                    <button disabled type="button">{link.value}</button> : 
+                                    <button type="button" onFocus={(e) => showSelect(e)}>{link.value}</button>}
                             </li>)}
                         </ul>
                     </div>

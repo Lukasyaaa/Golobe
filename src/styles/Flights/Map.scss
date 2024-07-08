@@ -1,0 +1,263 @@
+.map{
+    padding: toRem(80) 0;
+    @media (max-width: toEm(992, 16)) {
+        padding: toRem(65) 0;
+    }
+    @media (max-width: toEm(768, 16)) {
+        padding: toRem(45) 0;
+    }
+    @media (max-width: toEm(480, 16)) {
+        padding: toRem(30) 0;
+    }
+
+    .container:not(:last-child) &__header{
+        margin-bottom: toRem(24);
+    }
+    @media (max-width: toEm(768, 16)) {
+        .container:not(:last-child) &__header{
+            margin-bottom: 1rem;
+        }
+    }
+    
+    &__items{
+        background-color: $mintColor;
+    }
+
+    @media (min-width: toEm(1131, 16)) {
+        &__items-inner{
+            height: toRem(486);
+        }
+    }
+    @media (min-width: toEm(551, 16)) {
+        @media (max-width: toEm(1131, 16)) {
+            &__items-inner{    
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 1rem;
+            }
+        }
+        @media (max-width: toEm(768, 16)) {
+            &__items-inner{
+                grid-template-columns: repeat(2, 1fr)
+            }
+        }
+    }
+    &__items-inner{
+        position: relative;
+        z-index: 1;
+    }
+    @media (max-width: toEm(1131, 16)) {
+        &__items-inner{
+            background-color: $mintColor;
+
+            padding-top: toRem(30);
+            padding-bottom: toRem(30);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__items-inner{
+            padding-top: toRem(15);
+            padding-bottom: toRem(15);
+        }
+    }
+
+    @media (min-width: toEm(1131, 16)) {
+        &__item{
+            position: absolute;
+            z-index: 1;
+        }
+    }
+    &__item{
+        display: grid;
+        grid-template-columns: toRem(40) 1fr;
+        column-gap: 0.5rem;
+        align-items: center;
+
+        border-radius: toRem(4);
+        background-color: $whiteColor;
+        padding: toRem(4);
+
+        &::after{
+            content: "";
+
+            position: absolute;
+            z-index: 1;
+            transform: translateY(100%);
+
+            width: toRem(59.5);
+            height: toRem(28.56);
+        }
+    }
+    @media (max-width: toEm(1131, 16)) {
+        &__item{
+            grid-template-columns: toRem(60) 1fr;
+
+            border-radius: 0.5rem;
+            padding: 0.5rem;
+        }
+    }
+    @media (max-width: toEm(551, 16)) {
+        &__item:not(:last-child){
+            margin-bottom: toRem(10);
+        }
+    }
+}
+.item-map{
+    @media (min-width: toEm(1131, 16)) {
+        &_1{
+            top: toPercent(72, 486);
+            left: 222px;
+        
+            &::after{
+                background: url("../../assets/img/flights/map/items/1/1.svg") no-repeat;
+                background-size: cover;
+    
+                left: toRem(41);
+                bottom: toRem(-6);
+            }
+        }
+        @media (max-width: toEm($container + 15*2, 16)) {
+            &_1{
+                left: calc(222px + (100vw - ($containerPx + 15px * 2)) / 2);
+            }
+        }
+    
+        &_2{
+            top: toPercent(294, 486);
+            left: 375px;
+    
+            &::after{
+                background: url("../../assets/img/flights/map/items/2/2.svg") no-repeat;
+                background-size: cover;
+    
+                left: toRem(-11);
+                bottom: toRem(-6);
+            }
+        }
+        @media (max-width: toEm($container + 15*2, 16)) {
+            &_2{
+                left: calc(375px + (100vw - ($containerPx + 15px * 2)) / 2);
+            }
+        }
+    
+        &_3{
+            top: toPercent(280, 486);
+            left: 683px;
+    
+            &::after{
+                background: url("../../assets/img/flights/map/items/3/3.svg") no-repeat;
+                background-size: cover;
+    
+                left: toRem(-12);
+                top: toRem(-3.5);
+                transform: translateY(-100%);
+            }
+        }
+        @media (max-width: toEm($container + 15*2, 16)) {
+            &_3{
+                left: calc(683px + (100vw - ($containerPx + 15px * 2)) / 2);
+            }
+        }
+    
+        &_4{
+            top: toPercent(89, 486);
+            left: 885px;
+    
+            &::after{
+                background: url("../../assets/img/flights/map/items/4/4.svg") no-repeat;
+                background-size: cover;
+    
+                width: toRem(95);
+                height: toRem(46);
+    
+                left: toRem(-29);
+                bottom: toRem(-7);
+            }
+        }
+        @media (max-width: toEm($container + 15*2, 16)) {
+            &_4{
+                left: calc(885px + (100vw - ($containerPx + 15px * 2)) / 2);
+            }
+        }
+    
+        &_5{
+            top: toPercent(260, 486);
+            left: 1045px;
+    
+            &::after{
+                background: url("../../assets/img/flights/map/items/5/5.svg") no-repeat;
+                background-size: cover;
+    
+                left: toRem(1);
+                bottom: toRem(-5);
+            }
+        }
+        @media (max-width: toEm($container + 15*2, 16)) {
+            &_5{
+                left: calc(1045px + (100vw - ($containerPx + 15px * 2)) / 2);
+            }
+        }
+    }
+
+    &__image{
+        display: inline-block;
+        position: relative;
+        z-index: 1;
+
+        height: toRem(40);
+        img{
+            border-radius: toRem(4);
+            position: absolute;
+            z-index: 1;
+            left: 0;
+            top: 0;
+
+            width: 100%;
+            height: 100%;
+        }
+    }
+    @media (max-width: toEm(1131, 16)) {
+        &__image{
+            height: toRem(60);
+            img{
+                border-radius: toRem(8);
+            }
+        }
+    }
+
+    &__title{
+        color: $darkGreenColor;
+        font-family: "TradeGothic";
+        font-size: toRem(10);
+        font-weight: 700;
+        line-height: math.div(13, 10);
+    }
+    @media (max-width: toEm(1131, 16)) {
+        &__title{
+            font-size: toRem(18);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__title{
+            font-size: 1rem;
+        }
+    }
+
+    &__info{
+        color: $darkGreenColor;
+        font-family: "Montserrat";
+        font-size: 0.5rem;
+        font-weight: 400;
+        line-height: math.div(8, 10);
+    }
+    @media (max-width: toEm(1131, 16)) {
+        &__info{
+            font-size: 1rem;
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__info{
+            font-size: toRem(14);
+        }
+    }
+}

@@ -1,14 +1,18 @@
 import { legacy_createStore as createStore, combineReducers } from "redux";
-import { optionsReducer } from "./optionsReducer";
-import { reviewsReducer } from "./reviewsReducer";
-import { footerReducer } from "./footerReducer";
-import { anotherReducer } from "./anotherReducer";
+import { headerReducer } from "./start/headerReducer";
+import { optionsReducer } from "./start/optionsReducer";
+import { reviewsReducer } from "./start/reviewsReducer";
+import { footerReducer } from "./start/footerReducer";
+import { startTextReducer } from "./start/startText";
+import { flightsTextReducer } from "./flights/flightsText";
 
 const rootReducer = combineReducers({
+    header : headerReducer,
+    start : startTextReducer,
     options : optionsReducer,
     reviews : reviewsReducer,
-    another : anotherReducer,
-    footer : footerReducer,
+    flights : flightsTextReducer,
+    footer : footerReducer
 })
 
 export const store = createStore(rootReducer);

@@ -1,5 +1,6 @@
-import logoSvg from "../assets/img/footer/logo.svg"
-import { footer, footerItem } from "../types"
+import logoSvg from "../../assets/img/footer/logo.svg"
+import postSvg from "../../assets/img/footer/post.svg"
+import { footer } from "../../types"
 
 const defaultStore : footer = {
     post:{
@@ -8,6 +9,7 @@ const defaultStore : footer = {
         info: "Get inspired! Receive travel discounts, tips and behind the scenes stories.",
         input: "Your email address",
         button: "Subscribe",
+        image: postSvg
     },
     main:{
         info:{
@@ -21,7 +23,7 @@ const defaultStore : footer = {
                     {value: "Canada", href: "#"}, {value: "Alaska", href: "#"},
                     {value: "France", href: "#"}, {value: "Iceland", href: "#"}
                 ], 
-                isActive : false,
+                isActive : false
             },
             {
                 title: "Our Activities", 
@@ -29,57 +31,74 @@ const defaultStore : footer = {
                     {value: "Northern Lights", href: "#"}, {value: "Cruising & sailing", href:"#"}, 
                     {value: "Multi-activities", href: "#"}, {value: "Kayaing", href: "#"}
                 ], 
-                isActive : false,
+                isActive : false
             },
             {
                 title: "Travel Blogs", list:[
                     {value: "Bali Travel Guide", href: "#"}, {value: "Sri Lanks Travel Guide", href: "#"}, 
                     {value: "Peru Travel Guide", href: "#"}, {value: "Bali Travel Guide", href: "#"}
                 ], 
-                isActive : false,
+                isActive : false
             },
             {
                 title: "About Us", list:[
                     {value: "Our Story", href: "#"}, {value: "Work with us", href:"#"}
                 ], 
-                isActive : false,
+                isActive : false
             },
             {
                 title: "Contact Us", list:[
                     {value: "Our Story", href: "#"}, {value: "Work with us", href:"#"}
                 ], 
-                isActive : false,
-            },
+                isActive : false
+            }
         ]
     }
 }
 
 enum footerAction{
-    CHANGE_IS_ACTIVE = "FOOTER_CHANGE_IS_ACTIVE",
+    SWAP_IS_ACTIVE = "FOOTER_SWAP_IS_ACTIVE",
+    MAKE_ALL_NOT_ACTIVE = "FOOTER_MAKE_ALL_NOT_ACTIVE"
+}
+type footerSwapIsActive = {
+    type: footerAction.SWAP_IS_ACTIVE,
+    payload: number
 }
 
-type footerChangeIsActive ={
-    type: footerAction.CHANGE_IS_ACTIVE,
-    payload: number,
+type footerMakeAllNotActive = {
+    type: footerAction.MAKE_ALL_NOT_ACTIVE
 }
 
-export const footerReducer = (state : footer = defaultStore, action : footerChangeIsActive) =>{
+type footerActionType = footerSwapIsActive | footerMakeAllNotActive;
+
+export const footerReducer = (state : footer = defaultStore, action : footerActionType) =>{
     switch(action.type){
-        case footerAction.CHANGE_IS_ACTIVE:
-            let newItems : footerItem[] = state.main.items;
-            if(action.payload === -1){
-                newItems.forEach(item =>{
-                    item.isActive = false;
-                })
-            }else if(typeof action.payload === "number"){
-                newItems[action.payload].isActive = !(newItems[action.payload].isActive)
+        case footerAction.SWAP_IS_ACTIVE:
+            return {
+                ...state, 
+                main:{...state.main, items: state.main.items.map((item, index) => {
+                    if(index === action.payload){
+                        return{...item, isActive: !(item.isActive)}
+                    }
+                    return{...item}
+                })}
+            };
+        case footerAction.MAKE_ALL_NOT_ACTIVE:
+            return{
+                ...state,
+                main:{...state.main, items: state.main.items.map(item => ({
+                    ...item,
+                    isActive: false
+                }))}
             }
-            return {...state, main:{...state.main, newItems}};
         default:
             return state;
     }
 }
 
-export const footerChangeIsActiveAction = (id : number = -1) : footerChangeIsActive => ({
-    type: footerAction.CHANGE_IS_ACTIVE, payload: id
+export const footerSwapIsActiveAction = (id : number) : footerSwapIsActive => ({
+    type: footerAction.SWAP_IS_ACTIVE, payload: id
+})
+export const footerMakeAllNotActiveAction = () : footerMakeAllNotActive => ({
+    type: footerAction.MAKE_ALL_NOT_ACTIVE
 })

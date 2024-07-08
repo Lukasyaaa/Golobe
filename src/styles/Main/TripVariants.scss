@@ -38,27 +38,35 @@
         }
     }
 
-    @media (any-hover: hover) {
-        &__item{
-            position: relative;
+    &__item{
+        position: relative;
+        z-index: 1;
+        &::after{
+            border-radius: 1rem;
+            background-color: $mintColor;
+            content: "";
+
+            position: absolute;
             z-index: 1;
-            &::after{
-                border-radius: 1rem;
-                background-color: $mintColor;
-                content: "";
+            right: toRem(-7.5);
+            bottom: toRem(-7.5);
 
-                position: absolute;
-                z-index: 1;
-                right: toRem(-7.5);
-                bottom: toRem(-7.5);
+            width: 0;
+            height: 0;
 
-                width: 0;
-                height: 0;
-
-                transition: width 0.3s cubic-bezier(0.34, 0.03, 0, 0.99),
-                height 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
-            }
+            transition: width 0.3s cubic-bezier(0.34, 0.03, 0, 0.99),
+            height 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
         }
+    }
+    &__item:focus{
+        outline: none;
+        &::after{
+            width: calc(100% + toRem(7.5));
+            height: calc(100% + toRem(7.5));
+        }
+    }
+
+    @media (any-hover: hover) {
         &__item:hover::after{
             width: calc(100% + toRem(7.5));
             height: calc(100% + toRem(7.5));

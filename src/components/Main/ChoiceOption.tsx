@@ -1,23 +1,23 @@
 import React, { FC } from "react";
-import { defaultBlockText, imageVariants, srcs } from "../../types";
+import { choiceItem} from "../../types";
 
 interface ChoiceOptionProps{
-    text : defaultBlockText,
-    image : imageVariants,
+    about : choiceItem,
+    isSupportWebp : boolean
 }
 
-export const ChoiceOption : FC<ChoiceOptionProps> = ({image, text}) =>{
+export const ChoiceOption : FC<ChoiceOptionProps> = ({about, isSupportWebp}) =>{
+    const pathToBackground = (isSupportWebp) ? about.image.webp : about.image.jpeg;
+    
     return(
-        <div className="choice__item item-choice"> 
+        <div className="choice__item item-choice" style={{
+            background: `url(${pathToBackground}) center no-repeat`, backgroundSize: "cover"}
+        }> 
             <div className="item-choice__subimage">
-                <h3 className="item-choice__heading">{text.heading}</h3>
-                <div className="item-choice__info">{text.info}</div>
-                <a href="#" className="item-choice__button _icon-send"><span>{text.button}</span></a>
+                <h3 className="item-choice__heading">{about.text.heading}</h3>
+                <div className="item-choice__info">{about.text.info}</div>
+                <a href="#" className="item-choice__button _icon-send"><span>{about.text.button}</span></a>
             </div>
-            <picture className="item-choice__image">
-                <img src={image.srcs.jpeg} alt={image.alt} />
-                <source srcSet={image.srcs.webp} type="img/webp" />
-            </picture>
         </div>
     )
 }

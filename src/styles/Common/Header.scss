@@ -1,11 +1,11 @@
 .header{
     @media (min-width: toEm($headerContainer + 1, 16)) {
-        &:not(._scroll){
+        &._start:not(._scroll){
             padding-top: toRem(30);
         }
     }
     position: fixed;
-    z-index: 2;
+    z-index: 4;
     left: 0;
     top: 0;
 
@@ -14,8 +14,14 @@
     background-color 0.3s cubic-bezier(0.34, 0.03, 0, 0.99),
     box-shadow 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
 
-    &._scroll{
+    &._black-white{
+        background-color: #fff;
+    }
+
+    &._start._scroll{
         background-color: $mintColor;
+    }
+    &._scroll{
         box-shadow: 0 0 25px #333;
     }
 
@@ -80,8 +86,8 @@
             width: 100%;
             height: 100%;
 
-            overflow: auto;
-            padding: calc(toRem(76) + toRem(20)) 15px 0;
+            overflow-y: auto;
+            padding: calc(toRem(76) + toRem(20)) 15px toRem(20);
 
             transition: right 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
         }
@@ -91,20 +97,42 @@
     }
     @media (max-width: toEm(480, 16)) {
         &__menu{
-            padding: calc(toRem(66) + toRem(10)) 15px 0;
+            padding: calc(toRem(66) + toRem(10)) 15px toRem(10);
         }
     }
 
     &__logo{
-        display: flex;
-        align-items: center;
-        flex: 0 1 auto;
+        align-self: center;
 
         margin: 0 toRem(30);
         transition: filter 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
+        img{
+            max-width: 100%;
+        }
     }
-    &._scroll:not(._active) &__logo{
+    &._start._scroll &__logo{
         filter: drop-shadow(0 0 5px $whiteColor);
+    }
+    &._black-white._active &__logo{
+        filter: drop-shadow(0 0 5px $mintColor);
+    }
+
+    &__logo:focus{
+        outline: none;
+    }
+    &._black-white &__logo:focus{
+        transition: filter 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
+    }
+    &._black-white &__logo:focus{
+        filter: drop-shadow(0 0 10px $mintColor);
+    }
+    @media (any-hover: hover) {
+        &._black-white &__logo{
+            transition: filter 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
+        }
+        &._black-white &__logo:hover{
+            filter: drop-shadow(0 0 10px $mintColor);
+        }
     }
     @media (max-width: toEm(992, 16)) {
         &__logo{
@@ -117,10 +145,6 @@
             z-index: 6;
             margin: 0 toRem(20) 0 0;
         }
-    }
-
-    &__logo img{
-        max-width: 100%;
     }
 
     &__link span{
@@ -156,9 +180,9 @@
         }
     }
     @media (max-width: toEm(768, 16)) {
-        &._scroll:not(._active) &__burger span,
-        &._scroll:not(._active) &__burger::after,
-        &._scroll:not(._active) &__burger::before{
+        &._start._scroll:not(._active) &__burger span,
+        &._start._scroll:not(._active) &__burger::after,
+        &._start._scroll:not(._active) &__burger::before{
             background-color: $whiteColor;
         }
         &__burger{
@@ -177,14 +201,27 @@
             }
         }
     }
+
+    &._active .burger{
+        span{
+            transform: scale(0);
+        }
+        &::after{
+            top: 50%;
+            transform: rotate(45deg);
+        }
+        &::before{
+            top: 50%;
+            transform: rotate(-45deg);
+        }
+    }
 }
 .menu-header{
     @media (min-width: toEm(769, 16)) {
-        &__list, &__link a{
+        &__list, &__link a, &__link div{
             height: 100%;
         }
         &__list{
-            display: flex;
             flex-wrap: wrap;
             margin: 0 -1rem;
         }
@@ -194,10 +231,86 @@
             }
         }
     }
+    &__list{
+        display: flex;
+    }
     @media (max-width: toEm(768, 16)) {
-        &__list, &__buttons, &__link{
+        &__list{
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+
+    @media (min-width: toEm(769, 16)) {
+        .header._black-white &__link{
+            margin: -10px 0;
+        }
+    }
+    &__link div{
+        position: relative;
+        &::after{
+            pointer-events: none;
+            background-color: $mintColor;
+            content: "";
+
+            position: absolute;
+            z-index: 1;
+            right: 50%;
+            bottom: 0;
+            transform: translateX(50%);
+
+            width: 100%;
+            height: toRem(5);
+
+            transition: width 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
+        }
+        span{
             position: relative;
-            z-index: 3;
+            z-index: 2;
+        }
+    }
+    .header._black-white &__link span{
+        color: $darkGreenColor;
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__link div::after{
+            background-color: $whiteColor;
+            transform: translateX(50%) translateY(100%);
+        }
+    }
+    &__link a:focus{
+        outline: none;
+    }
+    @media (any-hover: hover) {
+        .header._black-white &__link a{
+            position: relative;
+            &::after{
+                pointer-events: none;
+                background-color: $mintColor;
+                content: "";
+    
+                position: absolute;
+                z-index: 1;
+                right: 50%;
+                bottom: 0;
+                transform: translateX(50%);
+    
+                width: 100%;
+                height: toRem(5);
+
+                transition: width 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
+            }
+        }
+        @media (max-width: toEm(768, 16)) {
+            .header._black-white &__link a::after{
+                background-color: $whiteColor;
+                transform: translateX(50%) translateY(100%);
+            }
+        }
+  
+        .header._black-white &__link a:not(._hovered)::after,
+        .header._black-white &__list._hide-active &__link div::after{
+            width: 0;
         }
     }
 
@@ -211,28 +324,39 @@
             }
         }
 
-        &__link a{
+        &__link a,
+        &__link div{
             display: flex;
             align-items: center;
         }
-        &__link a::before{
+        &__link a::before,
+        &__link div::before{
             margin-right: toRem(5.5);
         }
     }
-    &__link a::before{
+    &__link a::before,
+    &__link div::before{
         color: $whiteColor;
         font-size: toRem(22);
     }
+    .header._black-white &__link a::before,
+    .header._black-white &__link div::before{
+        color: $darkGreenColor;
+    }
+
+    .header._start &__link a{
+        transition: text-shadow 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
+    }
+    .header._start &__link a:focus{
+        text-shadow: 0 0 10px $darkPurpleColor;
+    }
     @media (any-hover: hover) {
-        &__link a{
-            transition: filter 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
-        }
-        &__link a:hover{
-            filter: drop-shadow(0 0 7px $darkPurpleColor);
+        .header._start &__link a:hover{
+            text-shadow: 0 0 10px $darkPurpleColor;
         }
         @media (max-width: toEm(768, 16)) {
-            &__link a:hover{
-                filter: drop-shadow(0 0 7px $whiteColor);
+            .header._start &__link a:hover{
+                text-shadow: 0 0 10px $whiteColor;
             }
         }
     }
@@ -248,7 +372,8 @@
             display: block;
             font-size: toRem(25);
         }
-        &__link a::before{
+        &__link a::before,
+        &__link div::before{
             font-size: toRem(35);
         }
     }
@@ -256,7 +381,8 @@
         &__link span{
             font-size: toRem(20);
         }
-        &__link a::before{
+        &__link a::before,
+        &__link div::before{
             font-size: toRem(30);
         }
     }
@@ -289,11 +415,10 @@
         @media (any-hover: hover) {
             &__button{
                 transition: box-shadow 0.3s cubic-bezier(0.34, 0.03, 0, 0.99),
-                border-radius 0.3s cubic-bezier(0.34, 0.03, 0, 0.99),
-                text-shadow 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
+                border-radius 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
             }
             &__button:hover{
-                border-radius: 15px;
+                border-radius: toRem(15);
                 box-shadow: 0 0 15px $whiteColor;
             }
         }
@@ -304,10 +429,15 @@
         &__link{
             text-align: center;
             white-space: nowrap;
+            &:last-child{
+                padding: toRem(15) toRem(24);
+                align-self: center;
+            }
+            transition: filter 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
         }
-        &__link:last-child{
-            padding: toRem(15) toRem(24);
-            align-self: center;
+        &__link:focus{
+            outline: none;
+            filter: drop-shadow(0 0 7px $blackColor);
         }
         @media (max-width: toEm(992, 16)) {
             &__link:last-child{
@@ -317,7 +447,7 @@
         @media (any-hover: hover) {
             &__link{
                 position: relative;
-                overflow: hidden;
+                overflow-x: hidden;
     
                 transition: left 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
                 span{
@@ -343,6 +473,15 @@
                     transition: left 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
                 }
             }
+            .header._black-white:not(._active) &__link{
+                span{
+                    color: $darkGreenColor;
+                }
+                &::after{
+                    background-color: $darkGreenColor;
+                }
+            }
+
             &__link:first-child{
                 align-self: center;
                 padding: toRem(15) toRem(32);
@@ -357,6 +496,10 @@
             &._left-active &__link:first-child span{
                 color: $darkGreenColor;
             }
+            .header._black-white:not(._active) &._right-active &__link:last-child span,
+            .header._black-white:not(._active) &._left-active &__link:first-child span{
+                color: $whiteColor;
+            }
         
             &._right-active &__link:first-child::after{
                 left: 101%;
@@ -365,7 +508,7 @@
                 left: -101%;
             }
         }
-        @media (any-hover:none) {
+        @media (any-hover: none) {
             &__link:first-child{
                 display: flex;
                 align-items: center;
@@ -377,6 +520,12 @@
                 border-radius: 0.5rem;
                 background-color: $whiteColor;
                 margin-left: toRem(32);
+            }
+            .header._black-white:not(._active) &__link:last-child{
+                background-color: $darkGreenColor;
+                span{
+                    color: $whiteColor;
+                }
             }
             @media (max-width: toEm(992, 16)) {
                 &__link:last-child{
@@ -406,19 +555,5 @@
     }
     &::before{
         top: calc(100% - 0.25rem);
-    }
-
-    &._active{
-        span{
-            transform: scale(0);
-        }
-        &::after{
-            top: 50%;
-            transform: rotate(45deg);
-        }
-        &::before{
-            top: 50%;
-            transform: rotate(-45deg);
-        }
     }
 }

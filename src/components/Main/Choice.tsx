@@ -3,16 +3,20 @@ import { useTypedSelector } from "../../hooks/redux";
 import { choiceItem } from "../../types";
 import { ChoiceOption } from "./ChoiceOption";
 
-export const Choice : FC = () =>{
-    const choiceItems : choiceItem[] = useTypedSelector(store => store.another.choice);
+interface ChoiceProps{
+    isSupportWebp : boolean
+}
+
+export const Choice : FC<ChoiceProps> = ({isSupportWebp}) =>{
+    const choiceStore : choiceItem[] = useTypedSelector(store => store.start.choice);
 
     return(
         <section className="choice">
             <div className="container">
-                {choiceItems.map((choiceItem, index) => <ChoiceOption 
+                {choiceStore.map((choiceItem, index) => <ChoiceOption 
                     key={index} 
-                    image={choiceItem.image} 
-                    text={choiceItem.text} 
+                    about={choiceItem}
+                    isSupportWebp={isSupportWebp}    
                 />)}
             </div>
         </section>

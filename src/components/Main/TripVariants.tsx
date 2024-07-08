@@ -5,20 +5,15 @@ import { BlockHeader } from "../Common/BlockHeader";
 import { TripVariant } from "./TripVariant";
 
 export const TripVariants = () =>{
-    const tripVariants = useTypedSelector<sectionHeaderItems<tripVariantsItem>>(store => store.another.tripVariants);
+    const tripVariantsStore = useTypedSelector<sectionHeaderItems<tripVariantsItem>>(store => store.start.tripVariants);
 
     return(
         <section className="trip-variants">
             <div className="container">
-                <BlockHeader parent="trip-variants" text={tripVariants.header} />
+                <BlockHeader parent="trip-variants" text={tripVariantsStore.header} />
                 <div className="trip-variants__items">
-                    {tripVariants.items.map((tripVariant, tripVariantIndex) => 
-                        <TripVariant 
-                            key={tripVariantIndex} 
-                            info={{title: tripVariant.title, features: tripVariant.features}} 
-                            href={tripVariant.href}
-                            image={tripVariant.image}
-                        />
+                    {tripVariantsStore.items.map((tripVariant, tripVariantIndex) => 
+                        <TripVariant key={tripVariantIndex} about={tripVariant}/>
                     )}
                 </div>
             </div>

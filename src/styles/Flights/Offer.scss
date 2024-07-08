@@ -1,0 +1,256 @@
+.offer{
+    padding: toRem(80) 0 toRem(122);
+    @media (max-width: toEm(992, 16)) {
+        padding: toRem(65) 0;
+    }
+    @media (max-width: toEm(768, 16)) {
+        padding: toRem(45) 0;
+    }
+    @media (max-width: toEm(480, 16)) {
+        padding: toRem(30) 0;
+    }
+
+    &__header:not(:last-child){
+        margin-bottom: toRem(40);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__header:not(:last-child){
+            margin-bottom: toRem(30);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__header:not(:last-child){
+            margin-bottom: toRem(20);
+        }
+    }
+
+    @media (min-width: toEm(769, 16)) {
+        &__main{
+            display: grid;
+            column-gap: toRem(24);
+            grid-template-columns: toPercent(552, $container) minmax(0, auto);
+        }
+    }
+}
+
+.main-offer{
+    &__text{
+        border-radius: toRem(20);
+        background-color: $mintColor;
+        padding: toRem(24);
+
+        display: flex;
+        flex-direction: column;
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__text{
+            padding: 1rem;
+            &:not(:last-child){
+                margin-bottom: 1rem;
+            }
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__text:not(:last-child){
+            margin-bottom: toRem(10);
+        }
+    }
+
+    @media (min-width: toEm(481, 16)) {
+        &__images{
+            align-self: center;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: toRem(24) toRem(20);
+        }
+        @media (max-width: toEm(992, 16)) {
+            &__images{
+                gap: 1rem;
+            }
+        }
+    }
+
+    &__image{
+        position: relative;
+        z-index: 1;
+        display: inline-block;
+
+        padding-bottom: toPercent(200, 318);
+        img{
+            border-radius: toRem(20);
+            position: absolute;
+            z-index: 1;
+            left: 0;
+            top: 0;
+
+            width: 100%;
+            height: 100%;
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__image{
+            width: 100%;
+            padding-bottom: toPercent(200, 450);
+            &:not(:last-child){
+                margin-bottom: toRem(10);
+            }
+        }
+    }
+}
+
+.text-main-offer{
+    @media (min-width: toEm(481, 16)) {
+        &__header{
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            &:not(:last-child){
+                margin-bottom: toRem(24);
+            }
+        }
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__header:not(:last-child){
+            margin-bottom: 1rem;
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__header:not(:last-child){
+            margin-bottom: toRem(10);
+        }
+    }
+
+    @media (min-width: toEm(481, 16)) {
+        &__heading:not(:last-child){
+            margin-right: toRem(16);
+            max-width: toPercent(363, 504);
+        }
+    }
+    &__heading{
+        color: $darkGreenColor;
+        font-family: "TradeGothic";
+        font-size: toRem(40);
+        font-weight: 700;
+        line-height: math.div(51, 40);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__heading{
+            font-size: toRem(30);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__heading{
+            font-size: toRem(24);
+            &:not(:last-child){
+                margin-bottom: toRem(5);
+            }
+        }
+    }
+    @media (min-width: toEm(481, 16)) {
+        &__price{
+            strong{
+                display: block;
+            }
+        }
+    }
+    &__price{
+        text-align: center;
+
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+        background: $whiteColor;
+
+        color: $darkGreenColor;
+        font-family: "TradeGothic";
+        font-size: toRem(14);
+        font-weight: 400;
+        line-height: math.div(18, 14);
+        strong{
+            font-family: "Montserrat";
+            font-size: toEm(20, 14);
+            font-weight: 600;
+            line-height: math.div(24, 20);
+
+            margin-top: toRem(4);
+        }
+    }
+
+    &__info{
+        color: $darkGreenColor;
+        font-family: Montserrat;
+        font-size: toRem(14);
+        font-weight: 400;
+        line-height: math.div(17, 14);
+
+        flex: 1 1 auto;
+
+        &:not(:last-child){
+            margin-bottom: 1rem;
+        }
+    }
+
+    &__link{
+        padding: 0.5rem 1rem;
+        border-radius: 0.25rem;
+        background: $whiteColor;
+
+        color: $darkGreenColor;
+        font-family: Montserrat;
+        font-size: toRem(14);
+        font-weight: 500;
+        line-height: math.div(17, 14);
+
+        span{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            min-height: toRem(32);
+        }
+    }
+    &__link{
+        position: relative;
+        &::after,&::before{
+            border-radius: 0.25rem;
+            content: "";
+
+            position: absolute;
+        }
+        &::after{
+            background-color: $darkGreenColor;
+            
+            width: 0;
+            height: calc(100% + toRem(8));
+
+            z-index: 1;
+            left: 50%;
+            top: toRem(-4);
+            transform: translateX(-50%);
+
+            transition: width 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
+        }
+        &::before{
+            background-color: $whiteColor;
+            
+            width: 100%;
+            height: 100%;
+
+            z-index: 2;
+            left: 0;
+            top: 0;
+        }
+        span{
+            position: relative;
+            z-index: 3;
+        }
+    }
+    &__link:hover::after{
+        width: 70%;
+    }
+    &__link:focus{
+        outline: none;
+        &::after{
+            width: 70%;
+        }
+    }
+}

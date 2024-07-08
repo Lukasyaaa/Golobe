@@ -2,11 +2,11 @@
 export interface defaultBlockText{
     heading : string,
     info : string,
-    button : string,
+    button : string
 }
 export interface srcs{
     webp : string,
-    jpeg : string,
+    jpeg : string
 }
 export interface sectionHeaderItems<T>{
     items : T[],
@@ -14,21 +14,37 @@ export interface sectionHeaderItems<T>{
 }
 export interface image{
     src : string,
-    alt : string,
+    alt : string
 }
 export interface imageVariants{
     srcs : srcs,
-    alt : string,
+    alt : string
+}
+export interface introVariant{
+    heading: string,
+    subheading : string,
+    background : srcs
 }
 
 //----------Header----------
+interface buttonHeaderLink{
+    href : string,
+    value : string
+}
 interface headerLink{
     href : string,
     value : string,
+    iconValue : string,
+    isActive : boolean
+}
+interface headerImg{
+    start : string,
+    another : string,
 }
 export interface header{
+    image : headerImg,
     links : headerLink[],
-    buttons : headerLink[],
+    buttons : buttonHeaderLink[]
 }
 
 //----------Intro----------
@@ -36,33 +52,25 @@ export interface introStart{
     supheading: string,
     heading: string,
     subheading : string,
-}
-interface introVariant{
-    heading: string,
-    subheading : string,
-}
-export interface intro{
-    start : introStart,
-    flights : introVariant,
-    hotels : introVariant,
+    background: srcs
 }
 
 //----------Options----------
 export enum optionIconPosition{
     Null = "icon-null",
     Left = "icon-left",
-    Right = "icon-right",
+    Right = "icon-right"
 }
 export type optionsSelectLink = {
     value : string,
-    isDisabled : boolean,
+    isDisabled : boolean
 }
 export interface flightsOptionsItem{
     title : string,
     iconValue : string | null,
     iconPosition : optionIconPosition,
     value : string | optionsSelectLink[],
-    isActive : boolean | null,
+    isActive : boolean | null
 }
 export interface hotelsOptionsItem{
     title : string,
@@ -70,22 +78,27 @@ export interface hotelsOptionsItem{
     iconPosition : optionIconPosition,
     isBigger : boolean,
     value : string | optionsSelectLink[],
-    isActive : boolean | null,
+    isActive : boolean | null
 }
 export enum optionsType{
     Flights = 0,
-    Hotels = 1,
+    Hotels = 1
 }
 
 interface optionsHeaderLink{
     value : string,
     iconValue : string,
-    isActive : boolean,
+    isActive : boolean
+}
+interface optionsHeader{
+    start : optionsHeaderLink[],
+    flights : string,
+    hotels : string
 }
 export interface options{
-    header : optionsHeaderLink[]
+    header : optionsHeader,
     flights : flightsOptionsItem[],
-    hotels : hotelsOptionsItem[],
+    hotels : hotelsOptionsItem[]
 }
 
 //-----------TripVariant----------
@@ -93,29 +106,26 @@ export interface tripVariantsItem{
     image : imageVariants
     title : string,
     features : string[],
-    href : string,
+    href : string
 }
 
 //----------Choice----------
 export interface choiceItem{
-    image : imageVariants,
-    text : defaultBlockText,
+    image : srcs,
+    text : defaultBlockText
 }
 
 //----------Reviews----------
-export interface reviewsItemText{
+export interface reviewsItem{
+    image : imageVariants,
     heading : string,
     info : string,
     button : string,
     starsCount : number,
     author : string,
     hotel : string,
-}
-export interface reviewsItem{
-    image : imageVariants,
-    text : reviewsItemText,
     hotelLink : string,
-    isActive : boolean,
+    isActive : boolean
 }
 
 //-----------Footer----------
@@ -125,27 +135,80 @@ interface post{
     info: string,
     input: string,
     button: string,
+    image : string
 }
 
 interface infoMain{
     image : image,
-    socials : string[],
+    socials : string[]
 }
 export interface footerLink{
     value : string,
-    href : string,
+    href : string
 }
 export interface footerItem{
     title : string,
     list : footerLink[],
-    isActive : boolean,
+    isActive : boolean
 }
 interface main{
     info : infoMain,
-    items : footerItem[],
+    items : footerItem[]
 }
 
 export interface footer{
     post : post,
-    main : main,
+    main : main
+}
+
+//----------Map----------
+interface mapItemScrs{
+    jpeg : string,
+    webp : string,
+    svg : string
+}
+export interface mapItemImage{
+    srcs : mapItemScrs,
+    alt : string
+}
+export interface mapItem{
+    title : string,
+    info : string,
+    image : mapItemImage
+}
+
+export interface map{
+    header : defaultBlockText,
+    items : mapItem[],
+    background : srcs
+}
+
+//----------Travels----------
+export interface travelsItem{
+    title : string,
+    subtitle : string,
+    price : number,
+    button : string,
+    href : string,
+    image : imageVariants
+}
+
+export interface travels{
+    header : defaultBlockText,
+    items : travelsItem[]
+}
+
+//----------Offer----------
+export interface offerItem{
+    title: string,
+    info : string,
+    button : string,
+    price : number,
+    href : string,
+    images : imageVariants[]
+}
+
+export interface offer{
+    header : defaultBlockText,
+    item : offerItem
 }

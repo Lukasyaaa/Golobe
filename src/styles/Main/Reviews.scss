@@ -198,20 +198,25 @@
             padding-bottom: 1rem;
         }
     }
-    @media (any-hover: hover) {
-        @keyframes scalling {
-            25%{
-                transform: scale(0.9);
-            }
-            75%{
-                transform: scale(1.1);
-            }
-        }
 
-        &__more{
-            animation: scalling 1.5s linear 0s infinite;
-            animation-play-state: paused;
+    @keyframes scalling {
+        25%{
+            transform: scale(0.9);
         }
+        75%{
+            transform: scale(1.1);
+        }
+    }
+    &__more{
+        animation: scalling 1.5s linear 0s infinite;
+        animation-play-state: paused;
+    }
+
+    &__more:focus{
+        outline: none;
+        animation-play-state: running;
+    }
+    @media (any-hover: hover) {
         &__more:hover{
             animation-play-state: running;
         }
@@ -316,25 +321,31 @@
         &:not(:last-child){
             padding-bottom: toRem(12);
         }
+
+        position: relative;
+        &::after{
+            background: linear-gradient(to right, #ea4335 25%, #fbbc05 25% 50%, #34a853 50% 75%, #4285f4 75% 100%);
+
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+
+            width: 0;
+            height: 3px;
+
+            transition: all 0.3s linear;
+        }
+    }
+
+    &__hotel-link:focus{
+        outline: none;
+        &::after{
+            width: 100%;
+        }
     }
     @media (any-hover: hover) {
-        &__hotel-link{
-            position: relative;
-            &::after{
-                background: linear-gradient(to right, #ea4335 25%, #fbbc05 25% 50%, #34a853 50% 75%, #4285f4 75% 100%);
-
-                content: "";
-                position: absolute;
-                left: 0;
-                bottom: 0;
-
-                width: 0;
-                height: 3px;
-
-                transition: all 0.3s linear;
-            }
-        }
-        &__hotel-link:hover.item-reviews__hotel-link::after{
+        &__hotel-link:hover::after{
             width: 100%;
         }
     }

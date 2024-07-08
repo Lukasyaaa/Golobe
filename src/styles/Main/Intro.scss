@@ -1,5 +1,9 @@
 .intro{
     @media (min-width: toEm($headerContainer + 1, 16)) {
+        padding-top: toRem(30);
+    }
+    
+    @media (min-width: toEm($headerContainer + 1, 16)) {
         .container:not(.options), .container:not(.options)::after{
             border-radius: 1.5rem;
         }
@@ -9,8 +13,6 @@
 
         position: relative;
         z-index: 1;
-        background: url("../../assets/img/main/intro/background.jpeg") center no-repeat;
-        background-size: cover;
         text-align: center; 
 
         padding-top: toRem(150);

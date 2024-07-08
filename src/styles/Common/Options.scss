@@ -43,20 +43,32 @@
         border-radius: 1rem;
         padding: 1rem 2rem 2rem;
     }
+    &:not(.header-both) &__inner{
+        padding: 2rem;
+    }
     @media (max-width: toEm(768, 16)) {
-        &__inner{
+        &__inner,
+        &:not(.header-both) &__inner{
             padding: 1rem;
         }
+
     }
 
     @media (min-width: toEm(993, 16)) {
-        &__header{
+        &.header-both &__header{
             min-height: toRem(63);
         }
     }
     &__header{
         display: flex;
         margin-bottom: toRem(25);
+    }
+    &:not(.header-both) &__header{
+        color: $darkGreenColor;
+        font-family: Montserrat;
+        font-size: toRem(20);
+        font-weight: 600;
+        line-height: math.div(24, 20);
     }
     @media (max-width: toEm(480, 16)) {
         &__header{
@@ -104,24 +116,67 @@
         display: flex;
     }
 
-    &__link button,
-    &__link:not(:last-child) button::after{
-        min-height: toRem(48);
-    }
-    @media (max-width: toEm(768, 16)) {
-        &__link button,
-        &__link:not(:last-child) button::after{
-            min-height: toRem(38);
-        }
-    }
-    @media (max-width: toEm(480, 16)) {
-        &__link button,
-        &__link:not(:last-child) button::after{
-            min-height: toRem(30);
+    &__link{
+        position: relative;
+        z-index: 1;
+        &:not(:last-child){
+            display: flex;
+            align-items: flex-start;
+            &::after{
+                background-color: rgb(215, 226, 238);
+
+                content: "";
+                width: toRem(1);
+                min-height: toRem(48);
+        
+                margin: 0 2rem;
+            }
         }
     }
 
-    &__link{
+    @media (max-width: toEm(768, 16)) {
+        &__link:not(:last-child)::after{
+            min-height: toRem(38);
+            margin: 0 toRem(24);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__link:not(:last-child)::after{
+            min-height: toRem(30);
+            margin: 0 toRem(12);
+        }
+    }
+
+    @media (min-width: toEm(769, 16)) {
+        &__link button,
+        &__link div{
+            padding-bottom: toRem(15);
+        }
+    }
+
+    &__link button:focus{
+        outline: none;
+    }
+
+    &__link button,
+    &__link div{
+        display: flex;
+        align-items: center;
+        color: $darkGreenColor;
+
+        height: 100%;
+        &::before{
+            font-size: toRem(21);
+        }
+        span{
+            font-family: Montserrat;
+            font-size: 1rem;
+            font-weight: 600;
+            line-height: math.div(20, 16);
+    
+            margin-left: toRem(9);
+        }
+
         position: relative;
         z-index: 1;
         &::after{
@@ -139,58 +194,15 @@
 
             transition: width 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
         }
-        &:not(:last-child)::after{
-            left: calc(50% - (toRem(32) + toRem(1)));
-        }
-    }
-    @media (max-width: toEm(768, 16)) {
-        &__link::after{
-            height: toRem(2);
-        }
-        &__link:not(:last-child)::after{
-            left: calc(50% - (toRem(24) + toRem(1)));
-        }
-    }
-    @media (max-width: toEm(480, 16)) {
-        &__link:not(:last-child)::after{
-            left: calc(50% - (toRem(12) + toRem(1)));
-        }
     }
 
-    &__list:not(._hide-active) &__link._active,
-    &__link._hover{
-        &:not(:last-child)::after{
-            width: calc(100% - (toRem(32) * 2 + toRem(1)));
-            @media (max-width: toEm(768, 16)) {
-                width: calc(100% - (toRem(24) * 2 + toRem(1)));
-            }
-            @media (max-width: toEm(480, 16)) {
-                width: calc(100% - (toRem(12) * 2 + toRem(1)));
-            }
-        }
-        &:last-child::after{
-            width: 100%;
-        }
-    }
-
-    &__link button{
-        display: flex;
-        align-items: center;
-        color: $darkGreenColor;
-        &::before{
-            font-size: toRem(21);
-        }
-        span{
-            font-family: Montserrat;
-            font-size: 1rem;
-            font-weight: 600;
-            line-height: math.div(20, 16);
-    
-            margin-left: toRem(9);
-        }
+    &__list:not(._hide-active) &__link div._active::after,
+    &__link button._hover::after{
+        width: 100%;
     }
     @media (max-width: toEm(768, 16)) {
-        &__link button{
+        &__link button,
+        &__link div{
             &::before{
                 font-size: toRem(18);
             }
@@ -198,25 +210,10 @@
                 font-size: toRem(14);
                 margin-left: toRem(6);
             }
-        }
-    }
 
-    &__link:not(:last-child) button::after{
-        background-color: rgb(215, 226, 238);
-
-        content: "";
-        width: toRem(1);
-
-        margin: 0 2rem;
-    }
-    @media (max-width: toEm(768, 16)) {
-        &__link:not(:last-child) button::after{
-            margin: 0 toRem(24);
-        }
-    }
-    @media (max-width: toEm(480, 16)) {
-        &__link:not(:last-child) button::after{
-            margin: 0 toRem(12);
+            &::after{
+                height: toRem(2);
+            }
         }
     }
 }
@@ -285,42 +282,6 @@
                 margin-bottom: toRem(6);
             }
         }
-    }
-}
-.select-options{
-    &__opener{
-        text-align: left;
-        @extend %textInput;
-
-        position: absolute;
-        left: 0;
-        top: 0;
-
-        border: 0;
-        width: 100%;
-        height: 100%;
-
-        padding: 0 toRem(20);
-    }
-    @media (max-width: toEm(768, 16)) {
-        &__opener{
-            padding: 0 toRem(12);
-        }    
-    }
-    
-    &__list{
-        position: absolute;
-        z-index: 3;
-        left: 50%;
-        bottom: toRem(-5);
-        transform: translate(-50%, 100%);
-
-        width: 110%;
-        text-align: center;
-
-        overflow-y: hidden;
-        height: 0;
-        transition: height 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
     }
 }
 .item-inputs-options{
@@ -429,6 +390,7 @@
     @media (any-hover: hover) {
         &__title{
             position: relative;
+            z-index: 1;
             span{
                 background-color: transparent;
                 position: relative;
@@ -441,6 +403,7 @@
                 content: "";
 
                 position: absolute;
+                z-index: 1;
                 width: 0;
                 height: 100%;
 
@@ -450,6 +413,7 @@
                 transition: width 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
             }
         }
+        &._focus &__title,
         &__select:hover + &__title,
         &__input:hover + &__title,
         &__input:focus + &__title,
@@ -465,6 +429,7 @@
 
     &.icon-left.select{
         position: relative;
+        z-index: 3;
     }
 
     &.with-icon &__inner::before,
@@ -489,12 +454,58 @@
             left: toRem(22);
         }
     }
+    @media (max-width: toEm(768, 16)) {
+        &.icon-left.select::before{
+            left: 1rem;
+        }
+    }
 
     &.select &__inner::before{
         transition: transform 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
     }
     &._active &__inner::before{
         transform: rotate(180deg) translateY(-50%);
+    }
+}
+.select-options{
+    &__opener{
+        text-align: left;
+        @extend %textInput;
+
+        position: absolute;
+        z-index: 1;
+        left: 0;
+        top: 0;
+
+        border: 0;
+        width: 100%;
+        height: 100%;
+
+        padding: 0 toRem(20);
+    }
+    &__opener:focus{
+        outline: none;
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__opener{
+            padding: 0 toRem(12);
+        }    
+    }
+    
+    &__list{
+        position: absolute;
+        z-index: 3;
+        left: 50%;
+        bottom: toRem(-5);
+        transform: translate(-50%, 100%);
+
+        width: 110%;
+        text-align: center;
+
+        overflow-y: hidden;
+        filter: drop-shadow(0 0 3px $darkGreenColor);
+        height: 0;
+        transition: height 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
     }
 }
 .list-select-options{
@@ -514,6 +525,12 @@
         font-weight: 600;
 
         padding: toRem(10) 0;
+
+        transition: text-shadow 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
+    }
+    &__link button:focus{
+        outline: none;
+        text-shadow: 0 0 5px $darkGreenColor;
     }
 
     &__link button[disabled]{
@@ -532,6 +549,8 @@
         }
     }
     &__item{
+        border-radius: toRem(4);
+
         color: $darkGreenColor;
         font-family: Montserrat;
         font-size: toRem(14);
@@ -559,50 +578,59 @@
         margin-right: toRem(5);
     }
 
-    @media (any-hover: hover) {
-        &__promo::before{
+    &__promo{
+        border: toRem(3) solid transparent;
+        transition: border 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
+        &::before{
             transition: transform 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
         }
+    }
+    @media (any-hover: hover) {
         &__promo:hover::before{
             transform: rotate(180deg);
         }
     }
+    &__promo:focus::before{
+        transform: rotate(180deg);
+    }
+    &__promo:focus{
+        outline: none;
+        border: toRem(3) solid $darkGreenColor;
+    }
 
     &__submit{
         padding: toRem(15) 1rem;
-        border-radius: toRem(4);
         background-color: $mintColor;
+
+        position: relative;
+        z-index: 1;
     }
 
+    &__submit:focus::after{
+        outline: none;
+        content: "?";
+        border-radius: toRem(4);
+        background-color: $darkGreenColor;
+        color: $whiteColor;
+        font-size: toRem(32);
+        
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        position: absolute;
+        z-index: 1;
+        left: 0;
+        top: 0;
+
+        width: 100%;
+        height: 100%;
+
+        transform: scale(1);
+    }
     @media (any-hover: hover) {
-        &__submit{
-            position: relative;
-            &::after{
-                content: "?";
-                border-radius: toRem(4);
-                background-color: $darkGreenColor;
-                color: $whiteColor;
-                font-size: toRem(32);
-                
-                display: flex;
-                align-items: center;
-                justify-content: center;
-
-                position: absolute;
-                left: 0;
-                top: 0;
-
-                width: 100%;
-                height: 100%;
-    
-                transform: scale(0);
-                transition: transform 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
-            }
-        }
-        &__submit:hover{
-            &::after{
-                transform: scale(1);
-            }
+        &__submit:hover::after{
+            transform: scale(1);
         }
     }
 }

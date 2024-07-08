@@ -23,6 +23,7 @@
         }
     }
     &__item{
+        border-radius: toRem(24);
         position: relative;
         z-index: 1;
         padding: toRem(25) toRem(15);
@@ -46,6 +47,7 @@
 }
 .item-choice{
     &::after{
+        border-radius: toRem(24);
         background: linear-gradient(180.00deg, rgba(0, 0, 0, 0),rgba(18, 18, 18, 0.75) 48.674%);
         content: "";
         position: absolute;
@@ -55,23 +57,6 @@
         
         width: 100%;
         height: 100%;
-    }
-
-    &__image, img{
-        position: absolute;
-        z-index: 1;
-        left: 0;
-        top: 0;
-
-        width: 100%;
-        height: 100%;
-    }
-    img{
-        object-fit: cover;
-    }
-
-    img, &::after{
-        border-radius: toRem(24);
     }
 
     @media (min-width: toEm(769, 16)) {
@@ -158,50 +143,54 @@
             font-weight: 500;
             line-height: math.div(17, 14);
             margin-left: toRem(5);
+
+            position: relative;
+            z-index: 3;
         }
      
         padding: 1rem;
         border-radius: toRem(4);
         background: $mintColor;
+
+        position: relative;
+        z-index: 1;
+        &::after, &::before{
+            content: "";
+            border-radius: toRem(4);
+            position: absolute;
+        }
+        &::after{
+            background-color: $whiteColor;
+
+            z-index: 1;
+            left: 50%;
+            top: toRem(-4);
+            transform: translateX(-50%);
+
+            width: 0;
+            height: calc(100% + toRem(8));
+
+            transition: width 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
+        }
+        &::before{
+            background-color: $mintColor;
+
+            z-index: 2;
+            left: 0;
+            top: 0;
+
+            width: calc(100%);
+            height: calc(100%);
+        }
+    }
+    &__button:focus{
+        outline: none;
+        &::after{
+            width: 70%;
+        }
     }
     @media (any-hover: hover) {
-        &__button{
-            position: relative;
-            z-index: 1;
-            &::after,&::before{
-                content: "";
-                border-radius: toRem(4);
-                position: absolute;
-            }
-            &::after{
-                background-color: $whiteColor;
-
-                z-index: 1;
-                left: 50%;
-                top: toRem(-4);
-                transform: translateX(-50%);
-
-                width: 0;
-                height: calc(100% + toRem(8));
-
-                transition: width 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
-            }
-            &::before{
-                background-color: $mintColor;
-
-                z-index: 2;
-                left: 0;
-                top: 0;
-
-                width: calc(100%);
-                height: calc(100%);
-            }
-            span{
-                position: relative;
-                z-index: 3;
-            }
-        }
-        &__button:hover.item-choice__button::after{
+        &__button:hover::after{
             width: 70%;
         }
     }
