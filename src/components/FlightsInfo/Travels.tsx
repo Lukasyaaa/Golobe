@@ -9,10 +9,10 @@ export const Travels : FC = () => {
     return(
         <section className="travels">
             <div className="container">
-                <BlockHeader text={travelsStore.header} parent="travels" />
+                <BlockHeader about={travelsStore.header} parent="travels" />
                 <div className="travels__items">
-                    {travelsStore.items.map((travel, index) => (
-                        <Travel key={index} about={travel}/>
+                    {travelsStore.items.map((travel, i) => (
+                        <Travel key={i} about={travel}/>
                     ))}
                 </div>
             </div>

@@ -101,19 +101,17 @@ const defaultStore : store  = {
     choice:[
         {
             image: {webp: choiceWebp_1, jpeg: choiceJpeg_1},
-            text:{
-                heading: "Flights", 
-                info: "Search Flights & Places Hire to our most popular destinations", 
-                button: "Show Filghts"
-            },
+            heading: "Flights", 
+            info: "Search Flights & Places Hire to our most popular destinations", 
+            button: "Show Filghts",
+            href: "#"
         },
         {
             image: {webp: choiceWebp_2, jpeg: choiceJpeg_2},
-            text:{ 
-                heading: "Hotels", 
-                info: "Search hotels & Places Hire to our most popular destinations", 
-                button: "Show Hotels"
-            },
+            heading: "Hotels", 
+            info: "Search hotels & Places Hire to our most popular destinations", 
+            button: "Show Hotels",
+            href: "#"
         }
     ]
 }

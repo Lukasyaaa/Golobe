@@ -1,4 +1,8 @@
 .footer{
+    &.gray{
+        background-color: $lightGrayColor;
+    }
+
     &__main{
         background-color: $mintColor;
 

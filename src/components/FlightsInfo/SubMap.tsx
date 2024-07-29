@@ -1,12 +1,12 @@
 import React, { FC } from "react";
 import { mapItem } from "../../types";
 
-interface MapItemProps{
+interface SubmapProps{
     id : number,
     about : mapItem,
 }
 
-export const MapItem : FC<MapItemProps> = ({id, about}) =>{
+export const Submap : FC<SubmapProps> = ({id, about}) =>{
     return(
         <div className={`map__item item-map item-map_${id}`}>
             <picture className="item-map__image">

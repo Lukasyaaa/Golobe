@@ -2,7 +2,7 @@ import React, { FC, useRef, MouseEvent, useEffect } from "react";
 import { reviewsItem, } from "../../types";
 import googleLogo from "../../assets/img/main/reviews/google.svg"
 import { useDispatch } from "react-redux";
-import { reviewsSwapIsActiveAction } from "../../store/start/reviewsReducer";
+import { reviewsSwapActiveAction } from "../../store/start/reviewsReducer";
 
 interface ReviewProps{
     id : number,
@@ -10,12 +10,12 @@ interface ReviewProps{
 }
 
 export const Review : FC<ReviewProps> = ({id, about}) =>{
-    const dispatch = useDispatch();
     let infoInner = useRef<HTMLDivElement>(null);
+    const dispatch = useDispatch();
 
     const showText = (e : MouseEvent<HTMLButtonElement>) =>{
         e.stopPropagation();
-        dispatch(reviewsSwapIsActiveAction(id));
+        dispatch(reviewsSwapActiveAction(id));
     }
 
     return(
@@ -30,7 +30,11 @@ export const Review : FC<ReviewProps> = ({id, about}) =>{
                         {about.info}
                     </div>
                 </div>
-                <button className="item-reviews__more" type="button" onClick={(e) => showText(e)}>{about.button}</button>
+                <button 
+                    className="item-reviews__more" type="button" onClick={(e) => {e.stopPropagation(); showText(e)}}
+                >
+                    {about.button}
+                </button>
                 <div className="item-reviews__stars">
                     {Array.from({ length: about.starsCount }, (_, index) => (
                         <span className="item-reviews__star _icon-star" key={index}></span>
@@ -38,7 +42,7 @@ export const Review : FC<ReviewProps> = ({id, about}) =>{
                 </div>
                 <div className="item-reviews__author">{about.author}</div>
                 <div className="item-reviews__hotel">{about.hotel}</div>
-                <a className="item-reviews__hotel-link" href={about.hotelLink}>
+                <a className="item-reviews__hotel-link" href={about.hotelLink} onClick={(e) => e.stopPropagation()}>
                     <img src={googleLogo} alt="Google" />
                     <span>Google</span>
                 </a>

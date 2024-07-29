@@ -1,67 +1,40 @@
-import React, { useState, forwardRef, ForwardRefRenderFunction, useRef, useEffect, MouseEvent, FocusEvent } from "react";
-import { useLocation } from "react-router-dom";
+import React, {FC, useState, useRef, MouseEvent, FocusEvent } from "react";
+import { useDispatch } from "react-redux";
 import { OptionsInput } from "./OptionsInput";
 import { OptionsSelect } from "./OptionsSelect";
+
 import { useTypedSelector } from "../../../hooks/redux";
-import { flightsOptionsItem, hotelsOptionsItem, optionsType } from "../../../types";
-import { useDispatch } from "react-redux";
-import { optionsReplaceActiveHeaderLinkAction } from "../../../store/start/optionsReducer";
-import { flightsPath, hotelsPath } from "../../../App";
+import { optionsFlightsItem, optionsHotelsItem, optionsBlockType, optionsItemsType } from "../../../types";
+import { optionsSetActiveHeaderLinkAction } from "../../../store/common/optionsReducer";
+
 
 interface OptionsProps{
-
+    neededBlocks : optionsBlockType,
+    startValue : optionsItemsType,
 }
 
-enum currentOptionsHeader{
-    Both = 0,
-    Flights = 1,
-    Hotels = 2 
-}
-
-const Options : ForwardRefRenderFunction<HTMLDivElement, OptionsProps> = (props, ref) =>{
+export const Options : FC<OptionsProps> = ({neededBlocks, startValue}) =>{
     const optionsStore = useTypedSelector(store => store.options);
-    let [currentValueOptions, setCurrentValueOptions] = useState<optionsType>(optionsType.Flights);
-    const neededMassive : flightsOptionsItem[] | hotelsOptionsItem[] = 
-        (currentValueOptions === optionsType.Flights) ? optionsStore.flights : optionsStore.hotels;
+    let [currentTypeOptions, setCurrentTypeOptions] = useState<optionsItemsType>(startValue);
+    let neededMassive : optionsFlightsItem[] | optionsHotelsItem[] = 
+        (currentTypeOptions === optionsItemsType.Flights) ? optionsStore.flights : optionsStore.hotels;
 
-    let location = useLocation();
-    let [currentHeaderOptions, setCurrentHeaderOptions] = useState<currentOptionsHeader>(currentOptionsHeader.Both);
     let header = useRef<HTMLUListElement>(null);
-    useEffect(() => {
-        switch(location.pathname){
-            case flightsPath:
-                setCurrentHeaderOptions(currentOptionsHeader.Flights);
-                break;
-            case hotelsPath:
-                setCurrentHeaderOptions(currentOptionsHeader.Flights);
-                break;
-            default:
-                setCurrentHeaderOptions(currentOptionsHeader.Both);
-                break;
-        }
-    }, [location.pathname])
 
     const dispatch = useDispatch();
-
-    const makeActive = (e : MouseEvent<HTMLButtonElement>, id : number) : void =>{
+    const makeActive = (id : number) : void =>{
         if(header.current){
-            for(let i : number = 0; i < optionsStore.header.start.length; i++){
-                if(optionsStore.header.start[i].isActive){
-                    dispatch(optionsReplaceActiveHeaderLinkAction(i, id));
-                    setCurrentValueOptions(id);
-                }
-            }
+            dispatch(optionsSetActiveHeaderLinkAction(id));
+            setCurrentTypeOptions(id);
             header.current.classList.remove("_hide-active");
         }
     }
-
     const makePseudoActive = (e : MouseEvent<HTMLButtonElement> | FocusEvent<HTMLButtonElement>) : void =>{
         if(header.current){
             e.currentTarget.classList.add("_hover");
             header.current.classList.add("_hide-active");
         }
     }
-
     const makeUnPseudoActive = (e : MouseEvent<HTMLButtonElement> | FocusEvent<HTMLButtonElement>) : void =>{
         if(header.current){
             e.currentTarget.classList.remove("_hover");
@@ -70,20 +43,25 @@ const Options : ForwardRefRenderFunction<HTMLDivElement, OptionsProps> = (props,
     }
 
     let classes : string[] = ["options", "container"];
-    if(currentHeaderOptions === currentOptionsHeader.Both){
+    if(neededBlocks === optionsBlockType.BOTH_HEADER_TYPES){
         classes.push("header-both");
+    }else if(neededBlocks === optionsBlockType.ONLY_ITEMS){
+        classes.push("independet");
     }
 
     return(
         <div className={classes.join(" ")}>
             <div className="options__inner">
+                {neededBlocks !== optionsBlockType.ONLY_ITEMS && 
                 <div className="options__header header-options">
-                    {(currentHeaderOptions === currentOptionsHeader.Both) 
+                    {(neededBlocks === optionsBlockType.BOTH_HEADER_TYPES) 
                     ? <ul className="header-options__list" ref={header}>
-                        {optionsStore.header.start.map((headerLink, index) => {
-                            if(headerLink.isActive){
+                        {optionsStore.header.start.items.map((headerLink, index) => {
+                            if(optionsStore.header.start.activeItem === index){
                                 return <li className="header-options__link" key={index}>
-                                    <div className={[headerLink.iconValue, "_active"].join(" ")}><span>{headerLink.value}</span></div>
+                                    <div className={[headerLink.iconValue, "_active"].join(" ")}>
+                                        <span>{headerLink.value}</span>
+                                    </div>
                                 </li>
                             }
                             return <li className="header-options__link" key={index}>
@@ -95,22 +73,26 @@ const Options : ForwardRefRenderFunction<HTMLDivElement, OptionsProps> = (props,
                                             makeUnPseudoActive(e);
                                         }
                                     }}
-                                    onClick={(e) => makeActive(e, index)}
+                                    onClick={(e) => {e.stopPropagation(); makeActive(index)}}
                                     onFocus={(e) => makePseudoActive(e)} onBlur={(e) => makeUnPseudoActive(e)}
                                 ><span>{headerLink.value}</span></button>
                             </li>
                         })}
                     </ul> 
-                    : ((currentHeaderOptions === currentOptionsHeader.Flights) ? optionsStore.header.flights : optionsStore.header.hotels)}
+                    : ((neededBlocks === optionsBlockType.FLIGHTS_HEADER_TYPE) ? 
+                    optionsStore.header.flights : optionsStore.header.hotels)}
                 </div>
-                <div className="options__inputs inputs-options" ref={ref}>
+                }
+                <div className="options__inputs inputs-options">
                     {neededMassive.map((optionsItem, optionIndex) => ((typeof optionsItem.value === "string") ?
                     <OptionsInput 
                         key={optionIndex} 
                         title={optionsItem.title} 
                         iconValue={optionsItem.iconValue} iconPosition={optionsItem.iconPosition}
-                        parentType={currentValueOptions}
-                        isBigger={(currentValueOptions === optionsType.Hotels) ? optionsStore.hotels[optionIndex].isBigger : false}
+                        parentType={currentTypeOptions}
+                        isBigger={
+                            (currentTypeOptions === optionsItemsType.Hotels) ? optionsStore.hotels[optionIndex].isBigger : false
+                        }
                         value={optionsItem.value}
                     /> :               
                     <OptionsSelect
@@ -118,21 +100,31 @@ const Options : ForwardRefRenderFunction<HTMLDivElement, OptionsProps> = (props,
                         id={optionIndex}
                         title={optionsItem.title} 
                         iconValue={optionsItem.iconValue} iconPosition={optionsItem.iconPosition}
-                        parentType={currentValueOptions}
-                        isBigger={(currentValueOptions === optionsType.Hotels) ? optionsStore.hotels[optionIndex].isBigger : false}
+                        parentType={currentTypeOptions}
+                        isBigger={
+                            (currentTypeOptions === optionsItemsType.Hotels) ? optionsStore.hotels[optionIndex].isBigger : false
+                        }
                         links={optionsItem.value}
                         isActive={(typeof optionsItem.isActive === "boolean") ? optionsItem.isActive : false}
                     />))}
+                    {neededBlocks === optionsBlockType.ONLY_ITEMS && 
+                        <div className="inputs-options__find">
+                            <button type="button" className="_icon-search" onClick={(e) => e.stopPropagation()}></button>
+                        </div>}
                 </div>
+                {neededBlocks !== optionsBlockType.ONLY_ITEMS &&
                 <div className="options__footer footer-options">
-                    <button className="footer-options__item footer-options__promo _icon-plus" type="button"><span>Add Promo Code</span></button>
-                    <button className="footer-options__item footer-options__submit _icon-send" type="submit">
-                        <span>Show {(currentValueOptions === optionsType.Flights) ? "Flights" : "Hotels"}</span>
+                    <button className="footer-options__item footer-options__promo _icon-plus" type="button" onClick={(e) => e.stopPropagation()}>
+                        <span>{optionsStore.footer.promoButtonText}</span>
+                    </button>
+                    <button className="footer-options__item footer-options__submit _icon-send" type="submit" onClick={(e) => e.stopPropagation()}>
+                        <span>{(currentTypeOptions === optionsItemsType.Flights) ? 
+                            optionsStore.footer.sendButtonText.flights : optionsStore.footer.sendButtonText.hotels}
+                        </span>
                     </button>
                 </div>
+                }
             </div>
         </div>
     )
 }
-
-export default forwardRef<HTMLDivElement, OptionsProps>(Options);

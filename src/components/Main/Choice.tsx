@@ -13,8 +13,8 @@ export const Choice : FC<ChoiceProps> = ({isSupportWebp}) =>{
     return(
         <section className="choice">
             <div className="container">
-                {choiceStore.map((choiceItem, index) => <ChoiceOption 
-                    key={index} 
+                {choiceStore.map((choiceItem, i) => <ChoiceOption 
+                    key={i} 
                     about={choiceItem}
                     isSupportWebp={isSupportWebp}    
                 />)}

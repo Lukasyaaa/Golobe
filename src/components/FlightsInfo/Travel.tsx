@@ -22,6 +22,7 @@ export const Travel : FC<TravelProps> = ({about}) =>{
                     <a 
                         className="item-travels__button"
                         href={about.href}  
+                        onClick={(e) => e.stopPropagation()}
                         onMouseEnter={() => parent.current?.classList.add("_active")}
                         onMouseLeave={(e) => {
                             if(e.target !== document.activeElement){
@@ -30,7 +31,9 @@ export const Travel : FC<TravelProps> = ({about}) =>{
                         }}
                         onFocus={() => parent.current?.classList.add("_active")}
                         onBlur={() => parent.current?.classList.remove("_active")}
-                    ><span>{about.button}</span></a>
+                    >
+                        <span>{about.button}</span>
+                    </a>
                 </figcaption>
                 <picture className="item-travels__image">
                     <img src={about.image.srcs.jpeg} alt={about.image.alt} />

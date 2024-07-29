@@ -25,9 +25,14 @@ export interface introVariant{
     subheading : string,
     background : srcs
 }
+export interface time{
+    hour : number,
+    minute : number,
+    meridiem : meridiem
+}
 
 //----------Header----------
-interface buttonHeaderLink{
+interface headerButton{
     href : string,
     value : string
 }
@@ -35,7 +40,10 @@ interface headerLink{
     href : string,
     value : string,
     iconValue : string,
-    isActive : boolean
+}
+interface headerLinks{
+    items : headerLink[],
+    activeItem : number
 }
 interface headerImg{
     start : string,
@@ -43,16 +51,16 @@ interface headerImg{
 }
 export interface header{
     image : headerImg,
-    links : headerLink[],
-    buttons : buttonHeaderLink[]
+    links : headerLinks,
+    buttons : headerButton[]
 }
 
 //----------Intro----------
 export interface introStart{
-    supheading: string,
-    heading: string,
+    supheading : string,
+    heading : string,
     subheading : string,
-    background: srcs
+    background : srcs
 }
 
 //----------Options----------
@@ -61,18 +69,18 @@ export enum optionIconPosition{
     Left = "icon-left",
     Right = "icon-right"
 }
-export type optionsSelectLink = {
+export interface optionsSelectLink{
     value : string,
     isDisabled : boolean
 }
-export interface flightsOptionsItem{
+export interface optionsFlightsItem{
     title : string,
     iconValue : string | null,
     iconPosition : optionIconPosition,
     value : string | optionsSelectLink[],
     isActive : boolean | null
 }
-export interface hotelsOptionsItem{
+export interface optionsHotelsItem{
     title : string,
     iconValue : string | null,
     iconPosition : optionIconPosition,
@@ -80,25 +88,44 @@ export interface hotelsOptionsItem{
     value : string | optionsSelectLink[],
     isActive : boolean | null
 }
-export enum optionsType{
-    Flights = 0,
-    Hotels = 1
-}
 
 interface optionsHeaderLink{
     value : string,
     iconValue : string,
-    isActive : boolean
+}
+interface optionsHeaderStart{
+    items : optionsHeaderLink[],
+    activeItem : number
 }
 interface optionsHeader{
-    start : optionsHeaderLink[],
+    start : optionsHeaderStart,
     flights : string,
     hotels : string
 }
+interface optionsFooterSend{
+    flights : string,
+    hotels : string
+}
+interface optionsFooter{
+    promoButtonText : string,
+    sendButtonText : optionsFooterSend
+}
 export interface options{
     header : optionsHeader,
-    flights : flightsOptionsItem[],
-    hotels : hotelsOptionsItem[]
+    flights : optionsFlightsItem[],
+    hotels : optionsHotelsItem[],
+    footer : optionsFooter
+}
+
+export enum optionsItemsType{
+    Flights = 0,
+    Hotels = 1
+}
+export enum optionsBlockType{
+    BOTH_HEADER_TYPES = 0,
+    FLIGHTS_HEADER_TYPE = 1,
+    HOTELS_HEADER_TYPE = 2,
+    ONLY_ITEMS = 3
 }
 
 //-----------TripVariant----------
@@ -112,7 +139,10 @@ export interface tripVariantsItem{
 //----------Choice----------
 export interface choiceItem{
     image : srcs,
-    text : defaultBlockText
+    heading : string,
+    info : string,
+    button : string
+    href : string
 }
 
 //----------Reviews----------
@@ -138,10 +168,15 @@ interface post{
     image : string
 }
 
+interface socialItem{
+    icon : string,
+    href : string
+}
 interface infoMain{
     image : image,
-    socials : string[]
+    socials : socialItem[]
 }
+
 export interface footerLink{
     value : string,
     href : string
@@ -151,6 +186,7 @@ export interface footerItem{
     list : footerLink[],
     isActive : boolean
 }
+
 interface main{
     info : infoMain,
     items : footerItem[]
@@ -211,4 +247,144 @@ export interface offerItem{
 export interface offer{
     header : defaultBlockText,
     item : offerItem
+}
+
+//----------Navbar----------
+export enum navbarFromToValueTypes{
+    Number = 0,
+    Time = 1
+}
+interface navbarFromToValueTime{
+    from : time,
+    to : time,
+}
+interface navbarFromToValueNumber{
+    from : number,
+    to : number,
+    min : number,
+    max : number
+}
+
+export enum navbarItemType{
+    Radio = 0,
+    Checkbox = 1,
+    FromTo = 2
+}
+
+export enum navbarTitle{
+    Airlines = "Airlines",
+    Rating = "Rating",
+    Price = "Price",
+    DepartureTime = "Departure Time",
+    Trips = "Trips"
+}
+
+export interface navbarFromToTime{
+    title : string,
+    value : navbarFromToValueTime,
+    valueType : navbarFromToValueTypes.Time,
+    type : navbarItemType.FromTo,
+    isActive : boolean
+}
+export interface navbarFromToNumber{
+    title : string,
+    value : navbarFromToValueNumber,
+    valueType : navbarFromToValueTypes.Number,
+    type : navbarItemType.FromTo,
+    isActive : boolean
+}
+
+interface navbarCheckboxesValue{
+    items : string[],
+    activeItem : number[];
+}
+export interface navbarCheckboxes{
+    title : string,
+    value : navbarCheckboxesValue,
+    type : navbarItemType.Checkbox,
+    isActive : boolean
+}
+
+interface navbarRadioValue{
+    items : string[],
+    activeItem : number
+}
+export interface navbarRadio{
+    title : string,
+    value : navbarRadioValue,
+    type : navbarItemType.Radio,
+    isActive : boolean
+}
+
+export type navbarItem = navbarFromToTime | navbarFromToNumber | navbarCheckboxes | navbarRadio;
+
+export interface navbar{
+    heading : string,
+    items : navbarItem[]
+}
+
+//----------Flights Options----------
+interface  flightsOptionSubtitle{
+    price : number,
+    time : number
+}
+
+export interface flightsOption{
+    title : string,
+    subtitle : flightsOptionSubtitle
+}
+
+export interface flightsOptions{
+    items : flightsOption[],
+    activeItem : number,
+    isActive : boolean
+}
+
+export enum flightsOptionParent{
+    CONTAINER = "CONTAINER",
+    LIST = "LIST"
+}
+
+//----------Flights Items----------
+export enum meridiem{
+    AM = "am",
+    PM = "pm"
+}
+export enum airlines{
+    Emirates = "Emirates",
+    FlyDubai = "Fly Dubai",
+    Qatar = "Qatar",
+    Etihad = "Etihad"
+}
+export interface flightsItemScheduleItem{
+    departureTime : time,
+    arrivalTime : time,
+    service : airlines,
+    numberOfTransfers : number,
+    from : string,
+    to : string
+}
+export interface flightsItem{
+    images : imageVariants[],
+    ratingNumb : number,
+    ratingText : string,
+    countReviews : number,
+    subprice : string,
+    price : number,
+    schedule : flightsItemScheduleItem[],
+    buttonText : string
+}
+interface flightsItemsSelect{
+    list : string[],
+    activeItem : number,
+    isActive : boolean
+}
+interface flightsItemsHeader{
+    countVisibleItems : number,
+    select: flightsItemsSelect
+}
+export interface flightsItems{
+    header : flightsItemsHeader,
+    items: flightsItem[],
+    button : string
 }

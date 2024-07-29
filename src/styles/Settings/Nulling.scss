@@ -1,17 +1,16 @@
 *,*::after,*::before{
     box-sizing: border-box;
 }
-body, ul, figure, h1, h2, h3, h4, h5, h6{
+body, ul, figure, h1, h2, h3, h4, h5, h6, input, fieldset{
     margin: 0;
 }
-ul, button, input{
+ul, button, input, legend, fieldset{
     padding: 0;
 }
 ul{
     list-style: none;
 }
 button{
-    background-color: inherit;
     border: inherit;
     cursor: pointer;
 }
@@ -20,7 +19,9 @@ a{
     color: inherit;
     text-decoration: none;
 }
-input{
+input, fieldset{
     border: 0;
-    background-color: transparent;
+}
+input, mark, button{
+    background-color: inherit;
 }

@@ -1,0 +1,570 @@
+.main.flights{
+    background-color: $lightGrayColor;
+    padding-bottom: toRem(116);
+    @media (max-width: toEm(992, 16)) {
+        padding-bottom: toRem(90);
+    }
+    @media (max-width: toEm(768, 16)) {
+        padding-bottom: toRem(65);
+    }
+    @media (max-width: toEm(480, 16)) {
+        padding-bottom: toRem(24);
+    }
+}
+
+.flights-items{
+    margin-top: toRem(24);
+    @media (min-width: toEm(1135, 16)) {
+        margin-right: toRem(9);
+    }
+
+    &__header{
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: toRem(24);
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__header{
+            margin-bottom: toRem(16);
+        }
+    }
+
+    &__count{
+        font-family: Montserrat;
+        font-size: toRem(14);
+        font-weight: 600;
+        line-height: math.div(17, 14);
+
+        mark{
+            color: $lightRedColor;
+        }
+        margin-right: toRem(20);
+    }
+
+    &__select{
+        position: relative;
+    }
+
+    @media (min-width: toEm(769, 16)) {
+        &__link{
+            display: flex;
+        }
+    }
+    &__link{
+        border-radius: toRem(12);
+        background-color: $whiteColor;
+        padding: toRem(24) toRem(16);
+
+        &:not(:last-child){
+            margin-bottom: toRem(32);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__link:not(:last-child){
+            margin-bottom: toRem(16);
+        }
+    }
+
+    &__more{
+        width: 100%;
+
+        padding: toRem(15) toRem(16);
+        border-radius: toRem(4);
+        background: $darkGreenColor;
+
+        color: $whiteColor;
+        font-family: Montserrat;
+        font-size: toRem(14);
+        font-weight: 600;
+        line-height: math.div(17, 14);
+
+        margin-top: toRem(24);
+
+        transition: text-shadow 0.3s cubic-bezier(0.34, 0.03, 0, 0.99),
+        filter 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
+    }
+    &__more:focus{
+        outline: none;
+    }
+    &__more:focus{
+        text-shadow: 0 0 15px $whiteColor;
+        filter: drop-shadow(0 0 5px $darkGreenColor);
+    }
+    @media (any-hover: hover) {
+        &__more:hover{
+            text-shadow: 0 0 15px $whiteColor;
+            filter: drop-shadow(0 0 5px $darkGreenColor);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__more{
+            margin-top: toRem(16);
+        }
+    }
+}
+.select-flights-items{
+    &__opener{
+        text-align: right;
+
+        display: flex;
+        align-items: center;
+        flex-direction: row-reverse;
+
+        span{
+            font-family: Montserrat;
+            font-size: toRem(14);
+            font-weight: 400;
+            line-height: math.div(17, 14);
+            color: $darkGreenColor;
+
+            margin-right: toRem(5);
+
+            transition: padding-left 0.3s cubic-bezier(0.34, 0.03, 0, 0.99),
+            color 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
+        }
+        &::before{
+            color: $darkGreenColor;
+            font-size: toRem(10);
+
+            transition: padding 0.3s cubic-bezier(0.34, 0.03, 0, 0.99),
+            color 0.3s cubic-bezier(0.34, 0.03, 0, 0.99),
+            transform 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
+        }
+        mark{
+            font-weight: 600;
+        }
+        transition: background-color 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
+    }
+    &._active &__opener::before{
+        transform: rotate(180deg);
+    }
+    &__opener:focus{
+        outline: none;
+        background-color: $darkGreenColor;
+        span{
+            padding-left: toRem(5);
+            margin-right: 0;
+        }
+        &::before{
+            padding: 0 toRem(5);
+        }
+        span, mark, &::before{
+            color: $whiteColor;
+        }
+    }
+    @media (any-hover: hover) {
+        &__opener:hover{
+            background-color: $darkGreenColor;
+            span{
+                padding-left: toRem(5);
+                margin-right: 0;
+            }
+            &::before{
+                padding: 0 toRem(5);
+            }
+            span, mark, &::before{
+                color: $whiteColor;
+            }
+        }
+    }
+
+    &__list{
+        text-align: center;
+
+        position: absolute;
+        z-index: 1;
+        left: 0;
+        bottom: 0;
+        transform: translateY(100%);
+
+        width: 100%;
+        overflow: hidden;
+
+        transition: height 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
+    }
+    &:not(._active) &__list{
+        height: 0;
+    }
+
+    &__list-inner{
+        border-radius: toRem(8);
+        background-color: $mintColor;
+        padding: toRem(5);
+    }
+
+    &__link button,
+    &__link span{
+        display: inline-block;
+
+        padding: toRem(10);
+        border-radius: toRem(8);
+        background-color: $mintColor;
+        width: 100%;
+
+        color: $whiteColor;
+        font-family: Montserrat;
+        font-size: toRem(16);
+        font-weight: 600;
+        line-height: 1.2142857143;
+
+        transition: background-color 0.3s cubic-bezier(0.34, 0.03, 0, 0.99),
+        color 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
+    }
+    &__link button:focus{
+        outline: none;
+    }
+
+    &__list-inner:not(._hide-active) &__link._active span,
+    &__link button._hovered{
+        background-color: $whiteColor;
+        color: $mintColor;
+    }
+}
+.link-flights-items{
+    &.many-image &__images{
+        width: toPercent(160, 808);
+    }
+
+    &.many-image &__image{
+        display: inline-block;
+        min-width: 100%;
+        &:not(:last-child){
+            margin-bottom: toRem(16);
+        }
+    }
+
+    &.one-image &__image{
+        align-self: flex-start;
+
+        width: toPercent(160, 808);
+        display: inline-block;
+    }
+    @media (max-width: toEm(768, 16)) {
+        &.one-image &__image, 
+        &.many-image &__images{
+            width: toRem(160);
+            padding-bottom: toRem(16);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &.one-image &__image,
+        &.many-image &__images{
+            width: toRem(100);
+            padding-bottom: toRem(10);
+        }
+    }
+
+    &__image img{
+        max-width: 100%;
+    }
+
+    @media (min-width: toEm(769, 16)) {
+        &__info{
+            margin-left: toRem(24);
+        }
+    }
+    &__info{
+        display: flex;
+        flex-direction: column;
+        flex: 1 1 auto;
+    }
+
+    &__header{
+        justify-content: space-between;
+        margin-bottom: toRem(16);
+    }
+    &__header, &__assessment-block{
+        display: flex;
+        align-items: center;
+    }
+
+    &__rating{
+        color: $darkGreenColor;
+        font-family: Montserrat;
+        font-size: toRem(12);
+        font-weight: 500;
+        line-height: math.div(15, 12);
+
+        border: toRem(1) solid $mintColor;
+        border-radius: toRem(4);
+        padding: toRem(8.5) toRem(11);
+    }
+
+    &__rating-text{
+        color: $darkGreenColor;
+        font-family: Montserrat;
+        font-size: toRem(12);
+        font-weight: 700;
+        line-height: math.div(15, 12);
+        
+        margin: 0 toRem(2) 0 toRem(8);
+    }
+
+    &__count-reviews{
+        color: $darkGreenColor;
+        font-family: Montserrat;
+        font-size: toRem(12);
+        font-weight: 500;
+        line-height: math.div(15, 12);
+    }
+
+    &__price{
+        color: $darkGreenColor;
+        font-family: Montserrat;
+        font-size: toRem(12);
+        font-weight: 500;
+        line-height: math.div(15, 12);
+        text-align: right;
+        mark{
+            display: block;
+            color: $lightRedColor;
+            font-size: toRem(24);
+            font-weight: 700;
+            line-height: math.div(29, 24);
+        }
+
+        margin-left: toRem(6);
+    }
+
+    &__schedule{
+        flex: 1 1 auto;
+    }
+
+    &__schedule-item{
+        display: flex;
+        align-items: center;
+
+        &:not(:last-child){
+            margin-bottom: toRem(16);
+        }
+        &::before{
+            opacity: 0.3;
+            border-radius: toRem(3);
+            border: toRem(2) solid $darkGreenColor;
+
+            content: "";
+            display: inline-block;
+            flex: 0 0 toRem(19);
+            height: toRem(19);
+            margin-right: toRem(14.5);
+        }
+    }
+    @media (max-width: toEm(400, 16)) {
+        &__schedule-item{
+            align-items: flex-start;
+        }
+    }
+
+    &__footer{
+        margin-top: toRem(16);
+        &::before{
+            opacity: 0.25;
+            background-color: $darkGreenColor;
+            content: "";
+
+            display: block;
+            min-width: 100%;
+            height: toRem(0.5);
+            margin-bottom: toRem(16);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__footer{
+            margin-top: toRem(10);
+            &::before{
+                margin-bottom: toRem(10);
+            }
+        }
+    }
+    &__footer-inner{
+        display: flex;
+    }
+
+    &__favourites{
+        border-radius: toRem(4);
+        border: toRem(1) solid $mintColor;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        flex: 0 1 toRem(48);
+        margin-right: toRem(16);
+
+        &::before{
+            color: $blackColor;
+            font-size: toRem(15);
+            transition: color 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
+        }
+        transition: background-color 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
+    }
+    &__favourites:focus{
+        outline: none;
+    }
+    &__favourites:focus{
+        background-color: $mintColor;
+        &::before{
+            color: $whiteColor;
+        }
+    }
+    @media (any-hover: hover) {
+        &__favourites:hover{
+            background-color: $mintColor;
+            &::before{
+                color: $whiteColor;
+            }
+        }
+    }
+
+    &__button{
+        flex: 1 1 auto;
+
+        border-radius: toRem(4);
+        background-color: $mintColor;
+        padding: toRem(15) toRem(16);
+
+        text-align: center;
+        color: $darkGreenColor;
+        font-family: Montserrat;
+        font-size: toRem(14);
+        font-weight: 600;
+        line-height: math.div(17, 14);
+
+        transition: all 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
+    }
+    &__button:focus{
+        outline: none;
+    }
+    &__button:focus{
+        background-color: $darkGreenColor;
+        color: $mintColor;
+    }
+    @media (any-hover: hover) {
+        &__button:hover{
+            background-color: $darkGreenColor;
+            color: $mintColor;
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__button{
+            padding: toRem(10) toRem(16);
+        }
+    }
+}
+.schedule-item-link-flights-items{
+    @media (min-width: toEm(401, 16)) {
+        &__inner{
+            align-items: center;
+        }
+        @media (max-width: toEm(992, 16)) {
+            &__inner{
+                justify-content: space-between;
+            }
+        }
+    }
+    &__inner{
+        display: flex;
+        flex: 1 1 auto;
+    }
+    @media (max-width: toEm(400, 16)) {
+        &__inner{
+            flex-direction: column;
+        }
+    }
+
+    @media (min-width: toEm(401, 16)) {
+        &__first{
+            flex: 0 1 toRem(210);
+            padding-right: toRem(20);
+        }
+    }
+    @media (max-width: toEm(400, 16)) {
+        &__first{
+            margin-bottom: toRem(5);
+        }
+    }
+
+    &__departure-return{
+        display: flex;
+        align-items: center;
+
+        span{
+            color: $darkGreenColor;
+            font-family: Montserrat;
+            font-size: toRem(16);
+            font-weight: 600;
+            line-height: math.div(20, 16);
+        }
+    }
+    &__departure-return-line{
+        background-color: $darkGreenColor;
+
+        width: toRem(4);
+        height: toRem(2.5);
+        
+        margin: 0 toRem(10);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__departure-return-line{
+            margin: 0 toRem(5);
+        }
+    }
+
+    @media (min-width: toEm(401, 16)) {
+        &__service{
+            margin-top: toRem(4);
+        }
+    }
+    &__service{
+        color: $darkGreenColor;
+        font-family: Montserrat;
+        font-size: toRem(14);
+        font-weight: 400;
+        line-height: math.div(17, 14);
+    }
+
+    @media (min-width: toEm(401, 16)) {
+        &__count-transfers{
+            text-align: center;
+            margin-right: toRem(40);
+        }
+        @media (max-width: toEm(1134, 16)) {
+            &__count-transfers{
+                margin-right: toRem(25);
+            }
+        }
+    }
+    &__count-transfers{
+        color: $darkGreenColor;
+        font-family: Montserrat;
+        font-size: toRem(14);
+        font-weight: 600;
+        line-height: math.div(17, 14);
+    }
+    @media (max-width: toEm(400, 16)) {
+        &__count-transfers{
+            margin-bottom: toRem(5);
+        }
+    }
+
+    @media (min-width: toEm(401, 16)) {
+        &__fly-time{
+            margin-bottom: toRem(4);
+        }
+    }
+    &__fly-time{
+        opacity: 0.78;
+        color: $darkGreenColor;
+        font-family: Montserrat;
+        font-size: toRem(16);
+        font-weight: 600;
+        line-height: math.div(20, 16);
+    }
+    &__from-to{
+        color: $darkGreenColor;
+        font-family: Montserrat;
+        font-size: toRem(14);
+        font-weight: 400;
+        line-height: math.div(17, 14);
+    }
+}

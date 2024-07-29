@@ -1,14 +1,15 @@
 import React, { FC } from "react";
 import { useTypedSelector } from "../../hooks/redux";
-import Options from "../Common/Options/Options";
+import { Options } from "../Common/Options/Options";
+import { optionsBlockType, optionsItemsType } from "../../types";
 
 interface introFlightsProps{
     isSupportWebp : boolean
 }
 
 export const IntroFlights : FC<introFlightsProps> = ({isSupportWebp}) =>{
-    const introFlightsStore = useTypedSelector(store => store.flights.intro);
-    const pathToBackground = (isSupportWebp) ? introFlightsStore.background.webp : introFlightsStore.background.jpeg;
+    const introStore = useTypedSelector(store => store.flights.intro);
+    const pathToBackground = (isSupportWebp) ? introStore.background.webp : introStore.background.jpeg;
     
     return(
         <section className="intro_flights">
@@ -18,12 +19,12 @@ export const IntroFlights : FC<introFlightsProps> = ({isSupportWebp}) =>{
             }}>
                 <div className="container">
                     <div className="intro_flights__info">
-                        <h1 className="intro_flights__heading">{introFlightsStore.heading}</h1>
-                        <div className="intro_flights__subheading">{introFlightsStore.subheading}</div>
+                        <h1 className="intro_flights__heading">{introStore.heading}</h1>
+                        <div className="intro_flights__subheading">{introStore.subheading}</div>
                     </div>
                 </div>
             </div>
-            <Options />
+            <Options neededBlocks={optionsBlockType.FLIGHTS_HEADER_TYPE} startValue={optionsItemsType.Flights} />
         </section>
     )
 }

@@ -17,7 +17,6 @@
     &._black-white{
         background-color: #fff;
     }
-
     &._start._scroll{
         background-color: $mintColor;
     }
@@ -102,41 +101,48 @@
     }
 
     &__logo{
-        align-self: center;
-
         margin: 0 toRem(30);
         transition: filter 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
         img{
             max-width: 100%;
         }
     }
+
+    &._start &__logo{
+        align-self: center;
+    }
     &._start._scroll &__logo{
         filter: drop-shadow(0 0 5px $whiteColor);
     }
+    &._black-white &__logo{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: -10px toRem(30);
+
+        transition: filter 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
+    }
     &._black-white._active &__logo{
-        filter: drop-shadow(0 0 5px $mintColor);
+        filter: drop-shadow(0 0 15px $darkGreenColor);
     }
 
     &__logo:focus{
         outline: none;
     }
     &._black-white &__logo:focus{
-        transition: filter 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
-    }
-    &._black-white &__logo:focus{
         filter: drop-shadow(0 0 10px $mintColor);
     }
     @media (any-hover: hover) {
-        &._black-white &__logo{
-            transition: filter 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
-        }
         &._black-white &__logo:hover{
             filter: drop-shadow(0 0 10px $mintColor);
         }
     }
     @media (max-width: toEm(992, 16)) {
         &__logo{
-            margin: 0 toRem(20);
+            margin: toRem(20);
+        }
+        &._black-white &__logo{
+            margin: -10px toRem(20);
         }
     }
     @media (max-width: toEm(768, 16)) {
@@ -145,14 +151,9 @@
             z-index: 6;
             margin: 0 toRem(20) 0 0;
         }
-    }
-
-    &__link span{
-        color: $whiteColor;
-        font-family: Montserrat;
-        font-size: toRem(14);
-        font-weight: 600;
-        line-height: math.div(17, 14);
+        &._black-white &__logo{
+            margin: -10px toRem(20) -10px 0;
+        }
     }
 
     @media (min-width: toEm(481, 16)) {
@@ -194,6 +195,11 @@
         
             min-width: toRem(35);
             height: toRem(27);
+            transition: filter 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
+            &:focus{
+                outline: none;
+                filter: drop-shadow(0 0 5px $mintColor);
+            }
         }
         @media (min-width: toEm(481, 16)) {
             &__burger{
@@ -231,6 +237,7 @@
             }
         }
     }
+    //Оставляю display: flex после 768px, чтобы область link`ов - не расширялась  
     &__list{
         display: flex;
     }
@@ -245,7 +252,39 @@
         .header._black-white &__link{
             margin: -10px 0;
         }
+        &__link{
+            padding: 0 1rem;
+        }
+        @media (max-width: toEm(992, 16)) {
+            &__link{
+                padding: 0 0.5rem;
+            }
+        }
     }
+
+    //Иконка У Link`a
+    @media (min-width: toEm(769, 16)) {
+        &__link a,
+        &__link div{
+            display: flex;
+            align-items: center;
+        }
+        &__link a::before,
+        &__link div::before{
+            margin-right: toRem(5.5);
+        }
+    }
+    &__link a::before,
+    &__link div::before{
+        color: $whiteColor;
+        font-size: toRem(22);
+    }
+    .header._black-white &__link a::before,
+    .header._black-white &__link div::before{
+        color: $darkGreenColor;
+    }
+
+    //Зелёная Полоса у Активного link`a
     &__link div{
         position: relative;
         &::after{
@@ -269,86 +308,70 @@
             z-index: 2;
         }
     }
-    .header._black-white &__link span{
-        color: $darkGreenColor;
-    }
     @media (max-width: toEm(768, 16)) {
         &__link div::after{
             background-color: $whiteColor;
             transform: translateX(50%) translateY(100%);
         }
     }
-    &__link a:focus{
-        outline: none;
-    }
-    @media (any-hover: hover) {
-        .header._black-white &__link a{
-            position: relative;
-            &::after{
-                pointer-events: none;
-                background-color: $mintColor;
-                content: "";
-    
-                position: absolute;
-                z-index: 1;
-                right: 50%;
-                bottom: 0;
-                transform: translateX(50%);
-    
-                width: 100%;
-                height: toRem(5);
 
-                transition: width 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
-            }
-        }
-        @media (max-width: toEm(768, 16)) {
-            .header._black-white &__link a::after{
-                background-color: $whiteColor;
-                transform: translateX(50%) translateY(100%);
-            }
-        }
-  
-        .header._black-white &__link a:not(._hovered)::after,
-        .header._black-white &__list._hide-active &__link div::after{
-            width: 0;
-        }
-    }
-
-    @media (min-width: toEm(769, 16)) {
-        &__link{
-            padding: 0 1rem;
-        }
-        @media (max-width: toEm(992, 16)) {
-            &__link{
-                padding: 0 0.5rem;
-            }
-        }
-
-        &__link a,
-        &__link div{
-            display: flex;
-            align-items: center;
-        }
-        &__link a::before,
-        &__link div::before{
-            margin-right: toRem(5.5);
-        }
-    }
-    &__link a::before,
-    &__link div::before{
+    &__link span{
         color: $whiteColor;
-        font-size: toRem(22);
+        font-family: Montserrat;
+        font-size: toRem(14);
+        font-weight: 600;
+        line-height: math.div(17, 14);
     }
-    .header._black-white &__link a::before,
-    .header._black-white &__link div::before{
+    .header._black-white &__link span{
         color: $darkGreenColor;
+    }
+
+    //Стили при Наведении на Link, при Чёрно-Белом Header`e
+    .header._black-white &__link a{
+        position: relative;
+        &::after{
+            pointer-events: none;
+            background-color: $mintColor;
+            content: "";
+
+            position: absolute;
+            z-index: 1;
+            right: 50%;
+            bottom: 0;
+            transform: translateX(50%);
+
+            width: 100%;
+            height: toRem(5);
+
+            transition: width 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        .header._black-white &__link a::after{
+            background-color: $whiteColor;
+            transform: translateX(50%) translateY(100%);
+        }
+    }
+
+    .header._black-white &__link a:not(._hovered)::after,
+    .header._black-white &__list._hide-active &__link div::after{
+        width: 0;
     }
 
     .header._start &__link a{
         transition: text-shadow 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
     }
+
+    &__link a:focus{
+        outline: none;
+    }
     .header._start &__link a:focus{
         text-shadow: 0 0 10px $darkPurpleColor;
+    }
+    @media (max-width: toEm(768, 16)) {
+        .header._start &__link a:focus{
+            text-shadow: 0 0 10px $whiteColor;
+        }
     }
     @media (any-hover: hover) {
         .header._start &__link a:hover{
@@ -360,6 +383,8 @@
             }
         }
     }
+
+    //Стили для Текста и Иконки Link`a
     @media (max-width: toEm(768, 16)) {
         &__link{
             text-align: center;
@@ -408,15 +433,21 @@
 
             text-align: center;
             display: block;
-        }
-        &__button:not(:last-child){
-            margin-bottom: 0.75rem;
-        }
-        @media (any-hover: hover) {
-            &__button{
-                transition: box-shadow 0.3s cubic-bezier(0.34, 0.03, 0, 0.99),
-                border-radius 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
+            
+            transition: box-shadow 0.3s cubic-bezier(0.34, 0.03, 0, 0.99),
+            border-radius 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
+
+            &:not(:last-child){
+                margin-bottom: 0.75rem;
             }
+            &:focus{
+                border-radius: toRem(15);
+                box-shadow: 0 0 15px $whiteColor;
+                outline: none;
+            }
+        }
+
+        @media (any-hover: hover) {
             &__button:hover{
                 border-radius: toRem(15);
                 box-shadow: 0 0 15px $whiteColor;
@@ -429,34 +460,58 @@
         &__link{
             text-align: center;
             white-space: nowrap;
-            &:last-child{
-                padding: toRem(15) toRem(24);
-                align-self: center;
-            }
             transition: filter 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
+            //Если Стиль Header`a Стартовый или Стиль Header`а Чёрно-Белый, но он Активный - то по-умолчанию цвет текста Белый
+            span{
+                color: $whiteColor;
+                font-family: Montserrat;
+                font-size: toRem(14);
+                font-weight: 600;
+                line-height: math.div(17, 14);
+            }
+            .header._black-white:not(._active) & > span{
+                color: $darkGreenColor;
+            }
         }
-        &__link:focus{
-            outline: none;
-            filter: drop-shadow(0 0 7px $blackColor);
+
+        &__link:last-child{
+            padding: toRem(15) toRem(24);
+            align-self: center;
         }
         @media (max-width: toEm(992, 16)) {
             &__link:last-child{
                 padding: toRem(15) toRem(20);
             }
         }
+        
+        &__link:focus{
+            outline: none;
+            filter: drop-shadow(0 0 7px $blackColor);
+        }
         @media (any-hover: hover) {
+            &__link:first-child{
+                align-self: center;
+                padding: toRem(15) toRem(32);
+            }
+            /*Здесь Отступ Слева-Справа Первого Link`a не равен Второму, а Равен Оступу, который у Этого Link`a Есть,
+            когда нету Возможности Навестить*/
+            @media (max-width: toEm(992, 16)) {
+                &__link:first-child{
+                    padding: toRem(15) toRem(16);
+                }
+            }
+
             &__link{
                 position: relative;
                 overflow-x: hidden;
-    
-                transition: left 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
+
                 span{
                     position: relative;
                     z-index: 2;
     
                     transition: color 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
                 }
-    
+                //Если Стиль Header`a Начальный или Стиль Header`a Чёрно-Белый, но он активный - то background-color: белый
                 &::after{
                     background-color: $whiteColor;
                     border-radius: 0.5rem;
@@ -481,16 +536,6 @@
                     background-color: $darkGreenColor;
                 }
             }
-
-            &__link:first-child{
-                align-self: center;
-                padding: toRem(15) toRem(32);
-            }
-            @media (max-width: toEm(992, 16)) {
-                &__link:first-child{
-                    padding: toRem(15) toRem(16);
-                }
-            }
     
             &._right-active &__link:last-child span,
             &._left-active &__link:first-child span{
@@ -512,24 +557,26 @@
             &__link:first-child{
                 display: flex;
                 align-items: center;
+                padding-right: toRem(32);
             }
+            @media (max-width: toEm(992, 16)) {
+                &__link:first-child{
+                    padding-right: 1rem;
+                }
+            }
+            //Если Стиль Header`a Начальный или Стиль Header`a Чёрно-Белый, но он активный - то background-color: белый
             &__link:last-child{
                 span{
                     color: $darkGreenColor;
                 }
                 border-radius: 0.5rem;
                 background-color: $whiteColor;
-                margin-left: toRem(32);
             }
+            //Если Стиль Header`a Чёрно-Белый, но он НЕ активный - то background-color: чёрный
             .header._black-white:not(._active) &__link:last-child{
                 background-color: $darkGreenColor;
                 span{
                     color: $whiteColor;
-                }
-            }
-            @media (max-width: toEm(992, 16)) {
-                &__link:last-child{
-                    margin-left: 1rem;
                 }
             }
         }

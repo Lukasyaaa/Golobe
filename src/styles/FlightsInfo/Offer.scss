@@ -244,8 +244,10 @@
             z-index: 3;
         }
     }
-    &__link:hover::after{
-        width: 70%;
+    @media (any-hover: hover) {
+        &__link:hover::after{
+            width: 70%;
+        }
     }
     &__link:focus{
         outline: none;

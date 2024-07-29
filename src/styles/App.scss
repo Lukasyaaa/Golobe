@@ -14,7 +14,11 @@
 @import "./Main/Reviews.scss";
 @import "./Common/Footer.scss";
 
-@import "./Flights/IntroFlights.scss";
-@import "./Flights/Map.scss";
-@import "./Flights/Travels.scss";
-@import "./Flights/Offer.scss";
+@import "./FlightsInfo/IntroFlights.scss";
+@import "./FlightsInfo/Map.scss";
+@import "./FlightsInfo/Travels.scss";
+@import "./FlightsInfo/Offer.scss";
+
+@import "./Flights/Navbar.scss";
+@import "./Flights/Options.scss";
+@import "./Flights/FlightsItems.scss"

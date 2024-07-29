@@ -1,49 +1,109 @@
-import React, { useRef, forwardRef, ForwardRefRenderFunction, MouseEvent, useEffect, FocusEvent } from "react";
+import React, {FC, useState, useRef, useEffect, MouseEvent, FocusEvent } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { useTypedSelector } from "../../hooks/redux";
-import { header } from "../../types";
-import { flightsPath, homePath, hotelsPath } from "../../App";
+import { flightsPath, homePath } from "../../App";
 import { useDispatch } from "react-redux";
-import { headerMakeAllNotActiveAction, headerMakeFlightsActiveAction, headerMakeHotelsctiveAction } from "../../store/start/headerReducer";
-
-interface isScrollType{
-    value : boolean,
-    set : (newValue : boolean) => void;
-}
-
-interface HeaderProps{
-    toggleMenu : (e : MouseEvent<HTMLButtonElement>) => void;
-    disappearMenu : () => void;
-    isScroll : isScrollType;
-}
+import { headerMakeAllNotActiveAction, headerMakeFlightsActiveAction, headerMakeHotelsctiveAction } from "../../store/common/headerReducer";
 
 enum headerStyle{
     start = "_start",
     blackWhite = "_black-white"
 }
 
-const Header : ForwardRefRenderFunction<HTMLElement, HeaderProps> = (props, ref) =>{
-    const header = useTypedSelector<header>(store => store.header);
+export const Header : FC = () =>{
+    const headerStore = useTypedSelector(store => store.header);
+    let header = useRef<HTMLElement>(null);
     let location = useLocation();
-    let style : string = (location.pathname === homePath) ? headerStyle.start : headerStyle.blackWhite;
+    let [windowWidth, setWindowWidth] = useState<number>(window.innerWidth);
 
-    const dispatch = useDispatch();
 
-    let buttonParent = useRef<HTMLElement>(null);
+    let imageTab : number = -1; 
+    let linksStartTab : number = 1;
+    let buttonsStartTab : number = 1 + headerStore.links.items.length;
+    let burgerTab : number = -1;
+    const setTabIndexes = () : void =>{
+        if(location.pathname !== homePath){
+            imageTab = (windowWidth <= 768) ? 1 : 1 + headerStore.links.items.length;
+        }
+        if(windowWidth <= 768){
+            const shift : number = ((imageTab > 0) ? imageTab : 0);
+            linksStartTab = headerStore.buttons.length + shift + 2;
+            buttonsStartTab = 1 + shift;
+            burgerTab = headerStore.buttons.length + shift + 1;
+
+            if(windowWidth <= 480){
+                burgerTab = 2;
+                linksStartTab = 3;
+            }
+        }
+    }
+    setTabIndexes();
+
+    const setNewWindowWidth = () : void => {
+        setWindowWidth(window.innerWidth);
+        setTabIndexes();
+    }
+    const updateHeaderOnScrollChange = () : void =>{
+        if(header.current){
+            if(window.scrollY > 0){
+                header.current.classList.add("_scroll");
+            }else{
+                header.current.classList.remove("_scroll");
+            }
+        }
+    }
+    useEffect(() =>{
+        window.addEventListener('scroll', updateHeaderOnScrollChange);
+        window.addEventListener("resize", () => setNewWindowWidth());
+        return () => {
+            window.removeEventListener('scroll', updateHeaderOnScrollChange);
+            window.removeEventListener("resize", () => setNewWindowWidth());
+        };
+    }, [])
+
     let linksParent = useRef<HTMLUListElement>(null);
+    const disappearMenu = () : void =>{
+        if(header.current && linksParent.current){
+            header.current.classList.remove("_active");
+            document.body.classList.remove("_locked");
+            linksParent.current.classList.remove("_hide-active");
+        }
+    }
+    const appearMenu = () : void =>{
+        if(header.current){
+            header.current.classList.add("_active");
+            document.body.classList.add("_locked");
+        }
+    }
+    const toggleMenu = () : void =>{
+        if(header.current){
+            header.current.classList.toggle("_active");
+            document.body.classList.toggle("_locked");
+        }
+    }
 
+    let dispatch = useDispatch();
+    let style = (location.pathname === homePath) ? headerStyle.start : headerStyle.blackWhite;
     useEffect(()=>{
-        props.isScroll.set(window.scrollY > 0);
+        updateHeaderOnScrollChange();
         style = (location.pathname === homePath) ? headerStyle.start : headerStyle.blackWhite;
-        if(location.pathname === flightsPath){
-            dispatch(headerMakeFlightsActiveAction());
-        }else if(location.pathname === hotelsPath){
-            dispatch(headerMakeHotelsctiveAction());
-        }else if(location.pathname === homePath){
-            dispatch(headerMakeAllNotActiveAction());
+        switch(location.pathname){
+            case flightsPath:
+                dispatch(headerMakeFlightsActiveAction());
+                break;
+            case flightsPath:
+                dispatch(headerMakeHotelsctiveAction());
+                break;
+            case flightsPath:
+                dispatch(headerMakeAllNotActiveAction());
+                break;
+            default:
+                break;
         }
     }, [location.pathname]);
 
+
+    let buttonParent = useRef<HTMLElement>(null);
     const hoverButton = (e : MouseEvent<HTMLAnchorElement> | FocusEvent<HTMLAnchorElement>) : void =>{
         if(buttonParent.current){
             if(e.currentTarget.getAttribute("data-id") === "1"){
@@ -61,91 +121,129 @@ const Header : ForwardRefRenderFunction<HTMLElement, HeaderProps> = (props, ref)
     }
     
     const makePseudoActive = (e : MouseEvent<HTMLAnchorElement> | FocusEvent<HTMLAnchorElement>) =>{
-        if(linksParent.current && location.pathname != homePath){
+        if(linksParent.current){
             linksParent.current.classList.add("_hide-active");
-            let target : any = e.currentTarget;
-            target.classList.add("_hovered");
+            e.currentTarget.classList.add("_hovered");
         }
     }
-
     const makeUnPseudoActive = (e : MouseEvent<HTMLAnchorElement> | FocusEvent<HTMLAnchorElement>) =>{
-        if(linksParent.current && location.pathname != homePath){
+        if(linksParent.current){
             linksParent.current.classList.remove("_hide-active");
-            let target : any = e.currentTarget;
-            target.classList.remove("_hovered");
+            e.currentTarget.classList.remove("_hovered");
         }
-    }
-
-    let headerClasses : string[] = ["header", style];
-
-    useEffect(() =>{
-        props.isScroll.set(window.scrollY > 0);
-    },[])
-
-    if(props.isScroll.value){
-        headerClasses.push("_scroll");
     }
 
     return(
-        <header ref={ref} className={headerClasses.join(" ")}>
+        <header className={["header", style].join(" ")} ref={header}>
             <div className="container">
             <nav className="header__menu menu-header header__nav">
                     <ul className="menu-header__list" ref={linksParent}>
-                        {header.links.map((link, index) => {
-                            if(link.isActive){
-                                return <li className="header__link menu-header__link" key={index}>
+                        {headerStore.links.items.map((link, i) => {
+                            if(i === headerStore.links.activeItem - 1){
+                                return <li className="header__link menu-header__link" key={i}>
                                     <div className={[link.iconValue, "_active"].join(" ")}><span>{link.value}</span></div>
                                 </li>
                             }
 
-                            return <li className="header__link menu-header__link" key={index}>
+                            if(location.pathname !== homePath){
+                                return <li key={i} className="header__link menu-header__link">
+                                    <NavLink 
+                                        tabIndex={linksStartTab + i}
+                                        className={link.iconValue} to={link.href}
+                                        onMouseEnter={(e) => makePseudoActive(e)} 
+                                        onMouseLeave={(e) => {
+                                            if(e.target !== document.activeElement){
+                                                makeUnPseudoActive(e);
+                                            }
+                                        }}
+                                        onFocus={(e) => {
+                                            if(windowWidth <= 768 && !header.current?.classList.contains("_active")){ 
+                                                appearMenu();
+                                            }
+                                            makePseudoActive(e);
+                                        }}
+                                        onBlur={(e) => {
+                                            if(windowWidth <= 768 && windowWidth > 480 && 
+                                                i + 1 === headerStore.links.items.length
+                                            ){
+                                                disappearMenu();
+                                            }
+                                            makeUnPseudoActive(e)
+                                        }}
+                                        onClick={(e) => {e.stopPropagation(); disappearMenu()}}
+                                    >
+                                        <span>{link.value}</span>
+                                    </NavLink>
+                                </li>
+                            }
+
+                            return <li key={i} className="header__link menu-header__link">
                                 <NavLink 
-                                    className={link.iconValue} to={link.href}
-                                    onMouseEnter={(e) => makePseudoActive(e)} 
-                                    onMouseLeave={(e) => {
-                                        if(e.target !== document.activeElement){
-                                            makeUnPseudoActive(e);
+                                    tabIndex={linksStartTab + i}
+                                    className={link.iconValue} to={link.href} 
+                                    onClick={(e) => {e.stopPropagation(); disappearMenu()}}
+                                    onFocus={() => {
+                                        if(windowWidth <= 768 && !header.current?.classList.contains("_active")){ 
+                                            appearMenu();
                                         }
                                     }}
-                                    onFocus={(e) => makePseudoActive(e)}
-                                    onBlur={(e) => makeUnPseudoActive(e)}
-                                    onClick={props.disappearMenu}
-                                ><span>{link.value}</span></NavLink>
+                                    onBlur={() => {
+                                        if(windowWidth <= 768 && windowWidth > 480 && i + 1 === headerStore.links.items.length){
+                                            disappearMenu();
+                                        } 
+                                    }}
+                                >
+                                    <span>{link.value}</span>
+                                </NavLink>
                             </li>
                         })}
                     </ul>
                     <div className="menu-header__buttons">
-                        {header.buttons.map((button, index) => (
-                            <a key={index} className="menu-header__button" href={button.href}><span>{button.value}</span></a>
-                        ))}
+                        {headerStore.buttons.map((button, i) => {
+                            if(i + 1 === headerStore.buttons.length){
+                                return <a 
+                                    className="menu-header__button" key={i} href={button.href}
+                                    onClick={(e) => e.stopPropagation()} onBlur={disappearMenu}
+                                >
+                                    <span>{button.value}</span>
+                                </a>
+                            }
+                            return <a 
+                                className="menu-header__button" key={i} href={button.href} onClick={(e) => e.stopPropagation()}
+                            >
+                                <span>{button.value}</span>
+                            </a>
+                        })}
                     </div>
                 </nav>
                 {(style === headerStyle.start) ?
                 <div className="header__logo">
-                    <img src={(style === headerStyle.start) ? header.image.start : header.image.another} alt="Logo" />
+                    <img src={headerStore.image.start} alt="Logo" />
                 </div> 
                 :
-                <NavLink className="header__logo" to={homePath}>
-                    <img src={(style === headerStyle.start) ? header.image.start : header.image.another} alt="Logo" />
+                <NavLink className="header__logo" to={homePath} tabIndex={imageTab} onClick={(e) => e.stopPropagation()}>
+                    <img src={headerStore.image.another} alt="Logo" />
                 </NavLink>
                 }
-                <nav ref={buttonParent} className="header__buttons buttons-header header__nav _right-active">
-                    {header.buttons.map((button, index) => (
+                <nav className="header__buttons buttons-header header__nav _right-active" ref={buttonParent}>
+                    {headerStore.buttons.map((button, i) => (
                         <a 
-                            key={index}
-                            data-id={index}
                             className="header__link buttons-header__link" 
+                            tabIndex={buttonsStartTab + i}
+                            key={i}
+                            data-id={i}
                             href={button.href} 
-                            onMouseEnter={(e) => hoverButton(e)} onFocus={(e) => hoverButton(e)} onBlur={(e) => hoverButton(e)}
+                            onMouseEnter={(e) => hoverButton(e)} onFocus={(e) => hoverButton(e)}
+                            onClick={(e) => e.stopPropagation()}
                         >
                             <span>{button.value}</span>
                         </a>
                     ))}
                 </nav>
-                <button className="header__burger burger" type="button" onClick={(e) => props.toggleMenu(e)}><span></span></button>
+                <button className="header__burger burger" type="button" onClick={toggleMenu} tabIndex={burgerTab}>
+                    <span></span>
+                </button>
             </div>
         </header>
     );
 }
-
-export default forwardRef<HTMLElement, HeaderProps>(Header);

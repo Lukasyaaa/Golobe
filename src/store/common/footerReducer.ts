@@ -14,7 +14,11 @@ const defaultStore : footer = {
     main:{
         info:{
             image: {src: logoSvg, alt: "Logo"},
-            socials: ["_icon-facebook", "_icon-twitter", "_icon-youtube", "_icon-inst"]
+            socials: [
+                {icon: "_icon-facebook", href: "#"}, 
+                {icon: "_icon-twitter", href: "#"}, 
+                {icon: "_icon-youtube", href: "#"}, 
+                {icon: "_icon-facebook", href: "#"}]
         },
         items:[
             {
@@ -58,18 +62,18 @@ const defaultStore : footer = {
 
 enum footerAction{
     SWAP_IS_ACTIVE = "FOOTER_SWAP_IS_ACTIVE",
-    MAKE_ALL_NOT_ACTIVE = "FOOTER_MAKE_ALL_NOT_ACTIVE"
+    HIDE_ACTIVE = "FOOTER_HIDE_ACTIVE"
 }
-type footerSwapIsActive = {
+type footerSwapActive = {
     type: footerAction.SWAP_IS_ACTIVE,
     payload: number
 }
 
-type footerMakeAllNotActive = {
-    type: footerAction.MAKE_ALL_NOT_ACTIVE
+type footerHideActive = {
+    type: footerAction.HIDE_ACTIVE
 }
 
-type footerActionType = footerSwapIsActive | footerMakeAllNotActive;
+type footerActionType = footerSwapActive | footerHideActive;
 
 export const footerReducer = (state : footer = defaultStore, action : footerActionType) =>{
     switch(action.type){
@@ -83,7 +87,7 @@ export const footerReducer = (state : footer = defaultStore, action : footerActi
                     return{...item}
                 })}
             };
-        case footerAction.MAKE_ALL_NOT_ACTIVE:
+        case footerAction.HIDE_ACTIVE:
             return{
                 ...state,
                 main:{...state.main, items: state.main.items.map(item => ({
@@ -96,9 +100,9 @@ export const footerReducer = (state : footer = defaultStore, action : footerActi
     }
 }
 
-export const footerSwapIsActiveAction = (id : number) : footerSwapIsActive => ({
+export const footerSwapActiveAction = (id : number) : footerSwapActive => ({
     type: footerAction.SWAP_IS_ACTIVE, payload: id
 })
-export const footerMakeAllNotActiveAction = () : footerMakeAllNotActive => ({
-    type: footerAction.MAKE_ALL_NOT_ACTIVE
+export const footerHideActiveAction = () : footerHideActive => ({
+    type: footerAction.HIDE_ACTIVE
 })

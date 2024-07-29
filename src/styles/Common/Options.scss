@@ -26,15 +26,43 @@
 .options{
     position: relative;
     z-index: 1;
-    margin-top: toRem(-93);
+    &:not(.independet){
+        margin-top: toRem(-93);
+        @media (max-width: toEm(992, 16)) {
+            margin-top: toRem(-78);
+        }
+        @media (max-width: toEm(768, 16)) {
+            margin-top: toRem(-58);
+        }
+        @media (max-width: toEm(480, 16)) {
+            margin-top: toRem(-35);
+        }
+    }
+    &.independet{
+        margin-top: toRem(96);
+        padding-top: toRem(48);
+        padding-bottom: toRem(32);
+    }
     @media (max-width: toEm(992, 16)) {
-        margin-top: toRem(-78);
+        &.independet{
+            margin-top: toRem(86);
+            padding-top: toRem(40);
+            padding-bottom: toRem(32);
+        }
     }
     @media (max-width: toEm(768, 16)) {
-        margin-top: toRem(-58);
+        &.independet{
+            margin-top: toRem(76);
+            padding-top: toRem(32);
+            padding-bottom: toRem(32);
+        }
     }
     @media (max-width: toEm(480, 16)) {
-        margin-top: toRem(-35);
+        &.independet{
+            margin-top: toRem(66);
+            padding-top: toRem(24);
+            padding-bottom: toRem(24);
+        }
     }
 
     &__inner{
@@ -47,11 +75,9 @@
         padding: 2rem;
     }
     @media (max-width: toEm(768, 16)) {
-        &__inner,
         &:not(.header-both) &__inner{
             padding: 1rem;
         }
-
     }
 
     @media (min-width: toEm(993, 16)) {
@@ -233,6 +259,12 @@
             &.bigger{
                 flex: 0 0 toRem(344 + 24);
             }
+            .options.independet &.input{
+                flex: 0 0 toRem(295 + 24);
+            }
+            .options.independet &.select{
+                flex: 0 0 toRem(138 + 24);
+            }
         }
         @media (max-width: toEm(992, 16)) {
             &__item{
@@ -283,6 +315,70 @@
             }
         }
     }
+
+    @media (min-width: toEm(481, 16)) {
+        &__find{
+            padding: toRem(6) 0 toRem(6) toRem(12);
+        }
+        @media (max-width: toEm(992, 6)) {
+            &__find{
+                padding: toRem(6) 0 toRem(6) toRem(6);
+            }
+        }
+    }
+    &__find{
+        flex: 0 0 toRem(56 + 12);
+
+        display: flex;
+        align-items: flex-end;
+        button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            height: toRem(56);
+            width: 100%;
+            border-radius: toRem(4);
+            background-color: $mintColor;
+
+            font-size: toRem(25);
+            color: $darkGreenColor;
+
+            transition: background-color 0.3s cubic-bezier(0.34, 0.03, 0, 0.99),
+            color 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
+        }
+    }
+    &__find button:focus{
+        outline: none;
+        background-color: $darkGreenColor;
+        color: $mintColor;
+    }
+    @media (any-hover: hover) {
+        &__find:hover button{
+            outline: none;
+            background-color: $darkGreenColor;
+            color: $mintColor;
+        }
+    }
+    @media (max-width: toEm(992, 6)) {
+        &__find{
+            flex: 0 0 toRem(56 + 6);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__find{
+            flex: 0 0 toRem(46 + 6);
+            button{
+                height: toRem(46);
+            }
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__find{
+            flex: 1 1 auto;
+            margin-top: toRem(9);
+        }
+    }
 }
 .item-inputs-options{
     &__inner{
@@ -291,72 +387,11 @@
         z-index: 1;
     }
 
-    @media (min-width: toEm(481, 16)) {
-        &.select:not(.smaller):not(.bigger) &__title{
-            max-width: toRem(136 - 32);
-        }
-        &.input:not(.smaller):not(.bigger) &__title{
-            max-width: toRem(320 - 32);
-        }
-        &.smaller &__title{
-            max-width: toRem(250 - 32);
-        }
-        &.bigger &__title{
-            max-width: toRem(344 - 32);
-        }
-        @media (max-width: toEm(992, 16)) {
-            &.input:not(.smaller):not(.bigger) &__title{
-                max-width: toRem(250 - 32);
-            }
-            &.select:not(.smaller):not(.bigger) &__title{
-                max-width: toRem(136 - 32);
-            }
-            &.smaller  &__title{
-                flex: 0 0 toRem(200 - 32);
-            }
-            &.bigger &__title{
-                flex: 0 0 toRem(269 - 32);
-            }
-        }
-        @media (max-width: toEm(768, 16)) {
-            &.select:not(.smaller):not(.bigger) &__title{
-                max-width: toRem(120 - 16);
-            }
-            &.input:not(.smaller):not(.bigger) &__title{
-                max-width: toRem(200 - 16);
-            }
-            &.smaller &__title{
-                flex: 0 0 toRem(150 - 16);
-            }
-            &.bigger &__title{
-                flex: 0 0 toRem(215 - 16);
-            }
-        }
-    }
-    &__title{
-        padding: 0 toRem(4); 
-        background-color: $whiteColor;
-        display: inline-block;
-
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-
-        position: relative;
-        z-index: 2;
-
-        color: $darkGreenColor;
-        font-family: Montserrat;
-        font-size: toRem(14);
-        font-weight: 400;
-        line-height: math.div(17, 14);
-
-        margin: 0 1rem 0;
-    }
     @media (max-width: toEm(768, 16)) {
         &__title{
             font-size: toRem(12);
             margin: 0 0.5rem 0;
+            max-width: calc(100% - 1rem);
         }
     }
 
@@ -387,37 +422,61 @@
     &__select{
         @extend %input;
     }
-    @media (any-hover: hover) {
-        &__title{
+    &__title{
+        padding: 0 toRem(4); 
+        background-color: $whiteColor;
+        display: inline-block;
+
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        color: $darkGreenColor;
+        font-family: Montserrat;
+        font-size: toRem(14);
+        font-weight: 400;
+        line-height: math.div(17, 14);
+
+        margin: 0 1rem 0;
+        max-width: calc(100% - 2rem);
+        
+        position: relative;
+        z-index: 1;
+        span{
+            background-color: transparent;
             position: relative;
-            z-index: 1;
-            span{
-                background-color: transparent;
-                position: relative;
-                z-index: 2;
+            z-index: 2;
 
-                transition: color 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
-            }
-            &::after{
-                background-color: $grayColor;
-                content: "";
-
-                position: absolute;
-                z-index: 1;
-                width: 0;
-                height: 100%;
-
-                left: 0;
-                top: 0;
-
-                transition: width 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
-            }
+            transition: color 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
         }
-        &._focus &__title,
+        &::after{
+            background-color: $grayColor;
+            content: "";
+
+            position: absolute;
+            z-index: 1;
+            width: 0;
+            height: 100%;
+
+            left: 0;
+            top: 0;
+
+            transition: width 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
+        }
+    }
+    &._focus &__title,
+    &__input:focus + &__title,
+    &._active &__title{
+        span{
+            color: $whiteColor;
+        }
+        &::after{
+            width: 100%;
+        }
+    }
+    @media (any-hover: hover) {
         &__select:hover + &__title,
-        &__input:hover + &__title,
-        &__input:focus + &__title,
-        &._active &__title{
+        &__input:hover + &__title{
             span{
                 color: $whiteColor;
             }
@@ -515,7 +574,9 @@
         padding: toRem(5);
     }
 
-    &__link button{
+    &__link button,
+    &__link span{
+        display: inline-block;
         width: 100%;
 
         color: $whiteColor;
@@ -524,19 +585,20 @@
         line-height: 1em;
         font-weight: 600;
 
-        padding: toRem(10) 0;
+        padding: toRem(10);
+        border-radius: 0.5rem;
 
-        transition: text-shadow 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
+        transition: background-color 0.3s cubic-bezier(0.34, 0.03, 0, 0.99),
+        color 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
     }
     &__link button:focus{
         outline: none;
-        text-shadow: 0 0 5px $darkGreenColor;
     }
 
-    &__link button[disabled]{
+    &__inner:not(._hide-active) &__link span,
+    &__link._hovered button{
         color: $mintColor;
-        background: $whiteColor;
-        border-radius: 0.5rem;
+        background-color: $whiteColor;
     }
 }
 .footer-options{
@@ -604,28 +666,33 @@
 
         position: relative;
         z-index: 1;
+        &::after{
+            outline: none;
+            content: "?";
+            border-radius: toRem(4);
+            background-color: $darkGreenColor;
+            color: $whiteColor;
+            font-size: toRem(32);
+            
+            display: flex;
+            align-items: center;
+            justify-content: center;
+    
+            position: absolute;
+            z-index: 1;
+            left: 0;
+            top: 0;
+    
+            width: 100%;
+            height: 100%;
+    
+            transform: scale(0);
+    
+            transition: transform 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
+        }
     }
 
     &__submit:focus::after{
-        outline: none;
-        content: "?";
-        border-radius: toRem(4);
-        background-color: $darkGreenColor;
-        color: $whiteColor;
-        font-size: toRem(32);
-        
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        position: absolute;
-        z-index: 1;
-        left: 0;
-        top: 0;
-
-        width: 100%;
-        height: 100%;
-
         transform: scale(1);
     }
     @media (any-hover: hover) {

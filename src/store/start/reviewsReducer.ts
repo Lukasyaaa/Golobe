@@ -52,52 +52,49 @@ let defaultStore : sectionHeaderItems<reviewsItem> = {
 }
 
 enum reviewsAction{
-    SWAP_IS_ACTIVE = "REVIEWS_SWAP_IS_ACTIVE",
-    MAKE_ALL_NOT_ACTIVE = "REVIEWS_MAKE_ALL_NOT_ACTIVE"
+    SWAP_ACTIVE = "REVIEWS_SWAP_ACTIVE",
+    HIDE_ACTIVE = "REVIEWS_HIDE_ACTIVE"
 }
 
-type reviewsSwapIsActive = {
-    type : reviewsAction.SWAP_IS_ACTIVE,
+type reviewsSwapActive = {
+    type : reviewsAction.SWAP_ACTIVE,
     payload : number,
 }
 
-type reviewsMakeAllNotActive = {
-    type: reviewsAction.MAKE_ALL_NOT_ACTIVE
+type reviewsHideActive = {
+    type: reviewsAction.HIDE_ACTIVE
 }
 
-type reviewsActionType = reviewsSwapIsActive | reviewsMakeAllNotActive;
+type reviewsActionType = reviewsSwapActive | reviewsHideActive;
 
 export const reviewsReducer = (
     state : sectionHeaderItems<reviewsItem> = defaultStore, 
     action : reviewsActionType
 ) : sectionHeaderItems<reviewsItem> =>{
     switch(action.type){
-        case reviewsAction.SWAP_IS_ACTIVE:
+        case reviewsAction.SWAP_ACTIVE:
             return {
                 ...state, 
-                items: state.items.map((item, index) => {
-                    if(index === action.payload){
-                        return{...item, isActive: !(item.isActive)};
+                items: state.items.map((item, i) => {
+                    return{
+                        ...item,
+                        isActive: (i === action.payload) ? !item.isActive : item.isActive
                     }
-                    return{...item};
                 })
             };
-        case reviewsAction.MAKE_ALL_NOT_ACTIVE:
+        case reviewsAction.HIDE_ACTIVE:
             return{
                 ...state,
-                items: state.items.map(item => ({
-                    ...item,
-                    isActive: false
-                }))
+                items: state.items.map(item => ({...item, isActive: false}))
             };
         default:
             return state;
     }
 }
 
-export const reviewsSwapIsActiveAction = (id = -1) : reviewsSwapIsActive => ({
-    type: reviewsAction.SWAP_IS_ACTIVE, payload: id
+export const reviewsSwapActiveAction = (id = -1) : reviewsSwapActive => ({
+    type: reviewsAction.SWAP_ACTIVE, payload: id
 })
-export const reviewsMakeAllNotActiveAction = () : reviewsMakeAllNotActive => ({
-    type: reviewsAction.MAKE_ALL_NOT_ACTIVE
+export const reviewsHideActiveAction = () : reviewsHideActive => ({
+    type: reviewsAction.HIDE_ACTIVE
 })

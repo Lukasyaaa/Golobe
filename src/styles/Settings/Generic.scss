@@ -10,6 +10,25 @@ body._locked{
     padding-right: 15px;
 }
 
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main{
+    flex: 1 1 auto;
+}
+
+@media (min-width: toEm(993, 16)) {
+    .row{
+        display: flex;
+        &__main{
+            flex: 1 1 auto;
+        }
+    }
+}
+
 .header-block{
     @media (min-width: toEm(769, 16)) {
         display: flex;
@@ -79,6 +98,10 @@ body._locked{
         padding: toRem(11) 1rem;
         border: toRem(1) solid rgb(141, 211, 187);
         border-radius: toRem(4);
+
+        transition: box-shadow 0.3s cubic-bezier(0.34, 0.03, 0, 0.99),
+        background-color 0.3s cubic-bezier(0.34, 0.03, 0, 0.99),
+        color 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
     }
     @media (max-width: toEm(768, 16)) {
         &__more{
@@ -96,9 +119,6 @@ body._locked{
         color: #fff;
     }
     @media (any-hover: hover) {
-        &__more{
-            transition: all 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
-        }
         &__more:hover{
             box-shadow: 0 0 15px rgb(141, 211, 187);
             background-color: rgb(141, 211, 187);

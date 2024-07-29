@@ -54,6 +54,9 @@
     -moz-osx-font-smoothing: grayscale;
 }
   
+._icon-search:before {
+    content: "\e91c";
+  }
 ._icon-plus:before {
     content: "\e919";
 }
@@ -141,9 +144,6 @@
 ._icon-restaurant:before {
     content: "\e91b";
 }
-._icon-search:before {
-    content: "\e91c";
-}
 ._icon-seats:before {
     content: "\e91d";
 }
@@ -168,7 +168,7 @@
 ._icon-star:before {
     content: "\e924";
 }
-._icon-stars:before {
+  ._icon-stars:before {
     content: "\e925";
 }
 ._icon-support:before {
