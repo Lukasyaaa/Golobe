@@ -8,7 +8,7 @@ interface ReviewsProps{
 }
 
 export const Reviews : FC<ReviewsProps> = () =>{
-    const reviewsStore = useTypedSelector(store => store.reviews);
+    const reviewsStore = useTypedSelector(store => store.start.reviews);
     return(
         <section className="reviews">
             <BlockHeader parent="reviews" about={reviewsStore.header} />

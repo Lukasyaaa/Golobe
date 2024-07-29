@@ -123,7 +123,7 @@
         transition: filter 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
     }
     &._black-white._active &__logo{
-        filter: drop-shadow(0 0 15px $darkGreenColor);
+        filter: drop-shadow(0 0 5px $mintColor);
     }
 
     &__logo:focus{

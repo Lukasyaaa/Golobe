@@ -6,7 +6,7 @@ import { useTypedSelector } from "../../hooks/redux";
 import { sectionHeaderItems, tripVariantsItem } from "../../types";
 
 export const TripVariants = () =>{
-    const tripVariantsStore = useTypedSelector<sectionHeaderItems<tripVariantsItem>>(store => store.start.tripVariants);
+    const tripVariantsStore = useTypedSelector<sectionHeaderItems<tripVariantsItem>>(store => store.start.text.tripVariants);
 
     return(
         <section className="trip-variants">

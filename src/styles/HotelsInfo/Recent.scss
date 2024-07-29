@@ -1,0 +1,176 @@
+.recent{
+    padding-top: toRem(112);
+    padding-bottom: toRem(80);
+    @media (max-width: toEm(992, 16)) {
+        padding-top: toRem(84);
+        padding-bottom: toRem(65);
+    }
+    @media (max-width: toEm(768, 16)) {
+        padding-top: toRem(45);
+        padding-bottom: toRem(45);
+    }
+    @media (max-width: toEm(768, 16)) {
+        padding-top: toRem(30);
+        padding-bottom: toRem(30);
+    }
+
+    &__heading{
+        color: $blackColor;
+        font-family: "TradeGothic";
+        font-size: toRem(32);
+        font-weight: 700;
+        line-height: math.div(40, 32);
+        &:not(:last-child){
+            margin-bottom: toRem(32);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__heading{
+            text-align: center;
+            font-size: toRem(26);
+            &:not(:last-child){
+                margin-bottom: toRem(22);
+            }
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__heading{
+            font-size: toRem(22);
+            &:not(:last-child){
+                margin-bottom: toRem(16);
+            }
+        }
+    }
+
+    @media (min-width: toEm(481, 16)) {
+        &__items{
+            margin: toRem(-8) toRem(-41.5);
+            display: flex;
+            flex-wrap: wrap;
+        }
+        @media (max-width: toEm($container + 30, 16)) {
+            &__items{
+                margin: toRem(-8) toRem(-30);
+            }
+        }
+        @media (max-width: toEm(992, 16)) {
+            &__items{
+                margin: toRem(-8) toRem(-20);
+            }
+        }
+        @media (max-width: toEm(768, 16)) {
+            &__items{
+                margin: toRem(-8) toRem(-12.5);
+            }
+        }
+    }
+
+    @media (min-width: toEm(481, 16)) {
+        &__item{
+            padding: toRem(8) toRem(41.5);
+        }
+        @media (max-width: toEm($container + 30, 16)) {
+            &__item{
+                padding: toRem(8) toRem(30);
+            }
+        }
+        @media (max-width: toEm(992, 16)) {
+            &__item{
+                padding: toRem(8) toRem(20);
+            }
+        }
+        @media (max-width: toEm(768, 16)) {
+            &__item{
+                padding: toRem(8) toRem(12.5);
+            }
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__item{
+            width: 100%;
+            &:not(:last-child){
+                margin-bottom: toRem(10);
+            }
+        }
+    }
+}
+.item-recent{
+    &__inner{
+        display: flex;
+        align-items: center;
+
+        position: relative;
+        z-index: 1;
+        &::after{
+            border-radius: toRem(8);
+            background-color: $mintColor;
+            content: "";
+            position: absolute;
+            z-index: 1;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+
+            width: 0;
+            height: calc(100% + toRem(10));
+
+            transition: width 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
+        }
+    }
+    &__inner:focus{
+        outline: none;
+    }
+    &__inner:focus::after{
+        width: calc(100% + toRem(10));
+    }
+    &__inner:focus &__title, 
+    &__inner:focus &__text{
+        color: $whiteColor;
+    }
+    @media (any-hover: hover) {
+        &__inner:hover::after{
+            width: calc(100% + toRem(10));
+        }
+        &__inner:hover &__title, 
+        &__inner:hover &__text{
+            color: $whiteColor;
+        }
+    }
+
+    &__image, &__info{
+        position: relative;
+        z-index: 2;
+    }
+
+    &__image{
+        display: inline-block;
+        width: toRem(90);
+        height: toRem(90);
+        img{
+            border-radius: toRem(8);
+        }
+        margin-right: toRem(16);
+    }
+
+    &__title{
+        color: $darkGreenColor;
+        font-family: Montserrat;
+        font-size: toRem(16);
+        font-weight: 600;
+        line-height: math.div(20, 16);
+
+        transition: color 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
+    }
+
+    &__text{
+        opacity: 0.75;
+        color: $darkGreenColor;
+        font-family: Montserrat;
+        font-size: toRem(12);
+        font-weight: 400;
+        line-height: math.div(15, 12);
+
+        margin-top: toRem(8);
+        transition: color 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
+    }
+}

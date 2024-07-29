@@ -117,7 +117,11 @@ export const Options : FC<OptionsProps> = ({neededBlocks, startValue}) =>{
                     <button className="footer-options__item footer-options__promo _icon-plus" type="button" onClick={(e) => e.stopPropagation()}>
                         <span>{optionsStore.footer.promoButtonText}</span>
                     </button>
-                    <button className="footer-options__item footer-options__submit _icon-send" type="submit" onClick={(e) => e.stopPropagation()}>
+                    <button 
+                        className={["footer-options__item", 
+                            "footer-options__submit", 
+                            (currentTypeOptions === optionsItemsType.Flights) ? "_icon-send" : "_icon-appartment"].join(" ")} 
+                        type="submit" onClick={(e) => e.stopPropagation()}>
                         <span>{(currentTypeOptions === optionsItemsType.Flights) ? 
                             optionsStore.footer.sendButtonText.flights : optionsStore.footer.sendButtonText.hotels}
                         </span>

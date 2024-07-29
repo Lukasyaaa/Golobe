@@ -5,6 +5,7 @@ import "./styles/App.scss"
 
 import { Start } from "./pages/Start";
 import { FlightsInfo } from "./pages/FlightsInfo";
+import { HotelsInfo } from "./pages/HotelsInfo";
 import { Configurate } from "./pages/Configurate";
 import { Header } from "./components/Common/Header";
 import { Footer } from "./components/Common/Footer/Footer";
@@ -29,10 +30,11 @@ export const App : FC = () =>{
             <Routes>
                 <Route path={homePath} element={<Start isSupportWebp={isSupportWebp} />} />
                 <Route path={flightsPath} element={<FlightsInfo isSupportWebp={isSupportWebp} />} />
-                <Route path={hotelsPath} element={<Configurate />} />
+                <Route path={hotelsPath} element={<HotelsInfo isSupportWebp={isSupportWebp}/>}></Route>
+                <Route path={flightsConfiguratePath} element={<Configurate />} />
                 <Route
                     path="*"
-                    element={<Navigate to={hotelsPath} replace />}
+                    element={<Navigate to={homePath} replace />}
                 />
             </Routes>
             <Footer />

@@ -34,7 +34,7 @@ type headerMakeHotelsActive = {
     type : headerAction.MAKE_HOTELS_ACTIVE
 }
 
-type headerActionType = headerMakeAllNotActive | headerMakeFlightsActive | headerMakeHotelsActive;
+export type headerActionType = headerMakeAllNotActive | headerMakeFlightsActive | headerMakeHotelsActive;
 
 export const headerReducer = (state : header = defaultStore, action : headerActionType) : header =>{
     switch(action.type){

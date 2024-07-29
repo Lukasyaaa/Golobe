@@ -1,4 +1,4 @@
-import { introVariant, map, offer, travels } from "../../types"
+import { flighsStore } from "../../types"
 //--------------Intro--------------
 import introJpeg from "../../assets/img/flights/intro/background.jpeg"
 import introWebp from "../../assets/img/flights/intro/background.webp"
@@ -45,14 +45,7 @@ import offerWebp_2 from "../../assets/img/flights/offer/2/2.webp"
 import offerWebp_3 from "../../assets/img/flights/offer/3/3.webp"
 import offerWebp_4 from "../../assets/img/flights/offer/4/4.webp"
 
-interface store{
-    intro : introVariant,
-    map : map,
-    travels : travels,
-    offer : offer
-}
-
-const defaultStore : store  = {
+const defaultStore : flighsStore  = {
     intro:{
         heading: "Make your travel whishlist, we’ll do the rest",
         subheading: "Special offers to suit your plan",
@@ -150,4 +143,4 @@ const defaultStore : store  = {
     }
 }
 
-export const flightsTextReducer = ((state = defaultStore) => state);
+export const flightsTextReducer = ((state : flighsStore = defaultStore) : flighsStore => state);

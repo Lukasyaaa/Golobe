@@ -234,45 +234,45 @@ const defaultStore : flightsItems = {
     button: "Show more results"
 }
 
-enum flightsItemsActions{
+enum flightsItemsAction{
     SWAP_ACTIVE = "FLIGHTS-ITEMS_SWAP_ACTIVE",
     HIDE_ACTIVE = "FLIGHTS-ITEMS_HIDE_ACTIVE"
 }
 
 type flightsItemsHideActive = {
-    type: flightsItemsActions.HIDE_ACTIVE
+    type: flightsItemsAction.HIDE_ACTIVE
 }
 
 type flightsItemsSwapActive = {
-    type: flightsItemsActions.SWAP_ACTIVE
+    type: flightsItemsAction.SWAP_ACTIVE
 }
 
-type flightsItemsAction = flightsItemsHideActive | flightsItemsSwapActive;
+type flightsItemsActionType = flightsItemsHideActive | flightsItemsSwapActive;
 
-export const flightsItemsTextReducer = (store : flightsItems = defaultStore, action : flightsItemsAction) : flightsItems => {
+export const flightsItemsTextReducer = (state : flightsItems = defaultStore, action : flightsItemsActionType) : flightsItems => {
     switch(action.type){
-        case flightsItemsActions.SWAP_ACTIVE:
+        case flightsItemsAction.SWAP_ACTIVE:
             return{
-                ...store,
-                header: {...store.header, select: {
-                    ...store.header.select, isActive: !store.header.select.isActive
+                ...state,
+                header: {...state.header, select: {
+                    ...state.header.select, isActive: !state.header.select.isActive
                 }}
             }
-        case flightsItemsActions.HIDE_ACTIVE:
+        case flightsItemsAction.HIDE_ACTIVE:
             return{
-                ...store,
-                header: {...store.header, select: {
-                    ...store.header.select, isActive: false
+                ...state,
+                header: {...state.header, select: {
+                    ...state.header.select, isActive: false
                 }}
             }
         default:
-            return store;
+            return state;
     }
 };
 
 export const flightsItemsHideActiveAction = () : flightsItemsHideActive => ({
-    type: flightsItemsActions.HIDE_ACTIVE,
+    type: flightsItemsAction.HIDE_ACTIVE,
 });
 export const flightsItemsSwapActiveAction = () : flightsItemsSwapActive => ({
-    type: flightsItemsActions.SWAP_ACTIVE,
+    type: flightsItemsAction.SWAP_ACTIVE,
 });

@@ -8,7 +8,7 @@ interface mapProps{
 }
 
 export const Map : FC<mapProps> = ({isSupportWebp}) =>{
-    let mapStore = useTypedSelector(store => store.flights.map)
+    let mapStore = useTypedSelector(store => store.flights.text.map)
     const pathToBackground = (isSupportWebp) ? mapStore.background.webp : mapStore.background.jpeg;
 
     return(

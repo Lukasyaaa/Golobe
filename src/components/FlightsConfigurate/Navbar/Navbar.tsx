@@ -6,7 +6,7 @@ import { NavbarRadios } from "./NavbarRadios";
 import { NavbarCheckboxes } from "./NavbarCheckboxes";
 
 export const Navbar = () =>{
-    let navbarStore = useTypedSelector<navbar>(store => store.navbar);
+    let navbarStore = useTypedSelector<navbar>(store => store.flights.navbar);
 
     let radioCount : number = 0;
     let checkboxCount : number = 0;

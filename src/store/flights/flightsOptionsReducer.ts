@@ -41,12 +41,12 @@ type optionsFlightsShowSelect = {
     type : optionsFlightsAction.SHOW_SELECT
 }
 
-export type optionsFlightsChangeActiveItem = {
+type optionsFlightsChangeActiveItem = {
     type : optionsFlightsAction.CHANGE_ACTIVE_ITEM,
     payload : number
 }
 
-export type optionsFlightsSwapItems = {
+type optionsFlightsSwapItems = {
     type : optionsFlightsAction.SWAP_ITEMS,
     payload : number
 }

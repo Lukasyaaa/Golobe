@@ -5,7 +5,7 @@ import { FlightsSortSelect } from "./FlightsSortSelect";
 
 
 export const FlightsSort : FC = () =>{
-    const optionsFlightsStore = useTypedSelector(store => store.optionsFlights);
+    const optionsFlightsStore = useTypedSelector(store => store.flights.options);
     const parent = useRef<HTMLDivElement>(null)
 
     return(

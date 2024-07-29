@@ -1,7 +1,7 @@
 import React, {FC, useState, useRef, useEffect, MouseEvent, FocusEvent } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { useTypedSelector } from "../../hooks/redux";
-import { flightsPath, homePath } from "../../App";
+import { flightsConfiguratePath, flightsPath, homePath, hotelsPath } from "../../App";
 import { useDispatch } from "react-redux";
 import { headerMakeAllNotActiveAction, headerMakeFlightsActiveAction, headerMakeHotelsctiveAction } from "../../store/common/headerReducer";
 
@@ -88,13 +88,14 @@ export const Header : FC = () =>{
         updateHeaderOnScrollChange();
         style = (location.pathname === homePath) ? headerStyle.start : headerStyle.blackWhite;
         switch(location.pathname){
+            case flightsConfiguratePath:
             case flightsPath:
                 dispatch(headerMakeFlightsActiveAction());
                 break;
-            case flightsPath:
+            case hotelsPath:
                 dispatch(headerMakeHotelsctiveAction());
                 break;
-            case flightsPath:
+            case homePath:
                 dispatch(headerMakeAllNotActiveAction());
                 break;
             default:

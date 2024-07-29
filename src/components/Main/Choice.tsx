@@ -8,7 +8,7 @@ interface ChoiceProps{
 }
 
 export const Choice : FC<ChoiceProps> = ({isSupportWebp}) =>{
-    const choiceStore : choiceItem[] = useTypedSelector(store => store.start.choice);
+    const choiceStore : choiceItem[] = useTypedSelector(store => store.start.text.choice);
 
     return(
         <section className="choice">

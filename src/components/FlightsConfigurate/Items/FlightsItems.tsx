@@ -13,9 +13,9 @@ interface minMassive{
 }
 
 export const FlightsItems : FC = () =>{
-    const flightsItemsStore = useTypedSelector(store => store.flightsItems);
-    const navbarStore = useTypedSelector(store => store.navbar);
-    const flightsOptionsStore = useTypedSelector(store => store.optionsFlights);
+    const flightsItemsStore = useTypedSelector(store => store.flights.items);
+    const navbarStore = useTypedSelector(store => store.flights.navbar);
+    const flightsOptionsStore = useTypedSelector(store => store.flights.options);
     let listInner = useRef<HTMLUListElement>(null);
 
     //-----------Формируем Запросы для Рейсов-----------

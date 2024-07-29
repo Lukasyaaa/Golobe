@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import { choiceItem} from "../../types";
+import { NavLink } from "react-router-dom";
 
 interface ChoiceOptionProps{
     about : choiceItem,
@@ -16,11 +17,11 @@ export const ChoiceOption : FC<ChoiceOptionProps> = ({about, isSupportWebp}) =>{
             <div className="item-choice__subimage">
                 <h3 className="item-choice__heading">{about.heading}</h3>
                 <div className="item-choice__info">{about.info}</div>
-                <a 
-                    className="item-choice__button _icon-send" href={about.href}  onClick={(e) => e.stopPropagation()}
+                <NavLink 
+                    className="item-choice__button _icon-send" to={about.href}  onClick={(e) => e.stopPropagation()}
                 >
                     <span>{about.button}</span>
-                </a>
+                </NavLink>
             </div>
         </div>
     )

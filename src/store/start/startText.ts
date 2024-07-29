@@ -1,4 +1,4 @@
-import { introStart, sectionHeaderItems, tripVariantsItem, choiceItem } from "../../types";
+import { startTextStore } from "../../types";
 //--------------Intro--------------
 import introJpeg from "../../assets/img/main/intro/background.jpeg"
 import introWebp from "../../assets/img/main/intro/background.webp"
@@ -30,14 +30,9 @@ import choiceWebp_2 from "../../assets/img/main/choice/2.webp"
 //--------------------------JPEG--------------
 import choiceJpeg_1 from "../../assets/img/main/choice/1.jpeg"
 import choiceJpeg_2 from "../../assets/img/main/choice/2.jpeg"
+import { flightsConfiguratePath } from "../../App";
 
-interface store{
-    intro : introStart,
-    tripVariants : sectionHeaderItems<tripVariantsItem>,
-    choice : choiceItem[],
-}
-
-const defaultStore : store  = {
+const defaultStore : startTextStore  = {
     intro:{
         supheading: "Helping Others",
         heading: "Live & Travel",
@@ -104,7 +99,7 @@ const defaultStore : store  = {
             heading: "Flights", 
             info: "Search Flights & Places Hire to our most popular destinations", 
             button: "Show Filghts",
-            href: "#"
+            href: flightsConfiguratePath
         },
         {
             image: {webp: choiceWebp_2, jpeg: choiceJpeg_2},
@@ -116,4 +111,4 @@ const defaultStore : store  = {
     ]
 }
 
-export const startTextReducer = ((state = defaultStore) => state);
+export const startTextReducer = ((state : startTextStore = defaultStore) => state);

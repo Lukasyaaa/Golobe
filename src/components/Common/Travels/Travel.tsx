@@ -1,5 +1,5 @@
 import React, { FC, useRef } from "react";
-import { travelsItem } from "../../types";
+import { travelsItem } from "../../../types";
 
 interface TravelProps{
     about : travelsItem

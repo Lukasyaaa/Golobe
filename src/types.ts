@@ -55,6 +55,26 @@ export interface header{
     buttons : headerButton[]
 }
 
+//----------Start----------
+export interface startTextStore{
+    intro : introStart,
+    tripVariants : sectionHeaderItems<tripVariantsItem>,
+    choice : choiceItem[],
+}
+//----------Flights----------
+export interface flighsStore{
+    intro : introVariant,
+    map : map,
+    travels : travels,
+    offer : offer
+}
+//----------Hotels----------
+export interface hotelsStore{
+    intro : introVariant
+    travels : travels,
+    offer : offer
+}
+
 //----------Intro----------
 export interface introStart{
     supheading : string,
@@ -387,4 +407,15 @@ export interface flightsItems{
     header : flightsItemsHeader,
     items: flightsItem[],
     button : string
+}
+
+//Hotels Recent
+export interface recentItem{
+    image : imageVariants,
+    title : string,
+    countHotels : number
+}
+export interface recent{
+    heading : string,
+    items : recentItem[]
 }

@@ -56,8 +56,8 @@ const defaultStore : options = {
     footer:{
         promoButtonText: "Add Promo Code",
         sendButtonText:{
-            flights: "Find Flights",
-            hotels: "Find Hotels"
+            flights: "Show Flights",
+            hotels: "Show Places"
         }
     }
 }

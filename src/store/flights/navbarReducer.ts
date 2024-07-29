@@ -47,7 +47,6 @@ export enum FromOrTo{
     To = 1
 }
 
-
 type navbarSwapActive = {
     type : navbarAction.SWAP_ACTIVE,
     payload : number

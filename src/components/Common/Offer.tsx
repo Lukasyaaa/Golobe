@@ -1,10 +1,13 @@
 import React, {FC} from "react";
-import { BlockHeader } from "../Common/BlockHeader";
+import { BlockHeader } from "./BlockHeader";
 import { useTypedSelector } from "../../hooks/redux";
+import { offer } from "../../types";
 
-export const Offer : FC = () =>{
-    let offerStore = useTypedSelector(store => store.flights.offer)
+interface OfferProps{
+    offerStore : offer
+}
 
+export const Offer : FC<OfferProps> = ({offerStore}) =>{
     return(
         <section className="offer">
             <div className="container">

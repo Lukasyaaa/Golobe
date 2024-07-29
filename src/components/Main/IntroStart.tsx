@@ -8,7 +8,7 @@ interface IntroStartProps{
 }
 
 export const IntroStart : FC<IntroStartProps> = ({isSupportWebp}) =>{
-    const introStore = useTypedSelector<introStart>(store => store.start.intro);
+    const introStore = useTypedSelector<introStart>(store => store.start.text.intro);
     const pathToBackground = (isSupportWebp) ? introStore.background.webp : introStore.background.jpeg;
 
     return(

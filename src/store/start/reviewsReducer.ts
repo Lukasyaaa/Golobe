@@ -65,7 +65,7 @@ type reviewsHideActive = {
     type: reviewsAction.HIDE_ACTIVE
 }
 
-type reviewsActionType = reviewsSwapActive | reviewsHideActive;
+export type reviewsActionType = reviewsSwapActive | reviewsHideActive;
 
 export const reviewsReducer = (
     state : sectionHeaderItems<reviewsItem> = defaultStore, 

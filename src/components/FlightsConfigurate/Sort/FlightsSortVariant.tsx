@@ -1,7 +1,7 @@
 import React, {FC, RefObject, MouseEvent, FocusEvent} from "react";
 import { UseDispatch } from "react-redux";
-import { flightsOption, flightsOptionParent } from "../../../types";
-import { flightsOptionsChangeActiveItemAction, flightsOptionsSwapItemsAction, optionsFlightsChangeActiveItem, optionsFlightsSwapItems } from "../../../store/flights/flightsOptionsReducer";
+import { flightsOption } from "../../../types";
+import { flightsOptionsChangeActiveItemAction} from "../../../store/flights/flightsOptionsReducer";
 import { useDispatch } from "react-redux";
 
 interface optionsFlightsProps{
