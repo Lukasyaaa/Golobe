@@ -236,6 +236,7 @@ const defaultStore : flightsItems = {
 
 enum flightsItemsAction{
     SWAP_ACTIVE = "FLIGHTS-ITEMS_SWAP_ACTIVE",
+    SET_ACTIVE_SELECT_LINK = "FLIGHTS-ITEMS_SET_ACTIVE_SELECT_LINK",
     HIDE_ACTIVE = "FLIGHTS-ITEMS_HIDE_ACTIVE"
 }
 
@@ -243,11 +244,16 @@ type flightsItemsHideActive = {
     type: flightsItemsAction.HIDE_ACTIVE
 }
 
+type flightsItemsSetActiveSelectLink = {
+    type: flightsItemsAction.SET_ACTIVE_SELECT_LINK,
+    payload : number
+}
+
 type flightsItemsSwapActive = {
     type: flightsItemsAction.SWAP_ACTIVE
 }
 
-type flightsItemsActionType = flightsItemsHideActive | flightsItemsSwapActive;
+type flightsItemsActionType = flightsItemsHideActive | flightsItemsSwapActive | flightsItemsSetActiveSelectLink;
 
 export const flightsItemsTextReducer = (state : flightsItems = defaultStore, action : flightsItemsActionType) : flightsItems => {
     switch(action.type){
@@ -256,6 +262,13 @@ export const flightsItemsTextReducer = (state : flightsItems = defaultStore, act
                 ...state,
                 header: {...state.header, select: {
                     ...state.header.select, isActive: !state.header.select.isActive
+                }}
+            }
+        case flightsItemsAction.SET_ACTIVE_SELECT_LINK:
+            return{
+                ...state,
+                header: {...state.header, select: {
+                    ...state.header.select, activeItem: action.payload
                 }}
             }
         case flightsItemsAction.HIDE_ACTIVE:
@@ -271,8 +284,11 @@ export const flightsItemsTextReducer = (state : flightsItems = defaultStore, act
 };
 
 export const flightsItemsHideActiveAction = () : flightsItemsHideActive => ({
-    type: flightsItemsAction.HIDE_ACTIVE,
+    type: flightsItemsAction.HIDE_ACTIVE
 });
+export const flightsItemsSetActiveSelectLink = (id : number) : flightsItemsSetActiveSelectLink => ({
+    type: flightsItemsAction.SET_ACTIVE_SELECT_LINK, payload: id
+})
 export const flightsItemsSwapActiveAction = () : flightsItemsSwapActive => ({
-    type: flightsItemsAction.SWAP_ACTIVE,
+    type: flightsItemsAction.SWAP_ACTIVE
 });

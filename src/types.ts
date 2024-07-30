@@ -89,15 +89,15 @@ export enum optionIconPosition{
     Left = "icon-left",
     Right = "icon-right"
 }
-export interface optionsSelectLink{
-    value : string,
-    isDisabled : boolean
+export interface optionsSelectValue{
+    items : string[],
+    activeItem : number
 }
 export interface optionsFlightsItem{
     title : string,
     iconValue : string | null,
     iconPosition : optionIconPosition,
-    value : string | optionsSelectLink[],
+    value : string | optionsSelectValue,
     isActive : boolean | null
 }
 export interface optionsHotelsItem{
@@ -105,7 +105,7 @@ export interface optionsHotelsItem{
     iconValue : string | null,
     iconPosition : optionIconPosition,
     isBigger : boolean,
-    value : string | optionsSelectLink[],
+    value : string | optionsSelectValue,
     isActive : boolean | null
 }
 

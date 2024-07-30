@@ -104,7 +104,8 @@ export const Options : FC<OptionsProps> = ({neededBlocks, startValue}) =>{
                         isBigger={
                             (currentTypeOptions === optionsItemsType.Hotels) ? optionsStore.hotels[optionIndex].isBigger : false
                         }
-                        links={optionsItem.value}
+                        links={optionsItem.value.items}
+                        activeLink={optionsItem.value.activeItem}
                         isActive={(typeof optionsItem.isActive === "boolean") ? optionsItem.isActive : false}
                     />))}
                     {neededBlocks === optionsBlockType.ONLY_ITEMS && 

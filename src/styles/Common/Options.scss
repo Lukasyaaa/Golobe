@@ -576,6 +576,7 @@
 
     &__link button,
     &__link span{
+
         display: inline-block;
         width: 100%;
 
@@ -595,8 +596,8 @@
         outline: none;
     }
 
-    &__inner:not(._hide-active) &__link span,
-    &__link._hovered button{
+    &__inner:not(._hide-active) &__link._active span,
+    &__link button._hovered{
         color: $mintColor;
         background-color: $whiteColor;
     }

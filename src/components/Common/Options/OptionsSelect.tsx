@@ -1,7 +1,7 @@
 import React, { FC, useRef, useState, MouseEvent, FocusEvent, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { optionsSelectLink, optionIconPosition, optionsItemsType } from "../../../types";
-import { optionsSwapActiveAction } from "../../../store/common/optionsReducer";
+import { optionIconPosition, optionsItemsType } from "../../../types";
+import { optionsSetActiveSelectLink, optionsSwapActiveAction } from "../../../store/common/optionsReducer";
 
 
 interface OptionsSelectProps{
@@ -11,13 +11,14 @@ interface OptionsSelectProps{
     iconPosition : optionIconPosition,
     parentType : optionsItemsType,
     isBigger: boolean,
-    links : optionsSelectLink[],
+    links : string[],
+    activeLink : number,
     isActive : boolean,
 }
 
-export const OptionsSelect : FC<OptionsSelectProps> = ({id, title, iconValue, iconPosition, parentType, isBigger, links, isActive}) =>{
-    let [selectLinks, setSelectLinks] = useState<optionsSelectLink[]>(links);
-    let activeSelectLink : optionsSelectLink[] = selectLinks.filter(selectLink => selectLink.isDisabled);
+export const OptionsSelect : FC<OptionsSelectProps> = ({id, title, iconValue, iconPosition, parentType, isBigger, links, activeLink, isActive}) =>{
+    let [selectLinks, setSelectLinks] = useState<string[]>(links);
+    let activeSelectLink : string = selectLinks[activeLink];
     let listInner = useRef<HTMLUListElement>(null);
 
     useEffect(() =>{
@@ -42,23 +43,14 @@ export const OptionsSelect : FC<OptionsSelectProps> = ({id, title, iconValue, ic
         classesParent.push(iconValue);
     }
 
-    const changeActive = (e : MouseEvent<HTMLLIElement>) =>{
-        const idClicked : number | null = ((e.currentTarget.getAttribute("id") === null) ? null : Number(e.currentTarget.getAttribute("id")) )
-        if(idClicked !== null){
-            let copyArray = [...selectLinks];
-            for(let i = 0; i < selectLinks.length; i++){
-                if(selectLinks[i].value === activeSelectLink[0].value){
-                    copyArray[i].isDisabled = false;
-                    break;
-                }
-            }
-            copyArray[idClicked].isDisabled = true;
-            setSelectLinks(copyArray);
-        }
+    const changeActive = (e : MouseEvent<HTMLButtonElement>, idLink : number, idSelect : number) =>{
+        e.stopPropagation();
+        makeUnPseudoActive(e);
+        dispatch(optionsSetActiveSelectLink(idLink, idSelect, parentType))
     }
 
     const dispatch = useDispatch();
-    const toggleSelect = (e : MouseEvent<HTMLButtonElement> | FocusEvent<HTMLButtonElement>) =>{
+    const toggleSelect = () =>{
         dispatch(optionsSwapActiveAction(id, parentType));
     }
 
@@ -68,7 +60,7 @@ export const OptionsSelect : FC<OptionsSelectProps> = ({id, title, iconValue, ic
             e.currentTarget.classList.add("_hovered");
         }
     }
-    const makeUnPseudoActive = (e : MouseEvent<HTMLButtonElement> | FocusEvent<HTMLButtonElement>) =>{
+    const makeUnPseudoActive = (e : MouseEvent<HTMLButtonElement> | FocusEvent<HTMLButtonElement> | MouseEvent<HTMLLIElement>) =>{
         if(listInner.current){
             listInner.current.classList.remove("_hide-active");
             e.currentTarget.classList.remove("_hovered");
@@ -82,32 +74,37 @@ export const OptionsSelect : FC<OptionsSelectProps> = ({id, title, iconValue, ic
                 <div className="item-inputs-options__select select-options">
                     <button 
                         className="select-options__opener" type="button" 
-                        onClick={(e) => {e.stopPropagation(); toggleSelect(e)}} 
+                        onClick={(e) => {e.stopPropagation(); toggleSelect()}} 
                         onFocus={() => parent.current?.classList.add("_focus")}
                         onBlur={() => parent.current?.classList.remove("_focus")}
-                    >{activeSelectLink[0].value}</button>
+                    >{activeSelectLink}</button>
                     <div className="select-options__list list-select-options" style={{
                         height: (listInner.current && isActive) ? listInner.current.offsetHeight : 0
                     }}>
                         <ul className="list-select-options__inner" ref={listInner}>
                             {selectLinks.map((link, i) => {
-                                if(link.isDisabled){
+                                if(i === activeLink){
                                     return(                            
-                                        <li className="list-select-options__link" key={i} id={String(i)}>
-                                            <span>{link.value}</span>
+                                        <li className="list-select-options__link _active" key={i}>
+                                            <span>{link}</span>
                                         </li>
                                     )
                                 }
                                 return(                            
-                                    <li className="list-select-options__link" key={i} id={String(i)} onClick={(e) => changeActive(e)}>
+                                    <li className="list-select-options__link" key={i}>
                                         <button 
                                             type="button" 
-                                            onFocus={(i === 0 || selectLinks[i-1].isDisabled) ? (e) => {
-                                                toggleSelect(e); makePseudoActive(e)
-                                            } : undefined}
+                                            onClick={(e) => changeActive(e, i, id)}
+                                            onFocus={(e) => {
+                                                makePseudoActive(e);
+                                                if((i === 0 || activeLink === i -1) && !isActive){
+                                                    toggleSelect(); 
+                                                }
+                                            }}
                                             onBlur={(e) => {
-                                                if(i === selectLinks.length - 1){
-                                                    toggleSelect(e);
+                                                if(i === selectLinks.length - 1 || 
+                                                (activeLink === selectLinks.length - 1 && i === activeLink - 1)){
+                                                    toggleSelect();
                                                 }
                                                 makeUnPseudoActive(e)
                                             }} 
@@ -117,7 +114,7 @@ export const OptionsSelect : FC<OptionsSelectProps> = ({id, title, iconValue, ic
                                                 }
                                             }}
                                         >
-                                            {link.value}
+                                            {link}
                                         </button>
                                     </li>
                                 )

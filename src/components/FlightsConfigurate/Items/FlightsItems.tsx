@@ -5,7 +5,7 @@ import { navbarItem, navbarCheckboxes, navbarFromToValueTypes, navbarItemType, f
 import { flightsOptionsTitles } from "../../../store/flights/flightsOptionsReducer";
 import { getTime } from "../TimeConverter";
 import { useDispatch } from "react-redux";
-import { flightsItemsSwapActiveAction } from "../../../store/flights/flightsItemsReducer";
+import { flightsItemsSetActiveSelectLink, flightsItemsSwapActiveAction } from "../../../store/flights/flightsItemsReducer";
 
 interface minMassive{
     value : number,
@@ -184,6 +184,9 @@ export const FlightsItems : FC = () =>{
     const toggleSelect = () =>{
         dispatch(flightsItemsSwapActiveAction());
     }
+    const changeHeaderSelectActive = (id : number) =>{
+        dispatch(flightsItemsSetActiveSelectLink(id));
+    }
 
     const makePseudoActive = (e : MouseEvent<HTMLButtonElement> | FocusEvent<HTMLButtonElement>) : void =>{
         if(listInner.current){
@@ -224,7 +227,7 @@ export const FlightsItems : FC = () =>{
                         height: (listInner.current && flightsItemsStore.header.select.isActive) ? listInner.current.offsetHeight : 0
                     }}>
                         <ul className="select-flights-items__list-inner" ref={listInner}>
-                            {flightsItemsStore.header.select.list.map((link, i, links) => {
+                            {flightsItemsStore.header.select.list.map((link, i, selectLinks) => {
                                 let classes : string[] = ["select-flights-items__link"]
                                 if(i === flightsItemsStore.header.select.activeItem){
                                     return( 
@@ -234,9 +237,14 @@ export const FlightsItems : FC = () =>{
                                     )
                                 }
                                 return( 
-                                    <li className={classes.join(" ")} key={i}                                             >
+                                    <li className={classes.join(" ")} key={i}>
                                         <button 
-                                            onClick={(e) => e.stopPropagation()}
+                                            type="button"
+                                            onClick={(e) => {
+                                                e.stopPropagation(); 
+                                                makeUnPseudoActive(e); 
+                                                changeHeaderSelectActive(i);
+                                            }}
                                             onFocus={(e) => {
                                                 makePseudoActive(e);
                                                 if((i === 0 || flightsItemsStore.header.select.activeItem === i - 1) && 
@@ -245,12 +253,18 @@ export const FlightsItems : FC = () =>{
                                                 }
                                             }}
                                             onBlur={(e) => {
-                                                makeUnPseudoActive(e);
-                                                if(i === links.length - 1){
+                                                if(i === selectLinks.length - 1 || 
+                                                (flightsItemsStore.header.select.activeItem === selectLinks.length - 1 && 
+                                                i === flightsItemsStore.header.select.activeItem - 1)){
                                                     toggleSelect();
                                                 }
+                                                makeUnPseudoActive(e);
                                             }}
-                                            onMouseEnter={makePseudoActive} onMouseLeave={makeUnPseudoActive}
+                                            onMouseEnter={makePseudoActive} onMouseLeave={(e) => {
+                                                if(document.activeElement !== e.target){
+                                                    makeUnPseudoActive(e);
+                                                }
+                                            }}
                                         >
                                             {link}
                                         </button>

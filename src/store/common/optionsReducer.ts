@@ -19,7 +19,10 @@ const defaultStore : options = {
         },
         {
             title: "Trip", iconValue: null, iconPosition: optionIconPosition.Null,
-            value:[{value: "Depart", isDisabled: true}, {value: "Return", isDisabled: false}],
+            value:{
+                items:["Depart", "Return"],
+                activeItem: 0
+            },
             isActive: false
         },
         {
@@ -49,7 +52,10 @@ const defaultStore : options = {
         },
         {
             title: "Rooms & Guests", iconValue: "_icon-account", iconPosition: optionIconPosition.Left,
-            isBigger: false, value: [{value: "1 room, 2 guests", isDisabled: true}, {value: "2 room, 1 guests", isDisabled: false}],
+            isBigger: false, value: {
+                items: ["1 room, 2 guests", "2 room, 1 guests"],
+                activeItem: 0
+            },
             isActive: false
         }
     ],
@@ -66,15 +72,26 @@ enum optionsAction{
     SWAP_ACTIVE = "OPTIONS_SWAP_ACTIVE",
     HIDE_ACTIVE = "OPTIONS_HIDE_ACTIVE",
     SET_ACTIVE_HEADER_LINK = "OPTIONS_SET_ACTIVE_HEADER_LINK",
+    SET_ACTIVE_SELECT_LINK = "OPTIONS_SET_ACTVEI_SELECT_LINK"
 }
 
-type payloadSwapActivePayload = {
+interface payloadSwapActivePayload {
     id : number,
     parent : optionsItemsType | null,
 }
 type optionsSwapActive = {
     type : optionsAction.SWAP_ACTIVE,
     payload : payloadSwapActivePayload,
+}
+
+interface payloadOptionsSetActiveSelectLink{
+    idLink : number,
+    idSelect : number,
+    parent : optionsItemsType
+}
+type optionsSetActiveSelectLink = {
+    type : optionsAction.SET_ACTIVE_SELECT_LINK,
+    payload : payloadOptionsSetActiveSelectLink,
 }
 
 type optionsSetActiveHeaderLink = {
@@ -86,7 +103,7 @@ type optionsHideActive = {
     type: optionsAction.HIDE_ACTIVE
 }
 
-type optionsActionType = optionsSwapActive | optionsSetActiveHeaderLink | optionsHideActive;
+type optionsActionType = optionsSwapActive | optionsSetActiveHeaderLink | optionsHideActive | optionsSetActiveSelectLink;
 export const optionsReducer = (state : options = defaultStore, action : optionsActionType) : options =>{
     switch(action.type){
         case optionsAction.SWAP_ACTIVE:
@@ -134,6 +151,37 @@ export const optionsReducer = (state : options = defaultStore, action : optionsA
                     }
                 }
             }
+        case optionsAction.SET_ACTIVE_SELECT_LINK:
+            if(action.payload.parent === optionsItemsType.Flights){
+                return{
+                    ...state,
+                    flights: state.flights.map((flight, i) => {
+                        if(i === action.payload.idSelect && typeof flight.value !== "string"){
+                            return{
+                                ...flight, value:{
+                                    ...flight.value,
+                                    activeItem: action.payload.idLink
+                                }
+                            }
+                        }
+                        return flight;
+                    })
+                }
+            }
+            return{
+                ...state,
+                hotels: state.hotels.map((hotel, i) => {
+                    if(i === action.payload.idSelect && typeof hotel.value !== "string"){
+                        return{
+                            ...hotel, value:{
+                                ...hotel.value,
+                                activeItem: action.payload.idLink
+                            }
+                        }
+                    }
+                    return hotel;
+                })
+            }
         default:
             return state;
     }
@@ -148,3 +196,6 @@ export const optionsHideActiveAction = () : optionsHideActive => ({
 export const optionsSetActiveHeaderLinkAction = (newActive : number) : optionsSetActiveHeaderLink => ({
     type: optionsAction.SET_ACTIVE_HEADER_LINK, payload: newActive
 });
+export const optionsSetActiveSelectLink = (idLink: number, idSelect : number, parent : optionsItemsType) : optionsSetActiveSelectLink => ({
+    type: optionsAction.SET_ACTIVE_SELECT_LINK, payload: {idLink, idSelect, parent}
+})
