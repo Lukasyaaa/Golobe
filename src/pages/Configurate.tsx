@@ -1,27 +1,37 @@
 import React, { FC, useEffect } from "react";
-import { Options } from "../components/Common/Options/Options";
-import { optionsBlockType, optionsItemsType } from "../types";
-import { Navbar } from "../components/FlightsConfigurate/Navbar/Navbar";
-import { FlightsSort } from "../components/FlightsConfigurate/Sort/FlightsSort";
-import { FlightsItems } from "../components/FlightsConfigurate/Items/FlightsItems";
 import { useDispatch } from "react-redux";
+import { useTypedSelector } from "../hooks/redux";
+import { Options } from "../components/Common/Options/Options";
+import { Navbar } from "../components/Common/Configurate/Navbar/Navbar";
+import { Sort } from "../components/Common/Configurate/Sort/Sort";
+import { FlightsItems } from "../components/Flights/Items/FlightsItems";
+import { HotelsItems } from "../components/Hotels/Items/HotelsItems";
+import { optionsBlockType, contentPart} from "../types";
 import { footerHideActiveAction } from "../store/common/footerReducer";
 import { optionsHideActiveAction } from "../store/common/optionsReducer";
-import { navbarHideActiveAction } from "../store/flights/navbarReducer";
+import { navbarHideActiveAction } from "../store/common/navbarReducer";
 import { flightsItemsHideActiveAction } from "../store/flights/flightsItemsReducer";
-import { flightsOptionsHideActive } from "../store/flights/flightsOptionsReducer";
+import { sortHideActive } from "../store/common/sortReducer";
+import { hotelsItemsHideItemActiveAction } from "../store/hotels/hotelsItemsReducer";
 
 interface ConfigurateProps{
+    contentType : contentPart
 }
 
-export const Configurate : FC<ConfigurateProps> = () =>{
+export const Configurate : FC<ConfigurateProps> = ({contentType}) =>{
+    let state = useTypedSelector(state => state);
+
     const dispatch = useDispatch();
     const clickDocument = () : void =>{
         dispatch(footerHideActiveAction());
         dispatch(optionsHideActiveAction());
-        dispatch(navbarHideActiveAction());
-        dispatch(flightsItemsHideActiveAction());
-        dispatch(flightsOptionsHideActive());
+        dispatch(navbarHideActiveAction(contentType));
+        if(contentType === contentPart.Flights){
+            dispatch(flightsItemsHideActiveAction());
+        }else{
+            dispatch(hotelsItemsHideItemActiveAction());
+        }
+        dispatch(sortHideActive(contentType));
     }
 
     useEffect(() =>{
@@ -33,12 +43,17 @@ export const Configurate : FC<ConfigurateProps> = () =>{
 
     return(
         <main className="main flights">
-            <Options neededBlocks={optionsBlockType.ONLY_ITEMS} startValue={optionsItemsType.Flights} />
+            <Options neededBlocks={optionsBlockType.ONLY_ITEMS} startValue={contentType} />
             <div className="row container">
-                <Navbar />
+                <Navbar 
+                    navbarStore={(contentType === contentPart.Flights) ? state.navbar.flights : state.navbar.hotels} 
+                    contentType={contentType}
+                />
                 <div className="row__main">
-                    <FlightsSort />
-                    <FlightsItems />
+                    {((contentType === contentPart.Flights) ?                     
+                    <Sort sortStore={state.sort.flights} sortType={contentPart.Flights} /> :
+                    <Sort sortStore={state.sort.hotels} sortType={contentPart.Hotels} />)}
+                    {(contentType === contentPart.Flights) ? <FlightsItems /> : <HotelsItems />}
                 </div>
             </div>
         </main>

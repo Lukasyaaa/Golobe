@@ -265,6 +265,9 @@
             .options.independet &.select{
                 flex: 0 0 toRem(138 + 24);
             }
+            .options.independet &.smaller{
+                flex: 0 0 toRem(240 + 24);
+            }
         }
         @media (max-width: toEm(992, 16)) {
             &__item{

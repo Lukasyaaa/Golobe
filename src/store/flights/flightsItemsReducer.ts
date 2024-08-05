@@ -1,4 +1,4 @@
-import { flightsItems, meridiem, airlines } from "../../types";
+import { flightsItems, meridiem, airlines, flightType } from "../../types";
 import emiratesJpeg from "../../assets/img/flights-configurate/1/1.png"
 import emiratesWebp from "../../assets/img/flights-configurate/1/1.webp"
 import flyDubaiJpeg from "../../assets/img/flights-configurate/2/2.png"
@@ -22,14 +22,19 @@ const defaultStore : flightsItems = {
     },
     items:[
         {
+            type: flightType.MultiCity,
             images: [
                 {srcs: {webp: qatarJpeg, jpeg: qatarWebp}, alt: airlines.Qatar}
             ],
-            ratingNumb: 1,
-            ratingText: "Very Good",
-            subprice: "starting from",
-            countReviews: 54,
-            price: 75,
+            review:{
+                rating: 1,
+                ratingText: "Very Good",
+                countReviews: 54
+            },
+            price:{
+                sub: "starting from",
+                main: 75
+            },
             schedule: [
                 {
                     departureTime: {
@@ -67,14 +72,19 @@ const defaultStore : flightsItems = {
             buttonText: "View Deals"
         },
         {
+            type: flightType.MultiCity,
             images: [
                 {srcs: {jpeg: emiratesJpeg, webp: emiratesWebp}, alt: airlines.Emirates},
             ],
-            ratingNumb: 3,
-            ratingText: "Very Good",
-            countReviews: 54,
-            subprice: "starting from",
-            price: 550,
+            review:{
+                rating: 3,
+                ratingText: "Very Good",
+                countReviews: 54
+            },
+            price:{
+                sub: "starting from",
+                main: 250
+            },
             schedule: [
                 {
                     departureTime: {
@@ -112,14 +122,19 @@ const defaultStore : flightsItems = {
             buttonText: "View Deals"
         },
         {
+            type: flightType.MyDatesAreFlexible,
             images: [
                 {srcs: {webp: flyDubaiJpeg, jpeg: flyDubaiWebp}, alt: airlines.FlyDubai}
             ],
-            ratingNumb: 5,
-            ratingText: "Very Good",
-            subprice: "starting from",
-            countReviews: 54,
-            price: 125,
+            review:{
+                rating: 5,
+                ratingText: "Very Good",
+                countReviews: 54
+            },
+            price:{
+                sub: "starting from",
+                main: 125
+            },
             schedule: [
                 {
                     departureTime: {
@@ -157,14 +172,19 @@ const defaultStore : flightsItems = {
             buttonText: "View Deals"
         },
         {
+            type: flightType.OnWay,
             images: [
                 {srcs: {webp: etihadJpeg, jpeg: etihadWebp}, alt: airlines.Etihad}
             ],
-            ratingNumb: 4,
-            ratingText: "Very Good",
-            subprice: "starting from",
-            countReviews: 54,
-            price: 55,
+            review:{
+                rating: 4,
+                ratingText: "Very Good",
+                countReviews: 54
+            },
+            price:{
+                sub: "starting from",
+                main: 475
+            },
             schedule: [
                 {
                     departureTime: {
@@ -202,14 +222,19 @@ const defaultStore : flightsItems = {
             buttonText: "View Deals"
         },
         {
+            type: flightType.RoundTrip,
             images: [
-                {srcs: {webp: "", jpeg: ""}, alt: ""}
+                {srcs: {webp: emiratesJpeg, jpeg: emiratesWebp}, alt: airlines.Emirates}
             ],
-            ratingNumb: 2.5,
-            ratingText: "Very Good",
-            subprice: "starting from",
-            countReviews: 54,
-            price: 250,
+            review:{
+                rating: 2.5,
+                ratingText: "Very Good",
+                countReviews: 54
+            },
+            price:{
+                sub: "starting from",
+                main: 225
+            },
             schedule: [
                 {
                     departureTime: {
@@ -231,13 +256,18 @@ const defaultStore : flightsItems = {
             buttonText: "View Deals"
         }
     ],
-    button: "Show more results"
+    isShowAll: false,
+    button: {
+        passive: "Show more results",
+        active: "Hide"
+    }
 }
 
 enum flightsItemsAction{
     SWAP_ACTIVE = "FLIGHTS-ITEMS_SWAP_ACTIVE",
     SET_ACTIVE_SELECT_LINK = "FLIGHTS-ITEMS_SET_ACTIVE_SELECT_LINK",
-    HIDE_ACTIVE = "FLIGHTS-ITEMS_HIDE_ACTIVE"
+    HIDE_ACTIVE = "FLIGHTS-ITEMS_HIDE_ACTIVE",
+    SWAP_SHOW_ALL = "FLIGHTS-ITEMS_SWAP_SHOW_ALL"
 }
 
 type flightsItemsHideActive = {
@@ -253,7 +283,13 @@ type flightsItemsSwapActive = {
     type: flightsItemsAction.SWAP_ACTIVE
 }
 
-type flightsItemsActionType = flightsItemsHideActive | flightsItemsSwapActive | flightsItemsSetActiveSelectLink;
+type flightsItemsSwapShowAll = {
+    type: flightsItemsAction.SWAP_SHOW_ALL
+}
+
+type flightsItemsActionType = 
+    flightsItemsHideActive | flightsItemsSwapActive | flightsItemsSetActiveSelectLink | flightsItemsSwapShowAll
+;
 
 export const flightsItemsTextReducer = (state : flightsItems = defaultStore, action : flightsItemsActionType) : flightsItems => {
     switch(action.type){
@@ -263,21 +299,26 @@ export const flightsItemsTextReducer = (state : flightsItems = defaultStore, act
                 header: {...state.header, select: {
                     ...state.header.select, isActive: !state.header.select.isActive
                 }}
-            }
+            };
         case flightsItemsAction.SET_ACTIVE_SELECT_LINK:
             return{
                 ...state,
                 header: {...state.header, select: {
                     ...state.header.select, activeItem: action.payload
                 }}
-            }
+            };
         case flightsItemsAction.HIDE_ACTIVE:
             return{
                 ...state,
                 header: {...state.header, select: {
                     ...state.header.select, isActive: false
                 }}
-            }
+            };
+        case flightsItemsAction.SWAP_SHOW_ALL:
+            return{
+                ...state,
+                isShowAll: !(state.isShowAll)
+            };
         default:
             return state;
     }
@@ -292,3 +333,6 @@ export const flightsItemsSetActiveSelectLink = (id : number) : flightsItemsSetAc
 export const flightsItemsSwapActiveAction = () : flightsItemsSwapActive => ({
     type: flightsItemsAction.SWAP_ACTIVE
 });
+export const flightsItemsSwapShowAll = () : flightsItemsSwapShowAll => ({
+    type: flightsItemsAction.SWAP_SHOW_ALL
+})

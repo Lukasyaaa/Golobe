@@ -1,11 +1,11 @@
 import React, {FC, useEffect, useState,} from "react";
-import { optionIconPosition, optionsItemsType } from "../../../types";
+import { optionIconPosition, contentPart } from "../../../types";
 
 interface OptionsInputProps{
     title : string,
     iconValue : string | null,
     iconPosition : optionIconPosition,
-    parentType : optionsItemsType,
+    parentType : contentPart,
     isBigger: boolean,
     value : string,
 }
@@ -19,7 +19,7 @@ export const OptionsInput : FC<OptionsInputProps> = ({title, iconValue, iconPosi
 
     let classesParent = ["inputs-options__item", "item-inputs-options", "input"];
     let classesInner = ["item-inputs-options__inner"];
-    if(parentType === optionsItemsType.Hotels){
+    if(parentType === contentPart.Hotels){
         if(isBigger) {
             classesParent.push("bigger");
         } else {

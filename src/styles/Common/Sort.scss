@@ -1,0 +1,342 @@
+.sort{
+    border-radius: toRem(12);
+    box-shadow: 0px 4px 16px 0px rgba(17, 34, 17, 0.05);
+    background-color: $whiteColor;
+
+    @media (min-width: toEm(1135, 16)) {
+        margin-right: toRem(9);
+    }
+    @media (max-width: toEm(992, 16)) {
+        margin-top: toRem(24);
+    }
+    @media (max-width: toEm(480, 6)) {
+        margin-top: toRem(16);
+    }
+
+    display: flex;
+    @media (max-width: toEm(500, 16)) {
+        flex-direction: column;
+    }
+
+    @media (min-width: toEm(501, 16)) {
+        &__item{
+            flex: 0 1 calc(100% + (toRem(23.5) * 2 + toRem(1)));
+            &:not(:last-child)::after{
+                opacity: 0.25;
+                background-color: $darkGreenColor;
+                content: "";
+        
+                position: absolute;
+                right: 0;
+                top: 50%;
+                transform: translateY(-50%);
+        
+                display: block;
+                min-width: toRem(1);
+                height: toRem(48);
+            }
+        }
+        @media (max-width: toEm(768, 16)) {
+            &__item{
+                flex: 0 1 calc(100% + (toRem(16) * 2 + toRem(1)));
+                &:not(:last-child)::after{
+                    height: toRem(36);
+                }
+            }
+        }
+    }
+    &__item{
+        background-color: transparent;
+
+        position: relative;
+        text-align: left;
+        padding: toRem(16) toRem(24.5) toRem(16) toRem(23.5);
+        &::before{
+            background-color: $mintColor;
+            content: "";
+            height: toRem(4);
+            width: 0;
+
+            position: absolute;
+            left: toRem(12.5);
+            bottom: 0;
+            transition: width 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
+        }
+        &:first-child::before{
+            left: toRem(24);
+        }
+        &:last-child::before{
+            right: toRem(24);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__item{
+            padding: toRem(10) toRem(16) toRem(10) toRem(17);
+            &:first-child::before{
+                left: toRem(16);
+            }
+            &:last-child::before{
+                right: toRem(16);
+            }
+        }
+    }
+    @media (max-width: toEm(500, 16)) {
+        &__item{
+            padding: toRem(10) toRem(16);
+            &:first-child::before{
+                border-radius: toRem(12) toRem(12) 0 0;
+                left: 0;
+            }
+            &:last-child::before{
+                border-radius: 0 0 toRem(12) toRem(12);
+                right: 0;
+            }
+            &::before{
+                left: 0;
+                height: 100%;
+            }
+        }
+    }
+    &__item:focus{
+        outline: none;
+    }
+
+    &:not(._hide-active) &__item._active::before,
+    &__item._hovered::before{
+        width: calc(100% - toRem(12.5) - toRem(15.5));
+    }
+    @media (max-width: toEm(500, 16)) {
+        &:not(._hide-active) &__item._active::before,
+        &__item._hovered::before{
+            width: 100%;
+        }
+    }
+
+    @media (min-width: toEm(501, 16)) {
+        &__item:first-child:not(:last-child){
+            border-radius: toRem(12) 0 0 toRem(12);
+            padding: toRem(16) toRem(24.5) toRem(16) toRem(24);
+            flex: 0 1 calc(100% + (toRem(24.5) + toRem(24)));
+        }
+        &__item:last-child:not(:first-child){
+            border-radius: 0 toRem(12) toRem(12) 0;
+            padding: toRem(16) toRem(24) toRem(16);
+            flex: 0 1 calc(100% + (toRem(48)));
+        }
+
+        &:not(._hide-active)  &__item:first-child:not(:last-child)._active::before,
+        &:not(._hide-active)  &__item:last-child:not(:first-child)._active::before,
+        &__item:last-child:not(:first-child)._hovered::before,
+        &__item:first-child:not(:last-child)._hovered::before{
+            width: calc(100% - toRem(11.5) - toRem(24));
+        }
+        @media (max-width: toEm(768, 16)) {
+            &__item:first-child:not(:last-child){
+                padding: toRem(10) toRem(17) toRem(10) toRem(16);
+                flex: 0 1 calc(100% + toRem(16) + toRem(17));
+            }
+            &__item:last-child:not(:first-child){
+                padding: toRem(10) toRem(16) toRem(10);
+                flex: 0 1 calc(100% + toRem(32));
+            }
+            &:not(._hide-active) &__item:last-child:not(:first-child)._active::before,
+            &:not(._hide-active) &__item:first-child:not(:last-child)._active::before,
+            &__item:last-child:not(:first-child)._hovered::before,
+            &__item:first-child:not(:last-child)._hovered::before{
+                width: calc(100% - toRem(11.5) - toRem(16));
+            }
+        }
+    }
+
+    @media (min-width: toEm(501, 16)) {
+        &__more{
+            flex: 0 0 toPercent(215.5, 840);
+        }
+        @media (max-width: toEm(768, 16)) {
+            &__more{
+                flex: 0 0 toPercent(200, 840);
+            }
+        }
+    }
+    &__more > button{
+        padding: toRem(16) toRem(23.5) toRem(16) toRem(24);
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__more > button{
+            padding: toRem(10) toRem(16);
+        }
+    }
+    @media (max-width: toEm(500, 16)) {
+        &__more > button{
+            padding: toRem(10) toRem(16);
+        }
+    }
+}
+.item-sort{
+    &__inner{
+        width: 100%;
+    }
+
+    &__title{
+        color: $darkGreenColor;
+        font-family: Montserrat;
+        font-size: toRem(16);
+        font-weight: 600;
+        line-height: math.div(20, 16);
+        margin-bottom: toRem(8);
+        text-align: left;
+    }
+
+    &__subtitle{
+        opacity: 0.4;
+        color: $darkGreenColor;
+        font-family: Montserrat;
+        font-size: toRem(14);
+        font-weight: 400;
+        line-height: math.div(17, 14);
+
+        display: flex;
+        align-items: flex-end;
+    }    
+    @media (max-width: toEm(500, 16)) {
+        &__subtitle{
+            transition: opacity 0.3s cubic-bezier(0.34, 0.03, 0, 0.99),
+            color 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
+        }
+        &__subtitle, &__title{
+            position: relative;
+            z-index: 2;
+
+            transition: color 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
+        }
+        &._active &__subtitle, &._active &__title{
+            opacity: 1;
+            color: $whiteColor;
+        }
+    }
+
+    &__circle{
+        opacity: 0.4;
+        background-color: $darkGreenColor;
+        content: "";
+
+        display: block;
+        width: toRem(2);
+        height: toRem(2);
+
+        margin: 0 toRem(4);
+        transform: translateY(-100%);
+    }
+}
+
+.more-sort{
+    position: relative;
+
+    &__opener{
+        border-radius: 0 toRem(12) toRem(12) 0;
+        display: flex;
+        align-items: center;
+
+        text-align: left;
+        width: 100%;
+        min-height: 100%;
+        & > span{
+            color: $darkGreenColor;
+            font-family: Montserrat;
+            font-size: toRem(14);
+            font-weight: 500;
+            line-height: math.div(17, 14);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__opener > span{
+            font-weight: 600;
+            font-size: toRem(16);
+        }
+    }
+
+    &__burger{
+        position: relative;
+        min-width: toRem(17.5);
+        height: toRem(10); 
+        &::after,&::before,span{
+            border-radius: 25%;
+            background-color: $blackColor;
+            content: "";
+
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: toRem(1.5);
+        }
+        span{
+            top: 50%;
+        }
+        &::before{
+            top: 100%;
+        }
+        margin-right: toRem(11);
+    }
+
+    &__list{
+        border-radius: toRem(12);
+        background-color: $mintColor;
+        text-align: center;
+
+        position: absolute;
+        z-index: 2;
+        left: 0;
+        bottom: toRem(-8);
+        transform: translateY(100%);
+
+        width: 100%;
+        overflow: hidden;
+
+        transition: height 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
+    }
+    &__list-inner{
+        padding: toRem(5);
+    }
+
+    &__link-parent:not(:last-child){
+        margin-bottom: toRem(5);
+    }
+    &__link{
+        padding: toRem(10);
+        border-radius: toRem(12);
+        background-color: $whiteColor;
+        width: 100%;
+
+        transition: box-shadow 0.3s cubic-bezier(0.34, 0.03, 0, 0.99);
+    }
+    &__link:focus{
+        outline: none;
+        box-shadow: inset 0 0 5px $darkGreenColor;
+    }
+    @media (any-hover:hover) {
+        &__link:hover{
+            box-shadow: inset 0 0 5px $darkGreenColor;
+        }
+    }
+}
+.link-more-sort{
+    &__title{
+        color: $darkGreenColor;
+        font-family: Montserrat;
+        font-size: toRem(16);
+        font-weight: 600;
+        line-height: math.div(20, 16);
+    }
+    &__subtitle{
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+
+        color: $darkGreenColor;
+        font-family: Montserrat;
+        font-size: toRem(14);
+        font-weight: 400;
+        line-height: math.div(17, 14);
+    }
+}

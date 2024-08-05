@@ -3,8 +3,8 @@ import { useTypedSelector } from "../hooks/redux";
 import { Travels } from "../components/Common/Travels/Travels";
 import { Offer } from "../components/Common/Offer";
 import { IntroVariant } from "../components/Common/IntroVariant";
-import { optionsItemsType } from "../types";
-import { Recent } from "../components/HotelsInfo/Recent";
+import { contentPart } from "../types";
+import { Recent } from "../components/Hotels/Info/Recent";
 import { useDispatch } from "react-redux";
 import { optionsHideActiveAction } from "../store/common/optionsReducer";
 
@@ -31,7 +31,7 @@ export const HotelsInfo : FC<HotelsProps> = ({isSupportWebp}) =>{
 
     return(
         <main className="main">
-            <IntroVariant isSupportWebp={isSupportWebp} introStore={introStore} optionsType={optionsItemsType.Hotels} />
+            <IntroVariant isSupportWebp={isSupportWebp} introStore={introStore} optionsType={contentPart.Hotels} />
             <Recent />
             <Travels travelsStore={travelsStore} />
             <Offer offerStore={offerStore} /> 

@@ -1,6 +1,6 @@
 import React, { FC, useRef, useState, MouseEvent, FocusEvent, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { optionIconPosition, optionsItemsType } from "../../../types";
+import { optionIconPosition, contentPart } from "../../../types";
 import { optionsSetActiveSelectLink, optionsSwapActiveAction } from "../../../store/common/optionsReducer";
 
 
@@ -9,7 +9,7 @@ interface OptionsSelectProps{
     title : string,
     iconValue : string | null,
     iconPosition : optionIconPosition,
-    parentType : optionsItemsType,
+    parentType : contentPart,
     isBigger: boolean,
     links : string[],
     activeLink : number,
@@ -27,7 +27,7 @@ export const OptionsSelect : FC<OptionsSelectProps> = ({id, title, iconValue, ic
 
     let classesParent = ["inputs-options__item", "item-inputs-options", "select"];
     let classesInner = ["item-inputs-options__inner", "_icon-arrow-bottom"];
-    if(parentType === optionsItemsType.Hotels){
+    if(parentType === contentPart.Hotels){
         if(isBigger){
             classesParent.push("bigger");
         } else {

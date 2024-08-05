@@ -9,13 +9,14 @@ import { HotelsInfo } from "./pages/HotelsInfo";
 import { Configurate } from "./pages/Configurate";
 import { Header } from "./components/Common/Header";
 import { Footer } from "./components/Common/Footer/Footer";
+import { contentPart } from "./types";
 
 
 export const flightsPath = "/Flights";
 export const flightsConfiguratePath = "/Flights/Configurate";
 export const hotelsPath = "/Hotels";
+export const hotelsConfiguratePath = "/Hotels/Configurate"
 export const homePath = "/";
-
 
 export const App : FC = () =>{
     let elem = document.createElement('canvas');
@@ -31,7 +32,8 @@ export const App : FC = () =>{
                 <Route path={homePath} element={<Start isSupportWebp={isSupportWebp} />} />
                 <Route path={flightsPath} element={<FlightsInfo isSupportWebp={isSupportWebp} />} />
                 <Route path={hotelsPath} element={<HotelsInfo isSupportWebp={isSupportWebp}/>}></Route>
-                <Route path={flightsConfiguratePath} element={<Configurate />} />
+                <Route path={flightsConfiguratePath} element={<Configurate contentType={contentPart.Flights} />} />
+                <Route path={hotelsConfiguratePath} element={<Configurate contentType={contentPart.Hotels} />} />
                 <Route
                     path="*"
                     element={<Navigate to={homePath} replace />}

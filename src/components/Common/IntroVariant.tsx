@@ -1,16 +1,16 @@
 import React, { FC } from "react";
 import { Options } from "./Options/Options";
-import { introVariant, optionsBlockType, optionsItemsType } from "../../types";
+import { introVariant, optionsBlockType, contentPart } from "../../types";
 
 interface introFlightsProps{
     isSupportWebp : boolean
     introStore : introVariant,
-    optionsType : optionsItemsType
+    optionsType : contentPart
 }
 
 export const IntroVariant : FC<introFlightsProps> = ({isSupportWebp, introStore, optionsType}) =>{
     const pathToBackground = (isSupportWebp) ? introStore.background.webp : introStore.background.jpeg;
-    const parentClass = (optionsType === optionsItemsType.Flights) ? "intro_flights" : "intro_hotels";
+    const parentClass = (optionsType === contentPart.Flights) ? "intro_flights" : "intro_hotels";
     
     return(
         <section className={`${parentClass} intro_variant`}>
@@ -26,7 +26,7 @@ export const IntroVariant : FC<introFlightsProps> = ({isSupportWebp, introStore,
                 </div>
             </div>
             <Options 
-                neededBlocks={(optionsType === optionsItemsType.Flights) ? 
+                neededBlocks={(optionsType === contentPart.Flights) ? 
                     optionsBlockType.FLIGHTS_HEADER_TYPE : optionsBlockType.HOTELS_HEADER_TYPE
                 } 
                 startValue={optionsType} 

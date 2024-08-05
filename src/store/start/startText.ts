@@ -30,7 +30,7 @@ import choiceWebp_2 from "../../assets/img/main/choice/2.webp"
 //--------------------------JPEG--------------
 import choiceJpeg_1 from "../../assets/img/main/choice/1.jpeg"
 import choiceJpeg_2 from "../../assets/img/main/choice/2.jpeg"
-import { flightsConfiguratePath } from "../../App";
+import { flightsConfiguratePath, hotelsConfiguratePath } from "../../App";
 
 const defaultStore : startTextStore  = {
     intro:{
@@ -106,7 +106,7 @@ const defaultStore : startTextStore  = {
             heading: "Hotels", 
             info: "Search hotels & Places Hire to our most popular destinations", 
             button: "Show Hotels",
-            href: "#"
+            href: hotelsConfiguratePath
         }
     ]
 }

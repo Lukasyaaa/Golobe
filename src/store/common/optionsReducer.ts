@@ -1,4 +1,4 @@
-import { options, optionIconPosition, optionsItemsType} from "../../types";
+import { options, optionIconPosition, contentPart} from "../../types";
 
 const defaultStore : options = {
     header:{
@@ -77,7 +77,7 @@ enum optionsAction{
 
 interface payloadSwapActivePayload {
     id : number,
-    parent : optionsItemsType | null,
+    parent : contentPart | null,
 }
 type optionsSwapActive = {
     type : optionsAction.SWAP_ACTIVE,
@@ -87,7 +87,7 @@ type optionsSwapActive = {
 interface payloadOptionsSetActiveSelectLink{
     idLink : number,
     idSelect : number,
-    parent : optionsItemsType
+    parent : contentPart
 }
 type optionsSetActiveSelectLink = {
     type : optionsAction.SET_ACTIVE_SELECT_LINK,
@@ -107,7 +107,7 @@ type optionsActionType = optionsSwapActive | optionsSetActiveHeaderLink | option
 export const optionsReducer = (state : options = defaultStore, action : optionsActionType) : options =>{
     switch(action.type){
         case optionsAction.SWAP_ACTIVE:
-            if(action.payload.parent === optionsItemsType.Flights){
+            if(action.payload.parent === contentPart.Flights){
                 return{
                     ...state,
                     flights: state.flights.map((flightsItem, i) => {
@@ -152,7 +152,7 @@ export const optionsReducer = (state : options = defaultStore, action : optionsA
                 }
             }
         case optionsAction.SET_ACTIVE_SELECT_LINK:
-            if(action.payload.parent === optionsItemsType.Flights){
+            if(action.payload.parent === contentPart.Flights){
                 return{
                     ...state,
                     flights: state.flights.map((flight, i) => {
@@ -187,7 +187,7 @@ export const optionsReducer = (state : options = defaultStore, action : optionsA
     }
 }
 
-export const optionsSwapActiveAction = (id : number, parent : optionsItemsType) : optionsSwapActive => ({
+export const optionsSwapActiveAction = (id : number, parent : contentPart) : optionsSwapActive => ({
     type: optionsAction.SWAP_ACTIVE, payload: {id, parent}
 });
 export const optionsHideActiveAction = () : optionsHideActive => ({
@@ -196,6 +196,6 @@ export const optionsHideActiveAction = () : optionsHideActive => ({
 export const optionsSetActiveHeaderLinkAction = (newActive : number) : optionsSetActiveHeaderLink => ({
     type: optionsAction.SET_ACTIVE_HEADER_LINK, payload: newActive
 });
-export const optionsSetActiveSelectLink = (idLink: number, idSelect : number, parent : optionsItemsType) : optionsSetActiveSelectLink => ({
+export const optionsSetActiveSelectLink = (idLink: number, idSelect : number, parent : contentPart) : optionsSetActiveSelectLink => ({
     type: optionsAction.SET_ACTIVE_SELECT_LINK, payload: {idLink, idSelect, parent}
 })

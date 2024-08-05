@@ -4,20 +4,20 @@ import { OptionsInput } from "./OptionsInput";
 import { OptionsSelect } from "./OptionsSelect";
 
 import { useTypedSelector } from "../../../hooks/redux";
-import { optionsFlightsItem, optionsHotelsItem, optionsBlockType, optionsItemsType } from "../../../types";
+import { optionsFlightsItem, optionsHotelsItem, optionsBlockType, contentPart } from "../../../types";
 import { optionsSetActiveHeaderLinkAction } from "../../../store/common/optionsReducer";
 
 
 interface OptionsProps{
     neededBlocks : optionsBlockType,
-    startValue : optionsItemsType,
+    startValue : contentPart,
 }
 
 export const Options : FC<OptionsProps> = ({neededBlocks, startValue}) =>{
     const optionsStore = useTypedSelector(store => store.options);
-    let [currentTypeOptions, setCurrentTypeOptions] = useState<optionsItemsType>(startValue);
+    let [currentTypeOptions, setCurrentTypeOptions] = useState<contentPart>(startValue);
     let neededMassive : optionsFlightsItem[] | optionsHotelsItem[] = 
-        (currentTypeOptions === optionsItemsType.Flights) ? optionsStore.flights : optionsStore.hotels;
+        (currentTypeOptions === contentPart.Flights) ? optionsStore.flights : optionsStore.hotels;
 
     let header = useRef<HTMLUListElement>(null);
 
@@ -25,7 +25,14 @@ export const Options : FC<OptionsProps> = ({neededBlocks, startValue}) =>{
     const makeActive = (id : number) : void =>{
         if(header.current){
             dispatch(optionsSetActiveHeaderLinkAction(id));
-            setCurrentTypeOptions(id);
+            switch(id){
+                case 0:
+                    setCurrentTypeOptions(contentPart.Flights);
+                    break;
+                default:
+                    setCurrentTypeOptions(contentPart.Hotels);
+                    break;
+            }
             header.current.classList.remove("_hide-active");
         }
     }
@@ -91,7 +98,7 @@ export const Options : FC<OptionsProps> = ({neededBlocks, startValue}) =>{
                         iconValue={optionsItem.iconValue} iconPosition={optionsItem.iconPosition}
                         parentType={currentTypeOptions}
                         isBigger={
-                            (currentTypeOptions === optionsItemsType.Hotels) ? optionsStore.hotels[optionIndex].isBigger : false
+                            (currentTypeOptions === contentPart.Hotels) ? optionsStore.hotels[optionIndex].isBigger : false
                         }
                         value={optionsItem.value}
                     /> :               
@@ -102,7 +109,7 @@ export const Options : FC<OptionsProps> = ({neededBlocks, startValue}) =>{
                         iconValue={optionsItem.iconValue} iconPosition={optionsItem.iconPosition}
                         parentType={currentTypeOptions}
                         isBigger={
-                            (currentTypeOptions === optionsItemsType.Hotels) ? optionsStore.hotels[optionIndex].isBigger : false
+                            (currentTypeOptions === contentPart.Hotels) ? optionsStore.hotels[optionIndex].isBigger : false
                         }
                         links={optionsItem.value.items}
                         activeLink={optionsItem.value.activeItem}
@@ -121,9 +128,9 @@ export const Options : FC<OptionsProps> = ({neededBlocks, startValue}) =>{
                     <button 
                         className={["footer-options__item", 
                             "footer-options__submit", 
-                            (currentTypeOptions === optionsItemsType.Flights) ? "_icon-send" : "_icon-appartment"].join(" ")} 
+                            (currentTypeOptions === contentPart.Flights) ? "_icon-send" : "_icon-appartment"].join(" ")} 
                         type="submit" onClick={(e) => e.stopPropagation()}>
-                        <span>{(currentTypeOptions === optionsItemsType.Flights) ? 
+                        <span>{(currentTypeOptions === contentPart.Flights) ? 
                             optionsStore.footer.sendButtonText.flights : optionsStore.footer.sendButtonText.hotels}
                         </span>
                     </button>

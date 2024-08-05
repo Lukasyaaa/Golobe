@@ -31,6 +31,25 @@ export interface time{
     meridiem : meridiem
 }
 
+export enum contentPart{
+    Flights = "Flights",
+    Hotels = "Hotels"
+}
+
+interface itemsHeaderSelect{
+    list : string[],
+    activeItem : number,
+    isActive : boolean
+}
+export interface itemsHeader{
+    countVisibleItems : number,
+    select: itemsHeaderSelect
+}
+interface itemsMore{
+    active : string,
+    passive : string
+}
+
 //----------Header----------
 interface headerButton{
     href : string,
@@ -137,10 +156,6 @@ export interface options{
     footer : optionsFooter
 }
 
-export enum optionsItemsType{
-    Flights = 0,
-    Hotels = 1
-}
 export enum optionsBlockType{
     BOTH_HEADER_TYPES = 0,
     FLIGHTS_HEADER_TYPE = 1,
@@ -296,7 +311,9 @@ export enum navbarTitle{
     Rating = "Rating",
     Price = "Price",
     DepartureTime = "Departure Time",
-    Trips = "Trips"
+    Trips = "Trips",
+    Freebies = "Freebies",
+    Amenities = "Amenities"
 }
 
 export interface navbarFromToTime{
@@ -316,7 +333,9 @@ export interface navbarFromToNumber{
 
 interface navbarCheckboxesValue{
     items : string[],
-    activeItem : number[];
+    activeItem : number[],
+    itemsToShow : number,
+    isActive : boolean
 }
 export interface navbarCheckboxes{
     title : string,
@@ -338,29 +357,46 @@ export interface navbarRadio{
 
 export type navbarItem = navbarFromToTime | navbarFromToNumber | navbarCheckboxes | navbarRadio;
 
-export interface navbar{
+export interface navbarPart{
     heading : string,
     items : navbarItem[]
 }
 
+export interface navbar{
+    flights: navbarPart,
+    hotels: navbarPart,
+}
+
 //----------Flights Options----------
-interface  flightsOptionSubtitle{
+interface sortFlightsVariantSubtitle{
     price : number,
     time : number
 }
-
-export interface flightsOption{
+export interface sortFlightsVariant{
     title : string,
-    subtitle : flightsOptionSubtitle
+    subtitle : sortFlightsVariantSubtitle
 }
-
-export interface flightsOptions{
-    items : flightsOption[],
+export interface sortFlights{
+    items : sortFlightsVariant[],
     activeItem : number,
     isActive : boolean
 }
 
-export enum flightsOptionParent{
+export interface sortHotelsVariant{
+    title : string,
+    count : number
+}
+export interface sortHotels{
+    items : sortHotelsVariant[],
+    activeItem : number,
+    isActive : boolean
+}
+export interface sorts{
+    flights : sortFlights,
+    hotels : sortHotels,
+}
+
+export enum sortParent{
     CONTAINER = "CONTAINER",
     LIST = "LIST"
 }
@@ -376,6 +412,13 @@ export enum airlines{
     Qatar = "Qatar",
     Etihad = "Etihad"
 }
+export enum flightType{
+    RoundTrip = "Round trip", 
+    OnWay = "On Way", 
+    MultiCity = "Multi-City", 
+    MyDatesAreFlexible = "My Dates Are Flexible"
+}
+
 export interface flightsItemScheduleItem{
     departureTime : time,
     arrivalTime : time,
@@ -384,32 +427,31 @@ export interface flightsItemScheduleItem{
     from : string,
     to : string
 }
-export interface flightsItem{
-    images : imageVariants[],
-    ratingNumb : number,
+interface flightsItemReview{
+    rating : number,
     ratingText : string,
-    countReviews : number,
-    subprice : string,
-    price : number,
+    countReviews : number
+}
+interface flightsItemPrice{
+    main : number,
+    sub : string
+}
+export interface flightsItem{
+    type : flightType,
+    images : imageVariants[],
+    review : flightsItemReview
+    price : flightsItemPrice
     schedule : flightsItemScheduleItem[],
     buttonText : string
 }
-interface flightsItemsSelect{
-    list : string[],
-    activeItem : number,
-    isActive : boolean
-}
-interface flightsItemsHeader{
-    countVisibleItems : number,
-    select: flightsItemsSelect
-}
 export interface flightsItems{
-    header : flightsItemsHeader,
+    header : itemsHeader,
     items: flightsItem[],
-    button : string
+    isShowAll: boolean,
+    button : itemsMore
 }
 
-//Hotels Recent
+//----------Hotels Recent----------
 export interface recentItem{
     image : imageVariants,
     title : string,
@@ -418,4 +460,69 @@ export interface recentItem{
 export interface recent{
     heading : string,
     items : recentItem[]
+}
+
+//----------Hotels Items----------
+export enum amenities{
+    OutdoorPool = "Outdoor pool",
+    IndoorPool = "Indoor pool",
+    Restaurant = "Restaurant",
+    RoomService = "Room service",
+    Fitness = "Fitness",
+    Gym = "Gym",
+    BarLounge = "Bar/Lounge",
+    FreeWiFi = "Free Wi-Fi",
+    TeaCoffeeMachine = "Tea/coffee machine",
+    AroundTheClockFrontDesk = "24hr front desk",
+    AirConditioned = "Air-conditioned",
+}
+export enum freeOptions{
+    Breakfast = "Free breakfast", 
+    Parking = "Free parking", 
+    Internet = "Free internet", 
+    AirportShuttle = "Free airport shuttle", 
+    Cancellation = "Free cancellation"
+}
+
+export enum placesType{
+    Hotels = "Hotels",
+    Motels = "Motels",
+    Resorts = "Resorts"
+}
+
+interface hotelsItemPrice{
+    pre : string,
+    main : number,
+    post : string
+}
+interface hotelsItemStars{
+    count : number,
+    post : string
+}
+interface hotelsItemReview{
+    rating : number,
+    ratingText : string,
+    countReviews : number
+}
+interface amenitiesHotelsItem{
+    items : string[],
+    isActive : boolean
+}
+export interface hotelsItem{
+    id : number,
+    type : placesType,
+    image : imageVariants,
+    title : string,
+    price : hotelsItemPrice,
+    location : string,
+    amenities : amenitiesHotelsItem,
+    stars : hotelsItemStars,
+    review : hotelsItemReview,
+    buttonText : string
+}
+export interface hotelsItems{
+    header : itemsHeader,
+    items: hotelsItem[],
+    isShowAll: boolean,
+    button : itemsMore
 }

@@ -1,13 +1,13 @@
 import React, {FC, useEffect} from "react";
 import { IntroVariant } from "../components/Common/IntroVariant";
-import { Map } from "../components/FlightsInfo/Map";
+import { Map } from "../components/Flights/Info/Map";
 import { Travels } from "../components/Common/Travels/Travels";
 import { Offer } from "../components/Common/Offer";
 import { useDispatch } from "react-redux";
 import { footerHideActiveAction } from "../store/common/footerReducer";
 import { optionsHideActiveAction } from "../store/common/optionsReducer";
 import { useTypedSelector } from "../hooks/redux";
-import { optionsItemsType } from "../types";
+import { contentPart } from "../types";
 
 interface FlightsProps{
     isSupportWebp : boolean
@@ -33,7 +33,7 @@ export const FlightsInfo : FC<FlightsProps> = ({isSupportWebp}) =>{
     
     return(
         <main className="main">
-            <IntroVariant isSupportWebp={isSupportWebp} introStore={introStore} optionsType={optionsItemsType.Flights}/>
+            <IntroVariant isSupportWebp={isSupportWebp} introStore={introStore} optionsType={contentPart.Flights}/>
             <Map isSupportWebp={isSupportWebp} />
             <Travels travelsStore={travelsStore} />
             <Offer offerStore={offerStore} /> 

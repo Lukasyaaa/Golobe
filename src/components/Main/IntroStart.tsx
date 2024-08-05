@@ -1,7 +1,7 @@
 import React, { FC } from "react";
 import { Options } from "../Common/Options/Options";
 import { useTypedSelector } from "../../hooks/redux";
-import { introStart, optionsBlockType, optionsItemsType } from "../../types";
+import { introStart, optionsBlockType, contentPart } from "../../types";
 
 interface IntroStartProps{
     isSupportWebp : boolean
@@ -18,7 +18,7 @@ export const IntroStart : FC<IntroStartProps> = ({isSupportWebp}) =>{
                 <h1 className="intro__heading">{introStore.heading}</h1>
                 <div className="intro__supheading">{introStore.subheading}</div>
             </div>
-            <Options neededBlocks={optionsBlockType.BOTH_HEADER_TYPES} startValue={optionsItemsType.Flights} />
+            <Options neededBlocks={optionsBlockType.BOTH_HEADER_TYPES} startValue={contentPart.Flights} />
         </section>
     );
 }
