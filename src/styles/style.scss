@@ -1,0 +1,15 @@
+@use 'sass:math';
+
+@import "./Settings/Vars.scss";
+@import "./Settings/Fonts.scss";
+@import "./Settings/NullingStyles.scss";
+@import "./Settings/Generic.scss";
+
+@import "./Common/Header.scss";
+@import "./Common/Footer.scss";
+
+@import "./Start/Intro.scss";
+@import "./Common/Options.scss";
+@import "./Start/Travels.scss";
+@import "./Start/Choose.scss";
+@import "./Start/Reviews.scss";

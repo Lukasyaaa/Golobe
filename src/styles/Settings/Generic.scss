@@ -1,0 +1,262 @@
+.container, .container_header, .container_intro{
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.container{
+    max-width: toRem($container + 30);
+}
+.container_header{
+    max-width: toRem($headerContainer + 30);
+}
+.container_intro{
+    max-width: toRem($introContainer + 30);
+}
+
+.button_question{
+    display: inline-flex;
+    align-items: center;
+    min-height: toRem(48);
+
+    border-radius: toRem(4);
+    background: rgb(141, 211, 187);
+    padding: toRem(8) toRem(16);
+
+    color: $darkGreen;
+    span{
+        font-family: Montserrat;
+        font-size: toRem(14);
+        font-weight: 500;
+        line-height: math.div(18, 14);
+    }
+    &::before{
+        min-width: toRem(16);
+        height: toRem(16);
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+        margin-right: toRem(4);
+        font-size: toRem(14);
+    }
+
+    position: relative;
+    z-index: 1;
+    &::after{
+        content: "?";
+        color: $white;
+        font-family: Montserrat;
+        font-size: 0;
+        font-weight: 600;
+
+        position: absolute;
+        z-index: 1;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border-radius: toRem(4);
+        background-color: $darkGreen;
+        width: 0;
+        height: 0;
+        overflow: hidden;
+
+        transition: width 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
+        height 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
+        font-size 0s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+}
+.button_question:focus{
+    outline: none;
+    &::after{
+        font-size: toRem(36);
+        width: 100%;
+        height: 100%;
+        
+        transition: width 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
+        height 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
+        font-size 0.3s cubic-bezier(0.075, 0.82, 0.165, 1) 0.1s;
+    }
+}
+@media (any-hover: hover) {
+    .button_question:hover::after{
+        font-size: toRem(36);
+        width: 100%;
+        height: 100%;
+
+        transition: width 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
+        height 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
+        font-size 0.3s cubic-bezier(0.075, 0.82, 0.165, 1) 0.1s;
+    }
+}
+
+.select{
+    position: relative;
+    z-index: 1;
+
+    &__list{
+        text-align: center;
+        overflow: hidden;
+
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        transform: translateY(100%);
+
+        width: 100%;
+
+        transition: height 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+    &__list-inner{
+        border-radius: toRem(8);
+        background-color: $mint;
+        padding: toRem(5);
+    }
+
+    &::before{
+        transition: transform 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+    &._active::before{
+        transform: rotate(180deg);
+    }
+
+    &__link-inner{
+        display: inline-block;
+        background-color: $mint;
+
+        color: $white;
+        font-family: Montserrat;
+        font-size: toRem(16);
+        font-weight: 700;
+        line-height: math.div(19, 16);
+
+        border-radius: toRem(8);
+        padding: toRem(10) toRem(5);
+
+        width: 100%;
+
+        transition: color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
+        background-color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+    &__link-inner:focus{
+        outline: none;
+    }
+
+    &__list-inner:not(._hide-active) &__link._active &__link-inner,
+    &__link-inner._hovered{
+        color: $mint;
+        background-color: $white;
+    }
+}
+
+.header-block{
+    @media (min-width: toEm(769, 16)) {
+        &:not(.havenot-button){
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        text-align: center;
+    }
+
+    @media (min-width: toEm(769, 16)) {
+        &__info{
+            max-width: toRem(768);
+            margin-right: toRem(32);
+        }
+        @media (max-width: toEm(992, 16)) {
+            &__info{
+                margin-right: toRem(24);
+            }
+        }
+    }
+
+    &__title{
+        color: $black;
+        font-family: Montserrat;
+        font-size: toRem(32);
+        font-weight: 600;
+        line-height: math.div(36, 32);
+        margin-bottom: toRem(16);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__title{
+            margin-bottom: toRem(10);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__title{
+            font-size: toRem(26);
+            margin-bottom: toRem(5);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__title{
+            font-size: toRem(22);
+        }
+    }
+
+
+    &__text{
+        color: $darkGreen;
+        font-family: Montserrat;
+        font-size: toRem(16);
+        font-weight: 400;
+        line-height: math.div(19, 16);
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__text{
+            font-size: toRem(14);
+        }
+    }
+
+    &__button{
+        display: flex;
+        align-items: center;
+        min-height: toRem(40);
+
+        background-color: transparent;
+        border: toRem(1) solid $mint;
+        border-radius: toRem(4);
+        padding: toRem(8) toRem(16);
+
+        color: $darkGreen;
+        font-family: Montserrat;
+        font-size: toRem(14);
+        font-weight: 500;
+        line-height: math.div(18, 14);
+
+        transition: color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
+        background-color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
+        box-shadow 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+    &__button:focus{
+        outline: none;
+        box-shadow: 0 0 15px $mint;
+        background-color: $mint;
+        color: $white;
+    }
+    @media (any-hover:hover) {
+        &__button:hover{
+            box-shadow: 0 0 15px $mint;
+            background-color: $mint;
+            color: $white;
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__button{
+            width: 100%;
+            justify-content: center;
+
+            margin-top: toRem(5);
+        }
+    }
+}

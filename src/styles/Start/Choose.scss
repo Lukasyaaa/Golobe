@@ -1,0 +1,120 @@
+.choose{
+    @media (min-width: toEm(769, 16)) {
+        .container{
+            display: flex;
+            align-items: center;
+        }
+    }
+
+    @media (min-width: toEm(769, 16)) {
+        &__item{
+            background-color: $darkGreen;
+            min-height: toRem(559);
+
+            display: flex;
+            flex: 1 1 auto;
+            justify-content: center;
+            align-items: flex-end;
+        }
+        @media (max-width: toEm($container + 30, 16)) {
+            &__item{
+                min-height: toRem(449);
+            }
+        }
+        @media (max-width: toEm(992, 16)) {
+            &__item{
+                min-height: toRem(349);
+            }
+        }
+    }
+    &__item{
+        border-radius: toRem(16);
+        box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+        padding: toRem(25) toRem(16);
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__item{
+            background-position: center center;
+        }
+    }
+
+    @media (min-width: toEm(769, 16)) {
+        &__item_flight{
+            margin-right: toRem(24);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__item_flight{
+            margin-bottom: toRem(24);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__item_flight{
+            margin-bottom: toRem(16);
+        }
+    }
+}
+.item-choose{
+    @media (min-width: toEm(769, 16)) {
+        &__inner{
+            text-align: center;
+            max-width: toRem(389);
+        }
+    }
+
+    @media (min-width: toEm(481, 16)) {
+        &__title{
+            margin-bottom: toRem(8);
+        }
+        @media (max-width: toEm(768, 16)) {
+            &__title{
+                margin-bottom: toRem(4);
+            }
+        }
+    }
+    &__title{
+        color: $white;
+        font-family: "TradeGothic";
+        font-size: toRem(40);
+        font-weight: 700;
+        line-height: math.div(51, 40);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__title{
+            font-size: toRem(32);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__title{
+            font-size: toRem(26);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__title{
+            font-size: toRem(22);
+        }
+    }
+
+    &__subtitle{
+        color: $white;
+        font-family: Montserrat;
+        font-size: toRem(16);
+        font-weight: 400;
+        line-height: math.div(20, 16);
+        margin-bottom: toRem(16);
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__subtitle{
+            font-size: toRem(14);
+            margin-bottom: toRem(10);
+        }
+    }
+
+    @media (max-width: toEm(768, 16)) {
+        &__link{
+            min-height: toRem(40);
+            justify-content: center;
+            display: flex;
+        }
+    }
+}

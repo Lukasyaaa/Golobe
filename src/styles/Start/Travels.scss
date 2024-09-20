@@ -1,0 +1,246 @@
+.travels{
+    padding: toRem(80) 0 toRem(78);
+    @media (max-width: toEm(992, 16)) {
+        padding: toRem(64) 0;
+    }
+    @media (max-width: toEm(768, 16)) {
+        padding: toRem(46) 0;
+    }
+    @media (max-width: toEm(480, 16)) {
+        padding: toRem(32) 0;
+    }
+
+    &__header{
+        margin-bottom: toRem(40);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__header{
+            margin-bottom: toRem(32);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__header{
+            margin-bottom: toRem(24);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__header{
+            margin-bottom: toRem(16);
+        }
+    }
+
+    @media (min-width: toEm(481, 16)) {
+        &__items{
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: toRem(32);
+        }
+        @media (max-width: toEm(992, 16)) {
+            &__items{
+                grid-template-columns: repeat(2, 1fr);
+                gap: toRem(24);
+            }
+        }
+        @media (max-width: toEm(768, 16)) {
+            &__items{
+                gap: toRem(16);
+            }
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__item:not(:last-child){
+            margin-bottom: toRem(10);
+        }
+    }
+}
+.header-travels{
+    &__text{
+        color: rgba($color: $darkGreen, $alpha: 0.75);
+    }
+}
+.item-travels{
+    &__inner{
+        display: flex;
+        align-items: center;
+
+        padding: toRem(16);
+        border-radius: toRem(16);
+        box-shadow: 0px 4px 16px 0px rgba(17, 34, 17, 0.05);
+        background: $white;
+
+        position: relative;
+        z-index: 1;
+        &::after,&::before{
+            pointer-events: none;
+            border-radius: toRem(16);
+            content: "";
+
+            position: absolute;
+            right: 0;
+            bottom: 0;
+
+                
+            width: 100%;
+            height: 100%;
+        }
+        &::after{
+            background-color: $mint;
+            z-index: 1;
+
+            transition: right 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
+            bottom 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+        }
+        &::before{
+            background-color: $white;
+            z-index: 2;
+        }
+        & > *{
+            position: relative;
+            z-index: 3;
+        }
+    }
+
+    &__inner:focus{
+        outline: none;
+        &::after{
+            right: toRem(-10);
+            bottom: toRem(-10);
+        }
+    }
+    @media (any-hover:hover) {
+        &__inner:hover::after{
+            right: toRem(-10);
+            bottom: toRem(-10);
+        }
+    }
+
+    @media (min-width: toEm(481, 16)) {
+        @media (max-width: toEm(992, 16)) {
+            &__inner{
+                display: grid;
+                grid-template-columns: minmax(toRem(60), toPercent(90, 437)) 1fr;
+                column-gap: toRem(16);
+            }
+        }
+        @media (max-width: toEm(768, 16)) {
+            &__inner{
+                column-gap: toRem(10);
+            }
+        }
+    }
+
+    @media (min-width: toEm(993, 16)) {
+        &__image{
+            min-width: toPercent(90, 357.33);
+            margin-right: toRem(16);
+        }
+    }
+    @media (min-width: toEm(481, 16)) {
+        &__image{
+            padding-bottom: toPercent(90, 357.33);
+        }
+        @media (max-width: toEm(992, 16)) {
+            &__image{
+                padding-bottom: 100%;
+            }
+        }
+    }
+    &__image{
+        border-radius: toRem(8);
+        background-color: $mint;
+
+        text-align: center;
+        font-family: Montserrat;
+        font-size: toRem(16);
+        color: $white;
+
+        position: relative;
+        z-index: 3;
+
+        img{
+            border-radius: toRem(8);
+
+            position: absolute;
+            z-index: 1;
+            left: 0;
+            top: 0;
+
+            width: 100%;
+            height: 100%;
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__image{
+            min-width: toRem(60);
+            height: toRem(60);
+            margin-right: toRem(10);
+        }
+    }
+
+    &__title{
+        color: rgba($color: $darkGreen, $alpha: 0.7);
+        font-family: Montserrat;
+        font-size: toRem(16);
+        font-weight: 600;
+        line-height: math.div(20, 16);
+
+        margin-bottom: toRem(8);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__title{
+            margin-bottom: toRem(4);
+        }
+    }
+
+    &__available{
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0 toRem(-10.5);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__available{
+            margin: 0 toRem(-8 - 2.5 / 2);
+        }
+    }
+
+    &__available-link{
+        color: $darkGreen;
+        font-family: Montserrat;
+        font-size: toRem(14);
+        font-weight: 500;
+        line-height: math.div(18, 14);
+
+        padding: 0 toRem(10.5);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__available-link{
+            padding: 0 toRem(8 + 2.5 / 2);
+        }
+    }
+
+    &__available-link:not(:last-child){
+        position: relative;
+        z-index: 1;
+
+        &::after{
+            border-radius: 50%;
+            background-color: $darkGreen;
+            width: toRem(2.5);
+            height: toRem(2.5);
+
+            content: "";
+            position: absolute;
+            z-index: 1;
+
+            right: toRem(-0.75);
+            top: 50%;
+            transform: translateY(-50%);
+        }
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__available-link:not(:last-child)::after{
+            right: 0;
+            transform: translateY(-50%) translateX(50%);
+        }
+    }
+}

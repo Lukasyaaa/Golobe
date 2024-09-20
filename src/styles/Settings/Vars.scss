@@ -1,0 +1,25 @@
+$container: 1232;
+$headerContainer: 1316;
+$introContainer: 1350;
+
+$black: #000;
+$white: #fff;
+$mint: #8DD3BB;
+$yellow: #FFC107;
+
+$darkGreen: #112211;
+$darkPurple: #1c1b1f;
+
+$lightBlue: #d7e2ee;
+$lightPurple: #79747e;
+$lightMint: #CDEAE1;
+
+@function toRem($px){
+    @return $px / 16 * 1rem;
+}
+@function toEm($child, $parent){
+    @return $child / $parent * 1em;
+}
+@function toPercent($child, $parent){
+    @return $child / $parent * 100%;
+}

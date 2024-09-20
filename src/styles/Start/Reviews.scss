@@ -1,0 +1,401 @@
+.reviews{
+    padding: toRem(68) 0 toRem(88);
+    @media (max-width: toEm(992, 16)) {
+        padding: toRem(64) 0;
+    }
+    @media (max-width: toEm(768, 16)) {
+        padding: toRem(46) 0;
+    }
+    @media (max-width: toEm(480, 16)) {
+        padding: toRem(32) 0;
+    }
+
+    &__header{
+        margin-bottom: toRem(46);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__header{
+            margin-bottom: toRem(32);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__header{
+            margin-bottom: toRem(24);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__header{
+            margin-bottom: toRem(16);
+        }
+    }
+
+    @media (min-width: toEm($container + 31, 16)) {
+        &__items{
+            padding-left: calc((100% - toRem($container)) / 2);
+        }
+    }
+    &__items{
+        display: flex;
+
+        overflow-x: auto;
+        padding-right: calc(toRem(26) + 15px);
+        padding-bottom: toRem(24);
+    }
+    @media (max-width: toEm($container + 31, 16)) {
+        &__items{
+            padding-left: 15px;
+        }
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__items{
+            padding-right: calc(toRem(19) + 15px);
+            padding-bottom: toRem(17.5);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__items{
+            padding-right: calc(toRem(12.5) + 15px);
+            padding-bottom: toRem(11.5);
+        }
+    }
+
+    &__item{
+        flex: 0 0 toRem(425);   
+    }
+    &__item:not(:last-child){
+        margin-right: toRem(50);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__item{
+            flex: 0 0 toPercent(425, 993 - 15*2 - 19);
+        }
+        &__item:not(:last-child){
+            margin-right: toRem(36);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__item{
+            flex: 0 0 calc(toRem(425) / toRem(993 - 15*2 - 19) * toRem(768 - 15*2 - 12.5));
+        }
+        &__item:not(:last-child){
+            margin-right: toRem(24);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__item{
+            flex: 0 0 toPercent(425 / (993 - 15*2 - 19) * (768 - 15*2 - 12.5), (481 - 15*2 - 12.5));
+        }
+    }
+    @media (max-width: toEm(392, 16)) {
+        &__item{
+            flex: 0 0 toRem(260);
+        }
+    }
+}
+.item-reviews{
+    &__inner{
+        position: relative;
+        z-index: 2;
+
+        padding: toRem(24);
+        border-radius: toRem(20);
+        box-shadow: 2px 4px 16px 0px rgba(17, 34, 17, 0.1);
+        background: $white;
+
+        display: flex;
+        flex-direction: column;
+
+        & > *{
+            position: relative;
+            z-index: 3;
+        }
+        &::after{
+            border-radius: toRem(20);
+            background-color: rgba($color: $mint, $alpha: 0.4);
+            content: "";
+
+            position: absolute;
+            z-index: 1;
+            right: toRem(-26);
+            bottom: toRem(-24);
+
+            width: 100%;
+            height: 100%;
+        }  
+        &::before{
+            border-radius: toRem(20);
+            background-color: $white;
+            content: "";
+
+            position: absolute;
+            z-index: 2;
+            right: 0;
+            bottom: 0;
+
+            width: 100%;
+            height: 100%;
+        }
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__inner::after{
+            right: toRem(-19);
+            bottom: toRem(-17.5);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__inner{
+            padding: toRem(16);
+            &::after{
+                right: toRem(-12.5);
+                bottom: toRem(-11.5);
+            }
+        }
+    }
+
+    @media (min-width: toEm(993, 16)) {
+        &__title{
+            min-height: toRem(80);
+        }
+    }
+    &__title{
+        color: $darkGreen;
+        font-family: "TradeGothic";
+        font-size: toRem(24);
+        font-weight: 700;
+        line-height: math.div(30, 24);
+
+        margin-bottom: toRem(16);
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__title{
+            line-height: math.div(26, 24);
+            margin-bottom: toRem(8);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__title{
+            font-size: toRem(20);
+            margin-bottom: toRem(4);
+        }
+    }
+
+    &__info{
+        color: rgba($color: $darkGreen, $alpha: 0.4);
+        font-family: Montserrat;
+        font-size: toRem(14);
+        font-weight: 500;
+        line-height: math.div(18.5, 14);
+
+        height: toRem(37);
+        overflow: hidden;
+        
+        transition: height 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+
+    @keyframes scalling {
+        0%{
+            transform: scale(1);
+        }
+        25%{
+            transform: scale(0.95);
+        }
+        75%{
+            transform: scale(1.05);
+        }
+        100%{
+            transform: scale(1);
+        }
+    }
+    &__more{
+        background-color: transparent;
+        align-self: flex-end;    
+
+        color: $darkGreen;
+        font-family: "TradeGothic";
+        font-size: toRem(14);
+        font-weight: 700;
+        line-height: math.div(18, 14);
+
+        transition: transform 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+        animation: scalling 1s linear 0s infinite;
+        animation-play-state: paused;
+
+        padding: toRem(12) 0 toRem(16);
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__more{
+            padding: toRem(8) 0;
+        }
+    }
+    &__more:focus{
+        outline: none;
+        animation-play-state: running;
+    }
+    @media (any-hover: hover) {
+        &__more:hover{
+            animation-play-state: running;
+        }
+    }
+
+    @media (min-width: toEm(769, 16)) {
+        &__stars{
+            min-height: toRem(29);
+        }
+    }
+    &__stars{
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+
+        margin: toRem(-2.5) toRem(-6.75);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__stars{
+            margin: toRem(-2.5) toRem(-4);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__stars{
+            margin: toRem(-2.5);
+        }
+    }
+    &__star{
+        color: $yellow;
+        font-size: toRem(19.6);
+        padding: toRem(2.5) toRem(6.75);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__star{
+            padding: toRem(2.5) toRem(4);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__star{
+            padding: toRem(2.5);
+        }
+    }
+
+    @media (min-width: toEm(769, 16)) {
+        &__author{
+            margin-bottom: toRem(4);
+        }
+    }
+    &__author{
+        color: $darkGreen;
+        font-family: "TradeGothic";
+        font-size: toRem(14);
+        font-weight: 700;
+        line-height: math.div(18, 14);
+
+        margin-top: toRem(20);
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__author{
+            margin-top: toRem(12);
+        }
+    }
+
+    &__place{
+        color: rgba($color: $darkGreen, $alpha: 0.5);
+        font-family: Montserrat;
+        font-size: toRem(12);
+        font-weight: 500;
+        line-height: math.div(15, 12);
+    }
+
+    @media (min-width: toEm(769, 16)) {
+        &__link{
+            min-height: toRem(24 + 12*2);
+        }
+    }
+    &__link{
+        padding: toRem(12) 0;
+
+        align-self: flex-start;
+        display: grid;
+        align-items: center;
+        grid-template-columns: toRem(20) 1fr;
+        column-gap: toRem(10);
+
+        img{
+            height: toRem(20);
+        }
+        span{
+            color: rgba($color: $darkGreen, $alpha: 0.4);
+            font-family: "TradeGothic";
+            font-size: toRem(12);
+            font-weight: 700;
+            line-height: math.div(15, 12);
+        }
+
+        position: relative;
+        z-index: 3;
+        &::after{
+            background: linear-gradient(to right, #db4437 0% 25%, #f4c20d 25% 50%, #0f9d58 50% 75%, #4285f4 75% 100%);
+            content: "";
+
+            position: absolute;
+            z-index: 1;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+
+            width: 0;
+            height: toRem(2);
+
+            transition: width 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__link{
+            padding: toRem(8) 0;
+        }
+    }
+    &__link:focus{
+        outline: none;
+        &::after{
+            width: 100%;
+        }
+    }
+    @media (any-hover: hover) {
+        &__link:hover::after{
+            width: 100%;
+        }
+    }
+    
+    &__image{
+        width: 100%;
+        padding-bottom: toPercent(200, 377);
+        position: relative;
+        z-index: 3;
+        margin-top: toRem(28);
+
+        text-align: center;
+        font-family: Montserrat;
+        font-size: toRem(22);
+        color: $darkGreen;
+
+        img{
+            border-radius: toRem(16);
+
+            object-fit: cover;
+            position: absolute;
+            z-index: 1;
+            left: 0;
+            top: 0;
+
+            width: 100%;
+            height: 100%;
+        }
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__image{
+            margin-top: toRem(20);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__image{
+            margin-top: toRem(16);
+        }
+    }
+}

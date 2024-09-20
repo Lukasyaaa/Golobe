@@ -1,0 +1,182 @@
+@font-face {
+    font-family: "TradeGothic";
+    src: url("../../assets/fonts/TradeGothic-Regular.woff2") format("woff2"),
+    url("../../assets/fonts/TradeGothic-Regular.woff") format("woff");
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: "TradeGothic";
+    src: url("../../assets/fonts/TradeGothic-Bold.woff2") format("woff2"),
+    url("../../assets/fonts/TradeGothic-Bold.woff") format("woff");
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: 'icomoon';
+    src: url("../../assets/fonts/icomoon.woff2") format("woff2"),
+    url("../../assets/fonts/icomoon.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
+  
+[class^="icon-"]::before, [class*=" icon-"]::before{
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: never;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+  
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+  
+.icon-plus:before {
+    content: "\e902";
+}
+.icon-search:before {
+    content: "\e900";
+}
+.icon-show:before {
+    content: "\e901";
+}
+.icon-hotel:before {
+    content: "\e903";
+}
+.icon-log-out:before {
+    content: "\e904";
+}
+.icon-support:before {
+    content: "\e905";
+}
+.icon-settings:before {
+    content: "\e906";
+}
+.icon-payment:before {
+    content: "\e907";
+}
+.icon-wifi:before {
+    content: "\e908";
+}
+.icon-heart:before {
+    content: "\e909";
+}
+.icon-junk-food:before {
+    content: "\e90a";
+}
+.icon-clock:before {
+    content: "\e90b";
+}
+.icon-heart_border:before {
+    content: "\e90c";
+}
+.icon-arrow_bottom:before {
+    content: "\e90d";
+}
+.icon-from-to:before {
+    content: "\e90e";
+}
+.icon-pen:before {
+    content: "\e90f";
+}
+.icon-unshow:before {
+    content: "\e910";
+}
+.icon-bin:before {
+    content: "\e911";
+}
+.icon-change:before {
+    content: "\e912";
+}
+.icon-plus_circle:before {
+    content: "\e913";
+}
+.icon-upload:before {
+    content: "\e914";
+}
+.icon-flag:before {
+    content: "\e915";
+}
+.icon-bar:before {
+    content: "\e916";
+}
+.icon-gym:before {
+    content: "\e917";
+}
+.icon-service:before {
+    content: "\e918";
+}
+.icon-restaurant:before {
+    content: "\e919";
+}
+.icon-spa:before {
+    content: "\e91a";
+}
+.icon-pool:before {
+    content: "\e91b";
+}
+.icon-stars:before {
+    content: "\e91c";
+}
+.icon-cup:before {
+    content: "\e91d";
+}
+.icon-user:before {
+    content: "\e91e";
+}
+.icon-door:before {
+    content: "\e91f";
+}
+.icon-time:before {
+    content: "\e920";
+}
+.icon-date:before {
+    content: "\e921";
+}
+.icon-visa:before {
+    content: "\e922";
+}
+.icon-mail:before {
+    content: "\e923";
+}
+.icon-apple:before {
+    content: "\e924";
+}
+.icon-seat:before {
+    content: "\e925";
+}
+.icon-location:before {
+    content: "\e926";
+}
+.icon-share:before {
+    content: "\e927";
+}
+.icon-inst:before {
+    content: "\e928";
+}
+.icon-youtube:before {
+    content: "\e929";
+}
+.icon-twitter:before {
+    content: "\e92a";
+}
+.icon-facebook:before {
+    content: "\e92b";
+}
+.icon-star:before {
+    content: "\e92c";
+}
+.icon-send:before {
+    content: "\e92d";
+}
+.icon-bed:before {
+    content: "\e92e";
+}
+.icon-plane:before {
+    content: "\e92f";
+}  
