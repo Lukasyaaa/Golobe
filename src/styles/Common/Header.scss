@@ -1,10 +1,10 @@
 @media (min-width: toEm($introContainer + 30*3 + 1, 16)) {
-    .header:not(._scroll){
+    .header.start:not(._scroll){
         padding-top: toRem(30);
     }
 }
 @media (max-width: toEm($introContainer + 30*3 + 1, 16)) and (min-width: toEm($introContainer + 31, 16)){
-    .header:not(._scroll){
+    .header.start:not(._scroll){
         padding-top: calc((100vw - toRem($introContainer + 30)) / 2);
     }
 }
@@ -16,12 +16,17 @@
     top: 0;
 
     width: 100%;
+    &:not(.start){
+        background-color: $white;
+    }
     transition: padding-top 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
     background-color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
     box-shadow 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
 
-    &._scroll{
+    &.start._scroll{
         background-color: $mint;
+    }
+    &._scroll{
         box-shadow: 0 0 25px #333;
     }
 
@@ -44,6 +49,11 @@
         }
     }
 
+    @media (min-width: toEm(993, 16)) {
+        &.black-white .container_header{
+            min-height: toRem(90);
+        }
+    }
     @media (min-width: toEm(321, 16)) {
         .container_header{
             min-height: toRem(96);
@@ -64,6 +74,11 @@
             }
         }
     }
+    @media (max-width: toEm(320, 16)) {
+        &.black-white .container_header{
+            min-height: toRem(60);
+        }
+    }
     .container_header{
         display: flex;
         padding-top: 10px;
@@ -75,18 +90,58 @@
         }
     }
 
+    &.start &__image{
+        align-self: center;
+    }
+    &.black-white &__image{
+        display: flex;
+        margin: -10px 0;
+    }
     &__image{
+        position: relative;
+        z-index: 6;
+
         font-family: Montserrat;
         font-size: toRem(16);
         color: $white;
 
         flex: 0 0 auto;
-        align-self: center;
         margin: 0 toRem(32);
         img{
+            max-width: 100%;
             transition: filter 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
         }
     }
+    &.black-white &__image::after{
+        background-color: $mint;
+        content: "";
+        position: absolute;
+        z-index: 2;
+
+        left: 50%;
+        bottom: 0;
+        transform: translateX(-50%);
+
+        width: 0;
+        height: toRem(5);
+
+        transition: width 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+    &.black-white._active &__image::after{
+        background-color: $white;
+    }
+    &__image:focus{
+        outline: none;
+        &::after{
+            width: calc(100% + toRem(6));
+        }
+    }
+    @media (any-hover: hover) {
+        &.black-white &__image:hover::after{
+            width: calc(100% + toRem(6));
+        }
+    }
+
     @media (max-width: toEm(992, 16)) {
         &__image{
             margin: 0 toRem(24);
@@ -94,9 +149,7 @@
     }
     @media (max-width: toEm(768, 16)) {
         &__image{
-            margin: 0  toRem(24) 0 0;
-            position: relative;
-            z-index: 6;
+            margin: 0 toRem(24) 0 0;
         }
     }
     @media (max-width: toEm(480, 16)) {
@@ -104,7 +157,7 @@
             margin: 0  toRem(16) 0 0;
         }
     }
-    &._scroll &__image img{
+    &.start._scroll &__image img{
         filter: drop-shadow(0 0 5px #333);
     }
 
@@ -171,10 +224,29 @@
             display: none;
         }
     }
+
+    &.black-white:not(._active) &__burger{
+        span, &::after, &::before{
+            background-color: $darkGreen;
+        }
+    }    
+    &._active &__burger{
+        &::after{
+            top: 50%;
+            transform: rotate(45deg) translateY(-25%);
+        }
+        &::before{
+            top: 50%;
+            transform: rotate(-45deg) translateY(-25%);
+        }
+        span{
+            transform: scale(0);
+        }
+    }
 }
 .menu-header{
     @media (min-width: toEm(769, 16)) {
-        &__list, &__link a{
+        &__list, &__link a, &__link div{
             height: 100%;
         }
     
@@ -227,20 +299,15 @@
             display: flex;
             align-items: center;
             &::before{
-                margin-right: toRem(4.75);
+                min-width: toRem(24);
+                height: toRem(24);
+    
+                display: flex;
+                align-items: center;
+                justify-content: center;
+    
+                margin-right: toRem(4);
             }
-        }
-    }
-    @media (min-width: toEm(769, 16)) {
-        &__link-inner::before{
-            min-width: toRem(24);
-            height: toRem(24);
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            margin-right: toRem(4);
         }
     }
     &__link-inner{
@@ -252,33 +319,82 @@
             font-weight: 600;
             line-height: math.div(17, 14);
         }
+    }
+    .header.black-white &__link-inner{
+        color: $darkGreen;
+        span, &::before{
+            position: relative;
+            z-index: 2;
+        }
         &::after{
             content: "";
-
+            background-color: $mint;
+    
             position: absolute;
+            z-index: 1;
             left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-
-            border: toRem(3) solid transparent;
+            bottom: 0;
+            transform: translateX(-50%);
+    
             width: 0;
-            height: 0;
+            height: toRem(5);
+    
+            transition: width 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+        }
+        transition: color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+    @media (max-width: toEm(768, 16)) {
+        .header.black-white &__link-inner{
+            padding: toRem(5);
+            width: 100%;
+            &::after{
+                background-color: $darkGreen;
+                bottom: 50%;
+                transform: translate(-50%, 50%);
 
-            transition: width 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
-            height 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
-            border-color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+                height: 100%;
+            }
+        }
+    }
+    .header.start &__link-inner::after{
+        content: "";
+        border: toRem(3) solid transparent;
+        background-color: transparent;
+
+        position: absolute;
+        z-index: 1;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+
+        width: 0;
+        height: 0;
+
+        transition: width 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
+        height 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
+        border-color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+
+    .header.black-white &__list:not(._hide-active) &__link-inner._active::after,
+    .header.black-white &__link-inner._hovered::after{
+        width: 100%;
+    }
+    @media (max-width: toEm(768, 16)) {
+        .header.black-white &__list:not(._hide-active) &__link-inner._active,
+        .header.black-white &__link-inner._hovered{
+            color: $mint;
         }
     }
     &__link-inner:focus{
         outline: none;
-        &::after{
-            width: calc(100% + toRem(6));
-            height: 100%;
-            border-color: $white;
-        }
+    }
+    .header.start &__link-inner:focus::after{
+        width: calc(100% + toRem(6));
+        height: 100%;
+        border-color: $white;
     }
     @media (any-hover: hover) {
-        &__link-inner:hover::after{
+        .header.start &__link-inner:hover::after{
             width: calc(100% + toRem(7.5));
             height: 100%;
             border-color: $white;
@@ -302,62 +418,63 @@
     }
 }
 .authorization-menu-header{
-    &__link{
-        min-height: toRem(48);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-
-        padding: toRem(10) toRem(16);
-        background-color: $white;
-        color: $darkGreen;
-        &:not(:last-child){
-            margin-bottom: toRem(10);
-        }
+    &__link:not(:last-child){
+        margin-bottom: toRem(10);
     }
     &__link-inner{
+        padding: toRem(10) toRem(16);
+        background-color: $white;
+        min-height: toRem(48);
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
         font-family: Montserrat;
+        color: $darkGreen;
         font-size: toRem(18);
         font-weight: 700;
         line-height: math.div(17, 14);
+
+        transition: box-shadow 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
+        text-shadow 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+    &__link-inner:focus{
+        outline: none;
+        box-shadow: 0 0 15px $white;
+        text-shadow: 0 0 5px $lightPurple;
+    }
+    @media (any-hover: hover) {
+        &__link-inner:hover{
+            box-shadow: 0 0 15px $white;
+            text-shadow: 0 0 5px $lightPurple;
+        }
     }
 }
 
 .authorization{
     &__list{
         height: 100%;
+        display: flex;
     }
     @media (any-hover: none) {
         &__link_log-in a{
             height: 100%;
         }
     }
-    &__list{
-        display: flex;
+
+    &__link-inner{
+        span{
+            font-family: Montserrat;
+            font-size: toRem(14);
+            font-weight: 600;
+            line-height: math.div(17, 14);
+        }
+        &:focus{
+            outline: none;
+        }
     }
 
-    &__link a:focus{
-        outline: none;
-    }
-
-    @media (any-hover: none) {
-        &__link_log-in{
-            margin: -10px toRem(32) -10px 0;
-        }
-        @media (max-width: toEm(992, 16)) {
-            &__link_log-in{
-                margin: -10px toRem(24) -10px 0;
-            }
-        }
-        @media (max-width: toEm(768, 16)) {
-            &__link_log-in{
-                margin: -10px toRem(16) -10px 0;
-            }
-        }
-        &__link_sign-in{
-            align-self: center;
-        }
-    }
     @media (any-hover: hover) {
         &__link{
             align-self: center;
@@ -388,10 +505,19 @@
                 transition: left 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
             }
             span{
+                color: $white;
                 position: relative;
                 z-index: 2;
 
                 transition: color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+            }
+        }
+        .header.black-white:not(._active) &__link a{
+            &::after{
+                background-color: $darkGreen;
+            }
+            span{
+                color: $darkGreen;
             }
         }
         @media (min-width: toEm(993, 16)) {
@@ -409,6 +535,11 @@
         &__list._left &__link_log-in span{
             color: $darkGreen;
         }
+        .header.black-white:not(._active) &__list._right &__link_sign-in span,
+        .header.black-white:not(._active) &__list._left &__link_log-in span{
+            color: $white;
+        }
+
         &__list._right &__link_log-in a::after{
             left: 100%;
         }
@@ -417,21 +548,31 @@
         }
     }
 
-    &__link-inner span{
-        color: $white;
-        font-family: Montserrat;
-        font-size: toRem(14);
-        font-weight: 600;
-        line-height: math.div(17, 14);
-    }
-
     @media (any-hover: none) {
+        &__link_log-in{
+            margin: -10px toRem(32) -10px 0;
+        }
+        @media (max-width: toEm(992, 16)) {
+            &__link_log-in{
+                margin: -10px toRem(24) -10px 0;
+            }
+        }
+        @media (max-width: toEm(768, 16)) {
+            &__link_log-in{
+                margin: -10px toRem(16) -10px 0;
+            }
+        }
+
         &__link_log-in-inner{
             display: flex;
             align-items: center;
 
             position: relative;
             z-index: 1;
+
+            span{
+                color: $white;
+            }
             &::after{
                 content: "";
     
@@ -449,13 +590,24 @@
                 border-color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
             }
         }
-        &__link_log-in-:focus::after{
+        &__link_log-in-inner:focus::after{
             width: calc(100% + toRem(6));
             height: 100%;
             border-color: $white;
         }
+        .header.black-white:not(._active) &__link_log-in-inner{
+            span{
+                color: $darkGreen;
+            }
+            &:focus::after{
+                border-color: $darkGreen;
+            }
+        }
 
-        &__link-sign-in-inner{
+        &__link_sign-in{
+            align-self: center;
+        }
+        &__link_sign-in-inner{
             border-radius: toRem(8);
             background-color: $white;
             padding: toRem(10) toRem(24);
@@ -467,12 +619,30 @@
                 color: $darkGreen;
                 transition: color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
             }
-            transition: background-color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+            transition: background-color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
+            box-shadow 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
         }
-        &__link-sign-in-inner:focus{
+        .header:not(.black-white) &__link_sign-in-inner:focus{
             background-color: $darkGreen;
             span{
                 color: $white;
+            }
+        }
+        .header.black-white:not(._active) &__link_sign-in-inner{
+            background-color: $darkGreen;
+            span{
+                color: $white;
+            }
+        }
+        .header.black-white:not(._active) &__link_sign-in-inner:focus{
+            box-shadow: 0 0 5px $darkGreen;
+        }
+        .header.black-white._active &__link_sign-in-inner:focus{
+            box-shadow: 0 0 5px $white;
+        }
+        @media (max-width: toEm(768, 16)) {
+            &__link_sign-in-inner{
+                padding: toRem(10) toRem(16);
             }
         }
     }
@@ -501,12 +671,23 @@
             top: toRem(9);
             width: 100%;
             min-height: toRem(3);
+
+            transition: background-color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
+            transform 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
         }
         &::after{
             top: 0;
         }
         &::before{
             top: toRem(18.5);
+        }
+
+        @media (any-hover: hover) {
+            &:hover{
+                span, &::after, &::before{
+                    background-color: $mint;
+                }
+            }
         }
     }
 }

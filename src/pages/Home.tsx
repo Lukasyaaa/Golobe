@@ -4,9 +4,9 @@ import { Travels } from "../components/Start/Travels/Travels";
 import { Choose } from "../components/Start/Choose/Choose";
 import { Reviews } from "../components/Start/Reviews/Reviews";
 
-export const Start : FC = () =>{
+export const Home : FC = () =>{
     return(
-        <main className="start">
+        <main className="home">
             <Intro />
             <Travels />
             <Choose />

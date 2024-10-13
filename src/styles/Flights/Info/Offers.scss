@@ -1,0 +1,273 @@
+.offers{
+    padding: toRem(80) 0 toRem(118);
+    @media (max-width: toEm(992, 16)) {
+        padding: toRem(64) 0;
+    }
+    @media (max-width: toEm(768, 16)) {
+        padding: toRem(46) 0;
+    }
+    @media (max-width: toEm(480, 16)) {
+        padding: toRem(32) 0;
+    }
+
+    &__header{
+        margin-bottom: toRem(24);
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__header{
+            margin-bottom: toRem(16);
+        }
+    }
+
+    @media (min-width: toEm(769, 16)) {
+        &__item{
+            display: grid;
+            grid-template-columns: toPercent(552, $container) toPercent(656, $container);
+            column-gap: toRem(24);
+        }
+    }
+    &__item:not(:last-child){
+        margin-bottom: toRem(24);
+    }
+}
+.header-offers{
+    &__info{
+        max-width: none;
+    }
+    &__text{
+        line-height: toEm(19.5, 16);
+    }
+}
+.item-offers{
+    @media (min-width: toEm(769, 16)) {
+        &__info{
+            display: flex;
+            flex-direction: column;
+        }
+    }
+    &__info{
+        border-radius: toRem(20);
+        background-color: $mint;
+        padding: toRem(24);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__info{
+            padding: toRem(16);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__info{
+            margin-bottom: toRem(24);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__info{
+            text-align: center;
+            margin-bottom: toRem(16);
+        }
+    }
+
+    
+    @media (min-width: toEm(481, 16)) {
+        &__images{
+            align-self: center;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: toRem(24) toRem(20);
+        }
+        @media (max-width: toEm(992, 16)) {
+            &__images{
+                gap: toRem(16);
+            }
+        }
+    }
+
+    &__image-parent{
+        position: relative;
+        z-index: 1;
+        padding-bottom: toPercent(200, 318);
+        img{
+            border: toRem(2) solid $mint;
+            border-radius: toRem(12);
+
+            object-fit: cover;
+            position: absolute;
+            z-index: 1;
+            left: 0;
+            top: 0;
+
+            width: 100%;
+            height: 100%;
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__image-parent{
+            width: 100%;
+            padding-bottom: toPercent(200, 450);
+            &:not(:last-child){
+                margin-bottom: toRem(10);
+            }
+        }
+    }
+}
+.info-item-offers{
+    @media (min-width: toEm(481, 16)) {
+        &__header{
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+        }
+        @media (max-width: toEm(992, 16)) {
+            &__header{
+                align-items: center;
+            }
+        }
+    }
+    &__header{
+        margin-bottom: toRem(24);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__header{
+            margin-bottom: toRem(16);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__header{
+            margin-bottom: toRem(10);
+        }
+    }
+
+    &__title{
+        color: $darkGreen;
+        font-family: "TradeGothic";
+        font-size: toRem(40);
+        font-weight: 700;
+        line-height: math.div(51, 40);
+
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        margin-right: toRem(16);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__title{
+            font-size: toRem(32);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__title{
+            font-size: toRem(26);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__title{
+            font-size: toRem(22);
+            margin-bottom: toRem(4);
+        }
+    }
+
+    @media (min-width: toEm(769, 16)) {
+        &__price strong{
+            margin-top: toRem(4);
+        }
+    }
+    @media (min-width: toEm(481, 16)) {
+        &__price strong{
+            display: block;
+        }
+    }
+    &__price{
+        border-radius: toRem(8);
+        background-color: $white;
+        padding: toRem(8);
+
+        text-align: center;
+        color: $darkGreen;
+        font-family: "TradeGothic";
+        font-size: toRem(14);
+        font-weight: 400;
+        line-height: math.div(18, 14);
+
+        strong{
+            font-family: Montserrat;
+            font-size: toRem(20);
+            font-weight: 600;
+            line-height: math.div(24, 20);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__price{
+            font-size: toRem(12);
+            strong{
+                font-size: toRem(17);
+            }
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__price{
+            border-radius: toRem(4);
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            strong{
+                margin-left: toRem(4);
+            }
+        }
+    }
+
+    &__info{
+        color: $darkGreen;
+        font-family: Montserrat;
+        font-size: toRem(14);
+        font-weight: 400;
+        line-height: math.div(17, 14);
+
+        flex: 1 1 auto;
+        margin-bottom: toRem(16);
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__info{
+            margin-bottom: toRem(10);
+        }
+    }
+
+    &__link{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        border-radius: toRem(4);
+        background-color: $white;
+        padding: toRem(8) toRem(16);
+        min-height: toRem(48);
+
+        color: $darkGreen;
+        font-family: Montserrat;
+        font-size: toRem(14);
+        font-weight: 500;
+        line-height: math.div(18, 14);
+
+        transition: color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
+        background-color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
+        box-shadow 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+    &__link:focus{
+        outline: none;
+        color: $white;
+        background-color: $darkGreen;
+        box-shadow: 0 0 15px $darkGreen;
+    }
+    @media (any-hover:hover) {
+        &__link:hover{
+            color: $white;
+            background-color: $darkGreen;
+            box-shadow: 0 0 15px $darkGreen;
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__link{
+            min-height: toRem(40);
+        }
+    }
+}

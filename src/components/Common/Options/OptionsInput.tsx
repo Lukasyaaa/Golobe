@@ -2,19 +2,21 @@ import React, { FC } from "react";
 import { contentPart, optionsIconPosition, optionsTitle } from "../../../types";
 
 interface optionsInputProps{
+    id : number
     title : string,
     placeholder : string,
     iconPosition : optionsIconPosition,
     isBigger : boolean,
-    parent : contentPart
+    parent : contentPart,
+    parentClasses : string[]
 }
 
-export const OptionsInput : FC<optionsInputProps> = ({title, placeholder, iconPosition, isBigger, parent}) =>{
+export const OptionsInput : FC<optionsInputProps> = ({id, title, placeholder, iconPosition, isBigger, parent, parentClasses}) =>{
     let classes = [
         "options__item", "item-options", 
         "options__item_input", "item_input-options",
-        "options-intro-start__item", "item-options-intro-start",
-        "options-intro-start__item_input", "item_input-options-intro-start"
+        parentClasses.map(cl => cl + "__item").join(" "), parentClasses.map(cl => "item-" + cl).join(" "),
+        parentClasses.map(cl => cl + "__item_input").join(" "), parentClasses.map(cl => "item_input-" + cl).join(" "),
     ];
     if(parent === contentPart.Hotels){
         classes.push(((isBigger) ? "bigger" : "smaller"));
@@ -22,7 +24,7 @@ export const OptionsInput : FC<optionsInputProps> = ({title, placeholder, iconPo
 
     let innerClasses : string[] = [
         "item-options__inner", "item_input-options__inner",
-        "item-options-intro-start__inner", "item_input-options-intro-start__inner"
+        parentClasses.map(cl => "item-" + cl + "__inner").join(" "), parentClasses.map(cl => "item_input-" + cl + "__inner").join(" ")
     ];
     if(iconPosition !== optionsIconPosition.Null){
         innerClasses.push(iconPosition);
@@ -46,15 +48,16 @@ export const OptionsInput : FC<optionsInputProps> = ({title, placeholder, iconPo
         <li className={classes.join(" ")}>
             <div className={innerClasses.join(" ")}>
                 <input 
-                    className="item-options__input item-options-intro-start__input" 
-                    type="text" id="1" placeholder={placeholder}
+                    className={parentClasses.map(cl => "item-" + cl + "__input").join(" ") + " item-options__input"}
+                    type="text" id={String(id)} placeholder={placeholder}
                 />
                 <label 
-                    className={[
-                        "item-options__label", "item_input-options__label",
-                        "item-options-intro-start__label", "item_input-options-intro-start__label"
-                    ].join(" ")} 
-                    htmlFor="1" 
+                    className={
+                        parentClasses.map(cl => "item-" + cl + "__label").join(" ") + " " + 
+                        parentClasses.map(cl => "item_input-" + cl + "__label").join(" ") +
+                        " item-options__label item_input-options__label"
+                    }
+                    htmlFor={String(id)} 
                 >
                     <span>{title}</span>
                 </label>

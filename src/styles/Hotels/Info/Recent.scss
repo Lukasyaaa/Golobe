@@ -1,0 +1,170 @@
+.recent{
+    padding: toRem(80) 0;
+    @media (max-width: toEm(992, 16)) {
+        padding: toRem(64) 0;
+    }
+    @media (max-width: toEm(768, 16)) {
+        padding: toRem(46) 0;
+    }
+    @media (max-width: toEm(480, 16)) {
+        padding: toRem(32) 0;
+    }
+
+    &__heading{
+        color: $black;
+        font-family: "TradeGothic";
+        font-size: toRem(32);
+        font-weight: 700;
+        line-height: math.div(40, 32);
+
+        margin-bottom: toRem(32);
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__heading{
+            font-size: toRem(26);
+            margin-bottom: toRem(24);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__heading{
+            font-size: toRem(22);
+            margin-bottom: toRem(16);
+        }
+    }
+
+    @media (min-width: toEm(481, 16)) {
+        &__items{
+            display: grid;
+            gap: toRem(24);
+            grid-template-columns: repeat(4, 1fr);
+        }
+        @media (max-width: toEm(992, 16)) {
+            &__items{
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        @media (max-width: toEm(768, 16)) {
+            &__items{
+                gap: toRem(16);
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    }
+
+    @media (min-width: toEm(481, 16)) {
+        &__item{
+            justify-content: flex-start;
+        }
+    }
+    &__item{
+        display: grid;
+        align-items: center;
+        grid-template-columns: minmax(toRem(70), toPercent(90, 284)) auto;
+
+        position: relative;
+        z-index: 1;
+        &::after,&::before{
+            border-radius: toRem(12);
+            content: "";
+            
+            pointer-events: none;
+            position: absolute;
+
+            width: 100%;
+            height: 100%;
+        }
+        &::after{
+            background-color: $white;
+
+            z-index: 2;
+            left: 0;
+            top: 0;
+        }
+        &::before{
+            background-color: $mint;
+
+            z-index: 1;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+
+            transition: width 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
+            height 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+        }
+        & > *{
+            position: relative;
+            z-index: 3;
+        }
+    }
+    &__item:focus{
+        outline: none;
+        &::before{
+            width: calc(100% + toRem(10));
+            height: calc(100% + toRem(10));
+        }
+    }
+    @media (any-hover: hover) {
+        &__item:hover::before{
+            width: calc(100% + toRem(10));
+            height: calc(100% + toRem(10));
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__item{
+            grid-template-columns: minmax(toRem(60), toPercent(90, 361)) auto;
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__item{
+            grid-template-columns: minmax(toRem(50), toPercent(70, 450)) auto;
+        }
+        &__item:not(:last-child){
+            margin-bottom: toRem(10);
+        }
+    }
+}
+.item-recent{
+    &__image{
+        padding-bottom: toPercent(90, 90);
+        position: relative;
+        z-index: 3;
+        img{
+            border-radius: toRem(8);
+            object-fit: cover;
+
+            position: absolute;
+            z-index: 1;
+            left: 0;
+            top: 0;
+
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    &__subimage{
+        margin-left: toRem(16);
+    }
+
+    &__title{
+        color: $darkGreen;
+        font-family: Montserrat;
+        font-size: toRem(16);
+        font-weight: 600;
+        line-height: math.div(20, 16);
+
+        margin-bottom: toRem(8);
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__title{
+            margin-bottom: toRem(4);
+        }
+    }
+    &__count{
+        color: rgba(17, 34, 17, 0.75);
+        font-family: Montserrat;
+        font-size: toRem(12);
+        font-weight: 400;
+        line-height: math.div(15, 12);
+    }
+}

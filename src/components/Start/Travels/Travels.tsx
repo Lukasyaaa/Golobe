@@ -1,4 +1,4 @@
-import React, { FC, Fragment, useState } from "react";
+import React, { FC, Fragment, useRef, useState } from "react";
 import { HeaderBlock } from "../../Common/HeaderBlock";
 import { useTypedSelector } from "../../../useTypedSelector";
 import { Travel } from "./Travel";
@@ -9,22 +9,25 @@ export const Travels : FC = () =>{
     const state = useTypedSelector(store => store.start.travels);
 
     let isWebp : boolean = true;
-    let filtredTravels : travelsItem[] = [];
-    state.items.forEach(travel => {
-        if(travel.available.length !== 0 && travel.city !== "" && (travel.image.srcs.jpeg !== "" || (isWebp && travel.image.srcs.webp !== ""))){
-            filtredTravels.push(travel);
-        }
-    })
-    if(filtredTravels.length !== 0){
+    let filtredTravels = useRef<travelsItem[]>([]);
+    if(filtredTravels.current.length === 0){
+        state.items.forEach(travel => {
+            if(travel.available.length !== 0 && travel.city !== "" && (travel.image.srcs.jpeg !== "" || (isWebp && travel.image.srcs.webp !== ""))){
+                filtredTravels.current.push(travel);
+            }
+        })
+    }
+
+    if(filtredTravels.current.length !== 0){
         return(
             <section className="start__travels travels">
                 <div className="container">
                     <HeaderBlock 
-                        parentClasses={["travels"]} about={state.header} isNeedButton={state.items.length > state.maxShow}
+                        parentClasses={["travels"]} about={state.header} isNeedButton={filtredTravels.current.length > state.maxShow}
                         isShowAll={{value: isShowAll, set: setIsShowAll}} 
                     />
                     <div className="travels__items">
-                        {((isShowAll) ? filtredTravels : filtredTravels.slice(0, state.maxShow)).map((about, i) => 
+                        {((isShowAll) ? filtredTravels.current : filtredTravels.current.slice(0, state.maxShow)).map((about, i) => 
                             <Travel about={about} key={i} />
                         )}
                     </div>

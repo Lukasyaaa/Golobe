@@ -1,10 +1,10 @@
 @media (min-width: toEm($introContainer + 30*3 + 1, 16)) {
-    .start{
+    .home{
         padding-top: toRem(30);
     }
 }
 @media (max-width: toEm($introContainer + 30*3 + 1, 16)) and (min-width: toEm($introContainer + 31, 16)) {
-    .start{
+    .home{
         padding-top: calc((100vw - toRem($introContainer + 30)) / 2);
     }
 }
@@ -160,11 +160,11 @@
     &__options{
         position: relative;
         z-index: 2;
-        margin-top: toRem(-113);
+        margin-top: toRem(-97);
     }
     @media (max-width: toEm($container + 31, 16)) {
         &__options{
-            margin-top: toPercent(-113, $container + 31);
+            margin-top: toPercent(-97, $container + 31);
         }
     }
     @media (max-width: toEm(768, 16)) {

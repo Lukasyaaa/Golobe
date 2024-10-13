@@ -1,6 +1,6 @@
 import React, { FC, useRef, useState } from "react";
 import { defaultSelect } from "../../../types";
-import { SelectInfo } from "../SelectInfo";
+import { SelectInfo } from "../Select/SelectInfo";
 
 interface footerItemProps{
     about : defaultSelect

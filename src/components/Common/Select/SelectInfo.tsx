@@ -1,5 +1,5 @@
 import React, { FC, Fragment, ReactElement, useRef, useState } from "react";
-import { defaultSelect } from "../../types";
+import { defaultSelect } from "../../../types";
 import { JsxElement } from "typescript";
 
 interface selectInfoProps{

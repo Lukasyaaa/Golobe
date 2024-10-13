@@ -1,7 +1,7 @@
 import { start, travelAvailable } from "../types";
 //--------Intro--------
-import jpeg from "../assets/img/start/intro/background.jpeg"
-import webp from "../assets/img/start/intro/background.webp"
+import introJpeg from "../assets/img/start/intro/background.jpeg"
+import introWebp from "../assets/img/start/intro/background.webp"
 //--------Travels--------
 //----------------Webp--------
 import travelsWebp_1 from "../assets/img/start/travels/1/main.webp"
@@ -44,7 +44,7 @@ import googleLogo from "../assets/img/start/reviews/google.svg"
 
 const defaultState : start = {
     intro:{
-        background: {webp: webp, jpeg: jpeg},
+        background: {webp: introWebp, jpeg: introJpeg},
         supheading: "Helping Others",
         heading: "Live & Travel",
         subheading: "Special offers to suit your plan"

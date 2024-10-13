@@ -1,0 +1,521 @@
+
+.map{
+    padding: toRem(80) 0;
+    @media (max-width: toEm(992, 16)) {
+        padding: toRem(64) 0;
+    }
+    @media (max-width: toEm(768, 16)) {
+        padding: toRem(46) 0;
+    }
+    @media (max-width: toEm(480, 16)) {
+        padding: toRem(32) 0;
+    }
+
+    &__header{
+        margin-bottom: toRem(25);
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__header{
+            margin-bottom: toRem(16);
+        }
+    }
+
+    @media (min-width: toEm(993, 16)) {
+        &__back .container{
+            position: relative;
+            z-index: 1;
+        }
+    }
+    @media (min-width: toEm(769, 16)) {
+        &__back .container{
+            min-height: toRem(486);
+        }
+        @media (max-width: toEm(992, 16)) {
+            &__back .container{
+                min-height: toRem(360);
+            }
+        }
+    }
+    &__back{
+        background-color: $mint;
+        .container{
+            padding-top: toRem(30);
+            padding-bottom: toRem(30);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__back .container{
+            padding-top: toRem(24);
+            padding-bottom: toRem(24);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__back .container{
+            padding-top: toRem(16);
+            padding-bottom: toRem(16);
+        }
+    }
+
+    @media (min-width: toEm(993, 16)) {
+        &._show-all &__back > .container{
+            display: flex;
+            align-items: center;
+        }
+        &._show-all &__inner{
+            display: grid;
+            width: 100%;
+            gap: toRem(10);
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
+    @media (min-width: toEm(481, 16)) {
+        @media (max-width: toEm(992, 16)) {
+            &__back > .container{
+                display: flex;
+                align-items: center;
+            }
+            &__inner{
+                display: grid;
+                width: 100%;
+                gap: toRem(10);
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        @media (max-width: toEm(768, 16)) {
+            &__inner{
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    }
+
+    @media (min-width: toEm(993, 16)) {
+        @media (min-width: toEm(1148, 16)) {
+            &__item_positioned{
+                position: absolute;
+                z-index: 3;
+                &::after{
+                    background-color: $white;
+                    border-radius: 50%;
+                    content: "";
+    
+                    position: absolute;
+                    z-index: 2;
+    
+                    min-width: toRem(9.9);
+                    height: toRem(9.58);
+                }
+            }
+        }
+        @media (max-width: toEm(1147.5, 16)) {
+            &__item_positioned:not(.japn){
+                position: absolute;
+                z-index: 3;
+                &::after{
+                    pointer-events: none;
+
+                    background-color: $white;
+                    border-radius: 50%;
+                    content: "";
+    
+                    position: absolute;
+                    z-index: 2;
+    
+                    min-width: toRem(9.9);
+                    height: toRem(9.58);
+                }
+            }
+            &__item_positioned.japn{
+                display: none;
+            }
+        }
+    }
+    &__item::before{
+        pointer-events: none;
+
+        background-color: $darkGreen;
+        border-radius: toRem(4);
+        content: "";
+
+        position: absolute;
+        z-index: 1;
+        left: 50%;
+        transform: translateX(-50%);
+
+        width: 100%;
+        height: 100%;
+
+        transition: bottom 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
+        width 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+    &__item_default::before{
+        border-radius: toRem(8);
+    }
+    &__item.top::before{
+        top: 0;
+        transition: top 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
+        width 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }        
+    &__item.bottom::before,
+    &__item:not(.top):not(.bottom){
+        bottom: 0;
+        transition: bottom 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
+        width 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+    &__item:not(.item-map_positioned){
+        position: relative;
+        z-index: 1;
+    }
+   
+    &__item:focus{
+        outline: none;
+    }
+    &__item.top:focus::before{
+        top: toRem(-15);
+        width: calc(100% + toRem(10));
+    }
+    &__item.bottom:focus::before{
+        bottom: toRem(-15);
+        width: calc(100% + toRem(10));
+    }
+
+    &__item:not(.bottom):not(.top):focus::before{
+        bottom: toRem(-5);
+        width: calc(100% + toRem(10));
+    }
+    
+    @media (any-hover: hover) {
+        &__item.top:hover::before{
+            top: toRem(-15);
+            width: calc(100% + toRem(10));
+        }
+        &__item.bottom:hover::before{
+            bottom: toRem(-15);
+            width: calc(100% + toRem(10));
+        }
+
+        &__item:not(.bottom):not(.top):hover::before{
+            bottom: toRem(-5);
+            width: calc(100% + toRem(10));
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__item{
+            width: 100%;
+            &:not(:last-child){
+                margin-bottom: toRem(10);
+            }
+        }
+    }
+
+    @media (min-width: toEm(993, 16)) {
+        &__item_positioned.wash{
+            left: toRem(200.9 + 15);
+            top: toRem(72);
+        }
+        @media (max-width: toEm($container + 30, 16)) {
+            &__item_positioned.wash{
+                left: calc(toRem(200.9 + 15) - (toRem($container + 30) - 100vw) / 2);
+            }
+        }
+    }
+
+    @media (min-width: toEm(993, 16)) {
+        &__item_positioned.braz{
+            left: toRem(362.9 + 15);
+            bottom: toRem(144.01);
+        }
+        @media (max-width: toEm($container + 30, 16)) {
+            &__item_positioned.braz{
+                left: calc(toRem(362.9 + 15) - (toRem($container + 30) - 100vw) / 2);
+            }
+        }
+    }
+
+    @media (min-width: toEm(993, 16)) {
+        &__item_positioned.alzh{
+            right: toRem(420 + 15);
+            bottom: toRem(158.01);
+        }
+        @media (max-width: toEm($container + 30, 16)) {
+            &__item_positioned.alzh{
+                right: calc(toRem(420 + 15) - (toRem($container + 30) - 100vw) / 2);
+            }
+        }
+    }
+
+    @media (min-width: toEm(993, 16)) {
+        &__item_positioned.arsk{
+            right: toRem(204 + 15);
+            top: toRem(89);
+        }
+        @media (max-width: toEm($container + 30, 16)) {
+            &__item_positioned.arsk{
+                right: calc(toRem(204 + 15) - (toRem($container + 30) - 100vw) / 2);
+            }
+        }
+    }
+
+    @media (min-width: toEm(1148, 16)) {
+        &__item_positioned.japn{
+            right: toRem(57 + 15);
+            bottom: toRem(178.01);
+        }
+        @media (max-width: toEm($container + 30, 16)) {
+            &__item_positioned.japn{
+                right: calc(toRem(57 + 15) - (toRem($container + 30) - 100vw) / 2);
+            }
+        }
+    }
+}
+.header-map{
+    &__title{
+        line-height: math.div(39, 32);
+    }
+}
+@media (min-width: toEm(1148, 16)) or (max-width: toEm(992, 16)) {
+    .item-map{
+        &__inner{
+            background-color: $white;
+            padding: toRem(4) toRem(8) toRem(4) toRem(4);
+            border-radius: toRem(4);
+
+            display: grid;
+            grid-template-columns: toRem(40) 1fr;
+            column-gap: toRem(8);
+            align-items: center;
+
+            position: relative;
+            z-index: 2;
+        }
+        @media (min-width: toEm(993, 16)) {
+            &_default__inner{
+                grid-template-columns: toRem(60) 1fr;
+                padding: toRem(8);
+                border-radius: toRem(8);
+            }
+        }
+        @media (max-width: toEm(992, 16)) {
+            &__inner{
+                grid-template-columns: toRem(60) 1fr;
+                padding: toRem(8);
+                border-radius: toRem(8);
+            }
+        }
+        @media (max-width: toEm(480, 16)) {
+            &__inner{
+                grid-template-columns: toRem(50) 1fr;
+            }
+        }
+    
+        @media (min-width: toEm(993, 16)) {
+            &__arrow{
+                position: absolute;
+                z-index: 1;
+            }
+        }
+        @media (max-width: toEm(992, 16)) {
+            &__arrow{
+                display: none;
+            }
+        }
+    
+        @media (min-width: toEm(1148, 16)) {
+            &.japn &__arrow{
+                left: toRem(1);
+                bottom: toRem(-5);
+                transform: translateY(100%);
+            }
+            &.japn::after{
+                left: toRem(-2);
+                bottom: toRem(-28.91);
+                transform: translateY(100%);
+            }
+        }
+    
+        &__image{
+            padding-bottom: 100%;
+            position: relative;
+            z-index: 1;
+            img{
+                border-radius: toRem(4);
+                position: absolute;
+                z-index: 1;
+                left: 0;
+                top: 0;
+    
+                width: 100%;
+                height: 100%;
+            }
+        }
+        @media (min-width: toEm(993, 16)) {
+            &_default &__image img{
+                border-radius: toRem(8);
+            }
+        }
+        @media (max-width: toEm(992, 16)) {
+            &__image img{
+                border-radius: toRem(8);
+            }
+        }
+        
+        &__user{
+            color: $darkGreen;
+            font-family: "TradeGothic";
+            font-size: toRem(10);
+            font-weight: 700;
+            line-height: math.div(13, 10);
+        }
+        @media (min-width: toEm(993, 16)) {
+            &_default__user{
+                font-size: toRem(16);
+            }
+        }
+        @media (max-width: toEm(992, 16)) {
+            &__user{
+                font-size: toRem(16);
+            }
+        }
+    
+        &__ticket{
+            color: $darkGreen;
+            font-family: Montserrat;
+            font-size: toRem(8);
+            font-weight: 400;
+            line-height: math.div(10, 8);
+        }
+        @media (min-width: toEm(993, 16)) {
+            &_default__ticket{
+                font-size: toRem(12);
+            }
+        }
+        @media (max-width: toEm(992, 16)) {
+            &__ticket{
+                font-size: toRem(12);
+            }
+        }
+    }
+}
+@media (min-width: toEm(993, 16)) {
+    .item-map{
+        &.wash &__arrow{
+            left: toRem(46);
+            bottom: toRem(-6);
+            transform: translateY(100%);
+        }
+        &.wash::after{
+            left: toRem(104.33);
+            bottom: toRem(-30.76);
+            transform: translateY(100%);
+        }
+
+        &.braz &__arrow{
+            left: toRem(-11);
+            bottom: toRem(-6);
+            transform: translateY(100%);
+        }
+        &.braz::after{
+            left: toRem(-0.81);
+            bottom: toRem(-29.71);
+            transform: translateY(100%) translateX(-100%);
+        }
+
+        &.alzh &__arrow{
+            left: toRem(-12);
+            top: toRem(-3.44);
+            transform: translateY(-100%);
+        }
+        &.alzh::after{
+            left: toRem(-4);
+            top: toRem(-26.75);
+            transform: translateY(-100%) translateX(-100%);
+        }
+
+        &.arsk &__arrow{
+            left: toRem(-29);
+            bottom: toRem(-7);
+            transform: translateY(100%);
+        }
+        &.arsk::after{
+            left: toRem(-21);
+            bottom: toRem(-49);
+            transform: translateY(100%) translateX(-100%);
+        }
+    }
+}
+@media (max-width: toEm(1147.5, 16)) and (min-width: toEm(993, 16)) {
+    .item-map:not(.japn) .item-map__inner{
+        background-color: $white;
+        padding: toRem(4) toRem(8) toRem(4) toRem(4);
+        border-radius: toRem(4);
+
+        display: grid;
+        grid-template-columns: toRem(40) 1fr;
+        column-gap: toRem(8);
+        align-items: center;
+
+        position: relative;
+        z-index: 2;
+    }
+    @media (min-width: toEm(993, 16)) {
+        .item-map:not(.japn) .item-map_default__inner{
+            grid-template-columns: toRem(60) 1fr;
+        }
+    }
+
+    .item-map.japn .item-map__arrow{
+        display: none;
+    }
+    @media (min-width: toEm(993, 16)) {
+        .item-map:not(.japn) .item-map__arrow{
+            position: absolute;
+            z-index: 1;
+        }
+    }
+    
+    .item-map:not(.japn) .item-map__image{
+        padding-bottom: 100%;
+        position: relative;
+        z-index: 1;
+        img{
+            border-radius: toRem(4);
+            position: absolute;
+            z-index: 1;
+            left: 0;
+            top: 0;
+
+            width: 100%;
+            height: 100%;
+        }
+    }
+    @media (min-width: toEm(993, 16)) {
+        .item-map:not(.japn) .item-map_default__image img{
+            border-radius: toRem(8);
+        }
+    }
+    
+    .item-map:not(.japn) .item-map__user{
+        color: $darkGreen;
+        font-family: "TradeGothic";
+        font-size: toRem(10);
+        font-weight: 700;
+        line-height: math.div(13, 10);
+    }
+    @media (min-width: toEm(993, 16)) {
+        .item-map:not(.japn) .item-map_default__user{
+            font-size: toRem(16);
+        }
+    }
+
+    .item-map:not(.japn) .item-map__ticket{
+        color: $darkGreen;
+        font-family: Montserrat;
+        font-size: toRem(8);
+        font-weight: 400;
+        line-height: math.div(10, 8);
+    }
+    @media (min-width: toEm(993, 16)) {
+        .item-map:not(.japn) .item-map_default__ticket{
+            font-size: toRem(12);
+        }
+    }
+}

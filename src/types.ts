@@ -3,7 +3,7 @@ interface srcs{
     webp : string,
     jpeg : string
 }
-interface imageVariants{
+export interface imageVariants{
     srcs : srcs,
     alt : string
 }
@@ -21,13 +21,18 @@ export enum contentPart{
     Hotels = "Hotels"
 }
 
+interface link{
+    path : string,
+    description : string
+}
+
 export interface selectValue{
     startActive : number,
     items : string[]
 }
 export interface defaultSelect{
     title : string,
-    links : footerLink[]
+    links : link[]
 }
 
 export interface setter<T>{
@@ -63,6 +68,42 @@ export enum socialType{
     YouTube = "icon-youtube"
 }
 
+
+//------------Variant------------
+export interface introVariant{
+    heading : string,
+    subheading : string,
+    background : srcs
+}
+
+export interface variantTravelsItem{
+    image : srcs,
+    city : string,
+    shortInfo : string,
+    price : number,
+    linkPath : string
+}
+export interface variantTravels{
+    header : sectionHeader,
+    items : variantTravelsItem[],
+    buttonBook : string,
+    maxShow : number
+}
+
+export interface offersItem{
+    title : string,
+    price : number,
+    info : string,
+    linkPath : string,
+    images : imageVariants[]
+}
+export interface offers{
+    header : sectionHeader,
+    items : offersItem[],
+    buttonBook : string,
+    idShowedItem : number
+}
+
 //-------------------------HEADER-------------------------
 interface headerImageVariantsSrcs{
     black : string,
@@ -81,69 +122,6 @@ export interface header{
     links : contentPartValues,
     logo : headerImageVariants,
     authorization : headerButtons
-}
-
-//-------------------------START-------------------------
-interface startIntro{
-    background : srcs,
-    supheading : string,
-    heading : string,
-    subheading : string
-}
-
-
-export enum travelAvailable{
-    Flights = "Flights",
-    Hotels = "Hotels",
-    Resorts = "Resorts"
-}
-export interface travelsItem{
-    image : imageVariants,
-    city : string,
-    available : travelAvailable[]
-}
-
-export interface chooseOption{
-    title : string,
-    subtitle : string,
-    link : string,
-    background : srcs
-}
-interface choose{
-    flights : chooseOption,
-    hotels : chooseOption
-}
-
-interface reviewItemHotel{
-    company : string,
-    location : string,
-    linkToLocation : string
-}
-export interface reviewItem{
-    title : string,
-    info : string,
-    countStars : number,
-    author : string,
-    hotel : reviewItemHotel
-    image : imageVariants
-}
-export interface reviewsLinkToLocation{
-    googleLogo : string,
-    subGoogleLogo : string
-}
-interface reviews{
-    header : sectionHeader,
-    items : reviewItem[],
-    buttonViewAll : string,
-    linkToLocation : reviewsLinkToLocation
-    maxShow : number
-}
-
-export interface start{
-    intro : startIntro,
-    travels : section<travelsItem>,
-    choose : choose,
-    reviews : reviews
 }
 
 //-------------------------OPTIONS-------------------------
@@ -238,10 +216,6 @@ export interface post{
     image : image
 }
 
-interface footerLink{
-    path : string,
-    description : string
-}
 
 interface foooterSocial{
     type : socialType,
@@ -259,4 +233,129 @@ interface footerMain{
 export interface footer{
     post : post,
     main : footerMain
+}
+
+//-------------------------START-------------------------
+interface startIntro{
+    background : srcs,
+    supheading : string,
+    heading : string,
+    subheading : string
+}
+
+
+export enum travelAvailable{
+    Flights = "Flights",
+    Hotels = "Hotels",
+    Resorts = "Resorts"
+}
+export interface travelsItem{
+    image : imageVariants,
+    city : string,
+    available : travelAvailable[]
+}
+
+export interface chooseOption{
+    title : string,
+    subtitle : string,
+    link : string,
+    background : srcs
+}
+interface choose{
+    flights : chooseOption,
+    hotels : chooseOption
+}
+
+interface reviewItemHotel{
+    company : string,
+    location : string,
+    linkToLocation : string
+}
+export interface reviewItem{
+    title : string,
+    info : string,
+    countStars : number,
+    author : string,
+    hotel : reviewItemHotel
+    image : imageVariants
+}
+export interface reviewsLinkToLocation{
+    googleLogo : string,
+    subGoogleLogo : string
+}
+interface reviews{
+    header : sectionHeader,
+    items : reviewItem[],
+    buttonViewAll : string,
+    linkToLocation : reviewsLinkToLocation
+    maxShow : number
+}
+
+export interface start{
+    intro : startIntro,
+    travels : section<travelsItem>,
+    choose : choose,
+    reviews : reviews
+}
+
+//-------------------------FLIGHTS-------------------------
+export enum mapItemType{
+    Default = "Default",
+    PartOfMap = "PartOfMap"
+}
+export enum mapPartType{
+    Washington = "wash",
+    Brazil = "braz",
+    Alzhir = "alzh",
+    Aralsk = "arsk",
+    Japan = "japn",
+}
+interface mapImageVariants{
+    main : imageVariants,
+    arrow : image
+}
+export interface mapPart{
+    type : mapItemType.PartOfMap,
+    location : mapPartType,
+    ticketNumb : number,
+    image : mapImageVariants,
+    linkPath : string
+}
+export interface mapPropose{
+    type : mapItemType.Default,
+    ticketNumb : number,
+    image : imageVariants,
+    linkPath : string
+}
+export type mapItem = mapPart | mapPropose;
+interface map{
+    header : sectionHeader,
+    items : mapItem[],
+    background : srcs
+}
+
+export interface flights{
+    intro : introVariant,
+    map : map,
+    travels : variantTravels,
+    offers : offers
+}
+
+//-------------------------Hotels-------------------------
+export interface recentItem{
+    image : imageVariants,
+    city : string,
+    countPlaces : number,
+    linkPath : string
+}
+interface recent{
+    heading : string,
+    items : recentItem[];
+}
+
+export interface hotels{
+    intro : introVariant,
+    recent : recent,
+    travels : variantTravels,
+    offers : offers
 }

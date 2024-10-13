@@ -1,6 +1,6 @@
 import React, { FC, useRef, useState, FocusEvent, MouseEvent } from "react";
-import { selectValue, setter } from "../../types";
-import { makeActiveState, makePseudoActive, makeUnActiveState, makeUnPseudoActive, toggleState } from "../../helperFunctions";
+import { selectValue, setter } from "../../../types";
+import { makeActiveState, makePseudoActive, makeUnActiveState, makeUnPseudoActive, toggleState } from "../../../helperFunctions";
 
 interface selectReplaceProps{
     parentClasses : string[],

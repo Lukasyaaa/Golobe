@@ -1,4 +1,8 @@
-.container, .container_header, .container_intro{
+body._locked{
+    overflow-y: hidden;
+}
+
+.container, .container_header, .container_intro, .container_intro-variant{
     margin-right: auto;
     margin-left: auto;
     padding-left: 15px;
@@ -13,6 +17,10 @@
 .container_intro{
     max-width: toRem($introContainer + 30);
 }
+.container_intro-variant{
+    max-width: toRem($introVariantContainer + 30);
+}
+
 
 .button_question{
     display: inline-flex;
@@ -170,12 +178,7 @@
     @media (min-width: toEm(769, 16)) {
         &__info{
             max-width: toRem(768);
-            margin-right: toRem(32);
-        }
-        @media (max-width: toEm(992, 16)) {
-            &__info{
-                margin-right: toRem(24);
-            }
+            margin-right: toRem(24);
         }
     }
 
@@ -222,6 +225,7 @@
         display: flex;
         align-items: center;
         min-height: toRem(40);
+        white-space: nowrap;
 
         background-color: transparent;
         border: toRem(1) solid $mint;
@@ -258,5 +262,111 @@
 
             margin-top: toRem(5);
         }
+    }
+}
+
+.intro_variants{
+    &__back{
+        position: relative;
+        z-index: 1;
+        &::after{
+            background: linear-gradient(90.00deg, rgba(0, 35, 77, 0.63) 11.458%, rgb(0, 35, 77, 0) 77.375%);
+            content: "";
+
+            position: absolute;
+            z-index: 1;
+            left: 0;
+            top: 0;
+
+            width: 100%;
+            height: 100%;
+        }
+    }
+    
+    .container_intro-variant{
+        position: relative;
+        z-index: 2;
+
+        padding-top: toRem(80 + 90);
+        padding-bottom: toRem(254);
+    }
+    @media (max-width: toEm(992, 16)) {
+        .container_intro-variant{
+            padding-top: toRem(64 + 86);
+            padding-bottom: toRem(200);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        .container_intro-variant{
+            padding-top: toRem(46 + 76);
+            padding-bottom: toRem(130);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        .container_intro-variant{
+            padding-top: toRem(32 + 66);
+            padding-bottom: toRem(100);
+        }
+    }
+    @media (max-width: toEm(320, 16)) {
+        .container_intro-variant{
+            padding-top: toRem(32 + 60);
+            padding-bottom: toRem(100);
+        }
+    }
+
+
+    &__heading{
+        color: $white;
+        font-family: "TradeGothic";
+        font-size: toRem(45);
+        font-weight: 700;
+        line-height: math.div(57, 45);
+        margin-bottom: toRem(8);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__heading{
+            font-size: toRem(40);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__heading{
+            font-size: toRem(36);
+            line-height: math.div(40, 36);
+            margin-bottom: toRem(4);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__heading{
+            font-size: toRem(28);
+        }
+    }
+
+    &__subheading{
+        color: $white;
+        font-family: Montserrat;
+        font-size: toRem(20);
+        font-weight: 500;
+        line-height: math.div(24, 20);
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__subheading{
+            font-size: toRem(18);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__subheading{
+            font-size: toRem(16);
+        }
+    }
+
+    &__info{
+        max-width: toRem(440);
+    }
+
+    &__options{
+        position: relative;
+        z-index: 3;
+        margin-top: toRem(-61);
     }
 }

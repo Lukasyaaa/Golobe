@@ -18,15 +18,20 @@ export const Options : FC<optionsProps> = ({neededBlocks, startValue}) =>{
     let isFirst = useRef<boolean>(true);
     let copyNeededBlocks = useRef<optionsNeededBlocks>(neededBlocks);
 
+    let parentClasses : string[] = [];
     if(isFirst.current){
         isFirst.current = false;
         switch(neededBlocks){
             case optionsNeededBlocks.FlightHeader:
+                parentClasses.push("intro_variants");
+                parentClasses.push("intro-flights");
                 if(state.header.flights === "" || state.inputs.flights.length === 0){
                     return <Fragment />
                 }
                 break;
             case optionsNeededBlocks.HotelHeader:
+                parentClasses.push("intro_variants");
+                parentClasses.push("intro-hotels");
                 if(state.header.hotels === "" || state.inputs.hotels.length === 0){
                     return <Fragment />
                 }
@@ -43,6 +48,7 @@ export const Options : FC<optionsProps> = ({neededBlocks, startValue}) =>{
                 }
                 break;
             case optionsNeededBlocks.BothHeaders:
+                parentClasses.push("intro-start");
                 if(state.inputs.flights.length === 0){
                     if(state.header.hotels === "" || state.inputs.hotels.length === 0){
                         return <Fragment />
@@ -60,50 +66,67 @@ export const Options : FC<optionsProps> = ({neededBlocks, startValue}) =>{
         }
     }
     
-    let classes = ["intro-start__options", "options-intro-start", "intro__options options", "container"]
+    let classes =  [
+        parentClasses.map(cl => cl + "__options").join(" "), parentClasses.map(cl => "options-" + cl).join(" "), 
+        "options", "container"
+    ]
     if(copyNeededBlocks.current !== optionsNeededBlocks.BothHeaders){
         classes.push("header-text");
     }
+
+    let inputsCount : number = 0;
     return(
         <article className={classes.join(" ")}>
-            <div className="options-intro-start__inner options__inner">
+            <div className={parentClasses.map(cl => "options-" + cl + "__inner").join(" ") +  " options__inner"}>
                 {(copyNeededBlocks.current === optionsNeededBlocks.BothHeaders) ? 
                     <OptionsHeader value={state.header} activeLink={{value: choosedOptions, set: setChoosedOptions}}/> :
-                    <div className="options-intro-start__header_text options__header_text">
-                        {(copyNeededBlocks.current === optionsNeededBlocks.FlightHeader) ? state.header.flights : state.header.hotels}
+                    <div className={parentClasses.map(cl => "options-" + cl + "__header_text").join(" ") +  " options__header_text"}>
+                        {(copyNeededBlocks.current === optionsNeededBlocks.FlightHeader) ? 
+                            state.header.onlyFlights : state.header.onlyHotels
+                        }
                     </div>
                 }
-                <div className="options-intro-start__rows options__rows">
+                <div className={parentClasses.map(cl => "options-" + cl + "__rows").join(" ") +  " options__rows"}>
                     {new Array(Math.ceil(choosedItems.length / 4)).fill(0).map((_, i) => 
-                        <ul className="options__inputs" key={i}>
+                        <ul className={parentClasses.map(cl => "options-" + cl + "__inputs").join(" ") +  " options__inputs"} key={i}>
                             {choosedItems.slice(i*4, Math.min((i+1) * 4, choosedItems.length)).map((input, j) => {
                                 if(input.type === optionType.Input){
                                     return <OptionsInput 
                                         key={(i + 1) * j}
+                                        id={++inputsCount}
                                         title={input.title} placeholder={input.value} iconPosition={input.iconPosition} 
                                         isBigger={choosedOptions === contentPart.Hotels && state.inputs.hotels[j].isBigger} 
-                                        parent={choosedOptions}
+                                        parent={choosedOptions} parentClasses={parentClasses.map(cl => "options-" + cl)}
                                     />
                                 }
                                 return <OptionsSelect 
                                     key={(i + 1) * j}
                                     title={input.title} links={input.value} parent={choosedOptions}
                                     isBigger={choosedOptions === contentPart.Hotels && state.inputs.hotels[j].isBigger}
+                                    parentClasses={parentClasses.map(cl => "options-" + cl)}
                                 />
                             })}
                         </ul>
                     )}
                 </div>
                 {copyNeededBlocks.current !== optionsNeededBlocks.OnlyInputs &&
-                    <div className="options-intro-start__footer options__footer">
+                    <div className={parentClasses.map(cl => "options-" + cl + "__footer").join(" ") +  " options__footer"}>
                         <button 
-                            className="options-intro-start__promo options-intro-start__button options__promo options__button icon-plus" 
+                            className={
+                                parentClasses.map(cl => "options-" + cl + "__promo").join(" ") + " " +
+                                parentClasses.map(cl => "options-" + cl + "__button").join(" ") +
+                                " options__promo options__button icon-plus"
+                            } 
                             type="button"
                         >
                             <span>{state.footer.addPromoText}</span>
                         </button>
                         <button 
-                            className="options-intro-start__show options-intro-start__button options__show options__button button_question icon-send" 
+                            className={
+                                parentClasses.map(cl => "options-" + cl + "__show").join(" ") + " " +
+                                parentClasses.map(cl => "options-" + cl + "__button").join(" ") +
+                                " options__show options__button button_question icon-send"
+                            } 
                             type="button"
                         >
                             <span>
