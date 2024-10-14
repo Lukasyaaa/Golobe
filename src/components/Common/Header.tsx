@@ -1,4 +1,4 @@
-import React, { FC, Fragment, useEffect, useRef, useState } from "react";
+import React, { FC, Fragment, useEffect, useRef, useState, FocusEvent, MouseEvent } from "react";
 import { useTypedSelector } from "../../useTypedSelector";
 import { NavLink, useLocation } from "react-router-dom";
 import { flightsPath, homePath, hotelsPath, logInPath, signInPath } from "../../App";
@@ -15,19 +15,68 @@ enum headerStyle{
     start = "start"
 }
 
+interface headerTabIndexes{
+    nav : number,
+    image : number,
+    authorization : number,
+    burger : number,
+    hiddenAuthorization : number
+}
+
 export const Header : FC = () =>{
     const state = useTypedSelector(store => store.header);
     let [style, setStyle] = useState(headerStyle.start);
+    let [tabIndexes, setTabIndexes] = useState<headerTabIndexes>({
+        nav: -1,
+        image: -1,
+        authorization: -1,
+        burger: -1,
+        hiddenAuthorization: -1
+    });
     let location = useLocation();
 
     const header = useRef<HTMLElement>(null);
     useEffect(() => {
-        document.body.classList.remove("_locked");
+        hideHeader();
         switch(location.pathname){
             case homePath:
+                if(window.innerWidth > 768){
+                    setTabIndexes({
+                        nav: 1,
+                        burger: -1,
+                        image: -1,
+                        authorization: 3,
+                        hiddenAuthorization: -2
+                    });
+                } else {
+                    setTabIndexes({
+                        nav: 4,
+                        burger: 3,
+                        image: -1,
+                        authorization: 1,
+                        hiddenAuthorization: (window.innerWidth > 480) ? -2 : 6
+                    });
+                }
                 setStyle(headerStyle.start);
                 break;
             default:
+                if(window.innerWidth > 768){
+                    setTabIndexes({
+                        nav: 1,
+                        burger: -1,
+                        image: 2,
+                        authorization: 3,
+                        hiddenAuthorization: -2
+                    });
+                } else {
+                    setTabIndexes({
+                        nav: 5,
+                        burger: 4,
+                        image: 1,
+                        authorization: 2,
+                        hiddenAuthorization: (window.innerWidth > 480) ? -2 : 6
+                    });
+                }
                 setStyle(headerStyle.blackWhite);
                 break;
         }
@@ -44,6 +93,18 @@ export const Header : FC = () =>{
             }
             header.current.classList.toggle("_active");
             document.body.classList.toggle("_locked");
+        }
+    }
+    const showHeader = () => {
+        if(header.current){
+            header.current.classList.add("_active");
+            document.body.classList.add("_locked");
+        }
+    }
+    const hideHeader = () => {
+        if(header.current){
+            header.current.classList.remove("_active");
+            document.body.classList.remove("_locked");
         }
     }
     const handleScroll = () => {
@@ -89,6 +150,20 @@ export const Header : FC = () =>{
         }
     }
 
+    const makeLinkPseudoActive = (e : FocusEvent<HTMLElement> | MouseEvent<HTMLElement>) : void =>{
+        makePseudoActive(e, headerLinks);
+        if(window.innerWidth <= 768){
+            showHeader();
+        }
+    }
+
+    const makeLinkUnPseudoActive = (e : FocusEvent<HTMLElement> | MouseEvent<HTMLElement>) : void =>{
+        makeUnPseudoActive(e, headerLinks);
+        if(window.innerWidth <= 768 && window.innerWidth > 480){
+            hideHeader();
+        }
+    }
+
     return(
         <header 
             className={"header " + ((style === headerStyle.activeBlackWhite) ? headerStyle.blackWhite : style)} 
@@ -108,6 +183,7 @@ export const Header : FC = () =>{
                                 </li>
                                 <li className="menu-header__link menu-header__link_hotel">
                                     <NavLink 
+                                        tabIndex={tabIndexes.nav}
                                         className="menu-header__link-inner menu-header__link_hotel-inner icon-bed" to={hotelsPath}
                                         onClick={(e) => makeUnPseudoActive(e, headerLinks)}
                                         onMouseEnter={(e) => makePseudoActive(e, headerLinks)} 
@@ -115,8 +191,8 @@ export const Header : FC = () =>{
                                             if(e.target !== document.activeElement){
                                                 makeUnPseudoActive(e, headerLinks);
                                             }
-                                        }} onFocus={(e) => makePseudoActive(e, headerLinks)} 
-                                        onBlur={(e) => makeUnPseudoActive(e, headerLinks)}
+                                        }} onFocus={(e) => makeLinkPseudoActive(e)} 
+                                        onBlur={(e) => makeLinkUnPseudoActive(e)}
                                     >
                                         <span>{state.links.hotels}</span>
                                     </NavLink>
@@ -127,16 +203,16 @@ export const Header : FC = () =>{
                                 <Fragment>
                                     <li className="menu-header__link menu-header__link_flight">
                                         <NavLink 
-                                            className="menu-header__link-inner menu-header__link_flight-inner icon-plane" 
-                                            to={flightsPath}
+                                            tabIndex={tabIndexes.nav}
+                                            className="menu-header__link-inner menu-header__link_flight-inner icon-plane" to={flightsPath}
                                             onClick={(e) => makeUnPseudoActive(e, headerLinks)}
                                             onMouseEnter={(e) => makePseudoActive(e, headerLinks)} 
                                             onMouseLeave={(e) => {
                                                 if(e.target !== document.activeElement){
                                                     makeUnPseudoActive(e, headerLinks);
                                                 }
-                                            }} onFocus={(e) => makePseudoActive(e, headerLinks)} 
-                                            onBlur={(e) => makeUnPseudoActive(e, headerLinks)}
+                                            }} onFocus={(e) => makeLinkPseudoActive(e)} 
+                                            onBlur={(e) => makeLinkUnPseudoActive(e)}
                                         >
                                             <span>{state.links.flights}</span>
                                         </NavLink>
@@ -153,16 +229,28 @@ export const Header : FC = () =>{
                                 <Fragment>
                                     <li className="menu-header__link menu-header__link_flight">
                                         <NavLink 
+                                            tabIndex={tabIndexes.nav}
                                             className="menu-header__link-inner menu-header__link_flight-inner icon-plane _active" 
                                             to={flightsPath}
+                                            onFocus={() => {
+                                                if(window.innerWidth <= 768){
+                                                    showHeader();
+                                                }
+                                            }}
                                         >
                                             <span>{state.links.flights}</span>
                                         </NavLink>
                                     </li>
                                     <li className="menu-header__link menu-header__link_hotel">
                                         <NavLink 
+                                            tabIndex={tabIndexes.nav + 1}
                                             className="menu-header__link-inner menu-header__link_hotel-inner icon-bed _active"
                                             to={hotelsPath}
+                                            onBlur={() => {
+                                                if(window.innerWidth <= 768 && window.innerWidth > 480){
+                                                    hideHeader();
+                                                }
+                                            }}
                                         >
                                             <span>{state.links.hotels}</span>
                                         </NavLink>
@@ -179,6 +267,7 @@ export const Header : FC = () =>{
                             ].join(" ")}
                         >
                             <NavLink 
+                                tabIndex={tabIndexes.hiddenAuthorization}
                                 className="authorization-menu-header__link-inner authorization-menu-header__link_log-in-inner" 
                                 to={logInPath}
                             >
@@ -192,8 +281,10 @@ export const Header : FC = () =>{
                             ].join(" ")}
                         >
                             <NavLink 
+                                tabIndex={tabIndexes.hiddenAuthorization + 1}
                                 className="authorization-menu-header__link-inner authorization-menu-header__link_sign-in-inner" 
                                 to={signInPath}
+                                onBlur={hideHeader}
                             >
                                 {state.authorization.signIn}
                             </NavLink>
@@ -207,6 +298,7 @@ export const Header : FC = () =>{
                     :
                     ((style === headerStyle.activeBlackWhite) ?
                         <NavLink 
+                            tabIndex={tabIndexes.image}
                             className="header__image" to={homePath}                                
                             onMouseEnter={hideActiveLink} 
                             onMouseLeave={(e) => {
@@ -219,6 +311,7 @@ export const Header : FC = () =>{
                         </NavLink> 
                         : 
                         <NavLink 
+                            tabIndex={tabIndexes.image}
                             className="header__image" to={homePath}
                             onMouseEnter={hideActiveLink} 
                             onMouseLeave={(e) => {
@@ -235,6 +328,7 @@ export const Header : FC = () =>{
                     <ul className="authorization__list _right" ref={buttonsList}>
                         <li className="authorization__link authorization__link_log-in">
                             <NavLink 
+                                tabIndex={tabIndexes.authorization}
                                 className="authorization__link-inner authorization__link_log-in-inner" to={logInPath}
                                 onMouseEnter={makeLeftPseudoActive} onFocus={makeLeftPseudoActive}
                             >
@@ -243,6 +337,7 @@ export const Header : FC = () =>{
                         </li>
                         <li className="authorization__link authorization__link_sign-in">
                             <NavLink
+                                tabIndex={tabIndexes.authorization + 1}
                                 className="authorization__link-inner authorization__link_sign-in-inner" to={signInPath}
                                 onMouseEnter={makeRightPseudoActive} onFocus={makeRightPseudoActive}
                             >
@@ -251,7 +346,7 @@ export const Header : FC = () =>{
                         </li>
                     </ul>
                 </nav>
-                <button className="header__burger burger" type="button" onClick={toggleHeader}><span></span></button>
+                <button className="header__burger burger" type="button" onClick={toggleHeader} tabIndex={tabIndexes.burger}><span></span></button>
             </div>
         </header>
     )

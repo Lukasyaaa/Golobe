@@ -28,7 +28,7 @@ export const Footer : FC = () =>{
                                 {state.main.info.socials.length > 0 &&
                                     <ul className="footer__socials">
                                         {state.main.info.socials.map((social, i) => 
-                                            <li className="footer__social">
+                                            <li className="footer__social" key={i}>
                                                 <a className={"footer__social-inner " + social.type} href={social.path}></a>
                                             </li>
                                         )}

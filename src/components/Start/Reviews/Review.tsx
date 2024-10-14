@@ -29,9 +29,9 @@ export const Review : FC<reviewProps> = ({about, linkToLocation, viewAll}) => {
                 <ul className="item-reviews__stars">
                     {new Array(5).fill(0).map((star, i) => {
                         if(i < about.countStars - 1){
-                            return <li className="item-reviews__star filled icon-star"></li>
+                            return <li className="item-reviews__star filled icon-star" key={i}></li>
                         }
-                        return <li className="item-reviews__star icon-star"></li>
+                        return <li className="item-reviews__star icon-star" key={i}></li>
                     })}
                 </ul>
                 <div className="item-reviews__author">{about.author}</div>

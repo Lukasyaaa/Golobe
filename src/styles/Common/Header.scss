@@ -130,7 +130,7 @@
     &.black-white._active &__image::after{
         background-color: $white;
     }
-    &__image:focus{
+    &.black-white &__image:focus{
         outline: none;
         &::after{
             width: calc(100% + toRem(6));
@@ -393,11 +393,21 @@
         height: 100%;
         border-color: $white;
     }
+    @media (max-width: toEm(768, 16)) {
+        .header.start &__link-inner:focus::after{
+            height: calc(100% + toRem(7.5));
+        }
+    }
     @media (any-hover: hover) {
         .header.start &__link-inner:hover::after{
             width: calc(100% + toRem(7.5));
             height: 100%;
             border-color: $white;
+        }
+        @media (max-width: toEm(768, 16)) {
+            .header.start &__link-inner:hover::after{
+                height: calc(100% + toRem(7.5));
+            }
         }
     }
     @media (max-width: toEm(768, 16)) {
@@ -682,6 +692,12 @@
             top: toRem(18.5);
         }
 
+        &:focus{
+            outline: none;
+            span, &::after, &::before{
+                background-color: $mint;
+            }
+        }
         @media (any-hover: hover) {
             &:hover{
                 span, &::after, &::before{
