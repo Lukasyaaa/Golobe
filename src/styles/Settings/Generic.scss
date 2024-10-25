@@ -2,6 +2,17 @@ body._locked{
     overflow-y: hidden;
 }
 
+.wrapper, body{
+    min-height: 100vh;
+}
+.wrapper{
+    display: flex;
+    flex-direction: column;
+}
+main{
+    flex: 1 1 auto;
+}
+
 .container, .container_header, .container_intro, .container_intro-variant{
     margin-right: auto;
     margin-left: auto;
@@ -315,7 +326,6 @@ body._locked{
         }
     }
 
-
     &__heading{
         color: $white;
         font-family: "TradeGothic";
@@ -368,5 +378,12 @@ body._locked{
         position: relative;
         z-index: 3;
         margin-top: toRem(-61);
+    }
+}
+
+.flights{
+    margin-top: toRem(90 + 48);
+    &__options{
+        margin-bottom: toRem(32);
     }
 }

@@ -5,6 +5,7 @@ import { startReducer } from "./startReducer";
 import { footerReducer } from "./common/footerReducer";
 import { flightsReducer } from "./flightsReducer";
 import { hotelsReducer } from "./hotelsReducer";
+import { navbarReducer } from "./navbarReducer";
 
 const rootReducer = combineReducers({
     header: headerReducer,
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
     start: startReducer,
     flights: flightsReducer,
     hotels: hotelsReducer,
-    footer: footerReducer
+    footer: footerReducer,
+    navbar: navbarReducer
 })
 
 export const store = createStore(rootReducer);
