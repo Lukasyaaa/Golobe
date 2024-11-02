@@ -381,9 +381,358 @@ main{
     }
 }
 
-.flights{
-    margin-top: toRem(90 + 48);
+.configurate{
+    background-color: $lightGray;
+    padding-top: toRem(90 + 48);
+    padding-bottom: toRem(116);
+    @media (max-width: toEm(992, 16)) {
+        padding-top: toRem(86 + 40);
+        padding-bottom: toRem(80);
+    }
+    @media (max-width: toEm(768, 16)) {
+        padding-top: toRem(76 + 32);
+        padding-bottom: toRem(64);
+    }
+    @media (max-width: toEm(480, 16)) {
+        padding-top: toRem(66 + 24);
+        padding-bottom: toRem(32);
+    }
+    @media (max-width: toEm(320, 16)) {
+        padding-top: toRem(60 + 24);
+        padding-bottom: toRem(32);
+    }
+
     &__options{
         margin-bottom: toRem(32);
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__options{
+            margin-bottom: toRem(24);
+        }
+    }
+    
+    @media (min-width: toEm(993, 16)) {
+        &__row{
+            display: grid;
+            grid-template-columns: toPercent(343, $container) 1fr;
+            column-gap: toRem(40);
+        }
+
+        &__column{
+            margin-right: toRem(9);
+        }
+    }
+
+    &__content{
+        margin-top: toRem(24);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__content{
+            margin-top: toRem(16);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__content{
+            margin-top: toRem(10);
+        }
+    }
+}
+.configurate ~ .footer{
+    background-color: $lightGray;
+}
+
+.content{
+    @media (min-width: toEm(481, 16)) {
+        &__header{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+    &__header{
+        margin-bottom: toRem(24);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__header{
+            margin-bottom: toRem(16);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__header{
+            margin-bottom: toRem(10);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__header{
+            text-align: center;
+        }
+    }
+
+    &__item{
+        box-shadow: 0px 4px 16px 0px rgba(17, 34, 17, 0.05);
+        border-radius: toRem(12);
+        background-color: $white;
+    }
+
+    &__items{
+        transition: height 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+        overflow: hidden;
+    }
+
+    &__items-hidden{
+        padding-top: toRem(32);
+        &._hidden{
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__items-hidden{
+            padding-top: toRem(24);
+        }
+    }
+
+    &__show-more{
+        width: 100%;
+        border-radius: toRem(4);
+        background-color: $darkGreen;
+        padding: toRem(8) toRem(16);
+        min-height: toRem(48);
+
+        color: $white;
+        font-family: Montserrat;
+        font-size: toRem(14);
+        font-weight: 600;
+        line-height: math.div(17, 14);
+    
+        margin-top: toRem(24);
+
+        transition: box-shadow 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
+        text-shadow 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+    &__show-more:focus{
+        outline: none;
+        box-shadow: 0 0 10px $darkGreen, inset 0 0 5px $white;
+        text-shadow: 0 0 5px $white;
+    }
+    @media (any-hover: hover) {
+        &__show-more:hover{
+            box-shadow: 0 0 10px $darkGreen, inset 0 0 5px $white;
+            text-shadow: 0 0 5px $white;
+        }
+    }
+}
+.header-content{
+    @media (min-width: toEm(481, 16)) {
+        &__show{
+            margin-right: toRem(24);
+        }
+        @media (max-width: toEm(768, 16)) {
+            &__show{
+                margin-right: toRem(16);
+            }
+        }
+    }
+    &__show{
+        display: inline-block;
+
+        color: $darkGreen;
+        font-family: Montserrat;
+        font-size: toRem(14);
+        font-weight: 600;
+        line-height: math.div(18, 14);
+
+        mark{
+            color: $lightRed;
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__show{
+            margin-bottom: toRem(4);
+        }
+    }
+}
+.select-header-content{
+    &__opener{
+        display: flex;
+        align-items: center;
+        flex-direction: row-reverse;
+
+        span, &::after{
+            color: $darkGreen;
+            font-family: Montserrat;
+            font-size: toRRem(14);
+            line-height: math.div(18, 14);
+        }
+
+        span{
+            font-weight: 600;
+        }
+        &::after{
+            content: "Sort by";
+            margin-right: toRem(4);
+        }
+
+        &::before{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: toRem(10);
+
+            width: toRem(18);
+            height: toRem(18);
+            margin-left: toRem(4);
+
+            transition: transform 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+        }
+
+        transition: text-shadow 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__opener{
+            width: 100%;
+            justify-content: center;
+        }
+    }
+
+    &._active &__opener::before{
+        transform: rotate(180deg);
+    }
+    &__opener:focus{
+        text-shadow: 0 0 10px $darkGreen;
+        outline: none;
+    }
+    @media (any-hover: hover) {
+        &__opener:hover{
+            text-shadow: 0 0 10px $darkGreen;
+        }
+    }
+}
+.item-content{
+    &__footer{
+        display: flex;
+
+        padding-top: toRem(32.5);
+        position: relative;
+        z-index: 1;
+        &::before{
+            background: rgba($color: $black, $alpha: 0.25);
+            content: "";
+
+            position: absolute;
+            z-index: 1;
+            left: 0;
+            top: toRem(16);
+
+            width: 100%;
+            height: toRem(0.5);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__footer{
+            padding-top: toRem(24.5);
+            &::before{
+                top: toRem(12);
+            }
+        }
+    }
+
+    &__favourites{
+        font-size: toRem(13.86);
+        color: $black;
+
+        border-radius: toRem(4);
+        border: toRem(1) solid $mint;
+        min-width: toRem(48);
+
+        margin-right: toRem(16);
+
+        transition: background-color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
+        color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+    &__favourites:focus{
+        outline: none;
+        background-color: $mint;
+        color: $white;
+    }
+    @media (any-hover: hover) {
+        &__favourites:hover{
+            background-color: $mint;
+            color: $white;
+        }
+    }
+
+    &__view-more{
+        flex: 1 1 auto;
+
+        border-radius: toRem(4);
+        background-color: $mint;
+        padding: toRem(8) toRem(16);
+        min-height: toRem(48);
+
+        color: $darkGreen;
+        font-family: Montserrat;
+        font-size: toRem(14);
+        font-weight: 600;
+        line-height: math.div(17, 14);
+
+        transition: border-color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
+        background-color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
+        color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
+        text-shadow 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__view-more{
+            min-height: toRem(40);
+        }
+    }
+    &__view-more:focus{
+        outline: none;
+        border-color: $darkGreen;
+        background-color: $darkGreen;
+        color: $mint;
+        text-shadow: 0 0 8px $mint;
+    }
+    @media (any-hover: hover) {
+        &__view-more:hover{
+            border-color: $darkGreen;
+            background-color: $darkGreen;
+            color: $mint;
+            text-shadow: 0 0 8px $mint;
+        }
+    }
+}
+
+.short-review{
+    display: flex;
+    align-items: center;
+    
+    &__rating{
+        display: inline-block;
+
+        color: $darkGreen;
+        font-family: Montserrat;
+        font-size: toRem(12);
+        font-weight: 500;
+        line-height: math.div(15, 12);
+
+        border: toRem(1) solid $mint;
+        border-radius: toRem(4);
+        padding: toRem(7.5) toRem(10);
+
+        margin-right: toRem(8);
+    }
+
+    &__count-reviews{
+        color: $darkGreen;
+        font-family: Montserrat;
+        font-size: toRem(12);
+        font-weight: 500;
+        line-height: math.div(15, 12);
+        strong{
+            font-weight: 700;
+        }
     }
 }

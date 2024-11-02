@@ -149,7 +149,6 @@
         border-radius: toRem(8);
         background-color: $mint;
 
-        text-align: center;
         font-family: Montserrat;
         font-size: toRem(16);
         color: $white;
@@ -159,6 +158,9 @@
 
         img{
             border-radius: toRem(8);
+
+            text-overflow: ellipsis;
+            overflow: hidden;
 
             position: absolute;
             z-index: 1;

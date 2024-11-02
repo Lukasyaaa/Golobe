@@ -151,7 +151,24 @@
             color: $darkGreen;
             border-radius: toRem(4);
             background-color: $mint;
+
+            transition: color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
+            text-shadow 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
+            background-color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
         }
+    }
+    @media (any-hover: hover) {
+        &__find button:hover{
+            color: $mint;
+            text-shadow: 0 0 10px $mint;
+            background-color: $darkGreen;
+        }
+    }
+    &__find button:focus{
+        outline: none;
+        color: $mint;
+        text-shadow: 0 0 10px $mint;
+        background-color: $darkGreen;
     }
     @media (max-width: toEm(768, 16)) {
         &__find{
@@ -581,19 +598,21 @@
     }
 }
 .select-item-options{
-    &::before{
-        font-size: toRem(8.254);
+    &__opener::before{
+        font-size: toRem(13.5);
 
         @extend %iconInput;
         right: toRem(12);
         bottom: 50%;
+
+        transition: transform 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
     }
     @media (max-width: toEm(992, 16)) {
-        &::before{
+        &__opener::before{
             right: toRem(8);
         }
     }
-    &._active::before{
+    &._active &__opener::before{
         transform: rotate(180deg) translateY(-50%);
     }
 

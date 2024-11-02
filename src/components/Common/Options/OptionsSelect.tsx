@@ -4,14 +4,15 @@ import { SelectReplace } from "../Select/SelectReplace";
 
 interface optionsSelectProps{
     title : string,
-    links : selectValue,
+    about : selectValue<string>,
     isBigger : boolean,
     parent : contentPart,
     parentClasses : string[]
 }
 
-export const OptionsSelect : FC<optionsSelectProps> = ({title, links, isBigger, parent, parentClasses}) =>{
+export const OptionsSelect : FC<optionsSelectProps> = ({title, about, isBigger, parent, parentClasses}) =>{
     let [isActive, setIsActive] = useState<boolean>(false);
+    let [activeLink, setActiveLink] = useState<number>(about.activeLink);
 
     let classes : string[] = [
         "options__item", "item-options", 
@@ -54,7 +55,9 @@ export const OptionsSelect : FC<optionsSelectProps> = ({title, links, isBigger, 
         <li className={classes.join(" ")} ref={selectParent}>
             <div className={innerClasses.join(" ")}>
                 <SelectReplace 
-                    parentClasses={["item-options", parentClasses.map(cl => "item-" + cl).join(" ")]} links={links} isActive={{value: isActive, set: setIsActive}}
+                    parentClasses={["item-options", parentClasses.map(cl => "item-" + cl).join(" ")]} links={about.links} 
+                    isActive={{value: isActive, set: setIsActive}} activeLink={{value: activeLink, set: setActiveLink}}
+                    title={null}
                     makeSelectPseudoActive={makeSelectPseudoActive} unMakeSelectPseudoActive={unMakeSelectPseudoActive}
                 />
                 <h3 

@@ -26,9 +26,9 @@ interface link{
     description : string 
 } 
  
-export interface selectValue{ 
-    startActive : number, 
-    items : string[] 
+export interface selectValue<valueType>{ 
+    activeLink : number, 
+    links : valueType[] 
 } 
 export interface defaultSelect{ 
     title : string, 
@@ -40,14 +40,15 @@ export interface setter<T>{
     set : (newValue : T) => void 
 } 
  
-export interface sectionHeaderButton{ 
+interface buttonStates{
     active : string, 
     passive : string 
-} 
+}
+
 export interface sectionHeader{ 
     title : string, 
     text : string, 
-    buttonShowMore : sectionHeaderButton 
+    buttonShowMore : buttonStates 
 } 
 export interface section<T>{ 
     header : sectionHeader, 
@@ -73,12 +74,22 @@ export enum meridiem{
     PM = "pm" 
 } 
  
-interface time{ 
+export interface time{ 
     hour : number, 
     minute : number, 
     meridiem : meridiem 
 } 
- 
+
+export interface configurateItemsHeader{
+    maxShow : number,
+    sort : selectValue<string>
+}
+
+export interface shortReview{
+    rating : number,
+    countReviews : number
+}
+
 //------------Variant------------ 
 export interface introVariant{ 
     heading : string, 
@@ -164,7 +175,7 @@ export enum optionType{
  
 interface optionsFlightsSelect{ 
     title : optionsTitle, 
-    value : selectValue, 
+    value : selectValue<string>, 
     type : optionType.Select 
 } 
 interface optionsFlightsInput{ 
@@ -177,7 +188,7 @@ export type optionsFlightItems = (optionsFlightsInput | optionsFlightsSelect)[];
  
 interface optionsHotelsSelect{ 
     title : optionsTitle, 
-    value : selectValue, 
+    value : selectValue<string>, 
     isBigger : boolean, 
     type : optionType.Select 
 } 
@@ -344,14 +355,14 @@ interface map{
     background : srcs 
 } 
  
-export interface flights{ 
+export interface flightsHome{ 
     intro : introVariant, 
     map : map, 
     travels : variantTravels, 
     offers : offers 
 } 
  
-//-------------------------Hotels------------------------- 
+//-------------------------HOTELS------------------------- 
 export interface recentItem{ 
     image : imageVariants, 
     city : string, 
@@ -363,14 +374,14 @@ interface recent{
     items : recentItem[]; 
 } 
  
-export interface hotels{ 
+export interface hotelsHome{ 
     intro : introVariant, 
     recent : recent, 
     travels : variantTravels, 
     offers : offers 
 } 
  
-//-------------------------Navbar------------------------- 
+//-------------------------NAVBAR------------------------- 
 export enum navbarTitles{ 
     Rating = "Rating", 
     Price = "Price", 
@@ -415,10 +426,9 @@ interface navbarRadiosValue{
     items : string[],  
     currentActive: number 
 } 
-interface navbarRadios{ 
-    title : navbarTitles 
-    isActive : boolean, 
-    value : navbarRadiosValue 
+export interface navbarRadios{ 
+    title : navbarTitles,
+    value : navbarRadiosValue, 
     type : navbarItemType.Radios 
 } 
  
@@ -428,43 +438,139 @@ interface navbarCheckboxesValue{
     isShowAll : boolean, 
     maxShow : number 
 } 
-interface navbarCheckboxes{ 
-    title : navbarTitles 
-    isActive : boolean, 
-    value : navbarCheckboxesValue 
+export interface navbarCheckboxes{ 
+    title : navbarTitles,
+    value : navbarCheckboxesValue, 
     type : navbarItemType.Checkboxes 
 } 
  
-interface navbarFromToTimeValue{ 
+export interface navbarFromToTimeValue{ 
     from : time, 
     to : time 
 } 
 interface navbarFromToTime{ 
-    title : navbarTitles 
-    isActive : boolean, 
-    value : navbarFromToTimeValue 
+    title : navbarTitles,
+    value : navbarFromToTimeValue,
     type : navbarItemType.FromToTime 
 } 
  
-interface navbarFromToNumberValue{ 
+export interface navbarFromToNumberValue{ 
     from : number, 
     to : number, 
     max : number, 
     min : number 
 } 
 interface navbarFromToNumber{ 
-    title : navbarTitles 
-    isActive : boolean, 
-    value : navbarFromToNumberValue 
+    title : navbarTitles,
+    value : navbarFromToNumberValue,
     type : navbarItemType.FromToNumbers 
 } 
+export type navbarFromTo = navbarFromToNumber | navbarFromToTime;
  
 interface navbarPart{ 
     heading : string, 
-    items : (navbarRadios | navbarCheckboxes | navbarFromToTime | navbarFromToNumber)[] 
+    items : (navbarRadios | navbarCheckboxes | navbarFromTo)[] 
 } 
  
 export interface navbar{ 
     flights : navbarPart, 
     hotels : navbarPart 
+}
+
+//-------------------------SORT------------------------- 
+export enum sortTitles{
+    Cheapest = "Cheapest",
+    Best = "Best",
+    Quickest = "Quickest",
+    CountTransfers = "Count Transfers",
+    Motels = "Motels",
+    Hotels = "Hotels",
+    Resorts = "Resorts"
+}
+
+interface sortFlightsCategorySubtitle{
+    price : number,
+    flyTime : number
+}
+export interface sortFlightsCategory{
+    title : sortTitles,
+    subtitle : sortFlightsCategorySubtitle
+}
+export interface sortFlights{
+    items : sortFlightsCategory[],
+    currentActive : number,
+    maxShow : number
+}
+
+export interface sortHotelsCategory{
+    title : sortTitles,
+    subtitle : number
+}
+export interface sortHotels{
+    items : sortHotelsCategory[],
+    currentActive : number,
+    maxShow : number
+}
+export interface sort{
+    flights : sortFlights,
+    hotels : sortHotels,
+    buttonShowMore : string
+}
+
+//-------------------------FLIGHTS ITEMS-------------------------
+export interface flightSchedulePart{
+    takeoffTime : time,
+    arrayTime : time,
+    airline : airlines,
+    transfersCount : number,
+    from : string,
+    to : string
+}
+interface flightSchedule{
+    depart : flightSchedulePart,
+    return : flightSchedulePart,
+    currentChoosed : number[]
+}
+export interface flight{
+    id : number,
+    type : tripsType,
+    images : imageVariants[],
+    shortReview : shortReview,
+    price : number,
+    schedule : flightSchedule
+}
+export interface flights{
+    elements : flight[],
+    isShowAll : boolean,
+    buttonViewMore : buttonStates,
+    buttonLink : string
+}
+
+//-------------------------HOTELS ITEMS-------------------------
+export enum hotelType{
+    Hotel = 0,
+    Motel = 1,
+    Resorts = 2,
+}
+
+interface hotelImages{
+    main : imageVariants,
+    another : imageVariants[]
+}
+export interface hotel{
+    id : number,
+    type : sortTitles,
+    images : hotelImages,
+    title : string,
+    price : number
+    location : string,
+    countStars : 5 | 4 | 3 | 2 | 1 | 0,
+    amenities : amenities[],
+    shortReview : shortReview,
+}
+export interface hotels{
+    elements : hotel[],
+    isShowAll : boolean,
+    buttonViewMore : buttonStates,
+    buttonLink : string,
 }

@@ -1,6 +1,6 @@
 import React, { FC, Fragment, useEffect, useState } from "react";
-import { recentItem } from "../../../types";
-import { fetchCountryByCity } from "../../../helperFunctions";
+import { recentItem } from "../../../../types";
+import { fetchCountryByCity } from "../../../../helperFunctions";
 
 interface recentProps{
     about : recentItem;

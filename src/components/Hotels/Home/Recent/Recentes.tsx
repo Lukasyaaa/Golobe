@@ -1,10 +1,10 @@
 import React, { FC, Fragment } from "react";
-import { useTypedSelector } from "../../../useTypedSelector";
-import { recentItem } from "../../../types";
+import { useTypedSelector } from "../../../../useTypedSelector";
+import { recentItem } from "../../../../types";
 import { Recent } from "./Recent";
 
 export const Recentes : FC = () => {
-    let state = useTypedSelector(store => store.hotels.recent);
+    let state = useTypedSelector(store => store.hotels.home.recent);
     let isWebp = true;
     let filtredRecents : recentItem[] = [];
     state.items.forEach(recent => {

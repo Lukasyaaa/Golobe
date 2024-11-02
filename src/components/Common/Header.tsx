@@ -1,7 +1,7 @@
 import React, { FC, Fragment, useEffect, useRef, useState, FocusEvent, MouseEvent } from "react";
 import { useTypedSelector } from "../../useTypedSelector";
 import { NavLink, useLocation } from "react-router-dom";
-import { flightsConfiguratePath, flightsPath, homePath, hotelsPath, logInPath, signInPath } from "../../App";
+import { flightsConfiguratePath, flightsPath, homePath, hotelsConfiguretePath, hotelsPath, logInPath, signInPath } from "../../App";
 import { makePseudoActive, makeUnPseudoActive } from "../../helperFunctions";
 
 enum authorizationId{
@@ -199,7 +199,7 @@ export const Header : FC = () =>{
                                 </li>
                             </Fragment>
                             :
-                            ((location.pathname === hotelsPath) ? 
+                            ((location.pathname === hotelsPath || location.pathname === hotelsConfiguretePath) ? 
                                 <Fragment>
                                     <li className="menu-header__link menu-header__link_flight">
                                         <NavLink 

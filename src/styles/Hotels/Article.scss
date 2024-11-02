@@ -1,0 +1,321 @@
+.hotels{
+    &__item:not(:last-child){
+        margin-bottom: toRem(24);
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__item:not(:last-child){
+            margin-bottom: toRem(16);
+        }
+    }
+}
+
+.item-hotels{
+    @media (min-width: toEm(769, 16)) {
+        display: flex;
+    }
+
+    &__image-block{
+        position: relative;
+        z-index: 1;
+    }
+
+    &__image.loner, &__image-block{
+        min-width: toPercent(300, 840);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__image.loner, &__image-block{
+            min-width: toPercent(300, 962);
+        }
+    }
+
+    &__image:not(.loner){
+        display: block;
+        height: 100%;
+    }
+    &__image{
+        position: relative;
+        z-index: 1;
+        img{
+            border-radius: toRem(12) 0 0 toRem(12);
+            position: absolute;
+            z-index: 1;
+            left: 0;
+            top: 0;
+
+            object-fit: cover;
+
+            width: 100%;
+            height: 100%;
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__image{
+            padding-bottom: toPercent(250, 738);
+            img{
+                border-radius: toRem(12) toRem(12) 0 0;
+            }
+        }
+    }
+
+    &__subimage{
+        border-radius: toRem(8);
+        backdrop-filter: blur(4px);
+        background: rgba(255, 255, 255, 0.5);
+        padding: toRem(4) toRem(8);
+        min-height: toRem(32);
+
+        display: flex;
+        align-items: center;
+
+        position: absolute;
+        z-index: 2;
+        right: toRem(8);
+        top: toRem(8);
+
+        color: rgba($color: $darkGreen, $alpha: 0.7);
+        font-family: Montserrat;
+        font-size: toRem(12);
+        font-weight: 500;
+        line-height: math.div(15, 12);
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__subimage{
+            min-height: toRem(28);
+        }
+    }
+
+    &__info{
+        padding: toRem(24);
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__info{
+            width: 100%;
+            padding: toRem(16);
+        }
+    }
+
+    @media (min-width: toEm(481, 16)) {
+        &__row{
+            display: grid;
+            grid-template-columns: 1fr auto;
+            column-gap: toRem(24);
+        }
+        @media (max-width: toEm($container + 30, 16)) {
+            &__row{
+                column-gap: toRem(16);
+            }
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__row{
+            display: flex;
+            flex-direction: column-reverse;
+        }
+    }
+
+    &__title{
+        color: $darkGreen;
+        font-family: "TradeGothic";
+        font-size: toRem(20);
+        font-weight: 700;
+        line-height: math.div(25, 20);
+        
+        margin-bottom: toRem(16);
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__title{
+            margin-bottom: toRem(6);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__title{
+            font-size: toRem(18);
+        }
+    }
+
+    &__location{
+        display: flex;
+        span{
+            color: rgba($color: $darkGreen, $alpha: 0.75);
+            font-family: Montserrat;
+            font-size: toRem(12);
+            font-weight: 500;
+            line-height: math.div(15, 12);
+        }
+        &::before{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            width: toRem(16);
+            height: toRem(16);
+
+            color: $darkGreen;
+            font-size: toRem(14);
+
+            margin-right: toRem(5);
+        }
+        margin-bottom: toRem(12);
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__location{
+            margin-bottom: toRem(6);
+        }
+    }
+
+    @media (min-width: toEm(481, 16)) {
+        &__status{
+            display: flex;
+            align-items: center;
+        }
+    }
+    &__status{
+        margin-bottom: toRem(12);
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__status{
+            margin-bottom: toRem(6);
+        }
+    }
+
+    @media (min-width: toEm(481, 16)) {
+        &__stars{
+            margin-right: toRem(32);
+        }
+        @media (max-width: toEm($container + 30, 16)) {
+            &__stars{
+                margin-right: toRem(24);
+            }
+        }
+        @media (max-width: toEm(768, 16)) {
+            &__stars{
+                margin-right: toRem(16);
+            }
+        }
+    }
+    &__stars{
+        display: flex;
+        align-items: center;
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__stars{
+            margin-bottom: toRem(6);
+        }
+    }
+
+    &__stars-container{
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+
+        margin-right: toRem(4);
+    }
+
+    &__star{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: toRem(16);
+        height: toRem(16);
+
+        &::before{
+            font-size: toRem(15);
+            color: $lightRed;
+        }
+    }
+
+    &__substars{
+        color: $darkGreen;
+        font-family: Montserrat;
+        font-size: toRem(12);
+        font-weight: 500;
+        line-height: math.div(15, 12);
+    }
+
+    &__amenities{
+        display: flex;
+
+        &::before{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            width: toRem(16);
+            height: toRem(16);
+
+            font-size: toRem(13);
+            color: $darkGreen;
+            margin-right: toRem(4);
+        }
+        span{
+            color: $darkGreen;
+            font-family: Montserrat;
+            font-size: toRem(12);
+            font-weight: 500;
+            line-height: math.div(15, 12);
+
+            strong{
+                font-weight: 700;
+            }
+        }
+    }
+
+    @media (min-width: toEm(481, 16)) {
+        &__right{
+            flex-direction: column;
+    
+            span:last-child{
+                align-self: flex-end;
+            }
+            mark{
+                display: block;
+            }
+        }
+    }
+    &__right{
+        display: inline-flex;
+
+        color: rgba($color: $darkGreen, $alpha: 0.75);
+        font-family: Montserrat;
+        font-size: toRem(12);
+        font-weight: 500;
+        line-height: math.div(15, 12);
+
+        mark{
+            font-size: toRem(24);
+            font-weight: 700;
+            color: $lightRed;
+        }
+    }
+    @media (max-width: toEm($container + 30, 16)) {
+        &__right mark{
+            font-size: toRem(20);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__right{
+            align-items: center;
+            mark{
+                margin: 0 toRem(4);
+                font-size: toRem(18);
+            }
+        }
+    }
+
+    @media (min-width: toEm(481, 16)) {
+        &__footer{
+            padding-top: toRem(48.5);
+            &::before{
+                top: toRem(24);
+            }
+        }
+        @media (max-width: toEm($container + 30, 16)) {
+            &__footer{
+                padding-top: toRem(32.5);
+                &::before{
+                    top: toRem(16);
+                }
+            }
+        }
+    }
+}

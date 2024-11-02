@@ -7,7 +7,7 @@ import { Travels } from "../components/Common/InfoVariant/Travels/Travels";
 import { Offers } from "../components/Common/InfoVariant/Offers/Offers";
 
 export const FlightsInfo : FC = () =>{
-    const state = useTypedSelector(store => store.flights)
+    const state = useTypedSelector(store => store.flights.home)
 
     return(
         <main className="flights">

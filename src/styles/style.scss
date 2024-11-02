@@ -14,8 +14,15 @@
 @import "./Start/Choose.scss";
 @import "./Start/Reviews.scss";
 
-@import "./Flights/Info/Map.scss";
-@import "./Flights/Info/Travels.scss";
-@import "./Flights/Info/Offers.scss";
+@import "./Flights/Map.scss";
+@import "./Common/Travels.scss";
+@import "./Common/Offers.scss";
 
-@import "./Hotels/Info/Recent.scss";
+@import "./Hotels/Recent.scss";
+
+@import "./Common/Navbar.scss";
+@import "./Common/Sort.scss";
+
+@import "./Flights/Article.scss";
+
+@import "./Hotels/Article.scss";

@@ -36,6 +36,9 @@
     }
 
     &__item{
+        border-radius: toRem(12);
+        background-color: $darkGreen;
+
         flex: 0 0 toRem(296);
         min-height: toRem(420);
         &:not(:last-child){

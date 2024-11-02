@@ -1,41 +1,41 @@
-import { hotels, recentItem } from "../types"
+import { hotelsHome, recentItem } from "../../types"
 //--------Intro--------
-import introJpeg from "../assets/img/hotels/intro/background.jpeg"
-import introWebp from "../assets/img/hotels/intro/background.webp"
+import introJpeg from "../../assets/img/hotels/intro/background.jpeg"
+import introWebp from "../../assets/img/hotels/intro/background.webp"
 //--------Travels--------
 //----------------Webp--------
-import travelsStartWebp_1 from "../assets/img/start/travels/1/main.webp"
-import travelsStartWebp_2 from "../assets/img/start/travels/2/main.webp"
-import travelsStartWebp_3 from "../assets/img/start/travels/3/main.webp"
-import travelsStartWebp_4 from "../assets/img/start/travels/4/main.webp"
+import travelsStartWebp_1 from "../../assets/img/start/travels/1/main.webp"
+import travelsStartWebp_2 from "../../assets/img/start/travels/2/main.webp"
+import travelsStartWebp_3 from "../../assets/img/start/travels/3/main.webp"
+import travelsStartWebp_4 from "../../assets/img/start/travels/4/main.webp"
 //----------------Jpeg--------
-import travelsStartJpeg_1 from "../assets/img/start/travels/1/main.jpeg"
-import travelsStartJpeg_2 from "../assets/img/start/travels/2/main.jpeg"
-import travelsStartJpeg_3 from "../assets/img/start/travels/3/main.jpeg"
-import travelsStartJpeg_4 from "../assets/img/start/travels/4/main.jpeg"
+import travelsStartJpeg_1 from "../../assets/img/start/travels/1/main.jpeg"
+import travelsStartJpeg_2 from "../../assets/img/start/travels/2/main.jpeg"
+import travelsStartJpeg_3 from "../../assets/img/start/travels/3/main.jpeg"
+import travelsStartJpeg_4 from "../../assets/img/start/travels/4/main.jpeg"
 //----------------Webp--------
-import travelsWebp_1 from "../assets/img/hotels/travels/1/main.webp"
-import travelsWebp_2 from "../assets/img/hotels/travels/2/main.webp"
-import travelsWebp_3 from "../assets/img/hotels/travels/3/main.webp"
-import travelsWebp_4 from "../assets/img/hotels/travels/4/main.webp"
+import travelsWebp_1 from "../../assets/img/hotels/travels/1/main.webp"
+import travelsWebp_2 from "../../assets/img/hotels/travels/2/main.webp"
+import travelsWebp_3 from "../../assets/img/hotels/travels/3/main.webp"
+import travelsWebp_4 from "../../assets/img/hotels/travels/4/main.webp"
 //----------------Jpeg--------
-import travelsJpeg_1 from "../assets/img/hotels/travels/1/main.jpeg"
-import travelsJpeg_2 from "../assets/img/hotels/travels/2/main.jpeg"
-import travelsJpeg_3 from "../assets/img/hotels/travels/3/main.jpeg"
-import travelsJpeg_4 from "../assets/img/hotels/travels/4/main.jpeg"
+import travelsJpeg_1 from "../../assets/img/hotels/travels/1/main.jpeg"
+import travelsJpeg_2 from "../../assets/img/hotels/travels/2/main.jpeg"
+import travelsJpeg_3 from "../../assets/img/hotels/travels/3/main.jpeg"
+import travelsJpeg_4 from "../../assets/img/hotels/travels/4/main.jpeg"
 //--------Offers--------
 //----------------Webp--------
-import offersWebp_1 from "../assets/img/hotels/offers/1/main.webp"
-import offersWebp_2 from "../assets/img/hotels/offers/2/main.webp"
-import offersWebp_3 from "../assets/img/hotels/offers/3/main.webp"
-import offersWebp_4 from "../assets/img/hotels/offers/4/main.webp"
+import offersWebp_1 from "../../assets/img/hotels/offers/1/main.webp"
+import offersWebp_2 from "../../assets/img/hotels/offers/2/main.webp"
+import offersWebp_3 from "../../assets/img/hotels/offers/3/main.webp"
+import offersWebp_4 from "../../assets/img/hotels/offers/4/main.webp"
 //----------------Jpeg--------
-import offersJpeg_1 from "../assets/img/hotels/offers/1/main.jpeg"
-import offersJpeg_2 from "../assets/img/hotels/offers/2/main.jpeg"
-import offersJpeg_3 from "../assets/img/hotels/offers/3/main.jpeg"
-import offersJpeg_4 from "../assets/img/hotels/offers/4/main.jpeg"
+import offersJpeg_1 from "../../assets/img/hotels/offers/1/main.jpeg"
+import offersJpeg_2 from "../../assets/img/hotels/offers/2/main.jpeg"
+import offersJpeg_3 from "../../assets/img/hotels/offers/3/main.jpeg"
+import offersJpeg_4 from "../../assets/img/hotels/offers/4/main.jpeg"
 
-const defaultState : hotels = {
+const defaultState : hotelsHome = {
     intro:{
         heading : "Make your travel whishlist, we’ll do the rest",
         subheading : "Special offers to suit your plan",
@@ -158,7 +158,7 @@ interface hotelsRemoveRecent{
 
 type hotelsActionType = hotelsAddRecent | hotelsRemoveRecent;
 
-export const hotelsReducer = (state : hotels = defaultState, action : hotelsActionType) : hotels => {
+export const hotelsReducer = (state : hotelsHome = defaultState, action : hotelsActionType) : hotelsHome => {
     switch(action.type){
         case hotelsAction.ADD_RECENT:
             return {

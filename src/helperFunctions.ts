@@ -1,5 +1,5 @@
 import { MouseEvent, FocusEvent, RefObject } from "react";
-import { setter } from "./types";
+import { meridiem, setter, time } from "./types";
 
 export const toggleState = (state : setter<boolean>) : void => {
     state.set(!state.value);
@@ -58,3 +58,25 @@ export const fetchCountryByCity = async (cityName : string) => {
         return null;
     }
 };
+
+export const intToTime = (int : number) : time => {
+    return {
+        hour: (Math.floor(int / 60) % 12) || 12, 
+        minute: int % 60, 
+        meridiem: (int < 720 || int === 1440) ? meridiem.AM : meridiem.PM
+    };
+}
+
+export const timeToInt = (t : time, replaceValue : 0 | 1440) : number => {
+    if(t.hour === 12 && t.minute === 0 && t.meridiem === meridiem.AM) 
+        return replaceValue;
+    let hourValue : number = Number(t.hour !== 12 || t.meridiem !== meridiem.AM) * t.hour * 60;
+    let plus12 : number = Number(t.hour !== 12 && t.meridiem === meridiem.PM) * 720;
+    return hourValue + plus12 + t.minute;
+}
+
+export const timeToString = (t : time) : string => {
+    let hourPart = (t.hour < 10) ? "0" + t.hour : t.hour;
+    let minPart = (t.minute < 10) ? "0" + t.minute : t.minute;
+    return hourPart + ":" + minPart + t.meridiem;
+}

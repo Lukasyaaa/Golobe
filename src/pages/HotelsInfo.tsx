@@ -4,10 +4,10 @@ import { useTypedSelector } from "../useTypedSelector";
 import { contentPart } from "../types";
 import { Travels } from "../components/Common/InfoVariant/Travels/Travels";
 import { Offers } from "../components/Common/InfoVariant/Offers/Offers";
-import { Recentes } from "../components/Hotels/Recent/Recentes";
+import { Recentes } from "../components/Hotels/Home/Recent/Recentes";
 
 export const HotelsInfo : FC = () => {
-    let state = useTypedSelector(state => state.hotels);
+    let state = useTypedSelector(state => state.hotels.home);
 
     return(
         <main className="hotels">

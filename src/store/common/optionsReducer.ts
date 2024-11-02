@@ -14,7 +14,7 @@ const defaultState : options = {
                 type: optionType.Input
             },
             {
-                title: optionsTitle.Trip, value: {startActive: 0, items: ["Return", "Depart"]}, 
+                title: optionsTitle.Trip, value: {activeLink: 0, links: ["Return", "Depart"]}, 
                 type: optionType.Select
             },
             {
@@ -40,7 +40,7 @@ const defaultState : options = {
                 iconPosition: optionsIconPosition.Right, type: optionType.Input
             },
             {
-                title: optionsTitle.RoomsAndGuests, value: {startActive: 0, items: ["1 room, 2 guests", "2 room, 1 guests"]},
+                title: optionsTitle.RoomsAndGuests, value: {activeLink: 0, links: ["1 room, 2 guests", "2 room, 1 guests"]},
                 isBigger: false, type: optionType.Select
             },
         ]

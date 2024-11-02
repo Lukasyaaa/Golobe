@@ -37,6 +37,7 @@ export const Options : FC<optionsProps> = ({neededBlocks, startValue}) =>{
                 } 
                 break; 
             case optionsNeededBlocks.OnlyInputs: 
+                parentClasses.push("configurate")
                 if(startValue === contentPart.Flights){ 
                     parentClasses.push("flights"); 
                     if(state.header.flights === "" || state.inputs.flights.length === 0){ 
@@ -109,7 +110,7 @@ export const Options : FC<optionsProps> = ({neededBlocks, startValue}) =>{
                                 }
                                 return <OptionsSelect 
                                     key={(i + 1) * j}
-                                    title={input.title} links={input.value} parent={choosedOptions}
+                                    title={input.title} about={input.value} parent={choosedOptions}
                                     isBigger={choosedOptions === contentPart.Hotels && state.inputs.hotels[j].isBigger}
                                     parentClasses={parentClasses.map(cl => "options-" + cl)}
                                 />

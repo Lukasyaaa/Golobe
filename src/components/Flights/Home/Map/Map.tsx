@@ -6,7 +6,7 @@ import { SubMap } from "./SubMap";
 
 export const Map : FC = () => {
     let [isShowAll, setIsShowAll] = useState<boolean>(false);
-    let state = useTypedSelector(store => store.flights.map);
+    let state = useTypedSelector(store => store.flights.home.map);
 
     let isWebp = true;
     let pathToBackground = (isWebp) ? state.background.webp : state.background.jpeg;

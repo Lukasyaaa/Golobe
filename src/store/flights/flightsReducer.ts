@@ -1,52 +1,52 @@
-import { flights, mapItemType, mapPartType } from "../types"
+import { flightsHome, mapItemType, mapPartType } from "../../types"
 //--------Intro--------
-import introJpeg from "../assets/img/flights/intro/background.jpeg"
-import introWebp from "../assets/img/flights/intro/background.webp"
+import introJpeg from "../../assets/img/flights/intro/background.jpeg"
+import introWebp from "../../assets/img/flights/intro/background.webp"
 //--------Map--------
-import mapBackgroundJpeg from "../assets/img/flights/map/background.jpeg"
-import mapBackgroundWebp from "../assets/img/flights/map/background.webp"
+import mapBackgroundJpeg from "../../assets/img/flights/map/background.jpeg"
+import mapBackgroundWebp from "../../assets/img/flights/map/background.webp"
 //----------------Webp--------
-import subMapWebp_1 from "../assets/img/flights/map/items/1/main.webp"
-import subMapWebp_2 from "../assets/img/flights/map/items/2/main.webp"
-import subMapWebp_3 from "../assets/img/flights/map/items/3/main.webp"
-import subMapWebp_4 from "../assets/img/flights/map/items/4/main.webp"
-import subMapWebp_5 from "../assets/img/flights/map/items/5/main.webp"
+import subMapWebp_1 from "../../assets/img/flights/map/items/1/main.webp"
+import subMapWebp_2 from "../../assets/img/flights/map/items/2/main.webp"
+import subMapWebp_3 from "../../assets/img/flights/map/items/3/main.webp"
+import subMapWebp_4 from "../../assets/img/flights/map/items/4/main.webp"
+import subMapWebp_5 from "../../assets/img/flights/map/items/5/main.webp"
 //----------------Jpeg--------
-import subMapJpeg_1 from "../assets/img/flights/map/items/1/main.jpeg"
-import subMapJpeg_2 from "../assets/img/flights/map/items/2/main.jpeg"
-import subMapJpeg_3 from "../assets/img/flights/map/items/3/main.jpeg"
-import subMapJpeg_4 from "../assets/img/flights/map/items/4/main.jpeg"
-import subMapJpeg_5 from "../assets/img/flights/map/items/5/main.jpeg"
+import subMapJpeg_1 from "../../assets/img/flights/map/items/1/main.jpeg"
+import subMapJpeg_2 from "../../assets/img/flights/map/items/2/main.jpeg"
+import subMapJpeg_3 from "../../assets/img/flights/map/items/3/main.jpeg"
+import subMapJpeg_4 from "../../assets/img/flights/map/items/4/main.jpeg"
+import subMapJpeg_5 from "../../assets/img/flights/map/items/5/main.jpeg"
 //----------------Arrow--------
-import subMapSvg_1 from "../assets/img/flights/map/items/1/arrow.svg"
-import subMapSvg_2 from "../assets/img/flights/map/items/2/arrow.svg"
-import subMapSvg_3 from "../assets/img/flights/map/items/3/arrow.svg"
-import subMapSvg_4 from "../assets/img/flights/map/items/4/arrow.svg"
-import subMapSvg_5 from "../assets/img/flights/map/items/5/arrow.svg"
+import subMapSvg_1 from "../../assets/img/flights/map/items/1/arrow.svg"
+import subMapSvg_2 from "../../assets/img/flights/map/items/2/arrow.svg"
+import subMapSvg_3 from "../../assets/img/flights/map/items/3/arrow.svg"
+import subMapSvg_4 from "../../assets/img/flights/map/items/4/arrow.svg"
+import subMapSvg_5 from "../../assets/img/flights/map/items/5/arrow.svg"
 //--------Travels--------
 //----------------Webp--------
-import travelsWebp_1 from "../assets/img/flights/travels/1/main.webp"
-import travelsWebp_2 from "../assets/img/flights/travels/2/main.webp"
-import travelsWebp_3 from "../assets/img/flights/travels/3/main.webp"
-import travelsWebp_4 from "../assets/img/flights/travels/4/main.webp"
+import travelsWebp_1 from "../../assets/img/flights/travels/1/main.webp"
+import travelsWebp_2 from "../../assets/img/flights/travels/2/main.webp"
+import travelsWebp_3 from "../../assets/img/flights/travels/3/main.webp"
+import travelsWebp_4 from "../../assets/img/flights/travels/4/main.webp"
 //----------------Jpeg--------
-import travelsJpeg_1 from "../assets/img/flights/travels/1/main.jpeg"
-import travelsJpeg_2 from "../assets/img/flights/travels/2/main.jpeg"
-import travelsJpeg_3 from "../assets/img/flights/travels/3/main.jpeg"
-import travelsJpeg_4 from "../assets/img/flights/travels/4/main.jpeg"
+import travelsJpeg_1 from "../../assets/img/flights/travels/1/main.jpeg"
+import travelsJpeg_2 from "../../assets/img/flights/travels/2/main.jpeg"
+import travelsJpeg_3 from "../../assets/img/flights/travels/3/main.jpeg"
+import travelsJpeg_4 from "../../assets/img/flights/travels/4/main.jpeg"
 //--------Offers--------
 //----------------Webp--------
-import offersWebp_1 from "../assets/img/flights/offers/1/main.webp"
-import offersWebp_2 from "../assets/img/flights/offers/2/main.webp"
-import offersWebp_3 from "../assets/img/flights/offers/3/main.webp"
-import offersWebp_4 from "../assets/img/flights/offers/4/main.webp"
+import offersWebp_1 from "../../assets/img/flights/offers/1/main.webp"
+import offersWebp_2 from "../../assets/img/flights/offers/2/main.webp"
+import offersWebp_3 from "../../assets/img/flights/offers/3/main.webp"
+import offersWebp_4 from "../../assets/img/flights/offers/4/main.webp"
 //----------------Jpeg--------
-import offersJpeg_1 from "../assets/img/flights/offers/1/main.jpeg"
-import offersJpeg_2 from "../assets/img/flights/offers/2/main.jpeg"
-import offersJpeg_3 from "../assets/img/flights/offers/3/main.jpeg"
-import offersJpeg_4 from "../assets/img/flights/offers/4/main.jpeg"
+import offersJpeg_1 from "../../assets/img/flights/offers/1/main.jpeg"
+import offersJpeg_2 from "../../assets/img/flights/offers/2/main.jpeg"
+import offersJpeg_3 from "../../assets/img/flights/offers/3/main.jpeg"
+import offersJpeg_4 from "../../assets/img/flights/offers/4/main.jpeg"
 
-const defaultState : flights = {
+const defaultState : flightsHome = {
     intro:{
         heading : "Make your travel whishlist, we’ll do the rest",
         subheading : "Special offers to suit your plan",
@@ -177,4 +177,4 @@ const defaultState : flights = {
     }
 }
 
-export const flightsReducer = (state : flights = defaultState) : flights => state;
+export const flightsReducer = (state : flightsHome = defaultState) : flightsHome => state;

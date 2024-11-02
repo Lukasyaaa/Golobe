@@ -1,0 +1,438 @@
+.navbar{
+    @media (min-width: toEm(993, 16)) {
+        position: relative;
+        z-index: 1;
+        &::after{
+            background-color: rgba($color: $darkGreen, $alpha: 0.25);
+            content: "";
+    
+            position: absolute;
+            z-index: 1;
+            right: toRem(-24);
+            top: 0;
+            transform: translateX(100%);
+            
+            height: 100%;
+            width: toRem(0.5);
+        }
+    }
+
+    @media (max-width: toEm(992, 16)) {
+        margin-bottom: toRem(32);
+    }
+    @media (max-width: toEm(768, 16)) {
+        margin-bottom: toRem(24);
+    }
+    @media (max-width: toEm(480, 16)) {
+        margin-bottom: toRem(16);
+    }
+
+    &__heading{
+        color: $darkGreen;
+        font-family: Montserrat;
+        font-size: toRem(20);
+        font-weight: 600;
+        line-height: math.div(24, 20);
+
+        margin-bottom: toRem(32);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__heading{
+            margin-bottom: toRem(16);
+        }
+    }
+
+    &__item:not(:last-child){
+        padding-bottom: toRem(64.5);
+        position: relative;
+        z-index: 1;
+        &::after{
+            background: rgba($color: $darkGreen, $alpha: 0.25);
+            content: "";
+
+            position: absolute;
+            z-index: 1;
+            left: 0;
+            bottom: toRem(32);
+
+            width: 100%;
+            height: toRem(0.5);
+        }
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__item:not(:last-child){
+            padding-bottom: toRem(48.5);
+            &::after{
+                bottom: toRem(24);
+            }
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__item:not(:last-child){
+            padding-bottom: toRem(32.5);
+            &::after{
+                bottom: toRem(16);
+            }
+        }
+    }
+}
+.item-navbar{
+    &__title{
+        button{
+            text-align: left;
+            width: 100%;
+
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: space-between;
+            align-items: center;
+
+            color: $darkGreen;
+            span{
+                font-family: Montserrat;
+                font-size: 16px;
+                font-weight: 600;
+                line-height: math.div(20, 16);
+            }
+            &::before{
+                width: toRem(24);
+                height: toRem(24);
+
+                font-size: toRem(13.5);
+
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                transition: transform 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+            }
+            transition: padding 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
+            background-color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
+            color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+        }
+        transition: margin-bottom 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+    &._active &__title{
+        margin-bottom: toRem(16);
+        & > button::before{
+            transform: rotate(180deg);
+        }
+    }
+    @media (max-width: toEm(992, 16)) {
+        &._active &__title{
+            margin-bottom: toRem(8);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &._active &__title{
+            margin-bottom: toRem(4);
+        }
+    }
+
+    &__title button:focus{
+        outline: none;
+        background-color: $darkGreen;
+        padding: toRem(5);
+        color: $white;
+    }
+    @media (any-hover: hover) {
+        &__title button:hover{
+            background-color: $darkGreen;
+            padding: toRem(5);
+            color: $white;
+        }
+    }
+
+    &__filters{
+        transition: height 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+    &:not(._active) &__filters{
+        overflow: hidden;
+    }
+
+    &__progress{
+        position: absolute;
+        z-index: 1;
+        top: toRem(11);
+        left: 0;
+
+        width: 100%;
+        height: toRem(2);
+    
+        span{
+            background-color: $darkGreen;
+
+            position: absolute;
+            z-index: 1;
+            top: 0;
+
+            height: 100%;
+        }
+    }
+
+    &__from, &__to{
+        pointer-events: none;
+
+        position: absolute;
+        z-index: 1;
+        top: toRem(11);
+        left: 0;
+
+        width: 100%;
+        height: calc(100% - toRem(11));
+    }
+
+    &__from input, &__to input{
+        pointer-events: none;
+        position: absolute;
+        z-index: 1;
+        left: 0;
+        top: 0;
+
+        width: 100%;
+        height: toRem(2);
+
+        background: none;
+        -webkit-appearance: none;
+    }
+    &__from input::-webkit-slider-thumb, &__to input::-webkit-slider-thumb{
+        -webkit-appearance: none;
+        pointer-events: auto;
+        cursor: pointer;
+
+        z-index: 2;
+
+        border-radius: 50%;
+        background-color: $mint;
+        width: toRem(24);
+        min-height: toRem(24);
+
+        transition: background-color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+    &__from input::-moz-range-thumb, &__to input::-moz-range-thumb{
+        -moz-appearance: none;
+        pointer-events: auto;
+        cursor: pointer;
+
+        z-index: 2;
+
+        border: none;
+        border-radius: 50%;
+        background-color: $mint;
+        width: toRem(24);
+        min-height: toRem(24);
+
+        transition: background-color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+    &__from input:focus, &__to input:focus{
+        outline: none;
+        &::-webkit-slider-thumb{
+            background-color: $darkGreen;
+        }
+        &::-moz-range-thumb{
+            background-color: $darkGreen;
+        }
+    }
+    @media (any-hover: hover) {
+        &__from input:hover, &__to input:hover{
+            outline: none;
+            &::-webkit-slider-thumb{
+                background-color: $darkGreen;
+            }
+            &::-moz-range-thumb{
+                background-color: $darkGreen;
+            }
+        }
+    }
+
+    &__from label, &__to label{
+        color: $darkGreen;
+        font-family: Montserrat;
+        font-size: toRem(12);
+        font-weight: 500;
+        line-height: math.div(15, 12);
+
+        position: absolute;
+        z-index: 1;
+        bottom: 0;
+    }
+
+    &__subradio{
+        color: $darkGreen;
+        font-family: Montserrat;
+        font-size: toRem(12);
+        font-weight: 500;
+        line-height: math.div(15, 12);
+        
+        &::after{
+            border-radius: toRem(4);
+            border: toRem(1) solid $mint;
+            content: "";
+
+            position: absolute;
+            z-index: 1;
+            left: 0;
+            top: 0;
+
+            width: 100%;
+            height: 100%;
+
+            transition: box-shadow 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+        }
+    }
+    &__radio{
+        appearance: none;
+
+        position: absolute;
+        z-index: 2;
+        left: 0;
+        top: 0;
+
+        width: 100%;
+        height: 100%;
+        border-radius: toRem(4);
+    }
+    &__radio:checked ~ &__subradio::after{
+        box-shadow: inset 0 0 20px $mint;
+    }
+    &__radio:focus{
+        outline: none;
+    }
+    @media (any-hover: hover) {
+        &__radio:hover:not(:checked) ~ &__subradio::after{
+            box-shadow: inset 0 0 8px $mint;
+        }
+    }
+
+    &__checkbox{
+        appearance: none;
+
+        position: relative;
+        z-index: 2;
+
+        width: toRem(19);
+        height: toRem(19);
+        border-radius: toRem(3);
+    }
+    &__subcheckbox{
+        color: $darkGreen;
+        font-family: Montserrat;
+        font-size: toRem(14);
+        font-weight: 500;
+        line-height: math.div(17, 14);
+
+        margin-left: toRem(10);
+
+        pointer-events: none;
+
+        &::after{
+            border-radius: toRem(3);
+            border: toRem(2) solid $darkGreen;
+            content: "";
+
+            position: absolute;
+            z-index: 1;
+            left: toRem(2);
+            top: 50%;
+            transform: translateY(-50%);
+
+            width: toRem(19);
+            height: toRem(19);
+
+            transition: background-color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+        }
+        &::before{
+            background-color: $darkGreen;
+            content: "";
+
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%) translateY(100%);
+
+            width: 0;
+            height: toRem(2);
+
+            transition: width 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+        }
+    }
+    &__checkbox:checked ~ &__subcheckbox::after{
+        background-color: $darkGreen;
+    }
+    &__checkbox:focus{
+        outline: none;
+    }
+    &__checkbox:focus ~ &__subcheckbox::before{
+        width: 100%;
+    }
+    @media (any-hover: hover) {
+        &__checkbox:hover ~ &__subcheckbox::before{
+            width: 100%;
+        }
+    }
+}
+
+.checkboxes-navbar{
+    &__filters-inner{
+        display: flex;
+        flex-direction: column;
+    }
+    
+    /*Прикол Дизайнера*/
+    @media (min-width: toEm(993, 16)) {
+        &__filter{
+            padding-left: toRem(2);
+            min-height: toRem(24);
+        }
+    }
+    &__filter{
+        display: flex;
+        align-self: flex-start;
+        align-items: center;
+
+        position: relative;
+        z-index: 1;
+
+
+        &:not(:last-child){
+            margin-bottom: toRem(8);
+        }
+    }
+}
+.radios-navbar{
+    &__filters{
+        margin: toRem(-4) toRem(-8);
+    }
+    &__filters-inner{
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    &__filter{
+        padding: toRem(4) toRem(8);
+
+        flex: 0 1 toRem(56);
+        height: toRem(40);
+    }
+
+    &__filter-inner{
+        padding: 0 toRem(6);
+
+        position: relative;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        flex: 1 1 auto;   
+        min-height: 100%;
+    }
+}
+.from-to-navbar{
+    &__filters-inner{
+        height: toRem(47);
+        
+        position: relative;
+        z-index: 1;
+    }
+}

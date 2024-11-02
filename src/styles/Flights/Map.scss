@@ -361,9 +361,18 @@
         }
     
         &__image{
+            background-color: $darkGreen;
+            border-radius: toRem(4);
+
             padding-bottom: 100%;
             position: relative;
             z-index: 1;
+
+            text-align: center;
+            font-family: Montserrat;
+            font-size: toRem(10);
+            color: $white;
+
             img{
                 border-radius: toRem(4);
                 position: absolute;
@@ -371,6 +380,9 @@
                 left: 0;
                 top: 0;
     
+                text-overflow: ellipsis;
+                overflow: hidden;
+
                 width: 100%;
                 height: 100%;
             }

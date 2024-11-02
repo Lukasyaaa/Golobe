@@ -364,19 +364,25 @@
     }
     
     &__image{
+        border-radius: toRem(16);
+        background-color: $mint;
+
         width: 100%;
         padding-bottom: toPercent(200, 377);
+
         position: relative;
         z-index: 3;
         margin-top: toRem(28);
 
-        text-align: center;
         font-family: Montserrat;
         font-size: toRem(22);
-        color: $darkGreen;
+        color: $white;
 
         img{
             border-radius: toRem(16);
+
+            text-overflow: ellipsis;
+            overflow: hidden;
 
             object-fit: cover;
             position: absolute;

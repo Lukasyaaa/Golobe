@@ -125,12 +125,23 @@
 }
 .item-recent{
     &__image{
+        background-color: $darkGreen;
+        border-radius: toRem(8);
+
         padding-bottom: toPercent(90, 90);
         position: relative;
         z-index: 3;
+
+        font-family: Montserrat;
+        font-size: toRem(16);
+        color: $white;
+
         img{
             border-radius: toRem(8);
             object-fit: cover;
+
+            text-overflow: ellipsis;
+            overflow: hidden;
 
             position: absolute;
             z-index: 1;

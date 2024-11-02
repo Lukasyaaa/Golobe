@@ -11,9 +11,11 @@ $yellow: #FFC107;
 $darkGreen: #112211;
 $darkPurple: #1c1b1f;
 
+$lightGray: rgb(250, 251, 252);
 $lightBlue: #d7e2ee;
 $lightPurple: #79747e;
 $lightMint: #CDEAE1;
+$lightRed: #FF8682;
 
 @function toRem($px){
     @return $px / 16 * 1rem;

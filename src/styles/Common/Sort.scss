@@ -1,0 +1,328 @@
+.sort{
+    @media (min-width: toEm(481, 16)) {
+        display: flex;
+        &._active{
+            border-radius: toRem(12) toRem(12) 0 toRem(12);
+            transition: border-radius 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+        }
+    }
+    box-shadow: 0px 4px 16px 0px rgba(17, 34, 17, 0.05);
+    border-radius: toRem(12);
+    transition: border-radius 0.3s cubic-bezier(0.075, 0.82, 0.165, 1) 0.3s;
+
+    &__item, &__select > button{
+        padding-top: toRem(17.5);
+        padding-bottom: toRem(17.5);
+        background-color: $white;
+
+        text-align: left;
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__item, &__select > button{
+            width: 100%;
+            padding-top: toRem(12);
+            padding-bottom: toRem(12);
+        }
+    }
+
+    &__item{
+        position: relative;
+        z-index: 1;
+        &::before{
+            background-color: $mint;
+            content: "";
+
+            position: absolute;
+            z-index: 1;
+            left: toRem(11.5);
+            width: 0;
+            bottom: 0;
+            
+            height: toRem(5);
+
+            transition: width 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__item:first-child::before{
+            border-radius: toRem(12) toRem(12) 0 0;
+        }
+        &__item::before{
+            left: 0;
+            height: 100%;
+        }
+        &__item:last-child:before{
+            border-radius: 0 0 toRem(12) toRem(12);
+        }
+
+        &__item > *{
+            position: relative;
+            z-index: 2;
+        }
+    }
+
+    &__item._hovered::before,
+    &:not(._hide-active) &__item._active::before{
+        width: calc(100% - toRem(28));
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__item._hovered::before,
+        &:not(._hide-active) &__item._active::before{
+            width: 100%;
+        }
+    }
+    &__item:focus{
+        outline: none;
+    }
+
+    &__item:first-child{
+        border-radius: toRem(12) 0 0 toRem(12);
+        padding-left: toRem(24);
+        padding-right: toRem(24.5);
+        flex: 1 1 calc(100% + toRem(24) + toRem(24.5));
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__item:first-child{
+            padding-left: toRem(16);
+            padding-right: toRem(16.5);
+            flex: 1 1 calc(100% + toRem(16) + toRem(16.5));
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__item:first-child{
+            border-radius: toRem(12) toRem(12) 0 0;
+        }
+    }
+
+    &__item:not(:first-child), &__select > button{
+        padding-left: toRem(23.5);
+    }
+    &__item:not(:first-child):not(:last-child){
+        padding-right: toRem(24.5);
+        flex: 1 1 calc(100% + toRem(24.5) + toRem(23.5));
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__item:not(:first-child), &__select > button{
+            padding-left: toRem(15.5);
+        }
+        &__item:not(:first-child):not(:last-child){
+            padding-right: toRem(16.5);
+            flex: 1 1 calc(100% + toRem(16.5) + toRem(15.5));
+        }
+    }
+
+    @media (min-width: toEm(481, 16)) {
+        &__item:not(:last-child)::after{
+            background-color: rgb(215, 226, 238);
+
+            content: "";
+            position: absolute;
+            z-index: 1;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+
+            width: toRem(1);
+            height: calc(100% - toRem(32));
+        }
+    }
+
+    &__select{
+        flex: 1 0 toPercent(215.5, 840);
+    }
+    &__item:last-child{
+        flex: 1 1 calc(100% + toRem(23.5) + toRem(24));
+    }
+    &__item:last-child, &__select > button{
+        border-radius: 0 toRem(12) toRem(12) 0;
+        padding-right: toRem(24);
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__item:last-child, &__select > button{
+            padding-right: toRem(16);
+        }
+        &__item:last-child{
+            flex: 1 1 calc(100% + toRem(15.5) + toRem(16));
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__item:last-child, &__select > button{
+            border-radius: 0 0 toRem(12) toRem(12);
+        }
+    }
+}
+.item-sort{
+    &__title{
+        color: $darkGreen;
+        font-family: Montserrat;
+        font-size: toRem(16);
+        font-weight: 600;
+        line-height: math.div(20, 16);
+
+        margin-bottom: toRem(8);
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__title{
+            font-size: toRem(14);
+            margin-bottom: toRem(4);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__title{
+            transition: color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+        }
+        &._hovered &__title,
+        .sort:not(._hide-active) &._active &__title{
+            color: $white;
+        }
+    }
+
+    &__subtitle{
+        color: rgba($color: $darkGreen, $alpha: 0.4);
+        font-family: Montserrat;
+        font-size: toRem(14);
+        font-weight: 400;
+        line-height: math.div(17, 14);
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__subtitle{
+            font-size: toRem(12);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__subtitle{
+            transition: color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+        }
+        &._hovered &__subtitle,
+        .sort:not(._hide-active) &._active &__subtitle{
+            color: rgba($color: $white, $alpha: 0.4);
+        }
+    }
+
+}
+.select-sort{
+    position: relative;
+    z-index: 2;
+
+    &._active &__opener{
+        border-radius: 0 toRem(12) 0 0;
+        transition: background-color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
+        color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
+        border-radius 0s linear;
+    }
+    @media (max-width: toEm(480, 16)) {
+        &._active &__opener{
+            border-radius: 0;
+        }
+    }
+
+    &__opener{
+        display: flex;
+        align-items: center;
+
+        color: $darkGreen;
+        font-family: Montserrat;
+        font-size: toRem(14);
+        font-weight: 500;
+        line-height: math.div(18, 14);
+
+        min-width: 100%;
+        height: 100%;
+
+        &::before{
+            width: toRem(24);
+            height: toRem(24);
+
+            display: flex;
+            align-items: center;
+            justify-content: baseline;
+
+            font-size: toRem(8);
+            margin-right: toRem(8);
+        }
+
+        transition: background-color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
+        color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
+        border-radius 0s cubic-bezier(0.075, 0.82, 0.165, 1) 0.3s;
+    }
+    &__opener:focus{
+        outline: none;
+        background-color: $mint;
+        color: $white;
+    }
+    &__opener:focus &__burger::after,
+    &__opener:focus &__burger::before,
+    &__opener:focus &__burger span{
+        background-color: $white;
+    }
+    @media (any-hover: hover) {
+        &__opener:hover{
+            background-color: $mint;
+            color: $white;
+        }
+        &__opener:hover &__burger::after,
+        &__opener:hover &__burger::before,
+        &__opener:hover &__burger span{
+            background-color: $white;
+        }
+    }
+
+    &__burger{
+        position: relative;
+        z-index: 1;
+        min-width: toRem(18);
+        height: toRem(10.5);
+
+        margin-right: toRem(11);
+        &::after,&::before{
+            content: "";
+        }
+        span, &::after, &::before{
+            background: $black;
+            border-radius: toRem(5);
+            
+            position: absolute;
+            z-index: 1;
+            left: 0;
+
+            width: 100%;
+            height: toRem(1.5);
+
+            transition: background-color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+        }
+        &::after{
+            top: 0;
+
+            transition: top 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
+            transform 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+        }
+        span{
+            top: toPercent(5, 10.5);
+
+            transition: transform 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+        }
+        &::before{
+            bottom: 0;
+
+            transition: top 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
+            transform 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+        }
+    }
+    &._active &__burger{
+        &::after{
+            top: 50%;
+            transform: rotate(45deg) translateY(-25%);
+        }
+        &::before{
+            top: 50%;
+            transform: rotate(-45deg) translateY(-25%);
+        }
+        span{
+            transform: scale(0);
+        }
+    }
+
+    &__list-inner{
+        border-radius: 0 0 toRem(8) toRem(8);
+    }
+}

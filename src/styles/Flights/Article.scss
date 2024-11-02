@@ -1,0 +1,294 @@
+.flights{
+    @media (min-width: toEm(769, 16)) {
+        &__item{
+            display: flex;
+            align-items: flex-start;
+        }
+    }
+    &__item{
+        padding: toRem(16);
+    
+        &:not(:last-child){
+            margin-bottom: toRem(32);
+        }
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__item:not(:last-child){
+            margin-bottom: toRem(24);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__item:not(:last-child){
+            margin-bottom: toRem(16);
+        }
+    }
+}
+
+.item-flights{
+    @media (min-width: toEm(769, 16)) {
+        &__image, &__images{
+            flex: 0 0 toRem(160);
+        }
+        &__images > &__image{
+            margin-bottom: toRem(10);
+        }
+    }
+    &__image{
+        display: block;
+
+        text-align: center;
+        font-family: Montserrat;
+        font-size: toRem(16);
+        color: $white;
+        img{
+            width: 100%;
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__images{
+            display: grid;
+            grid-template-columns: repeat(auto-fit, toRem(160));
+            gap: toRem(10);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__images{
+            grid-template-columns: (repeat(auto-fit, toPercent(160, 406)));
+        }
+    }
+
+    @media (min-width: toEm(769, 16)) {
+        &__info{
+            margin-left: toRem(24);
+        }
+    }
+    &__info{
+        flex: 1 1 auto;
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__info{
+            margin-top: toRem(10);
+        }
+    }
+
+    @media (min-width: toEm(481, 16)) {
+        &__header{
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+    &__header{
+        margin-bottom: toRem(16);
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__header{
+            margin-bottom: toRem(8);
+        }
+    }
+
+    @media (min-width: toEm(481, 16)) {
+        &__price strong{
+            text-align: right;
+            margin-left: toRem(16);
+        }
+    }
+    &__price{
+        color: rgba($color: $darkGreen, $alpha: 0.75);
+        font-family: Montserrat;
+        font-size: toRem(12);
+        font-weight: 500;
+        line-height: math.div(15, 12);
+
+        strong{
+            display: block;
+
+            color: $lightRed;
+            font-size: toRem(24);
+            font-weight: 700;
+            line-height: math.div(29, 24);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__price{
+            display: flex;
+            align-items: center;
+
+            strong{
+                margin-left: toRem(4);
+            }
+        }
+    }
+
+    &__schedule-part{
+        display: flex;
+        &:not(:last-child){
+            margin-bottom: toRem(16);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__schedule-part:not(:last-child){
+            margin-bottom: toRem(8);
+        }
+    }
+}
+.part-schedule-item-flights{
+    &__input{
+        border-radius: toRem(3);
+        border: toRem(2) solid rgba($color: $darkGreen, $alpha: 0.4);
+        appearance: none;
+
+        min-width: toRem(19);
+        height: toRem(19);
+
+        margin-top: toRem(3);
+        margin-left: toRem(3);
+
+        transition: border-color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
+        background-color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
+        filter 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+    &__input:checked{
+        border-color: $darkGreen;
+        background-color: $darkGreen;
+    }
+    &__input:focus{
+        outline: none;
+        filter: drop-shadow(0 0 3px $black);
+    }
+    @media (any-hover: hover) {
+        &__input:hover{
+            filter: drop-shadow(0 0 3px $black);
+        }
+    }
+
+    @media (min-width: toEm(481, 16)) {
+        &__inner{
+            display: flex;
+        }
+        @media (max-width: toEm(768, 16)) {
+            &__inner{
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+    }
+    &__inner{
+        margin-left: toRem(12);
+    }
+
+    @media (max-width: toEm(480, 16)) {
+        &__column{
+            display: flex;
+            align-items: center;
+        }
+    }
+
+    @media (max-width: toEm(480, 16)) {
+        &__left, &__transfers{
+            margin-bottom: toRem(2);
+        }
+    }
+
+    @media (min-width: toEm(769, 16)) {
+        &__fly-line, &__fly-time{
+            margin-bottom: toRem(4);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__fly-line, &__fly-time{
+            margin-right: toRem(8);
+        }
+    }
+
+    &__fly-part{
+        color: $darkGreen;
+        font-family: Montserrat;
+        font-size: toRem(16);
+        font-weight: 600;
+        line-height: math.div(20, 16);
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__fly-part{
+            font-size: toRem(14);
+        }
+    }
+
+    &__fly-part_takeoff{
+        padding-right: toRem(23);
+        position: relative;
+        z-index: 1;
+        &::after{
+            background-color: $darkGreen;
+            content: "";
+
+            position: absolute;
+            z-index: 1;
+            top: 50%;
+            right: calc(toRem(23) / 2 + toRem(0.375));
+            transform: translateX(50%) translateY(-50%);
+
+            width: toRem(4.25);
+            height: toRem(1.5);
+        }
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__fly-part_takeoff{
+            padding-right: toRem(16);
+            &::after{
+                right: calc(toRem(16) / 2 + toRem(0.375));
+            }
+        }
+    }
+
+    &__service{
+        color: rgba($color: $darkGreen, $alpha: 0.4);
+        font-family: Montserrat;
+        font-size: toRem(14);
+        font-weight: 400;
+        line-height: math.div(17, 14);
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__service{
+            font-size: toRem(12);
+        }
+    }
+
+    @media (min-width: toEm(481, 16)) {
+        &__transfers{
+            margin: 0 toRem(40);
+        }
+        @media (max-width: toEm(992, 16)) {
+            &__transfers{
+                margin: 0 toRem(28);
+            }
+        }
+    }
+    &__transfers{
+        color: rgba($color: $darkGreen, $alpha: 0.78);
+        font-family: Montserrat;
+        font-size: toRem(14);
+        font-weight: 600;
+        line-height: math.div(18, 14);
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__transfers{
+            font-size: toRem(12);
+        }
+    }
+
+    &__fly-time{
+        color: rgba($color: $darkGreen, $alpha: 0.78);
+        font-family: Montserrat;
+        font-size: toRem(14);
+        font-weight: 600;
+        line-height: math.div(20, 14);
+    }
+
+    &__from-to{
+        color: rgba($color: $darkGreen, $alpha: 0.4);
+        font-family: Montserrat;
+        font-size: toRem(14);
+        font-weight: 400;
+        line-height: math.div(18, 14);
+    }
+}

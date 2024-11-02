@@ -29,6 +29,7 @@ export const App : FC = () => {
                         <Route path={flightsPath} element={<FlightsInfo />}></Route> 
                         <Route path={hotelsPath} element={<HotelsInfo />}></Route> 
                         <Route path={flightsConfiguratePath} element={<Configurate displayedContent={contentPart.Flights} />}></Route> 
+                        <Route path={hotelsConfiguretePath} element={<Configurate displayedContent={contentPart.Hotels} />}></Route>
                         <Route path="*" element={<Navigate to={homePath} replace />} /> 
                     </Routes> 
                     <Footer /> 
