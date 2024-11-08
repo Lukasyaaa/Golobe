@@ -1,6 +1,6 @@
 import React, { FC, Fragment, useRef, useState } from "react";
 import { ItemsHeader } from "./ItemsHeader";
-import { airlines, amenities, contentPart, flight, hotel, navbarItemType, navbarTitles, sortTitles, tripsType } from "../../../types";
+import { airlines, hotelsAmenities, contentPart, flight, hotel, navbarItemType, navbarTitles, sortTitles, tripsType } from "../../../types";
 import { useTypedSelector } from "../../../useTypedSelector";
 import { FlightsItem } from "../../Flights/Items/FlightsItem";
 import { HotelsItem } from "../../Hotels/Items/HotelsItem";
@@ -90,7 +90,12 @@ export const Items : FC<itemsProps> = ({displayedContent}) => {
             }
             //Проверка на Корректность Стоимости
             if(priceFrom < priceTo){
-                if(flight.price < priceFrom || flight.price > priceTo){
+                let departTotalPrice = flight.schedule.depart.price.baseFare + flight.schedule.depart.price.serviceFee + 
+                    flight.schedule.depart.price.taxes - flight.schedule.depart.price.discount;
+                let returnTotalPrice = flight.schedule.return.price.baseFare + flight.schedule.return.price.serviceFee + 
+                flight.schedule.return.price.taxes - flight.schedule.return.price.discount
+                if(departTotalPrice < priceFrom || departTotalPrice > priceTo ||
+                    returnTotalPrice < priceFrom || returnTotalPrice > priceTo){
                     continue;
                 }
             }
@@ -112,7 +117,7 @@ export const Items : FC<itemsProps> = ({displayedContent}) => {
                 let isAirlineCoincidence = false;
                 outherLoop : for(const schedulePart of Array.from([flight.schedule.depart, flight.schedule.return])){
                     for(const choosedAirline of choosedAirlines){
-                        if(airlinesMassive[choosedAirline] === schedulePart.airline){
+                        if(airlinesMassive[choosedAirline] === schedulePart.airline.alt){
                             isAirlineCoincidence = true;
                             break outherLoop;
                         }
@@ -128,8 +133,8 @@ export const Items : FC<itemsProps> = ({displayedContent}) => {
                 outherLoop : for(const schedulePart of Array.from([flight.schedule.depart, flight.schedule.return])){
                     if(choosedAirlines.length !== 0){
                         for(const choosedAirline of choosedAirlines){
-                            if(airlinesMassive[choosedAirline] === schedulePart.airline){
-                                if(timeToInt(schedulePart.takeoffTime, 0) >= timeFrom && timeToInt(schedulePart.arrayTime, 1440) <= timeTo){
+                            if(airlinesMassive[choosedAirline] === schedulePart.airline.alt){
+                                if(timeToInt(schedulePart.takeoffTime.units, 0) >= timeFrom && timeToInt(schedulePart.arrayTime.units, 1440) <= timeTo){
                                     isCorrectTime = true;
                                     break outherLoop;
                                 }
@@ -137,7 +142,7 @@ export const Items : FC<itemsProps> = ({displayedContent}) => {
                             }
                         }
                     } else {
-                        if(timeToInt(schedulePart.takeoffTime, 0) >= timeFrom && timeToInt(schedulePart.arrayTime, 1440) <= timeTo){
+                        if(timeToInt(schedulePart.takeoffTime.units, 0) >= timeFrom && timeToInt(schedulePart.arrayTime.units, 1440) <= timeTo){
                             isCorrectTime = true;
                         }
                     }
@@ -152,7 +157,20 @@ export const Items : FC<itemsProps> = ({displayedContent}) => {
 
         switch(sortStore.flights.items[sortStore.flights.currentActive].title){
             case sortTitles.Cheapest:
-                correctFlights.sort((a, b) => a.price - b.price);
+                correctFlights.sort((a, b) => 
+                    Math.min(
+                        a.schedule.depart.price.baseFare + a.schedule.depart.price.serviceFee + 
+                        a.schedule.depart.price.taxes - a.schedule.depart.price.discount, 
+                        a.schedule.return.price.baseFare + a.schedule.return.price.serviceFee + 
+                        a.schedule.return.price.taxes - a.schedule.return.price.discount
+                    ) - 
+                    Math.min(
+                        b.schedule.depart.price.baseFare + b.schedule.depart.price.serviceFee + 
+                        b.schedule.depart.price.taxes - b.schedule.depart.price.discount, 
+                        b.schedule.return.price.baseFare + b.schedule.return.price.serviceFee + 
+                        b.schedule.return.price.taxes - b.schedule.return.price.discount
+                    )
+                );
                 break;
             case sortTitles.Best:
                 correctFlights.sort((a, b) => b.shortReview.rating - a.shortReview.rating);
@@ -182,13 +200,13 @@ export const Items : FC<itemsProps> = ({displayedContent}) => {
                     let isDepartAirlineCoincidence = false;
                     let isReturnAirlineCoincidence = false;
                     for(const choosedAirline of choosedAirlines){
-                        if(airlinesMassive[choosedAirline] === flight.schedule.depart.airline){
+                        if(airlinesMassive[choosedAirline] === flight.schedule.depart.airline.alt){
                             isDepartAirlineCoincidence = true;
                             if(isReturnAirlineCoincidence){
                                 break;
                             }
                         }
-                        if(airlinesMassive[choosedAirline] === flight.schedule.return.airline){
+                        if(airlinesMassive[choosedAirline] === flight.schedule.return.airline.alt){
                             isReturnAirlineCoincidence = true;
                             if(isDepartAirlineCoincidence){
                                 break;
@@ -198,16 +216,16 @@ export const Items : FC<itemsProps> = ({displayedContent}) => {
 
                     if(isDepartAirlineCoincidence && isReturnAirlineCoincidence){
                         flightsFlyTimeValue.push(Math.min(
-                            timeToInt(flight.schedule.depart.arrayTime, 1440) - timeToInt(flight.schedule.depart.takeoffTime, 0),
-                            timeToInt(flight.schedule.return.arrayTime, 1440) - timeToInt(flight.schedule.return.takeoffTime, 0)
+                            timeToInt(flight.schedule.depart.arrayTime.units, 1440) - timeToInt(flight.schedule.depart.takeoffTime.units, 0),
+                            timeToInt(flight.schedule.return.arrayTime.units, 1440) - timeToInt(flight.schedule.return.takeoffTime.units, 0)
                         ))
                     } else if (isDepartAirlineCoincidence){
                         flightsFlyTimeValue.push(
-                            timeToInt(flight.schedule.depart.arrayTime, 1440) - timeToInt(flight.schedule.depart.takeoffTime, 0)
+                            timeToInt(flight.schedule.depart.arrayTime.units, 1440) - timeToInt(flight.schedule.depart.takeoffTime.units, 0)
                         )
                     } else {
                         flightsFlyTimeValue.push(
-                            timeToInt(flight.schedule.return.arrayTime, 1440) - timeToInt(flight.schedule.return.takeoffTime, 0)
+                            timeToInt(flight.schedule.return.arrayTime.units, 1440) - timeToInt(flight.schedule.return.takeoffTime.units, 0)
                         )
                     }
 
@@ -252,6 +270,16 @@ export const Items : FC<itemsProps> = ({displayedContent}) => {
                     </div>
                 );
             }
+            return(
+                <div className="configurate__content flights__content content">
+                    <ItemsHeader contentType={contentPart.Flights} itemsCount={correctFlights.length} about={itemsHeaderStore} />
+                    <div className="flights__items content__items">          
+                        {correctFlights.map((flight, i) => 
+                            <FlightsItem key={i} about={flight} buttonLink={state.flights.items.buttonLink} />
+                        )}
+                    </div>
+                </div>
+            );
         }
     } else {
         let correctHotels : hotel[] = [];
@@ -276,14 +304,14 @@ export const Items : FC<itemsProps> = ({displayedContent}) => {
                 case navbarItemType.Checkboxes:
                     if(navbarGroup.title === navbarTitles.Amenities){
                         navbarGroup.value.items.map(amenitie => {
-                            if(Object.values(amenities).includes(amenitie as amenities)){
+                            if(Object.values(hotelsAmenities).includes(amenitie as hotelsAmenities)){
                                 amenitiesMassive.push(amenitie);
                             }
                         })
                         choosedAmenities = navbarGroup.value.currentActive;
                     } else if(navbarGroup.title === navbarTitles.Freebies) {
                         navbarGroup.value.items.map(freebie => {
-                            if(Object.values(amenities).includes(freebie as amenities)){
+                            if(Object.values(hotelsAmenities).includes(freebie as hotelsAmenities)){
                                 freebiesMassive.push(freebie);
                             }
                         })
@@ -387,6 +415,16 @@ export const Items : FC<itemsProps> = ({displayedContent}) => {
                 </div>
             );
         }
+        return(
+            <div className="configurate__content flights__content content">
+                <ItemsHeader contentType={contentPart.Flights} itemsCount={correctHotels.length} about={itemsHeaderStore} />
+                <div className="flights__items content__items">          
+                    {correctHotels.map((hotel, i) => 
+                        <HotelsItem key={i} about={hotel} buttonLink={state.hotels.items.buttonLink} />
+                    )}
+                </div>
+            </div>
+        );
     }
 
     return <Fragment />

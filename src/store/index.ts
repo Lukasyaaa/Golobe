@@ -10,6 +10,11 @@ import { sortReducer } from "./configurate/sortReducer";
 import { flightsItemsReducer } from "./flights/flightsItemsReducer";
 import { hotelsItemsReducer } from "./hotels/hotelsItemsReducer";
 import { itemsHeaderReducer } from "./configurate/itemsHeaderReducer";
+import { airlinesReducer } from "./configurate/airlinesReducer";
+import { paymentReducer } from "./booking/paymentReducer";
+import { cardsReducer } from "./cardReducer";
+import { authorizationTextReducer } from "./booking/authorizationTextReducer";
+import { addCardReducer } from "./booking/addCardReducer";
 
 const rootReducer = combineReducers({
     header: headerReducer,
@@ -26,8 +31,15 @@ const rootReducer = combineReducers({
     configurate: combineReducers({
         navbar: navbarReducer,
         sort: sortReducer,
-        itemsHeader: itemsHeaderReducer
+        itemsHeader: itemsHeaderReducer,
+        airlines: airlinesReducer
     }),
+    bookings: combineReducers({
+        payment: paymentReducer,
+        authorization: authorizationTextReducer,
+        addCard: addCardReducer
+    }),
+    cards: cardsReducer,
     footer: footerReducer,
 })
 

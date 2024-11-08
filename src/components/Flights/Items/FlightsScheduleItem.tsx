@@ -1,15 +1,20 @@
 import React, { FC } from "react";
-import { flightSchedulePart } from "../../../types";
-import { timeToInt, timeToString } from "../../../helperFunctions";
+import { flightSchedulePart, setter } from "../../../types";
+import { durationToString, timeToInt, timeToString } from "../../../helperFunctions";
 
 interface flightsScheduleItemProps{
     about : flightSchedulePart,
-    isDeparture : boolean
+    isDeparture : boolean,
+    isActive : setter<boolean>
 }
 
-export const FlightsScheduleItem : FC<flightsScheduleItemProps> = ({about, isDeparture}) => {
+export const FlightsScheduleItem : FC<flightsScheduleItemProps> = ({about, isDeparture, isActive}) => {
     let neededDesc : string = (isDeparture) ? "departure" : "return";
-    let flyTime : number = timeToInt(about.arrayTime, 1440) - timeToInt(about.takeoffTime, 0);
+    let flyTime : number = timeToInt(about.arrayTime.units, 1440) - timeToInt(about.takeoffTime.units, 0);
+
+    const toggleInput = () => {
+        isActive.set(!isActive.value);
+    }
 
     return(
         <div 
@@ -24,6 +29,8 @@ export const FlightsScheduleItem : FC<flightsScheduleItemProps> = ({about, isDep
                     "part-schedule-item-flights__input", 
                     `part_${neededDesc}-schedule-item-flights__input`
                 ].join(" ")} 
+                checked={isActive.value}
+                onChange={toggleInput}
             />
             <div                 
                 className={[
@@ -52,7 +59,7 @@ export const FlightsScheduleItem : FC<flightsScheduleItemProps> = ({about, isDep
                                 `part_${neededDesc}-schedule-item-flights__fly-part_takeoff`
                             ].join(" ")}
                         >
-                            {timeToString(about.takeoffTime)}
+                            {timeToString(about.takeoffTime.units)}
                         </time>
                         <time 
                             dateTime=""
@@ -63,7 +70,7 @@ export const FlightsScheduleItem : FC<flightsScheduleItemProps> = ({about, isDep
                                 `part_${neededDesc}-schedule-item-flights__fly-part_array`
                             ].join(" ")}
                         >
-                            {timeToString(about.arrayTime)}
+                            {timeToString(about.arrayTime.units)}
                         </time>
                     </div>
                     <div 
@@ -72,7 +79,7 @@ export const FlightsScheduleItem : FC<flightsScheduleItemProps> = ({about, isDep
                             `part_${neededDesc}-schedule-item-flights__service`
                         ].join(" ")}
                     >
-                        {about.airline}
+                        {about.airline.alt}
                     </div>
                 </div>
                 <div 
@@ -95,7 +102,7 @@ export const FlightsScheduleItem : FC<flightsScheduleItemProps> = ({about, isDep
                             `part_${neededDesc}-schedule-item-flights__fly-time`
                         ].join(" ")}
                     >
-                        {Math.floor(flyTime / 60) + "h " + flyTime % 60 + "m"}
+                        {durationToString(flyTime)}
                     </output>
                     <div 
                         className={[

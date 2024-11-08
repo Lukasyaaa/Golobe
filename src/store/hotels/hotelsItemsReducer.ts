@@ -1,4 +1,4 @@
-import { amenities, hotels, hotelType, sortTitles } from "../../types"
+import { hotelsAmenities, hotels, sortTitles } from "../../types"
 import firstItemImageMainJpeg from "../../assets/img/hotels/items/1/main.jpeg"
 import firstItemImageMainWebp from "../../assets/img/hotels/items/1/main.webp"
 import secondItemImageMainJpeg from "../../assets/img/hotels/items/2/main.jpeg"
@@ -23,7 +23,7 @@ const defaultStore : hotels = {
             price: 204,
             location: "Gümüssuyu Mah. Inönü Cad. No:8, Istanbul 34437",
             countStars: 5,
-            amenities: [amenities.AirConditioned, amenities.FreeAirportShuttle],
+            amenities: [hotelsAmenities.AirConditioned, hotelsAmenities.FreeAirportShuttle],
             shortReview: {
                 countReviews: 371,
                 rating: 4.2
@@ -42,7 +42,7 @@ const defaultStore : hotels = {
             price: 204,
             location: "Gümüssuyu Mah. Inönü Cad. No:8, Istanbul 34437",
             countStars: 5,
-            amenities: [amenities.AirConditioned, amenities.FreeAirportShuttle],
+            amenities: [hotelsAmenities.AirConditioned, hotelsAmenities.FreeAirportShuttle],
             shortReview: {
                 countReviews: 371,
                 rating: 4.2
@@ -61,7 +61,7 @@ const defaultStore : hotels = {
             price: 204,
             location: "Gümüssuyu Mah. Inönü Cad. No:8, Istanbul 34437",
             countStars: 5,
-            amenities: [amenities.AirConditioned, amenities.FreeAirportShuttle],
+            amenities: [hotelsAmenities.AirConditioned, hotelsAmenities.FreeAirportShuttle],
             shortReview: {
                 countReviews: 371,
                 rating: 4.2
@@ -80,7 +80,7 @@ const defaultStore : hotels = {
             price: 204,
             location: "Gümüssuyu Mah. Inönü Cad. No:8, Istanbul 34437",
             countStars: 5,
-            amenities: [amenities.AirConditioned, amenities.FreeAirportShuttle],
+            amenities: [hotelsAmenities.AirConditioned, hotelsAmenities.FreeAirportShuttle],
             shortReview: {
                 countReviews: 371,
                 rating: 4.2

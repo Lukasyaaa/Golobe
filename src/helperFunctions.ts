@@ -1,5 +1,5 @@
 import { MouseEvent, FocusEvent, RefObject } from "react";
-import { meridiem, setter, time } from "./types";
+import { flightAmenities, meridiem, setter, units } from "./types";
 
 export const toggleState = (state : setter<boolean>) : void => {
     state.set(!state.value);
@@ -59,7 +59,7 @@ export const fetchCountryByCity = async (cityName : string) => {
     }
 };
 
-export const intToTime = (int : number) : time => {
+export const intToTime = (int : number) : units => {
     return {
         hour: (Math.floor(int / 60) % 12) || 12, 
         minute: int % 60, 
@@ -67,7 +67,7 @@ export const intToTime = (int : number) : time => {
     };
 }
 
-export const timeToInt = (t : time, replaceValue : 0 | 1440) : number => {
+export const timeToInt = (t : units, replaceValue : 0 | 1440) : number => {
     if(t.hour === 12 && t.minute === 0 && t.meridiem === meridiem.AM) 
         return replaceValue;
     let hourValue : number = Number(t.hour !== 12 || t.meridiem !== meridiem.AM) * t.hour * 60;
@@ -75,8 +75,84 @@ export const timeToInt = (t : time, replaceValue : 0 | 1440) : number => {
     return hourValue + plus12 + t.minute;
 }
 
-export const timeToString = (t : time) : string => {
-    let hourPart = (t.hour < 10) ? "0" + t.hour : t.hour;
-    let minPart = (t.minute < 10) ? "0" + t.minute : t.minute;
+export const timeToString = (t : units) : string => {
+    let hourPart = ((t.hour < 10) ? "0" : "") + t.hour;
+    let minPart = ((t.minute < 10) ? "0" : "") + t.minute;
     return hourPart + ":" + minPart + t.meridiem;
+}
+
+export const durationToString = (d : number) : string => {
+    return Math.floor(d / 60) + "h " + d % 60 + "m"
+}
+
+export const halfTimeToWholeString = (t : units) : string => {
+    let hourPart = ((t.hour + ((t.meridiem === meridiem.AM) ? 0 : 12) < 10) ? "0" : "") + (t.hour + ((t.meridiem === meridiem.AM) ? 0 : 12));
+    let minPart = ((t.minute + ((t.meridiem === meridiem.AM) ? 0 : 12) < 10) ? "0" : "") + t.minute;
+    return hourPart + ":" + minPart;
+}
+
+export const getDayWeek = (dayWeek : number) : string => {
+    switch(dayWeek){
+        case 1:
+            return "Mon";
+        case 2:
+            return "Tue";
+        case 3:
+            return "Wed";
+        case 4:
+            return "Thu";
+        case 5:
+            return "Fri";
+        case 6:
+            return "Sat";
+        case 7:
+            return "Sun";
+        default:
+            return "Error";
+    }
+}
+export const getMonth = (dayWeek : number) : string => {
+    switch(dayWeek){
+        case 0:
+            return "Jan";
+        case 1:
+            return "Feb";
+        case 2:
+            return "Mar";
+        case 3:
+            return "Apr";
+        case 4:
+            return "May";
+        case 5:
+            return "Jun";
+        case 6:
+            return "Jul";
+        case 7:
+            return "Aug";
+        case 8:
+            return "Sep";
+        case 9:
+            return "Oct";
+        case 10:
+            return "Nov";
+        case 11:
+            return "Dec";
+        default:
+            return "Error";
+    }
+}
+
+export const getFlightAmenitie = (amenitie : string) : string => {
+    switch(amenitie){
+        case flightAmenities.Fast:
+            return "icon-plane";
+        case flightAmenities.FastFood:
+            return "icon-junk-food";
+        case flightAmenities.ManySeats:
+            return "icon-seat";
+        case flightAmenities.Punctual:
+            return "icon-clock";
+        default:
+            return "error"
+    }
 }

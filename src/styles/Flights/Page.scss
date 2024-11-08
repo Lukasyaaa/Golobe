@@ -1,0 +1,691 @@
+.header-flight{
+    &:not(.two) &__breadcrumbs,
+    &__breadcrumbs-container{
+        margin-bottom: toRem(31);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &:not(.two) &__breadcrumbs,
+        &__breadcrumbs-container{
+            margin-bottom: toRem(24);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &:not(.two) &__breadcrumbs,
+        &__breadcrumbs-container{
+            margin-bottom: toRem(16);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &:not(.two) &__breadcrumbs,
+        &__breadcrumbs-container{
+            margin-bottom: toRem(10);
+        }
+    }
+
+    @media (min-width: toEm(769, 16)) {
+        &__row{
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;    
+        }
+    }
+    &__row{
+        margin-bottom: toRem(32);
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__row{
+            margin-bottom: toRem(24);
+        }
+    }
+
+    &__left{
+        max-width: toRem(768);
+    }
+    @media (max-width: toEm($container + 30, 16)) {
+        &__left{
+            max-width: toRem(480);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__left{
+            margin-bottom: toRem(16);
+        }
+    }
+
+    &__title{
+        color: $darkGreen;
+        font-family: "TradeGothic";
+        font-size: toRem(24);
+        font-weight: 700;
+        line-height: math.div(30, 24);
+
+        margin-bottom: toRem(16);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__title{
+            font-size: toRem(22);
+            margin-bottom: toRem(10);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__title{
+            font-size: toRem(20);
+            margin-bottom: toRem(5);
+        }
+    }
+    
+    &__location, &__location-inner{
+        display: flex;
+        align-items: center;
+    }
+    @media (min-width: toEm(481, 16)) {
+        &__location::before{
+            margin-right: toRem(4);
+        }
+    }
+    &__location{
+        &::before{
+            color: $darkGreen;
+            font-size: toRem(15.75);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            width: toRem(18);
+            height: toRem(18);
+        }
+
+        color: $darkGreen;
+        font-family: Montserrat;
+        font-size: toRem(18);
+        font-weight: 500;
+        line-height: math.div(24, 18);
+
+        span{
+            color: rgba($color: $darkGreen, $alpha: 0.75);
+            font-family: Montserrat;
+            font-size: toRem(14);
+            font-weight: 500;
+            line-height: math.div(18, 14);
+        }
+    }
+    &:not(.two) &__location,
+    &.two &__locations{
+        margin-bottom: toRem(8);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__location{
+            &::before{
+                font-size: toRem(14);
+            }
+            font-size: toRem(16);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &:not(.two) &__location,
+        &.two &__locations{
+            margin-bottom: toRem(5);
+        }
+        &__location{
+            font-size: toRem(14);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__location, &__location span{
+            font-size: toRem(12);
+        }
+    }
+
+    &__right{
+        display: flex;
+        flex-direction: column;
+    }
+
+    @media (min-width: toEm(769, 16)) {
+        &__price{
+            align-self: flex-end;
+        }
+    }
+    &__price{
+        color: $lightRed;
+        font-family: Montserrat;
+        font-size: toRem(32);
+        font-weight: 700;
+        line-height: math.div(39, 32);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__price{
+            font-size: toRem(26);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__price{
+            font-size: toRem(24);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__price{
+            font-size: toRem(22);
+        }
+    }
+
+    &__interaction{
+        display: inline-flex;
+        margin-top: toRem(16);
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__interaction{
+            margin-top: toRem(10);
+        }
+    }
+
+    &__favourites, &__share{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: toRem(48);
+
+        border-radius: toRem(4);
+        border: toRem(1) solid $mint;
+        &:not(:last-child){
+            margin-right: toRem(15);
+        }
+        transition: background-color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
+        color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+    &__favourites:focus, &__share:focus{
+        outline: none;
+        background-color: $mint;
+        color: $white;
+    }
+    @media (any-hover: hover) {
+        &__favourites:hover, &__share:hover{
+            background-color: $mint;
+            color: $white;
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__favourites, &__share{
+            min-width: toRem(40);
+            &:not(:last-child){
+                margin-right: toRem(10);
+            }
+        }
+    }
+
+    &__book{
+        border-radius: toRem(4);
+        background: $mint;
+        padding: toRem(8) toRem(16);
+
+        min-height: toRem(48);
+        display: flex;
+        align-items: center;
+
+        color: $darkGreen;
+        font-family: Montserrat;
+        font-size: toRem(14);
+        font-weight: 600;
+        line-height: math.div(17, 14);
+
+        transition: border-color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
+        background-color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
+        color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
+        text-shadow 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+    &__book:focus{
+        outline: none;
+        border-color: $darkGreen;
+        background-color: $darkGreen;
+        color: $mint;
+        text-shadow: 0 0 8px $mint;
+    }
+    @media (any-hover: hover) {
+        &__book:hover{
+            border-color: $darkGreen;
+            background-color: $darkGreen;
+            color: $mint;
+            text-shadow: 0 0 8px $mint;
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__book{
+            flex: 1 1 auto;
+            justify-content: center;
+            min-height: toRem(40);
+        }
+    }
+
+    &__images{
+        position: relative;
+        z-index: 1;
+        padding-bottom: toPercent(395, $container);
+    }
+    &__image{
+        display: block;
+        img{
+            position: absolute;
+            z-index: 1;
+            left: 0;
+            top: 0;
+
+            object-fit: cover;
+
+            width: 100%;
+            height: 100%;
+
+            border-radius: toRem(12);
+        }
+    }
+    &:not(.two) &__image{
+        padding-bottom: toPercent(395, $container);
+        position: relative;
+        z-index: 1;
+    }
+
+    &.two &__image{
+        position: absolute;
+        z-index: 1;
+        left: 0;
+        top: 0;
+
+        height: 100%;
+        width: 100%;
+    }
+
+    &__subimage{
+        position: absolute;
+        z-index: 1;
+
+        color: $white;
+        font-family: Montserrat;
+        font-size: toRem(16);
+        font-weight: 600;
+        line-height: math.div(17, 14);
+    }
+}
+.header-flight.two .header_depart-flight{
+    &__image{
+        clip-path: polygon(0 0, 100% 0, 0 100%);
+    }
+    &__subimage{
+        left: toRem(15);
+        top: toRem(15);
+    }
+}
+.header-flight.two .header_return-flight{
+    &__image{
+        clip-path: polygon(100% 100%, 0 100%, 100% 0);
+    }
+    &__subimage{
+        right: toRem(15);
+        bottom: toRem(15);
+    }
+}
+
+.features-flight{
+    padding-top: toRem(40);
+    @media (max-width: toEm(992, 16)) {
+        padding-top: toRem(32);
+    }
+    @media (max-width: toEm(768, 16)) {
+        padding-top: toRem(24);
+    }
+    @media (max-width: toEm(480, 16)) {
+        padding-top: toRem(16);
+    }
+
+    @media (min-width: toEm($container + 30, 16)) {
+        &.two .container{
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: toRem(24);
+        }
+    }
+    @media (max-width: toEm($container + 30, 16)) {
+        &__item:not(:last-child){
+            margin-bottom: toRem(24);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__item:not(:last-child){
+            margin-bottom: toRem(16);
+        }
+    }
+}
+.item-features-flight{
+    @media (min-width: toEm(769, 16)) {
+        &__header{
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+    &__header{
+        margin-bottom: toRem(24);
+    }
+    @media (max-width: toEm($container + 30, 16)) {
+        &__header{
+            margin-bottom: toRem(16);
+        }
+    }
+
+    @media (min-width: toEm(769, 16)) {
+        &__title{
+            margin-right: toRem(24);
+        }
+    }
+    &__title{
+        color: $darkGreen;
+        font-family: "TradeGothic";
+        font-size: toRem(24);
+        font-weight: 700;
+        line-height: math.div(30, 24);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__title{
+            font-size: toRem(22);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__title{
+            text-align: center;
+            font-size: toRem(20);
+            margin-bottom: toRem(10);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__title{
+            margin-bottom: toRem(5);
+        }
+    }
+
+    &__inputs{
+        display: flex;
+        margin: toRem(-3) toRem(-12);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__inputs{
+            margin: toRem(-3) toRem(-6);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__inputs{
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+    }
+    
+    &__input-block{
+        padding: toRem(3) toRem(12);
+        display: flex;
+        align-items: center;
+
+        position: relative;
+        z-index: 1;
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__input-block{
+            padding: toRem(3) toRem(6);
+        }
+    }
+
+    @media (min-width: toEm(993, 16)) {
+        &__input{
+            margin: toRem(2);
+        }
+    }
+    &__input{
+        border-radius: toRem(3);
+        min-width: toRem(18);
+        height: toRem(18);
+
+        appearance: none;
+    }
+    &__input:focus{
+        outline: none;
+    }
+    &__input:focus ~ &__subinput::before{
+        filter: drop-shadow(0 0 3px $black);
+    }
+    @media (any-hover: hover) {
+        &__input:hover ~ &__subinput::before{
+            filter: drop-shadow(0 0 3px $black);
+        }
+    }
+    &__subinput{
+        pointer-events: none;
+        color: $darkGreen;
+        font-family: Montserrat;
+        font-size: toRem(14);
+        font-weight: 500;
+        line-height: math.div(17, 14);
+        padding-left: toRem(8);
+
+        &::before{
+            border-radius: toRem(3);
+            border: toRem(2) solid $darkGreen;
+            content: "";
+            pointer-events: none;
+
+            position: absolute;
+            z-index: 1;
+            left: toRem(2 + 12);
+            top: 50%;
+            transform: translateY(-50%);
+
+            width: toRem(18);
+            height: toRem(18);
+
+            
+            transition: filter 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+        }
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__subinput::before{
+            left: toRem(6);
+        }
+    }
+
+    &__input:checked ~ &__subinput::before{
+        background-color: $darkGreen;
+    }
+
+    &__images{
+        display: grid;
+        grid-template-columns: repeat(auto-fit, toRem(120));
+        gap: toRem(19);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__images{
+            grid-template-columns: repeat(auto-fit, toRem(90));
+            gap: toRem(16);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__images{
+            grid-template-columns: repeat(auto-fit, toRem(75));
+            justify-content: center;
+            gap: toRem(10);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__images{
+            grid-template-columns: repeat(auto-fit, toRem(60));
+        }
+    }
+
+    &__image{
+        height: toRem(120);
+        img{
+            border-radius: toPercent(12, 120);
+            max-width: 100%;
+        }
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__image{
+            height: toRem(90);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__image{
+            height: toRem(75);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__image{
+            height: toRem(60);
+        }
+    }
+}
+
+.navigation-flight{
+    padding-top: toRem(40);
+    @media (max-width: toEm(992, 16)) {
+        padding-top: toRem(32);
+    }
+    @media (max-width: toEm(768, 16)) {
+        padding-top: toRem(24);
+    }
+
+    &__policies{
+        border-radius: toRem(8);
+        background-color: rgba($color: $mint, $alpha: 0.6);
+        padding: toRem(16);
+    }
+
+    &:not(.two) &__policie{
+        background-color: rgba($color: $mint, $alpha: 0.6);
+        padding: toRem(16);
+    }
+    &.two &__policie:not(:last-child){
+        margin-bottom: toRem(24);
+    }
+    @media (max-width: toEm(768, 16)) {
+        &.two &__policie:not(:last-child){
+            margin-bottom: toRem(16);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &.two &__policie:not(:last-child){
+            margin-bottom: toRem(10);
+        }
+    }
+
+    &__policie{
+        border-radius: toRem(8);
+    }
+
+    &:not(.two) &__policie,
+    &__policies{
+        margin-bottom: toRem(40);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &:not(.two) &__policie,
+        &__policies{
+            margin-bottom: toRem(32);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &:not(.two) &__policie,
+        &__policies{
+            margin-bottom: toRem(24);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &:not(.two) &__policie,
+        &__policies{
+            margin-bottom: toRem(16);
+        }
+    }
+
+    &.two &__link:not(:last-child){
+        margin-bottom: toRem(24);
+    }
+    @media (max-width: toEm(768, 16)) {
+        &.two &__link:not(:last-child){
+            margin-bottom: toRem(16);
+        }
+    }
+}
+.policie-navigation-flight{
+    &__title{
+        color: $darkGreen;
+        font-family: TradeGothic;
+        font-size: toRem(24);
+        font-weight: 700;
+        line-height: math.div(30, 24);
+        
+        margin-bottom: toRem(16);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__title{
+            margin-bottom: toRem(10);
+            font-size: toRem(22);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__title{
+            margin-bottom: toRem(5);
+            font-size: toRem(20);
+        }
+    }
+
+    @media (min-width: toEm(769, 16)) {
+        &__list{
+            display: grid;
+            gap: toRem(10) toRem(16);
+            grid-template-columns: repeat(2, 1fr);
+        }
+        @media (max-width: toEm(992, 16)) {
+            &__list{
+                gap: toRem(10);
+            }
+        }
+    }
+
+    &__link{
+        display: flex;
+        align-items: center;
+
+        &::before{
+            font-size: toRem(18);
+            color: $darkGreen;
+
+            width: toRem(24);
+            height: toRem(24);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin-right: toRem(16);
+        }
+
+        span{
+            color: rgba($color: $darkGreen, $alpha: 0.75);
+            font-family: Montserrat;
+            font-size: toRem(16);
+            font-weight: 500;
+            line-height: math.div(20, 16);
+        }
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__link::before{
+            margin-right: toRem(10);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__link{
+            &::before{
+                margin-right: toRem(6);
+            }
+            &:not(:last-child){
+                margin-bottom: toRem(3);
+            }
+            span{
+                font-size: toRem(14);
+            }
+        }
+    }
+}

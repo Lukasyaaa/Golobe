@@ -1,6 +1,25 @@
 body._locked{
     overflow-y: hidden;
 }
+body::before{
+    background: $black;
+    opacity: 0;
+    content: "";
+    pointer-events: none;
+
+    position: fixed;
+    z-index: 5;
+    left: 0;
+    top: 0;
+
+    width: 100%;
+    height: 100%;
+
+    transition: opacity 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+body._modal-showed::before{
+    opacity: 0.5;
+}
 
 .wrapper, body{
     min-height: 100vh;
@@ -381,7 +400,7 @@ main{
     }
 }
 
-.configurate{
+.configurate, .flight, .booking{
     background-color: $lightGray;
     padding-top: toRem(90 + 48);
     padding-bottom: toRem(116);
@@ -401,7 +420,13 @@ main{
         padding-top: toRem(60 + 24);
         padding-bottom: toRem(32);
     }
+}
+.configurate ~ .footer, .flight ~ .footer, .booking ~ .footer{
+    background-color: $lightGray;
+}
 
+
+.configurate{
     &__options{
         margin-bottom: toRem(32);
     }
@@ -436,9 +461,6 @@ main{
             margin-top: toRem(10);
         }
     }
-}
-.configurate ~ .footer{
-    background-color: $lightGray;
 }
 
 .content{
@@ -666,6 +688,9 @@ main{
 
     &__view-more{
         flex: 1 1 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
         border-radius: toRem(4);
         background-color: $mint;
@@ -683,6 +708,9 @@ main{
         color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
         text-shadow 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
     }
+    &__view-more._disabled{
+        opacity: 0.5;
+    }
     @media (max-width: toEm(768, 16)) {
         &__view-more{
             min-height: toRem(40);
@@ -696,7 +724,7 @@ main{
         text-shadow: 0 0 8px $mint;
     }
     @media (any-hover: hover) {
-        &__view-more:hover{
+        &__view-more:not(._disabled):hover{
             border-color: $darkGreen;
             background-color: $darkGreen;
             color: $mint;
@@ -710,7 +738,9 @@ main{
     align-items: center;
     
     &__rating{
-        display: inline-block;
+        display: inline-flex;
+        justify-content: center;
+        min-width: toRem(40);
 
         color: $darkGreen;
         font-family: Montserrat;
@@ -720,7 +750,7 @@ main{
 
         border: toRem(1) solid $mint;
         border-radius: toRem(4);
-        padding: toRem(7.5) toRem(10);
+        padding: toRem(7.7) toRem(10);
 
         margin-right: toRem(8);
     }
@@ -733,6 +763,507 @@ main{
         line-height: math.div(15, 12);
         strong{
             font-weight: 700;
+        }
+    }
+}
+
+.breadcrumbs{
+    &__inner{
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+
+        margin: toRem(-2) toRem(-16);
+    }
+
+    &__link{
+        color: $darkGreen;
+        font-family: Montserrat;
+        font-size: toRem(14);
+        font-weight: 500;
+        line-height: math.div(18, 14);
+
+        padding: toRem(2) toRem(16);
+    }
+    &__link._active{
+        color: $lightRed;
+        position: relative;
+        z-index: 1;
+        &::before{
+            color: $darkGreen;
+            font-size: toRem(9);
+
+            position: absolute;
+            z-index: 1;
+            right: toRem(-8);
+            top: 50%;
+            transform: translateY(-50%) rotate(-90deg);
+        
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: toRem(16);
+            height: toRem(16);
+        }
+    }
+    &__link._active &__link-inner:hover{
+        transition: text-shadow 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+    &__link-inner:focus{
+        outline: none;
+        text-shadow: 0 0 5px $lightRed;
+    }
+    @media (any-hover: hover) {
+        &__link._active &__link-inner:hover{
+            text-shadow: 0 0 5px $lightRed;
+        }
+    }
+}
+
+
+.booking{
+    &__link{
+        border-radius: toRem(12);
+        box-shadow: 0px 4px 16px 0px rgba(17, 34, 17, 0.05);
+        background-color: $white;
+        padding: toRem(32) toRem(24);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__link{
+            padding: toRem(24);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__link{
+            padding: toRem(16);
+        }
+    }
+}
+.link-booking{
+    @media (min-width: toEm(481, 16)) {
+        &__main, &__header{
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+    &__header{
+        margin-bottom: toRem(24);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__header{
+            margin-bottom: toRem(16);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__header{
+            margin-bottom: toRem(10);
+        }
+    }
+
+    &__takeoff-time{
+        color: $darkGreen;
+        font-family: TradeGothic;
+        font-size: toRem(20);
+        font-weight: 700;
+        line-height: math.div(25, 20);
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__takeoff-time{
+            font-size: toRem(18);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__takeoff-time{
+            display: block;
+            font-size: toRem(16);
+        }
+    }
+
+    &__fly-time{
+        color: $darkGreen;
+        font-family: Montserrat;
+        font-size: toRem(20);
+        font-weight: 500;
+        line-height: math.div(24, 20);
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__fly-time{
+            font-size: toRem(18);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__fly-time{
+            display: block;
+            font-size: toRem(16);
+        }
+    }
+
+    &__main{
+        align-items: center;
+        margin-bottom: toRem(40);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__main{
+            margin-bottom: toRem(32);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__main{
+            margin-bottom: toRem(24);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__main{
+            margin-bottom: toRem(16);
+        }
+    }
+
+    @media (min-width: toEm(769, 16)) {
+        &__button{
+            min-width: toRem(262);
+        }
+    }
+    @media (min-width: toEm(481, 16)) {
+        &__button{
+            margin-right: toRem(24);
+        }
+        @media (max-width: toEm(768, 16)) {
+            &__button{
+                margin-right: toRem(16);
+            }
+        }
+    }
+    &__button{
+        border: toRem(1) solid $mint;
+        border-radius: toRem(8);
+        padding: toRem(15);
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        transition: background-color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
+        opacity 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+    &__button._disabled{
+        opacity: 0.5;
+    }
+    &__button:focus{
+        outline: none;
+        background-color: $mint;
+    }
+    &__button:focus &__airline,
+    &__button:focus &__airplane{
+        color: $white;
+    }
+    @media (any-hover: hover) {
+        &__button:not(._disabled):hover{
+            background-color: $mint;
+        }
+        &__button:not(._disabled):hover &__airline,
+        &__button:not(._disabled):hover &__airplane{
+            color: $white;
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__button{
+            padding: toRem(10);
+        }
+    }
+
+    &__image{
+        width: toRem(64);
+        margin-right: toRem(24);
+        img{
+            max-width: 100%;
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__image{
+            margin-right: toRem(16);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__image{
+            margin-right: toRem(10);
+        }
+    }
+
+    &__airline{
+        color: $darkGreen;
+        font-family: Montserrat;
+        font-size: toRem(24);
+        font-weight: 600;
+        line-height: math.div(29, 24);
+
+        margin-bottom: toRem(8);
+        transition: color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__airline{
+            font-size: toRem(22);
+            margin-bottom: toRem(6);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__airline{
+            font-size: toRem(20);
+            margin-bottom: toRem(4);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__airline{
+            font-size: toRem(18);
+        }
+    }
+
+    &__airplane{
+        color: rgba($color: $darkGreen, $alpha: 0.6);
+        font-family: Montserrat;
+        font-size: toRem(14);
+        font-weight: 500;
+        line-height: math.div(18, 14);
+
+        transition: color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__airplane{
+            font-size: toRem(12);
+        }
+    }
+
+    &__amenities{
+        display: flex;
+        flex-wrap: wrap;
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__amenities{
+            margin-top: toRem(10);
+            justify-content: center;
+        }
+    }
+
+    &__amenitie{
+        color: $darkGreen;
+        min-width: toRem(72);
+        height: toRem(48);
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    
+        position: relative;
+        z-index: 1;
+        &:not(:last-child)::after{
+            background-color: rgb(215, 226, 238);
+            content: "";
+
+            position: absolute;
+            z-index: 1;
+            right: toRem(-0.25);
+        
+            width: toRem(0.5);
+            height: 100%;
+        }
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__amenitie{
+            min-width: toRem(62);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__amenitie{
+            min-width: toRem(48);
+            height: toRem(36);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__amenitie{
+            min-width: toRem(36);
+            height: toRem(24);
+        }
+    }
+
+    &__schedule{
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        align-items: center;
+        justify-content: center;
+    }
+    @media (min-width: toEm(481, 16)) {
+        &__schedule-part{
+            position: relative;
+            z-index: 1;
+            &::before{
+                background-color: $black;
+                content: "";
+    
+                width: toRem(34);
+                height: toRem(0.5);
+    
+                position: absolute;
+                z-index: 1;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+            &::after{
+                background-color: $black;
+                border-radius: 50%;
+                content: "";
+    
+                width: toRem(6);
+                height: toRem(6);
+    
+                position: absolute;
+                z-index: 1;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+        }   
+        @media (max-width: toEm(768, 16)) {
+            &__schedule-part{
+                &::before{
+                    width: toRem(26);
+                }
+            }
+        }
+    }
+    &__schedule-part{
+        flex: 1 1 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__schedule-part{
+            flex-direction: column;
+        }
+    }
+
+    &__gap{
+        font-size: toRem(45);
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        min-width: toRem(48);
+        height: toRem(48);
+
+        margin: 0 toRem(24);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__gap{
+            font-size: toRem(36);
+            min-width: toRem(36);
+            height: toRem(36);
+
+            margin: 0 toRem(16);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__gap{
+            font-size: toRem(28);
+            min-width: toRem(28);
+            height: toRem(28);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__gap{
+            margin: 0 toRem(10);
+        }
+    }
+}
+.schedule-part-link-booking{
+    @media (min-width: toEm(481, 16)) {
+        &__time{
+            margin-right: toRem(16);
+        }
+        @media (max-width: toEm(992, 16)) {
+            &__time{
+                margin-right: toRem(10);
+            }
+        }
+        @media (max-width: toEm(768, 16)) {
+            &__time{
+                margin-right: toRem(6);
+            }
+        }
+    }
+    &__time{
+        color: $darkGreen;
+        font-family: Montserrat;
+        font-size: toRem(24);
+        font-weight: 600;
+        line-height: math.div(29, 24);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__time{
+            font-size: toRem(22);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__time{
+            font-size: toRem(20);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__time{
+            font-size: toRem(18);
+        }
+    }
+
+    &__place{
+        color: rgba($color: $darkGreen, $alpha: 0.6);
+        font-family: Montserrat;
+        font-size: toRem(16);
+        font-weight: 500;
+        line-height: math.div(20, 16);
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__place{
+            font-size: toRem(14);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__place{
+            font-size: toRem(12);
+        }
+    }
+}
+@media (min-width: toEm(481, 16)) {
+    .schedule-part_from-link-booking{
+        padding-right: toRem(40 + 10);
+        @media (max-width: toEm(768, 16)) {
+            padding-right: toRem(32 + 10);
+        }
+        &::before{
+            right: 0;
+        }
+        &::after{
+            right: toRem(34);
+        }
+        @media (max-width: toEm(768, 16)) {
+            &::after{
+                right: toRem(26);
+            }
+        }
+    }
+    .schedule-part_to-link-booking{
+        padding-left: toRem(40 + 10);
+        @media (max-width: toEm(768, 16)) {
+            padding-left: toRem(32 + 10);
+        }
+        &::before{
+            left: 0;
+        }
+        &::after{
+            left: toRem(34);
+        }
+        @media (max-width: toEm(768, 16)) {
+            &::after{
+                left: toRem(26);
+            }
         }
     }
 }

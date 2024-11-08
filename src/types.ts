@@ -3,9 +3,9 @@ interface srcs{
     webp : string, 
     jpeg : string 
 } 
-export interface imageVariants{ 
+export interface imageVariants<T>{ 
     srcs : srcs, 
-    alt : string 
+    alt : T 
 } 
 interface image{ 
     src : string, 
@@ -21,7 +21,7 @@ export enum contentPart{
     Hotels = "Hotels" 
 } 
  
-interface link{ 
+export interface link{ 
     path : string, 
     description : string 
 } 
@@ -74,11 +74,17 @@ export enum meridiem{
     PM = "pm" 
 } 
  
-export interface time{ 
+export interface units{ 
     hour : number, 
     minute : number, 
     meridiem : meridiem 
 } 
+export interface time{
+    day : number,
+    month : number,
+    year : number,
+    units : units
+}
 
 export interface configurateItemsHeader{
     maxShow : number,
@@ -88,6 +94,25 @@ export interface configurateItemsHeader{
 export interface shortReview{
     rating : number,
     countReviews : number
+}
+
+export enum flightDirection{
+    Return = "Return",
+    Depart = "Depart"
+}
+
+export interface priceDetails{
+    baseFare : number,
+    discount : number,
+    taxes : number,
+    serviceFee : number
+}
+
+export enum availableVariants{
+    Facebook = "Facebook",
+    Google = "Google",
+    Apple = "Apple",
+    Mail = "Mail"
 }
 
 //------------Variant------------ 
@@ -116,7 +141,7 @@ export interface offersItem{
     price : number, 
     info : string, 
     linkPath : string, 
-    images : imageVariants[] 
+    images : imageVariants<string>[] 
 } 
 export interface offers{ 
     header : sectionHeader, 
@@ -271,7 +296,7 @@ export enum travelAvailable{
     Resorts = "Resorts" 
 } 
 export interface travelsItem{ 
-    image : imageVariants, 
+    image : imageVariants<string>, 
     city : string, 
     available : travelAvailable[] 
 } 
@@ -297,8 +322,8 @@ export interface reviewItem{
     info : string, 
     countStars : number, 
     author : string, 
-    hotel : reviewItemHotel 
-    image : imageVariants 
+    hotel : reviewItemHotel,
+    image : imageVariants<string> 
 } 
 export interface reviewsLinkToLocation{ 
     googleLogo : string, 
@@ -332,7 +357,7 @@ export enum mapPartType{
     Japan = "japn", 
 } 
 interface mapImageVariants{ 
-    main : imageVariants, 
+    main : imageVariants<string>, 
     arrow : image 
 } 
 export interface mapPart{ 
@@ -345,7 +370,7 @@ export interface mapPart{
 export interface mapPropose{ 
     type : mapItemType.Default, 
     ticketNumb : number, 
-    image : imageVariants, 
+    image : imageVariants<string>, 
     linkPath : string 
 } 
 export type mapItem = mapPart | mapPropose; 
@@ -364,7 +389,7 @@ export interface flightsHome{
  
 //-------------------------HOTELS------------------------- 
 export interface recentItem{ 
-    image : imageVariants, 
+    image : imageVariants<string>, 
     city : string, 
     countPlaces : number, 
     linkPath : string 
@@ -409,7 +434,7 @@ export enum tripsType{
     MultiCity = "Multi-City", 
     MyDatesAreFlexible = "My Dates Are Flexible" 
 } 
-export enum amenities{ 
+export enum hotelsAmenities{ 
     Fitness = "Fitness", 
     AirConditioned = "Air-conditioned", 
     InsidePool = "Inside Pool", 
@@ -445,8 +470,8 @@ export interface navbarCheckboxes{
 } 
  
 export interface navbarFromToTimeValue{ 
-    from : time, 
-    to : time 
+    from : units, 
+    to : units
 } 
 interface navbarFromToTime{ 
     title : navbarTitles,
@@ -518,25 +543,52 @@ export interface sort{
 }
 
 //-------------------------FLIGHTS ITEMS-------------------------
+export interface airlinePolicie{
+    type : airlines,
+    elements : string[]
+}
+
+export enum flightAmenities{
+    Fast = "Fast",
+    FastFood = "Fast Food",
+    ManySeats = "Many Seats",
+    Punctual = "Punctual"
+}
+
+interface flightArrayPlace{
+    city : string,
+    airport : string,
+    full : string
+}
+export interface seatsTypes{
+    economy : imageVariants<string>[],
+    business : imageVariants<string>[],
+    first : imageVariants<string>[]
+}
+
 export interface flightSchedulePart{
+    image : imageVariants<string>,
     takeoffTime : time,
     arrayTime : time,
-    airline : airlines,
+    airline : imageVariants<airlines>,
+    airplane : string,
     transfersCount : number,
+    price : priceDetails,
+    amenities : flightAmenities[],
+    arrayPlace : flightArrayPlace,
+    seatsTypes : seatsTypes,
     from : string,
-    to : string
+    to : string,
+    isChoosed : boolean
 }
 interface flightSchedule{
     depart : flightSchedulePart,
-    return : flightSchedulePart,
-    currentChoosed : number[]
+    return : flightSchedulePart
 }
 export interface flight{
     id : number,
     type : tripsType,
-    images : imageVariants[],
     shortReview : shortReview,
-    price : number,
     schedule : flightSchedule
 }
 export interface flights{
@@ -554,8 +606,8 @@ export enum hotelType{
 }
 
 interface hotelImages{
-    main : imageVariants,
-    another : imageVariants[]
+    main : imageVariants<string>,
+    another : imageVariants<string>[]
 }
 export interface hotel{
     id : number,
@@ -565,7 +617,7 @@ export interface hotel{
     price : number
     location : string,
     countStars : 5 | 4 | 3 | 2 | 1 | 0,
-    amenities : amenities[],
+    amenities : hotelsAmenities[],
     shortReview : shortReview,
 }
 export interface hotels{
@@ -573,4 +625,98 @@ export interface hotels{
     isShowAll : boolean,
     buttonViewMore : buttonStates,
     buttonLink : string,
+}
+
+//-------------------------PAYMENT-------------------------
+export enum paymentTitles{
+    payFull = "Pay in full",
+    payParts = "Pay part now, part later"
+}
+
+export interface paymentMethod{
+    type : paymentTitles,
+    description : string
+}
+
+export interface payment{
+    methods : paymentMethod[],
+    currentActive : number,
+    linkInfo : link
+}
+
+//-------------------------CARD-------------------------
+interface cardExpDate{
+    month : number,
+    year : number
+}
+
+export interface card{
+    number : number,
+    cvc : number,
+    expDate : cardExpDate,
+    name : string,
+    country : string,
+    savedInfo : boolean
+}
+
+export enum typeAddCardInput{
+    Entry = "Entry",
+    Select = "Select"
+}
+
+export enum addCardInputTitles{
+    Card = "Card Number",
+    ExpDate = "Exp. Date",
+    CVC = "CVC",
+    Name = "Name on Card",
+    CountryOrRegion = "Country or Region"
+}
+
+export interface addCardInputValueEntry{
+    type : typeAddCardInput.Entry,
+    description : addCardInputTitles,
+    placeholder : string
+}
+interface addCardInputValueSelect{
+    type : typeAddCardInput.Select,
+    description : addCardInputTitles,
+    links : string[]
+}
+interface addCardInput{
+    isMassive : false,
+    value : addCardInputValueEntry | addCardInputValueSelect
+}
+interface addCardMassive{
+    isMassive : true,
+    value : (addCardInputValueEntry | addCardInputValueSelect)[]
+}
+
+export interface addCard{
+    title : string,
+    inputs : (addCardInput | addCardMassive)[],
+    saveText : string,
+    buttonAdd : string,
+    privacyPolicy : string
+}
+
+//-------------------------AUTHORIZATION-------------------------
+export interface availableAuthorizationVariantIcon{
+    type : availableVariants,
+    subType : string,
+    isImage : false,
+    isBigger : boolean
+}
+export interface availableAuthorizationVariantImage{
+    type : image,
+    subType : string,
+    isImage : true,
+    isBigger : boolean
+}
+
+export interface authorizationText{
+    heading : string,
+    placeholder : string,
+    description : string,
+    continueButton : string,
+    availableVariants : (availableAuthorizationVariantIcon | availableAuthorizationVariantImage)[]
 }

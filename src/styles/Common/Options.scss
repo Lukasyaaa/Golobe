@@ -26,8 +26,11 @@
     &.header-text &__inner{
         padding: toRem(32);
     }
+    &.independent &__inner{
+        padding: toRem(24) toRem(32) toRem(32);
+    }
     @media (max-width: toEm(768, 16)) {
-        &__inner, &.header-text &__inner{
+        &__inner, &.header-text &__inner, &.independent &__inner{
             padding: toRem(16);
         }
     }

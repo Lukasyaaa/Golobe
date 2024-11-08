@@ -11,7 +11,6 @@ interface configurateProps{
 } 
  
 export const Configurate : FC<configurateProps> = ({displayedContent}) =>{ 
-    
     return( 
         <main className={"configurate" + " " + displayedContent.toLowerCase()}> 
             <Options neededBlocks={optionsNeededBlocks.OnlyInputs} startValue={contentPart.Flights} /> 

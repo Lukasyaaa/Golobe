@@ -10,6 +10,8 @@ import { FlightsInfo } from "./pages/FlightsInfo";
 import { HotelsInfo } from "./pages/HotelsInfo"; 
 import { Configurate } from "./pages/Configurate"; 
 import { contentPart } from "./types"; 
+import { Flight } from "./pages/Flight";
+import { Booking } from "./pages/Booking";
  
 export const homePath = "/"; 
 export const flightsPath = "/Flights/"; 
@@ -30,6 +32,12 @@ export const App : FC = () => {
                         <Route path={hotelsPath} element={<HotelsInfo />}></Route> 
                         <Route path={flightsConfiguratePath} element={<Configurate displayedContent={contentPart.Flights} />}></Route> 
                         <Route path={hotelsConfiguretePath} element={<Configurate displayedContent={contentPart.Hotels} />}></Route>
+                        <Route path={flightsConfiguratePath + "/:id/:choosedFlight"} element={<Flight/>}></Route>
+                        <Route 
+                            path={flightsConfiguratePath + "/:id/:choosedFlight/:choosedSeatsTypes"} 
+                            element={<Booking contentType={contentPart.Flights} />}
+                        >
+                        </Route>
                         <Route path="*" element={<Navigate to={homePath} replace />} /> 
                     </Routes> 
                     <Footer /> 

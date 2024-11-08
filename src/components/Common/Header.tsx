@@ -172,7 +172,7 @@ export const Header : FC = () =>{
             <div className="container_header">
                 <nav className="header__menu menu-header">
                     <ul className="menu-header__list" ref={headerLinks}>
-                        {(location.pathname === flightsPath || location.pathname === flightsConfiguratePath) ? 
+                        {(location.pathname.includes(flightsPath)) ? 
                             <Fragment>
                                 <li className="menu-header__link menu-header__link_flight">
                                     <div 
@@ -199,7 +199,7 @@ export const Header : FC = () =>{
                                 </li>
                             </Fragment>
                             :
-                            ((location.pathname === hotelsPath || location.pathname === hotelsConfiguretePath) ? 
+                            ((location.pathname.includes(hotelsPath)) ? 
                                 <Fragment>
                                     <li className="menu-header__link menu-header__link_flight">
                                         <NavLink 

@@ -1,5 +1,5 @@
 import { intToTime } from "../../helperFunctions";
-import { airlines, amenities, contentPart, meridiem, navbar, navbarItemType, navbarTitles, tripsType } from "../../types"; 
+import { airlines, hotelsAmenities, contentPart, meridiem, navbar, navbarItemType, navbarTitles, tripsType } from "../../types"; 
  
 const defaultStore : navbar = { 
     flights:{ 
@@ -50,7 +50,7 @@ const defaultStore : navbar = {
             { 
                 type: navbarItemType.Checkboxes, title: navbarTitles.Freebies,  
                 value: {
-                    items: [amenities.FreeBreakfast, amenities.FreeParking, amenities.FreeInternet, amenities.FreeAirportShuttle, amenities .FreeAirportShuttle], 
+                    items: [hotelsAmenities.FreeBreakfast, hotelsAmenities.FreeParking, hotelsAmenities.FreeInternet, hotelsAmenities.FreeAirportShuttle, hotelsAmenities.FreeAirportShuttle], 
                     currentActive: [0, 1, 2, 3, 4], 
                     maxShow: 5, 
                     isShowAll: false
@@ -59,7 +59,7 @@ const defaultStore : navbar = {
             { 
                 type: navbarItemType.Checkboxes, title: navbarTitles.Amenities,  
                 value: {
-                    items: [amenities.FrontDeskAroundTheClock, amenities.AirConditioned, amenities.Fitness, amenities.InsidePool, amenities.OutsidePool], 
+                    items: [hotelsAmenities.FrontDeskAroundTheClock, hotelsAmenities.AirConditioned, hotelsAmenities.Fitness, hotelsAmenities.InsidePool, hotelsAmenities.OutsidePool], 
                     currentActive: [0, 1, 2, 3, 4], 
                     maxShow: 4, 
                     isShowAll: false

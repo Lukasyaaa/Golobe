@@ -6,7 +6,7 @@
         }
     }
     &__item{
-        padding: toRem(16);
+        padding: toRem(24) toRem(16);
     
         &:not(:last-child){
             margin-bottom: toRem(32);
@@ -15,6 +15,11 @@
     @media (max-width: toEm(992, 16)) {
         &__item:not(:last-child){
             margin-bottom: toRem(24);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__item{
+            padding: toRem(16);
         }
     }
     @media (max-width: toEm(480, 16)) {
