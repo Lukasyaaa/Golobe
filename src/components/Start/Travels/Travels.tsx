@@ -1,4 +1,4 @@
-import React, { FC, Fragment, useRef, useState } from "react";
+import React, { FC, Fragment, useEffect, useRef, useState } from "react";
 import { HeaderBlock } from "../../Common/HeaderBlock";
 import { useTypedSelector } from "../../../useTypedSelector";
 import { Travel } from "./Travel";
@@ -18,16 +18,32 @@ export const Travels : FC = () =>{
         })
     }
 
+
+    let items = useRef<HTMLDivElement>(null);
+    let [itemsHeight, setItemsHeight] = useState<number>(0);
+    let hiddenItems = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        if (items.current) {
+            requestAnimationFrame(() => {
+                if (items.current) {
+                    setItemsHeight(items.current.offsetHeight);
+                }
+            });
+        }
+    }, []);
+
+
     if(filtredTravels.current.length !== 0){
         return(
             <section className="start__travels travels">
                 <div className="container">
                     <HeaderBlock 
-                        parentClasses={["travels"]} about={state.header} isNeedButton={filtredTravels.current.length > state.maxShow}
-                        isShowAll={{value: isShowAll, set: setIsShowAll}} 
+                        classes={["travels"]} about={state.header} isNeedButton={(filtredTravels.current.length < state.maxShow)}
+                        isShowAll={{value: isShowAll, set: setIsShowAll}}
                     />
                     <div className="travels__items">
-                        {((isShowAll) ? filtredTravels.current : filtredTravels.current.slice(0, state.maxShow)).map((about, i) => 
+                        {filtredTravels.current.map((about, i) => 
                             <Travel about={about} key={i} />
                         )}
                     </div>

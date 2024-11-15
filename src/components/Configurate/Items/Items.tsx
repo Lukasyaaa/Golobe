@@ -1,6 +1,6 @@
-import React, { FC, Fragment, useRef, useState } from "react";
+import React, { FC, Fragment, useEffect, useRef, useState } from "react";
 import { ItemsHeader } from "./ItemsHeader";
-import { airlines, hotelsAmenities, contentPart, flight, hotel, navbarItemType, navbarTitles, sortTitles, tripsType } from "../../../types";
+import { airlines, hotelsIncludes, contentPart, flight, hotel, navbarItemType, navbarTitles, sortTitles, tripsType } from "../../../types";
 import { useTypedSelector } from "../../../useTypedSelector";
 import { FlightsItem } from "../../Flights/Items/FlightsItem";
 import { HotelsItem } from "../../Hotels/Items/HotelsItem";
@@ -11,10 +11,19 @@ interface itemsProps{
 }
 
 export const Items : FC<itemsProps> = ({displayedContent}) => {
+    const userStore = useTypedSelector(state => state.user);
+    console.log(userStore.favourites.flights);
+
     let [isShowAll, setIsShowAll] = useState<boolean>(false);
     let itemsInner = useRef<HTMLDivElement>(null);
     let itemsHidden = useRef<HTMLDivElement>(null);
-    let isFirst = useRef<boolean>(true);
+    let [height, setHeight] = useState<number>(0);
+
+    useEffect(() => {
+        if(itemsInner.current){
+            setHeight(itemsInner.current.offsetHeight);
+        }
+    }, [])
 
     let state = useTypedSelector(state => state);
     let itemsHeaderStore = useTypedSelector(state => state.configurate.itemsHeader);
@@ -23,7 +32,6 @@ export const Items : FC<itemsProps> = ({displayedContent}) => {
 
     const toggleButton = () => {
         setIsShowAll((prev) => !prev);
-        isFirst.current = false;
     }
 
     if(displayedContent === contentPart.Flights){
@@ -239,31 +247,38 @@ export const Items : FC<itemsProps> = ({displayedContent}) => {
             if(state.flights.items.elements.length > itemsHeaderStore.maxShow){
                 let itemsHiddenClasses = ["flights__items-hidden", "content__items-hidden"]
 
-                if(isFirst.current){
-                    itemsHiddenClasses.push("_hidden");
-                }
-
                 return(
                     <div className="configurate__content flights__content content">
-                        <ItemsHeader contentType={contentPart.Flights} itemsCount={correctFlights.length} about={itemsHeaderStore} />
+                        <ItemsHeader 
+                            contentType={contentPart.Flights} itemsCount={correctFlights.length} about={itemsHeaderStore} 
+                            isShowedAll={isShowAll}
+                        />
                         <div className="flights__items content__items" style={{
                             height: (itemsInner.current && itemsHidden.current) ?
                                 itemsInner.current.offsetHeight + ((isShowAll) ? itemsHidden.current.offsetHeight : 0)
-                                : "auto"
+                                : ""
                         }}>          
                             <div className="flights__items-inner content__items-inner" ref={itemsInner}>
                                 {correctFlights.slice(0, itemsHeaderStore.maxShow).map((flight, i) => 
-                                    <FlightsItem key={i} about={flight} buttonLink={state.flights.items.buttonLink} />
+                                    <FlightsItem 
+                                        key={i} about={flight} buttonLink={state.flights.items.buttonLink}
+                                        isFavourite={userStore.favourites.flights.includes(flight.id)}
+                                        isAuthorized={userStore.firstName !== ""}
+                                    />
                                 )}
                             </div>
                             <div className={itemsHiddenClasses.join(" ")} ref={itemsHidden}>
                                 {correctFlights.slice(itemsHeaderStore.maxShow).map((flight, i) => 
-                                    <FlightsItem key={i} about={flight} buttonLink={state.flights.items.buttonLink} />
+                                    <FlightsItem 
+                                        key={i} about={flight} buttonLink={state.flights.items.buttonLink} 
+                                        isFavourite={userStore.favourites.flights.includes(flight.id)}
+                                        isAuthorized={userStore.firstName !== ""}
+                                    />
                                 )}
                             </div>
                         </div> 
                         <button className="flights__show-more content__show-more" onClick={toggleButton}>
-                            {(state.flights.items.isShowAll) ? 
+                            {(isShowAll) ? 
                                 state.flights.items.buttonViewMore.active : state.flights.items.buttonViewMore.passive
                             }
                         </button>
@@ -272,10 +287,17 @@ export const Items : FC<itemsProps> = ({displayedContent}) => {
             }
             return(
                 <div className="configurate__content flights__content content">
-                    <ItemsHeader contentType={contentPart.Flights} itemsCount={correctFlights.length} about={itemsHeaderStore} />
+                    <ItemsHeader 
+                        contentType={contentPart.Flights} itemsCount={correctFlights.length} about={itemsHeaderStore}  
+                        isShowedAll={isShowAll}
+                    />
                     <div className="flights__items content__items">          
                         {correctFlights.map((flight, i) => 
-                            <FlightsItem key={i} about={flight} buttonLink={state.flights.items.buttonLink} />
+                            <FlightsItem 
+                                key={i} about={flight} buttonLink={state.flights.items.buttonLink}
+                                isFavourite={userStore.favourites.flights.includes(flight.id)}
+                                isAuthorized={userStore.firstName !== ""}
+                            />
                         )}
                     </div>
                 </div>
@@ -304,14 +326,14 @@ export const Items : FC<itemsProps> = ({displayedContent}) => {
                 case navbarItemType.Checkboxes:
                     if(navbarGroup.title === navbarTitles.Amenities){
                         navbarGroup.value.items.map(amenitie => {
-                            if(Object.values(hotelsAmenities).includes(amenitie as hotelsAmenities)){
+                            if(Object.values(hotelsIncludes).includes(amenitie as hotelsIncludes)){
                                 amenitiesMassive.push(amenitie);
                             }
                         })
                         choosedAmenities = navbarGroup.value.currentActive;
                     } else if(navbarGroup.title === navbarTitles.Freebies) {
                         navbarGroup.value.items.map(freebie => {
-                            if(Object.values(hotelsAmenities).includes(freebie as hotelsAmenities)){
+                            if(Object.values(hotelsIncludes).includes(freebie as hotelsIncludes)){
                                 freebiesMassive.push(freebie);
                             }
                         })
@@ -327,23 +349,40 @@ export const Items : FC<itemsProps> = ({displayedContent}) => {
             }
         }
 
+        let minPrice : number;
         for(const hotel of state.hotels.items.elements){
             //Проверка на Корректность Рейтинга
             if(choosedRating !== -1){
-                if(hotel.shortReview.rating < choosedRating){
-                    continue;
+                if(hotel.reviews.elements.length !== 0){
+                    let avarageRating = 0;
+                    hotel.reviews.elements.forEach(review => {
+                        avarageRating += review.grade;
+                    })
+                    avarageRating /= hotel.reviews.elements.length;
+                    if(avarageRating < choosedRating){
+                        continue;
+                    }
                 }
             }
             //Проверка на Корректность Стоимости
             if(priceFrom < priceTo){
-                if(hotel.price < priceFrom || hotel.price > priceTo){
+                minPrice = 
+                    hotel.rooms[0].price.baseFare + hotel.rooms[0].price.serviceFee + hotel.rooms[0].price.taxes - 
+                    hotel.rooms[0].price.discount;
+                hotel.rooms.slice(1).map(room => {
+                    let price = room.price.baseFare + room.price.serviceFee + room.price.taxes - room.price.discount;
+                    if(price < minPrice){
+                        minPrice = price;
+                    }
+                })
+                if(minPrice < priceFrom || minPrice > priceTo){
                     continue;
                 }
             }
             //Проверка на Корректность Бесплатных Фишек
             if(choosedFreebies.length !== 0){
                 let isAmenitieCoincidence = false;
-                outherLoop : for(const amenitie of hotel.amenities){
+                outherLoop : for(const amenitie of hotel.includes.elements){
                     for(const choosedFreebie of choosedFreebies){
                         if(freebiesMassive[choosedFreebie] === amenitie){
                             isAmenitieCoincidence = true;
@@ -358,7 +397,7 @@ export const Items : FC<itemsProps> = ({displayedContent}) => {
             //Проверка на Корректность Фишек
             if(choosedAmenities.length !== 0){
                 let isAmenitieCoincidence = false;
-                outherLoop : for(const amenitie of hotel.amenities){
+                outherLoop : for(const amenitie of hotel.includes.elements){
                     for(const choosedAmenitie of choosedAmenities){
                         if(freebiesMassive[choosedAmenitie] === amenitie){
                             isAmenitieCoincidence = true;
@@ -382,45 +421,57 @@ export const Items : FC<itemsProps> = ({displayedContent}) => {
         if(correctHotels.length !== 0){
             let itemsHiddenClasses = ["hotels__items-hidden", "content__items-hidden"]
 
-            if(isFirst.current){
-                itemsHiddenClasses.push("_hidden");
-            }
-
             return(
                 <div className="configurate__content hotels__content content">
-                    <ItemsHeader contentType={contentPart.Hotels} itemsCount={correctHotels.length} about={itemsHeaderStore} />
+                    <ItemsHeader 
+                        contentType={contentPart.Hotels} itemsCount={correctHotels.length} about={itemsHeaderStore}  
+                        isShowedAll={isShowAll}
+                    />
                     <div className="flights__items content__items" style={{
-                            height: (itemsInner.current && itemsHidden.current) ?
-                                itemsInner.current.offsetHeight + ((isShowAll) ? itemsHidden.current.offsetHeight : 0)
-                                : "auto"
+                            height: height + ((itemsHidden.current) ? itemsHidden.current.offsetHeight : 0)
                         }}>          
                             <div className="flights__items-inner content__items-inner" ref={itemsInner}>
                                 {correctHotels.slice(0, itemsHeaderStore.maxShow).map((hotel, i) => 
-                                    <HotelsItem key={i} about={hotel} buttonLink={state.flights.items.buttonLink} />
+                                    <HotelsItem 
+                                        key={i} about={hotel} buttonLink={state.flights.items.buttonLink} minPrice={minPrice} 
+                                        isFavourite={userStore.favourites.hotels.includes(hotel.id)}
+                                        isAuthorized={userStore.firstName !== ""}
+                                    />
                                 )}
                             </div>
                             <div className={itemsHiddenClasses.join(" ")} ref={itemsHidden}>
                                 {correctHotels.slice(itemsHeaderStore.maxShow).map((hotel, i) => 
-                                    <HotelsItem key={i} about={hotel} buttonLink={state.flights.items.buttonLink} />
+                                    <HotelsItem 
+                                        key={i} about={hotel} buttonLink={state.flights.items.buttonLink} minPrice={minPrice}
+                                        isFavourite={userStore.favourites.hotels.includes(hotel.id)}
+                                        isAuthorized={userStore.firstName !== ""}
+                                    />
                                 )}
                             </div>
                         </div> 
-                    {state.hotels.items.elements.length > itemsHeaderStore.maxShow && 
-                        <button className="hotels__show-more content__show-more">
-                            {(state.hotels.items.isShowAll) ? 
-                                state.hotels.items.buttonViewMore.active : state.hotels.items.buttonViewMore.passive
-                            }
-                        </button>
-                    }
+                        {state.hotels.items.elements.length > itemsHeaderStore.maxShow && 
+                            <button className="hotels__show-more content__show-more">
+                                {(isShowAll) ? 
+                                    state.hotels.items.buttonViewMore.active : state.hotels.items.buttonViewMore.passive
+                                }
+                            </button>
+                        }
                 </div>
             );
         }
         return(
             <div className="configurate__content flights__content content">
-                <ItemsHeader contentType={contentPart.Flights} itemsCount={correctHotels.length} about={itemsHeaderStore} />
+                <ItemsHeader 
+                    contentType={contentPart.Flights} itemsCount={correctHotels.length} about={itemsHeaderStore} 
+                    isShowedAll={isShowAll} 
+                />
                 <div className="flights__items content__items">          
                     {correctHotels.map((hotel, i) => 
-                        <HotelsItem key={i} about={hotel} buttonLink={state.hotels.items.buttonLink} />
+                        <HotelsItem 
+                            key={i} about={hotel} buttonLink={state.hotels.items.buttonLink} minPrice={minPrice} 
+                            isFavourite={userStore.favourites.hotels.includes(hotel.id)} 
+                            isAuthorized={userStore.firstName !== ""}
+                        />
                     )}
                 </div>
             </div>

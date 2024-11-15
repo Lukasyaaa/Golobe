@@ -1,6 +1,5 @@
 import React, { FC, Fragment, ReactElement, useRef, useState } from "react";
 import { defaultSelect } from "../../../types";
-import { JsxElement } from "typescript";
 
 interface selectInfoProps{
     about : defaultSelect,
@@ -11,13 +10,13 @@ export const SelectInfo : FC<selectInfoProps> = ({about, parentClasses}) =>{
     let [isActive, setIsActive] = useState(false);
     let listInner = useRef<HTMLUListElement>(null);
 
-    const showSpoiler = () : void =>{
+    const showSelect = () : void => {
         setIsActive(true);
     }
-    const unShowSpoiler = () : void =>{
+    const hideSelect = () : void => {
         setIsActive(false);
     }
-    const toggleSpoiler = () : void =>{
+    const toggleSelect = () : void => {
         setIsActive(prev => !prev);
     }
 
@@ -29,7 +28,7 @@ export const SelectInfo : FC<selectInfoProps> = ({about, parentClasses}) =>{
         <li className={classes.join(" ")}>
             <button 
                 className={parentClasses.map(cl => "select-" + cl + "__title").join(" ") + " select_info__title"} 
-                type="button" onClick={toggleSpoiler}
+                type="button" onClick={toggleSelect}
             >
                 {about.title}
             </button>
@@ -44,7 +43,7 @@ export const SelectInfo : FC<selectInfoProps> = ({about, parentClasses}) =>{
                                 <li className={parentClasses.map(cl => "select-" + cl + "__link").join(" ") + " select_info__link"} key={i}>
                                     <a 
                                         className={parentClasses.map(cl => "select-" + cl + "__link-inner").join(" ") + " select_info__link-inner"} 
-                                        href={link.path} onFocus={showSpoiler}
+                                        href={link.path} onFocus={showSelect}
                                     >
                                         {link.description}
                                     </a>
@@ -66,7 +65,7 @@ export const SelectInfo : FC<selectInfoProps> = ({about, parentClasses}) =>{
                             <li className={parentClasses.map(cl => "select-" + cl + "__link").join(" ") + " select_info__link"} key={i}>
                                 <a 
                                     className={parentClasses.map(cl => "select-" + cl + "__link-inner").join(" ") + " select_info__link-inner"} 
-                                    href={link.path} onBlur={unShowSpoiler}
+                                    href={link.path} onBlur={hideSelect}
                                 >
                                     {link.description}
                                 </a>

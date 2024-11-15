@@ -1,7 +1,13 @@
 import { addCard, addCardInputTitles, typeAddCardInput } from "../../types";
 
 const defaultStore : addCard = {
-    title: "Add a new Card",
+    header: {
+        firstAppear: {
+            title: "Add a new Card",
+            description: "Let’s get you all st up so you can access your personal account."
+        },
+        nextAppear: "Add a payment method"
+    },
     inputs: [
         {
             isMassive: false, 
@@ -31,7 +37,10 @@ const defaultStore : addCard = {
         }
     ],
     saveText: "Securely save my information for 1-click checkout",
-    buttonAdd: "Add Card",
+    buttonAdd: {
+        firstAppear: "Add payment method",
+        nextAppear: "Add Card"
+    },
     privacyPolicy: "By confirming your subscription, you allow The Outdoor Inn Crowd Limited to charge your card for this payment and future payments in accordance with their terms. You can always cancel your subscription."
 }
 

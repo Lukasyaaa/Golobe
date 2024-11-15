@@ -9,10 +9,10 @@ const defaultState : header = {
     },
     logo: {srcs: {black: blackLogo, white: whiteLogo}, alt: "Golobe Logo"},
     authorization: {
-        logIn: "Login",
-        signIn: "Sign up",
-        favouritesText: "Favourites"
-    }
+        signIn: "Login",
+        signUp: "Sign up",
+        favourites: "Favourites"
+    },
 }
 
 export const headerReducer = (state : header = defaultState) : header => state;

@@ -5,10 +5,11 @@ import { SelectReplace } from "../../Common/Select/SelectReplace";
 interface itemsHeaderProps{
     contentType : contentPart,
     about : configurateItemsHeader,
-    itemsCount : number
+    itemsCount : number,
+    isShowedAll : boolean
 }
 
-export const ItemsHeader : FC<itemsHeaderProps> = ({contentType, about, itemsCount}) => {
+export const ItemsHeader : FC<itemsHeaderProps> = ({contentType, about, itemsCount, isShowedAll}) => {
     let [activeLink, setActiveLink] = useState<number>(about.sort.activeLink);
     let [isActive, setIsActive] = useState<boolean>(false);
 
@@ -20,7 +21,7 @@ export const ItemsHeader : FC<itemsHeaderProps> = ({contentType, about, itemsCou
             }>
                 {itemsCount > about.maxShow &&
                     <output className={"header-" + contentType.toLowerCase() + "__show " + "header-content__show"}>
-                        {`Showing ${about.maxShow} of`} <mark>{itemsCount} places</mark>
+                        {`Showing ${(isShowedAll) ? itemsCount : about.maxShow} of`} <mark>{itemsCount} places</mark>
                     </output>
                 }
                 <SelectReplace 

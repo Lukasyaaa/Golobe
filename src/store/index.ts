@@ -12,9 +12,15 @@ import { hotelsItemsReducer } from "./hotels/hotelsItemsReducer";
 import { itemsHeaderReducer } from "./configurate/itemsHeaderReducer";
 import { airlinesReducer } from "./configurate/airlinesReducer";
 import { paymentReducer } from "./booking/paymentReducer";
-import { cardsReducer } from "./cardReducer";
+import { userReducer } from "./userReducer";
 import { authorizationTextReducer } from "./booking/authorizationTextReducer";
 import { addCardReducer } from "./booking/addCardReducer";
+import { termsConditionsReducer } from "./termsConditionsReducer";
+import { accessReducer } from "./authorization/authorizationReducer";
+import { forgotPasswordReducer } from "./authorization/forgotPasswordReducer";
+import { setPasswordReducer } from "./authorization/setPasswordReducer";
+import { verifyCodeReducer } from "./authorization/verifyCodeReducer";
+import { accountTextReducer } from "./accountTextReducer";
 
 const rootReducer = combineReducers({
     header: headerReducer,
@@ -39,7 +45,15 @@ const rootReducer = combineReducers({
         authorization: authorizationTextReducer,
         addCard: addCardReducer
     }),
-    cards: cardsReducer,
+    access: combineReducers({
+        authorization: accessReducer,
+        forgotPassword: forgotPasswordReducer,
+        setPassword: setPasswordReducer,
+        verifyCode: verifyCodeReducer
+    }),
+    user: userReducer,
+    termsConditions: termsConditionsReducer,
+    accountText: accountTextReducer,
     footer: footerReducer,
 })
 

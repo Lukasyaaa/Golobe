@@ -1,4 +1,4 @@
-import React, { FC, Fragment, useRef, useState } from "react"; 
+import React, { FC, Fragment, useEffect, useRef, useState } from "react"; 
 import { navbarSetActiveAction } from "../../../store/configurate/navbarReducer";
 import { contentPart } from "../../../types";
 import { useDispatch } from "react-redux";
@@ -17,6 +17,12 @@ export const NavbarRadios : FC<navbarRadiosProps> = ({title, itemsLabel, current
 
     let [isActive, setIsActive] = useState<boolean>(true);
     let spoilerInner = useRef<HTMLDivElement>(null);
+    let [spoilerHeight, setSpoilerHeight] = useState<number>(0);
+    useEffect(() => {
+        if(spoilerInner.current){
+            setSpoilerHeight(spoilerInner.current.offsetHeight);
+        }
+    }, [])
 
     let classes = ["navbar__item", "item-navbar", "navbar__radios", "radios-navbar"]
     if(isActive){
@@ -36,7 +42,7 @@ export const NavbarRadios : FC<navbarRadiosProps> = ({title, itemsLabel, current
                         </button>
                     </legend>   
                     <div className="item-navbar__filters radios-navbar__filters" style={{
-                        height: (isActive) ? ((spoilerInner.current) ? spoilerInner.current.offsetHeight : "auto") : 0
+                        height: (isActive) ? spoilerHeight : 0
                     }}>
                         <div className="item-navbar__filters-inner radios-navbar__filters-inner" ref={spoilerInner}>
                             {itemsLabel.map((label, i) => 

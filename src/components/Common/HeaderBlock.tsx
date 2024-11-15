@@ -1,38 +1,44 @@
 import React, { FC } from "react";
 import { sectionHeader, setter } from "../../types";
 
-interface headerBlockProps{
+interface HeaderBlockSmallerProps{
     about : sectionHeader,
-    parentClasses : string[],
-    isNeedButton : boolean,
+    classes : string[],
+    isNeedButton : true,
     isShowAll : setter<boolean>
 }
 
-export const HeaderBlock : FC<headerBlockProps> = ({about, parentClasses, isNeedButton, isShowAll}) =>{
-    const toggleIsShowAll = () : void => {
-        isShowAll.set(!isShowAll.value);
-    }
+interface HeaderBlockBiggerProps{
+    about : sectionHeader,
+    classes : string[],
+    isNeedButton : false
+}
 
-    if(isNeedButton){
+export const HeaderBlock : FC<HeaderBlockSmallerProps | HeaderBlockBiggerProps> = (props) =>{
+    if(props.isNeedButton){
+        const toggleIsShowAll = () : void => {
+            props.isShowAll.set(!props.isShowAll.value);
+        }
         return(
             <div 
                 className={
-                    parentClasses.map(cl => cl + "__header").join(" ") + " " + parentClasses.map(cl => "header-" + cl) + " header-block"
+                    props.classes.map(cl => cl + "__header").join(" ") + " " + 
+                    props.classes.map(cl => "header-" + cl) + " header-block"
                 }
             >
-                <div className={parentClasses.map(cl => "header-" + cl + "__info").join(" ") + " header-block__info"}>
-                    <h2 className={parentClasses.map(cl => "header-" + cl + "__title").join(" ") + " header-block__title"}>
-                        {about.title}
+                <div className={props.classes.map(cl => "header-" + cl + "__info").join(" ") + " header-block__info"}>
+                    <h2 className={props.classes.map(cl => "header-" + cl + "__title").join(" ") + " header-block__title"}>
+                        {props.about.title}
                     </h2>
-                    <div className={parentClasses.map(cl => "header-" + cl + "__text").join(" ") + " header-block__text"}>
-                        {about.text}
+                    <div className={props.classes.map(cl => "header-" + cl + "__text").join(" ") + " header-block__text"}>
+                        {props.about.text}
                     </div>
                 </div>
                 <button 
-                    className={parentClasses.map(cl => "header-" + cl + "__button").join(" ") + " header-block__button"} 
+                    className={props.classes.map(cl => "header-" + cl + "__button").join(" ") + " header-block__button"} 
                     type="button" onClick={toggleIsShowAll}
                 >
-                    {(isShowAll.value) ? about.buttonShowMore.passive : about.buttonShowMore.active}
+                    {(props.isShowAll.value) ? props.about.buttonShowMore.passive : props.about.buttonShowMore.active}
                 </button>
             </div>
         )
@@ -40,15 +46,15 @@ export const HeaderBlock : FC<headerBlockProps> = ({about, parentClasses, isNeed
     return(
         <div 
             className={
-                parentClasses.map(cl => cl + "__header").join(" ") + " " + parentClasses.map(cl => "header-" + cl) + 
+                props.classes.map(cl => cl + "__header").join(" ") + " " + props.classes.map(cl => "header-" + cl) + 
                 " header-block havenot-button"
             }
         >
-            <h2 className={parentClasses.map(cl => "header-" + cl + "__title").join(" ") + " header-block__title"}>
-                {about.title}
+            <h2 className={props.classes.map(cl => "header-" + cl + "__title").join(" ") + " header-block__title"}>
+                {props.about.title}
             </h2>
-            <div className={parentClasses.map(cl => "header-" + cl + "__text").join(" ") + " header-block__text"}>
-                {about.text}
+            <div className={props.classes.map(cl => "header-" + cl + "__text").join(" ") + " header-block__text"}>
+                {props.about.text}
             </div>
         </div>
     )

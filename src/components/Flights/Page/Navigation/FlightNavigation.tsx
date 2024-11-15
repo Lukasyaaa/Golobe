@@ -7,15 +7,17 @@ import { BookingDetails } from "../../../Common/BookingDetails";
 interface flightNavigationProps{
     about : flight,
     flightId : number,
-    choosedFlight : string,
+    choosedDirection : string,
     choosedReturnSeatsType : imageVariants<string>[],
     choosedDepartSeatsType : imageVariants<string>[],
 }
 
-export const FlightNavigation : FC<flightNavigationProps> = ({about, flightId, choosedFlight, choosedReturnSeatsType, choosedDepartSeatsType}) => {
+export const FlightNavigation : FC<flightNavigationProps> = ({
+    about, flightId, choosedDirection, choosedReturnSeatsType, choosedDepartSeatsType
+}) => {
     let airlinesStore = useTypedSelector(state =>  state.configurate.airlines);
 
-    if(choosedFlight.includes("+")){
+    if(choosedDirection.includes("+")){
         return(
             <section className="flight__navigation navigation-flight two">
                 <div className="container">
@@ -48,7 +50,7 @@ export const FlightNavigation : FC<flightNavigationProps> = ({about, flightId, c
             </section>
         )
     }
-    if(choosedFlight === flightDirection.Depart){
+    if(choosedDirection === flightDirection.Depart){
         return(
             <section className="flight__navigation navigation-flight">
                 <div className="container">

@@ -26,25 +26,25 @@ export const Authorization : FC<authorizationProps> = ({contentType}) => {
     }
 
     return(
-        <article className={`booking__authorization authorization booking_${contentType.toLowerCase()}__authorization authorization_${contentType.toLowerCase()}`}>
-            <h2 className={`authorization__title authorization_${contentType.toLowerCase()}__title`}>{store.heading}</h2>
+        <article className={`booking__authorization authorization_selfish booking_${contentType.toLowerCase()}__authorization authorization_${contentType.toLowerCase()}`}>
+            <h2 className={`authorization__title authorization_selfish__title authorization_${contentType.toLowerCase()}__title`}>{store.heading}</h2>
             <input 
-                className={`authorization__input authorization_${contentType.toLowerCase()}__input`} type="tel" placeholder={store.placeholder} 
+                className={`authorization__input authorization_selfish__input authorization_${contentType.toLowerCase()}__input`} type="tel" placeholder={store.placeholder} 
             />
-            <div className={`authorization__description authorization_${contentType.toLowerCase()}__description`}>{store.description}</div>
-            <button className={`authorization__send authorization_${contentType.toLowerCase()}__send`} type="button">
+            <div className={`authorization__description authorization_selfish__description authorization_${contentType.toLowerCase()}__description`}>{store.description}</div>
+            <button className={`authorization__send authorization_selfish__send authorization_${contentType.toLowerCase()}__send`} type="button">
                 {store.continueButton}
             </button>
-            <div className={`authorization__or authorization_${contentType.toLowerCase()}__or`}><span>Or</span></div>
+            <div className={`authorization__or authorization_selfish__or authorization_${contentType.toLowerCase()}__or`}><span>Or</span></div>
             {(window.innerWidth > 480) 
-                ? <div className={`authorization__variants authorization_${contentType.toLowerCase()}__variants`}>
+                ? <div className={`authorization__variants authorization_selfish__variants authorization_${contentType.toLowerCase()}__variants`}>
                     {store.availableVariants.map((variant, i) => {
                         if(variant.isImage){
                             return(
                                 <NavLink
                                     key={i} 
                                     className={
-                                        `authorization__variant authorization_${contentType.toLowerCase()}__variant${(variant.isBigger) ? " bigger" : ""}`
+                                        `authorization__variant authorization_selfish__variant authorization_${contentType.toLowerCase()}__variant${(variant.isBigger) ? " bigger" : ""}`
                                     } 
                                     to={"#"}
                                 >
@@ -57,7 +57,7 @@ export const Authorization : FC<authorizationProps> = ({contentType}) => {
                             <NavLink 
                                 key={i} 
                                 className={
-                                    `authorization__variant authorization_${contentType.toLowerCase()}__variant ${getIcon(variant.type)}${(variant.isBigger) ? " bigger" : ""}`
+                                    `authorization__variant authorization_selfish__variant authorization_${contentType.toLowerCase()}__variant ${getIcon(variant.type)}${(variant.isBigger) ? " bigger" : ""}`
                                 } 
                                 to={"#"}
                             >
@@ -66,14 +66,14 @@ export const Authorization : FC<authorizationProps> = ({contentType}) => {
                         )
                     })}
                 </div>
-                : <div className={`authorization__variants authorization_${contentType.toLowerCase()}__variants`}>
+                : <div className={`authorization__variants authorization_selfish__variants authorization_${contentType.toLowerCase()}__variants`}>
                     {store.availableVariants.map((variant, i, variants) => {
                         if(variant.isImage){
                             return(
                                 <NavLink
                                     key={i} 
                                     className={
-                                        `authorization__variant authorization_${contentType.toLowerCase()}__variant${(variant.isBigger || (i+1 < variants.length && i % 2 === 0 && variants[i+1].isBigger)) ? " bigger" : ""}`
+                                        `authorization__variant authorization_selfish__variant authorization_${contentType.toLowerCase()}__variant${(variant.isBigger || (i+1 < variants.length && i % 2 === 0 && variants[i+1].isBigger)) ? " bigger" : ""}`
                                     } 
                                     to={"#"}
                                 >
@@ -86,7 +86,7 @@ export const Authorization : FC<authorizationProps> = ({contentType}) => {
                             <NavLink 
                                 key={i} 
                                 className={
-                                    `authorization__variant authorization_${contentType.toLowerCase()}__variant ${getIcon(variant.type)}${(variant.isBigger || (i+1 < variants.length && i % 2 === 0 && variants[i+1].isBigger)) ? " bigger" : ""}`
+                                    `authorization__variant authorization_selfish__variant authorization_${contentType.toLowerCase()}__variant ${getIcon(variant.type)}${(variant.isBigger || (i+1 < variants.length && i % 2 === 0 && variants[i+1].isBigger)) ? " bigger" : ""}`
                                 } 
                                 to={"#"}
                             >

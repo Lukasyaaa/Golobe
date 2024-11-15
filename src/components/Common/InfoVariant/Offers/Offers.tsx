@@ -28,7 +28,7 @@ export const Offers : FC<offersStore> = ({state}) => {
             <section className="offers">
                 <div className="container">
                     <HeaderBlock 
-                        about={state.header} parentClasses={["offers"]} 
+                        about={state.header} classes={["offers"]} 
                         isNeedButton={filtredOffers.current.length > 1 && newIdShowedItem.current !== -1}  
                         isShowAll={{value: isShowAll, set: setIsShowAll}}
                     />

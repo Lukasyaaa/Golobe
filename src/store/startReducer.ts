@@ -40,7 +40,7 @@ import reviewsJpeg_1 from "../assets/img/start/reviews/1/main.jpeg"
 import reviewsJpeg_2 from "../assets/img/start/reviews/2/main.jpeg"
 import reviewsJpeg_3 from "../assets/img/start/reviews/3/main.jpeg"
 //--------Google--------
-import googleLogo from "../assets/img/start/reviews/google.svg"
+import googleLogo from "../assets/img/logos/google.svg"
 
 const defaultState : start = {
     intro:{

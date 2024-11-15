@@ -26,7 +26,7 @@ export const Reviews : FC = () => {
                 <section className="start__reviews reviews">
                     <div className="container">
                         <HeaderBlock 
-                            about={state.header} parentClasses={["reviews"]}  isNeedButton={filtredReviews.current.length > state.maxShow}
+                            about={state.header} classes={["reviews"]}  isNeedButton={filtredReviews.current.length > state.maxShow}
                             isShowAll={{value: isShowAll, set: setIsShowAll}}
                         />
                     </div>

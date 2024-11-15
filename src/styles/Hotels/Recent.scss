@@ -88,6 +88,9 @@
             top: 50%;
             transform: translate(-50%, -50%);
 
+            width: calc(100% - toRem(2));
+            height: calc(100% - toRem(2));
+
             transition: width 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
             height 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
         }

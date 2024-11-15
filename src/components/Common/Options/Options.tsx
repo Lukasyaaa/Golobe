@@ -5,16 +5,16 @@ import { OptionsHeader } from "./OptionsHeader";
 import { OptionsInput } from "./OptionsInput"; 
 import { OptionsSelect } from "./OptionsSelect"; 
  
-interface optionsProps{ 
+interface OptionsProps{ 
     neededBlocks : optionsNeededBlocks, 
     startValue : contentPart 
 } 
  
-export const Options : FC<optionsProps> = ({neededBlocks, startValue}) =>{ 
-    const state = useTypedSelector(store => store.options); 
-    let [choosedOptions, setChoosedOptions] = useState(startValue); 
+export const Options : FC<OptionsProps> = ({neededBlocks, startValue}) =>{ 
+    const store = useTypedSelector(state => state.options); 
+    let [choosedOption, setChoosedOption] = useState(startValue); 
     let choosedItems : optionsFlightItems | optionsHotelsItems =  
-        (choosedOptions === contentPart.Flights) ? state.inputs.flights : state.inputs.hotels; 
+        (choosedOption === contentPart.Flights) ? store.inputs.flights : store.inputs.hotels; 
     let isFirst = useRef<boolean>(true); 
     let copyNeededBlocks = useRef<optionsNeededBlocks>(neededBlocks); 
  
@@ -25,14 +25,14 @@ export const Options : FC<optionsProps> = ({neededBlocks, startValue}) =>{
             case optionsNeededBlocks.FlightHeader: 
                 parentClasses.push("intro_variants"); 
                 parentClasses.push("intro-flights"); 
-                if(state.header.flights === "" || state.inputs.flights.length === 0){ 
+                if(store.header.flights === "" || store.inputs.flights.length === 0){ 
                     return <Fragment /> 
                 } 
                 break; 
             case optionsNeededBlocks.HotelHeader: 
                 parentClasses.push("intro_variants"); 
                 parentClasses.push("intro-hotels"); 
-                if(state.header.hotels === "" || state.inputs.hotels.length === 0){ 
+                if(store.header.hotels === "" || store.inputs.hotels.length === 0){ 
                     return <Fragment /> 
                 } 
                 break; 
@@ -40,30 +40,30 @@ export const Options : FC<optionsProps> = ({neededBlocks, startValue}) =>{
                 parentClasses.push("configurate")
                 if(startValue === contentPart.Flights){ 
                     parentClasses.push("flights"); 
-                    if(state.header.flights === "" || state.inputs.flights.length === 0){ 
+                    if(store.header.flights === "" || store.inputs.flights.length === 0){ 
                         return <Fragment /> 
                     } 
                 }else{ 
                     parentClasses.push("hotels"); 
-                    if(state.header.hotels === "" || state.inputs.hotels.length === 0){ 
+                    if(store.header.hotels === "" || store.inputs.hotels.length === 0){ 
                         return <Fragment /> 
                     } 
                 } 
                 break; 
             case optionsNeededBlocks.BothHeaders: 
                 parentClasses.push("intro-start"); 
-                if(state.inputs.flights.length === 0){ 
-                    if(state.header.hotels === "" || state.inputs.hotels.length === 0){ 
+                if(store.inputs.flights.length === 0){ 
+                    if(store.header.hotels === "" || store.inputs.hotels.length === 0){ 
                         return <Fragment /> 
                     } 
                     copyNeededBlocks.current = optionsNeededBlocks.HotelHeader; 
-                    setChoosedOptions(contentPart.Hotels); 
-                }else if(state.inputs.hotels.length === 0){ 
-                    if(state.header.flights === ""){ 
+                    setChoosedOption(contentPart.Hotels); 
+                }else if(store.inputs.hotels.length === 0){ 
+                    if(store.header.flights === ""){ 
                         return <Fragment /> 
                     } 
                     copyNeededBlocks.current = optionsNeededBlocks.FlightHeader; 
-                    setChoosedOptions(contentPart.Flights); 
+                    setChoosedOption(contentPart.Flights); 
                 } 
                 break; 
         } 
@@ -71,8 +71,7 @@ export const Options : FC<optionsProps> = ({neededBlocks, startValue}) =>{
      
      
     let classes =  [ 
-        parentClasses.map(cl => cl + "__options").join(" "), parentClasses.map(cl => "options-" + cl).join(" "),  
-        "options", "container" 
+        ...parentClasses.map(cl => cl + "__options"), ...parentClasses.map(cl => "options-" + cl), "options", "container" 
     ] 
     if(neededBlocks === optionsNeededBlocks.OnlyInputs){ 
         classes.push("independent"); 
@@ -83,14 +82,14 @@ export const Options : FC<optionsProps> = ({neededBlocks, startValue}) =>{
  
     let inputsCount : number = 0; 
     return( 
-<article className={classes.join(" ")}>
+        <article className={classes.join(" ")}>
             <div className={parentClasses.map(cl => "options-" + cl + "__inner").join(" ") +  " options__inner"}>
                 {(neededBlocks !== optionsNeededBlocks.OnlyInputs) ?
                     (copyNeededBlocks.current === optionsNeededBlocks.BothHeaders) ? 
-                        <OptionsHeader value={state.header} activeLink={{value: choosedOptions, set: setChoosedOptions}}/> :
+                        <OptionsHeader value={store.header} activeLink={{value: choosedOption, set: setChoosedOption}}/> :
                         <div className={parentClasses.map(cl => "options-" + cl + "__header_text").join(" ") +  " options__header_text"}>
                             {(copyNeededBlocks.current === optionsNeededBlocks.FlightHeader) ? 
-                                state.header.onlyFlights : state.header.onlyHotels
+                                store.header.onlyFlights : store.header.onlyHotels
                             }
                         </div>
                     : <Fragment />
@@ -104,14 +103,14 @@ export const Options : FC<optionsProps> = ({neededBlocks, startValue}) =>{
                                         key={(i + 1) * j}
                                         id={++inputsCount}
                                         title={input.title} placeholder={input.value} iconPosition={input.iconPosition} 
-                                        isBigger={choosedOptions === contentPart.Hotels && state.inputs.hotels[j].isBigger} 
-                                        parent={choosedOptions} parentClasses={parentClasses.map(cl => "options-" + cl)}
+                                        isBigger={choosedOption === contentPart.Hotels && store.inputs.hotels[j].isBigger} 
+                                        parent={choosedOption} parentClasses={parentClasses.map(cl => "options-" + cl)}
                                     />
                                 }
                                 return <OptionsSelect 
                                     key={(i + 1) * j}
-                                    title={input.title} about={input.value} parent={choosedOptions}
-                                    isBigger={choosedOptions === contentPart.Hotels && state.inputs.hotels[j].isBigger}
+                                    title={input.title} about={input.value} parent={choosedOption}
+                                    isBigger={choosedOption === contentPart.Hotels && store.inputs.hotels[j].isBigger}
                                     parentClasses={parentClasses.map(cl => "options-" + cl)}
                                 />
                             })}
@@ -131,7 +130,7 @@ export const Options : FC<optionsProps> = ({neededBlocks, startValue}) =>{
                             } 
                             type="button"
                         >
-                            <span>{state.footer.addPromoText}</span>
+                            <span>{store.footer.addPromoText}</span>
                         </button>
                         <button 
                             className={
@@ -142,7 +141,7 @@ export const Options : FC<optionsProps> = ({neededBlocks, startValue}) =>{
                             type="button"
                         >
                         <span>
-                            {(choosedOptions === contentPart.Flights) ? state.footer.showText.flights : state.footer.showText.hotels}
+                            {(choosedOption === contentPart.Flights) ? store.footer.showText.flights : store.footer.showText.hotels}
                         </span>
                     </button>
                 </div>

@@ -6,17 +6,16 @@ import { Card } from "./Card";
 interface cardsProps{
     contentType : contentPart,
     choosedCard : setter<number>,
-    appearModal : () => void
+    appearModal : () => void,
+    cards : card[]
 }
 
-export const Cards : FC<cardsProps> = ({contentType, choosedCard, appearModal}) => {
-    const store = useTypedSelector(state => state.cards);
-
+export const Cards : FC<cardsProps> = ({contentType, choosedCard, appearModal, cards}) => {
     return(
         <article className={`booking__cards cards booking_${contentType.toLowerCase()}__cards cards_${contentType.toLowerCase()} radios`}>
-            {store.length !== 0 &&
+            {cards.length !== 0 &&
             <div className={`cards__elements cards_${contentType.toLowerCase()}__elements radios__items`}>
-                {store.map((card, i) => <Card 
+                {cards.map((card, i) => <Card 
                     key={i} contentType={contentType} about={card} id={i} choosedCard={choosedCard} 
                 />)}
             </div>

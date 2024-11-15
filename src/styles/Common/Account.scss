@@ -1,0 +1,1200 @@
+.account{
+    &__heading{
+        color: $black;
+        font-family: TradeGothic;
+        font-size: toRem(32);
+        font-weight: 700;
+        line-height: math.div(40, 32);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__heading{
+            font-size: toRem(28);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__heading{
+            font-size: toRem(26);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__heading{
+            font-size: toRem(24);
+        }
+    }
+
+    &__header{
+        margin-bottom: toRem(32);
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__header{
+            margin-bottom: toRem(24);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__header{
+            margin-bottom: toRem(16);
+        }
+    }
+
+    &__sort{
+        margin-bottom: toRem(42);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__sort{
+            margin-bottom: toRem(32);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__sort{
+            margin-bottom: toRem(24);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__sort{
+            margin-bottom: toRem(16);
+        }
+    }
+}
+.header-account{
+    &__banner, &__ava{
+        position: relative;
+        z-index: 1;
+    }
+
+    &__ava{
+        margin-top: toRem(-77);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__ava{
+            margin-top: toRem(-67);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__ava{
+            margin-top: toRem(-48);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__ava{
+            margin-top: toRem(-38.5);
+        }
+    }
+
+    &__text{
+        display: inline-block;
+        margin-top: toRem(24);
+        text-align: center;
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__text{
+            margin-top: toRem(16);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__text{
+            margin-top: toRem(10);
+        }
+    }
+
+    @media (min-width: toEm(769, 16)) {
+        &__name{
+            margin-bottom: toRem(8);
+        }
+        @media (max-width: toEm(992, 16)) {
+            &__name{
+                margin-bottom: toRem(4);
+            }
+        }
+    }
+    &__name{
+        color: $darkGreen;
+        font-family: Montserrat;
+        font-size: toRem(24);
+        font-weight: 600;
+        line-height: math.div(29, 24);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__name{
+            font-size: toRem(22);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__name{
+            font-size: toRem(20);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__name{
+            font-size: toRem(18);
+        }
+    }
+    &__email{
+        color: rgba($color: $darkGreen, $alpha: 0.75);
+        font-family: Montserrat;
+        font-size: toRem(16);
+        font-weight: 400;
+        line-height: math.div(19, 16);
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__email{
+            font-size: toRem(14);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__email{
+            font-size: toRem(12);
+        }
+    }
+}
+.banner-header-account{
+    &__image{
+        width: 100%;
+        padding-bottom: toPercent(350, $container);
+        position: relative;
+        z-index: 1;
+        img{
+            border-radius: toRem(12);
+            object-fit: cover;
+
+            position: absolute;
+            z-index: 1;
+            left: 0;
+            top: 0;
+
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    @media (min-width: toEm(769, 16)) {
+        &__upload{
+            position: absolute;
+            z-index: 2;
+            right: toRem(26);
+            bottom: toRem(26);
+        }
+        @media (max-width: toEm(992, 16)) {
+            &__upload{
+                right: toRem(16);
+                bottom: toRem(16);
+            }
+        }
+    }
+    &__upload{
+        display: flex;
+        align-items: center;
+        min-height: toRem(48);
+
+        padding: toRem(8) toRem(16);
+        background-color: $mint;
+        border-radius: toRem(4);
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__upload{
+            min-height: toRem(40);
+            justify-content: center;
+            margin-bottom: toRem(16);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__upload{
+            margin-bottom: toRem(10);
+        }
+    }
+}
+.upload-banner-header-account{
+    &__label{
+        display: flex;
+        align-items: center;
+
+        &::before{
+            font-size: toRem(16);
+            color: $black;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            min-width: toRem(16);
+            height: toRem(16);
+
+            margin-right: toRem(4);
+        }
+        span{
+            color: $darkGreen;
+            font-family: Montserrat;
+            font-size: toRem(14);
+            font-weight: 500;
+            line-height: math.div(18, 14);
+        }
+    }
+
+    &__input{
+        opacity: 0;
+
+        position: absolute;
+        left: 0;
+        top: 0;
+
+        width: 100%;
+        height: 100%;
+    }
+}
+.ava-header-account{
+    &__image{
+        min-width: toRem(160);
+        height: toRem(160);
+
+        position: relative;
+        z-index: 1;
+        img{
+            border: toRem(4) solid $lightRed;
+            border-radius: 50%;
+
+            width: 100%;
+            height: 100%;
+        }
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__image{
+            min-width: toRem(140);
+            height: toRem(140);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__image{
+            min-width: toRem(100);
+            height: toRem(100);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__image{
+            min-width: toRem(80);
+            height: toRem(80);
+        }
+    }
+
+    &__upload{
+        border-radius: 50%;
+        background-color: $lightRed;
+
+        position: absolute;
+        z-index: 2;
+        left: toRem(160);
+        bottom: 0;
+        transform: translateX(-100%);
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: toRem(44);
+        height: toRem(44);
+        &::before{
+            font-size: toRem(18);
+            color: $black;
+        }
+        input{
+            opacity: 0;
+
+            position: absolute;
+            left: 0;
+            top: 0;
+
+            width: 100%;
+            height: 100%;
+        }
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__upload{
+            left: toRem(140);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__upload{
+            width: toRem(36);
+            height: toRem(36);
+            left: toRem(100);
+            &::before{
+                font-size: toRem(16);
+            }
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__upload{
+            left: toRem(80);
+        }
+    }
+}
+
+.sort-account{
+    &__item._disabled{
+        opacity: 0.5;
+    }
+
+    &__items{
+        min-height: toRem(80);
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__items{
+            min-height: toRem(70);
+        }
+    }
+
+    &__item{
+        display: flex;
+        align-items: center;
+
+        color: $darkGreen;
+        font-family: Montserrat;
+        font-size: toRem(16);
+        font-weight: 600;
+        line-height: math.div(20, 16);
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__item{
+            font-size: toRem(14);
+        }
+    }
+}
+
+.about-account{
+    &__main{
+        border-radius: toRem(16);
+        box-shadow: 0px 4px 16px 0px rgba(17, 34, 17, 0.05);
+        background: $white;
+        padding: toRem(32) toRem(24);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__main{
+            padding: toRem(24);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__main{
+            padding: toRem(16);
+        }
+    }
+
+    &__heading{
+        margin-bottom: toRem(16);
+    }
+
+    @media (min-width: toEm(769, 16)) {
+        &__part{
+            display: flex;
+            align-items: center;
+        }
+    }
+    &__part:not(:last-child){
+        margin-bottom: toRem(32);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__part:not(:last-child){
+            margin-bottom: toRem(24);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__part:not(:last-child){
+            margin-bottom: toRem(16);
+        }
+    }
+}
+.part-about-account{
+    @media (min-width: toEm(769, 16)) {
+        &__info{
+            flex: 1 1 auto;
+            margin-right: toRem(24);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__info{
+            margin-bottom: toRem(5);
+        }
+    }
+
+    @media (min-width: toEm(769, 16)) {
+        &__description{
+            margin-bottom: toRem(8);
+        }
+        @media (max-width: toEm(992, 16)) {
+            &__description{
+                margin-bottom: toRem(4);
+            }
+        }
+    }
+    &__description{
+        color: rgba($color: $darkGreen, $alpha: 0.75);
+        font-family: Montserrat;
+        font-size: toRem(16);
+        font-weight: 400;
+        line-height: math.div(20, 16);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__description{
+            font-size: toRem(14);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__description{
+            font-size: toRem(12);
+        }
+    }
+
+    &__value{
+        color: $darkGreen;
+        font-family: Montserrat;
+        font-size: toRem(20);
+        font-weight: 600;
+        line-height: math.div(24, 20);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__value{
+            font-size: toRem(18);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__value{
+            font-size: toRem(16);
+        }
+    }
+
+    @media (min-width: toEm(769, 16)) {
+        &__change{
+            min-width: toRem(140);
+        }
+        &__add{
+            min-width: toRem(185);
+            margin-right: toRem(16);
+        }
+    }
+    &__change, &__add{
+        border-radius: toRem(4);
+        border: toRem(1) solid $mint;
+
+        padding: toRem(8) toRem(16);
+        min-height: toRem(48);
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    
+        &::before{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            width: toRem(16);
+            height: toRem(16);
+
+            margin-right: toRem(4);
+        }
+        span{
+            color: $darkGreen;
+            font-family: Montserrat;
+            font-size: toRem(14);
+            font-weight: 500;
+            line-height: math.div(18, 14);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__change, &__add{
+            width: 100%;
+            min-height: toRem(40);
+        }
+        &__add{
+            margin-bottom: toRem(5);
+        }
+    }
+    &__change::before{
+        font-size: toRem(14.5);
+    }
+    &__add::before{
+        font-size: toRem(13);
+    }
+}
+
+.history-account{
+    @media (min-width: toEm(481, 16)) {
+        &__header{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+    }
+    &__header{
+        margin-bottom: toRem(16);
+    }
+
+    @media (min-width: toEm(481, 16)) {
+        &__select{       
+            margin-left: toRem(24);
+        }
+        @media (max-width: toEm(768, 16)) {
+            &__select{
+                margin-left: toRem(16);
+            }
+        }
+    }
+    &__select{
+        z-index: 2;
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__select{
+            margin-top: toRem(5);
+        }
+    }
+
+    &__tickets{
+        margin-top: toRem(16);
+    }
+
+    @media (min-width: toEm(769, 16)) {
+        &__ticket{
+            display: flex;
+            align-items: center;
+        }
+    }
+    &__ticket{
+        border-radius: toRem(16);
+        box-shadow: 0px 4px 16px 0px rgba($color: $darkGreen, $alpha: 0.05);
+        background: $white;
+
+        padding: toRem(32) toRem(24);
+        &:not(:last-child){
+            margin-bottom: toRem(16);
+        }
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__ticket{
+            padding: toRem(24);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__ticket{
+            padding: toRem(16);
+        }
+    }
+}
+.select-history-account{
+    &__opener{
+        display: flex;
+        align-items: center;
+        flex-direction: row-reverse;
+        &::before{
+            color: $darkGreen;
+            font-size: toRem(11);
+            
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            width: toRem(18);
+            height: toRem(18);
+
+            margin-left: toRem(4);
+        }
+        span{
+            color: $darkGreen;
+            font-family: Montserrat;
+            font-size: toRem(14);
+            font-weight: 600;
+            line-height: math.div(18, 14);
+        }
+    }
+}
+.ticket-history-account{
+    @media (min-width: toEm(769, 16)) {
+        &__image-block{
+            flex: 0 0 toRem(80);
+            margin-right: toRem(32);
+        }
+        @media (max-width: toEm(992, 16)) {
+            &__image-block{
+                flex: 0 0 toRem(64);
+                margin-right: toRem(24);
+            }
+        }
+    }
+    &__image-block{
+        border-radius: toRem(8);
+        border: toRem(1) solid $mint;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        height: toRem(80);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__image-block{
+            height: toRem(64);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__image-block{
+            width: toRem(64);
+        }
+    }
+
+    &__image{
+        width: toRem(64);
+        height: calc(100% - toRem(14));
+        position: relative;
+        z-index: 1;
+        img{
+            position: absolute;
+            z-index: 1;
+            left: 0;
+            top: 0;
+
+            width: 100%;
+            height: 100%;
+        }
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__image{
+            width: toRem(54);
+            height: calc(100% - toRem(8));
+        }
+    }
+
+    @media (min-width: toEm(481, 16)) {
+        &__center{
+            display: flex;
+            align-items: center;
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__center{
+            margin: toRem(10) 0;
+        }
+    }
+    
+    @media (min-width: toEm(993, 16)) {
+        &__schedule{
+            display: flex;
+            align-items: center;
+        }
+    }
+    @media (min-width: toEm(481, 16)) {
+        &__schedule{
+            padding-right: toRem(48);
+            position: relative;
+            z-index: 1;
+            &::before{
+                background: rgb(215, 226, 238);
+                content: "";
+    
+                position: absolute;
+                right: toRem(24);
+                top: 50%;
+                transform: translateY(-50%);
+    
+                height: calc(100% - toRem(28));
+                min-height: toRem(48);
+                width: toRem(1);
+            }
+        }
+        @media (max-width: toEm(992, 16)) {
+            &__schedule{
+                padding-right: toRem(36);
+                &::before{
+                    right: toRem(18);
+                }
+            }
+        }
+        @media (max-width: toEm(768, 16)) {
+            &__schedule{
+                padding-right: toRem(24);
+                &::before{
+                    right: toRem(12);
+                }
+            }
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__schedule{
+            display: flex;
+            align-items: center;
+            margin-bottom: toRem(5);
+        }
+    }
+
+    @media (min-width: toEm(993, 16)) or (max-width: toEm(480, 16)) {
+        &__schedule-part:first-child{
+            position: relative;
+            z-index: 1;
+            padding-right: toRem(52);
+            &::before{
+                background-color: $darkGreen;
+                content: "";
+    
+                position: absolute;
+                z-index: 1;
+                right: toRem(16);
+                bottom: calc(50% - toRem(3));
+    
+                width: toRem(20);
+                height: toRem(1.5);
+            }
+        }
+    }
+    @media (min-width: toEm(481, 16)) {
+        @media (max-width: toEm(992, 16)) {
+            &__schedule-part:first-child{
+                margin-bottom: toRem(8);
+            }
+        }
+        @media (max-width: toEm(768, 16)) {
+            &__schedule-part:first-child{
+                margin-bottom: toRem(4);
+            }
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__schedule-part:first-child{
+            padding-right: toRem(24);
+            &::before{
+                width: toRem(10);
+                height: toRem(2);
+                right: toRem(7);
+            }
+        }
+    }
+
+    &__features{
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, toRem(154)));
+        gap: toRem(8) toRem(24);
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__features{
+            flex: 1 1 auto;
+            grid-template-columns: repeat(3, 1fr);
+            gap: toRem(8) toRem(16);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__features{
+            grid-template-columns: repeat(2, 1fr);
+            gap: toRem(5) toRem(16);
+        }
+    }
+
+    &__feature{
+        display: flex;
+        align-items: center;
+        &::before{
+            background: $lightMint;
+            border-radius: toRem(4);
+
+            color: $mint;
+            font-size: toRem(16.5);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            min-width: toRem(32);
+            height: toRem(32);
+            margin-right: toRem(8);
+        }
+    }
+
+    @media (min-width: toEm(769, 16)) {
+        &__interaction{
+            justify-content: flex-end;
+            margin-left: toRem(24);
+        }
+    }
+    &__interaction{
+        flex: 1 1 auto;
+        display: flex;
+    }
+
+    &__download{
+        border-radius: toRem(4);
+        background-color: $mint;
+
+        white-space: nowrap;
+        display: flex;
+        align-items: center;
+        min-height: toRem(48);
+        padding: toRem(8) toRem(16);
+
+        color: $darkGreen;
+        font-family: Montserrat;
+        font-size: toRem(14);
+        font-weight: 500;
+        line-height: math.div(18, 14);
+
+        margin-right: toRem(16);
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__download{
+            width: 100%;
+            justify-content: center;
+            min-height: toRem(40);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__download{
+            margin-right: toRem(10);
+        }
+    }
+
+    &__arrow{
+        border: toRem(1) solid $mint;
+        border-radius: toRem(4);
+        min-width: toRem(48);
+        
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &::before{
+            color: $black;
+            font-size: toRem(10);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transform: rotate(-90deg);
+
+            width: toRem(16);
+            height: toRem(16);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__arrow{
+            min-width: toRem(40);
+        }
+    }
+}
+.schedule-part-ticket-history-account{
+    @media (min-width: toEm(993, 16)) {
+        &__description{
+            margin-right: toRem(8);
+        }
+    }
+    &__description{
+        color: rgba($color: $darkGreen, $alpha: 0.75);
+        font-family: Montserrat;
+        font-size: toRem(16);
+        font-weight: 400;
+        line-height: math.div(20, 16);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__description{
+            font-size: toRem(12);
+        }
+    }
+
+    &__time{
+        color: $darkGreen;
+        font-family: Montserrat;
+        font-size: toRem(20);
+        font-weight: 600;
+        line-height: math.div(24, 20);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__time{
+            font-size: toRem(16);
+        }
+    }
+}
+.feature-ticket-history-account{
+    &__description{
+        color: rgba($color: $darkGreen, $alpha: 0.6);
+        font-family: Montserrat;
+        font-size: toRem(12);
+        font-weight: 600;
+        line-height: math.div(15, 12);
+    }
+
+    &__value{
+        color: $darkGreen;
+        font-family: Montserrat;
+        font-size: toRem(16);
+        font-weight: 500;
+        line-height: math.div(20, 16);
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__value{
+            font-size: toRem(14);
+        }
+    }
+}
+
+.cards-account{
+    &__heading{
+        margin-bottom: toRem(16);
+    }
+
+    &__main{
+        border-radius: toRem(24);
+        box-shadow: 0px 4px 16px 0px rgba(17, 34, 17, 0.05);
+        background: $white;
+        padding: toRem(24);
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__main{
+            border-radius: toRem(16);
+            padding: toRem(16);
+        }
+    }
+
+    @media (min-width: toEm(481, 16)) {
+        &__main{
+            display: flex;
+        }
+        &__items{
+            display: flex;
+            flex-wrap: wrap;
+            margin: toRem(-6) toRem(-12);
+        }
+        @media (max-width: toEm(768, 16)) {
+            &__items{
+                margin: toRem(-4) toRem(-8);
+            }
+        }
+    }
+
+    @media (min-width: toEm(481, 16)) {
+        &__item{
+            padding: toRem(6) toRem(12);
+            min-width: toRem(378 + 24);
+            min-height: toRem(212 + 12);
+        }
+        @media (max-width: toEm(992, 16)) {
+            &__item{
+                min-width: toRem(300 + 24);
+                min-height: toRem(170 + 12);
+            }
+        }
+        @media (max-width: toEm(768, 16)) {
+            &__item{
+                padding: toRem(4) toRem(8);
+                min-width: toRem(240 + 16);
+                min-height: toRem(136 + 8);
+            }
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__item{
+            width: 100%;
+            height: toRem(136);
+            &:not(:last-child){
+                margin-bottom: toRem(10);
+            }
+        }
+    }
+
+    @media (min-width: toEm(993, 16)) {
+        &__add::before{
+            margin-bottom: toRem(10);
+        }
+    }
+    @media (min-width: toEm(481, 16)) {
+        &__add{
+            margin-left: toRem(24);
+            width: toRem(378);
+            min-height: toRem(212);
+        }
+        @media (max-width: toEm(992, 16)) {
+            &__add{
+                width: toRem(300);
+                min-height: toRem(170);
+            }
+        }
+        @media (max-width: toEm(768, 16)) {
+            &__add{
+                width: toRem(240);
+                min-height: toRem(136);
+                margin-left: toRem(16);
+            }
+        }
+    }
+    &__add{
+        border: toRem(2) dashed $mint;
+        border-radius: toRem(16);
+        padding: toRem(24);
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+
+        &::before{
+            color: $mint;
+            font-size: toRem(48);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            width: toRem(64);
+            height: toRem(64);
+        }
+        span{
+            color: $darkGreen;
+            font-family: Montserrat;
+            font-size: toRem(12);
+            font-weight: 500;
+            line-height: math.div(15, 12);
+        }
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__add{
+            padding: toRem(16);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__add{
+            padding: toRem(10);
+            &::before{
+                font-size: toRem(36);
+                width: toRem(48);
+                height: toRem(48);
+            }
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__add{
+            width: 100%;
+            margin-top: toRem(10);
+        }
+    }
+}
+.item-cards-account{
+    &__inner{
+        padding: toRem(16);
+        background-color: $mint;
+        border-radius: toRem(16);
+
+        position: relative;
+        z-index: 1;
+
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        height: 100%;
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__inner{
+            padding: toRem(10);
+            border-radius: toRem(10);
+        }
+    }
+
+    &__number{
+        color: $darkGreen;
+        font-family: Montserrat;
+        font-size: toRem(24);
+        font-weight: 600;
+        line-height: math.div(19, 24);
+        strong{
+            display: block;
+            font-size: toRem(32);
+            line-height: math.div(39, 32);
+        }
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__number{
+            font-size: toRem(20);
+            strong{
+                font-size: toRem(26);
+            }
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__number{
+            font-size: toRem(18);
+            strong{
+                font-size: toRem(22);
+            }
+        }
+    }
+
+    &__delete{
+        position: absolute;
+        top: toRem(16);
+        right: toRem(16);
+        z-index: 2;
+
+        color: $black;
+        font-size: toRem(19.5);
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: toRem(24);
+        height: toRem(24);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__delete{
+            top: toRem(10);
+            right: toRem(10);
+        }
+    }
+
+    &__exp-date{
+        color: $darkGreen;
+        font-family: Montserrat;
+        font-size: toRem(12);
+        font-weight: 500;
+        line-height: math.div(15, 12);
+        strong{
+            display: block;
+            font-size: toRem(20);
+        }
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__exp-date strong{
+            font-size: toRem(16);
+        }
+    }
+
+    &__inner::before{
+        font-size: toRem(52);
+        color: $darkGreen;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: toRem(52);
+        height: toRem(32.5);
+
+        position: absolute;
+        z-index: 1;
+        right: toRem(16);
+        bottom: toRem(30.5);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__inner::before{
+            width: toRem(40);
+            height: toRem(25);
+            font-size: toRem(40);
+
+            bottom: toRem(16);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__inner::before{
+            width: toRem(32);
+            height: toRem(20);
+            font-size: toRem(32);
+
+            bottom: toRem(10);
+            right: toRem(10);
+        }
+    }
+}
+
+body._modal-showed .account{
+    &__header, &__sort, &__cards{
+        filter: blur(4px);
+    }
+}

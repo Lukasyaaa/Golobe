@@ -1,4 +1,4 @@
-import React, { FC, Fragment, useRef, useState } from "react"; 
+import React, { FC, Fragment, useEffect, useRef, useState } from "react"; 
 import { contentPart } from "../../../types";
 import { navbarAddActiveAction, navbarRemoveActiveAction } from "../../../store/configurate/navbarReducer";
 import { useDispatch } from "react-redux";
@@ -17,6 +17,12 @@ export const NavbarCheckboxes : FC<navbarCheckboxesProps> = ({title, itemsLabel,
 
     let [isActive, setIsActive] = useState<boolean>(true);
     let spoilerInner = useRef<HTMLDivElement>(null);
+    let [spoilerHeight, setSpoilerHeight] = useState<number>(0);
+    useEffect(() => {
+        if(spoilerInner.current){
+            setSpoilerHeight(spoilerInner.current.offsetHeight);
+        }
+    }, [])
     
     let classes = ["navbar__item", "item-navbar", "navbar__checkboxes", "checkboxes-navbar"]
     if(isActive){
@@ -36,7 +42,7 @@ export const NavbarCheckboxes : FC<navbarCheckboxesProps> = ({title, itemsLabel,
                         </button>
                     </legend>   
                     <div className="item-navbar__filters checkboxes-navbar__filters" style={{
-                        height: (isActive) ? ((spoilerInner.current) ? spoilerInner.current.offsetHeight : "auto") : 0
+                        height: (isActive) ? spoilerHeight : 0
                     }}>
                         <div className="item-navbar__filters-inner checkboxes-navbar__filters-inner" ref={spoilerInner}>
                             {itemsLabel.map((label, i) => 

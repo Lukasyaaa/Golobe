@@ -2,6 +2,7 @@ body._locked{
     overflow-y: hidden;
 }
 body::before{
+    filter: blur(0);
     background: $black;
     opacity: 0;
     content: "";
@@ -19,6 +20,10 @@ body::before{
 }
 body._modal-showed::before{
     opacity: 0.5;
+}
+body._modal-showed .header,
+body._modal-showed .footer{
+    filter: blur(4px);
 }
 
 .wrapper, body{
@@ -143,11 +148,12 @@ main{
         overflow: hidden;
 
         position: absolute;
-        left: 0;
+        left: 50%;
         bottom: 0;
-        transform: translateY(100%);
+        transform: translateY(100%) translateX(-50%);
 
-        width: 100%;
+        min-width: 100%;
+        filter: drop-shadow(0 0 5px #999);
 
         transition: height 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
     }
@@ -400,7 +406,7 @@ main{
     }
 }
 
-.configurate, .flight, .booking{
+.configurate, .flight, .hotel, .booking, .check, .account, .favourites{
     background-color: $lightGray;
     padding-top: toRem(90 + 48);
     padding-bottom: toRem(116);
@@ -421,10 +427,10 @@ main{
         padding-bottom: toRem(32);
     }
 }
-.configurate ~ .footer, .flight ~ .footer, .booking ~ .footer{
+.configurate ~ .footer, .flight ~ .footer, .hotel ~ .footer, 
+.booking ~ .footer, .check ~ .footer, .account ~ .footer, .favourites ~ .footer{
     background-color: $lightGray;
 }
-
 
 .configurate{
     &__options{
@@ -665,6 +671,10 @@ main{
         font-size: toRem(13.86);
         color: $black;
 
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
         border-radius: toRem(4);
         border: toRem(1) solid $mint;
         min-width: toRem(48);
@@ -674,13 +684,16 @@ main{
         transition: background-color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
         color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
     }
-    &__favourites:focus{
+    &__favourites._disabled{
+        opacity: 0.5;
+    }
+    &__favourites:not(._disabled):focus{
         outline: none;
         background-color: $mint;
         color: $white;
     }
     @media (any-hover: hover) {
-        &__favourites:hover{
+        &__favourites:not(._disabled):hover{
             background-color: $mint;
             color: $white;
         }
@@ -729,6 +742,231 @@ main{
             background-color: $darkGreen;
             color: $mint;
             text-shadow: 0 0 8px $mint;
+        }
+    }
+}
+
+.header-shared{
+    @media (min-width: toEm(769, 16)) {
+        &__row{
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;    
+        }
+    }
+    &__row:not(:last-child){
+        margin-bottom: toRem(32);
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__row:not(:last-child){
+            margin-bottom: toRem(24);
+        }
+    }
+
+    @media (min-width: toEm(769, 16)) {
+        &__left{
+            margin-right: toRem(24);
+        }
+    }
+    &__left{
+        max-width: toRem(768);
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__left{
+            margin-bottom: toRem(16);
+        }
+    }
+
+    &__title{
+        color: $darkGreen;
+        font-family: "TradeGothic";
+        font-size: toRem(24);
+        font-weight: 700;
+        line-height: math.div(30, 24);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__title{
+            font-size: toRem(22);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__title{
+            font-size: toRem(20);
+        }
+    }
+    
+    &__location{
+        display: flex;
+        align-items: center;
+    }
+    @media (min-width: toEm(481, 16)) {
+        &__location::before{
+            margin-right: toRem(4);
+        }
+    }
+    &__location{
+        &::before{
+            color: $darkGreen;
+            font-size: toRem(15.75);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            width: toRem(18);
+            height: toRem(18);
+        }
+
+        color: $darkGreen;
+        font-family: Montserrat;
+        font-size: toRem(18);
+        font-weight: 500;
+        line-height: math.div(24, 18);
+
+        span{
+            color: rgba($color: $darkGreen, $alpha: 0.75);
+            font-family: Montserrat;
+            font-size: toRem(14);
+            font-weight: 500;
+            line-height: math.div(18, 14);
+        }
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__location{
+            &::before{
+                font-size: toRem(14);
+            }
+            font-size: toRem(16);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__location{
+            font-size: toRem(14);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__location, &__location span{
+            font-size: toRem(12);
+        }
+    }
+
+    &__right{
+        display: flex;
+        flex-direction: column;
+    }
+
+    @media (min-width: toEm(769, 16)) {
+        &__price{
+            align-self: flex-end;
+        }
+    }
+    &__price{
+        color: $lightRed;
+        font-family: Montserrat;
+        font-size: toRem(32);
+        font-weight: 700;
+        line-height: math.div(39, 32);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__price{
+            font-size: toRem(26);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__price{
+            font-size: toRem(24);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__price{
+            font-size: toRem(22);
+        }
+    }
+
+    &__interaction{
+        display: inline-flex;
+        margin-top: toRem(16);
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__interaction{
+            margin-top: toRem(10);
+        }
+    }
+
+    &__favourites, &__share{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: toRem(48);
+
+        border-radius: toRem(4);
+        border: toRem(1) solid $mint;
+        &:not(:last-child){
+            margin-right: toRem(15);
+        }
+        transition: background-color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
+        color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+    &__favourites:focus, &__share:focus{
+        outline: none;
+        background-color: $mint;
+        color: $white;
+    }
+    @media (any-hover: hover) {
+        &__favourites:hover, &__share:hover{
+            background-color: $mint;
+            color: $white;
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__favourites, &__share{
+            min-width: toRem(40);
+            &:not(:last-child){
+                margin-right: toRem(10);
+            }
+        }
+    }
+
+    &__book{
+        border-radius: toRem(4);
+        background: $mint;
+        padding: toRem(8) toRem(16);
+
+        min-height: toRem(48);
+        display: flex;
+        align-items: center;
+
+        color: $darkGreen;
+        font-family: Montserrat;
+        font-size: toRem(14);
+        font-weight: 600;
+        line-height: math.div(17, 14);
+
+        transition: border-color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
+        background-color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
+        color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
+        text-shadow 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+    &__book:focus{
+        outline: none;
+        border-color: $darkGreen;
+        background-color: $darkGreen;
+        color: $mint;
+        text-shadow: 0 0 8px $mint;
+    }
+    @media (any-hover: hover) {
+        &__book:hover{
+            border-color: $darkGreen;
+            background-color: $darkGreen;
+            color: $mint;
+            text-shadow: 0 0 8px $mint;
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__book{
+            flex: 1 1 auto;
+            justify-content: center;
+            min-height: toRem(40);
         }
     }
 }
@@ -785,8 +1023,11 @@ main{
 
         padding: toRem(2) toRem(16);
     }
-    &__link._active{
+
+    &_colored__link._active{
         color: $lightRed;
+    }
+    &__link._active{
         position: relative;
         z-index: 1;
         &::before{
@@ -806,20 +1047,31 @@ main{
             height: toRem(16);
         }
     }
-    &__link._active &__link-inner:hover{
+    &__link._active &__link-inner{
         transition: text-shadow 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
     }
-    &__link-inner:focus{
+
+    &_colored__link-inner:focus{
         outline: none;
         text-shadow: 0 0 5px $lightRed;
     }
+    &_none-colored__link-inner:focus{
+        outline: none;
+        text-shadow: 0 0 5px $darkGreen;
+    }
     @media (any-hover: hover) {
-        &__link._active &__link-inner:hover{
+        &_colored__link._active &__link-inner:hover{
             text-shadow: 0 0 5px $lightRed;
         }
+        &_none-colored__link._active &__link-inner:hover{
+            text-shadow: 0 0 5px $darkGreen;
+        }
+    }
+
+    &_none-colored__link:last-child{
+        color: rgba($color: $darkGreen, $alpha: 0.4);
     }
 }
-
 
 .booking{
     &__link{
@@ -845,6 +1097,9 @@ main{
             display: flex;
             justify-content: space-between;
         }
+        &_hotel__header{
+            align-items: center;
+        }
     }
     &__header{
         margin-bottom: toRem(24);
@@ -860,20 +1115,34 @@ main{
         }
     }
 
-    &__takeoff-time{
+    @media (min-width: toEm(481, 16)) {
+        &__takeoff-time, &__advantages{
+            margin-right: toRem(16);
+        }
+        @media (max-width: toEm(768, 16)) {
+            &__takeoff-time, &__advantages{
+                margin-right: toRem(10);
+            }
+        }
+    }
+    &__takeoff-time, &__advantages{
         color: $darkGreen;
         font-family: TradeGothic;
         font-size: toRem(20);
         font-weight: 700;
         line-height: math.div(25, 20);
     }
+    &__advantages{
+        font-size: toRem(24);
+        max-width: toRem(491);
+    }
     @media (max-width: toEm(768, 16)) {
-        &__takeoff-time{
+        &__takeoff-time, &__advantages{
             font-size: toRem(18);
         }
     }
     @media (max-width: toEm(480, 16)) {
-        &__takeoff-time{
+        &__takeoff-time, &__advantages{
             display: block;
             font-size: toRem(16);
         }
@@ -898,22 +1167,51 @@ main{
         }
     }
 
+    &__price{
+        color: $lightRed;
+        font-family: Montserrat;
+        font-size: toRem(14);
+        font-weight: 700;
+        mark{
+            color: $lightRed;
+            font-size: toRem(32);
+            line-height: math.div(37, 32);
+        }
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__price mark{
+            font-size: toRem(26);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__price mark{
+            font-size: toRem(24);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__price mark{
+            font-size: toRem(22);
+        }
+    }
+
     &__main{
         align-items: center;
+    }
+    &__main, &_hotel__button{
         margin-bottom: toRem(40);
     }
     @media (max-width: toEm(992, 16)) {
-        &__main{
+        &__main, &_hotel__button{
             margin-bottom: toRem(32);
         }
     }
     @media (max-width: toEm(768, 16)) {
-        &__main{
+        &__main, &_hotel__button{
             margin-bottom: toRem(24);
         }
     }
     @media (max-width: toEm(480, 16)) {
-        &__main{
+        &__main, &_hotel__button{
             margin-bottom: toRem(16);
         }
     }
@@ -924,14 +1222,17 @@ main{
         }
     }
     @media (min-width: toEm(481, 16)) {
-        &__button{
+        &_flight__button{
             margin-right: toRem(24);
         }
         @media (max-width: toEm(768, 16)) {
-            &__button{
+            &_flight__button{
                 margin-right: toRem(16);
             }
         }
+    }
+    &_flight__button{
+        justify-content: center;
     }
     &__button{
         border: toRem(1) solid $mint;
@@ -940,7 +1241,6 @@ main{
 
         display: flex;
         align-items: center;
-        justify-content: center;
 
         transition: background-color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
         opacity 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
@@ -971,6 +1271,9 @@ main{
         }
     }
 
+    &_hotel__image{
+        height: toRem(64);
+    }
     &__image{
         width: toRem(64);
         margin-right: toRem(24);
@@ -989,7 +1292,7 @@ main{
         }
     }
 
-    &__airline{
+    &__airline, &__title{
         color: $darkGreen;
         font-family: Montserrat;
         font-size: toRem(24);
@@ -1000,24 +1303,39 @@ main{
         transition: color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
     }
     @media (max-width: toEm(992, 16)) {
-        &__airline{
+        &__airline, &__title{
             font-size: toRem(22);
             margin-bottom: toRem(6);
         }
     }
     @media (max-width: toEm(768, 16)) {
-        &__airline{
+        &__airline, &__title{
             font-size: toRem(20);
             margin-bottom: toRem(4);
         }
     }
     @media (max-width: toEm(480, 16)) {
-        &__airline{
+        &__airline, &__title{
             font-size: toRem(18);
         }
     }
 
-    &__airplane{
+    &__location{
+        display: flex;
+        align-items: center;
+        &::before{
+            color: $darkGreen;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            width: toRem(18);
+            height: toRem(18);
+
+            margin-right: toRem(2);
+        }
+    }
+    &__airplane, &__location{
         color: rgba($color: $darkGreen, $alpha: 0.6);
         font-family: Montserrat;
         font-size: toRem(14);
@@ -1027,7 +1345,7 @@ main{
         transition: color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
     }
     @media (max-width: toEm(480, 16)) {
-        &__airplane{
+        &__airplane, &__location{
             font-size: toRem(12);
         }
     }
@@ -1102,7 +1420,7 @@ main{
                 height: toRem(0.5);
     
                 position: absolute;
-                z-index: 1;
+                z-index: 3;
                 top: 50%;
                 transform: translateY(-50%);
             }
@@ -1115,7 +1433,7 @@ main{
                 height: toRem(6);
     
                 position: absolute;
-                z-index: 1;
+                z-index: 3;
                 top: 50%;
                 transform: translateY(-50%);
             }
@@ -1128,16 +1446,23 @@ main{
             }
         }
     }
-    &__schedule-part{
+    &_flight__schedule-part{
         flex: 1 1 auto;
         display: flex;
-        align-items: center;
         justify-content: center;
+        align-items: center;
     }
     @media (max-width: toEm(480, 16)) {
-        &__schedule-part{
+        &_flight__schedule-part{
             flex-direction: column;
         }
+    }
+    &_hotel__schedule-part{
+        text-align: left;
+    }
+    &_hotel__schedule-part_to{
+        display: flex;
+        justify-content: flex-end;
     }
 
     &__gap{
@@ -1175,20 +1500,68 @@ main{
     }
 }
 .schedule-part-link-booking{
+    &__inner{
+        &::after, &::before{
+            border-radius: toRem(12);
+            background-color: $white;
+
+            content: "";
+            position: absolute;
+            z-index: 2;
+            left: 50%;
+            top: 50%;
+            transform: translateY(-50%) translateX(-50%);
+
+            width: calc(100% + toRem(6));
+            height: calc(100% + toRem(6));
+        }
+        &::before{
+            background-color: $darkGreen;
+            z-index: 1;
+
+            width: calc(100% + toRem(4));
+            height: calc(100% + toRem(4));
+
+            transition: width 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
+            height 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+        }
+    }
+    &:focus{
+        outline: none;
+    }
+    &:not(:disabled):focus &__inner::before{
+        width: calc(100% + toRem(12));
+        height: calc(100% + toRem(12));
+    }
+    @media (any-hover: hover) {
+        &:not(:disabled):hover &__inner::before{
+            width: calc(100% + toRem(12));
+            height: calc(100% + toRem(12));
+        }
+    }
+
+    &__inner > *{
+        position: relative;
+        z-index: 3;
+    }
+
     @media (min-width: toEm(481, 16)) {
-        &__time{
+        &_flight__time{
             margin-right: toRem(16);
         }
         @media (max-width: toEm(992, 16)) {
-            &__time{
+            &_flight__time{
                 margin-right: toRem(10);
             }
         }
         @media (max-width: toEm(768, 16)) {
-            &__time{
+            &_flight__time{
                 margin-right: toRem(6);
             }
         }
+    }
+    &_hotel__time{
+        display: block;
     }
     &__time{
         color: $darkGreen;
@@ -1196,6 +1569,10 @@ main{
         font-size: toRem(24);
         font-weight: 600;
         line-height: math.div(29, 24);
+    }
+    &_hotel__time{
+        font-size: toRem(20);
+        margin-bottom: toRem(8);
     }
     @media (max-width: toEm(992, 16)) {
         &__time{
@@ -1265,5 +1642,22 @@ main{
                 left: toRem(26);
             }
         }
+    }
+}
+
+.favourites{
+    &__heading{
+        color: $black;
+        font-family: TradeGothic;
+        font-size: toRem(32);
+        font-weight: 700;
+        line-height: math.div(40, 32);
+
+        margin-bottom: toRem(24);
+    }
+
+    &__items.sort__items{
+        min-height: toRem(80);
+        margin-bottom: toRem(40);
     }
 }

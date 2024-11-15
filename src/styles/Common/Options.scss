@@ -116,7 +116,6 @@
         }
     }
 
-
     @media (min-width: toEm(481, 16)) {
         &__item_input:not(.smaller):not(.bigger){
             flex: 1 1 toRem(324 + 24);

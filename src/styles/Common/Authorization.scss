@@ -1,0 +1,1058 @@
+.access{
+    @media (min-width: toEm($container + 31, 16)) {
+        display: flex;
+        align-items: center;
+        min-height: 100vh;
+    
+        padding: toRem(104) 0;
+        .container{
+            flex: 0 1 toRem($container + 30);
+        }
+    }
+    @media (max-width: toEm($container + 31, 16)) {
+        padding: toRem(76) 0;
+    }
+    @media (max-width: toEm(992, 16)) {
+        padding: toRem(64) 0;
+    }
+    @media (max-width: toEm(768, 16)) {
+        padding: toRem(46) 0;
+    }
+    @media (max-width: toEm(480, 16)) {
+        padding: toRem(32) 0;
+    }
+
+    @media (min-width: toEm(769, 16)) {
+        &:not(.access_reverse) .container{
+            display: grid;
+            align-items: flex-start;
+            grid-template-columns: 1fr toPercent(616, $container);
+        }
+
+        &_reverse .container{
+            display: flex;
+            align-items: flex-start;
+        }
+    }
+    
+    @media (min-width: toEm(769, 16)) {
+        &:not(.access_reverse) &__interaction{
+            padding-right: toRem(104);
+        }
+        @media (max-width: toEm($container + 31, 16)) {
+            &:not(.access_reverse) &__interaction{
+                padding-right: toRem(64);
+            }
+        }
+        @media (max-width: toEm(992, 16)) {
+            &:not(.access_reverse) &__interaction{
+                padding-right: toRem(48);
+            }
+        }
+    }
+
+    @media (min-width: toEm(769, 16)) {
+        &_reverse__interaction{
+            padding-left: toRem(105);
+            width: calc(100% - toPercent(486, $container));
+        }
+        @media (max-width: toEm($container + 31, 16)) {
+            &_reverse__interaction{
+                padding-left: toRem(64);
+            }
+        }
+        @media (max-width: toEm(992, 16)) {
+            &_reverse__interaction{
+                padding-left: toRem(48);
+            }
+        }
+    }
+    @media (max-width: toEm(768, 16)) and (min-width: toEm(481, 16)) {
+        &__interaction{
+            padding-bottom: toRem(32);
+        }
+    }
+
+    &__heading{
+        color: $black;
+        font-family: TradeGothic;
+        font-size: toRem(40);
+        font-weight: 700;
+        line-height: math.div(51, 40);
+        margin-bottom: toRem(16);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__heading{
+            font-size: toRem(32);
+            margin-bottom: toRem(10);
+        }   
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__heading{
+            font-size: toRem(28);
+            margin-bottom: toRem(5);
+        }   
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__heading{
+            font-size: toRem(24);
+        }   
+    }
+    &__explanation{
+        color: rgba($color: $darkGreen, $alpha: 0.75);
+        font-family: Montserrat;
+        font-size: toRem(16);
+        font-weight: 400;
+        line-height: math.div(19, 16);
+
+        padding-bottom: toRem(40);
+    }
+    @media (max-width: toEm($container + 31, 16)) {
+        &__explanation{
+            padding-bottom: toRem(32);
+        }
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__explanation{
+            padding-bottom: toRem(24);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__explanation{
+            font-size: toRem(14);
+            padding-bottom: toRem(16);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__explanation{
+            font-size: toRem(12);
+            padding-bottom: toRem(10);
+        }
+    }
+
+    &__logo{
+        display: block;
+        margin-bottom: toRem(64);
+        transition: filter 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+    &__logo:focus{
+        outline: none;
+        filter: drop-shadow(0 0 5px $mint);
+    }
+    @media (any-hover: hover) {
+        &__logo:hover{
+            filter: drop-shadow(0 0 5px $mint);
+        }
+    }
+    @media (max-width: toEm($container + 31, 16)) {
+        &__logo{
+            margin-bottom: toRem(36);
+        }
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__logo{
+            margin-bottom: toRem(16);
+        }
+    }
+
+    @media (min-width: toEm(481, 16)) {
+        &__return::before{
+            margin-right: toRem(4);
+        }
+    }
+    &__return{
+        display: inline-flex;
+        align-items: center;
+        margin-bottom: toRem(16);
+
+        position: relative;
+        z-index: 1;
+
+        &::before{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            min-width: toRem(24);
+            height: toRem(24);
+
+            transform: rotate(90deg);
+            color: $darkGreen;
+            font-size: toRem(13.5);
+        }
+        span{
+            color: $darkGreen;
+            font-family: Montserrat;
+            font-size: toRem(14);
+            font-weight: 500;
+            line-height: math.div(18, 14);
+        }
+        &::after{
+            background-color: $darkGreen;
+            content: "";
+
+            position: absolute;
+            z-index: 1; 
+            left: calc(50% + toRem(12) + toRem(2));
+            transform: translateX(-50%);
+            bottom: 0;
+
+            width: 0;
+            height: toRem(2);
+
+            transition: width 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+        }
+    }
+    &__return:focus{
+        outline: none;
+        &::after{
+            width: calc(100% - toRem(24) - toRem(4));
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__return:focus::after{
+            width: calc(100% - toRem(20) - toRem(4));
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__return:focus::after{
+            width: calc(100% - toRem(20));
+        }
+    }
+    @media (any-hover: hover) {
+        &__return:hover::after{
+            width: calc(100% - toRem(24) - toRem(4));
+        }
+        @media (max-width: toEm(768, 16)) {
+            &__return:hover::after{
+                width: calc(100% - toRem(20) - toRem(4));
+            }
+        }
+        @media (max-width: toEm(480, 16)) {
+            &__return:hover::after{
+                width: calc(100% - toRem(20));
+            }
+        }
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__return{
+            margin-bottom: toRem(10);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__return{
+            &::after{
+                left: calc(50% + toRem(10) + toRem(2));
+            }
+            &::before{
+                min-width: toRem(20);
+                height: toRem(20);
+            }
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__return::after{
+            left: calc(50% + toRem(10));
+        }
+    }
+
+    &__fieldgroup{
+        display: flex;
+        flex-direction: column-reverse;
+        position: relative;
+        z-index: 1;
+    }
+    &__fieldgroups > &__fieldgroup:not(:last-child){
+        margin-bottom: toRem(16);
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__fieldgroups > &__fieldgroup:not(:last-child){
+            margin-bottom: toRem(10);
+        }
+    }
+
+    &__fieldgroup-row > *{
+        flex: 1 1 auto;
+        min-width: 0;
+    }
+    &__fieldgroup-row > *:first-child{
+        margin-right: toRem(12);
+    }
+    &__fieldgroup-row > *:not(:first-child):not(:last-child){
+        margin: 0 toRem(12);
+    }
+    &__fieldgroup-row > *:last-child{
+        margin-left: toRem(12);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__fieldgroup-row > *:first-child{
+            margin-right: toRem(8);
+        }
+        &__fieldgroup-row > *:not(:first-child):not(:last-child){
+            margin: 0 toRem(8);
+        }
+        &__fieldgroup-row > *:last-child{
+            margin-left: toRem(8);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__fieldgroup-row > *:first-child{
+            margin-right: toRem(5);
+        }
+        &__fieldgroup-row > *:not(:first-child):not(:last-child){
+            margin: 0 toRem(5);
+        }
+        &__fieldgroup-row > *:last-child{
+            margin-left: toRem(5);
+        }
+    }
+
+    &__fieldgroup-row{
+        display: flex;
+        &:not(:last-child){
+            margin-bottom: toRem(16);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__fieldgroup-row:not(:last-child){
+            margin-bottom: toRem(10);
+        } 
+    }
+
+    &__subinput{
+        align-self: flex-start;
+        
+        background-color: $white;
+        padding: 0 toRem(4);
+        margin-left: toRem(12);
+
+        position: relative;
+        z-index: 2;
+        span{
+            color: $darkPurple;
+            font-family: Montserrat;
+            font-size: toRem(14);
+            font-weight: 400;
+            line-height: math.div(18, 14);
+            position: relative;
+            z-index: 2;
+
+            transition: color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+        }
+        &::after{
+            background-color: #999;
+
+            content: "";
+            position: absolute;
+            z-index: 1;
+            left: 0;
+            top: 0;
+
+            height: 100%;
+            width: 0;
+
+            transition: width 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__subinput{
+            font-size: toRem(12);
+        }
+    }
+    &__input{
+        position: relative;
+        z-index: 1;
+        transition: border-color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+        max-width: 100%;
+
+        border: toRem(1) solid rgb(121, 116, 126);
+        border-radius: toRem(4);
+        min-height: toRem(56);
+        padding-left: toRem(16);
+        padding-right: toRem(16);
+
+        &::placeholder{
+            color: $darkPurple;
+        }
+        color: $darkPurple;
+        font-family: Montserrat;
+        font-size: toRem(16);
+        font-weight: 400;
+        line-height: math.div(20, 16);
+
+        margin-top: toRem(-10);
+    }
+    &__input:focus{
+        outline: none;
+    }
+    &__input:focus ~ &__subinput{
+        span{
+            color: $white;
+        }
+        &::after{
+            width: 100%;
+        }
+    }
+    @media (any-hover: hover) {
+        &__input:hover ~ &__subinput{
+            span{
+                color: $white;
+            }
+            &::after{
+                width: 100%;
+            }
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__input{
+            min-height: toRem(48);
+            font-size: toRem(14);
+            margin-top: toRem(-8.75);
+        }
+    }
+
+    &__input.error{
+        border-color: $lightRed;
+    }
+    &__input.good{
+        border-color: $mint;
+    }
+    &__show-hide{
+        position: absolute;
+        z-index: 2;
+        bottom: calc((100% - toRem(8)) / 2);
+        right: 0;
+        transform: translateY(50%);
+    
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: toRem(48);
+        height: toRem(56);
+
+        font-size: toRem(17);
+        color: $black;
+        
+        transition: text-shadow 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+        &::after{
+            background-color: rgb(121, 116, 126);
+            border-radius: 0 toRem(4) toRem(4) 0;
+            content: "";
+
+            position: absolute;
+            z-index: 2;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+
+            width: 100%;
+            height: 0;
+
+            transition: height 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
+            border-color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+        }
+        &::before{
+            position: relative;
+            z-index: 3;
+            transition: color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+        }
+    }
+    &__show-hide:focus{
+        outline: none;
+        &::after{
+            height: 100%;
+        }
+        &::before{
+            color: $white;
+        }
+    }
+    @media (any-hover: hover) {
+        &__show-hide:hover{
+            &::after{
+                height: 100%;
+            }
+            &::before{
+                color: $white;
+            }
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__show-hide{
+            bottom: calc((100% - toRem(9)) / 2);
+            height: toRem(48);
+        }
+    }
+
+    &__row{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    &__row, &__checkbox:not(.inner){
+        margin: toRem(24) 0 toRem(40);
+    }
+    @media (max-width: toEm($container + 31, 16)) {
+        &__row, &__checkbox:not(.inner){
+            margin: toRem(24) 0 toRem(32);
+        }
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__row, &__checkbox:not(.inner){
+            margin: toRem(16) 0 toRem(24);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__row, &__checkbox:not(.inner){
+            margin: toRem(16) 0;
+        }
+    }
+
+    &__checkbox{
+        display: flex;
+        align-items: center;
+
+        position: relative;
+        z-index: 1;
+    }
+
+    &__save{
+        border-radius: toRem(4);
+        background-color: $mint;
+
+        color: $darkGreen;
+        font-family: Montserrat;
+        font-size: toRem(14);
+        font-weight: 600;
+        line-height: math.div(18, 14);
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: toRem(48);
+
+        transition: background-color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
+        text-shadow 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
+        color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
+        opacity 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+    &__save:not(.access__save_disabled):focus{
+        outline: none;
+        background-color: $darkGreen;
+        text-shadow: 0 0 10px $mint;
+        color: $mint;
+    }
+    @media (any-hover: hover) {
+        &__save:not(.access__save_disabled):hover{
+            background-color: $darkGreen;
+            text-shadow: 0 0 10px $mint;
+            color: $mint;
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__save{
+            min-height: toRem(40);
+        }
+    }
+
+    &__save_disabled{
+        opacity: 0.5;
+    }
+    &__propose:not(.verify-code__resent){
+        text-align: center;
+    }
+    &__propose{
+        display: block;
+
+        color: $darkGreen;
+        font-family: Montserrat;
+        font-size: toRem(14);
+        font-weight: 600;
+        line-height: math.div(18, 14);
+        a{
+            color: $lightRed;
+            transition: text-shadow 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+        }
+
+        margin: toRem(16) 0 toRem(40);
+    }
+    &__propose a:focus{
+        outline: none;
+        text-shadow: 0 0 10px $lightRed;
+    }
+    @media (any-hover: hover) {
+        &__propose a:hover{
+            text-shadow: 0 0 10px $lightRed;
+        }
+    }
+    @media (max-width: toEm($container + 31, 16)) {
+        &__propose{
+            margin: toRem(16) 0 toRem(32);
+        }
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__propose{
+            margin: toRem(16) 0 toRem(24);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__propose{
+            margin: toRem(16) 0;
+        }
+    }
+
+    &__or{
+        text-align: center;
+        position: relative;
+        z-index: 1;
+
+        margin-bottom: toRem(40);
+        span{
+            position: relative;
+            z-index: 2;
+            
+            background-color: $white;
+            padding: 0 toRem(16);
+
+            color: rgba($color: $darkGreen, $alpha: 0.5);
+            font-family: Montserrat;
+            font-size: toRem(14);
+            font-weight: 400;
+            line-height: math.div(18, 14);
+        }
+        &::before{
+            background-color: rgba($color: $darkGreen, $alpha: 0.25);
+            content: "";
+
+            position: absolute;
+            z-index: 1;
+            left: 0;
+            top: 50%;
+            transform: translateY(50%);
+
+            width: 100%;
+            height: toRem(0.5);
+        }
+    }
+    @media (max-width: toEm($container + 31, 16)) {
+        &__or{
+            margin-bottom: toRem(32);
+        }
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__or{
+            margin-bottom: toRem(24);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__or{
+            margin-bottom: toRem(16);
+        }
+    }
+
+    &__variants{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: toRem(16);
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__variants{
+            grid-template-columns: repeat(2, 1fr);
+            gap: toRem(10);
+        }
+    }
+
+    @media (min-width: toEm(481, 16)) {
+        &__variant.icon-facebook::before{
+            font-size: toRem(24);
+        }
+        &__variant.icon-apple::before{
+            font-size: toRem(19.5);
+        }
+        &__variant.icon-mail::before{
+            font-size: toRem(21);
+        }
+    }
+    &__variant{
+        border: toRem(1) solid $lightMint;
+        border-radius: toRem(4);
+        padding: toRem(10) toRem(16);
+
+        &::before{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            min-width: toRem(24);
+            height: toRem(24);
+        }
+
+        span{
+            color: $darkGreen;
+            font-family: Montserrat;
+            font-size: toRem(16);
+            font-weight: 500;
+            line-height: math.div(20, 16);
+
+            margin-left: toRem(16);
+        }
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: toRem(56);
+
+        transition: box-shadow 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+    &__variant:focus{
+        outline: none;
+        box-shadow: inset 0 0 20px $mint;
+    }
+    @media (any-hover: hover) {
+        &__variant:hover{
+            box-shadow: inset 0 0 20px $mint;
+        }
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__variant{
+            min-height: toRem(48);
+        }
+    }
+    &__variant.bigger{
+        grid-column: span 3;
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__variant.bigger, &__variants.one-in-row &__variant:last-child{
+            grid-column: span 2;
+        }
+    }
+    &__variant.icon-facebook::before{
+        color: $facebook;
+    }
+
+    @media (min-width: toEm(481, 16)) {
+        &__images{
+            position: relative;
+            z-index: 1;
+        }
+
+        &:not(.access_reverse) &__images{
+            padding-bottom: toPercent(816, 616);
+        }
+        @media (max-width: toEm(768, 16)) {
+            &:not(.access_reverse) &__images{
+                padding-bottom: toPercent(300, 738);
+            }
+        }
+    
+        &_reverse__images{
+            flex: 0 0 toPercent(486, $container);
+            padding-bottom: toRem(816);
+        }
+        @media (max-width: toEm($container + 31, 16)) {
+            &_reverse__images{
+                padding-bottom: toPercent(816, $container);
+            }
+        }
+
+        &__image, &__image img{
+            position: absolute;
+            z-index: 1;
+            left: 50%;
+            top: 50%;
+            transform: translateY(-50%) translateX(-50%);
+    
+            width: 100%;
+            height: 100%;
+        }
+        &__image img{
+            object-fit: cover;
+            border-radius: toRem(30);
+        }
+        @media (max-width: toEm(992, 16)) {
+            &__image img{
+                border-radius: toRem(24);
+            }
+        }
+        @media (max-width: toEm(768, 16)) {
+            &__image img{
+                border-radius: toRem(16);
+            }
+        }
+        &__image.visible{
+            transition: width 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
+            height 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+        }
+        &__image.hidden{
+            width: 0;
+            height: 0;
+        }
+    
+        &__pagination{
+            position: absolute;
+            z-index: 1;
+            left: 50%;
+            bottom: toRem(24);
+            transform: translateX(-50%);
+    
+            text-align: center;
+    
+            width: calc(100% - toRem(48));
+            overflow-x: auto;
+    
+            margin: toRem(-4);
+        }
+        @media (max-width: toEm(768, 16)) {
+            &__pagination{
+                bottom: toRem(16);
+                width: calc(100% - toRem(32));
+            }
+        }
+    
+        &__pagination-circle-parent{
+            display: inline-flex;
+            align-items: center;
+            
+            padding: toRem(4);
+            height: toRem(18);
+        }
+    
+        &__pagination:not(._hide-active) &__pagination-circle._active,
+        &__pagination-circle._hovered{
+            background-color: $mint;
+            min-width: toRem(32);
+        }
+        &__pagination-circle{
+            border-radius: toRem(10);
+            background-color: $white;
+    
+            min-width: toRem(10);
+            height: 100%;
+    
+            transition: min-width 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
+            background-color;
+            &:focus{
+                outline: none;
+            }
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__images{
+            display: none;
+        }
+    }
+}
+.checkbox-access{
+    @media (min-width: toEm(993, 16)) {
+        &__input{
+            margin: toRem(2);
+        }
+    }
+    &__input{
+        appearance: none;
+
+        border-radius: toRem(3);
+        width: toRem(20);
+        height: toRem(20);
+    }
+
+    &__subinput{
+        pointer-events: none;
+        display: inline-block;
+
+        color: $darkGreen;
+        font-family: Montserrat;
+        font-size: toRem(14);
+        font-weight: 500;
+        line-height: math.div(18, 14);
+
+        padding-left: toRem(8);
+        &::after{
+            content: "";
+            pointer-events: none;
+
+            position: absolute;
+            z-index: 1;
+            left: toRem(2);
+            bottom: 50%;
+            transform: translateY(50%);
+
+            border-radius: toRem(3);
+            border: toRem(2) solid $darkGreen;
+
+            width: toRem(20);
+            height: toRem(20);
+
+            transition: filter 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__subinput{
+            padding-left: toRem(4);
+            &::after{
+                left: 0;
+            }
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__subinput{
+            font-size: toRem(12);
+        }
+    }
+
+    &__input:focus{
+        outline: none;
+    }
+    &__input:focus ~ &__subinput::after{
+        filter: drop-shadow(0 0 5px $darkGreen);
+    }
+    @media (any-hover: hover) {
+        &__input:hover ~ &__subinput::after{
+            filter: drop-shadow(0 0 5px $darkGreen);
+        }
+    }
+    &__input:checked ~ &__subinput::after{
+        background-color: $darkGreen;
+    }
+}
+
+.sign-in{
+    &__forgot-password{
+        color: $lightRed;
+        font-family: Montserrat;
+        font-size: toRem(14);
+        font-weight: 500;
+        line-height: math.div(18, 14);
+
+        transition: text-shadow 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+    &__forgot-password:focus{
+        outline: none;
+        text-shadow: 0 0 10px $lightRed;
+    }
+    @media (any-hover: hover) {
+        &__forgot-password:hover{
+            text-shadow: 0 0 10px $lightRed;
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__forgot-password{
+            font-size: toRem(12);
+        }
+    }
+}
+.sign-up{
+    @media (min-width: toEm(769, 16)) {
+        .container{
+            flex-direction: row-reverse;
+        }
+    }
+}
+
+.add-card-create-card{
+    &__description{
+        color: rgba($color: $darkGreen, $alpha: 0.75);
+        font-family: Montserrat;
+        font-size: toRem(16);
+        font-weight: 400;
+        line-height: math.div(20, 16);
+
+        margin: toRem(16) 0 toRem(40);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__description{
+            margin: toRem(16) 0 toRem(32);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__description{
+            margin: toRem(16) 0 toRem(24);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__description{
+            margin: toRem(16) 0;
+        }
+    }
+}
+
+.forgot-password{
+    &__submit{
+        margin-top: toRem(32);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__submit{
+            margin-top: toRem(24);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__submit{
+            margin-top: toRem(16);
+        }
+    }
+
+    &__or{
+        margin: toRem(48) 0;
+    }
+    @media (max-width: toEm($container + 31, 16)) {
+        &__or{
+            margin: toRem(40) 0;
+        }
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__or{
+            margin: toRem(32) 0;
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__or{
+            margin: toRem(24) 0;
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__or{
+            margin: toRem(16) 0;
+        }
+    }
+}
+
+.verify-code{
+    &__resent{
+        font-family: Montserrat;
+        font-size: toRem(14);
+        font-weight: 600;
+        line-height: math.div(18, 14);
+        color: $darkGreen;
+        a{
+            color: $lightRed;
+        }
+
+        margin: toRem(16) 0 toRem(32);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__resent{
+            margin: toRem(16) 0 toRem(24);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__resent{
+            margin: toRem(16) 0;
+        }
+    }
+}
+
+.set-password{
+    &__fieldgroups{
+        margin-bottom: toRem(32);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__fieldgroups{
+            margin-bottom: toRem(24);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__fieldgroups{
+            margin-bottom: toRem(16);
+        }
+    }
+}

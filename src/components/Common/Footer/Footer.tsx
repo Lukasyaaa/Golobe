@@ -3,9 +3,12 @@ import { FooterPost } from "./FooterPost";
 import { useTypedSelector } from "../../../useTypedSelector";
 import { defaultSelect } from "../../../types";
 import { FooterItem } from "./FooterItem";
+import { useLocation } from "react-router-dom";
+import { signUpPath, signInPath, createCardPath } from "../../../App";
 
 export const Footer : FC = () =>{
     const state = useTypedSelector(store => store.footer);
+    let location = useLocation();
 
     let filtredGroups : defaultSelect[] = [];
     state.main.groups.forEach(group => {
@@ -14,7 +17,7 @@ export const Footer : FC = () =>{
         }
     })
 
-    if(filtredGroups.length !== 0){
+    if(filtredGroups.length !== 0 && !location.pathname.includes(signInPath) && !location.pathname.includes(signUpPath)){
         return(
             <footer className="footer">
                 <FooterPost about={state.post} />

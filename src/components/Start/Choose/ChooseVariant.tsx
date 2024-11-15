@@ -11,7 +11,7 @@ interface chooseVariantProps{
 export const ChooseVariant : FC<chooseVariantProps> = ({about, isFlight}) => { 
     let isWebp = true; 
     let pathToBackground = (isWebp) ? about.background.webp : about.background.jpeg; 
-    
+
     if(isFlight){
         return( 
             <div  
@@ -29,7 +29,7 @@ export const ChooseVariant : FC<chooseVariantProps> = ({about, isFlight}) => {
                     </div> 
                     <NavLink  
                         className="item-choose__link item_flight-choose__link button_question icon-send" 
-                        to={flightsConfiguratePath} 
+                        to={flightsConfiguratePath}
                     > 
                         <span>{about.link}</span> 
                     </NavLink> 

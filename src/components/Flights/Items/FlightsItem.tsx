@@ -1,16 +1,20 @@
-import React, { FC, useState } from "react";
-import { flight, flightDirection } from "../../../types";
+import { FC, useState } from "react";
+import { NavLink } from "react-router-dom";
+import { flightsConfiguratePath } from "../../../App";
+import { contentPart, flight, flightDirection, seatsTypeCategory } from "../../../types";
 import { ShortReview } from "../../Common/ShortReview";
 import { FlightsScheduleItem } from "./FlightsScheduleItem";
-import { flightsConfiguratePath } from "../../../App";
-import { NavLink } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { userAddFavouriteAction, userDeleteFavouriteAction } from "../../../store/userReducer";
 
 interface flightsItemProps{
     about : flight,
-    buttonLink : string
+    buttonLink : string,
+    isFavourite : boolean,
+    isAuthorized : boolean
 }
 
-export const FlightsItem : FC<flightsItemProps> = ({about, buttonLink}) => {
+export const FlightsItem : FC<flightsItemProps> = ({about, buttonLink, isFavourite, isAuthorized}) => {
     let [isDepartChoosed, setIsDepartChoosed] = useState<boolean>(about.schedule.depart.isChoosed);
     let [isReturnChoosed, setIsReturnChoosed] = useState<boolean>(about.schedule.return.isChoosed);
     
@@ -23,6 +27,14 @@ export const FlightsItem : FC<flightsItemProps> = ({about, buttonLink}) => {
         }
     }else if(isReturnChoosed){
         choosedFlight = flightDirection.Return;
+    }
+
+    const dispatch = useDispatch();
+    const addFavourite = () => {
+        dispatch(userAddFavouriteAction(contentPart.Flights, about.id));
+    }
+    const deleteFavourite = () => {
+        dispatch(userDeleteFavouriteAction(contentPart.Flights, about.id))
     }
 
     return(
@@ -64,7 +76,24 @@ export const FlightsItem : FC<flightsItemProps> = ({about, buttonLink}) => {
                     />
                 </div>
                 <div className="item-flights__footer item-content__footer">
-                    <button className="item-flights__favourites item-content__favourites icon-heart_border" type="button"></button>
+                    {(isAuthorized) 
+                        ? ((!isFavourite) 
+                            ? <button 
+                                className="item-fligths__favourites item-content__favourites icon-heart_border" 
+                                type="button" onClick={addFavourite}
+                            >   
+                            </button>
+                            : <button 
+                                className="item-fligths__favourites item-content__favourites icon-heart _choosed" 
+                                type="button" onClick={deleteFavourite}
+                            >   
+                            </button>
+                        )
+                        : <div 
+                            className="item-fligths__favourites item-content__favourites icon-heart_border _disabled" 
+                        >
+                        </div>
+                    }
                     {(choosedFlight === "") 
                     ? <div className="item-flights__view-more item-content__view-more _disabled">
                         {buttonLink}

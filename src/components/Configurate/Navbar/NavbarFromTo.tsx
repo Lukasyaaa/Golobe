@@ -64,6 +64,13 @@ export const NavbarFromTo : FC<navbarFromToProps> = ({title, groupId, contentTyp
 
     let [isActive, setIsActive] = useState<boolean>(true);
     let spoilerInner = useRef<HTMLDivElement>(null);
+    let [spoilerHeight, setSpoilerHeight] = useState(0);
+    useEffect(() => {
+        if(spoilerInner.current){
+            setSpoilerHeight(spoilerInner.current.offsetHeight);
+        }
+    }, [])
+
     let fromLabel = useRef<HTMLLabelElement>(null);
     let toLabel = useRef<HTMLLabelElement>(null);
     let proggresBar = useRef<HTMLDivElement>(null);
@@ -108,7 +115,7 @@ export const NavbarFromTo : FC<navbarFromToProps> = ({title, groupId, contentTyp
                         </button>
                     </legend>
                     <div className="item-navbar__filters from-to-navbar__filters" style={{
-                        height: (isActive) ? ((spoilerInner.current) ? spoilerInner.current.offsetHeight : "") : 0
+                        height: (isActive) ? spoilerHeight : 0
                     }}>
                         <div className="item-navbar__filters-inner from-to-navbar__filters-inner" ref={spoilerInner}>
                             <div className="item-navbar__from">

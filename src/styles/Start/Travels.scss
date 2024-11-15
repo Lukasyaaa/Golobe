@@ -30,19 +30,19 @@
     }
 
     @media (min-width: toEm(481, 16)) {
-        &__items{
+        &__items, &__hidden-items{
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: toRem(32);
         }
         @media (max-width: toEm(992, 16)) {
-            &__items{
+            &__items, &__hidden-items{
                 grid-template-columns: repeat(2, 1fr);
                 gap: toRem(24);
             }
         }
         @media (max-width: toEm(768, 16)) {
-            &__items{
+            &__items, &__hidden-items{
                 gap: toRem(16);
             }
         }

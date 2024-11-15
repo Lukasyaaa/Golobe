@@ -38,6 +38,9 @@
             margin-bottom: toRem(10);
         }
     }
+    &__images > &__image img{
+        width: 100%;
+    }
     &__image{
         display: block;
 
@@ -45,9 +48,6 @@
         font-family: Montserrat;
         font-size: toRem(16);
         color: $white;
-        img{
-            width: 100%;
-        }
     }
     @media (max-width: toEm(768, 16)) {
         &__images{

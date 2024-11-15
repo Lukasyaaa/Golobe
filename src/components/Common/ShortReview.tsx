@@ -15,7 +15,9 @@ export const ShortReview : FC<shortReviewProps> = ({parentClasses, about}) => {
                 className={
                     parentClasses.map(cl => "short-review-" + cl + "__rating") + " short-review__rating"
                 }
-            >{about.rating}</div>
+            >
+                {about.rating + ((Number.isInteger(about.rating)) ? ".0" : "")}
+            </div>
             <div 
                 className={
                     parentClasses.map(cl => "short-review-" + cl + "__count-reviews") + " short-review__count-reviews"

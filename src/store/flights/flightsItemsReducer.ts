@@ -1,4 +1,4 @@
-import { airlines, flightAmenities, flights, meridiem, tripsType } from "../../types"
+import { airlines, flightAmenities, flights, flightSchedule, flightSchedulePart, meridiem, seatsTypeCategory, tripsType } from "../../types"
 import etihadJpeg from "../../assets/img/flights/items/airlines/etihad/main.png"
 import etihadWebp from "../../assets/img/flights/items/airlines/etihad/main.webp"
 import flyDubaiJpeg from "../../assets/img/flights/items/airlines/flyDubai/main.png"
@@ -11,6 +11,10 @@ import qatarWebp from "../../assets/img/flights/items/airlines/qatar/main.webp"
 //----------------Return--------
 import firstReturnJpeg from "../../assets/img/flights/items/1/return/main.jpeg"
 import firstReturnWebp from "../../assets/img/flights/items/1/return/main.webp"
+import firstReturnFromJpeg from "../../assets/img/flights/items/1/return/from/main.jpeg"
+import firstReturnFromWebp from "../../assets/img/flights/items/1/return/from/main.webp"
+import firstReturnToJpeg from "../../assets/img/flights/items/1/return/to/main.jpeg"
+import firstReturnToWebp from "../../assets/img/flights/items/1/return/to/main.webp"
 import firstReturnBusines1Jpeg from "../../assets/img/flights/items/1/return/seatsTypes/busines/1/main.jpeg"
 import firstReturnBusines1Webp from "../../assets/img/flights/items/1/return/seatsTypes/busines/1/main.webp"
 import firstReturnBusines2Jpeg from "../../assets/img/flights/items/1/return/seatsTypes/busines/2/main.jpeg"
@@ -42,6 +46,10 @@ import firstReturnFirst3Webp from "../../assets/img/flights/items/1/return/seats
 //----------------Depart--------
 import firstDepartJpeg from "../../assets/img/flights/items/1/depart/main.jpeg"
 import firstDepartWebp from "../../assets/img/flights/items/1/depart/main.webp"
+import firstDepartFromJpeg from "../../assets/img/flights/items/1/depart/from/main.jpeg"
+import firstDepartFromWebp from "../../assets/img/flights/items/1/depart/from/main.webp"
+import firstDepartToJpeg from "../../assets/img/flights/items/1/depart/to/main.jpeg"
+import firstDepartToWebp from "../../assets/img/flights/items/1/depart/to/main.webp"
 import firstDepartBusines1Jpeg from "../../assets/img/flights/items/1/depart/seatsTypes/busines/1/main.jpeg"
 import firstDepartBusines1Webp from "../../assets/img/flights/items/1/depart/seatsTypes/busines/1/main.webp"
 import firstDepartBusines2Jpeg from "../../assets/img/flights/items/1/depart/seatsTypes/busines/2/main.jpeg"
@@ -74,6 +82,10 @@ import firstDepartFirst3Webp from "../../assets/img/flights/items/1/depart/seats
 //----------------Return--------
 import secondReturnJpeg from "../../assets/img/flights/items/2/return/main.jpeg"
 import secondReturnWebp from "../../assets/img/flights/items/2/return/main.webp"
+import secondReturnFromJpeg from "../../assets/img/flights/items/2/return/from/main.jpeg"
+import secondReturnFromWebp from "../../assets/img/flights/items/2/return/from/main.webp"
+import secondReturnToJpeg from "../../assets/img/flights/items/2/return/to/main.jpeg"
+import secondReturnToWebp from "../../assets/img/flights/items/2/return/to/main.webp"
 import secondReturnBusines1Jpeg from "../../assets/img/flights/items/2/return/seatsTypes/busines/1/main.jpeg"
 import secondReturnBusines1Webp from "../../assets/img/flights/items/2/return/seatsTypes/busines/1/main.webp"
 import secondReturnBusines2Jpeg from "../../assets/img/flights/items/2/return/seatsTypes/busines/2/main.jpeg"
@@ -105,6 +117,10 @@ import secondReturnFirst3Webp from "../../assets/img/flights/items/2/return/seat
 //----------------Depart--------
 import secondDepartJpeg from "../../assets/img/flights/items/2/depart/main.jpeg"
 import secondDepartWebp from "../../assets/img/flights/items/2/depart/main.webp"
+import secondDepartFromJpeg from "../../assets/img/flights/items/2/depart/from/main.jpeg"
+import secondDepartFromWebp from "../../assets/img/flights/items/2/depart/from/main.webp"
+import secondDepartToJpeg from "../../assets/img/flights/items/2/depart/to/main.jpeg"
+import secondDepartToWebp from "../../assets/img/flights/items/2/depart/to/main.webp"
 import secondDepartBusines1Jpeg from "../../assets/img/flights/items/2/depart/seatsTypes/busines/1/main.jpeg"
 import secondDepartBusines1Webp from "../../assets/img/flights/items/2/depart/seatsTypes/busines/1/main.webp"
 import secondDepartBusines2Jpeg from "../../assets/img/flights/items/2/depart/seatsTypes/busines/2/main.jpeg"
@@ -137,6 +153,10 @@ import secondDepartFirst3Webp from "../../assets/img/flights/items/2/depart/seat
 //----------------Return--------
 import thirdReturnJpeg from "../../assets/img/flights/items/3/return/main.jpeg"
 import thirdReturnWebp from "../../assets/img/flights/items/3/return/main.webp"
+import thirdReturnFromJpeg from "../../assets/img/flights/items/3/return/from/main.jpeg"
+import thirdReturnFromWebp from "../../assets/img/flights/items/3/return/from/main.webp"
+import thirdReturnToJpeg from "../../assets/img/flights/items/3/return/to/main.jpeg"
+import thirdReturnToWebp from "../../assets/img/flights/items/3/return/to/main.webp"
 import thirdReturnBusines1Jpeg from "../../assets/img/flights/items/3/return/seatsTypes/busines/1/main.jpeg"
 import thirdReturnBusines1Webp from "../../assets/img/flights/items/3/return/seatsTypes/busines/1/main.webp"
 import thirdReturnBusines2Jpeg from "../../assets/img/flights/items/3/return/seatsTypes/busines/2/main.jpeg"
@@ -168,6 +188,10 @@ import thirdReturnFirst3Webp from "../../assets/img/flights/items/3/return/seats
 //----------------Depart--------
 import thirdDepartJpeg from "../../assets/img/flights/items/3/depart/main.jpeg"
 import thirdDepartWebp from "../../assets/img/flights/items/3/depart/main.webp"
+import thirdDepartFromJpeg from "../../assets/img/flights/items/3/depart/from/main.jpeg"
+import thirdDepartFromWebp from "../../assets/img/flights/items/3/depart/from/main.webp"
+import thirdDepartToJpeg from "../../assets/img/flights/items/3/depart/to/main.jpeg"
+import thirdDepartToWebp from "../../assets/img/flights/items/3/depart/to/main.webp"
 import thirdDepartBusines1Jpeg from "../../assets/img/flights/items/3/depart/seatsTypes/busines/1/main.jpeg"
 import thirdDepartBusines1Webp from "../../assets/img/flights/items/3/depart/seatsTypes/busines/1/main.webp"
 import thirdDepartBusines2Jpeg from "../../assets/img/flights/items/3/depart/seatsTypes/busines/2/main.jpeg"
@@ -200,6 +224,10 @@ import thirdDepartFirst3Webp from "../../assets/img/flights/items/3/depart/seats
 //----------------Return--------
 import fourthReturnJpeg from "../../assets/img/flights/items/4/return/main.jpeg"
 import fourthReturnWebp from "../../assets/img/flights/items/4/return/main.webp"
+import fourthReturnFromJpeg from "../../assets/img/flights/items/4/return/from/main.jpeg"
+import fourthReturnFromWebp from "../../assets/img/flights/items/4/return/from/main.webp"
+import fourthReturnToJpeg from "../../assets/img/flights/items/4/return/to/main.jpeg"
+import fourthReturnToWebp from "../../assets/img/flights/items/4/return/to/main.webp"
 import fourthReturnBusines1Jpeg from "../../assets/img/flights/items/4/return/seatsTypes/busines/1/main.jpeg"
 import fourthReturnBusines1Webp from "../../assets/img/flights/items/4/return/seatsTypes/busines/1/main.webp"
 import fourthReturnBusines2Jpeg from "../../assets/img/flights/items/4/return/seatsTypes/busines/2/main.jpeg"
@@ -231,6 +259,10 @@ import fourthReturnFirst3Webp from "../../assets/img/flights/items/4/return/seat
 //----------------Depart--------
 import fourthDepartJpeg from "../../assets/img/flights/items/4/depart/main.jpeg"
 import fourthDepartWebp from "../../assets/img/flights/items/4/depart/main.webp"
+import fourthDepartFromJpeg from "../../assets/img/flights/items/4/depart/from/main.jpeg"
+import fourthDepartFromWebp from "../../assets/img/flights/items/4/depart/from/main.webp"
+import fourthDepartToJpeg from "../../assets/img/flights/items/4/depart/to/main.jpeg"
+import fourthDepartToWebp from "../../assets/img/flights/items/4/depart/to/main.webp"
 import fourthDepartBusines1Jpeg from "../../assets/img/flights/items/4/depart/seatsTypes/busines/1/main.jpeg"
 import fourthDepartBusines1Webp from "../../assets/img/flights/items/4/depart/seatsTypes/busines/1/main.webp"
 import fourthDepartBusines2Jpeg from "../../assets/img/flights/items/4/depart/seatsTypes/busines/2/main.jpeg"
@@ -302,35 +334,53 @@ const defaultStore : flights = {
                         serviceFee: 5
                     },
                     amenities: [flightAmenities.Fast, flightAmenities.Punctual, flightAmenities.FastFood, flightAmenities.ManySeats],
+                    departurePlace:{
+                        city: "Istanbul",
+                        image: {srcs: {webp: firstDepartFromWebp, jpeg: firstDepartFromJpeg}, alt: ""}
+                    },
                     arrayPlace: {
                         city: "Istanbul",
                         airport: "CVK Park Bosphorus Hotel Istanbul",
-                        full: "Gümüssuyu Mah. Inönü Cad. No:8, Istanbul 34437"
+                        full: "Gümüssuyu Mah. Inönü Cad. No:8, Istanbul 34437",
+                        image: {srcs: {webp: firstDepartToWebp, jpeg: firstDepartToJpeg}, alt: ""}
                     },
                     seatsTypes: {
-                        economy: [
-                            {srcs: {webp: firstDepartEconomy1Webp, jpeg: firstDepartEconomy1Jpeg}, alt: ""},
-                            {srcs: {webp: firstDepartEconomy2Webp, jpeg: firstDepartEconomy2Jpeg}, alt: ""}
-                        ],
-                        business: [
-                            {srcs: {webp: firstDepartBusines1Webp, jpeg: firstDepartBusines1Jpeg}, alt: ""},
-                            {srcs: {webp: firstDepartBusines2Webp, jpeg: firstDepartBusines2Jpeg}, alt: ""},
-                            {srcs: {webp: firstDepartBusines3Webp, jpeg: firstDepartBusines3Jpeg}, alt: ""},
-                            {srcs: {webp: firstDepartBusines4Webp, jpeg: firstDepartBusines4Jpeg}, alt: ""},
-                            {srcs: {webp: firstDepartBusines5Webp, jpeg: firstDepartBusines5Jpeg}, alt: ""},
-                            {srcs: {webp: firstDepartBusines6Webp, jpeg: firstDepartBusines6Jpeg}, alt: ""},
-                            {srcs: {webp: firstDepartBusines7Webp, jpeg: firstDepartBusines7Jpeg}, alt: ""},
-                            {srcs: {webp: firstDepartBusines8Webp, jpeg: firstDepartBusines8Jpeg}, alt: ""},
-                            {srcs: {webp: firstDepartBusines9Webp, jpeg: firstDepartBusines9Jpeg}, alt: ""}
-                        ],
-                        first: [
-                            {srcs: {webp: firstDepartFirst1Webp, jpeg: firstDepartFirst1Jpeg}, alt: ""},
-                            {srcs: {webp: firstDepartFirst2Webp, jpeg: firstDepartFirst2Jpeg}, alt: ""},
-                            {srcs: {webp: firstDepartFirst3Webp, jpeg: firstDepartFirst3Jpeg}, alt: ""}
-                        ]
+                        economy: {
+                            images: [
+                                {srcs: {webp: firstDepartEconomy1Webp, jpeg: firstDepartEconomy1Jpeg}, alt: ""},
+                                {srcs: {webp: firstDepartEconomy2Webp, jpeg: firstDepartEconomy2Jpeg}, alt: ""}
+                            ],
+                            seatsCount: 10,
+                            safeSeats: [100, 101, 102, 103, 104, 105, 106, 107, 108, 109]
+                        },
+                        business: {
+                            images: [
+                                {srcs: {webp: firstDepartBusines1Webp, jpeg: firstDepartBusines1Jpeg}, alt: ""},
+                                {srcs: {webp: firstDepartBusines2Webp, jpeg: firstDepartBusines2Jpeg}, alt: ""},
+                                {srcs: {webp: firstDepartBusines3Webp, jpeg: firstDepartBusines3Jpeg}, alt: ""},
+                                {srcs: {webp: firstDepartBusines4Webp, jpeg: firstDepartBusines4Jpeg}, alt: ""},
+                                {srcs: {webp: firstDepartBusines5Webp, jpeg: firstDepartBusines5Jpeg}, alt: ""},
+                                {srcs: {webp: firstDepartBusines6Webp, jpeg: firstDepartBusines6Jpeg}, alt: ""},
+                                {srcs: {webp: firstDepartBusines7Webp, jpeg: firstDepartBusines7Jpeg}, alt: ""},
+                                {srcs: {webp: firstDepartBusines8Webp, jpeg: firstDepartBusines8Jpeg}, alt: ""},
+                                {srcs: {webp: firstDepartBusines9Webp, jpeg: firstDepartBusines9Jpeg}, alt: ""}
+                            ],
+                            seatsCount: 5,
+                            safeSeats: [110, 111, 112, 113, 114]
+                        },
+                        first: {
+                            images: [
+                                {srcs: {webp: firstDepartFirst1Webp, jpeg: firstDepartFirst1Jpeg}, alt: ""},
+                                {srcs: {webp: firstDepartFirst2Webp, jpeg: firstDepartFirst2Jpeg}, alt: ""},
+                                {srcs: {webp: firstDepartFirst3Webp, jpeg: firstDepartFirst3Jpeg}, alt: ""}
+                            ],
+                            seatsCount: 5,
+                            safeSeats: [115, 116, 117, 118, 119]
+                        }
                     },
                     from: "EWR",
                     to: "BNA",
+                    gate: "A12",
                     isChoosed: false
                 },
                 return:{
@@ -365,35 +415,53 @@ const defaultStore : flights = {
                         serviceFee: 5
                     },
                     amenities: [flightAmenities.Fast, flightAmenities.Punctual, flightAmenities.FastFood, flightAmenities.ManySeats],
+                    departurePlace:{
+                        city: "Istanbul",
+                        image: {srcs: {webp: firstReturnFromJpeg, jpeg: firstReturnFromJpeg}, alt: ""}
+                    },
                     arrayPlace: {
                         city: "Istanbul",
                         airport: "CVK Park Bosphorus Hotel Istanbul",
-                        full: "Gümüssuyu Mah. Inönü Cad. No:8, Istanbul 34437"
+                        full: "Gümüssuyu Mah. Inönü Cad. No:8, Istanbul 34437",
+                        image: {srcs: {webp: firstReturnToJpeg, jpeg: firstReturnToJpeg}, alt: ""}
                     },
                     seatsTypes: {
-                        economy: [
-                            {srcs: {webp: firstReturnEconomy1Webp, jpeg: firstReturnEconomy1Jpeg}, alt: ""},
-                            {srcs: {webp: firstReturnEconomy2Webp, jpeg: firstReturnEconomy2Jpeg}, alt: ""}
-                        ],
-                        business: [
-                            {srcs: {webp: firstReturnBusines1Webp, jpeg: firstReturnBusines1Jpeg}, alt: ""},
-                            {srcs: {webp: firstReturnBusines2Webp, jpeg: firstReturnBusines2Jpeg}, alt: ""},
-                            {srcs: {webp: firstReturnBusines3Webp, jpeg: firstReturnBusines3Jpeg}, alt: ""},
-                            {srcs: {webp: firstReturnBusines4Webp, jpeg: firstReturnBusines4Jpeg}, alt: ""},
-                            {srcs: {webp: firstReturnBusines5Webp, jpeg: firstReturnBusines5Jpeg}, alt: ""},
-                            {srcs: {webp: firstReturnBusines6Webp, jpeg: firstReturnBusines6Jpeg}, alt: ""},
-                            {srcs: {webp: firstReturnBusines7Webp, jpeg: firstReturnBusines7Jpeg}, alt: ""},
-                            {srcs: {webp: firstReturnBusines8Webp, jpeg: firstReturnBusines8Jpeg}, alt: ""},
-                            {srcs: {webp: firstReturnBusines9Webp, jpeg: firstReturnBusines9Jpeg}, alt: ""}
-                        ],
-                        first: [
-                            {srcs: {webp: firstReturnFirst1Webp, jpeg: firstReturnFirst1Jpeg}, alt: ""},
-                            {srcs: {webp: firstReturnFirst2Webp, jpeg: firstReturnFirst2Jpeg}, alt: ""},
-                            {srcs: {webp: firstReturnFirst3Webp, jpeg: firstReturnFirst3Jpeg}, alt: ""}
-                        ]
+                        economy: {
+                            images:[
+                                {srcs: {webp: firstReturnEconomy1Webp, jpeg: firstReturnEconomy1Jpeg}, alt: ""},
+                                {srcs: {webp: firstReturnEconomy2Webp, jpeg: firstReturnEconomy2Jpeg}, alt: ""}
+                            ],
+                            seatsCount: 10,
+                            safeSeats: [100, 101, 102, 103, 104, 105, 106, 107, 108, 109]
+                        },
+                        business: {
+                            images:[
+                                {srcs: {webp: firstReturnBusines1Webp, jpeg: firstReturnBusines1Jpeg}, alt: ""},
+                                {srcs: {webp: firstReturnBusines2Webp, jpeg: firstReturnBusines2Jpeg}, alt: ""},
+                                {srcs: {webp: firstReturnBusines3Webp, jpeg: firstReturnBusines3Jpeg}, alt: ""},
+                                {srcs: {webp: firstReturnBusines4Webp, jpeg: firstReturnBusines4Jpeg}, alt: ""},
+                                {srcs: {webp: firstReturnBusines5Webp, jpeg: firstReturnBusines5Jpeg}, alt: ""},
+                                {srcs: {webp: firstReturnBusines6Webp, jpeg: firstReturnBusines6Jpeg}, alt: ""},
+                                {srcs: {webp: firstReturnBusines7Webp, jpeg: firstReturnBusines7Jpeg}, alt: ""},
+                                {srcs: {webp: firstReturnBusines8Webp, jpeg: firstReturnBusines8Jpeg}, alt: ""},
+                                {srcs: {webp: firstReturnBusines9Webp, jpeg: firstReturnBusines9Jpeg}, alt: ""}
+                            ],
+                            seatsCount: 5,
+                            safeSeats: [110, 111, 112, 113, 114]
+                        },
+                        first: {
+                            images:[
+                                {srcs: {webp: firstReturnFirst1Webp, jpeg: firstReturnFirst1Jpeg}, alt: ""},
+                                {srcs: {webp: firstReturnFirst2Webp, jpeg: firstReturnFirst2Jpeg}, alt: ""},
+                                {srcs: {webp: firstReturnFirst3Webp, jpeg: firstReturnFirst3Jpeg}, alt: ""}
+                            ],
+                            seatsCount: 5,
+                            safeSeats: [115, 116, 117, 118, 119]
+                        }
                     },
                     from: "EWR",
                     to: "BNA",
+                    gate: "A12",
                     isChoosed: false
                 },
             }
@@ -438,35 +506,53 @@ const defaultStore : flights = {
                         serviceFee: 5
                     },
                     amenities: [flightAmenities.Fast, flightAmenities.Punctual, flightAmenities.FastFood, flightAmenities.ManySeats],
+                    departurePlace:{
+                        city: "Istanbul",
+                        image: {srcs: {webp: secondDepartFromJpeg, jpeg: secondDepartFromJpeg}, alt: ""}
+                    },
                     arrayPlace: {
                         city: "Istanbul",
                         airport: "CVK Park Bosphorus Hotel Istanbul",
-                        full: "Gümüssuyu Mah. Inönü Cad. No:8, Istanbul 34437"
+                        full: "Gümüssuyu Mah. Inönü Cad. No:8, Istanbul 34437",
+                        image: {srcs: {webp: secondDepartToJpeg, jpeg: secondDepartToJpeg}, alt: ""}
                     },
                     seatsTypes: {
-                        economy: [
-                            {srcs: {webp: secondDepartEconomy1Webp, jpeg: secondDepartEconomy1Jpeg}, alt: ""},
-                            {srcs: {webp: secondDepartEconomy2Webp, jpeg: secondDepartEconomy2Jpeg}, alt: ""}
-                        ],
-                        business: [
-                            {srcs: {webp: secondDepartBusines1Webp, jpeg: secondDepartBusines1Jpeg}, alt: ""},
-                            {srcs: {webp: secondDepartBusines2Webp, jpeg: secondDepartBusines2Jpeg}, alt: ""},
-                            {srcs: {webp: secondDepartBusines3Webp, jpeg: secondDepartBusines3Jpeg}, alt: ""},
-                            {srcs: {webp: secondDepartBusines4Webp, jpeg: secondDepartBusines4Jpeg}, alt: ""},
-                            {srcs: {webp: secondDepartBusines5Webp, jpeg: secondDepartBusines5Jpeg}, alt: ""},
-                            {srcs: {webp: secondDepartBusines6Webp, jpeg: secondDepartBusines6Jpeg}, alt: ""},
-                            {srcs: {webp: secondDepartBusines7Webp, jpeg: secondDepartBusines7Jpeg}, alt: ""},
-                            {srcs: {webp: secondDepartBusines8Webp, jpeg: secondDepartBusines8Jpeg}, alt: ""},
-                            {srcs: {webp: secondDepartBusines9Webp, jpeg: secondDepartBusines9Jpeg}, alt: ""}
-                        ],
-                        first: [
-                            {srcs: {webp: secondDepartFirst1Webp, jpeg: secondDepartFirst1Jpeg}, alt: ""},
-                            {srcs: {webp: secondDepartFirst2Webp, jpeg: secondDepartFirst2Jpeg}, alt: ""},
-                            {srcs: {webp: secondDepartFirst3Webp, jpeg: secondDepartFirst3Jpeg}, alt: ""}
-                        ]
+                        economy: {
+                            images: [
+                                {srcs: {webp: secondDepartEconomy1Webp, jpeg: secondDepartEconomy1Jpeg}, alt: ""},
+                                {srcs: {webp: secondDepartEconomy2Webp, jpeg: secondDepartEconomy2Jpeg}, alt: ""}
+                            ],
+                            seatsCount: 10,
+                            safeSeats: [100, 101, 102, 103, 104, 105, 106, 107, 108, 109]
+                        },
+                        business: {
+                            images: [
+                                {srcs: {webp: secondDepartBusines1Webp, jpeg: secondDepartBusines1Jpeg}, alt: ""},
+                                {srcs: {webp: secondDepartBusines2Webp, jpeg: secondDepartBusines2Jpeg}, alt: ""},
+                                {srcs: {webp: secondDepartBusines3Webp, jpeg: secondDepartBusines3Jpeg}, alt: ""},
+                                {srcs: {webp: secondDepartBusines4Webp, jpeg: secondDepartBusines4Jpeg}, alt: ""},
+                                {srcs: {webp: secondDepartBusines5Webp, jpeg: secondDepartBusines5Jpeg}, alt: ""},
+                                {srcs: {webp: secondDepartBusines6Webp, jpeg: secondDepartBusines6Jpeg}, alt: ""},
+                                {srcs: {webp: secondDepartBusines7Webp, jpeg: secondDepartBusines7Jpeg}, alt: ""},
+                                {srcs: {webp: secondDepartBusines8Webp, jpeg: secondDepartBusines8Jpeg}, alt: ""},
+                                {srcs: {webp: secondDepartBusines9Webp, jpeg: secondDepartBusines9Jpeg}, alt: ""}
+                            ],
+                            seatsCount: 5,
+                            safeSeats: [110, 111, 112, 113, 114]
+                        },
+                        first: {
+                            images: [
+                                {srcs: {webp: secondDepartFirst1Webp, jpeg: secondDepartFirst1Jpeg}, alt: ""},
+                                {srcs: {webp: secondDepartFirst2Webp, jpeg: secondDepartFirst2Jpeg}, alt: ""},
+                                {srcs: {webp: secondDepartFirst3Webp, jpeg: secondDepartFirst3Jpeg}, alt: ""}
+                            ],
+                            seatsCount: 5,
+                            safeSeats: [115, 116, 117, 118, 119]
+                        }
                     },
                     from: "EWR",
                     to: "BNA",
+                    gate: "A12",
                     isChoosed: false
                 },
                 return:{
@@ -501,35 +587,53 @@ const defaultStore : flights = {
                         serviceFee: 5
                     },
                     amenities: [flightAmenities.Fast, flightAmenities.Punctual, flightAmenities.FastFood, flightAmenities.ManySeats],
+                    departurePlace:{
+                        city: "Istanbul",
+                        image: {srcs: {webp: secondReturnFromJpeg, jpeg: secondReturnFromJpeg}, alt: ""}
+                    },
                     arrayPlace: {
                         city: "Istanbul",
                         airport: "CVK Park Bosphorus Hotel Istanbul",
-                        full: "Gümüssuyu Mah. Inönü Cad. No:8, Istanbul 34437"
+                        full: "Gümüssuyu Mah. Inönü Cad. No:8, Istanbul 34437",
+                        image: {srcs: {webp: secondReturnToJpeg, jpeg: secondReturnToJpeg}, alt: ""}
                     },
                     seatsTypes: {
-                        economy: [
-                            {srcs: {webp: secondReturnEconomy1Webp, jpeg: secondReturnEconomy1Jpeg}, alt: ""},
-                            {srcs: {webp: secondReturnEconomy2Webp, jpeg: secondReturnEconomy2Jpeg}, alt: ""}
-                        ],
-                        business: [
+                        economy: {
+                            images: [
+                                {srcs: {webp: secondReturnEconomy1Webp, jpeg: secondReturnEconomy1Jpeg}, alt: ""},
+                                {srcs: {webp: secondReturnEconomy2Webp, jpeg: secondReturnEconomy2Jpeg}, alt: ""},
+                            ],
+                            seatsCount: 10,
+                            safeSeats: [100, 101, 102, 103, 104, 105, 106, 107, 108, 109]
+                        },
+                        business: {
+                            images: [
                             {srcs: {webp: secondReturnBusines1Webp, jpeg: secondReturnBusines1Jpeg}, alt: ""},
-                            {srcs: {webp: secondReturnBusines2Webp, jpeg: secondReturnBusines2Jpeg}, alt: ""},
-                            {srcs: {webp: secondReturnBusines3Webp, jpeg: secondReturnBusines3Jpeg}, alt: ""},
-                            {srcs: {webp: secondReturnBusines4Webp, jpeg: secondReturnBusines4Jpeg}, alt: ""},
-                            {srcs: {webp: secondReturnBusines5Webp, jpeg: secondReturnBusines5Jpeg}, alt: ""},
-                            {srcs: {webp: secondReturnBusines6Webp, jpeg: secondReturnBusines6Jpeg}, alt: ""},
-                            {srcs: {webp: secondReturnBusines7Webp, jpeg: secondReturnBusines7Jpeg}, alt: ""},
-                            {srcs: {webp: secondReturnBusines8Webp, jpeg: secondReturnBusines8Jpeg}, alt: ""},
-                            {srcs: {webp: secondReturnBusines9Webp, jpeg: secondReturnBusines9Jpeg}, alt: ""}
-                        ],
-                        first: [
-                            {srcs: {webp: secondReturnFirst1Webp, jpeg: secondReturnFirst1Jpeg}, alt: ""},
-                            {srcs: {webp: secondReturnFirst2Webp, jpeg: secondReturnFirst2Jpeg}, alt: ""},
-                            {srcs: {webp: secondReturnFirst3Webp, jpeg: secondReturnFirst3Jpeg}, alt: ""}
-                        ]
+                                {srcs: {webp: secondReturnBusines2Webp, jpeg: secondReturnBusines2Jpeg}, alt: ""},
+                                {srcs: {webp: secondReturnBusines3Webp, jpeg: secondReturnBusines3Jpeg}, alt: ""},
+                                {srcs: {webp: secondReturnBusines4Webp, jpeg: secondReturnBusines4Jpeg}, alt: ""},
+                                {srcs: {webp: secondReturnBusines5Webp, jpeg: secondReturnBusines5Jpeg}, alt: ""},
+                                {srcs: {webp: secondReturnBusines6Webp, jpeg: secondReturnBusines6Jpeg}, alt: ""},
+                                {srcs: {webp: secondReturnBusines7Webp, jpeg: secondReturnBusines7Jpeg}, alt: ""},
+                                {srcs: {webp: secondReturnBusines8Webp, jpeg: secondReturnBusines8Jpeg}, alt: ""},
+                                {srcs: {webp: secondReturnBusines9Webp, jpeg: secondReturnBusines9Jpeg}, alt: ""},
+                            ],
+                            seatsCount: 5,
+                            safeSeats: [110, 111, 112, 113, 114]
+                        },
+                        first: {
+                            images: [
+                                {srcs: {webp: secondReturnFirst1Webp, jpeg: secondReturnFirst1Jpeg}, alt: ""},
+                                {srcs: {webp: secondReturnFirst2Webp, jpeg: secondReturnFirst2Jpeg}, alt: ""},
+                                {srcs: {webp: secondReturnFirst3Webp, jpeg: secondReturnFirst3Jpeg}, alt: ""}
+                            ],
+                            seatsCount: 5,
+                            safeSeats: [115, 116, 117, 118, 119]
+                        }
                     },
                     from: "EWR",
                     to: "BNA",
+                    gate: "A12",
                     isChoosed: false
                 },
             }
@@ -574,35 +678,53 @@ const defaultStore : flights = {
                         serviceFee: 5
                     },
                     amenities: [flightAmenities.Fast, flightAmenities.Punctual, flightAmenities.FastFood, flightAmenities.ManySeats],
+                    departurePlace:{
+                        city: "Istanbul",
+                        image: {srcs: {webp: thirdDepartFromJpeg, jpeg: thirdDepartFromJpeg}, alt: ""}
+                    },
                     arrayPlace: {
                         city: "Istanbul",
                         airport: "CVK Park Bosphorus Hotel Istanbul",
-                        full: "Gümüssuyu Mah. Inönü Cad. No:8, Istanbul 34437"
+                        full: "Gümüssuyu Mah. Inönü Cad. No:8, Istanbul 34437",
+                        image: {srcs: {webp: thirdDepartToJpeg, jpeg: thirdDepartToJpeg}, alt: ""}
                     },
                     seatsTypes: {
-                        economy: [
-                            {srcs: {webp: thirdDepartEconomy1Webp, jpeg: thirdDepartEconomy1Jpeg}, alt: ""},
-                            {srcs: {webp: thirdDepartEconomy2Webp, jpeg: thirdDepartEconomy2Jpeg}, alt: ""}
-                        ],
-                        business: [
-                            {srcs: {webp: thirdDepartBusines1Webp, jpeg: thirdDepartBusines1Jpeg}, alt: ""},
-                            {srcs: {webp: thirdDepartBusines2Webp, jpeg: thirdDepartBusines2Jpeg}, alt: ""},
-                            {srcs: {webp: thirdDepartBusines3Webp, jpeg: thirdDepartBusines3Jpeg}, alt: ""},
-                            {srcs: {webp: thirdDepartBusines4Webp, jpeg: thirdDepartBusines4Jpeg}, alt: ""},
-                            {srcs: {webp: thirdDepartBusines5Webp, jpeg: thirdDepartBusines5Jpeg}, alt: ""},
-                            {srcs: {webp: thirdDepartBusines6Webp, jpeg: thirdDepartBusines6Jpeg}, alt: ""},
-                            {srcs: {webp: thirdDepartBusines7Webp, jpeg: thirdDepartBusines7Jpeg}, alt: ""},
-                            {srcs: {webp: thirdDepartBusines8Webp, jpeg: thirdDepartBusines8Jpeg}, alt: ""},
-                            {srcs: {webp: thirdDepartBusines9Webp, jpeg: thirdDepartBusines9Jpeg}, alt: ""}
-                        ],
-                        first: [
-                            {srcs: {webp: thirdDepartFirst1Webp, jpeg: thirdDepartFirst1Jpeg}, alt: ""},
-                            {srcs: {webp: thirdDepartFirst2Webp, jpeg: thirdDepartFirst2Jpeg}, alt: ""},
-                            {srcs: {webp: thirdDepartFirst3Webp, jpeg: thirdDepartFirst3Jpeg}, alt: ""}
-                        ]
+                        economy: {
+                            images: [
+                                {srcs: {webp: thirdDepartEconomy1Webp, jpeg: thirdDepartEconomy1Jpeg}, alt: ""},
+                                {srcs: {webp: thirdDepartEconomy2Webp, jpeg: thirdDepartEconomy2Jpeg}, alt: ""}
+                            ],
+                            seatsCount: 10,
+                            safeSeats: [100, 101, 102, 103, 104, 105, 106, 107, 108, 109]
+                        },
+                        business: {
+                            images: [
+                                {srcs: {webp: thirdDepartBusines1Webp, jpeg: thirdDepartBusines1Jpeg}, alt: ""},
+                                {srcs: {webp: thirdDepartBusines2Webp, jpeg: thirdDepartBusines2Jpeg}, alt: ""},
+                                {srcs: {webp: thirdDepartBusines3Webp, jpeg: thirdDepartBusines3Jpeg}, alt: ""},
+                                {srcs: {webp: thirdDepartBusines4Webp, jpeg: thirdDepartBusines4Jpeg}, alt: ""},
+                                {srcs: {webp: thirdDepartBusines5Webp, jpeg: thirdDepartBusines5Jpeg}, alt: ""},
+                                {srcs: {webp: thirdDepartBusines6Webp, jpeg: thirdDepartBusines6Jpeg}, alt: ""},
+                                {srcs: {webp: thirdDepartBusines7Webp, jpeg: thirdDepartBusines7Jpeg}, alt: ""},
+                                {srcs: {webp: thirdDepartBusines8Webp, jpeg: thirdDepartBusines8Jpeg}, alt: ""},
+                                {srcs: {webp: thirdDepartBusines9Webp, jpeg: thirdDepartBusines9Jpeg}, alt: ""}
+                            ],
+                            seatsCount: 5,
+                            safeSeats: [110, 111, 112, 113, 114]
+                        },
+                        first: {
+                            images: [
+                                {srcs: {webp: thirdDepartFirst1Webp, jpeg: thirdDepartFirst1Jpeg}, alt: ""},
+                                {srcs: {webp: thirdDepartFirst2Webp, jpeg: thirdDepartFirst2Jpeg}, alt: ""},
+                                {srcs: {webp: thirdDepartFirst3Webp, jpeg: thirdDepartFirst3Jpeg}, alt: ""}
+                            ],
+                            seatsCount: 5,
+                            safeSeats: [115, 116, 117, 118, 119]
+                        }
                     },
                     from: "EWR",
                     to: "BNA",
+                    gate: "A12",
                     isChoosed: false
                 },
                 return:{
@@ -637,35 +759,53 @@ const defaultStore : flights = {
                         serviceFee: 5
                     },
                     amenities: [flightAmenities.Fast, flightAmenities.Punctual, flightAmenities.FastFood, flightAmenities.ManySeats],
+                    departurePlace:{
+                        city: "Istanbul",
+                        image: {srcs: {webp: thirdReturnFromJpeg, jpeg: thirdReturnFromJpeg}, alt: ""}
+                    },
                     arrayPlace: {
                         city: "Istanbul",
                         airport: "CVK Park Bosphorus Hotel Istanbul",
-                        full: "Gümüssuyu Mah. Inönü Cad. No:8, Istanbul 34437"
+                        full: "Gümüssuyu Mah. Inönü Cad. No:8, Istanbul 34437",
+                        image: {srcs: {webp: thirdReturnToJpeg, jpeg: thirdReturnToJpeg}, alt: ""}
                     },
                     seatsTypes: {
-                        economy: [
-                            {srcs: {webp: thirdReturnEconomy1Webp, jpeg: thirdReturnEconomy1Jpeg}, alt: ""},
-                            {srcs: {webp: thirdReturnEconomy2Webp, jpeg: thirdReturnEconomy2Jpeg}, alt: ""}
-                        ],
-                        business: [
-                            {srcs: {webp: thirdReturnBusines1Webp, jpeg: thirdReturnBusines1Jpeg}, alt: ""},
-                            {srcs: {webp: thirdReturnBusines2Webp, jpeg: thirdReturnBusines2Jpeg}, alt: ""},
-                            {srcs: {webp: thirdReturnBusines3Webp, jpeg: thirdReturnBusines3Jpeg}, alt: ""},
-                            {srcs: {webp: thirdReturnBusines4Webp, jpeg: thirdReturnBusines4Jpeg}, alt: ""},
-                            {srcs: {webp: thirdReturnBusines5Webp, jpeg: thirdReturnBusines5Jpeg}, alt: ""},
-                            {srcs: {webp: thirdReturnBusines6Webp, jpeg: thirdReturnBusines6Jpeg}, alt: ""},
-                            {srcs: {webp: thirdReturnBusines7Webp, jpeg: thirdReturnBusines7Jpeg}, alt: ""},
-                            {srcs: {webp: thirdReturnBusines8Webp, jpeg: thirdReturnBusines8Jpeg}, alt: ""},
-                            {srcs: {webp: thirdReturnBusines9Webp, jpeg: thirdReturnBusines9Jpeg}, alt: ""}
-                        ],
-                        first: [
-                            {srcs: {webp: thirdReturnFirst1Webp, jpeg: thirdReturnFirst1Jpeg}, alt: ""},
-                            {srcs: {webp: thirdReturnFirst2Webp, jpeg: thirdReturnFirst2Jpeg}, alt: ""},
-                            {srcs: {webp: thirdReturnFirst3Webp, jpeg: thirdReturnFirst3Jpeg}, alt: ""}
-                        ]
+                        economy: {
+                            images: [
+                                {srcs: {webp: thirdReturnEconomy1Webp, jpeg: thirdReturnEconomy1Jpeg}, alt: ""},
+                                {srcs: {webp: thirdReturnEconomy2Webp, jpeg: thirdReturnEconomy2Jpeg}, alt: ""}
+                            ],
+                            seatsCount: 10,
+                            safeSeats: [100, 101, 102, 103, 104, 105, 106, 107, 108, 109]
+                        },
+                        business: {
+                            images: [
+                                {srcs: {webp: thirdReturnBusines1Webp, jpeg: thirdReturnBusines1Jpeg}, alt: ""},
+                                {srcs: {webp: thirdReturnBusines2Webp, jpeg: thirdReturnBusines2Jpeg}, alt: ""},
+                                {srcs: {webp: thirdReturnBusines3Webp, jpeg: thirdReturnBusines3Jpeg}, alt: ""},
+                                {srcs: {webp: thirdReturnBusines4Webp, jpeg: thirdReturnBusines4Jpeg}, alt: ""},
+                                {srcs: {webp: thirdReturnBusines5Webp, jpeg: thirdReturnBusines5Jpeg}, alt: ""},
+                                {srcs: {webp: thirdReturnBusines6Webp, jpeg: thirdReturnBusines6Jpeg}, alt: ""},
+                                {srcs: {webp: thirdReturnBusines7Webp, jpeg: thirdReturnBusines7Jpeg}, alt: ""},
+                                {srcs: {webp: thirdReturnBusines8Webp, jpeg: thirdReturnBusines8Jpeg}, alt: ""},
+                                {srcs: {webp: thirdReturnBusines9Webp, jpeg: thirdReturnBusines9Jpeg}, alt: ""}
+                            ],
+                            seatsCount: 5,
+                            safeSeats: [110, 111, 112, 113, 114]
+                        },
+                        first: {
+                            images: [
+                                {srcs: {webp: thirdReturnFirst1Webp, jpeg: thirdReturnFirst1Jpeg}, alt: ""},
+                                {srcs: {webp: thirdReturnFirst2Webp, jpeg: thirdReturnFirst2Jpeg}, alt: ""},
+                                {srcs: {webp: thirdReturnFirst3Webp, jpeg: thirdReturnFirst3Jpeg}, alt: ""}
+                            ],
+                            seatsCount: 5,
+                            safeSeats: [115, 116, 117, 118, 119]
+                        }
                     },
                     from: "EWR",
                     to: "BNA",
+                    gate: "A12",
                     isChoosed: false
                 }
             }
@@ -710,35 +850,53 @@ const defaultStore : flights = {
                         serviceFee: 5
                     },
                     amenities: [flightAmenities.Fast, flightAmenities.Punctual, flightAmenities.FastFood, flightAmenities.ManySeats],
+                    departurePlace:{
+                        city: "Istanbul",
+                        image: {srcs: {webp: fourthDepartFromJpeg, jpeg: fourthDepartFromJpeg}, alt: ""}
+                    },
                     arrayPlace: {
                         city: "Istanbul",
                         airport: "CVK Park Bosphorus Hotel Istanbul",
-                        full: "Gümüssuyu Mah. Inönü Cad. No:8, Istanbul 34437"
+                        full: "Gümüssuyu Mah. Inönü Cad. No:8, Istanbul 34437",
+                        image: {srcs: {webp: fourthDepartToJpeg, jpeg: fourthDepartToJpeg}, alt: ""}
                     },
                     seatsTypes: {
-                        economy: [
-                            {srcs: {webp: fourthDepartEconomy1Webp, jpeg: fourthDepartEconomy1Jpeg}, alt: ""},
-                            {srcs: {webp: fourthDepartEconomy2Webp, jpeg: fourthDepartEconomy2Jpeg}, alt: ""}
-                        ],
-                        business: [
-                            {srcs: {webp: fourthDepartBusines1Webp, jpeg: fourthDepartBusines1Jpeg}, alt: ""},
-                            {srcs: {webp: fourthDepartBusines2Webp, jpeg: fourthDepartBusines2Jpeg}, alt: ""},
-                            {srcs: {webp: fourthDepartBusines3Webp, jpeg: fourthDepartBusines3Jpeg}, alt: ""},
-                            {srcs: {webp: fourthDepartBusines4Webp, jpeg: fourthDepartBusines4Jpeg}, alt: ""},
-                            {srcs: {webp: fourthDepartBusines5Webp, jpeg: fourthDepartBusines5Jpeg}, alt: ""},
-                            {srcs: {webp: fourthDepartBusines6Webp, jpeg: fourthDepartBusines6Jpeg}, alt: ""},
-                            {srcs: {webp: fourthDepartBusines7Webp, jpeg: fourthDepartBusines7Jpeg}, alt: ""},
-                            {srcs: {webp: fourthDepartBusines8Webp, jpeg: fourthDepartBusines8Jpeg}, alt: ""},
-                            {srcs: {webp: fourthDepartBusines9Webp, jpeg: fourthDepartBusines9Jpeg}, alt: ""}
-                        ],
-                        first: [
-                            {srcs: {webp: fourthDepartFirst1Webp, jpeg: fourthDepartFirst1Jpeg}, alt: ""},
-                            {srcs: {webp: fourthDepartFirst2Webp, jpeg: fourthDepartFirst2Jpeg}, alt: ""},
-                            {srcs: {webp: fourthDepartFirst3Webp, jpeg: fourthDepartFirst3Jpeg}, alt: ""}
-                        ]
+                        economy: {
+                            images: [
+                                {srcs: {webp: fourthDepartEconomy1Webp, jpeg: fourthDepartEconomy1Jpeg}, alt: ""},
+                                {srcs: {webp: fourthDepartEconomy2Webp, jpeg: fourthDepartEconomy2Jpeg}, alt: ""}
+                            ],
+                            seatsCount: 10,
+                            safeSeats: [100, 101, 102, 103, 104, 105, 106, 107, 108, 109]
+                        },
+                        business: {
+                            images: [
+                                {srcs: {webp: fourthDepartBusines1Webp, jpeg: fourthDepartBusines1Jpeg}, alt: ""},
+                                {srcs: {webp: fourthDepartBusines2Webp, jpeg: fourthDepartBusines2Jpeg}, alt: ""},
+                                {srcs: {webp: fourthDepartBusines3Webp, jpeg: fourthDepartBusines3Jpeg}, alt: ""},
+                                {srcs: {webp: fourthDepartBusines4Webp, jpeg: fourthDepartBusines4Jpeg}, alt: ""},
+                                {srcs: {webp: fourthDepartBusines5Webp, jpeg: fourthDepartBusines5Jpeg}, alt: ""},
+                                {srcs: {webp: fourthDepartBusines6Webp, jpeg: fourthDepartBusines6Jpeg}, alt: ""},
+                                {srcs: {webp: fourthDepartBusines7Webp, jpeg: fourthDepartBusines7Jpeg}, alt: ""},
+                                {srcs: {webp: fourthDepartBusines8Webp, jpeg: fourthDepartBusines8Jpeg}, alt: ""},
+                                {srcs: {webp: fourthDepartBusines9Webp, jpeg: fourthDepartBusines9Jpeg}, alt: ""}
+                            ],
+                            seatsCount: 5,
+                            safeSeats: [110, 111, 112, 113, 114]
+                        },
+                        first: {
+                            images: [
+                                {srcs: {webp: fourthDepartFirst1Webp, jpeg: fourthDepartFirst1Jpeg}, alt: ""},
+                                {srcs: {webp: fourthDepartFirst2Webp, jpeg: fourthDepartFirst2Jpeg}, alt: ""},
+                                {srcs: {webp: fourthDepartFirst3Webp, jpeg: fourthDepartFirst3Jpeg}, alt: ""}
+                            ],
+                            seatsCount: 5,
+                            safeSeats: [115, 116, 117, 118, 119]
+                        },                       
                     },
                     from: "EWR",
                     to: "BNA",
+                    gate: "A12",
                     isChoosed: false
                 },
                 return:{
@@ -773,41 +931,230 @@ const defaultStore : flights = {
                         serviceFee: 5
                     },
                     amenities: [flightAmenities.Fast, flightAmenities.Punctual, flightAmenities.FastFood, flightAmenities.ManySeats],
+                    departurePlace:{
+                        city: "Istanbul",
+                        image: {srcs: {webp: thirdReturnFromJpeg, jpeg: thirdReturnFromJpeg}, alt: ""}
+                    },
                     arrayPlace: {
                         city: "Istanbul",
                         airport: "CVK Park Bosphorus Hotel Istanbul",
-                        full: "Gümüssuyu Mah. Inönü Cad. No:8, Istanbul 34437"
+                        full: "Gümüssuyu Mah. Inönü Cad. No:8, Istanbul 34437",
+                        image: {srcs: {webp: thirdReturnToJpeg, jpeg: thirdReturnToJpeg}, alt: ""}
                     },
                     seatsTypes: {
-                        economy: [
-                            {srcs: {webp: fourthReturnEconomy1Webp, jpeg: fourthReturnEconomy1Jpeg}, alt: ""},
-                            {srcs: {webp: fourthReturnEconomy2Webp, jpeg: fourthReturnEconomy2Jpeg}, alt: ""}
-                        ],
-                        business: [
-                            {srcs: {webp: fourthReturnBusines1Webp, jpeg: fourthReturnBusines1Jpeg}, alt: ""},
-                            {srcs: {webp: fourthReturnBusines2Webp, jpeg: fourthReturnBusines2Jpeg}, alt: ""},
-                            {srcs: {webp: fourthReturnBusines3Webp, jpeg: fourthReturnBusines3Jpeg}, alt: ""},
-                            {srcs: {webp: fourthReturnBusines4Webp, jpeg: fourthReturnBusines4Jpeg}, alt: ""},
-                            {srcs: {webp: fourthReturnBusines5Webp, jpeg: fourthReturnBusines5Jpeg}, alt: ""},
-                            {srcs: {webp: fourthReturnBusines6Webp, jpeg: fourthReturnBusines6Jpeg}, alt: ""},
-                            {srcs: {webp: fourthReturnBusines7Webp, jpeg: fourthReturnBusines7Jpeg}, alt: ""},
-                            {srcs: {webp: fourthReturnBusines8Webp, jpeg: fourthReturnBusines8Jpeg}, alt: ""},
-                            {srcs: {webp: fourthReturnBusines9Webp, jpeg: fourthReturnBusines9Jpeg}, alt: ""}
-                        ],
-                        first: [
-                            {srcs: {webp: fourthReturnFirst1Webp, jpeg: fourthReturnFirst1Jpeg}, alt: ""},
-                            {srcs: {webp: fourthReturnFirst2Webp, jpeg: fourthReturnFirst2Jpeg}, alt: ""},
-                            {srcs: {webp: fourthReturnFirst3Webp, jpeg: fourthReturnFirst3Jpeg}, alt: ""}
-                        ]
+                        economy: {
+                            images: [
+                                {srcs: {webp: fourthReturnEconomy1Webp, jpeg: fourthReturnEconomy1Jpeg}, alt: ""},
+                                {srcs: {webp: fourthReturnEconomy2Webp, jpeg: fourthReturnEconomy2Jpeg}, alt: ""}
+                            ],
+                            seatsCount: 10,
+                            safeSeats: [100, 101, 102, 103, 104, 105, 106, 107, 108, 109]
+                        },
+                        business: {
+                            images: [
+                                {srcs: {webp: fourthReturnBusines1Webp, jpeg: fourthReturnBusines1Jpeg}, alt: ""},
+                                {srcs: {webp: fourthReturnBusines2Webp, jpeg: fourthReturnBusines2Jpeg}, alt: ""},
+                                {srcs: {webp: fourthReturnBusines3Webp, jpeg: fourthReturnBusines3Jpeg}, alt: ""},
+                                {srcs: {webp: fourthReturnBusines4Webp, jpeg: fourthReturnBusines4Jpeg}, alt: ""},
+                                {srcs: {webp: fourthReturnBusines5Webp, jpeg: fourthReturnBusines5Jpeg}, alt: ""},
+                                {srcs: {webp: fourthReturnBusines6Webp, jpeg: fourthReturnBusines6Jpeg}, alt: ""},
+                                {srcs: {webp: fourthReturnBusines7Webp, jpeg: fourthReturnBusines7Jpeg}, alt: ""},
+                                {srcs: {webp: fourthReturnBusines8Webp, jpeg: fourthReturnBusines8Jpeg}, alt: ""},
+                                {srcs: {webp: fourthReturnBusines9Webp, jpeg: fourthReturnBusines9Jpeg}, alt: ""}
+                            ],
+                            seatsCount: 5,
+                            safeSeats: [110, 111, 112, 113, 114]
+                        },
+                        first: {
+                            images: [
+                                {srcs: {webp: fourthReturnFirst1Webp, jpeg: fourthReturnFirst1Jpeg}, alt: ""},
+                                {srcs: {webp: fourthReturnFirst2Webp, jpeg: fourthReturnFirst2Jpeg}, alt: ""},
+                                {srcs: {webp: fourthReturnFirst3Webp, jpeg: fourthReturnFirst3Jpeg}, alt: ""}
+                            ],
+                            seatsCount: 5,
+                            safeSeats: [115, 116, 117, 118, 119]
+                        }
                     },
                     from: "EWR",
                     to: "BNA",
+                    gate: "A12",
+                    isChoosed: false
+                }
+            }
+        },
+        {
+            id: 3,
+            type: tripsType.OnWay,
+            shortReview: {
+                rating: 1,
+                countReviews: 52
+            },
+            schedule: {
+                depart:{
+                    image: {srcs: {webp: fourthDepartWebp, jpeg: fourthDepartJpeg}, alt: ""},
+                    takeoffTime: {
+                        month: 11,
+                        day: 13,
+                        year: 2024,
+                        units: {
+                            hour: 12,
+                            minute: 0,
+                            meridiem: meridiem.AM
+                        }
+                    },
+                    arrayTime: {
+                        month: 11,
+                        day: 13,
+                        year: 2024,
+                        units: {
+                            hour: 1,
+                            minute: 28,
+                            meridiem: meridiem.PM
+                        }
+                    },
+                    airline: {srcs: {webp: etihadWebp, jpeg: etihadJpeg}, alt: airlines.Etihad},
+                    airplane: "A380 Airbus",
+                    transfersCount: 0,
+                    price: {
+                        baseFare: 240,
+                        discount: 10,
+                        taxes: 5,
+                        serviceFee: 5
+                    },
+                    amenities: [flightAmenities.Fast, flightAmenities.Punctual, flightAmenities.FastFood, flightAmenities.ManySeats],
+                    departurePlace:{
+                        city: "Istanbul",
+                        image: {srcs: {webp: fourthDepartFromJpeg, jpeg: fourthDepartFromJpeg}, alt: ""}
+                    },
+                    arrayPlace: {
+                        city: "Istanbul",
+                        airport: "CVK Park Bosphorus Hotel Istanbul",
+                        full: "Gümüssuyu Mah. Inönü Cad. No:8, Istanbul 34437",
+                        image: {srcs: {webp: fourthDepartToJpeg, jpeg: fourthDepartToJpeg}, alt: ""}
+                    },
+                    seatsTypes: {
+                        economy: {
+                            images: [
+                                {srcs: {webp: fourthDepartEconomy1Webp, jpeg: fourthDepartEconomy1Jpeg}, alt: ""},
+                                {srcs: {webp: fourthDepartEconomy2Webp, jpeg: fourthDepartEconomy2Jpeg}, alt: ""}
+                            ],
+                            seatsCount: 10,
+                            safeSeats: [100, 101, 102, 103, 104, 105, 106, 107, 108, 109]
+                        },
+                        business: {
+                            images: [
+                                {srcs: {webp: fourthDepartBusines1Webp, jpeg: fourthDepartBusines1Jpeg}, alt: ""},
+                                {srcs: {webp: fourthDepartBusines2Webp, jpeg: fourthDepartBusines2Jpeg}, alt: ""},
+                                {srcs: {webp: fourthDepartBusines3Webp, jpeg: fourthDepartBusines3Jpeg}, alt: ""},
+                                {srcs: {webp: fourthDepartBusines4Webp, jpeg: fourthDepartBusines4Jpeg}, alt: ""},
+                                {srcs: {webp: fourthDepartBusines5Webp, jpeg: fourthDepartBusines5Jpeg}, alt: ""},
+                                {srcs: {webp: fourthDepartBusines6Webp, jpeg: fourthDepartBusines6Jpeg}, alt: ""},
+                                {srcs: {webp: fourthDepartBusines7Webp, jpeg: fourthDepartBusines7Jpeg}, alt: ""},
+                                {srcs: {webp: fourthDepartBusines8Webp, jpeg: fourthDepartBusines8Jpeg}, alt: ""},
+                                {srcs: {webp: fourthDepartBusines9Webp, jpeg: fourthDepartBusines9Jpeg}, alt: ""}
+                            ],
+                            seatsCount: 5,
+                            safeSeats: [110, 111, 112, 113, 114]
+                        },
+                        first: {
+                            images: [
+                                {srcs: {webp: fourthDepartFirst1Webp, jpeg: fourthDepartFirst1Jpeg}, alt: ""},
+                                {srcs: {webp: fourthDepartFirst2Webp, jpeg: fourthDepartFirst2Jpeg}, alt: ""},
+                                {srcs: {webp: fourthDepartFirst3Webp, jpeg: fourthDepartFirst3Jpeg}, alt: ""}
+                            ],
+                            seatsCount: 5,
+                            safeSeats: [115, 116, 117, 118, 119]
+                        },                       
+                    },
+                    from: "EWR",
+                    to: "BNA",
+                    gate: "A12",
+                    isChoosed: false
+                },
+                return:{
+                    image: {srcs: {webp: fourthReturnWebp, jpeg: fourthReturnJpeg}, alt: ""},
+                    takeoffTime: {
+                        month: 11,
+                        day: 13,
+                        year: 2024,
+                        units: {
+                            hour: 12,
+                            minute: 0,
+                            meridiem: meridiem.PM
+                        }
+                    },
+                    arrayTime: {
+                        month: 11,
+                        day: 13,
+                        year: 2024,
+                        units: {
+                            hour: 12,
+                            minute: 0,
+                            meridiem: meridiem.AM
+                        }
+                    },
+                    airline: {srcs: {webp: etihadWebp, jpeg: etihadJpeg}, alt: airlines.Etihad},
+                    airplane: "A380 Airbus",
+                    transfersCount: 0,
+                    price: {
+                        baseFare: 240,
+                        discount: 10,
+                        taxes: 5,
+                        serviceFee: 5
+                    },
+                    amenities: [flightAmenities.Fast, flightAmenities.Punctual, flightAmenities.FastFood, flightAmenities.ManySeats],
+                    departurePlace:{
+                        city: "Istanbul",
+                        image: {srcs: {webp: thirdReturnFromJpeg, jpeg: thirdReturnFromJpeg}, alt: ""}
+                    },
+                    arrayPlace: {
+                        city: "Istanbul",
+                        airport: "CVK Park Bosphorus Hotel Istanbul",
+                        full: "Gümüssuyu Mah. Inönü Cad. No:8, Istanbul 34437",
+                        image: {srcs: {webp: thirdReturnToJpeg, jpeg: thirdReturnToJpeg}, alt: ""}
+                    },
+                    seatsTypes: {
+                        economy: {
+                            images: [
+                                {srcs: {webp: fourthReturnEconomy1Webp, jpeg: fourthReturnEconomy1Jpeg}, alt: ""},
+                                {srcs: {webp: fourthReturnEconomy2Webp, jpeg: fourthReturnEconomy2Jpeg}, alt: ""}
+                            ],
+                            seatsCount: 10,
+                            safeSeats: [100, 101, 102, 103, 104, 105, 106, 107, 108, 109]
+                        },
+                        business: {
+                            images: [
+                                {srcs: {webp: fourthReturnBusines1Webp, jpeg: fourthReturnBusines1Jpeg}, alt: ""},
+                                {srcs: {webp: fourthReturnBusines2Webp, jpeg: fourthReturnBusines2Jpeg}, alt: ""},
+                                {srcs: {webp: fourthReturnBusines3Webp, jpeg: fourthReturnBusines3Jpeg}, alt: ""},
+                                {srcs: {webp: fourthReturnBusines4Webp, jpeg: fourthReturnBusines4Jpeg}, alt: ""},
+                                {srcs: {webp: fourthReturnBusines5Webp, jpeg: fourthReturnBusines5Jpeg}, alt: ""},
+                                {srcs: {webp: fourthReturnBusines6Webp, jpeg: fourthReturnBusines6Jpeg}, alt: ""},
+                                {srcs: {webp: fourthReturnBusines7Webp, jpeg: fourthReturnBusines7Jpeg}, alt: ""},
+                                {srcs: {webp: fourthReturnBusines8Webp, jpeg: fourthReturnBusines8Jpeg}, alt: ""},
+                                {srcs: {webp: fourthReturnBusines9Webp, jpeg: fourthReturnBusines9Jpeg}, alt: ""}
+                            ],
+                            seatsCount: 5,
+                            safeSeats: [110, 111, 112, 113, 114]
+                        },
+                        first: {
+                            images: [
+                                {srcs: {webp: fourthReturnFirst1Webp, jpeg: fourthReturnFirst1Jpeg}, alt: ""},
+                                {srcs: {webp: fourthReturnFirst2Webp, jpeg: fourthReturnFirst2Jpeg}, alt: ""},
+                                {srcs: {webp: fourthReturnFirst3Webp, jpeg: fourthReturnFirst3Jpeg}, alt: ""}
+                            ],
+                            seatsCount: 5,
+                            safeSeats: [115, 116, 117, 118, 119]
+                        }
+                    },
+                    from: "EWR",
+                    to: "BNA",
+                    gate: "A12",
                     isChoosed: false
                 }
             }
         }
     ],
-    isShowAll: false,
     buttonViewMore: {
         passive: "Show more results",
         active: "Hide"
@@ -815,4 +1162,90 @@ const defaultStore : flights = {
     buttonLink: "View Deals"
 }
 
-export const flightsItemsReducer = (store : flights = defaultStore) : flights => store
+enum flightItemsActionsType{
+    DELETE_SAFE_SEAT = "FLIGHT-ITEMS_DELETE_SAFE_SEAT"
+}
+
+interface flightItemsDeleteSafeSeatPayload{
+    idItem : number,
+    isDepart : boolean,
+    seatsType : seatsTypeCategory,
+    idSeat : number
+}
+type flightItemsDeleteSafeSeat = {
+    type : flightItemsActionsType.DELETE_SAFE_SEAT,
+    payload : flightItemsDeleteSafeSeatPayload
+}
+
+export const flightsItemsReducer = (store : flights = defaultStore, action : flightItemsDeleteSafeSeat) : flights => {
+    switch(action.type){
+        case flightItemsActionsType.DELETE_SAFE_SEAT:
+            let newFlightSchedule : flightSchedule = JSON.parse(JSON.stringify(store.elements[action.payload.idItem].schedule));
+            let newSafeSeats : number[];
+            let usedSchedulePart : flightSchedulePart = (action.payload.isDepart) 
+                ? store.elements[action.payload.idItem].schedule.depart
+                : store.elements[action.payload.idItem].schedule.return
+            ;
+            switch(action.payload.seatsType){
+                case seatsTypeCategory.Economy:
+                    newSafeSeats = new Array(usedSchedulePart.seatsTypes.economy.safeSeats.length - 1);
+                    for(let i = 0, k = 0; i < usedSchedulePart.seatsTypes.economy.safeSeats.length; i++){
+                        if(i === action.payload.idSeat) {
+                            continue;
+                        }
+                        newSafeSeats[k++] = usedSchedulePart.seatsTypes.economy.safeSeats[i];
+                    }
+                    if(action.payload.isDepart){
+                        newFlightSchedule.depart.seatsTypes.economy.safeSeats = [...newSafeSeats];
+                    } else {
+                        newFlightSchedule.return.seatsTypes.economy.safeSeats = [...newSafeSeats];
+                    }       
+                    break;
+                case seatsTypeCategory.Busines:
+                    newSafeSeats = new Array(usedSchedulePart.seatsTypes.business.safeSeats.length - 1);
+                    for(let i = 0, k = 0; i < usedSchedulePart.seatsTypes.business.safeSeats.length; i++){
+                        if(i === action.payload.idSeat) {
+                            continue;
+                        }
+                        newSafeSeats[k++] = usedSchedulePart.seatsTypes.business.safeSeats[i];
+                    }
+                    if(action.payload.isDepart){
+                        newFlightSchedule.depart.seatsTypes.business.safeSeats = [...newSafeSeats];
+                    } else {
+                        newFlightSchedule.return.seatsTypes.business.safeSeats = [...newSafeSeats];
+                    }   
+                    break;
+                case seatsTypeCategory.First:
+                    newSafeSeats = new Array(usedSchedulePart.seatsTypes.first.safeSeats.length - 1);
+                    for(let i = 0, k = 0; i < usedSchedulePart.seatsTypes.first.safeSeats.length; i++){
+                        if(i === action.payload.idSeat) {
+                            continue;
+                        }
+                        newSafeSeats[k++] = usedSchedulePart.seatsTypes.first.safeSeats[i];
+                    }
+                    if(action.payload.isDepart){
+                        newFlightSchedule.depart.seatsTypes.first.safeSeats = [...newSafeSeats];
+                    } else {
+                        newFlightSchedule.return.seatsTypes.first.safeSeats = [...newSafeSeats];
+                    }   
+                    break;
+            }
+            return({
+                ...store,
+                elements: store.elements.map((flight, i) => {
+                    if(i === action.payload.idItem){
+                        return {...flight, schedule: newFlightSchedule}
+                    }
+                    return flight;
+                })
+            })
+        default:
+            return store;
+    }
+}
+
+export const flightItemsDeleteSafeSeatAction = (
+    idItem : number, isDepart : boolean, seatsType : seatsTypeCategory, idSeat : number
+) : flightItemsDeleteSafeSeat => ({
+    type: flightItemsActionsType.DELETE_SAFE_SEAT, payload: {idItem, isDepart, seatsType, idSeat}
+})

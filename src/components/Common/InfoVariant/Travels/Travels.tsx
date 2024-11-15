@@ -26,7 +26,7 @@ export const Travels : FC<travelsProps> = ({state}) => {
                 <section className="flights__travels_variant travels_variant">
                     <div className="container">
                         <HeaderBlock 
-                            about={state.header} parentClasses={["travels_variant"]} 
+                            about={state.header} classes={["travels_variant"]} 
                             isNeedButton={filtredTravels.current.length > state.maxShow} 
                             isShowAll={{value: isShowAll, set: setIsShowAll}}
                         />

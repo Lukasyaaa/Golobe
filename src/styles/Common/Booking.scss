@@ -13,8 +13,11 @@
         }
     }
 
+    &__left, &__price-details{
+        transition: filter 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    }
+
     &__left > *, &__price-details{
-        padding: toRem(16);
         border-radius: toRem(12);
         box-shadow: 0px 4px 16px 0px rgba(17, 34, 17, 0.05);
         background: $white;
@@ -36,6 +39,11 @@
         &__left > *:not(:last-child), &__left{
             margin-bottom: toRem(16);
         }
+    }
+}
+body._modal-showed .booking{
+    &__left, &__price-details{
+        filter: blur(4px);
     }
 }
 
@@ -227,7 +235,7 @@
     }
 }
 
-.authorization{
+.authorization_selfish{
     padding: toRem(24);
     @media (max-width: toEm(768, 16)) {
         padding: toRem(16);
@@ -467,6 +475,7 @@
 }
 
 .cards{
+    padding: toRem(16);
     &__element{
         display: flex;
         align-items: center;
@@ -665,6 +674,10 @@
         }
     }
 
+    &__subimage{
+        max-width: calc(100% - toRem(120) - toRem(24));
+    }
+
     &__suptitle{
         color: rgba($color: $darkGreen, $alpha: 0.75);
         font-family: Montserrat;
@@ -707,7 +720,6 @@
             margin: 0 0 toRem(5);
         }
     }
-
 
     &__assurance{
         padding: toRem(32.5) 0;
@@ -868,13 +880,13 @@
     }
 }
 
-body._modal-showed .add-card{
+body._modal-showed .add-card.modal-win{
     opacity: 1;
 }
-body:not(._modal-showed) .add-card{
+body:not(._modal-showed) .add-card.modal-win{
     pointer-events: none;
 }
-.add-card{
+.add-card.modal-win{
     padding: toRem(69) toRem(64) toRem(64);
     @media (max-width: toEm($container + 31, 16)) {
         padding: toRem(48);
@@ -889,13 +901,6 @@ body:not(._modal-showed) .add-card{
         padding: toRem(24);
     }
 
-    border-radius: toRem(12);
-    background: $white;
-
-    width: toRem(640);
-    @media (max-width: toEm(640 + 30, 16)) {
-        width: calc(100% - toRem(30));
-    }
     max-height: calc(100vh - toRem(60));
     opacity: 0;
 
@@ -906,6 +911,25 @@ body:not(._modal-showed) .add-card{
     left: 50%;
     top: 50%;
     transform: translateY(-50%) translateX(-50%);
+}
+.add-card.modal-win .add-card__title{
+    margin-bottom: 1em;
+    @media (max-width: toEm(768, 16)) {
+        font-size: toRem(24);
+        margin-bottom: toRem(16);
+    }
+    @media (max-width: toEm(480, 16)) {
+        margin-bottom: toRem(10);
+    }
+}
+.add-card{
+    border-radius: toRem(12);
+    background: $white;
+
+    width: toRem(640);
+    @media (max-width: toEm(640 + 30, 16)) {
+        width: calc(100% - toRem(30));
+    }
 
     display: flex;
     flex-direction: column;
@@ -950,8 +974,6 @@ body:not(._modal-showed) .add-card{
         font-size: toRem(40);
         font-weight: 700;
         line-height: math.div(51, 40);
-
-        margin-bottom: 1em;
     }
     @media (max-width: toEm($container + 31, 16)) {
         &__title{
@@ -966,13 +988,11 @@ body:not(._modal-showed) .add-card{
     @media (max-width: toEm(768, 16)) {
         &__title{
             font-size: toRem(24);
-            margin-bottom: toRem(16);
         }
     }
     @media (max-width: toEm(480, 16)) {
         &__title{
             font-size: toRem(22);
-            margin-bottom: toRem(10);
         }
     }
 
@@ -985,17 +1005,17 @@ body:not(._modal-showed) .add-card{
         }
     }
 
-    &__row + &__element{
+    &__row + &__fieldgroup{
         margin-top: toRem(16);
     }
-    &__element:not(:last-child){
+    &__fieldgroup:not(:last-child){
         margin-bottom: toRem(16);
     }
     @media (max-width: toEm(768, 16)) {
-        &__row + &__element{
+        &__row + &__fieldgroup{
             margin-top: toRem(10);
         }
-        &__element:not(:last-child){
+        &__fieldgroup:not(:last-child){
             margin-bottom: toRem(10);
         }
     }
@@ -1052,6 +1072,9 @@ body:not(._modal-showed) .add-card{
 
         margin-bottom: toRem(16);
     }
+    &__button_disabled{
+        opacity: 0.5;
+    }
     @media (max-width: toEm(992, 16)) {
         &__button{
             margin-bottom: toRem(10);
@@ -1073,11 +1096,13 @@ body:not(._modal-showed) .add-card{
         line-height: math.div(15, 12);
     }
 }
-.element-add-card, .element-row-add-card{
-    display: flex;
-    flex-direction: column-reverse;
+.add-card, .row-add-card{
+    &__fieldgroup{
+        display: flex;
+        flex-direction: column-reverse;
+    }
 
-    &__submain{
+    &__subinput{
         background-color: $white;
         position: relative;
         z-index: 2;
@@ -1094,12 +1119,12 @@ body:not(._modal-showed) .add-card{
         padding: 0 toRem(4);
     }
     @media (max-width: toEm(480, 16)) {
-        &__submain{
+        &__subinput{
             font-size: toRem(12);
         }
     }
 
-    &__main{
+    &__input{
         border: toRem(1) solid rgb(121, 116, 126);
         border-radius: toRem(4);
         position: relative;
@@ -1118,9 +1143,16 @@ body:not(._modal-showed) .add-card{
 
         margin-top: toRem(-10);
         min-height: toRem(56);
+    }    
+    &__input.error{
+        border-color: $lightRed;
     }
+    &__input.good{
+        border-color: $mint;
+    }
+
     @media (max-width: toEm(480, 16)) {
-        &__main{
+        &__input{
             min-height: toRem(40);
             font-size: toRem(14);
 
@@ -1128,7 +1160,7 @@ body:not(._modal-showed) .add-card{
         }
     }
 }
-.select-element-add-card{
+.select-add-card{
     position: relative;
     z-index: 2;
     &__opener{

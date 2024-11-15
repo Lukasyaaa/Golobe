@@ -1,3 +1,5 @@
+import { ticketFactTitles } from "./components/Check/Ticket/Ticket"
+
 //-------------------------COMMON------------------------- 
 interface srcs{ 
     webp : string, 
@@ -7,7 +9,7 @@ export interface imageVariants<T>{
     srcs : srcs, 
     alt : T 
 } 
-interface image{ 
+export interface image{ 
     src : string, 
     alt : string 
 } 
@@ -85,6 +87,11 @@ export interface time{
     year : number,
     units : units
 }
+interface date{
+    day : number,
+    month : number,
+    year : number
+}
 
 export interface configurateItemsHeader{
     maxShow : number,
@@ -98,7 +105,9 @@ export interface shortReview{
 
 export enum flightDirection{
     Return = "Return",
-    Depart = "Depart"
+    Depart = "Depart",
+    Two = "Two",
+    None = "None"
 }
 
 export interface priceDetails{
@@ -113,6 +122,31 @@ export enum availableVariants{
     Google = "Google",
     Apple = "Apple",
     Mail = "Mail"
+}
+
+export enum fieldGroupsTitles{
+    FirstName = "First Name",
+    LastName = "Last Name",
+    Email = "Email",
+    PhoneNumber = "Phone Number",
+    Password = "Password",
+    ConfirmPassword = "Сonfirm Password",
+    EnterCode = "Enter Code",
+    CardNumber = "Card Number",
+    ExpDate = "Exp. Date",
+    CVC = "CVC",
+    NameOnCard = "Name on Card",
+    EnterDestination = "Enter Destination",
+    CheckIn = "Check In",
+    CheckOut = "Check Out",
+    FromTo = "From - To",
+    DepartReturn = "Depart - Return",
+    PassengerClass = "Passenger - Class"
+}
+export interface fieldGroup{
+    placeholder : string,
+    label : string,
+    type : fieldGroupsTypes
 }
 
 //------------Variant------------ 
@@ -151,23 +185,23 @@ export interface offers{
 } 
  
 //-------------------------HEADER------------------------- 
-interface headerImageVariantsSrcs{ 
+interface headerImageSrcs{ 
     black : string, 
     white : string 
 } 
-interface headerImageVariants{ 
-    srcs : headerImageVariantsSrcs, 
+interface headerImage{ 
+    srcs : headerImageSrcs, 
     alt : string 
 } 
-interface headerButtons{ 
-    logIn : string, 
+interface headerAuthorization{ 
     signIn : string, 
-    favouritesText : string 
+    signUp : string, 
+    favourites : string 
 } 
 export interface header{ 
     links : contentPartValues, 
-    logo : headerImageVariants, 
-    authorization : headerButtons 
+    logo : headerImage, 
+    authorization : headerAuthorization 
 } 
  
 //-------------------------OPTIONS------------------------- 
@@ -434,11 +468,17 @@ export enum tripsType{
     MultiCity = "Multi-City", 
     MyDatesAreFlexible = "My Dates Are Flexible" 
 } 
-export enum hotelsAmenities{ 
-    Fitness = "Fitness", 
+export enum hotelsIncludes{ 
+    Fitness = "Fitness center", 
     AirConditioned = "Air-conditioned", 
     InsidePool = "Inside Pool", 
     OutsidePool = "Outside Pool", 
+    Spa = "Spa and wellness center",
+    Restaurant = "Restaurant",
+    RoomService = "Room Service",
+    BarLounge = "Bar/Lounge",
+    FreeWifi = "Free WiFi",
+    TeaCoffeMachind = "Tea/Coffe Machine",
     FrontDeskAroundTheClock = "24-h front desk", 
     FreeBreakfast = "Free Breakfast", 
     FreeParking = "Free Parking", 
@@ -548,6 +588,12 @@ export interface airlinePolicie{
     elements : string[]
 }
 
+export enum seatsTypeCategory{
+    Economy = "Economy",
+    First = "First",
+    Busines = "Busines"
+}
+
 export enum flightAmenities{
     Fast = "Fast",
     FastFood = "Fast Food",
@@ -555,15 +601,25 @@ export enum flightAmenities{
     Punctual = "Punctual"
 }
 
+interface flightDeparturePlace{
+    city : string,
+    image : imageVariants<string>
+}
 interface flightArrayPlace{
     city : string,
     airport : string,
     full : string
+    image : imageVariants<string>
+}
+interface seatsType{
+    images : imageVariants<string>[],
+    seatsCount : number,
+    safeSeats : number[]
 }
 export interface seatsTypes{
-    economy : imageVariants<string>[],
-    business : imageVariants<string>[],
-    first : imageVariants<string>[]
+    economy : seatsType,
+    business : seatsType,
+    first : seatsType
 }
 
 export interface flightSchedulePart{
@@ -575,13 +631,15 @@ export interface flightSchedulePart{
     transfersCount : number,
     price : priceDetails,
     amenities : flightAmenities[],
+    departurePlace : flightDeparturePlace,
     arrayPlace : flightArrayPlace,
     seatsTypes : seatsTypes,
     from : string,
     to : string,
+    gate : string,
     isChoosed : boolean
 }
-interface flightSchedule{
+export interface flightSchedule{
     depart : flightSchedulePart,
     return : flightSchedulePart
 }
@@ -593,38 +651,86 @@ export interface flight{
 }
 export interface flights{
     elements : flight[],
-    isShowAll : boolean,
     buttonViewMore : buttonStates,
     buttonLink : string
 }
 
 //-------------------------HOTELS ITEMS-------------------------
+export enum hotelAdvantages{
+    NearPark = "Near Park",
+    NearNightlife = "Near Nightlife",
+    NearTheatre = "Near Theatre",
+    CleanHotel = "Clean Hotel"
+}
 export enum hotelType{
     Hotel = 0,
     Motel = 1,
     Resorts = 2,
 }
+export enum roomAdvantages{
+    SuperiorRoom = "Superior Room",
+    CityView = "City View"
+}
 
 interface hotelImages{
     main : imageVariants<string>,
-    another : imageVariants<string>[]
+    another : imageVariants<string>[],
+    maxShow : number
 }
+export interface hotelLocation{
+    city : string,
+    full : string,
+    image : imageVariants<string>
+}
+
+export interface hotelReview{
+    avatar : imageVariants<string>,
+    grade : number,
+    author : string,
+    info : string
+}
+interface hotelReviews{
+    elements : hotelReview[],
+    maxShow : number
+}
+
+interface roomBeds{
+    double : number,
+    twin : number
+}
+export interface room{
+    image : imageVariants<string>,
+    advantages : roomAdvantages[],
+    countBeds : roomBeds,
+    price : priceDetails
+}
+
+export interface hotelsIncludesContent{
+    elements : hotelsIncludes[],
+    maxInCol : number,
+    maxShow : number
+}
+
 export interface hotel{
     id : number,
     type : sortTitles,
+    logo : imageVariants<string>,
     images : hotelImages,
     title : string,
-    price : number
-    location : string,
+    location : hotelLocation,
+    advantages : hotelAdvantages[],
+    rooms : room[],
+    reviews : hotelReviews,
     countStars : 5 | 4 | 3 | 2 | 1 | 0,
-    amenities : hotelsAmenities[],
-    shortReview : shortReview,
+    overview : string,
+    includes : hotelsIncludesContent
 }
 export interface hotels{
     elements : hotel[],
-    isShowAll : boolean,
     buttonViewMore : buttonStates,
     buttonLink : string,
+    buttonShowAllImages : string,
+    buttonRoomLink : string
 }
 
 //-------------------------PAYMENT-------------------------
@@ -645,7 +751,7 @@ export interface payment{
 }
 
 //-------------------------CARD-------------------------
-interface cardExpDate{
+export interface cardExpDate{
     month : number,
     year : number
 }
@@ -656,7 +762,7 @@ export interface card{
     expDate : cardExpDate,
     name : string,
     country : string,
-    savedInfo : boolean
+    isSavedInfo : boolean
 }
 
 export enum typeAddCardInput{
@@ -691,11 +797,23 @@ interface addCardMassive{
     value : (addCardInputValueEntry | addCardInputValueSelect)[]
 }
 
-export interface addCard{
+interface addCardFirstAppear{
     title : string,
+    description : string
+}
+interface addCardHeader{
+    firstAppear : addCardFirstAppear,
+    nextAppear : string
+}
+interface addCardButton{
+    firstAppear : string,
+    nextAppear : string
+}
+export interface addCard{
+    header : addCardHeader,
     inputs : (addCardInput | addCardMassive)[],
     saveText : string,
-    buttonAdd : string,
+    buttonAdd : addCardButton,
     privacyPolicy : string
 }
 
@@ -719,4 +837,191 @@ export interface authorizationText{
     description : string,
     continueButton : string,
     availableVariants : (availableAuthorizationVariantIcon | availableAuthorizationVariantImage)[]
+}
+
+interface flightTicketSchedulePart{
+    place : string,
+    time : time
+}
+export interface flightTicket{
+    airline : imageVariants<string>,
+    from : flightTicketSchedulePart,
+    to : flightTicketSchedulePart,
+    gate : string,
+    seatNumber : number
+}
+
+export interface hotelTicket{
+    logo : imageVariants<string>,
+    from : date,
+    to : date,
+    roomNumber : number | "On arrival"
+}
+
+export interface userFavourites{
+    flights : number[],
+    hotels : number[]
+}
+
+interface userInfoAddress{
+    street : string,
+    postalCode : string
+}
+export interface userInfo{
+    banner : image,
+    ava : image,
+    firstName : string,
+    lastName : string,
+    email : string,
+    password : string,
+    phoneNumber : string,
+    isLogOut : boolean,
+    address : userInfoAddress,
+    dataBirth : date,
+    cards : card[],
+    flightsTickets : flightTicket[],
+    hotelsTickets : hotelTicket[],
+    favourites : userFavourites
+}
+export interface shortUserInfo{
+    fisrtName : string,
+    lastName : string,
+    email : string,
+    password : string,
+    phoneNumber : string
+}
+//-------------------------Terms And Conditions-------------------------
+interface paymentsBlock{
+    title : string,
+    list : string[]
+}
+
+interface contactInfo{
+    companyName : string,
+    building : string,
+    poBox : string,
+    helpLink : string
+}
+interface contactsBlock{
+    title : string,
+    pre : string,
+    info : contactInfo
+}
+
+export interface termsConditions{
+    heading : string,
+    payments : paymentsBlock,
+    contacts : contactsBlock
+}
+
+//-------------------------Login-------------------------
+export interface accessFieldGroup{
+    placeholder : string,
+    label : fieldGroupsTitles,
+    type : fieldGroupsTypes
+}
+interface fieldGroupMassive {
+    value : accessFieldGroup[],
+    isMassive : true
+}
+interface fieldGroupLoner {
+    value : accessFieldGroup,
+    isMassive : false
+}
+
+export enum fieldGroupsTypes{
+    Text = "Text",
+    Email = "Email",
+    Password = "Password"
+}
+
+interface accessPropose{
+    preLink : string,
+    link : string
+}
+export interface accessPart{
+    heading: string,
+    explanation : string,
+    fieldGroups : (fieldGroupMassive | fieldGroupLoner)[]
+    checkboxText : string,
+    isLogin : boolean,
+    saveButton : string,
+    propose : accessPropose,
+    orText : string,
+    availableVariants : (availableAuthorizationVariantIcon | availableAuthorizationVariantImage)[],
+    images : imageVariants<string>[]
+}
+export interface access{
+    signIn : accessPart,
+    signUp : accessPart
+}
+
+//-------------------------FORGOT-PASSWORD-------------------------
+export interface fieldGroupTyped{
+    placeholder : string,
+    label : fieldGroupsTitles
+}
+
+export interface forgotPassword{
+    logo : image,
+    heading : string,
+    explanation : string,
+    email : fieldGroupTyped,
+    submitButton : string,
+    orText : string,
+    availableVariants : (availableAuthorizationVariantIcon | availableAuthorizationVariantImage)[],
+    images : imageVariants<string>[]
+}
+
+//-------------------------VERIFY-CODE-------------------------
+export interface verifyCode{
+    logo : image,
+    heading : string,
+    explanation : string,
+    code : fieldGroupTyped,
+    verifyButton : string,
+    resendText : accessPropose,
+    images : imageVariants<string>[]
+}
+
+//-------------------------SET-PASSWORD-------------------------
+export interface setPassword{
+    logo : image,
+    heading : string,
+    explanation : string,
+    firstInput : fieldGroupTyped,
+    secondInput : fieldGroupTyped,
+    saveButton : string,
+    images : imageVariants<string>[]
+}
+
+//-------------------------ACCOUNT-TEXT-------------------------
+interface aboutAccountText{
+    heading : string,
+    nameDescription : string,
+    emailDescription : string,
+    passwordDescription : string,
+    phoneDescription : string,
+    addressDescription : string,
+    dateBirthDescription : string,
+    addEmailButton : string,
+    changeButton: string
+}
+interface historyAccountText{
+    heading : string,
+    flightsPartDescription : string,
+    hotelsPartDescription : string,
+    downloadButton : string,
+    viewBy : string[],
+}
+interface paymentMethodsAccountText{
+    heading : string,
+    addCardButton : string
+}
+
+export interface accountText{
+    uploadBannerButton : string,
+    about : aboutAccountText,
+    history : historyAccountText,
+    paymentMethods : paymentMethodsAccountText
 }

@@ -1,5 +1,5 @@
 import { authorizationText, availableVariants } from "../../types";
-import googleLogo from "../../assets/img/start/reviews/google.svg"
+import googleLogo from "../../assets/img/logos/google.svg"
 
 const defaultStore : authorizationText = {
     heading: "Login or Sign up to book",

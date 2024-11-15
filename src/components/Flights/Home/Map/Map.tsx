@@ -39,7 +39,7 @@ export const Map : FC = () => {
             <section className={classes.join(" ")}>
                 <div className="container">
                     <HeaderBlock 
-                        parentClasses={["map"]} about={state.header} 
+                        classes={["map"]} about={state.header} 
                         isNeedButton={filtredItems.current.length !== filtredPart.current.length && filtredPart.current.length !== 0}
                         isShowAll={{value: isShowAll, set: setIsShowAll}}  
                     />

@@ -75,9 +75,12 @@ export const timeToInt = (t : units, replaceValue : 0 | 1440) : number => {
     return hourValue + plus12 + t.minute;
 }
 
-export const timeToString = (t : units) : string => {
+export const timeToString = (t : units, withSpace : boolean = false) : string => {
     let hourPart = ((t.hour < 10) ? "0" : "") + t.hour;
     let minPart = ((t.minute < 10) ? "0" : "") + t.minute;
+    if(withSpace){
+        return hourPart + ":" + minPart + " " + t.meridiem;
+    }
     return hourPart + ":" + minPart + t.meridiem;
 }
 
@@ -86,13 +89,15 @@ export const durationToString = (d : number) : string => {
 }
 
 export const halfTimeToWholeString = (t : units) : string => {
-    let hourPart = ((t.hour + ((t.meridiem === meridiem.AM) ? 0 : 12) < 10) ? "0" : "") + (t.hour + ((t.meridiem === meridiem.AM) ? 0 : 12));
+    let hourPart = ((t.hour + ((t.meridiem === meridiem.AM) ? 0 : 12) < 10) ? "0" : "") + (t.hour + ((t.meridiem === meridiem.AM || t.hour === 12) ? 0 : 12));
     let minPart = ((t.minute + ((t.meridiem === meridiem.AM) ? 0 : 12) < 10) ? "0" : "") + t.minute;
     return hourPart + ":" + minPart;
 }
 
 export const getDayWeek = (dayWeek : number) : string => {
     switch(dayWeek){
+        case 0:
+            return "Sun";
         case 1:
             return "Mon";
         case 2:
@@ -100,18 +105,36 @@ export const getDayWeek = (dayWeek : number) : string => {
         case 3:
             return "Wed";
         case 4:
-            return "Thu";
+            return "Thur";
         case 5:
             return "Fri";
         case 6:
             return "Sat";
-        case 7:
-            return "Sun";
         default:
             return "Error";
     }
 }
-export const getMonth = (dayWeek : number) : string => {
+export const getDayWeekFull = (dayWeek : number) : string => {
+    switch(dayWeek){
+        case 0:
+            return "Sunday";
+        case 1:
+            return "Monday";
+        case 2:
+            return "Tuesday";
+        case 3:
+            return "Wednesday";
+        case 4:
+            return "Thursday";
+        case 5:
+            return "Friday";
+        case 6:
+            return "Saturday";
+        default:
+            return "Error";
+    }
+}
+export const getStringMonth = (dayWeek : number) : string => {
     switch(dayWeek){
         case 0:
             return "Jan";
@@ -141,6 +164,37 @@ export const getMonth = (dayWeek : number) : string => {
             return "Error";
     }
 }
+export const getNumberMonth = (dayWeek : string) : number => {
+    switch(dayWeek){
+        case "Jan":
+            return 0;
+        case "Feb":
+            return 1;
+        case "Mar":
+            return 2;
+        case "Apr":
+            return 3;
+        case "May":
+            return 4;
+        case "Jun":
+            return 5;
+        case "Jul":
+            return 6;
+        case "Aug":
+            return 7;
+        case "Sep":
+            return 8;
+        case "Oct":
+            return 9;
+        case "Nov":
+            return 10;
+        case "Dec":
+            return 11;
+        default:
+            return -1;
+    }
+}
+
 
 export const getFlightAmenitie = (amenitie : string) : string => {
     switch(amenitie){

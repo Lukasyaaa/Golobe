@@ -22,238 +22,45 @@
         }
     }
 
-    @media (min-width: toEm(769, 16)) {
-        &__row{
-            display: flex;
-            align-items: flex-end;
-            justify-content: space-between;    
-        }
-    }
-    &__row{
-        margin-bottom: toRem(32);
-    }
-    @media (max-width: toEm(768, 16)) {
-        &__row{
-            margin-bottom: toRem(24);
-        }
-    }
-
-    &__left{
-        max-width: toRem(768);
-    }
     @media (max-width: toEm($container + 30, 16)) {
         &__left{
             max-width: toRem(480);
         }
     }
-    @media (max-width: toEm(768, 16)) {
-        &__left{
-            margin-bottom: toRem(16);
-        }
-    }
 
     &__title{
-        color: $darkGreen;
-        font-family: "TradeGothic";
-        font-size: toRem(24);
-        font-weight: 700;
-        line-height: math.div(30, 24);
-
         margin-bottom: toRem(16);
     }
     @media (max-width: toEm(992, 16)) {
         &__title{
-            font-size: toRem(22);
             margin-bottom: toRem(10);
         }
     }
     @media (max-width: toEm(768, 16)) {
         &__title{
-            font-size: toRem(20);
             margin-bottom: toRem(5);
         }
     }
-    
+
     &__location, &__location-inner{
         display: flex;
         align-items: center;
     }
-    @media (min-width: toEm(481, 16)) {
-        &__location::before{
-            margin-right: toRem(4);
-        }
-    }
     &__location{
-        &::before{
-            color: $darkGreen;
-            font-size: toRem(15.75);
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            width: toRem(18);
-            height: toRem(18);
-        }
-
         color: $darkGreen;
         font-family: Montserrat;
         font-size: toRem(18);
         font-weight: 500;
         line-height: math.div(24, 18);
-
-        span{
-            color: rgba($color: $darkGreen, $alpha: 0.75);
-            font-family: Montserrat;
-            font-size: toRem(14);
-            font-weight: 500;
-            line-height: math.div(18, 14);
-        }
     }
     &:not(.two) &__location,
     &.two &__locations{
         margin-bottom: toRem(8);
     }
-    @media (max-width: toEm(992, 16)) {
-        &__location{
-            &::before{
-                font-size: toRem(14);
-            }
-            font-size: toRem(16);
-        }
-    }
     @media (max-width: toEm(768, 16)) {
         &:not(.two) &__location,
         &.two &__locations{
             margin-bottom: toRem(5);
-        }
-        &__location{
-            font-size: toRem(14);
-        }
-    }
-    @media (max-width: toEm(480, 16)) {
-        &__location, &__location span{
-            font-size: toRem(12);
-        }
-    }
-
-    &__right{
-        display: flex;
-        flex-direction: column;
-    }
-
-    @media (min-width: toEm(769, 16)) {
-        &__price{
-            align-self: flex-end;
-        }
-    }
-    &__price{
-        color: $lightRed;
-        font-family: Montserrat;
-        font-size: toRem(32);
-        font-weight: 700;
-        line-height: math.div(39, 32);
-    }
-    @media (max-width: toEm(992, 16)) {
-        &__price{
-            font-size: toRem(26);
-        }
-    }
-    @media (max-width: toEm(768, 16)) {
-        &__price{
-            font-size: toRem(24);
-        }
-    }
-    @media (max-width: toEm(480, 16)) {
-        &__price{
-            font-size: toRem(22);
-        }
-    }
-
-    &__interaction{
-        display: inline-flex;
-        margin-top: toRem(16);
-    }
-    @media (max-width: toEm(768, 16)) {
-        &__interaction{
-            margin-top: toRem(10);
-        }
-    }
-
-    &__favourites, &__share{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-width: toRem(48);
-
-        border-radius: toRem(4);
-        border: toRem(1) solid $mint;
-        &:not(:last-child){
-            margin-right: toRem(15);
-        }
-        transition: background-color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
-        color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
-    }
-    &__favourites:focus, &__share:focus{
-        outline: none;
-        background-color: $mint;
-        color: $white;
-    }
-    @media (any-hover: hover) {
-        &__favourites:hover, &__share:hover{
-            background-color: $mint;
-            color: $white;
-        }
-    }
-    @media (max-width: toEm(480, 16)) {
-        &__favourites, &__share{
-            min-width: toRem(40);
-            &:not(:last-child){
-                margin-right: toRem(10);
-            }
-        }
-    }
-
-    &__book{
-        border-radius: toRem(4);
-        background: $mint;
-        padding: toRem(8) toRem(16);
-
-        min-height: toRem(48);
-        display: flex;
-        align-items: center;
-
-        color: $darkGreen;
-        font-family: Montserrat;
-        font-size: toRem(14);
-        font-weight: 600;
-        line-height: math.div(17, 14);
-
-        transition: border-color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
-        background-color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
-        color 0.3s cubic-bezier(0.075, 0.82, 0.165, 1),
-        text-shadow 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
-    }
-    &__book:focus{
-        outline: none;
-        border-color: $darkGreen;
-        background-color: $darkGreen;
-        color: $mint;
-        text-shadow: 0 0 8px $mint;
-    }
-    @media (any-hover: hover) {
-        &__book:hover{
-            border-color: $darkGreen;
-            background-color: $darkGreen;
-            color: $mint;
-            text-shadow: 0 0 8px $mint;
-        }
-    }
-    @media (max-width: toEm(768, 16)) {
-        &__book{
-            flex: 1 1 auto;
-            justify-content: center;
-            min-height: toRem(40);
         }
     }
 
@@ -305,7 +112,7 @@
         line-height: math.div(17, 14);
     }
 }
-.header-flight.two .header_depart-flight{
+.header-flight.two .header-flight_depart{
     &__image{
         clip-path: polygon(0 0, 100% 0, 0 100%);
     }
@@ -314,7 +121,7 @@
         top: toRem(15);
     }
 }
-.header-flight.two .header_return-flight{
+.header-flight.two .header-flight_return{
     &__image{
         clip-path: polygon(100% 100%, 0 100%, 100% 0);
     }

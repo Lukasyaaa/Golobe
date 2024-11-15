@@ -4,13 +4,13 @@ import { FlightSeatsType } from "./FlightSeatsType";
 
 interface flightSeatsTypesProps{
     about : flight,
-    choosedFlight : string,
+    choosedDirection : string,
     choosedReturnSeatsType : setter<imageVariants<string>[]>,
     choosedDepartSeatsType : setter<imageVariants<string>[]>,
 }
 
-export const FlightSeatsTypes : FC<flightSeatsTypesProps> = ({about, choosedFlight, choosedReturnSeatsType, choosedDepartSeatsType}) => {
-    if(choosedFlight.includes("+")){
+export const FlightSeatsTypes : FC<flightSeatsTypesProps> = ({about, choosedDirection, choosedReturnSeatsType, choosedDepartSeatsType}) => {
+    if(choosedDirection.includes("+")){
         return(
             <section className="flight__features features-flight two">
                 <div className="container">
@@ -26,7 +26,7 @@ export const FlightSeatsTypes : FC<flightSeatsTypesProps> = ({about, choosedFlig
             </section>
         )
     }
-    if(choosedFlight === flightDirection.Depart){
+    if(choosedDirection === flightDirection.Depart){
         return(
             <section className="flight__features features-flight">
                 <div className="container">
