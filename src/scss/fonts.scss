@@ -1,0 +1,218 @@
+@font-face{
+    font-family: "TradeGothic";
+    font-weight: 700;
+    src: url("../assets/fonts/TradeGothic/TradeGothic-Bold.woff2") format("woff2"),
+    url("../assets/fonts/TradeGothic/TradeGothic-Bold.woff") format("woff");
+    font-display: swap;
+    font-style: normal;
+}
+@font-face{
+    font-family: "TradeGothic";
+    font-weight: 400;
+    src: url("../assets/fonts/TradeGothic/TradeGothic-Regular.woff2") format("woff2"),
+    url("../assets/fonts/TradeGothic/TradeGothic-Regular.woff") format("woff");
+    font-display: swap;
+    font-style: normal;
+}
+
+@font-face{
+    font-family: "Montserrat";
+    font-weight: 700;
+    src: url("../assets/fonts/Montserrat/Montserrat-Bold.woff2") format("woff2"),
+    url("../assets/fonts/Montserrat/Montserrat-Bold.woff") format("woff");
+    font-display: swap;
+    font-style: normal;
+}
+@font-face{
+    font-family: "Montserrat";
+    font-weight: 600;
+    src: url("../assets/fonts/Montserrat/Montserrat-SemiBold.woff2") format("woff2"),
+    url("../assets/fonts/Montserrat/Montserrat-SemiBold.woff") format("woff");
+    font-display: swap;
+    font-style: normal;
+}
+@font-face{
+    font-family: "Montserrat";
+    font-weight: 500;
+    src: url("../assets/fonts/Montserrat/Montserrat-Medium.woff2") format("woff2"),
+    url("../assets/fonts/Montserrat/Montserrat-Medium.woff") format("woff");
+    font-display: swap;
+    font-style: normal;
+}
+@font-face{
+    font-family: "Montserrat";
+    font-weight: 400;
+    src: url("../assets/fonts/Montserrat/Montserrat-Regular.woff2") format("woff2"),
+    url("../assets/fonts/Montserrat/Montserrat-Regular.woff") format("woff");
+    font-display: swap;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'icomoon';
+    font-weight: normal;
+    src: url("../assets/fonts/Icons/icomoon.woff2") format("woff2"),
+    url("../assets/fonts/Icons/icomoon.woff") format("woff");
+    font-style: normal;
+    font-display: block;
+  }
+  
+  [class^="icon-"]::before, [class*=" icon-"]::before {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: never;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+  
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+.icon-apple:before {
+    content: "\e900";
+}
+.icon-arrow_bottom:before {
+    content: "\e901";
+}
+.icon-bar:before {
+    content: "\e902";
+}
+.icon-bed:before {
+    content: "\e903";
+}
+.icon-bin:before {
+    content: "\e904";
+}
+.icon-change:before {
+    content: "\e905";
+}
+.icon-clock:before {
+    content: "\e906";
+}
+.icon-cup:before {
+    content: "\e907";
+}
+.icon-date:before {
+    content: "\e908";
+}
+.icon-door:before {
+    content: "\e909";
+}
+.icon-facebook:before {
+    content: "\e90a";
+}
+.icon-flag:before {
+    content: "\e90b";
+}
+.icon-from-to:before {
+    content: "\e90c";
+}
+.icon-gym:before {
+    content: "\e90d";
+}
+.icon-heart:before {
+    content: "\e90e";
+}
+.icon-heart_border:before {
+    content: "\e90f";
+}
+.icon-hotel:before {
+    content: "\e910";
+}
+.icon-inst:before {
+    content: "\e911";
+}
+.icon-junk-food:before {
+    content: "\e912";
+}
+.icon-location:before {
+    content: "\e913";
+}
+.icon-log-out:before {
+    content: "\e914";
+}
+.icon-mail:before {
+    content: "\e915";
+}
+.icon-payment:before {
+    content: "\e916";
+}
+.icon-pen:before {
+    content: "\e917";
+}
+.icon-plane:before {
+    content: "\e918";
+}
+.icon-plus:before {
+    content: "\e919";
+}
+.icon-plus_circle:before {
+    content: "\e91a";
+}
+.icon-pool:before {
+    content: "\e91b";
+}
+.icon-restaurant:before {
+    content: "\e91c";
+}
+.icon-search:before {
+    content: "\e91d";
+}
+.icon-seat:before {
+    content: "\e91e";
+}
+.icon-send:before {
+    content: "\e91f";
+}
+.icon-service:before {
+    content: "\e920";
+}
+.icon-settings:before {
+    content: "\e921";
+}
+.icon-share:before {
+    content: "\e922";
+}
+.icon-show:before {
+    content: "\e923";
+}
+.icon-spa:before {
+    content: "\e924";
+}
+.icon-star:before {
+    content: "\e925";
+}
+.icon-stars:before {
+    content: "\e926";
+}
+.icon-support:before {
+    content: "\e927";
+}
+.icon-time:before {
+    content: "\e928";
+}
+.icon-twitter:before {
+    content: "\e929";
+}
+.icon-unshow:before {
+    content: "\e92a";
+}
+.icon-upload:before {
+    content: "\e92b";
+}
+.icon-user:before {
+    content: "\e92c";
+}
+.icon-visa:before {
+    content: "\e92d";
+}
+.icon-wifi:before {
+    content: "\e92e";
+}
+.icon-youtube:before {
+    content: "\e92f";
+}
