@@ -1,4 +1,9 @@
-@use "./fonts.scss";
-@use "./nullingStyles.scss";
+@use "./service/fonts.scss";
+@use "./service/nullingStyles.scss";
 
-@use "./common.scss";
+@use "./service/common.scss";
+
+@use "./common/header.scss";
+@use "./start/intro.scss";
+@use "./common/options.scss";
+@use "./start/trips.scss";

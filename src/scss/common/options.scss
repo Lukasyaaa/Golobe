@@ -1,0 +1,621 @@
+@use "../service/common.scss";
+
+.options{
+    margin-top: common.toRem(-97);
+    position: relative;
+    z-index: 2;
+
+    @media (min-width: common.toEm(993, 16)) {
+        &__inner{
+            padding: common.toRem(16) common.toRem(32) common.toRem(32);
+        }
+    }
+    &__inner{
+        border-radius: common.toRem(16);
+        box-shadow: 0px 4px 16px 0px rgba(141, 211, 187, 0.15);
+        background-color: common.$white;
+    }
+    @media (max-width: common.toEm(992, 16)) and (min-width: common.toEm(481, 16)) {
+        &__inner{
+            padding: common.toRem(16) common.toRem(24) common.toRem(24);
+        }
+    }
+    @media (max-width: common.toEm(480, 16)) {
+        &__inner{
+            padding: common.toRem(16);
+        }
+    }
+
+    @media (min-width: common.toEm(993, 16)) {
+        &__header{
+            min-height: common.toRem(63); // 48px(real height) + 15px(margin)    
+            margin: 0 common.toRem(-32);
+        }
+    }
+    @media (min-width: common.toEm(769, 16)) {
+        &__header{
+            padding-bottom: common.toRem(15);
+        }
+    }
+    &__header{
+        display: flex;
+    }
+    @media (max-width: common.toEm(992, 16)) and (min-width: common.toEm(769, 16)) {
+        &__header{
+            margin: 0 common.toRem(-24);
+        }
+    }
+    @media (max-width: common.toEm(992, 16))  {
+        &__header{
+            min-height: common.toRem(48);
+        }
+    }
+    @media (max-width: common.toEm(768, 16)) {
+        &__header{
+            padding-bottom: common.toRem(5);
+            margin: 0 common.toRem(-16);
+        }
+    }
+
+    @media (min-width: common.toEm(769, 16)) {
+        &__table{
+            margin: common.toRem(25) 0 common.toRem(32);
+        }   
+    }
+    @media (max-width: common.toEm(768, 16)) and (min-width: common.toEm(481, 16)) {
+        &__table{
+            margin: common.toRem(24) 0;
+        }
+    }
+    @media (max-width: common.toEm(480, 16)) {
+        &__table{
+            margin: common.toRem(16) 0;
+        }
+    }
+
+    @media (min-width: common.toEm(769, 16)) {
+        &__row{
+            display: flex;
+        }    
+    }
+
+    @media (min-width: common.toEm(993, 16)) {
+        &__input:not(:last-child), &__select:not(:last-child){
+            margin-right: common.toRem(24);
+        }    
+    }
+    @media (min-width: common.toEm(769, 16)) {
+        &__input{
+            flex: 1 1 common.toRem(320);
+        }   
+        &__select{
+            flex: 1 1 common.toRem(136);
+        } 
+        &__input.bigger,
+        &__select.bigger{
+            flex: 1 1 common.toRem(420);
+        }
+        &__input.smaller,
+        &__select.smaller{
+            flex: 1 1 common.toRem(249);
+        }
+    }
+    &__input, &__select{
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    &__select{
+        position: relative;
+    }
+    @media (max-width: common.toEm(992, 16)) and (min-width: common.toEm(769, 16)) {
+        &__input:not(:last-child), &__select:not(:last-child){
+            margin-right: common.toRem(16);
+        } 
+    }
+    @media (max-width: common.toEm(768, 16)) {
+        &__input:not(:last-child), &__select:not(:last-child){
+            margin-bottom: common.toRem(10);
+        } 
+    }
+
+    @media (min-width: common.toEm(769, 16)) {
+        &__footer{
+            display: flex;
+            justify-content: flex-end;
+        }
+    }
+    &__add-promo, &__link{
+        display: flex;
+        align-items: center;
+        min-height: common.toRem(48);
+
+        color: common.$darkGreen;
+        &::before{
+            min-width: common.toRem(16);
+            height: common.toRem(16);
+    
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: common.toRem(4);
+        }
+        span{
+            font-family: Montserrat;
+            font-size: common.toRem(14);
+            font-weight: 500;
+            line-height: common.toEm(18, 14);
+        }
+    }
+    @media (max-width: common.toEm(768, 16)) {
+        &__add-promo, &__link{
+            width: 100%;
+            justify-content: center;
+        }
+    }
+
+    @media (min-width: common.toEm(769, 16)) {
+        &__add-promo{
+            margin-right: common.toRem(24);
+            &::after{ 
+                background-color: common.$darkGreen;
+                height: common.toRem(5);
+                bottom: 0;
+                transform: translateX(-50%);
+
+                transition: width 0.3s cubic-bezier(0,-0.18,0,1);
+            }
+        }
+        &__add-promo:focus::after{
+            width: 100%;
+        }
+        @media (any-hover: hover) {
+            &__add-promo:hover::after{
+                width: 100%;
+            }
+        }
+    }  
+    &__add-promo:focus{
+        outline: none;
+    }
+    &__add-promo{
+        position: relative;
+        &::after{
+            content: "";
+
+            pointer-events: none;
+            position: absolute;
+            left: 50%;
+
+            width: 0%;
+        }
+    }
+    @media (max-width: common.toEm(768, 16)) {
+        &__add-promo{
+            border-radius: common.toRem(4);
+            background-color: common.$darkGreen;
+            color: common.$white;
+
+            margin-bottom: common.toRem(10);
+            &::after{
+                border: common.toRem(2) solid common.$darkGreen;
+                border-radius: common.toRem(4);
+                background-color: common.$white;
+
+                height: 0;
+                top: 50%;
+                transform: translateY(-50%) translateX(-50%);
+                z-index: 1;
+                
+                transition: width 0.3s cubic-bezier(0,-0.18,0,1),
+                height 0.3s cubic-bezier(0,-0.18,0,1);
+            }
+            span, &::before{
+                position: relative;
+                z-index: 2;
+            }
+        }
+        &__add-promo:focus{
+            color: common.$darkGreen;
+            &::after{
+                width: 100%;
+                height: 100%;
+            }
+        } 
+        @media (any-hover: hover) {
+            &__add-promo:hover{
+                color: common.$darkGreen;
+                &::after{
+                    width: 100%;
+                    height: 100%;
+                }
+            }   
+        }
+    }
+
+    &__link{
+        border-radius: common.toRem(4);
+        background-color: common.$mint;
+        padding: common.toRem(8) common.toRem(16);
+    
+        position: relative;
+        transition: color 0.3s cubic-bezier(0,-0.18,0,1);
+        &::after{
+            border-radius: common.toRem(4);
+            background-color: common.$darkGreen;
+            content: "";
+
+            position: absolute;
+            z-index: 1;
+            left: 50%;
+            top: 50%;
+            transform: translateY(-50%) translateX(-50%);
+
+            width: 0;
+            height: 0;
+
+            transition: height 0.3s cubic-bezier(0,-0.18,0,1),
+            width 0.3s cubic-bezier(0,-0.18,0,1);
+        }
+        span, &::before{
+            position: relative;
+            z-index: 2;
+        }
+    }
+    &__link:focus{
+        outline: none;
+        color: common.$mint;
+        &::after{
+            width: 100%;
+            height: 100%;
+        }
+    } 
+    @media (any-hover: hover) {
+        &__link:hover{
+            color: common.$mint;
+            &::after{
+                width: 100%;
+                height: 100%;
+            }
+        }   
+    }
+}
+.header-options{
+    @media (min-width: common.toEm(993, 16)) {
+        &__link{
+            padding: 0 common.toRem(32);
+        }
+    }
+    @media (max-width: common.toEm(992, 16)) and (min-width: common.toEm(769, 16)) {
+        &__link{
+            padding: 0 common.toRem(24);
+        }
+    }
+    @media (max-width: common.toEm(768, 16)) {
+        &__link{
+            padding: 0 common.toRem(16);
+        }
+    }
+    &__link:not(:last-child){
+        position: relative;
+        &::after{
+            background-color: common.$blueGray;
+
+            content: "";
+            position: absolute;
+            right: 0;
+            top: 0;
+
+            height: 100%;
+            width: common.toRem(1);
+        }
+    }
+
+    @media (min-width: common.toEm(993, 16)) {
+        &__link button::before,
+        &__link div::before{
+            margin-right: common.toRem(8);
+        }
+    }
+    &__link button,
+    &__link div{
+        height: 100%;
+        display: flex;
+        align-items: center;
+        span{
+            color: common.$darkGreen;
+            font-family: Montserrat;
+            font-size: common.toRem(16);
+            font-weight: 600;
+            line-height: common.toEm(19, 16);
+        }
+        &::before{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            align-self: center;
+
+            min-width: common.toRem(24);
+            height: common.toRem(24);
+        }
+    }
+    @media (max-width: common.toEm(992, 16)) {
+        &__link button::before,
+        &__link div::before{
+            margin-right: common.toRem(4);
+        }
+    }
+
+    @media (min-width: common.toEm(769, 16)) {
+        &__link button::after,
+        &__link div::after{
+            bottom: common.toRem(-15);
+        }
+    }
+    &__link button:focus{
+        outline: none;
+    }
+    &__link button,
+    &__link div{
+        position: relative;
+        &::after{
+            background: common.$mint;
+
+            content: "";
+            height: common.toRem(4);
+            width: 0;
+
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+
+            transition: width 0.3s cubic-bezier(0,-0.18,0,1);
+        }
+    }
+    &:not(._hide-active) &__link div::after,
+    &__link button._hovered::after{
+        width: 100%;
+    }
+    @media (max-width: common.toEm(768, 16)) {
+        &__link button::after,
+        &__link div::after{
+            bottom: common.toRem(-5);
+        }
+    }
+}
+
+.input-options__label, .select-options__label{
+    display: inline-block;
+    align-self: flex-start;
+    position: relative;
+    z-index: 2;
+    &::before{
+        background-color: common.$grayPurple;
+        content: "";
+
+        position: absolute;
+        z-index: 1;
+        left: 0;
+        top: 0;
+
+        width: 0;
+        height: 100%;
+
+        transition: width 0.3s cubic-bezier(0,-0.18,0,1);
+    }
+    span{
+        position: relative;
+        z-index: 2;
+
+        transition: color 0.3s cubic-bezier(0,-0.18,0,1);
+    }
+    background-color: common.$white;
+    margin: 0 common.toRem(12);
+    padding: 0 common.toRem(4);
+
+    color: common.$darkGreen;
+    font-family: Montserrat;
+    font-size: common.toRem(14);
+    font-weight: 400;
+    line-height: common.toEm(18, 14);
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@media (min-width: common.toEm(769, 16)) {
+    .input-options__sublabel, .select-options__opener{
+        min-height: common.toRem(56);
+        flex: 1 1 auto;
+    }
+}
+.input-options__sublabel, .select-options__opener{
+    border: common.toRem(1) solid common.$grayPurple;
+    border-radius: common.toRem(4);
+
+    color: common.$darkPurple;
+    font-family: Montserrat;
+    font-size: common.toRem(16);
+    font-weight: 400;
+    line-height: common.toEm(20, 16);
+
+    width: 100%;
+
+    position: relative;
+    z-index: 1;
+    margin-top: common.toRem(-10);
+    &:focus{
+        outline: none;
+    }
+}
+@media (max-width: common.toEm(768, 16)) {
+    .input-options__sublabel, .select-options__opener{
+        min-height: common.toRem(48);
+    }
+}
+
+.input-options.left::before, .select-options.left::before, 
+.input-options.right::before{
+    top: calc(50% + common.toRem(10) / 2);
+}
+
+.select-options__opener::before{
+    top: 50%;
+}
+.input-options.left, .select-options.left,
+.input-options.right, .select-options__opener{
+    position: relative;
+    &::before{
+        pointer-events: none;
+        position: absolute;
+        z-index: 2;
+        transform: translateY(-50%);
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: common.toRem(24);
+        width: common.toRem(24);
+    }
+}
+.input-options{
+    &__sublabel{
+        padding: 0 common.toRem(16);
+        &::placeholder{
+            color: common.$darkPurple;
+        }
+    }
+    &__sublabel:focus ~ &__label{
+        &::before{
+            width: 100%;
+        }
+        span{
+            color: common.$white;
+        }
+    }
+    @media (any-hover: hover) {
+        &__sublabel:hover ~ &__label{
+            &::before{
+                width: 100%;
+            }
+            span{
+                color: common.$white;
+            }
+        }
+    }
+
+    @media (min-width: common.toEm(993, 16)) {
+        &.left &__sublabel{
+            padding: 0 common.toRem(16) 0 common.toRem(48);
+        }    
+    }
+    @media (max-width: common.toEm(992, 16)) {
+        &.left &__sublabel{
+            padding: 0 common.toRem(16) 0 common.toRem(36);
+        }
+    }
+
+    @media (min-width: common.toEm(993, 16)) {
+        &.left::before{
+            left: common.toRem(12);
+        }
+    }
+    @media (max-width: common.toEm(992, 16)) {
+        &.left::before{
+            left: common.toRem(6);
+        }    
+    }
+
+    @media (min-width: common.toEm(993, 16)) {
+        &.right &__sublabel{
+            padding: 0 common.toRem(48) 0 common.toRem(16);
+        }        
+    }
+    @media (max-width: common.toEm(992, 16)) {
+        &.right &__sublabel{
+            padding: 0 common.toRem(36) 0 common.toRem(16);
+        }        
+    }
+
+    @media (min-width: common.toEm(993, 16)) {
+        &.right::before{
+            right: common.toRem(12);
+        }      
+    }
+    @media (max-width: common.toEm(992, 16)) {
+        &.right::before{
+            right: common.toRem(6);
+        }      
+    }
+}
+.select-options{
+    @media (min-width: common.toEm(993, 16)) {
+        &__opener{
+            padding: common.toRem(10) common.toRem(48) common.toRem(10) common.toRem(16);
+            &::before{
+                right: common.toRem(12);
+            }
+        }
+    }
+    &__opener{
+        text-align: left;
+    }
+    &__opener:focus ~ &__label{
+        &::before{
+            width: 100%;
+        }
+        span{
+            color: common.$white;
+        }
+    }
+    @media (any-hover: hover) {
+        &__opener:hover ~ &__label{
+            &::before{
+                width: 100%;
+            }
+            span{
+                color: common.$white;
+            }
+        }
+    }
+
+    @media (max-width: common.toEm(992, 16)) {
+        &__opener{
+            padding: common.toRem(10) common.toRem(36) common.toRem(10) common.toRem(16);
+            &::before{
+                right: common.toRem(6);
+            }
+        }
+    }
+
+    @media (min-width: common.toEm(993, 16)) {
+        &.left &__opener{
+            padding: common.toRem(10) common.toRem(48);
+        }
+    }
+    @media (max-width: common.toEm(992, 16)) {
+        &.left &__opener{
+            padding: common.toRem(10) common.toRem(36);
+        }
+    }
+
+    @media (min-width: common.toEm(993, 16)) {
+        &.left::before{
+            left: common.toRem(12);
+        }    
+    }
+    @media (max-width: common.toEm(992, 16)) {
+        &.left::before{
+            left: common.toRem(6);
+        }
+    }
+
+    @media (min-width: common.toEm(769, 16)) {
+        &__container{
+            width: 115%;
+        }
+    }
+    &__container{
+        z-index: 3;
+    }
+}

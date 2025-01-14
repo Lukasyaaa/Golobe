@@ -1,0 +1,555 @@
+@use "../service/common.scss";
+
+.header{
+    position: fixed;
+    z-index: 3;
+
+    @media (min-width: common.toEm(1441, 16)) {
+        padding-top: common.toRem(30);
+    }
+    @media (max-width: common.toEm(1440, 16)) and (min-width: common.toEm(1381, 16)) {
+        padding-top: calc(common.toRem(30) - (1440px - 100vw) / 2);
+    }
+
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: transparent;
+
+    transition: padding-top 0.3s cubic-bezier(0,-0.18,0,1),
+    background-color 0.3s cubic-bezier(0,-0.18,0,1);
+
+    @media (max-width: common.toEm(768, 16)) {
+        &::before{
+            background-color: common.$mint;
+            content: "";
+
+            position: absolute;
+            z-index: 5;
+            right: -100%;
+            top: 0;
+
+            width: 100%;
+            height: 100%;
+
+            transition: right 0.3s cubic-bezier(0,-0.18,0,1);
+        }
+        &._active::before{
+            right: 0;
+        }
+    }
+
+    &._scroll{
+        padding-top: 0;
+        background: common.$mint;
+    }
+    
+    @media (min-width: common.toEm(993, 16)) {
+        .container{
+            min-height: common.toRem(96);
+        }
+    }
+    .container{
+        display: flex;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    @media (max-width: common.toEm(992, 16)) and (min-width: common.toEm(769, 16)) {
+        .container{
+            min-height: common.toRem(86);
+        }
+    }
+    @media (max-width: common.toEm(768, 16)) and (min-width: common.toEm(481, 16)) {
+        .container{
+            min-height: common.toRem(76);
+        }
+    }
+    @media (max-width: common.toEm(480, 16)) {
+        .container{
+            justify-content: space-between;
+            min-height: common.toRem(66);
+        }
+    }
+    
+    @media (max-width: common.toEm(768, 16)) {
+        .container > *:not(.header__menu){
+            position: relative;
+            z-index: 6;
+        }
+    }
+
+    @media (min-width: common.toEm(769, 16)) {
+        &__menu{
+            flex: 0 1 50%;
+            margin: -10px 0;
+        }
+    }
+    @media (max-width: common.toEm(768, 16)) {
+        @media (min-width: common.toEm(481, 16)) {
+            &__menu{
+                padding: common.toRem(92) 15px common.toRem(32); //92 = 76(header height) + 16(padding)
+            }   
+        }
+        &__menu{
+            background-color: rgba($color: common.$white, $alpha: 0.9);
+            position: fixed;
+            z-index: 4;
+            right: -100%;
+            top: 0;
+
+            width: 100%;
+            height: 100%;
+            overflow-y: scroll;
+
+            transition: right 0.3s cubic-bezier(0,-0.18,0,1);
+        }
+        &._active &__menu{
+            right: 0;
+        }
+    }
+    @media (max-width: common.toEm(480, 16)) {
+        &__menu{
+            padding: common.toRem(82) 15px common.toRem(24); //82 = 66(header height) + 16(padding)
+        }
+    }
+
+    @media (min-width: common.toEm(993, 16)) {
+        &__logo{
+            margin: 0 common.toRem(32);
+        }
+    }
+    &__logo{
+        transition: filter 0.3s cubic-bezier(0,-0.18,0,1);
+    }
+    @media (max-width: common.toEm(992, 16)) and (min-width: common.toEm(769, 16)) {
+        &__logo{
+            margin: 0 common.toRem(24);
+        }
+    }
+    @media (max-width: common.toEm(768, 16)) and (min-width: common.toEm(481, 16)) {
+        &__logo{
+            margin: 0 common.toRem(24) 0 0;
+        }
+    }
+    @media (max-width: common.toEm(480, 16)) {
+        &__logo{
+            margin: 0 common.toRem(16) 0 0;
+        }
+    }
+
+    &._scroll &__logo,
+    &._active &__logo{
+        filter: drop-shadow(0 0 5px common.$white);
+    }
+
+    @media (min-width: common.toEm(769, 16)) {
+        &__authorization{
+            flex: 0 1 50%;
+        }
+    }
+    @media (min-width: common.toEm(481, 16)) {
+        &__authorization{
+            display: flex;
+            justify-content: flex-end;
+            
+            margin: -10px 0;
+        }
+        @media (max-width: common.toEm(768, 16)) {
+            &__authorization{
+                flex: 1 1 auto;
+            }
+        }
+    }
+    @media (max-width: common.toEm(480, 16)) {
+        &__authorization{
+            display: none;
+        }
+    }
+
+    @media (min-width: common.toEm(769, 16)) {
+        &__burger{
+            display: none;
+        }
+    }
+    @media (max-width: common.toEm(768, 16)) {
+        @media (min-width: common.toEm(480, 16)) {
+            &__burger{
+                margin-left: common.toRem(24);
+            }
+        }
+        &__burger{
+            align-self: center;
+
+            display: block;
+            flex: 0 1 common.toRem(48);
+            height: common.toRem(28);
+            position: relative;
+
+            &::after, &::before{
+                content: "";
+                transition: top 0.3s cubic-bezier(0,-0.18,0,1),
+                transform 0.3s cubic-bezier(0,-0.18,0,1);
+            }
+            span, &::after, &::before{
+                background-color: common.$white;
+
+                position: absolute;
+                left: 0;
+                top: 0;
+
+                width: 100%;
+                height: common.toRem(5);
+            }
+            &::after{
+                top: 100%;
+                transform: translateY(-100%);
+                transition: top 0.6s cubic-bezier(0,-0.18,0,1),
+                transform 0.6s cubic-bezier(0,-0.18,0,1);
+            }
+            span{
+                top: common.toRem(14); 
+                transform: translateY(-50%);
+
+                
+                transition: transform 0.45s cubic-bezier(0,-0.18,0,1);
+            }
+
+            transition: filter 0.3s cubic-bezier(0,-0.18,0,1);
+        }
+        &._active &__burger{
+            span{
+                transform: translateY(-50%) scale(0);
+            }
+            &::after{
+                top: 50%;
+                transform: translateY(-50%) rotate(45deg);
+            }
+            &::before{
+                top: 50%;
+                transform: translateY(-50%) rotate(-45deg);
+            }
+        }
+        &__burger:focus{
+            outline: none;
+            filter: drop-shadow(0 0 5px common.$white);
+        }
+        @media (any-hover: hover) {
+            &__burger:hover{
+                filter: drop-shadow(0 0 5px common.$white);
+            }
+        }
+    }
+}
+.menu-header{
+    @media (min-width: common.toEm(769, 16)) {
+        &__list, &__link, &__link a{
+            height: 100%;
+        }
+    }
+
+    @media (min-width: common.toEm(993, 16)) {
+        &__list{
+            margin: 0 common.toRem(-16);
+        }
+    }
+    @media (min-width: common.toEm(769, 16)) {
+        &__list{
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        @media (max-width: common.toEm(992, 16)) {
+            &__list{
+                margin: 0 common.toRem(-12);
+            }
+        }
+    }
+    @media (max-width: common.toEm(768, 16)) {
+        &__list{
+            text-align: center;
+        }
+    }
+    @media (max-width: common.toEm(480, 16)) {
+        &__list{
+            margin-bottom: common.toRem(24);
+        }
+    }
+
+    @media (min-width: common.toEm(993, 16)) {
+        &__link{            
+            padding: 0 common.toRem(16);
+        }
+    }
+    @media (max-width: common.toEm(992, 16)) and (min-width: common.toEm(769, 16)) {
+        &__link{
+            padding: 0 common.toRem(12);
+        }
+    }
+    @media (max-width: common.toEm(768, 16)) {
+        &__link{
+            position: relative;
+        }
+    }
+    @media (max-width: common.toEm(768, 16)) and (min-width: common.toEm(481, 16)) {
+        &__link:not(:last-child){
+            margin-bottom: common.toRem(16);
+        }
+    }
+    @media (max-width: common.toEm(480, 16)) {
+        &__link:not(:last-child){
+            margin-bottom: common.toRem(10);
+        }
+    }
+
+    @media (min-width: common.toEm(769, 16)) {
+        &__link a{
+            position: relative;
+
+            display: flex;
+            align-items: center;
+            span{
+                font-size: common.toRem(14);
+                color: common.$white;
+            }
+            &::before{
+                color: common.$white;
+                min-width: common.toRem(24);
+                height: common.toRem(24);
+    
+                margin-right: common.toRem(4);
+            }
+        }
+
+        &__link a:focus::after{
+            opacity: 1;
+            width: calc(100% + common.toRem(12));
+            height: 100%;
+        }
+        @media (any-hover: hover) {
+            &__link a:hover::after{
+                opacity: 1;
+                width: calc(100% + common.toRem(12));
+                height: 100%;
+            }
+        }
+    }
+    &__link a{
+        span{
+            font-family: Montserrat;
+            font-weight: 600;
+            line-height: common.toEm(18, 14);
+        }
+        &::before{
+            display: flex;
+            align-self: center;
+            align-items: center;
+            justify-content: center;
+        }
+        &::after{
+            border: common.toRem(3) solid common.$white;
+            content: "";
+            opacity: 0;
+
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translateY(-50%) translateX(-50%);
+        
+            width: 0;
+            height: 0;
+
+            transition: width 0.3s cubic-bezier(0,-0.18,0,1),
+            height 0.3s cubic-bezier(0,-0.18,0,1),
+            opacity 0.3s cubic-bezier(0,-0.18,0,1);
+        }
+    }
+    &__link a:focus{
+        outline: none;
+    }
+    @media (max-width: common.toEm(768, 16)) {
+        &__link a{
+            color: common.$darkGreen;
+        }
+        &__link a span, &__link a::before{
+            position: relative;
+            z-index: 2;
+        }
+        &__link a::after{
+            border: unset;
+            background-color: common.$darkGreen;
+            height: calc(100% + common.toRem(10));
+        }
+
+        &__link a:focus{
+            color: common.$white;
+            &::after{
+                opacity: 1;
+                width: 100%;
+            }
+        }
+        @media (any-hover: hover) {
+            &__link a:hover{
+                color: common.$white;
+                &::after{
+                    opacity: 1;
+                    width: 100%;
+                }
+            }
+        }
+    }
+    @media (max-width: common.toEm(768, 16)) and (min-width: common.toEm(481, 16)) {
+        &__link a span{
+            font-size: common.toRem(32);
+        }
+        &__link a::before{
+            flex: 0 0 common.toRem(40);
+            height: common.toRem(40);
+            font-size: common.toRem(40);
+        }
+    }
+    @media (max-width: common.toEm(480, 16)) {
+        &__link a span{
+            font-size: common.toRem(24);
+        }
+        &__link a::before{
+            flex: 0 0 common.toRem(30);
+            height: common.toRem(30);
+
+            font-size: common.toRem(30);
+        }
+    }
+
+    @media (min-width: common.toEm(481, 16)) {
+        &__authorization{
+            display: none;
+        }
+    }
+}
+@media (min-width: common.toEm(481, 16)) {
+    .authorization-header{
+        &__link{
+            display: flex;
+            align-items: center;
+            span{
+                font-family: Montserrat;
+                font-size: common.toRem(14);
+                font-weight: 600;
+                line-height: common.toEm(18, 14);
+            }
+        }
+        &__link:focus{
+            outline: none;
+        }
+        @media (any-hover: hover) {
+            &__link{
+                align-self: center;
+                min-height: common.toRem(48);
+
+                position: relative;
+                overflow: hidden;
+                span{
+                    color: common.$darkGreen;
+                    position: relative;
+                    z-index: 2;
+
+                    transition: color 0.3s cubic-bezier(0,-0.18,0,1);
+                }
+                &::after{
+                    border-radius: common.toRem(8);
+                    background-color: common.$white;
+                    content: "";
+
+                    position: absolute;
+                    z-index: 1;
+                    left: 0;
+                    top: 0;
+
+                    width: 100%;
+                    height: 100%;
+
+                    transition: left 0.3s cubic-bezier(0,-0.18,0,1);
+                }
+            }
+        }
+    
+        @media (any-hover: none) {
+            &__login{
+                color: #fff;
+                margin-right: common.toRem(32);
+            }
+        }
+        @media (any-hover: hover) {
+            &__login{
+                padding: 0 common.toRem(32);
+            }
+            &:not(.left-side) &__login{
+                &::after{
+                    left: 100%;
+                }
+                span{
+                    color: common.$white;
+                }
+            }
+        }
+    
+        @media (any-hover: none) {
+            &__sign-up{
+                color: common.$darkGreen;
+
+                border-radius: common.toRem(8);
+                background-color: common.$white;
+                min-height: common.toRem(48);
+                align-self: center;
+            }
+        }
+        &__sign-up{
+            padding: common.toRem(10) common.toRem(24);
+        }
+        @media (any-hover: hover) {
+            &:not(.right-side) &__sign-up{
+                &::after{
+                    left: -100%;
+                }
+                span{
+                    color: common.$white;
+                }
+            }
+        }
+    }
+}
+@media (max-width: common.toEm(480, 16)) {
+    .authorization-menu-header{
+        &__link{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+    
+            padding: common.toRem(8) common.toRem(16);
+            background-color: common.$darkGreen;
+            min-height: common.toRem(64);
+            &:not(:last-child){
+                margin-bottom: common.toRem(10);
+            }
+
+            color: common.$white;
+            font-family: Montserrat;
+            font-size: common.toRem(24);
+            font-weight: 600;
+            line-height: common.toEm(18, 14);
+
+            transition: box-shadow 0.3s cubic-bezier(0,-0.18,0,1),
+            text-shadow 0.3s cubic-bezier(0,-0.18,0,1);
+        }
+        &__link:focus{
+            outline: none;
+            box-shadow: 0 0 10px common.$darkGreen;
+            text-shadow: 0 0 10px common.$white;
+        }
+        @media (any-hover: hover) {
+            &__link:hover{
+                box-shadow: 0 0 10px common.$darkGreen;
+                text-shadow: 0 0 10px common.$white;
+            }
+        }
+    }
+}

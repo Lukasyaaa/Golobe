@@ -1,16 +1,16 @@
 @font-face{
     font-family: "TradeGothic";
     font-weight: 700;
-    src: url("../assets/fonts/TradeGothic/TradeGothic-Bold.woff2") format("woff2"),
-    url("../assets/fonts/TradeGothic/TradeGothic-Bold.woff") format("woff");
+    src: url("../../assets/fonts/TradeGothic/TradeGothic-Bold.woff2") format("woff2"),
+    url("../../assets/fonts/TradeGothic/TradeGothic-Bold.woff") format("woff");
     font-display: swap;
     font-style: normal;
 }
 @font-face{
     font-family: "TradeGothic";
     font-weight: 400;
-    src: url("../assets/fonts/TradeGothic/TradeGothic-Regular.woff2") format("woff2"),
-    url("../assets/fonts/TradeGothic/TradeGothic-Regular.woff") format("woff");
+    src: url("../../assets/fonts/TradeGothic/TradeGothic-Regular.woff2") format("woff2"),
+    url("../../assets/fonts/TradeGothic/TradeGothic-Regular.woff") format("woff");
     font-display: swap;
     font-style: normal;
 }
@@ -18,32 +18,32 @@
 @font-face{
     font-family: "Montserrat";
     font-weight: 700;
-    src: url("../assets/fonts/Montserrat/Montserrat-Bold.woff2") format("woff2"),
-    url("../assets/fonts/Montserrat/Montserrat-Bold.woff") format("woff");
+    src: url("../../assets/fonts/Montserrat/Montserrat-Bold.woff2") format("woff2"),
+    url("../../assets/fonts/Montserrat/Montserrat-Bold.woff") format("woff");
     font-display: swap;
     font-style: normal;
 }
 @font-face{
     font-family: "Montserrat";
     font-weight: 600;
-    src: url("../assets/fonts/Montserrat/Montserrat-SemiBold.woff2") format("woff2"),
-    url("../assets/fonts/Montserrat/Montserrat-SemiBold.woff") format("woff");
+    src: url("../../assets/fonts/Montserrat/Montserrat-SemiBold.woff2") format("woff2"),
+    url("../../assets/fonts/Montserrat/Montserrat-SemiBold.woff") format("woff");
     font-display: swap;
     font-style: normal;
 }
 @font-face{
     font-family: "Montserrat";
     font-weight: 500;
-    src: url("../assets/fonts/Montserrat/Montserrat-Medium.woff2") format("woff2"),
-    url("../assets/fonts/Montserrat/Montserrat-Medium.woff") format("woff");
+    src: url("../../assets/fonts/Montserrat/Montserrat-Medium.woff2") format("woff2"),
+    url("../../assets/fonts/Montserrat/Montserrat-Medium.woff") format("woff");
     font-display: swap;
     font-style: normal;
 }
 @font-face{
     font-family: "Montserrat";
     font-weight: 400;
-    src: url("../assets/fonts/Montserrat/Montserrat-Regular.woff2") format("woff2"),
-    url("../assets/fonts/Montserrat/Montserrat-Regular.woff") format("woff");
+    src: url("../../assets/fonts/Montserrat/Montserrat-Regular.woff2") format("woff2"),
+    url("../../assets/fonts/Montserrat/Montserrat-Regular.woff") format("woff");
     font-display: swap;
     font-style: normal;
 }
@@ -51,13 +51,13 @@
 @font-face {
     font-family: 'icomoon';
     font-weight: normal;
-    src: url("../assets/fonts/Icons/icomoon.woff2") format("woff2"),
-    url("../assets/fonts/Icons/icomoon.woff") format("woff");
+    src: url("../../assets/fonts/Icons/icomoon.woff2") format("woff2"),
+    url("../../assets/fonts/Icons/icomoon.woff") format("woff");
     font-style: normal;
     font-display: block;
   }
   
-  [class^="icon-"]::before, [class*=" icon-"]::before {
+[class^="icon-"]::before, [class*=" icon-"]::before {
     /* use !important to prevent issues with browser extensions that change fonts */
     font-family: 'icomoon' !important;
     speak: never;
@@ -70,7 +70,7 @@
     /* Better Font Rendering =========== */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-  }
+}
   
 .icon-apple:before {
     content: "\e900";

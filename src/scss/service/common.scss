@@ -1,0 +1,213 @@
+$container: 1232;
+$headerContainer: 1316;
+
+$white: rgb(255, 255, 255);
+$black: rgb(0, 0, 0);
+$mint: rgb(141, 211, 187);
+$gray: rgb(217, 217, 217);
+$red: rgb(255, 134, 130);
+
+$blueGray: rgb(215, 226, 238);
+
+$darkGreen: rgb(17, 34, 17);
+
+$darkPurple: rgb(28, 27, 31);
+$grayPurple: rgb(121, 116, 126);
+
+@function toRem($px){
+    @return $px / 16 * 1rem;
+}
+@function toEm($ch, $pr){
+    @return $ch / $pr * 1em;
+}
+@function toPercent($ch, $pr){
+    @return $ch / $pr * 100%;
+}
+
+body._locked{
+    overflow-y: hidden;
+}
+
+.container{
+    max-width: toRem($container + 30);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.container_header{
+    max-width: toRem($headerContainer + 30);
+}
+
+img{
+    color: $white;
+    font-family: Montserrat;
+    font-size: toRem(14);
+}
+
+.header-block{
+    @media (min-width: toEm(769, 16)) {
+        &:not(.short){
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+    }
+
+    @media (min-width: toEm(993, 16)) {
+        margin-bottom: toRem(40);
+    }
+    @media (max-width: toEm(992, 16)) and (min-width: toEm(769, 16)) {
+        margin-bottom: toRem(32);
+    }
+    @media (max-width: toEm(768, 16)) {
+        margin-bottom: toRem(24);
+    }
+
+    @media (min-width: toEm(993, 16)) {
+        &__title{
+            font-size: toRem(32);
+            margin-bottom: toRem(16);
+        }
+    }
+    &__title{
+        color: $black;
+        font-family: Montserrat;
+        font-weight: 600;
+        line-height: toEm(36, 32);
+    }
+    @media (max-width: toEm(992, 16)) and (min-width: toEm(769, 16)) {
+        &__title{
+            font-size: toRem(28);
+            margin-bottom: toRem(10);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__title{
+            margin-bottom: toRem(5);
+        }
+    }
+    @media (max-width: toEm(768, 16)) and (min-width: toEm(481, 16)) {
+        &__title{
+            font-size: toRem(26);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__title{
+            font-size: toRem(24);
+        }
+    }
+
+    &__subtitle{
+        color: $darkGreen;
+        font-family: Montserrat;
+        font-size: toRem(16);
+        font-weight: 400;
+        line-height: toEm(19, 16);
+    }
+
+    @media (min-width: toEm(993, 16)) {
+        &__button{
+            margin-left: toRem(32);
+        }
+    }
+    @media (max-width: toEm(992, 16)) and (min-width: toEm(769, 16)){
+        &__button{
+            margin-left: toRem(24);
+        }
+    }
+    @media (min-width: toEm(481, 16)) {
+        &__button{
+            min-height: toRem(48);
+        }
+    }
+    &__button{
+        border: toRem(1) solid $mint;
+        border-radius: toRem(4);
+
+        color: $darkGreen;
+        font-family: Montserrat;
+        font-size: toRem(14);
+        font-weight: 500;
+        line-height: toEm(18, 14);
+
+        transition: box-shadow 0.3s cubic-bezier(0,-0.18,0,1),
+        background-color 0.3s cubic-bezier(0,-0.18,0,1),
+        color 0.3s cubic-bezier(0,-0.18,0,1);
+
+        padding: toRem(8) toRem(16);
+    }
+    &__button:focus{
+        outline: none;
+        box-shadow: inset 0 0 10px $white;
+        background-color: $mint;
+        color: $white;
+    }
+    @media (any-hover: hover) {
+        &__button:hover{
+            box-shadow: inset 0 0 10px $white;
+            background-color: $mint;
+            color: $white;
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__button{
+            margin-top: toRem(5);
+            width: 100%;
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__button{
+            min-height: toRem(40);
+        }
+    }
+}
+
+.select{
+    &__container{
+        width: 100%;
+        height: 0;
+        overflow: hidden;
+
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        transform: translateY(100%) translateX(-50%);
+
+        transition: height 0.3s cubic-bezier(0,-0.18,0,1);
+    }
+    &__list{
+        border-radius: toRem(8);
+        background-color: $mint;
+        padding: toRem(6);
+    }
+
+    &__link span, &__link button{
+        border-radius: toRem(8);
+        padding: toRem(6);
+        width: 100%;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: toRem(40);
+
+        font-family: Montserrat;
+        color: $white;
+        font-size: toRem(18);
+        font-weight: 700;
+        line-height: toEm(18, 14);
+    }
+    &__link button{
+        transition: background-color 0.3s cubic-bezier(0,-0.18,0,1),
+        color 0.3s cubic-bezier(0,-0.18,0,1);
+    }
+    &__link button:focus{
+        outline: none;
+    }
+    &__list:not(._hide-active) &__link span,
+    &__link button._hovered{
+        background-color: $white;
+        color: $mint;
+    }
+}

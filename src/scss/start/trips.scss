@@ -1,0 +1,183 @@
+@use "../service/common.scss";
+
+.trips{
+    overflow-x: hidden;
+    padding-top: common.toRem(80);
+    padding-bottom: common.toRem(77);
+
+    @media (min-width: common.toEm(993, 16)) {
+        &__items{
+            margin: common.toRem(-16);
+        }
+    }
+    @media (min-width: common.toEm(769, 16)) {
+        &__items{
+            display: flex;
+            flex-wrap: wrap;
+        }
+    }
+    @media (max-width: common.toEm(992, 16)) {
+        &__items{
+            margin: common.toRem(-12);
+        }
+    }
+
+    @media (min-width: common.toEm(993, 16)) {
+        &__item{
+            width: 33.333%;
+            padding: common.toRem(16);
+        }
+    }
+    @media (max-width: common.toEm(992, 16)) and (min-width: common.toEm(769, 16)) {
+        &__item{
+            width: 50%;
+            padding: common.toRem(12);
+        }
+    }
+    @media (max-width: common.toEm(768, 16)) {
+        &__item{
+            display: block;
+        }
+    }
+    @media (max-width: common.toEm(768, 16)) and (min-width: common.toEm(481, 16)) {
+        &__item:not(:last-child){
+            margin-bottom: common.toRem(16);
+        }
+    }
+    @media (max-width: common.toEm(480, 16)) {
+        &__item:not(:last-child){
+            margin-bottom: common.toRem(10);
+        }
+    }
+}
+.item-trips{
+    &__inner{
+        background: common.$white;
+        border-radius: common.toRem(16);
+        box-shadow: 0px 4px 16px 0px rgba(17, 34, 17, 0.05);
+        padding: common.toRem(16);
+    
+        display: flex;
+        align-items: center;
+
+        position: relative;
+        overflow: hidden;
+        &::after{
+            border-left: double common.toRem(20) common.$white;
+            border-top: double common.toRem(20) common.$white;
+
+            background-color: common.$mint;
+            border-radius: common.toRem(60) 0 common.toRem(16) 0;
+            content: "";
+
+            position: absolute;
+            z-index: 1;
+            right: 0;
+            bottom: 0;
+            transform: translateY(100%) translateX(100%);
+
+            width: common.toRem(60);
+            height: common.toRem(60);
+
+            transition: transform 0.3s cubic-bezier(0,-0.18,0,1);
+        }
+    }
+    &:focus{
+        outline: none;
+    }
+    &:focus &__inner::after{
+        transform: translateY(0) translateX(0);
+    }
+    @media (any-hover: hover) {
+        &:hover &__inner::after{
+            transform: translateY(0) translateX(0);
+        }
+    }
+    &__inner > *{
+        position: relative;
+        z-index: 2;
+    }
+
+    @media (min-width: common.toEm(993, 16)) {
+        &__image{
+            flex: 0 0 common.toPercent(90, 357.325);
+            padding-bottom: common.toPercent(90, 357.325);
+        }
+    }
+    &__image{
+        position: relative;
+        margin-right: common.toRem(16);
+        
+        img{
+            background-color: common.$mint;
+            border-radius: common.toRem(8);
+
+            position: absolute;
+            left: 0;
+            top: 0;
+
+            width: 100%;
+            height: 100%;
+        }
+    }
+    @media (max-width: common.toEm(992, 16)) and (min-width: common.toEm(769, 16)) {
+        &__image{
+            flex: 0 0 common.toPercent(90, 437);
+            padding-bottom: common.toPercent(90, 437);
+        }
+    }
+    @media (max-width: common.toEm(768, 16)) and (min-width: common.toEm(481, 16)) {
+        &__image{
+            flex: 0 0 common.toRem(90);
+            padding-bottom: common.toRem(90);
+        }
+    }
+    @media (max-width: common.toEm(480, 16)) {
+        &__image{
+            flex: 0 0 common.toPercent(90, 442);
+            padding-bottom: common.toPercent(90, 442);
+        }
+    }
+
+    &__title{
+        color: rgba($color: common.$darkGreen, $alpha: 0.7);
+        font-family: Montserrat;
+        font-size: common.toRem(16);
+        font-weight: 600;
+        line-height: common.toEm(19, 16);
+        padding-bottom: common.toRem(8);
+    }
+
+    &__include{
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0 common.toRem(-10.5);
+    }
+    &__include-item{
+        padding: 0 common.toRem(10.5);
+
+        span{
+            color: common.$darkGreen;
+            font-family: Montserrat;
+            font-size: common.toRem(14);
+            font-weight: 500;
+            line-height: common.toEm(18, 14);
+        }
+    }
+    &__include-item:not(:last-child){
+        position: relative;
+        &::before{
+            border-radius: 50%;
+            background-color: common.$darkGreen;
+            content: "";
+
+            width: common.toRem(2.5);
+            height: common.toRem(2.5);
+
+            position: absolute;
+            right: common.toRem(-1);
+            bottom: common.toRem(6.5);
+            transform: translateY(-50%);
+        }
+    }
+}

@@ -1,0 +1,23 @@
+*, *::after, *::before{
+    box-sizing: border-box;
+}
+body, ul, h1, h2, h3, figure{
+    margin: 0;
+}
+ul, button{
+    padding: 0;
+}
+a{
+    text-decoration: none;
+}
+span, a, button{
+    display: inline-block;
+}
+ul, ol{
+    list-style: none;
+}
+button{
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
