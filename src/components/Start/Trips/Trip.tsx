@@ -1,13 +1,13 @@
 import React, { FC } from "react";
 import { trip } from "../../../types";
 
-interface tripProps{
+interface TripProps{
     about : trip
 }
 
-export const Trip : FC<tripProps> = ({about}) => {
+export const Trip : FC<TripProps> = ({about}) => {
     return (
-        <a className="trips__item item-trips" href="#">
+        <a className="trips__item item-trips" href={about.link}>
             <figure className="item-trips__inner">
                 <picture className="item-trips__image">
                     <source srcSet={about.image.srcs.webp} type="image/webp" />

@@ -1,0 +1,180 @@
+@use "../service/common.scss";
+
+.choose{
+    @media (min-width: common.toEm(769, 16)) {
+        .container{
+            display: flex;
+        }
+    }
+
+    @media (min-width: common.toEm(common.$container + 31, 16)) {
+        &__item{
+            min-height: common.toRem(559);
+        }
+    }
+    @media (min-width: common.toEm(769, 16)) {
+        &__item{   
+            text-align: center;
+            flex: 0 1 50%;
+            &:not(:last-child){
+                margin-right: common.toRem(24);
+            }
+        }
+    }
+    @media (min-width: common.toEm(481, 16)) {
+        &__item{
+            padding: common.toRem(24);
+        }
+    }
+    &__item{
+        display: flex;
+        justify-content: flex-end;
+        flex-direction: column;
+
+        border-radius: common.toRem(24);
+        background-color: common.$darkGreen;
+    }
+    @media (max-width: common.toEm(common.$container + 31, 16)) and (min-width: common.toEm(993, 16)) {
+        &__item{
+            min-height: common.toRem(500);
+        }
+    }
+    @media (max-width: common.toEm(992, 16)) and (min-width: common.toEm(769, 16)) {
+        &__item{
+            min-height: common.toRem(400);
+        }
+    }
+    @media (max-width: common.toEm(768, 16)) and (min-width: common.toEm(481, 16)) {
+        &__item{
+            min-height: common.toRem(225);
+        }
+    }
+    @media (max-width: common.toEm(768, 16)) {
+        &__item{
+            background-position: center center;
+            &:not(:last-child){
+                margin-bottom: common.toRem(16);
+            }
+        }
+    }
+    @media (max-width: common.toEm(480, 16)) {
+        &__item{
+            padding: common.toRem(16);
+        }
+    }
+}
+.item-choose{
+    @media (min-width: common.toEm(993, 16)) {
+        &__title{
+            font-size: common.toRem(40);
+        }
+    }
+    &__title{
+        color: common.$white;
+        font-family: "TradeGothic";
+        font-weight: 700;
+        line-height: common.toEm(51, 40);
+    }
+    @media (max-width: common.toEm(992, 16)) and (min-width: common.toEm(481, 16)) {
+        &__title{
+            font-size: common.toRem(32);
+        }
+    }
+    @media (max-width: common.toEm(480, 16)) {
+        &__title{
+            font-size: common.toRem(26);
+        }
+    }
+
+    @media (min-width: common.toEm(993, 16)) {
+        &__subtitle{
+            font-size: common.toRem(16);
+            margin: common.toRem(8) 0 common.toRem(16);
+        }
+    }
+    &__subtitle{
+        color: common.$white;
+        font-family: Montserrat;
+        font-weight: 400;
+        line-height: common.toEm(19.5, 16);
+    }
+    @media (max-width: common.toEm(992, 16)) {
+        &__subtitle{
+            font-size: common.toRem(14);
+            margin: common.toRem(4) 0 common.toRem(10);
+        }
+    }
+
+    @media (min-width: common.toEm(769, 16)) {
+        &__link{
+            align-self: center;
+        }
+    }
+    @media (min-width: common.toEm(481, 16)) {
+        &__link{
+            min-height: common.toRem(48);
+        }
+    }
+    &__link{
+        border-radius: common.toRem(4);
+        background-color: common.$mint;
+        padding: common.toRem(8) common.toRem(16);
+        
+        display: flex;
+        align-items: center;
+
+        color: common.$darkGreen;
+        span{
+            font-family: Montserrat;
+            font-size: common.toRem(14);
+            font-weight: 500;
+            line-height: common.toEm(18, 14);
+        }
+        &::before{
+            min-width: common.toRem(16);
+            height: common.toRem(16);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        
+            margin-right: common.toRem(4);
+        }
+        position: relative;
+        &::after{
+            background-color: common.$white;
+            content: "";
+
+            position: absolute;
+            left: 50%;
+            bottom: common.toRem(-6);
+            transform: translateX(-50%) translateY(100%);
+
+            height: common.toRem(5);
+            width: 0;
+
+            transition: width 0.3s cubic-bezier(0,-0.18,0,1);
+        }
+    }
+    @media (max-width: common.toEm(768, 16)) {
+        &__link{
+            justify-content: center;
+        }
+    }
+    @media (max-width: common.toEm(480, 16)) {
+        &__link{
+            min-height: common.toRem(40);
+        }
+    }
+    &__link:focus{
+        outline: none;
+        &::after{
+            width: calc(100% + common.toRem(8));
+        }
+    }
+    @media (any-hover: hover) {
+        &__link:hover::after{
+            width: calc(100% + common.toRem(8));
+        }
+    }
+}

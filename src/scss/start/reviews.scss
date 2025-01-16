@@ -1,0 +1,389 @@
+@use "../service/common.scss";
+
+.reviews{
+    @media (min-width: common.toEm(993, 16)) {
+        padding: common.toRem(68) 0 common.toRem(90);
+    }
+    @media (max-width: common.toEm(992, 16)) {
+        padding: common.toRem(48) 0 common.toRem(80);
+    }
+    @media (max-width: common.toEm(768, 16)) {
+        padding: common.toRem(32) 0 common.toRem(64);
+    }
+    @media (max-width: common.toEm(480, 16)) {
+        padding: common.toRem(32) 0;
+    }
+
+    @media (min-width: common.toEm(993, 16)) {
+        &__header{
+            margin-bottom: common.toRem(46);
+        }    
+    }
+
+    @media (min-width: common.toEm(common.$container + 31, 16)) {
+        &__items{
+            padding-left: calc((100vw - common.toRem(common.$container)) / 2);
+        }
+    }
+    @media (min-width: common.toEm(769, 16)) {
+        &__items{
+            padding-bottom: common.toRem(24);
+        }
+    }
+    &__items{
+        display: flex;
+        align-items: flex-start;
+        overflow-x: scroll;
+      
+        padding-right: 15px;
+    }
+    @media (max-width: common.toEm(common.$container + 31, 16)) {
+        &__items{
+            padding-left: 15px;
+        }
+    }
+    @media (max-width: common.toEm(768, 16)) {
+        &__items{
+            padding-bottom: common.toRem(16);
+        }
+    }
+    
+    @media (min-width: common.toEm(993, 16)) {
+        &__item{
+            flex: 0 0 common.toRem(425);
+        }
+    }
+    @media (min-width: common.toEm(769, 16)) {
+        &__item{
+            padding: common.toRem(24);
+            &::after{
+                right: common.toRem(-26);
+                bottom: common.toRem(-24);
+            }
+            &:not(:last-child){
+                margin-right: common.toRem(50);
+            }
+            &:last-child{
+                margin-right: common.toRem(26);
+            }
+        }
+    }
+    &__item{
+        border-radius: common.toRem(20);
+        box-shadow: 2px 4px 16px 0px rgba($color: common.$darkGreen, $alpha: 0.1);
+        background-color: common.$white;
+
+        display: flex;
+        flex-direction: column;
+
+        position: relative;
+        &::after{
+            border-radius: common.toRem(20);
+            background-color: rgba($color: common.$mint, $alpha: 0.4);
+            content: "";
+
+            position: absolute;
+            z-index: -1;
+
+            width: 100%;
+            height: 100%;
+        }
+    }
+    @media (max-width: common.toEm(992, 16)) and (min-width: common.toEm(769, 16)) {
+        &__item{
+            flex: 0 0 common.toRem(375);
+        }
+    }
+    @media (max-width: common.toEm(768, 16)) and (min-width: common.toEm(481, 16)) {
+        &__item{
+            flex: 0 0 common.toRem(325);
+        }
+    }
+    @media (max-width: common.toEm(768, 16)) {
+        &__item{
+            padding: common.toRem(16);
+            &::after{
+                right: common.toRem(-16);
+                bottom: common.toRem(-16);
+            }
+            &:not(:last-child){
+                margin-right: common.toRem(32);
+            }
+            &:last-child{
+                margin-right: common.toRem(16);
+            }
+        }
+    }
+    @media (max-width: common.toEm(480, 16)) {
+        &__item{
+            flex: 0 0 common.toRem(250);
+        }
+    }
+}
+.item-reviews{
+    @media (min-width: common.toEm(common.$container + 31, 16)) {
+        &__title{
+            min-height: common.toRem(80);
+        }
+    }
+    @media (min-width: common.toEm(993, 16)) {
+        &__title{
+            font-size: common.toRem(24);
+            margin-bottom: common.toRem(16);
+        }
+    }
+    &__title{
+        color: common.$darkGreen;
+        font-family: "TradeGothic";
+        font-weight: 700;
+        line-height: common.toEm(30, 24);
+    }
+    @media (max-width: common.toEm(992, 16)) {
+        &__title{
+            margin-bottom: common.toRem(10);
+        }
+    }
+    @media (max-width: common.toEm(992, 16)) and (min-width: common.toEm(769, 16)) {
+        &__title{
+            font-size: common.toRem(22);
+        }
+    }
+    @media (max-width: common.toEm(768, 16)) and (min-width: common.toEm(481, 16)) {
+        &__title{
+            font-size: common.toRem(20);
+        }
+    }
+    @media (max-width: common.toEm(768, 16)) {
+        &__title{
+            line-height: common.toEm(20, 20);
+        }
+    }
+    @media (max-width: common.toEm(480, 16)) {
+        &__title{
+            font-size: common.toRem(18);
+        }
+    }
+
+    @media (min-width: common.toEm(481, 16)) {
+        &__message{
+            font-size: common.toRem(14);
+            height: common.toRem(37);
+        }
+    }
+    &__message{
+        color: rgba($color: common.$darkGreen, $alpha: 0.5);
+        font-family: Montserrat;
+        font-weight: 500;
+        line-height: common.toEm(18.5, 14);
+
+        overflow: hidden;
+        transition: height 0.3s cubic-bezier(0,-0.18,0,1);
+    }
+    @media (max-width: common.toEm(480, 16)) {
+        &__message{
+            font-size: common.toRem(12);
+            height: common.toRem(31);
+        }
+    }
+
+    @media (min-width: common.toEm(common.$container + 31, 16)) {
+        &__more{
+            padding-bottom: common.toRem(16);
+        }
+    }
+    @keyframes scalling {
+        75%{
+            transform: scale(1.1);
+        }
+    }
+    &__more{
+        align-self: flex-end;
+
+        color: common.$darkGreen;
+        font-family: "TradeGothic";
+        font-size: common.toRem(14);
+        font-weight: 700;
+        line-height: common.toEm(18, 14);
+
+        padding-top: common.toRem(12);
+        animation: scalling 0.75s cubic-bezier(0,-0.18,0,1) 0s infinite;
+        animation-play-state: paused;
+
+        transition: text-shadow 0.3s cubic-bezier(0,-0.18,0,1);
+    }
+    @media (max-width: common.toEm(common.$container + 31, 16)) {
+        &__more{
+            padding-bottom: common.toRem(12);
+        }
+    }
+    &__more:focus{
+        outline: none;
+        text-shadow: 0 0 5px rgba($color: common.$grayPurple, $alpha: 0.6);
+        animation-play-state: running;
+    }
+    @media (any-hover: hover) {
+        &__more:hover{
+            animation-play-state: running;
+        }
+    }
+
+    @media (min-width: common.toEm(993, 16)) {
+        &__stars{
+            gap: common.toRem(3) common.toRem(12);
+            margin-bottom: common.toRem(20);
+        }
+    }
+    &__stars{
+        display: flex;
+        flex-wrap: wrap;
+    }
+    @media (max-width: common.toEm(992, 16)) {
+        &__stars{
+            gap: common.toRem(3) common.toRem(6);
+            margin-bottom: common.toRem(10);
+        }
+    }
+
+
+    @media (min-width: common.toEm(769, 16)) {
+        &__star::before{
+            font-size: common.toRem(22.5);
+        }
+    }
+    &__star{
+        min-width: common.toRem(24);
+        height: common.toRem(24);
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        &::before{
+            color: common.$yellow;
+        }
+    }
+    @media (max-width: common.toEm(768, 16)) {
+        &__star::before{
+            font-size: common.toRem(20);
+        }
+    }
+
+    &__author{
+        color: common.$darkGreen;
+        font-family: "TradeGothic";
+        font-size: common.toRem(14);
+        font-weight: 700;
+        line-height: common.toEm(18, 14);
+
+        margin-bottom: common.toRem(4);
+    }
+
+    &__place{
+        color: rgba($color: common.$darkGreen, $alpha: 0.5);
+        font-family: Montserrat;
+        font-size: common.toRem(12);
+        font-weight: 500;
+        line-height: common.toEm(15, 12);
+    }
+
+    @media (min-width: common.toEm(common.$container + 31, 16)) {
+        &__link{
+            margin-bottom: common.toRem(28);
+        }
+    }
+    @media (min-width: common.toEm(769, 16)) {
+        &__link{
+            img{
+                margin-right: common.toRem(10);
+            }
+            &::after{
+                bottom: 0;
+            }
+        }
+    }
+    &__link{
+        display: flex;
+        align-self: flex-start;
+        align-items: center;
+        padding: common.toRem(12) 0;
+        
+        span{
+            color: rgba($color: common.$darkGreen, $alpha: 0.5);
+            font-family: "TradeGothic";
+            font-size: common.toRem(12);
+            font-weight: 700;
+            line-height: common.toEm(15, 12);
+        }
+        img{
+            width: common.toRem(20);
+            height: common.toRem(20);
+        }
+        
+        position: relative;
+        &::after{
+            background: linear-gradient(to right, 
+                #EA4335 0%,  #EA4335 25%, 
+                #FBBC05 25%, #FBBC05 50%, 
+                #34A853 50%, #34A853 75%, 
+                #4285F4 75%, #4285F4 100%
+            );
+            content: "";
+
+            position: absolute;
+            left: 0;
+
+            width: 0;
+            height: common.toRem(5);
+        
+            transition: width 0.3s cubic-bezier(0,-0.18,0,1);
+        }
+    }
+    @media (max-width: common.toEm(common.$container + 31, 16)) and (min-width: common.toEm(993, 16)) {
+        &__link{
+            margin-bottom: common.toRem(18);
+        }
+    }
+    @media (max-width: common.toEm(992, 16)) and (min-width: common.toEm(769, 16)) {
+        &__link{
+            margin-bottom: common.toRem(8);
+        }
+    }
+    @media (max-width: common.toEm(768, 16)) {
+        &__link{
+            img{
+                margin-right: common.toRem(6);
+            }
+            &::after{
+                bottom: common.toRem(4);
+            }
+        }
+    }
+    &__link:focus{
+        outline: none;
+        &::after{
+            width: 100%;
+        }
+    }    
+    @media (any-hover: hover) {
+        &__link:hover::after{
+            width: 100%;
+        }    
+    }
+
+    &__image{
+        width: 100%;
+        padding-bottom: common.toPercent(200, 377);
+        position: relative;
+        img{
+            background-color: rgba($color: common.$mint, $alpha: 0.4);
+            border-radius: common.toRem(20);
+            object-fit: cover;
+
+            position: absolute;
+            left: 0;
+            top: 0;
+
+            width: 100%;
+            height: 100%;
+        }
+    }
+}

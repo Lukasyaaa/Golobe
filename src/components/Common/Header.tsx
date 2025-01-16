@@ -1,7 +1,7 @@
 import React, { FC, useState, useRef, useEffect, FocusEvent, MouseEvent } from "react";
 import logo from "../../assets/img/logos/mint.svg";
 
-interface tabIndexesType{
+interface TabIndexes{
     authorization : number,
     menu : number,
     burger : number
@@ -18,7 +18,8 @@ export const Header : FC = () => {
             }
         }
     });
-    const toggleMenu = () => {
+    const toggleMenu = (e) => {
+        e.stopPropagation();
         if(header.current){
             header.current.classList.toggle("_active");
             document.body.classList.toggle("_locked");
@@ -54,12 +55,12 @@ export const Header : FC = () => {
         }
     }
 
-    let [tabIndexes, setTabIndexes] = useState<tabIndexesType>({
+    let [tabIndexes, setTabIndexes] = useState<TabIndexes>({
         menu: 1, authorization: 3,
         burger: -1, menuAuthorization: -1,
     });
     useEffect(() => {
-        if(window.innerWidth < 768){
+        if(window.innerWidth <= 768){
             if(window.innerWidth > 480){
                 setTabIndexes({
                     menu: 4, authorization: 1,

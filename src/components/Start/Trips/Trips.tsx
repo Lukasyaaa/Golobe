@@ -20,53 +20,71 @@ import ninthImageWebp from "../../../assets/img/start/trips/9/main.webp";
 
 import { SectionHeader } from "../../Common/SectionHeader.tsx";
 import { Trip } from "./Trip.tsx";
-import { trips } from "../../../types.ts";
+import { Section, Trip as TripInterface } from "../../../types.ts";
 
 export const Trips : FC = () => {
-    const about : trips = {
+    const about : Section<TripInterface> = {
+        header: {
+            title: "Plan your perfect trip", 
+            text: "Search Flights & Places Hire to our most popular destinations",
+            button: { active: "Hide", passive: "See more places" }
+        },
         content: [
             {
                 city: "Istanbul", includes: ["Flights", "Hotels", "Resorts"], 
-                image: { srcs: {jpeg: firstImageJpeg, webp: firstImageWebp}, alt: "Image" }
+                image: { srcs: {jpeg: firstImageJpeg, webp: firstImageWebp}, alt: "Image" },
+                link: "#"
             },        {
                 city: "Sydney", includes: ["Flights", "Hotels", "Resorts"], 
-                image: { srcs: {jpeg: secondImageJpeg, webp: secondImageWebp}, alt: "Image" }
+                image: { srcs: {jpeg: secondImageJpeg, webp: secondImageWebp}, alt: "Image" },
+                link: "#"
             },        {
                 city: "Baku", includes: ["Flights", "Hotels", "Resorts"], 
-                image: { srcs: {jpeg: thirdImageJpeg, webp: thirdImageWebp}, alt: "Image" }
+                image: { srcs: {jpeg: thirdImageJpeg, webp: thirdImageWebp}, alt: "Image" },
+                link: "#"
             },        {
                 city: "Male", includes: ["Flights", "Hotels", "Resorts"], 
-                image: { srcs: {jpeg: fourthImageJpeg, webp: fourthImageWebp}, alt: "Image" }
+                image: { srcs: {jpeg: fourthImageJpeg, webp: fourthImageWebp}, alt: "Image" },
+                link: "#"
             },        {
                 city: "Paris", includes: ["Flights", "Hotels", "Resorts"], 
-                image: { srcs: {jpeg: fifthImageJpeg, webp: fifthImageWebp}, alt: "Image" }
+                image: { srcs: {jpeg: fifthImageJpeg, webp: fifthImageWebp}, alt: "Image" },
+                link: "#"
             },        {
                 city: "New York", includes: ["Flights", "Hotels", "Resorts"], 
-                image: { srcs: {jpeg: sixthImageJpeg, webp: sixthImageWebp}, alt: "Image" }
+                image: { srcs: {jpeg: sixthImageJpeg, webp: sixthImageWebp}, alt: "Image" },
+                link: "#"
             },        {
                 city: "London", includes: ["Flights", "Hotels", "Resorts"], 
-                image: { srcs: {jpeg: seventhImageJpeg, webp: seventhImageWebp}, alt: "Image" }
+                image: { srcs: {jpeg: seventhImageJpeg, webp: seventhImageWebp}, alt: "Image" },
+                link: "#"
             },        {
                 city: "Tokyo", includes: ["Flights", "Hotels", "Resorts"], 
-                image: { srcs: {jpeg: eigthImageJpeg, webp: eigthImageWebp}, alt: "Image" }
+                image: { srcs: {jpeg: eigthImageJpeg, webp: eigthImageWebp}, alt: "Image" },
+                link: "#"
             },
             {
                 city: "Dubai", includes: ["Flights", "Hotels", "Resorts"], 
-                image: { srcs: {jpeg: ninthImageJpeg, webp: ninthImageWebp}, alt: "Image" }
+                image: { srcs: {jpeg: ninthImageJpeg, webp: ninthImageWebp}, alt: "Image" },
+                link: "#"
             },
             {
                 city: "New York", includes: ["Flights", "Hotels", "Resorts"], 
-                image: { srcs: {jpeg: sixthImageJpeg, webp: sixthImageWebp}, alt: "Image" }
+                image: { srcs: {jpeg: sixthImageJpeg, webp: sixthImageWebp}, alt: "Image" },
+                link: "#"
             },        {
                 city: "London", includes: ["Flights", "Hotels", "Resorts"], 
-                image: { srcs: {jpeg: seventhImageJpeg, webp: seventhImageWebp}, alt: "Image" }
+                image: { srcs: {jpeg: seventhImageJpeg, webp: seventhImageWebp}, alt: "Image" },
+                link: "#"
             },        {
                 city: "Tokyo", includes: ["Flights", "Hotels", "Resorts"], 
-                image: { srcs: {jpeg: eigthImageJpeg, webp: eigthImageWebp}, alt: "Image" }
+                image: { srcs: {jpeg: eigthImageJpeg, webp: eigthImageWebp}, alt: "Image" },
+                link: "#"
             },
             {
                 city: "Dubai", includes: ["Flights", "Hotels", "Resorts"], 
-                image: { srcs: {jpeg: ninthImageJpeg, webp: ninthImageWebp}, alt: "Image" }
+                image: { srcs: {jpeg: ninthImageJpeg, webp: ninthImageWebp}, alt: "Image" },
+                link: "#"
             },
         ],
         maxShow: 9
@@ -79,19 +97,14 @@ export const Trips : FC = () => {
             <div className="container">
                 {(about.maxShow < about.content.length)
                     ? <SectionHeader 
-                        about={{ 
-                            title: "Plan your perfect trip", 
-                            text: "Search Flights & Places Hire to our most popular destinations",
-                            button: { active: "Hide", passive: "See more places" }
-                        }} 
+                        parent="trips"
+                        about={about.header} 
                         isNeedButton={true}
                         isShowAll={{value: isShowAll, set: setIsShowAll}}    
                     />
                     : <SectionHeader 
-                        about={{ 
-                            title: "Plan your perfect trip", 
-                            text: "Search Flights & Places Hire to our most popular destinations"
-                        }} 
+                        parent="trips"
+                        about={{ title: about.header.title, text: about.header.text }} 
                         isNeedButton={false}
                     />
                 }

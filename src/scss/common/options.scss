@@ -1,7 +1,19 @@
 @use "../service/common.scss";
 
 .options{
-    margin-top: common.toRem(-97);
+    @media (min-width: common.toEm(993, 16)) {
+        margin-top: common.toRem(-97);
+    }
+    @media (max-width: common.toEm(992, 16)) {
+        margin-top: common.toRem(-80);
+    }
+    @media (max-width: common.toEm(768, 16)) {
+        margin-top: common.toRem(-64);
+    }
+    @media (max-width: common.toEm(480, 16)) {
+        margin-top: common.toRem(-46);
+    }
+
     position: relative;
     z-index: 2;
 
@@ -28,8 +40,8 @@
 
     @media (min-width: common.toEm(993, 16)) {
         &__header{
-            min-height: common.toRem(63); // 48px(real height) + 15px(margin)    
-            margin: 0 common.toRem(-32);
+            min-height: common.toRem(63); // 48px(real height) + 15px(margin) 
+            column-gap: common.toRem(64);   
         }
     }
     @media (min-width: common.toEm(769, 16)) {
@@ -40,20 +52,20 @@
     &__header{
         display: flex;
     }
-    @media (max-width: common.toEm(992, 16)) and (min-width: common.toEm(769, 16)) {
-        &__header{
-            margin: 0 common.toRem(-24);
-        }
-    }
     @media (max-width: common.toEm(992, 16))  {
         &__header{
             min-height: common.toRem(48);
         }
     }
+    @media (max-width: common.toEm(993, 16)) and (min-width: common.toEm(769, 16)) {
+        &__header{
+            column-gap: common.toRem(48);
+        }
+    }
     @media (max-width: common.toEm(768, 16)) {
         &__header{
             padding-bottom: common.toRem(5);
-            margin: 0 common.toRem(-16);
+            column-gap: common.toRem(32);
         }
     }
 
@@ -281,18 +293,8 @@
 }
 .header-options{
     @media (min-width: common.toEm(993, 16)) {
-        &__link{
-            padding: 0 common.toRem(32);
-        }
-    }
-    @media (max-width: common.toEm(992, 16)) and (min-width: common.toEm(769, 16)) {
-        &__link{
-            padding: 0 common.toRem(24);
-        }
-    }
-    @media (max-width: common.toEm(768, 16)) {
-        &__link{
-            padding: 0 common.toRem(16);
+        &__link:not(:last-child)::after{
+            right: common.toRem(-32);
         }
     }
     &__link:not(:last-child){
@@ -302,11 +304,20 @@
 
             content: "";
             position: absolute;
-            right: 0;
             top: 0;
 
             height: 100%;
             width: common.toRem(1);
+        }
+    }
+    @media (max-width: common.toEm(992, 16)) and (min-width: common.toEm(769, 16)) {
+        &__link:not(:last-child)::after{
+            right: common.toRem(-24);
+        }
+    }
+    @media (max-width: common.toEm(768, 16)) {
+        &__link:not(:last-child)::after{
+            right: common.toRem(-16);
         }
     }
 
@@ -560,6 +571,14 @@
     &__opener{
         text-align: left;
     }
+    @media (max-width: common.toEm(992, 16)) {
+        &__opener{
+            padding: common.toRem(10) common.toRem(36) common.toRem(10) common.toRem(16);
+            &::before{
+                right: common.toRem(6);
+            }
+        }
+    }
     &__opener:focus ~ &__label{
         &::before{
             width: 100%;
@@ -575,15 +594,6 @@
             }
             span{
                 color: common.$white;
-            }
-        }
-    }
-
-    @media (max-width: common.toEm(992, 16)) {
-        &__opener{
-            padding: common.toRem(10) common.toRem(36) common.toRem(10) common.toRem(16);
-            &::before{
-                right: common.toRem(6);
             }
         }
     }
@@ -612,7 +622,7 @@
 
     @media (min-width: common.toEm(769, 16)) {
         &__container{
-            width: 115%;
+            width: calc(100% + common.toRem(24));
         }
     }
     &__container{

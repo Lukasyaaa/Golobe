@@ -1,17 +1,17 @@
 import React, { FC, Fragment, useRef, useEffect} from "react";
-import { icon, iconPosition, iconValue } from "../../../types.ts";
+import { Icon, IconPosition, IconValue } from "../../../types.ts";
 import { Select } from "../Select.tsx";
 
-interface optionSelectProps{
+interface OptionSelectProps{
     label : string,
     startActive : number,
     links : string[],
-    icon : null | icon,
+    icon : null | Icon,
     isBigger : boolean,
     isHotelPart : boolean
 }
 
-export const OptionSelect : FC<optionSelectProps> = ({label, startActive, links, icon, isBigger, isHotelPart}) => {
+export const OptionSelect : FC<OptionSelectProps> = ({label, startActive, links, icon, isBigger, isHotelPart}) => {
     let selectElement = useRef<HTMLDivElement>(null);
     let labelElement = useRef<HTMLElement>(null);
 
@@ -28,17 +28,17 @@ export const OptionSelect : FC<optionSelectProps> = ({label, startActive, links,
                 }
                 if(icon !== null){
                     switch(icon.value){
-                        case iconValue.BED:
+                        case IconValue.BED:
                             classes.push("icon-bed");
                             break;
-                        case iconValue.DATE:
+                        case IconValue.DATE:
                             classes.push("icon-date");
                             break;
-                        case iconValue.HUMAN:
+                        case IconValue.HUMAN:
                             classes.push("icon-user");
                             break;
                     }
-                    if(icon.position === iconPosition.LEFT){
+                    if(icon.position === IconPosition.LEFT){
                         classes.push("left");
                     } else {
                         classes.push("right");

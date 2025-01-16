@@ -1,16 +1,16 @@
 import React, { FC, Fragment, useRef, useEffect } from "react";
-import { icon, iconPosition, iconValue } from "../../../types.ts";
+import { Icon, IconPosition, IconValue } from "../../../types.ts";
 
-interface optionInputProps{
+interface OptionInputProps{
     id : number,
     placeholder : string,
     label : string,
-    icon : null | icon,
+    icon : null | Icon,
     isBigger : boolean,
     isHotelPart : boolean
 }
 
-export const OptionInput : FC<optionInputProps> = ({id, placeholder, label, icon, isBigger, isHotelPart}) => {
+export const OptionInput : FC<OptionInputProps> = ({id, placeholder, label, icon, isBigger, isHotelPart}) => {
     let inputElement = useRef<HTMLDivElement>(null);
     let labelElement = useRef<HTMLLabelElement>(null);
 
@@ -31,17 +31,17 @@ export const OptionInput : FC<optionInputProps> = ({id, placeholder, label, icon
         }
         if(icon !== null){
             switch(icon.value){
-                case iconValue.BED:
+                case IconValue.BED:
                     classes.push("icon-bed");
                     break;
-                case iconValue.DATE:
+                case IconValue.DATE:
                     classes.push("icon-date");
                     break;
-                case iconValue.HUMAN:
+                case IconValue.HUMAN:
                     classes.push("icon-user");
                     break;
             }
-            if(icon.position === iconPosition.LEFT){
+            if(icon.position === IconPosition.LEFT){
                 classes.push("left");
             } else {
                 classes.push("right");

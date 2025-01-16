@@ -17,7 +17,8 @@
     background: transparent;
 
     transition: padding-top 0.3s cubic-bezier(0,-0.18,0,1),
-    background-color 0.3s cubic-bezier(0,-0.18,0,1);
+    background-color 0.3s cubic-bezier(0,-0.18,0,1),
+    box-shadow 0.3s cubic-bezier(0,-0.18,0,1);
 
     @media (max-width: common.toEm(768, 16)) {
         &::before{
@@ -42,11 +43,13 @@
     &._scroll{
         padding-top: 0;
         background: common.$mint;
+        box-shadow: 0 0 25px common.$darkGreen;
     }
     
     @media (min-width: common.toEm(993, 16)) {
         .container{
             min-height: common.toRem(96);
+            column-gap: common.toRem(32);
         }
     }
     .container{
@@ -59,6 +62,11 @@
             min-height: common.toRem(86);
         }
     }
+    @media (max-width: common.toEm(992, 16)) {
+        .container{
+            column-gap: common.toRem(24);
+        }
+    }
     @media (max-width: common.toEm(768, 16)) and (min-width: common.toEm(481, 16)) {
         .container{
             min-height: common.toRem(76);
@@ -66,6 +74,7 @@
     }
     @media (max-width: common.toEm(480, 16)) {
         .container{
+            column-gap: common.toRem(16);
             justify-content: space-between;
             min-height: common.toRem(66);
         }
@@ -113,28 +122,8 @@
         }
     }
 
-    @media (min-width: common.toEm(993, 16)) {
-        &__logo{
-            margin: 0 common.toRem(32);
-        }
-    }
     &__logo{
         transition: filter 0.3s cubic-bezier(0,-0.18,0,1);
-    }
-    @media (max-width: common.toEm(992, 16)) and (min-width: common.toEm(769, 16)) {
-        &__logo{
-            margin: 0 common.toRem(24);
-        }
-    }
-    @media (max-width: common.toEm(768, 16)) and (min-width: common.toEm(481, 16)) {
-        &__logo{
-            margin: 0 common.toRem(24) 0 0;
-        }
-    }
-    @media (max-width: common.toEm(480, 16)) {
-        &__logo{
-            margin: 0 common.toRem(16) 0 0;
-        }
     }
 
     &._scroll &__logo,
@@ -172,11 +161,6 @@
         }
     }
     @media (max-width: common.toEm(768, 16)) {
-        @media (min-width: common.toEm(480, 16)) {
-            &__burger{
-                margin-left: common.toRem(24);
-            }
-        }
         &__burger{
             align-self: center;
 
@@ -249,7 +233,7 @@
 
     @media (min-width: common.toEm(993, 16)) {
         &__list{
-            margin: 0 common.toRem(-16);
+            column-gap: common.toRem(32);
         }
     }
     @media (min-width: common.toEm(769, 16)) {
@@ -260,7 +244,7 @@
         }
         @media (max-width: common.toEm(992, 16)) {
             &__list{
-                margin: 0 common.toRem(-12);
+                column-gap: common.toRem(24);
             }
         }
     }
@@ -275,16 +259,6 @@
         }
     }
 
-    @media (min-width: common.toEm(993, 16)) {
-        &__link{            
-            padding: 0 common.toRem(16);
-        }
-    }
-    @media (max-width: common.toEm(992, 16)) and (min-width: common.toEm(769, 16)) {
-        &__link{
-            padding: 0 common.toRem(12);
-        }
-    }
     @media (max-width: common.toEm(768, 16)) {
         &__link{
             position: relative;
@@ -318,6 +292,9 @@
     
                 margin-right: common.toRem(4);
             }
+            &::after{
+                border: common.toRem(3) solid common.$white;
+            }
         }
 
         &__link a:focus::after{
@@ -346,7 +323,6 @@
             justify-content: center;
         }
         &::after{
-            border: common.toRem(3) solid common.$white;
             content: "";
             opacity: 0;
 
@@ -402,7 +378,7 @@
             font-size: common.toRem(32);
         }
         &__link a::before{
-            flex: 0 0 common.toRem(40);
+            min-width: common.toRem(40);
             height: common.toRem(40);
             font-size: common.toRem(40);
         }
@@ -412,9 +388,8 @@
             font-size: common.toRem(24);
         }
         &__link a::before{
-            flex: 0 0 common.toRem(30);
+            min-width: common.toRem(30);
             height: common.toRem(30);
-
             font-size: common.toRem(30);
         }
     }
@@ -473,14 +448,53 @@
         }
     
         @media (any-hover: none) {
+            @media (min-width: common.toEm(769, 16)) {
+                &__login{
+                    margin-right: common.toRem(32);
+                }
+            }
             &__login{
                 color: #fff;
-                margin-right: common.toRem(32);
+                position: relative;
+                &::after{
+                    opacity: 0;
+                    border: common.toRem(3) common.$white solid;
+                    content: "";
+
+                    position: absolute;
+                    left: 50%;
+                    top: 50%;
+                    transform: translateY(-50%) translateX(-50%);
+
+                    width: 0;
+                    height: 0;
+
+                    transition: opacity 0.3s cubic-bezier(0,-0.18,0,1),
+                    width 0.3s cubic-bezier(0,-0.18,0,1),
+                    height 0.3s cubic-bezier(0,-0.18,0,1);
+                }
+            }
+            &__login:focus::after{
+                opacity: 1;
+                width: calc(100% + common.toRem(12));
+                height: 100%;
+            }
+            @media (max-width: common.toEm(768, 16)) {
+                &__login{
+                    margin-right: common.toRem(24);
+                }
             }
         }
         @media (any-hover: hover) {
-            &__login{
-                padding: 0 common.toRem(32);
+            @media (min-width: common.toEm(769, 16)) {
+                &__login{
+                    padding: 0 common.toRem(32);
+                }
+            }
+            @media (max-width: common.toEm(768, 16)) {
+                &__login{
+                    padding: 0 common.toRem(24);
+                }
             }
             &:not(.left-side) &__login{
                 &::after{
@@ -500,6 +514,13 @@
                 background-color: common.$white;
                 min-height: common.toRem(48);
                 align-self: center;
+
+                transition: color 0.3s cubic-bezier(0,-0.18,0,1),
+                background-color 0.3s cubic-bezier(0,-0.18,0,1);
+            }
+            &__sign-up:focus{
+                background-color: common.$darkGreen;
+                color: common.$white;
             }
         }
         &__sign-up{

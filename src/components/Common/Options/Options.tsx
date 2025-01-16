@@ -1,24 +1,24 @@
 import React, { FC, useState, useRef } from "react";
 import { OptionInput } from "./OptionInput.tsx";
 import { OptionSelect } from "./OptionSelect.tsx";
-import { iconPosition, iconValue, optionsContainer, optionsFlights, optionsHotels, optionType } from "../../../types.ts";
+import { IconPosition, IconValue, OptionsContainer, OptionsFlights, OptionsHotels, OptionType } from "../../../types.ts";
 import { makePseudoActive, unMakePseudoActive} from "../../../helperFunctions.ts"
 
 export const Options : FC = () => {
-    const about : optionsContainer = {
+    const about : OptionsContainer = {
         flights: {
             content: [
                 {
-                    type: optionType.INPUT, label: "From - To", value: "Lahore - Karachi", icon: null
+                    type: OptionType.INPUT, label: "From - To", value: "Lahore - Karachi", icon: null
                 },
                 {
-                    type: optionType.SELECT, label: "Trip", value: { links: ["Return", "Depart"], startActive: 0 }, icon: null
+                    type: OptionType.SELECT, label: "Trip", value: { links: ["Return", "Depart"], startActive: 0 }, icon: null
                 },
                 {
-                    type: optionType.INPUT, label: "Depart - Return", value: "07 Nov 22 - 13 Nov 22", icon: null
+                    type: OptionType.INPUT, label: "Depart - Return", value: "07 Nov 22 - 13 Nov 22", icon: null
                 },
                 {
-                    type: optionType.INPUT, label: "Passenger - Clas", value: "1 Passenger, Economy", icon: null
+                    type: OptionType.INPUT, label: "Passenger - Clas", value: "1 Passenger, Economy", icon: null
                 },
             ],
             isFlight: true
@@ -26,29 +26,29 @@ export const Options : FC = () => {
         hotels: {
             content: [
                 {
-                    type: optionType.INPUT, label: "Enter Destination", value: "Istanbul, Turkey", isBigger: true,
-                    icon: {value: iconValue.BED, position: iconPosition.LEFT}
+                    type: OptionType.INPUT, label: "Enter Destination", value: "Istanbul, Turkey", isBigger: true,
+                    icon: {value: IconValue.BED, position: IconPosition.LEFT}
                 },
                 {
-                    type: optionType.INPUT, label: "Check-in", value: "Fri 12/2", isBigger: false,
-                    icon: {value: iconValue.DATE, position: iconPosition.RIGHT}
+                    type: OptionType.INPUT, label: "Check-in", value: "Fri 12/2", isBigger: false,
+                    icon: {value: IconValue.DATE, position: IconPosition.RIGHT}
                 },
                 {
-                    type: optionType.INPUT, label: "Check Out", value: "Sun 12/4", isBigger: false,
-                    icon: {value: iconValue.DATE, position: iconPosition.RIGHT}
+                    type: OptionType.INPUT, label: "Check Out", value: "Sun 12/4", isBigger: false,
+                    icon: {value: IconValue.DATE, position: IconPosition.RIGHT}
                 },
                 {
-                    type: optionType.SELECT, label: "Rooms & Guests", 
+                    type: OptionType.SELECT, label: "Rooms & Guests", 
                     value: { links: ["1 room, 2 guests", "2 room, 2 guests"], startActive: 0 }, 
-                    icon: {value: iconValue.HUMAN, position: iconPosition.LEFT}, isBigger: false
+                    icon: {value: IconValue.HUMAN, position: IconPosition.LEFT}, isBigger: false
                 }
             ],
             isFlight: false
         }
     };
-    let [optionsType, setOptionsType] = useState<optionsFlights | optionsHotels>(about.flights);
+    let [optionsType, setOptionsType] = useState<OptionsFlights | OptionsHotels>(about.flights);
     
-    const toggleOptionsType = (newAbout : optionsFlights | optionsHotels) => {
+    const toggleOptionsType = (newAbout : OptionsFlights | OptionsHotels) => {
         setOptionsType(newAbout);
     }
 
@@ -96,7 +96,7 @@ export const Options : FC = () => {
                         return(
                             <div className="options__row" key={i}>
                                 {optionsType.content.slice(i * 4, (i+1)*4).map((option, j) => {
-                                    if(option.type === optionType.INPUT){
+                                    if(option.type === OptionType.INPUT){
                                         inputId++;
                                         return(
                                             <OptionInput 

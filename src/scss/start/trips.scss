@@ -2,12 +2,27 @@
 
 .trips{
     overflow-x: hidden;
-    padding-top: common.toRem(80);
-    padding-bottom: common.toRem(77);
+    
+    @media (min-width: common.toEm(993, 16)) {
+        padding-top: common.toRem(80);
+        padding-bottom: common.toRem(77);   
+    }
+    @media (max-width: common.toEm(992, 16)) and (min-width: common.toEm(769, 16)) {
+        padding-top: common.toRem(64);
+        padding-bottom: common.toRem(64);
+    }
+    @media (max-width: common.toEm(768, 16)) and (min-width: common.toEm(481, 16)) {
+        padding-top: common.toRem(48);
+        padding-bottom: common.toRem(48);
+    }
+    @media (max-width: common.toEm(480, 16)) {
+        padding-top: common.toRem(32);
+        padding-bottom: common.toRem(32);
+    }
 
     @media (min-width: common.toEm(993, 16)) {
         &__items{
-            margin: common.toRem(-16);
+            gap: common.toRem(32);
         }
     }
     @media (min-width: common.toEm(769, 16)) {
@@ -16,22 +31,20 @@
             flex-wrap: wrap;
         }
     }
-    @media (max-width: common.toEm(992, 16)) {
+    @media (max-width: common.toEm(992, 16)) and (min-width: common.toEm(769, 16)) {
         &__items{
-            margin: common.toRem(-12);
+            gap: common.toRem(24);
         }
     }
 
     @media (min-width: common.toEm(993, 16)) {
         &__item{
-            width: 33.333%;
-            padding: common.toRem(16);
+            width: calc((100% - common.toRem(32) * 2) / 3);
         }
     }
     @media (max-width: common.toEm(992, 16)) and (min-width: common.toEm(769, 16)) {
         &__item{
-            width: 50%;
-            padding: common.toRem(12);
+            width: calc((100% - common.toRem(32)) / 2);
         }
     }
     @media (max-width: common.toEm(768, 16)) {
@@ -151,11 +164,9 @@
     &__include{
         display: flex;
         flex-wrap: wrap;
-        margin: 0 common.toRem(-10.5);
+        column-gap: common.toRem(21);
     }
     &__include-item{
-        padding: 0 common.toRem(10.5);
-
         span{
             color: common.$darkGreen;
             font-family: Montserrat;
@@ -175,7 +186,7 @@
             height: common.toRem(2.5);
 
             position: absolute;
-            right: common.toRem(-1);
+            right: common.toRem(-11.5);
             bottom: common.toRem(6.5);
             transform: translateY(-50%);
         }

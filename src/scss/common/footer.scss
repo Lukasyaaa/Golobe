@@ -1,0 +1,707 @@
+@use "../service/common.scss";
+
+.footer{
+    &__post{
+        position: relative;
+        z-index: 2;
+    }
+
+    @media (min-width: common.toEm(common.$container + 31, 16)) {
+        &__main{
+            padding: common.toRem(214) 0 common.toRem(64);
+            margin-top: common.toRem(-150);
+        }
+    }
+    &__main{
+        position: relative;
+        z-index: 1;
+        background-color: common.$mint;
+    }
+    @media (max-width: common.toEm(common.$container + 31, 16)) {
+        &__main{
+            padding: common.toRem(170) 0 common.toRem(64);
+            margin-top: common.toRem(-120);
+        }
+    }
+    @media (max-width: common.toEm(992, 16)) and (min-width: common.toEm(769, 16)) {
+        &__main{
+            padding: common.toRem(130) 0 common.toRem(48);
+            margin-top: common.toRem(-90);
+        }
+    }
+    @media (max-width: common.toEm(768, 16)) {
+        &__main{
+            padding: common.toRem(85) 0 common.toRem(32);
+            margin-top: common.toRem(-60);
+        }
+    }
+
+    @media (min-width: common.toEm(769, 16)) {
+        &__main .container{
+            display: flex;
+        }   
+    }
+
+    @media (min-width: common.toEm(993, 16)) {
+        &__info{
+            margin-right: common.toRem(48);
+        }
+    }
+    @media (min-width: common.toEm(769, 16)) {
+        &__info{
+            flex: 0 1 common.toRem(120);
+        }   
+    }
+    @media (max-width: common.toEm(992, 16)) and (min-width: common.toEm(769, 16)) {
+        &__info{
+            margin-right: common.toRem(32);
+        }
+    }
+    @media (max-width: common.toEm(768, 16)) {
+        &__info{
+            text-align: center;
+            max-width: common.toRem(480);
+            margin: 0 auto common.toRem(24);
+        }
+    }
+    
+    &__image{
+        width: 100%;
+        height: auto;
+    }
+    @media (max-width: common.toEm(768, 16)) {
+        &__image{
+            max-width: common.toRem(200);
+        }
+    }
+
+    @media (min-width: common.toEm(common.$container + 31, 16)) {
+        &__socials{
+            margin-bottom: common.toRem(24);
+        }
+    }
+    &__socials{
+        display: flex;
+        flex-wrap: wrap;
+        gap: common.toRem(12);
+    }
+    @media (max-width: common.toEm(common.$container + 31, 16)) and (min-width: common.toEm(769, 16)) {
+        &__socials{
+            margin-bottom: common.toRem(16);
+        }
+    }
+    @media (max-width: common.toEm(768, 16)) {
+        &__socials{
+            justify-content: center;
+        }
+    }
+
+    &__social a{
+        color: common.$darkGreen;
+        min-width: common.toRem(20);
+        height: common.toRem(20);
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    
+        &::before{
+            position: relative;
+            z-index: 2;
+        }
+
+        position: relative;
+        &::after{
+            box-shadow: inset 0 0 5px rgba($color: common.$darkGreen, $alpha: 0.1);
+            border-radius: common.toRem(4);
+            background-color: common.$white;
+
+            content: "";
+            position: absolute;
+            z-index: 1;
+
+            left: 50%;
+            top: 50%;
+            transform: translateY(-50%) translateX(-50%);
+
+            width: 0;
+            height: 0;
+
+            transition: width 0.3s cubic-bezier(0,-0.18,0,1),
+            height 0.3s cubic-bezier(0,-0.18,0,1);
+        }
+    }
+    &__social a:focus{
+        outline: none;
+        &::after{
+            width: calc(100% + common.toRem(12));
+            height: calc(100% + common.toRem(12)); 
+        }
+    }
+    @media (any-hover: hover) {
+        &__social a:hover::after{
+           width: calc(100% + common.toRem(12));
+           height: calc(100% + common.toRem(12)); 
+        }
+    }
+    &__social a.icon-facebook::before{
+        font-size: common.toRem(18);
+    }
+    &__social a.icon-twitter::before{
+        font-size: common.toRem(19);
+    }
+    &__social a.icon-youtube::before{
+        font-size: common.toRem(20);
+    }
+    &__social a.icon-inst::before{
+        font-size: common.toRem(17);
+    }
+
+    @media (min-width: common.toEm(993, 16)) {
+        &__columns{
+            gap: common.toRem(24);
+        }
+    }
+    @media (min-width: common.toEm(769, 16)) {
+        &__columns{
+            flex: 1 1 auto;
+            justify-content: flex-end;
+        }
+    }
+    @media (min-width: common.toEm(481, 16)) {
+        &__columns{
+            display: flex;
+        }
+    }
+    @media (max-width: common.toEm(992, 16)) and (min-width: common.toEm(481, 16)) {
+        &__columns{
+            flex-wrap: wrap;
+            gap: common.toRem(16);
+        }
+    }
+    @media (max-width: common.toEm(768, 16)) and (min-width: common.toEm(481, 16)) {
+        &__columns{
+            justify-content: center;
+        }
+    }
+
+    &__column{
+        flex: 0 1 common.toRem(175.2);
+    }
+    @media (max-width: common.toEm(768, 16)) {
+        &__column{
+            text-align: center;
+        }
+    }
+    @media (max-width: common.toEm(480, 16)) {
+        &__column:not(:last-child){
+            margin-bottom: common.toRem(10);
+        }
+    }
+}
+.post-footer{
+    @media (min-width: common.toEm(993, 16)) {
+        &__inner{
+            position: relative;
+            &::after{
+                background: url("../../assets/img/footer/post.svg") no-repeat;
+                background-size: contain;
+                content: "";
+    
+                position: absolute;
+                z-index: 1;
+                right: common.toRem(24);
+                bottom: 0;
+    
+                width: common.toPercent(400, common.$container);
+                padding-bottom: common.toPercent(258, common.$container);
+            }
+        }
+    }
+    @media (min-width: common.toEm(769, 16)) {
+        &__inner{
+            padding: common.toRem(24);
+        }
+    }
+    &__inner{
+        border-radius: common.toRem(20);
+        background-color: common.$lightMint;
+    }
+    @media (max-width: common.toEm(768, 16)) {
+        &__inner{
+            padding: common.toRem(16);
+        }
+    }
+
+    @media (min-width: common.toEm(993, 16)) {
+        &__inner > *{
+            position: relative;
+            z-index: 2;
+            max-width: common.toRem(593);
+        }
+    }
+
+    @media (min-width: common.toEm(993, 16)) {
+        &__title{
+            max-width: common.toRem(364);
+
+            font-size: common.toRem(44);
+            margin-bottom: common.toRem(25);
+        }
+    }
+    &__title{
+        color: common.$darkGreen;
+        font-family: "TradeGothic";
+        font-weight: 700;
+        line-height: common.toEm(54, 44);
+    }
+    @media (max-width: common.toEm(992, 16)) and (min-width: common.toEm(769, 16)) {
+        &__title{
+            font-size: common.toRem(36);
+            margin-bottom: common.toRem(16);
+        }
+    }
+    @media (max-width: common.toEm(768, 16)) and (min-width: common.toEm(481, 16)) {
+        &__title{
+            font-size: common.toRem(32);
+        }
+    }
+    @media (max-width: common.toEm(768, 16)) {
+        &__title{
+            margin-bottom: common.toRem(10);
+        }
+    }
+    @media (max-width: common.toEm(480, 16)) {
+        &__title{
+            font-size: common.toRem(28);
+        }
+    }
+
+    @media (min-width: common.toEm(993, 16)) {
+        &__supinfo{
+            margin-bottom: common.toRem(8);
+        }
+    }
+    @media (min-width: common.toEm(769, 16)) {
+        &__supinfo{
+            font-size: common.toRem(20);
+        }
+    }
+    &__supinfo{
+        color: rgba($color: common.$darkGreen, $alpha: 0.8);
+        font-family: "TradeGothic";
+        font-weight: 700;
+        line-height: common.toEm(25, 20);
+    }
+    @media (max-width: common.toEm(992, 16)) and (min-width: common.toEm(481, 16)) {
+        &__supinfo{
+            margin-bottom: common.toRem(4);
+        }
+    }
+    @media (max-width: common.toEm(768, 16)) and (min-width: common.toEm(481, 16)) {
+        &__supinfo{
+            font-size: common.toRem(18);
+        }
+    }
+    @media (max-width: common.toEm(480, 16)) {
+        &__supinfo{
+            font-size: common.toRem(16);
+        }
+    }
+
+    @media (min-width: common.toEm(993, 16)) {
+        &__info{
+            margin-bottom: common.toRem(16);
+        }
+    }
+    @media (max-width: common.toEm(481, 16)) {
+        &__info{
+            font-size: common.toRem(16);
+        }
+    }
+    &__info{
+        color: rgba($color: common.$darkGreen, $alpha: 0.7);
+        font-family: Montserrat;
+        font-weight: 500;
+        line-height: common.toEm(19, 16);
+    }
+    @media (max-width: common.toEm(992, 16)) {
+        &__info{
+            margin-bottom: common.toRem(10);
+        }
+    }
+    @media (max-width: common.toEm(480, 16)) {
+        &__info{
+            font-size: common.toRem(14);
+        }
+    }
+
+    @media (min-width: common.toEm(769, 16)) {
+        &__row{
+            display: flex;
+        }
+    }
+
+    @media (min-width: common.toEm(769, 16)) {
+        &__input{
+            flex: 1 1 auto;
+            margin-right: common.toRem(16);
+        }
+    }
+    &__input{
+        border: common.toRem(3) solid common.$white;
+        border-radius: common.toRem(4);
+        &::placeholder{
+            color: common.$darkPurple;
+        }
+
+        font-family: Montserrat;
+        font-size: common.toRem(16);
+        font-weight: 400;
+        line-height: common.toEm(20, 16);
+        padding: 0 common.toRem(16);
+
+        transition: border-color 0.3s cubic-bezier(0,-0.18,0,1);
+    }
+    &__input:focus{
+        outline: none;
+        border-color: common.$darkGreen;
+    }
+    @media (any-hover: hover) {
+        &__input:hover{
+            border-color: common.$darkGreen;
+        }
+    }
+    @media (max-width: common.toEm(768, 16)) and (min-width: common.toEm(481, 16)) {
+        &__input{
+            height: common.toRem(48);
+        }
+    }
+    @media (max-width: common.toEm(768, 16)) {
+        &__input{
+            width: 100%;
+            margin-bottom: common.toRem(10);
+        }
+    }
+    @media (max-width: common.toEm(480, 16)) {
+        &__input{
+            height: common.toRem(40);
+        }
+    }
+
+    @media (min-width: common.toEm(769, 16)) {
+        &__button{
+            min-height: common.toRem(56);
+        }
+    }
+    &__button{
+        border-radius: common.toRem(4);
+        background-color: common.$darkGreen;
+        
+        padding: common.toRem(8) common.toRem(16);
+        display: flex;
+        align-items: center;
+
+        span{
+            position: relative;
+            z-index: 2;
+
+            color: common.$white;
+            font-family: Montserrat;
+            font-size: common.toRem(14);
+            font-weight: 600;
+            line-height: common.toEm(18, 14);
+
+            transition: color 0.3s cubic-bezier(0,-0.18,0,1);
+        }
+        position: relative;
+        &::after{
+            border: common.toRem(2) solid common.$darkGreen;
+            border-radius: common.toRem(4);
+            background-color: common.$white;
+            content: "";
+
+            position: absolute;
+            z-index: 1;
+            bottom: 50%;
+            left: 50%;
+            transform: translateY(50%) translateX(-50%);
+
+            width: 0;
+            height: 0;
+
+            transition: width 0.3s cubic-bezier(0,-0.18,0,1),
+            height 0.3s cubic-bezier(0,-0.18,0,1);
+        }
+    }
+    &__button:focus{
+        outline: none;
+        span{
+            color: common.$darkGreen;
+        }
+        &::after{
+            width: calc(100% + common.toRem(1));
+            height: calc(100% + common.toRem(1));
+        }
+    }
+    @media (any-hover: hover) {
+        &__button:hover{
+            span{
+                color: common.$darkGreen;
+            }
+            &::after{
+                width: calc(100% + common.toRem(1));
+                height: calc(100% + common.toRem(1));
+            }
+        }
+    }
+    @media (max-width: common.toEm(768, 16)) and (min-width: common.toEm(481, 16)) {
+        &__button{
+            min-height: common.toRem(48);
+        }
+    }
+    @media (max-width: common.toEm(768, 16)) {
+        &__button{
+            justify-content: center;
+            width: 100%;
+        }
+    }
+    @media (max-width: common.toEm(480, 16)) {
+        &__button{
+            min-height: common.toRem(40);
+        }
+    }
+}
+.column-footer{
+    @media (min-width: common.toEm(993, 16)) {
+        &__title{
+            margin-bottom: common.toRem(16);
+        }
+    }
+    &__title{
+        color: common.$darkGreen;
+        font-family: "TradeGothic";
+        font-size: common.toRem(16);
+        font-weight: 700;
+        line-height: common.toEm(20, 16);
+    }
+    @media (max-width: common.toEm(992, 16)) and (min-width: common.toEm(481, 16)) {
+        &__title{
+            margin-bottom: common.toRem(10);
+        }
+    }
+    @media (max-width: common.toEm(480, 16)) {
+        &__title{
+            width: 100%;
+            
+            background-color: common.$white;
+            border-radius: common.toRem(8);
+            padding: common.toRem(12);
+        
+            transition: background-color 0.3s cubic-bezier(0,-0.18,0,1),
+            color 0.3s cubic-bezier(0,-0.18,0,1),
+            border-radius 0s linear 0.3s;
+        }
+        &__title:focus{
+            outline: none;
+            background-color: common.$darkGreen;
+            color: common.$mint;
+        }   
+        @media (any-hover: hover) {
+            &__title:hover{
+                background-color: common.$darkGreen;
+                color: common.$mint;
+            }   
+        }
+    }
+
+    @media (max-width: common.toEm(480, 16)) {
+        &__list-parent{
+            height: 0;
+            overflow: hidden;
+
+            transition: height 0.3s cubic-bezier(0,-0.18,0,1);
+        }
+        &._active &__title{
+            border-radius: common.toRem(8) common.toRem(8) 0 0;
+            transition: background-color 0.3s cubic-bezier(0,-0.18,0,1),
+            color 0.3s cubic-bezier(0,-0.18,0,1),
+            border-radius 0s linear;
+        }
+    }
+
+    @media (max-width: common.toEm(480, 16)) {
+        &__list{
+            border: common.toRem(5) solid common.$white;
+            border-top: none;
+            border-radius: 0 0 common.toRem(8) common.toRem(8);
+            background-color: common.$mint;
+
+            transition: border-color 0.3s cubic-bezier(0,-0.18,0,1);
+        }
+        &__title:focus ~ &__list-parent &__list{
+            border-color: common.$darkGreen;
+        }
+        @media (any-hover: hover) {
+            &__title:hover ~ &__list-parent &__list{
+                border-color: common.$darkGreen;
+            }    
+        }
+    }
+
+    @media (min-width: common.toEm(769, 16)) {
+        &__link a{
+            padding: common.toRem(6) 0;
+        }
+    }
+    @media (min-width: common.toEm(481, 16)) {
+        &__link a::after{
+            border: common.toRem(3) solid rgba($color: common.$darkGreen, $alpha: 0.7);
+        }
+    }
+    &__link a{
+        span{
+            color: rgba($color: common.$darkGreen, $alpha: 0.7);
+            font-family: Montserrat;
+            font-size: common.toRem(14);
+            font-weight: 500;
+            line-height: common.toEm(18, 14);
+        }
+
+        position: relative;
+        &::after{
+            opacity: 0;
+            content: "";
+            position: absolute;
+            
+            left: 50%;
+            top: 50%;
+            transform: translateY(-50%) translateX(-50%);
+
+            width: 0;
+            height: 0;
+
+            transition: width 0.3s cubic-bezier(0,-0.18,0,1),
+            height 0.3s cubic-bezier(0,-0.18,0,1),
+            opacity 0.3s cubic-bezier(0,-0.18,0,1);
+        }
+    }
+    @media (max-width: common.toEm(768, 16)) and (min-width: common.toEm(481, 16)) {
+        &__link a{
+            padding: common.toRem(3) 0;
+        }
+    }
+    @media (max-width: common.toEm(480, 16)) {
+        &__link a{
+            display: block;
+            padding: common.toRem(6) common.toRem(12);
+            span{
+                color: common.$white;
+                position: relative;
+                z-index: 2;
+            }
+            &::after{
+                box-shadow: inset 0 0 5px rgba($color: common.$darkGreen, $alpha: 0.1);
+                background-color: common.$white;
+                z-index: 1;
+            }
+        }
+    }
+
+    @media (min-width: common.toEm(769, 16)) {
+        &__link:first-child a{
+            padding: 0 0 common.toRem(6);
+        }
+    }
+    @media (min-width: common.toEm(481, 16)) {
+        &__link:first-child a::after{
+            top: common.toRem(-6);
+            transform: translateX(-50%);
+        }   
+    }
+    @media (max-width: common.toEm(768, 16)) and (min-width: common.toEm(481, 16)) {
+        &__link:first-child a{
+            padding: 0 0 common.toRem(3);
+        }
+    }
+    @media (max-width: common.toEm(480, 16)) {
+        &__link:first-child a{
+            padding: common.toRem(12) common.toRem(12) common.toRem(6);
+        }
+    }
+
+    @media (min-width: common.toEm(769, 16)) {
+        &__link:last-child a{ 
+            padding: common.toRem(6) 0 0;
+        }
+    }
+    @media (min-width: common.toEm(481, 16)) {
+        &__link:last-child a::after{
+            top: calc(100% + common.toRem(6));
+            transform: translateY(-100%) translateX(-50%);
+        }
+    }
+    @media (max-width: common.toEm(768, 16)) and (min-width: common.toEm(481, 16)) {
+        &__link:last-child a{
+            padding: common.toRem(3) 0 0;
+        }
+    }
+    @media (max-width: common.toEm(480, 16)) {
+        &__link:last-child a{
+            padding: common.toRem(6) common.toRem(12) common.toRem(12);
+            &::after{
+                border-radius: 0 0 common.toRem(3) common.toRem(3);
+            }
+        }
+    }
+
+    @media (min-width: common.toEm(481, 16)) {
+        &__link a:focus::after{
+            opacity: 1;
+            width: calc(100% + common.toRem(12));
+            height: 100%;
+        }
+        &__link:first-child a:focus::after,
+        &__link:last-child a:focus::after{
+            height: calc(100% + common.toRem(6));
+        }
+        @media (any-hover: hover) {
+            &__link a:hover::after{
+                opacity: 1;
+                width: calc(100% + common.toRem(12));
+                height: 100%;
+            }
+            &__link:first-child a:hover::after,
+            &__link:last-child a:hover::after{
+                height: calc(100% + common.toRem(6));
+            }
+        }
+    }
+    &__link a:focus{
+        outline: none;
+    }
+    @media (max-width: common.toEm(480, 16)) {
+        &__link a:focus{
+            &::after{
+                opacity: 1;
+                width: 100%;
+                height: 100%;
+            }
+            span{
+                color: common.$darkGreen;
+            }
+        }
+        @media (any-hover: hover) {
+            &__link a:hover{
+                &::after{
+                    opacity: 1;
+                    width: 100%;
+                    height: 100%;
+                }
+                span{
+                    color: common.$darkGreen;
+                }
+            }
+        }
+    }
+}

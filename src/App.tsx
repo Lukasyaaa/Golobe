@@ -1,21 +1,21 @@
 import React from "react";
 import "./scss/style.scss";
 import { Header } from "./components/Common/Header.tsx";
-import { Intro } from "./components/Start/Intro.tsx";
-import { Options } from "./components/Common/Options/Options.tsx";
-import { Trips } from "./components/Start/Trips/Trips.tsx";
+import { Start } from "./pages/Start.tsx";
+import { Footer } from "./components/Common/Footer/Footer.tsx";
 
 export const App = () => {
-    const closeInteraction = () => {
+    const isWebp = false;
 
+    const closeInteraction = () => {
+        console.log("hello");
     }
 
     return(
         <div className="wrapper" onClick={closeInteraction}>
             <Header />
-            <Intro />
-            <Options />
-            <Trips />
+            <Start isWebp={isWebp} />
+            <Footer />
         </div>
     )
 }

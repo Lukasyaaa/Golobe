@@ -1,93 +1,139 @@
 //-----------------General-----------------
-interface srcs{
+interface Srcs{
     jpeg : string,
     webp : string
 }
-interface imageVariants{
-    srcs : srcs,
+interface ImageVariants{
+    srcs : Srcs,
     alt : string
 }
 
-export interface setter<T>{
+export interface Setter<T>{
     value : T,
     set : (newValue : T) => void
 }
 
+interface Link{
+    text : string,
+    href : string
+}
+
+export interface Block{
+    title : string,
+    text : string,
+}
+interface SectionHeaderButton{
+    active : string,
+    passive : string
+}
+export interface SectionHeader{
+    title : string,
+    text : string,
+    button : SectionHeaderButton
+}
+export interface Section<T>{
+    header : SectionHeader,
+    content : T[],
+    maxShow : number
+}
+
 //-----------------Options-----------------
-export enum optionType{
+export enum OptionType{
     SELECT = 0,
     INPUT = 1
 }
-export enum iconPosition{
+export enum IconPosition{
     LEFT = 0,
     RIGHT = 1
 }
-export enum iconValue{
+export enum IconValue{
     BED = 1,
     DATE = 2,
     HUMAN = 3
 }
 
-export interface icon{
-    value : iconValue,
-    position : iconPosition
+export interface Icon{
+    value : IconValue,
+    position : IconPosition
 }
 
-export interface optionInput{
-    type : optionType.INPUT,
+export interface OptionInput{
+    type : OptionType.INPUT,
     label : string,
     value : string,
-    icon : icon | null
+    icon : Icon | null
 }
-interface optionSelectValue{
+interface OptionSelectValue{
     links : string[],
     startActive : number
 }
-export interface optionSelect{
-    type : optionType.SELECT,
+export interface OptionSelect{
+    type : OptionType.SELECT,
     label : string,
-    value : optionSelectValue,
-    icon : icon | null
+    value : OptionSelectValue,
+    icon : Icon | null
 }
-export type optionsItems = (optionSelect | optionInput)[];
+export type OptionsItems = (OptionSelect | OptionInput)[];
 
-export interface optionAdvancedInput{
-    type : optionType.INPUT,
+export interface OptionAdvancedInput{
+    type : OptionType.INPUT,
     label : string,
     value : string,
     isBigger : boolean,
-    icon : icon | null
+    icon : Icon | null
 }
-export interface optionAdvancedSelect{
-    type : optionType.SELECT,
+export interface OptionAdvancedSelect{
+    type : OptionType.SELECT,
     label : string,
-    value : optionSelectValue,
+    value : OptionSelectValue,
     isBigger : boolean,
-    icon : icon | null
+    icon : Icon | null
 }
-export type optionsAdvancedItems = (optionAdvancedSelect | optionAdvancedInput)[];
+export type OptionsAdvancedItems = (OptionAdvancedSelect | OptionAdvancedInput)[];
 
-export interface optionsFlights{
-    content : optionsItems,
+export interface OptionsFlights{
+    content : OptionsItems,
     isFlight: true
 }
-export interface optionsHotels{
-    content : optionsAdvancedItems,
+export interface OptionsHotels{
+    content : OptionsAdvancedItems,
     isFlight: false
 }
 
-export interface optionsContainer{
-    flights : optionsFlights,
-    hotels : optionsHotels
+export interface OptionsContainer{
+    flights : OptionsFlights,
+    hotels : OptionsHotels
 }
 
 //-----------------Trips-----------------
-export interface trip{
+export interface Trip{
+    link : string,
     city : string,
     includes : string[],
-    image : imageVariants
+    image : ImageVariants
 }
-export interface trips{
-    content : trip[],
-    maxShow: 9
+
+//-----------------Choose-----------------
+export interface ChooseVariant{
+    title : string,
+    subtitle : string,
+    link : Link,
+    background : ImageVariants
+}
+
+//-----------------Reviews-----------------
+export interface Review{
+    title : string,
+    message : string,
+    showMore : string,
+    countStars : number,
+    author : string,
+    place : Link,
+    image : ImageVariants
+}
+
+//-----------------Footer-----------------
+export interface FooterColumn{
+    title : string,
+    links : Link[]
 }

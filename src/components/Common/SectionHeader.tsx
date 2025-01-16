@@ -1,52 +1,41 @@
 import React, { FC } from "react";
-import { setter } from "../../types";
+import { Setter, Block, SectionHeader as SectionHeaderInterface } from "../../types";
 
-interface block{
-    title : string,
-    text : string,
-}
-interface sectionHeaderButton{
-    active : string,
-    passive : string
-}
-interface sectionHeader{
-    title : string,
-    text : string,
-    button : sectionHeaderButton
-}
-
-interface sectionHeaderWithMoreProps{
-    about : sectionHeader,
+interface SectionHeaderWithMoreProps{
+    parent : string,
+    about : SectionHeaderInterface,
     isNeedButton : true,
-    isShowAll : setter<boolean>
+    isShowAll : Setter<boolean>
 }
-interface sectionHeaderWithoutMoreProps{
-    about : block,
+interface SectionHeaderWithoutMoreProps{
+    parent : string,
+    about : Block,
     isNeedButton : false,
 }
 
-export const SectionHeader : FC<sectionHeaderWithMoreProps | sectionHeaderWithoutMoreProps> = ({about, isNeedButton, ...props}) => {
+export const SectionHeader : FC<SectionHeaderWithMoreProps | SectionHeaderWithoutMoreProps> = ({parent, about, isNeedButton, ...props}) => {
     if(isNeedButton){
-        const toggleIsShowAll = () => {
+        const toggleIsShowAll = (e) => {
+            e.stopPropagation();
             props.isShowAll.set(!props.isShowAll.value);
         }
 
         return(
-            <div className="header-block">
-                <div className="header-block__info">
-                    <h2 className="header-block__title">{about.title}</h2>
-                    <div className="header-block__subtitle">{about.text}</div>
+            <div className={"header-block " + parent + "__header"}>
+                <div className={"header-block__info " + "header-" + parent + "__info"}>
+                    <h2 className={"header-block__title " + "header-" + parent + "__title"}>{about.title}</h2>
+                    <div className={"header-block__subtitle " + "header-" + parent + "__subtitle"}>{about.text}</div>
                 </div>
-                <button className="header-block__button" type="button" onClick={toggleIsShowAll}>
+                <button className={"header-block__button " + "header-" + parent + "__button"} type="button" onClick={toggleIsShowAll}>
                     {(props.isShowAll.value) ? about.button.active : about.button.passive}
                 </button>
             </div>
         );
     } else {
         return(
-            <div className="header-block short">
-                <h2 className="header-block__title">{about.title}</h2>
-                <div className="header-block__subtitle">{about.text}</div>
+            <div className={"header-block " + parent + "__header short"}>
+                <h2 className={"header-block__title " + "header-" + parent + "__title"}>{about.title}</h2>
+                <div className={"header-block__subtitle " + "header-" + parent + "__subtitle"}>{about.text}</div>
             </div>
         );
     }

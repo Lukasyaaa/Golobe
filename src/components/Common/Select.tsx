@@ -1,15 +1,16 @@
-import React, { FC, Fragment, useState, useRef } from "react";
+import React, { FC, Fragment, useState, useRef, MouseEvent } from "react";
 import { makePseudoActive, unMakePseudoActive} from "../../helperFunctions.ts"
 
-interface selectProps{
+interface SelectProps{
     classes : string[],
     links : string[],
     startActive : number,
 }
 
-export const Select : FC<selectProps> = ({classes, links, startActive}) => {
+export const Select : FC<SelectProps> = ({classes, links, startActive}) => {
     let [isActive, setIsActive] = useState<boolean>(false);
-    const toggleList = () => {
+    const toggleList = (e) => {
+        e.stopPropagation();
         setIsActive(!isActive);
     }
     const showList = () => {
@@ -21,7 +22,8 @@ export const Select : FC<selectProps> = ({classes, links, startActive}) => {
 
     let listElement = useRef<HTMLUListElement>(null);
     let [choosed, setChoosed] = useState<number>(startActive);
-    const setChoosedLink = (id : number) => {
+    const setChoosedLink = (e : MouseEvent<HTMLButtonElement>, id : number) => {
+        e.stopPropagation();
         setChoosed(id);
     }
     
@@ -67,7 +69,7 @@ export const Select : FC<selectProps> = ({classes, links, startActive}) => {
                                             unMakePseudoActive(e, listElement);
                                         }
                                     }}
-                                    onClick={() => setChoosedLink(i)}
+                                    onClick={(e) => setChoosedLink(e, i)}
                                 >
                                     {link}
                                 </button>
