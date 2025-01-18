@@ -1,5 +1,5 @@
 //-----------------General-----------------
-interface Srcs{
+export interface Srcs{
     jpeg : string,
     webp : string
 }
@@ -10,12 +10,12 @@ interface ImageVariants{
 
 export interface Setter<T>{
     value : T,
-    set : (newValue : T) => void
+    set : React.Dispatch<React.SetStateAction<T>>
 }
 
-interface Link{
-    text : string,
-    href : string
+export interface Link<T>{
+    description : T,
+    path : string
 }
 
 export interface Block{
@@ -27,14 +27,35 @@ interface SectionHeaderButton{
     passive : string
 }
 export interface SectionHeader{
-    title : string,
-    text : string,
-    button : SectionHeaderButton
+    heading : string,
+    description : string,
+    buttonMore : SectionHeaderButton
+}
+interface Loading{
+    is : boolean,
+    description : string
+}
+interface SectionItems<T>{
+    container : T[]
+    loading : Loading,
+    errorMessage : null | string,
 }
 export interface Section<T>{
     header : SectionHeader,
-    content : T[],
+    items : SectionItems<T>
     maxShow : number
+}
+
+export interface Separation<T>{
+    flights : T,
+    hotels : T
+}
+
+export enum Socials{
+    Instagram = "icon-inst",
+    Youtube = "icon-youtube",
+    Twitter = "icon-twitter",
+    Facebook = "icon-facebook"
 }
 
 //-----------------Options-----------------
@@ -91,18 +112,12 @@ export interface OptionAdvancedSelect{
 }
 export type OptionsAdvancedItems = (OptionAdvancedSelect | OptionAdvancedInput)[];
 
-export interface OptionsFlights{
-    content : OptionsItems,
-    isFlight: true
-}
-export interface OptionsHotels{
-    content : OptionsAdvancedItems,
-    isFlight: false
-}
-
 export interface OptionsContainer{
-    flights : OptionsFlights,
-    hotels : OptionsHotels
+    header : Separation<string>
+    flights : OptionsItems,
+    hotels : OptionsAdvancedItems,
+    addPromo : string,
+    link : Separation<string>
 }
 
 //-----------------Trips-----------------
@@ -116,9 +131,9 @@ export interface Trip{
 //-----------------Choose-----------------
 export interface ChooseVariant{
     title : string,
-    subtitle : string,
-    link : Link,
-    background : ImageVariants
+    description : string,
+    linkText : string,
+    background : Srcs
 }
 
 //-----------------Reviews-----------------
@@ -128,12 +143,28 @@ export interface Review{
     showMore : string,
     countStars : number,
     author : string,
-    place : Link,
+    place : Link<string>,
     image : ImageVariants
 }
 
 //-----------------Footer-----------------
 export interface FooterColumn{
     title : string,
-    links : Link[]
+    links : Link<string>[]
+}
+
+export interface FooterContact{
+    heading : string,
+    supDescription : string,
+    description : string,
+    inputPlaceholder : string,
+    buttonSend : string,
+    image : string
+}
+
+export interface Footer{
+    contact : FooterContact,
+    logo : string,
+    socials : Link<Socials>[],
+    columns : FooterColumn[] 
 }

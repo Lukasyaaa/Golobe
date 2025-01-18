@@ -1,6 +1,7 @@
 import React, { FC, useRef } from "react";
 import { Review as ReviewInterface } from "../../../types";
 import googleLogo from "../../../assets/img/start/reviews/google.svg";
+import { importImage } from "../../../helperFunctions.ts";
 
 interface ReviewProps{
     about : ReviewInterface
@@ -11,7 +12,7 @@ export const Review : FC<ReviewProps> = ({about}) => {
     let messageInnerElement = useRef<HTMLDivElement>(null);
     const toggleMessage = (e) => {
         e.stopPropagation();
-        if(messageElement.current && messageInnerElement){
+        if(messageElement.current && messageInnerElement.current){
             console.log(parseInt(getComputedStyle(messageElement.current).height))
             if(parseInt(getComputedStyle(messageElement.current).height) !== messageInnerElement.current.offsetHeight){
                 messageElement.current.style.height = messageInnerElement.current.offsetHeight + "px";
@@ -37,14 +38,14 @@ export const Review : FC<ReviewProps> = ({about}) => {
                 })}
             </ul>
             <div className="item-reviews__author">{about.author}</div>
-            <div className="item-reviews__place">{about.place.text}</div>
-            <a className="item-reviews__link" href={about.place.href}>
+            <div className="item-reviews__place">{about.place.description}</div>
+            <a className="item-reviews__link" href={about.place.path} onClick={(e) => e.stopPropagation()}>
                 <img src={googleLogo} alt="Google" />
                 <span>Google</span>
             </a>
             <picture className="item-reviews__image">
-                <source srcSet={about.image.srcs.webp} type="image/webp" />
-                <img src={about.image.srcs.jpeg} alt={about.image.alt} />
+                <source srcSet={importImage(about.image.srcs.webp)} type="image/webp" />
+                <img src={importImage(about.image.srcs.jpeg)} alt={about.image.alt} />
             </picture>
         </article>
     )

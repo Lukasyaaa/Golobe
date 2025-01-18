@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, MouseEvent } from "react";
 import { Setter, Block, SectionHeader as SectionHeaderInterface } from "../../types";
 
 interface SectionHeaderWithMoreProps{
@@ -15,7 +15,7 @@ interface SectionHeaderWithoutMoreProps{
 
 export const SectionHeader : FC<SectionHeaderWithMoreProps | SectionHeaderWithoutMoreProps> = ({parent, about, isNeedButton, ...props}) => {
     if(isNeedButton){
-        const toggleIsShowAll = (e) => {
+        const toggleIsShowAll = (e : MouseEvent<HTMLButtonElement>) => {
             e.stopPropagation();
             props.isShowAll.set(!props.isShowAll.value);
         }
@@ -23,11 +23,11 @@ export const SectionHeader : FC<SectionHeaderWithMoreProps | SectionHeaderWithou
         return(
             <div className={"header-block " + parent + "__header"}>
                 <div className={"header-block__info " + "header-" + parent + "__info"}>
-                    <h2 className={"header-block__title " + "header-" + parent + "__title"}>{about.title}</h2>
-                    <div className={"header-block__subtitle " + "header-" + parent + "__subtitle"}>{about.text}</div>
+                    <h2 className={"header-block__title " + "header-" + parent + "__title"}>{about.heading}</h2>
+                    <div className={"header-block__subtitle " + "header-" + parent + "__subtitle"}>{about.description}</div>
                 </div>
                 <button className={"header-block__button " + "header-" + parent + "__button"} type="button" onClick={toggleIsShowAll}>
-                    {(props.isShowAll.value) ? about.button.active : about.button.passive}
+                    {(props.isShowAll.value) ? about.buttonMore.active : about.buttonMore.passive}
                 </button>
             </div>
         );

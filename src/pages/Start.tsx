@@ -12,7 +12,7 @@ interface startProps{
 export const Start : FC<startProps> = ({isWebp}) => {
     return(
         <main className="main">
-            <Intro />
+            <Intro isWebp={isWebp} />
             <Options />
             <Trips />
             <Choose isWebp={isWebp} />

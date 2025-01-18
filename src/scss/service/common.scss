@@ -214,3 +214,26 @@ img{
         color: $mint;
     }
 }
+
+.loading, .error{
+    color: $darkGreen;
+    font-family: "TradeGothic";
+    font-size: toRem(26);
+    font-weight: 700;
+    line-height: toEm(26, 26);
+}
+@media (max-width: toEm(992, 16)) {
+    .loading{
+        font-size: toRem(24);
+    }
+}
+@media (max-width: toEm(768, 16)) {
+    .loading{
+        font-size: toRem(22);
+    }
+}
+@media (max-width: toEm(480, 16)) {
+    .loading{
+        font-size: toRem(20);
+    }
+}

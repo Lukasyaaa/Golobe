@@ -50,7 +50,10 @@ export const OptionInput : FC<OptionInputProps> = ({id, placeholder, label, icon
         const inputId : string = "option_" + id;
         return(
             <div className={classes.join(" ")} ref={inputElement}>
-                <input className="input-options__sublabel" id={inputId} type="text" placeholder={placeholder} />
+                <input 
+                    className="input-options__sublabel" id={inputId} type="text" placeholder={placeholder} 
+                    onClick={(e) => e.stopPropagation()} 
+                />
                 <label className="input-options__label" htmlFor={inputId} ref={labelElement}><span>{label}</span></label>
             </div>
         )
