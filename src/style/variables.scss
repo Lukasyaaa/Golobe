@@ -1,0 +1,17 @@
+@font-face {
+    font-family: "TradeGothic";
+    font-display: swap; font-weight: 700; font-style: normal;
+    src: url("../assets/fonts/TradeGothic.woff2") format("woff2"),
+    url("../assets/fonts/TradeGothic.woff") format("woff"),
+    url("../assets/fonts/TradeGothic.ttf") format("truetype");
+}
+
+@function toRem($px){
+    @return $px / 16 * 1rem;
+}
+@function toEm($ch, $pr){
+    @return $ch / $pr * 1em;
+}
+@function toPercent($ch, $pr){
+    @return $ch / $pr * 100%;
+}

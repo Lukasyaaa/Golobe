@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 15.002 18"
+   width="15.002"
+   height="18"
+   fill="none"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="bar.svg"
+   inkscape:version="1.4.2 (f4327f4, 2025-05-13)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="32.208333"
+     inkscape:cx="12"
+     inkscape:cy="12"
+     inkscape:window-width="1920"
+     inkscape:window-height="991"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg1" />
+  <path
+     id="Vector"
+     d="M 14.933951,1.44938 V 0.75 c 0,-0.19891 -0.079,-0.38968 -0.2197,-0.53033 C 14.573651,0.07902 14.382851,0 14.183951,0 H 0.81894087 c -0.19892,0 -0.38968,0.07902 -0.53034,0.21967 -0.14065,0.14065 -0.21966,0.33142 -0.21966,0.53033 v 0.69938 c -0.0684400043,0.53296 -0.45235,4.25343 1.73109003,6.78232 1.16578,1.35 2.82937,2.1024 4.95142,2.2435 V 16.5 h -3.75001 c -0.19892,0 -0.38968,0.079 -0.53033,0.2197 -0.14066,0.1406 -0.21967,0.3314 -0.21967,0.5303 0,0.1989 0.07901,0.3897 0.21967,0.5303 0.14065,0.1407 0.33141,0.2197 0.53033,0.2197 h 9.0000101 c 0.1989,0 0.3897,-0.079 0.5303,-0.2197 0.1407,-0.1406 0.2197,-0.3314 0.2197,-0.5303 0,-0.1989 -0.079,-0.3897 -0.2197,-0.5303 -0.1406,-0.1407 -0.3314,-0.2197 -0.5303,-0.2197 H 8.2514509 v -6.0248 c 2.1220001,-0.1407 3.7856001,-0.8935 4.9514001,-2.2435 2.1834,-2.52889 1.7986,-6.24936 1.7311,-6.78232 z M 1.5605009,1.60922 C 1.5661209,1.57308 1.5689409,1.53657 1.5689409,1.5 H 13.433951 c 0,0.03657 0.0028,0.07308 0.0084,0.10922 0.081,0.7113 0.081,1.42948 0,2.14078 H 1.5633109 c -0.08095,-0.71125 -0.08189,-1.42933 -0.00281,-2.14078 z"
+     fill="#112211"
+     fill-rule="nonzero" />
+</svg>

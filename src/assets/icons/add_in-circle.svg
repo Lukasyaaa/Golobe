@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 50 50"
+   width="50"
+   height="50"
+   fill="none"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="add_in-circle.svg"
+   inkscape:version="1.4.2 (f4327f4, 2025-05-13)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="12.078125"
+     inkscape:cx="32"
+     inkscape:cy="25.376455"
+     inkscape:window-width="1920"
+     inkscape:window-height="991"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg1" />
+  <path
+     id="Vector"
+     d="M 25,1 C 11.75,1 1,11.75 1,25 1,38.25 11.75,49 25,49 38.25,49 49,38.25 49,25 49,11.75 38.25,1 25,1 Z"
+     fill-rule="nonzero"
+     stroke="#8dd3bb"
+     stroke-width="2" />
+  <path
+     id="path1"
+     d="M 25,15 V 35 M 35,25 H 15"
+     fill-rule="nonzero"
+     stroke="#8dd3bb"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     stroke-width="2" />
+</svg>

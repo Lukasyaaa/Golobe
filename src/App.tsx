@@ -1,7 +1,8 @@
-export const App = () =>  {
+import React, { type FC } from "react"
+import "./style/index.scss";
+
+export const App : FC = () =>  {
     return (
-      <div>
-        Hello
-      </div>
+        <></>
     )
 }
