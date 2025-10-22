@@ -6,6 +6,9 @@
     url("../assets/fonts/TradeGothic.ttf") format("truetype");
 }
 
+@function toPx($px){
+    @return $px * 1px;
+}
 @function toRem($px){
     @return $px / 16 * 1rem;
 }
@@ -14,4 +17,108 @@
 }
 @function toPercent($ch, $pr){
     @return $ch / $pr * 100%;
+}
+
+$container: 1232;
+$containerPadding: 15;
+$containerPaddings: $container + $containerPadding * 2;
+
+$containerHeader: 1316;
+$containerHeaderPadding: 32;
+$containerHeaderPaddings: $containerHeader + $containerHeaderPadding * 2;
+
+$mint: rgba(141, 211, 187); 
+$lightMint: rgb(205, 234, 225);
+$darkGreen: rgb(17, 34, 17);
+$darkPurple: rgb(28, 27, 31);
+$blueGray: rgba(215, 226, 238, 1);
+$purpleGray: rgb(121, 116, 126);
+$gray: rgb(250, 251, 252);
+
+.container, .container_header{
+    padding-left: $containerPadding * 1px;
+    padding-right: $containerPadding * 1px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: toRem($containerPaddings);
+}
+.container_header{
+    padding-left: $containerHeaderPadding * 1px;
+    padding-right: $containerHeaderPadding * 1px;
+    max-width: toRem($containerHeaderPaddings);
+}
+
+#root{
+    background-color: $gray;
+    @media (min-width: toEm(1440, 16)) {
+        padding-top: 30px;
+    }
+    @media (max-width: toEm(1440, 16)) and (min-width: toEm(1381, 16)) {
+        padding-top: calc(30px - (1440px - 100vw) / 2);
+    }
+}
+
+@media (min-width: toEm(769, 16)) {
+    .header-block.have-button{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+.header-block{
+    &__text{
+        margin: 0 toRem(24) 0 0;
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__text{
+            margin: 0 toRem(16) 0 0;
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__text{
+            margin: 0 0 toRem(16);
+        }
+    }
+    
+    &__heading{
+        font-family: Montserrat; font-weight: 600;
+        font-size: toRem(32); line-height: toEm(36, 32);
+        margin-bottom: toRem(16);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__heading{
+            font-size: toRem(28);
+            margin-bottom: toRem(10);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__heading{
+            font-size: toRem(24);
+            margin-bottom: toRem(6);
+        }
+    }
+
+    &__description{
+        color: rgba($color: $darkGreen, $alpha: 0.75);
+        font-family: Montserrat; font-weight: 400;
+        font-size: toRem(16); line-height: toEm(19, 16);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__description{
+            font-size: toRem(14);
+        }
+    }
+    &__button{
+        border: toRem(1) solid $mint; border-radius: toRem(4);
+        padding: toRem(10) toRem(15);
+
+        color: $darkGreen;
+        font-family: Montserrat; font-weight: 500;
+        font-size: toRem(14); line-height: toEm(18, 14);
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__button{
+            width: 100%;
+        }
+    }
 }

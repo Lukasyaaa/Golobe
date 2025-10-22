@@ -1,0 +1,103 @@
+{
+    "trips": [
+        { 
+            "city": "Istanbul", 
+            "image": { 
+                "srcs": { "jpeg": "/img/start/trips/1/image.jpg", "webp": "/img/start/trips/1/image.webp" },
+                "alt": ""
+            },
+            "services": ["Flights", "Hotels", "Resorts"]
+        },
+        { 
+            "city": "Sydney", 
+            "image": { 
+                "srcs": { "jpeg": "/img/start/trips/2/image.jpg", "webp": "/img/start/trips/2/image.webp" },
+                "alt": ""
+            },
+            "services": ["Flights", "Hotels", "Resorts"]
+        },
+        { 
+            "city": "Baku", 
+            "image": { 
+                "srcs": { "jpeg": "/img/start/trips/3/image.jpg", "webp": "/img/start/trips/3/image.webp" },
+                "alt": ""
+            },
+            "services": ["Flights", "Hotels", "Resorts"]
+        },
+        { 
+            "city": "Male", 
+            "image": { 
+                "srcs": { "jpeg": "/img/start/trips/4/image.jpg", "webp": "/img/start/trips/4/image.webp" },
+                "alt": ""
+            },
+            "services": ["Flights", "Hotels", "Resorts"]
+        },
+        { 
+            "city": "Paris", 
+            "image": { 
+                "srcs": { "jpeg": "/img/start/trips/5/image.jpg", "webp": "/img/start/trips/5/image.webp" },
+                "alt": ""
+            },
+            "services": ["Flights", "Hotels", "Resorts"]
+        }
+        ,
+        { 
+            "city": "New York", 
+            "image": { 
+                "srcs": { "jpeg": "/img/start/trips/6/image.jpg", "webp": "/img/start/trips/6/image.webp" },
+                "alt": ""
+            },
+            "services": ["Flights", "Hotels", "Resorts"]
+        },
+        { 
+            "city": "London", 
+            "image": { 
+                "srcs": { "jpeg": "/img/start/trips/7/image.jpg", "webp": "/img/start/trips/7/image.webp" },
+                "alt": ""
+            },
+            "services": ["Flights", "Hotels", "Resorts"]
+        },
+        { 
+            "city": "Tokyo", 
+            "image": { 
+                "srcs": { "jpeg": "/img/start/trips/8/image.jpg", "webp": "/img/start/trips/8/image.webp" },
+                "alt": ""
+            },
+            "services": ["Flights", "Hotels", "Resorts"]
+        },
+        { 
+            "city": "Dubai", 
+            "image": { 
+                "srcs": { "jpeg": "/img/start/trips/9/image.jpg", "webp": "/img/start/trips/9/image.webp" }, 
+                "alt": "" 
+            },
+            "services": ["Flights", "Hotels", "Resorts"]
+        }
+    ],
+    "reviews": [
+        {
+            "heading": "A real sense of community, nurtured",
+            "description": "Really appreciate the help and support from the staff during these tough times. Shoutout to Katie for helping me always, even when I was out of the country. And always available when needed.",
+            "starsCount": 5,
+            "author": "Olga",
+            "livePlace": "Weave Studios – Kai Tak",
+            "image": { "srcs": { "jpeg": "/img/start/reviews/1/image.jpg", "webp": "/img/start/reviews/1/image.webp" }, "alt": "" } 
+        },
+        {
+            "heading": "The facilities are superb. Clean, slick, bright.",
+            "description": "“A real sense of community, nurtured”Really appreciate the help and support from the staff during these tough times. Shoutout to Katie for helping me always, even when I was out of the country. And always available when needed.“The facilities are superb. Clean, slick, bright.”",
+            "starsCount": 5,
+            "author": "Thomas",
+            "livePlace": "Weave Studios – Olympic",
+            "image": { "srcs": { "jpeg": "/img/start/reviews/2/image.jpg", "webp": "/img/start/reviews/2/image.webp" }, "alt": "" } 
+        },
+        {
+            "heading": "A real sense of community, nurtured",
+            "description": "Really appreciate the help and support from the staff during these tough times. Shoutout to Katie for helping me always, even when I was out of the country. And always available when needed.",
+            "starsCount": 5,
+            "author": "Eliot",
+            "livePlace": "Weave Studios – Kai Tak",
+            "image": { "srcs": { "jpeg": "/img/start/reviews/3/image.jpg", "webp": "/img/start/reviews/3/image.webp" }, "alt": "" } 
+        }
+    ]
+}
