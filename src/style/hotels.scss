@@ -1,0 +1,129 @@
+@use "variables.scss";
+
+.recent{
+    padding-top: variables.toRem(80);
+    @media (max-width: variables.toEm(992, 16)) {
+        padding-top: variables.toRem(64);
+    }
+    @media (max-width: variables.toEm(768, 16)) {
+        padding-top: variables.toRem(48);
+    }
+    @media (max-width: variables.toEm(480, 16)) {
+        padding-top: variables.toRem(32);
+    }
+
+    &__heading{
+        margin-bottom: variables.toRem(32);
+    }
+    @media (max-width: variables.toEm(992, 16)) {
+        &__heading{
+            margin-bottom: variables.toRem(24);
+        }
+    }
+    @media (max-width: variables.toEm(768, 16)) {
+        &__heading{
+            margin-bottom: variables.toRem(16);
+        }
+    }
+
+    @media (min-width: variables.toEm(481, 16)) {
+        &__items{
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: variables.toRem(24);
+        }
+        @media (max-width: variables.toEm(992, 16)) {
+            &__items{
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        @media (max-width: variables.toEm(768, 16)) {
+            &__items{
+                grid-template-columns: repeat(2, 1fr);
+                gap: variables.toRem(16);
+            }
+        }
+    }
+
+    &__item{
+        display: flex; align-items: center;
+        position: relative;
+    }
+    @media (max-width: variables.toEm(480, 16)) {
+        &__item:not(:last-child){
+            margin-bottom: variables.toRem(16);
+        }
+    }
+    &__item > *{
+        position: relative; z-index: 3;
+    }
+    &__item::after, &__item::before{
+        content: "";
+        border-radius: variables.toRem(8);
+        position: absolute; left: 50%; top: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        width: 100%; height: 100%;
+    }
+    &__item::after{
+        background-color: variables.$gray; z-index: 2;
+    }
+    &__item::before{
+        background-color: variables.$mint; z-index: 1;
+        transition: width 0.3s cubic-bezier(0.215, 0.610, 0.355, 1),
+        height 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+    }
+    &__item:hover::before{
+        width: calc(100% + variables.toRem(12));
+        height: calc(100% + variables.toRem(12));
+    }
+    @media (max-width: variables.toEm(992, 16)) {
+        &__item:hover::before{
+            width: calc(100% + variables.toRem(8));
+            height: calc(100% + variables.toRem(8));
+        }
+    }
+}
+.item-recent{
+    &__image{
+        flex: 0 0 variables.toRem(90);
+        height: variables.toRem(90);
+        margin-right: variables.toRem(16);
+        img{
+            border-radius: variables.toRem(8);
+            width: 100%; height: 100%;
+        }
+    }
+    @media (max-width: variables.toEm(992, 16)) {
+        &__image{
+            flex: 0 0 variables.toRem(80);
+            height: variables.toRem(80);
+        }
+    }
+    @media (max-width: variables.toEm(768, 16)) {
+        &__image{
+            flex: 0 0 variables.toRem(70);
+            height: variables.toRem(70);
+        }
+    }
+
+    &__city{
+        color: variables.$darkGreen;
+        font-family: Montserrat; font-weight: 600;
+        font-size: variables.toRem(16);
+        line-height: variables.toEm(20, 16);
+
+        margin-bottom: variables.toRem(8);
+    }
+    @media (max-width: variables.toEm(992, 16)) {
+        &__city{
+            margin-bottom: variables.toRem(4);
+        }
+    }
+
+    &__places{
+        color: rgba($color: variables.$darkGreen, $alpha: 0.75);
+        font-family: Montserrat; font-weight: 400;
+        font-size: variables.toRem(12);
+        line-height: variables.toEm(15, 12);
+    }
+}

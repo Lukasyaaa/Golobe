@@ -13,7 +13,6 @@
     @media (max-width: variables.toEm(992, 16)) {
         padding: 0 variables.toRem(8) 0 variables.toRem(12);
     }
-    margin-top: variables.toRem(-10);
 }
 %fieldText{
     font-family: Montserrat; font-weight: 400;
@@ -32,6 +31,9 @@
         position: relative;
         z-index: 2;
     }
+    .intro-variants &.top-margin{
+        margin-top: variables.toRem(-76);
+    }
 
     &__inner{
         border-radius: variables.toRem(16); background: #fff;
@@ -48,16 +50,16 @@
             padding: variables.toRem(16);
         }
     }
-    &:not(.not-header) &__inner{
+    &.two-header &__inner{
         padding-top: variables.toRem(20);
     }
     @media (max-width: variables.toEm(992, 16)) {
-        &:not(.not-header) &__inner{
+        &.two-header &__inner{
             padding-top: variables.toRem(15.5);
         }
     }
     @media (max-width: variables.toEm(480, 16)) {
-        &:not(.not-header) &__inner{
+        &.two-header &__inner{
             padding-top: variables.toRem(7.5);
         }
     }
@@ -72,6 +74,29 @@
             }
         }
     }*/
+    &__header{
+        color: variables.$darkGreen;
+        font-family: Montserrat; font-weight: 600;
+        font-size: variables.toRem(20);
+        line-height: variables.toEm(24, 20);
+        margin-bottom: variables.toRem(24);
+    }
+    @media (max-width: variables.toEm(992, 16)) {
+        &__header{
+            margin-bottom: variables.toRem(20);
+        }
+    }
+    @media (max-width: variables.toEm(768, 16)) {
+        &__header{
+            font-size: variables.toRem(18);
+        }
+    }
+    @media (max-width: variables.toEm(480, 16)) {
+        &__header{
+            margin-bottom: variables.toRem(16);
+        }
+    }
+
     &__types{
         display: flex;
         column-gap: variables.toRem(64);
@@ -329,6 +354,7 @@
         &::placeholder{
             color: variables.$darkPurple;
         }
+        margin-top: variables.toRem(-10);
     }
     &__field:hover ~ &__label, &__field:focus ~ &__label, 
     &._hovered &__label, &__select._active ~ &__label{
@@ -373,6 +399,10 @@
             left: variables.toRem(8);
         }
     }
+
+    &__select{
+        margin-top: variables.toRem(-10);
+    }
 }
 .select-fieldset-options{
     position: relative;
@@ -387,6 +417,7 @@
         }
         display: flex; align-items: center;
         justify-content: space-between;
+        height: 100%;
     }
     .options__fieldset.select.have-icon &__opener{
         padding-left: variables.toRem(12 + 24 + 12);
@@ -423,12 +454,9 @@
         transition: background-color 0.3s cubic-bezier(0.215, 0.610, 0.355, 1),
         color 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
     }
-    &__button:disabled{
-        background-color: #fff;
-        color: variables.$mint
-    }
+    &__list:not(._hide-active) &__button:disabled,
     &__button:focus, &__button:hover{
-        background-color: variables.$darkGreen;
+        background-color: #fff;
         color: variables.$mint
     }
 

@@ -1,6 +1,18 @@
 *, *::after, *::before{
     box-sizing: border-box;
 }
+body, #root{
+    min-height: 100vh;
+}
+#root{
+    display: flex;flex-direction: column;
+}
+picture{
+    display: block;
+}
+main{
+    flex: 1 1 auto;
+}
 a:focus, input:focus, button:focus{
     outline: none;
 }
@@ -23,4 +35,7 @@ a{
 }
 button:not(:disabled){
     cursor: pointer;
+}
+a[tabindex="-1"]{
+    cursor: default;
 }

@@ -1,7 +1,6 @@
 import React, { useEffect, useState, type FC } from "react";
 import { SectionHeader } from "../../Common/SectionHeader";
 import { useAppDispatch, useTypedSelector } from "../../../store";
-import { type Trip as TripType } from "../../../types";
 import { Trip } from "./Trip"
 import { fetchTrips } from "../../../store/home";
 
@@ -29,7 +28,7 @@ export const Trips : FC = () =>{
                 />
                 <div className="trips__items">
                     {(isAll[0] ? about.items : about.items.slice(0, about.maxShow)).map((trip, i) =>
-                        <Trip key={i} about={trip} />
+                        <Trip key={i} {...trip} />
                     )}
                 </div>
             </div>

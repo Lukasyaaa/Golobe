@@ -1,0 +1,287 @@
+@use "variables.scss";
+
+.map{
+    overflow: hidden;
+    padding-top: variables.toRem(80);
+    @media (max-width: variables.toEm(992, 16)) {
+        padding-top: variables.toRem(64);
+    }
+    @media (max-width: variables.toEm(768, 16)) {
+        padding-top: variables.toRem(48);
+    }
+    @media (max-width: variables.toEm(480, 16)) {
+        padding-top: variables.toRem(32);
+    }
+
+    &__header{
+        margin-bottom: variables.toRem(24);
+    }
+
+    @media (min-width: variables.toEm(769, 16)) {
+        &__items{
+            min-height: variables.toRem(480);
+        }
+        @media (max-width: variables.toEm(variables.$containerPaddings, 16)) {
+            &__items{
+                min-height: variables.toRem(420);
+            }
+        }
+        @media (max-width: variables.toEm(992, 16)) {
+            &__items{
+                min-height: variables.toRem(360);
+            }
+        }
+    }
+    &__items{
+        position: relative;
+        &::after{
+            content: "";
+            background: variables.$mint;
+            position: absolute; z-index: 1; left: 50%; top: 0; transform: translateX(-50%);
+            width: 100vw; height: 100%;
+        }
+        &::before{
+            content: "";
+            background: url("/public/img/flights/home/map/background/image.png");
+            background-size: cover; background-repeat: no-repeat;
+            background-position: center;
+            position: absolute; z-index: 2; left: 50%; top: 0; transform: translateX(-50%);
+            width: variables.toRem(variables.$container); height: 100%;
+        }
+    }
+    &__items:not(.positioned){
+        padding: variables.toRem(48) 0;
+    }
+    @media (max-width: variables.toEm(768, 16)) {
+        &__items:not(.positioned){
+            padding: variables.toRem(32) 0;
+        }
+    }
+    @media (max-width: variables.toEm(480, 16)) {
+        &__items:not(.positioned){
+            padding: variables.toRem(24) 0;
+        }
+    }
+
+    @media (min-width: variables.toEm(481, 16)) {
+        &__items:not(.positioned) &__items-inner{
+            display: grid; gap: variables.toRem(16);
+            grid-template-columns: repeat(3, 1fr);
+        }
+        @media (max-width: variables.toEm(768, 16)) {
+            &__items:not(.positioned) &__items-inner{
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    }
+
+    @media (min-width: variables.toEm(993, 16)) {
+        &__items.positioned &__item{
+            position: absolute;
+        }
+    }
+    &__item{
+        z-index: 4;
+
+        border-radius: variables.toRem(4);
+        background-color: #fff; padding: variables.toRem(4);
+        display: flex; align-items: center;
+        
+        transition: background-color 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+    }
+    &__item:hover, &__item:focus{
+        background-color: variables.$darkGreen;
+    }
+    @media (max-width: variables.toEm(992, 16)) {
+        &__items:not(.positioned) &__item{
+            position: relative;
+        }
+    }
+    @media (max-width: variables.toEm(480, 16)) {
+        &__item:not(:last-child){
+            margin-bottom: variables.toRem(10);
+        }
+    }
+
+    @media (min-width: variables.toEm(993, 16)) {
+        &__items.positioned &__item.washington{
+            left: variables.toRem(201);
+            top: variables.toRem(67);
+        }
+    }
+    @media (max-width: variables.toEm(variables.$containerPaddings, 16)) and (min-width: variables.toEm(993, 16)) {
+        &__items.positioned &__item.washington{
+            left: calc(variables.toRem(201) - (variables.toRem(variables.$containerPaddings) - 100vw) / 2);
+            top: calc(variables.toRem(67) - variables.toRem(480 - 420) / 2);
+        }
+    }
+
+
+    @media (min-width: variables.toEm(993, 16)) {
+        &__items.positioned &__item.brazil{
+            left: variables.toRem(363);
+            bottom: variables.toRem(143);
+        }
+    }
+    @media (max-width: variables.toEm(variables.$containerPaddings, 16)) and (min-width: variables.toEm(993, 16)) {
+        &__items.positioned &__item.brazil{
+            left: calc(variables.toRem(363) - (variables.toRem(variables.$containerPaddings) - 100vw) / 2);
+            bottom: calc(variables.toRem(143) - variables.toRem(480 - 420) / 2);
+        }
+    }
+
+    @media (min-width: variables.toEm(993, 16)) {
+        &__items.positioned &__item.alzhir{
+            right: variables.toRem(421);
+            bottom: variables.toRem(157);
+        }
+    }
+    @media (max-width: variables.toEm(variables.$containerPaddings, 16)) and (min-width: variables.toEm(993, 16)) {
+        &__items.positioned &__item.alzhir{
+            right: calc(variables.toRem(421) - (variables.toRem(variables.$containerPaddings) - 100vw) / 2);
+            bottom: calc(variables.toRem(157) - variables.toRem(480 - 420) / 2);
+        }
+    }
+
+    @media (min-width: variables.toEm(993, 16)) {
+        &__items.positioned &__item.astana{
+            right: variables.toRem(205);
+            top: variables.toRem(84);
+        }
+    }
+    @media (max-width: variables.toEm(variables.$containerPaddings, 16)) and (min-width: variables.toEm(993, 16)) {
+        &__items.positioned &__item.astana{
+            right: calc(variables.toRem(205) - (variables.toRem(variables.$containerPaddings) - 100vw) / 2);
+            top: calc(variables.toRem(84) - variables.toRem(480 - 420) / 2);
+        }
+    }
+
+    @media (min-width: variables.toEm(993, 16)) {
+        &__items.positioned &__item.japan{
+            right: variables.toRem(58);
+            bottom: variables.toRem(177);
+        }
+    }
+    @media (max-width: variables.toEm(variables.$containerPaddings, 16)) and (min-width: variables.toEm(993, 16)) {
+        &__items.positioned &__item.japan{
+            right: calc(variables.toRem(58) - (variables.toRem(variables.$containerPaddings) - 100vw) / 2);
+        }
+    }
+}
+.item-map{
+    &__image{
+        flex: 0 0 variables.toRem(40);
+        height: variables.toRem(40);
+        margin-right: variables.toRem(8);
+        img{
+            border-radius: variables.toRem(4);
+            width: 100%; height: 100%;
+        }
+    }
+    .map__items:not(.positioned) &__image{
+        flex: 0 0 variables.toRem(56);
+        height: variables.toRem(56);
+    }
+
+    &__name{
+        color: variables.$darkGreen;
+        font-family: "TradeGothic";
+        font-size: variables.toRem(10);
+        font-weight: 700;
+        line-height: variables.toEm(13, 10);
+
+        transition: color 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+    }
+    &:hover &__name, &:focus &__name{
+        color: #fff;
+    }
+    .map__items:not(.positioned) &__name{
+        font-size: variables.toRem(16);
+    }
+
+    &__pass{
+        color: variables.$darkGreen;
+        font-family: Montserrat; font-weight: 400;
+        font-size: variables.toRem(8);
+        line-height: variables.toEm(10, 8);
+        
+        transition: color 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+    }
+    &:hover &__pass, &:focus &__pass{
+        color: #fff;
+    }
+    .map__items:not(.positioned) &__pass{
+        font-size: variables.toRem(12);
+    }
+
+    .map__items:not(.positioned) &__arrow{
+        display: none;
+    }
+    .map__items.positioned &__arrow{
+        position: absolute; z-index: 3;
+        pointer-events: none;
+    }
+
+    .map__items.positioned &::after{
+        content: "";
+        background-color: #fff; border-radius: 50%;
+        width: variables.toRem(10); height: variables.toRem(10);
+        position: absolute;
+        pointer-events: none;
+    }
+
+    .map__items.positioned &.washington &__arrow{
+        bottom: variables.toRem(-6);
+        right: variables.toRem(32);
+        transform: translateY(100%);
+    }
+    .map__items.positioned &.washington::after{
+        bottom: variables.toRem(-32);
+        right: variables.toRem(21);
+        transform: translateY(100%);
+    }
+
+    .map__items.positioned &.brazil &__arrow{
+        bottom: variables.toRem(-6);
+        left: variables.toRem(-11);
+        transform: translateY(100%);
+    }
+    .map__items.positioned &.brazil::after{
+        bottom: variables.toRem(-32);
+        left: variables.toRem(-10);
+        transform: translateY(100%);
+    }
+
+    .map__items.positioned &.alzhir &__arrow{
+        top: variables.toRem(-3.5);
+        left: variables.toRem(-15);
+        transform: translateY(-100%);
+    }
+    .map__items.positioned &.alzhir::after{
+        top: variables.toRem(-24);
+        left: variables.toRem(-16);
+        transform: translateY(-100%);
+    }
+
+    .map__items.positioned &.astana &__arrow{
+        bottom: variables.toRem(-7);
+        left: variables.toRem(-29);
+        transform: translateY(100%);
+    }
+    .map__items.positioned &.astana::after{
+        bottom: variables.toRem(-50);
+        left: variables.toRem(-33);
+        transform: translateY(100%);
+    }
+
+    .map__items.positioned &.japan &__arrow{
+        bottom: variables.toRem(-5);
+        left: variables.toRem(-1);
+        transform: translateY(100%);
+    }
+    .map__items.positioned &.japan::after{
+        bottom: variables.toRem(-30);
+        left: variables.toRem(-1);
+        transform: translateY(100%);
+    }
+}

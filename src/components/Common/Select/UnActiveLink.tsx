@@ -1,25 +1,15 @@
 import React, { type FC } from "react";
 
-interface SelectLinkProps{
-    isDisabled : boolean,
+interface UnActiveSelectLinkProps{
     description : string,
     onFocusHandler : (() => void) | undefined,
     onBlurHandler : (() => void) | undefined,
-    onClickHandler : (() => void) | undefined,
+    onClickHandler : (() => void),
     onMouseEnterHandler : (() => void) | undefined,
     onMouseLeaveHandler : (() => void) | undefined
 }
 
-export const SelectLink : FC<SelectLinkProps> = ({isDisabled, description, onFocusHandler, onBlurHandler, onClickHandler, onMouseEnterHandler, onMouseLeaveHandler}) => {
-    if(isDisabled){
-        return(
-            <li className="select-fieldset-options__link">
-                <button className="select-fieldset-options__button" type="button" disabled>
-                    {description}
-                </button>
-            </li>
-        )
-    }
+export const UnActiveSelectLink : FC<UnActiveSelectLinkProps> = (({description, onFocusHandler, onBlurHandler, onClickHandler, onMouseEnterHandler, onMouseLeaveHandler}) => {
     return(
         <li className="select-fieldset-options__link">
             <button 
@@ -31,4 +21,4 @@ export const SelectLink : FC<SelectLinkProps> = ({isDisabled, description, onFoc
             </button>
         </li>
     )
-}
+})

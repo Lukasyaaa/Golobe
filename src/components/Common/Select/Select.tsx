@@ -1,6 +1,7 @@
-import React, { type FC, Fragment, useEffect, useRef, type MouseEvent } from "react";
-import type { useStateReturned } from "../../types";
-import { SelectLink } from "./SelectLink";
+import React, { type FC, Fragment, useEffect, useRef, type MouseEvent, useState } from "react";
+import type { useStateReturned } from "../../../types";
+import { UnActiveSelectLink } from "./UnActiveLink";
+import { ActiveSelectLink } from "./ActiveLink";
 
 interface SelectProps{
     description : null | string,
@@ -31,7 +32,25 @@ export const Select : FC<SelectProps> = (
                 containerHTML.style.height = 0 + "px";
             }
         }
-    }, [isOpenedValue])
+    }, [isOpenedValue]);
+
+    let isHoveredOnUnActive = useState<boolean>(false);
+    useEffect(() => {
+        const listHTML = list.current;
+        if(listHTML){
+            if(isHoveredOnUnActive[0]){
+                listHTML.classList.add("_hide-active");
+            } else {
+                listHTML.classList.remove("_hide-active");
+            }
+        }
+    }, [isHoveredOnUnActive[0]]);
+    const makeIsHoveredOnUnActive = () => {
+        isHoveredOnUnActive[1](true);
+    }
+    const unMakeIsHoveredOnUnActive = () => {
+        isHoveredOnUnActive[1](false);
+    }
     
     const toggleIsOpened = () => setIsOpened(prev => !prev);
     const open = () => setIsOpened(true);
@@ -61,15 +80,30 @@ export const Select : FC<SelectProps> = (
             </button>
             <div className="select-fieldset-options__container" ref={container}>
                 <ul className="select-fieldset-options__list" ref={list}>
-                    {links.map((link, i, {length}) => 
-                        <SelectLink 
-                            key={i} isDisabled={activeLinkValue === i} description={link}
-                            onFocusHandler={(getCondition(i, 0, 1)) ? open : undefined} 
-                            onBlurHandler={(getCondition(i, length - 1, length - 2)) ? close : undefined}
-                            onClickHandler={() => setActiveLink(i)} 
-                            onMouseEnterHandler={undefined} onMouseLeaveHandler={undefined}
-                        />
-                    )}
+                    {links.map((link, i, {length}) => {
+                        if(activeLinkValue === i){
+                            return(
+                                <ActiveSelectLink key={i} description={link}/>
+                            )
+                        } else {
+                            return(
+                                <UnActiveSelectLink 
+                                    key={i} description={link}
+                                    onFocusHandler={() => {
+                                        makeIsHoveredOnUnActive();
+                                        if(getCondition(i, 0, 1)) open()
+                                    }} 
+                                    onBlurHandler={() => {
+                                        unMakeIsHoveredOnUnActive();
+                                        if(getCondition(i, length - 1, length - 2)) close();
+                                    }}
+                                    onClickHandler={() => setActiveLink(i)} 
+                                    onMouseEnterHandler={makeIsHoveredOnUnActive} 
+                                    onMouseLeaveHandler={unMakeIsHoveredOnUnActive}
+                                />
+                            )
+                        }
+                    })}
                 </ul>
             </div>
         </Fragment>

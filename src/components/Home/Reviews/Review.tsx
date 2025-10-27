@@ -26,17 +26,15 @@ export const Review : FC<ReviewType> = ({heading, description, starsCount, autho
             <div className="item-reviews__description" ref={container}>
                 <div ref={inner}>{description}</div>
             </div>
-            <button 
-                className="item-reviews__more" type="button" onClick={toggleIsShow}
-            >
+            <button className="item-reviews__more" type="button" onClick={toggleIsShow}>
                 View more
             </button>
             <ul className="item-reviews__stars">
                 {Array.from({length: starsCount}).map((_, i) => 
-                    <Star color="#ffc107" key={i} />
+                    <Star key={i} color="#ffc107" />
                 )}
                 {Array.from({length: 5 - starsCount}).map((_, i) => 
-                    <Star color="#112211" key={i + (5 - starsCount)} />
+                    <Star key={i + (5 - starsCount)} color="#112211" />
                 )}
             </ul>
             <div className="item-reviews__author">{author}</div>

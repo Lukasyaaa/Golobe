@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState, type FC, type MouseEvent } from "react";
 import { ICON_VALUE, type objType } from "../../types";
-import { Select } from "../Common/Select";
+import { Select } from "../Common/Select/Select";
 
 interface OptionsSelectProps{
     iconValue : null | objType<typeof ICON_VALUE>,

@@ -67,6 +67,26 @@ export interface Link<T = string>{
     path: string
 }
 
+export interface IntroVariants{
+    heading: string,
+    subheading: string,
+    background: Srcs
+}
+
+export interface Travel{
+    city: string,
+    price: number,
+    description: string,
+    image: Srcs
+}
+
+export interface Offer{
+    heading: string,
+    price: number,
+    description: string,
+    images: Image[]
+}
+
 //----Options----
 export const NEEDED_BLOCKS = {
     all: "OPTIONS_ALL-BLOCKS",
@@ -119,4 +139,25 @@ export interface Newsletter{
     description: string,
     inputPlaceholder: string,
     subscribe: string
+}
+
+//----Flights----
+//--------Map--------
+export interface Submap{
+    image: Image,
+    arrow: string,
+    boardingPass: number,
+    place: string
+}
+
+//----Hotels----
+//--------Recent--------
+export interface RecentItem{
+    image: Image,
+    city: string,
+    countPlaces: number
+}
+export interface Recent{
+    heading: string,
+    items: RecentItem[]
 }

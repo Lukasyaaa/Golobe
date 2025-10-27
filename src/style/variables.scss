@@ -50,8 +50,10 @@ $gray: rgb(250, 251, 252);
 
 #root{
     background-color: $gray;
+}
+main.home{
     @media (min-width: toEm(1440, 16)) {
-        padding-top: 30px;
+        padding-top: toRem(30);
     }
     @media (max-width: toEm(1440, 16)) and (min-width: toEm(1381, 16)) {
         padding-top: calc(30px - (1440px - 100vw) / 2);
@@ -65,7 +67,27 @@ $gray: rgb(250, 251, 252);
         justify-content: space-between;
     }
 }
+
+.header-block__heading, .section__heading{
+    font-family: Montserrat; font-weight: 600;
+    font-size: toRem(32); line-height: toEm(36, 32);
+}
+@media (max-width: toEm(992, 16)) {
+    .header-block__heading, .section__heading{
+        font-size: toRem(28);
+    }
+}
+@media (max-width: toEm(480, 16)) {
+    .header-block__heading, .section__heading{
+        font-size: toRem(24);
+    }
+}
+
 .header-block{
+    & > *:not(.header-block__button){
+        max-width: toRem(768);
+    }
+
     &__text{
         margin: 0 toRem(24) 0 0;
     }
@@ -79,21 +101,17 @@ $gray: rgb(250, 251, 252);
             margin: 0 0 toRem(16);
         }
     }
-    
+
     &__heading{
-        font-family: Montserrat; font-weight: 600;
-        font-size: toRem(32); line-height: toEm(36, 32);
         margin-bottom: toRem(16);
     }
     @media (max-width: toEm(992, 16)) {
         &__heading{
-            font-size: toRem(28);
             margin-bottom: toRem(10);
         }
     }
     @media (max-width: toEm(480, 16)) {
         &__heading{
-            font-size: toRem(24);
             margin-bottom: toRem(6);
         }
     }
@@ -115,10 +133,477 @@ $gray: rgb(250, 251, 252);
         color: $darkGreen;
         font-family: Montserrat; font-weight: 500;
         font-size: toRem(14); line-height: toEm(18, 14);
+
+        transition: background-color 0.3s cubic-bezier(0.215, 0.610, 0.355, 1),
+        color 0.3s cubic-bezier(0.215, 0.610, 0.355, 1),
+        box-shadow 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+    }
+    &__button:hover, &__button:focus{
+        background-color: $mint;
+        color: #fff;
+        box-shadow: 0 0 10px $mint;
     }
     @media (max-width: toEm(768, 16)) {
         &__button{
             width: 100%;
+        }
+    }
+}
+
+.intro-variants{
+    &__back{
+        margin-top: toRem(96);
+        padding: toRem(80) 0 toRem(76 + 80);
+        min-height: toRem(537);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__back{
+            margin-top: toRem(86);
+            padding: toRem(64) 0 toRem(76 + 64);
+            min-height: toRem(430);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__back{
+            margin-top: toRem(76);
+            padding: toRem(48) 0 toRem(76 + 48);
+            min-height: toRem(320);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__back{
+            margin-top: toRem(66);
+            padding: toRem(32) 0 toRem(76 + 32);
+        }
+    }
+
+    @media (min-width: toEm(481, 16)) {
+        &__back .container > *{
+            max-width: toRem(440);
+        }   
+    }
+    
+    &__heading{
+        color: #fff;
+        font-family: "TradeGothic"; font-weight: 700;
+        font-size: toRem(45); line-height: toEm(54, 45);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__heading{
+            font-size: toRem(40);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__heading{
+            font-size: toRem(32);
+        }
+    }
+
+    &__subheading{
+        color: #fff;
+        font-family: Montserrat; font-weight: 500;
+        font-size: toRem(20); line-height: toEm(24, 20);
+        padding-top: toRem(8);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__subheading{
+            font-size: toRem(18);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__subheading{
+            font-size: toRem(16);
+        }
+    }
+}
+
+.travels{
+    padding-top: toRem(80);
+    @media (max-width: toEm(992, 16)) {
+        padding-top: toRem(64);
+    }
+    @media (max-width: toEm(768, 16)) {
+        padding-top: toRem(48);
+    }
+    @media (max-width: toEm(480, 16)) {
+        padding-top: toRem(32);
+    }
+
+    &__header{
+        margin-bottom: toRem(40);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__header{
+            margin-bottom: toRem(32);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__header{
+            margin-bottom: toRem(24);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__header{
+            margin-bottom: toRem(16);
+        }
+    }
+
+    &__items{
+        display: flex; align-items: center;
+        overflow-x: auto; column-gap: toRem(16);
+        padding: 0 toPx($containerPadding) 0 calc((100vw - toRem($containerPaddings)) / 2 + toPx($containerPadding));
+    }
+    @media (max-width: toEm($containerHeaderPaddings, 16)) {
+        &__items{
+            padding: 0 toPx($containerPadding);
+        }
+    }
+    &__item{
+        border-radius: toRem(8);
+        flex: 0 0 toRem(296);
+        min-height: toRem(420);
+        padding: toRem(24);
+
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__item{
+            flex: 0 0 toRem(250);
+            min-height: toRem(350);
+            padding: toRem(16);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__item{
+            flex: 0 0 toRem(200);
+            min-height: toRem(285);
+            padding: toRem(10);
+        }
+    }
+}
+.item-travels{
+    transition: box-shadow 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+    box-shadow: inset 0 0 0 #fff;
+    &._hovered{
+        box-shadow: inset 0 0 25px #fff;
+    }
+
+    &__row{
+        display: flex; align-items: flex-end;
+        justify-content: space-between;
+        margin-bottom: toRem(16);
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__row{
+            margin-bottom: toRem(10);
+        }
+    }
+
+    &__city{
+        color: #fff;
+        font-family: Montserrat; font-weight: 600;
+        font-size: toRem(24);
+        line-height: toEm(29, 24);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__city{
+            font-size: toRem(20);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__city{
+            font-size: toRem(16);
+        }
+    }
+
+    &__description{
+        color: #fff;
+        font-family: Montserrat;
+        font-size: toRem(14);
+        font-weight: 400;
+        line-height: toEm(18, 14);
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__description{
+            font-size: toRem(12);
+        }
+    }
+
+    &__price{
+        color: #fff;
+        font-family: Montserrat; font-weight: 600;
+        font-size: toRem(24);
+        line-height: toEm(29, 24);
+
+        margin-left: toRem(10);
+        white-space: nowrap;
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__price{
+            font-size: toRem(20);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__price{
+            font-size: toRem(16);
+        }
+    }
+
+    &__link{
+        background-color: $mint;
+        border-radius: toRem(4);
+        padding: toRem(8) toRem(16);
+
+        display: flex; 
+        align-items: center; justify-content: center;
+        min-height: toRem(48);
+
+        color: $darkGreen;
+        font-family: Montserrat; font-weight: 500;
+        font-size: toRem(14);
+        line-height: toEm(18, 14);
+
+        transition: box-shadow 0.3s cubic-bezier(0.215, 0.610, 0.355, 1),
+        text-shadow 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__link{
+            font-size: toRem(12);
+            min-height: toRem(40);
+        }
+    }
+}
+
+.offers{
+    padding: toRem(80) 0 toRem(122);
+    @media (max-width: toEm(992, 16)) {
+        padding: toRem(64) 0;
+    }
+    @media (max-width: toEm(768, 16)) {
+        padding: toRem(48) 0;
+    }
+    @media (max-width: toEm(480, 16)) {
+        padding: toRem(32) 0;
+    }
+
+    &__header{
+        margin-bottom: toRem(24);
+    }
+    @media (min-width: toEm(769, 16)) {
+        &__item{
+            display: grid;
+            grid-template-columns: toPercent(552, $container) toPercent(656, $container);
+            column-gap: toRem(24);
+        }
+        @media (max-width: toEm(992, 16)) {
+            &__item{
+                column-gap: toRem(16);
+            }
+        }
+    }
+}
+.item-offers{
+    @media (min-width: toEm(769, 16)) {
+        &__info{
+            display: flex; flex-direction: column;
+        }
+    }
+    &__info{
+        border-radius: toRem(20);
+        background: $mint;
+        padding: toRem(24);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__info{
+            padding: toRem(16);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__info{
+            margin-bottom: toRem(24);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__info{
+            margin-bottom: toRem(16);
+        }
+    }
+
+    @media (min-width: toEm(769, 16)) {
+        &__row{
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+        }
+    }
+    
+    @media (min-width: toEm(769, 16)) {
+        &__heading{
+            margin-right: toRem(16);
+        }
+        @media (max-width: toEm(992, 16)) {
+            &__heading{
+                margin-right: toRem(10);
+            }
+        }
+    }
+    &__heading{
+        color: $darkGreen;
+        font-family: "TradeGothic"; font-weight: 700;
+        font-size: toRem(40);
+        line-height: toEm(48, 40);
+        max-width: toRem(363);
+
+        overflow: hidden; text-overflow: ellipsis;
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__heading{
+            font-size: toRem(32);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__heading{
+            font-size: toRem(24);
+            margin-bottom: toRem(10);
+        }
+    }
+
+    @media (min-width: toEm(769, 16)) {
+        &__price strong{
+            display: block; margin-top: toRem(4);
+        }
+    }
+    &__price{
+        border-radius: toRem(8); padding: toRem(8);
+        background: #fff; text-align: center;
+
+        color: $darkGreen;
+        font-family: "TradeGothic";
+        font-size: toRem(14);
+        font-weight: 400;
+        line-height: toEm(18, 14);
+
+        strong{
+            font-family: Montserrat; font-weight: 600;
+            font-size: toRem(20); line-height: toEm(24, 20);
+            white-space: nowrap;
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__price{
+            display: flex; align-items: center; justify-content: center;
+            padding: toRem(4);
+            strong{
+                margin-left: toRem(4);
+            }
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__price strong{
+            font-size: toRem(18);
+        }
+    }
+
+    @media (min-width: toEm(769, 16)) {
+        &__description{
+            flex: 1 1 auto;
+        }
+    }
+    &__description{
+        color: $darkGreen;
+        font-family: Montserrat; font-weight: 400;
+        font-size: toRem(14); line-height: toEm(18, 14);
+        margin: toRem(24) 0;
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__description{
+            margin: toRem(16) 0;
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__description{
+            margin: toRem(10) 0;
+        }
+    }
+
+    &__link{
+        color: $darkGreen;
+        font-family: Montserrat; font-weight: 500;
+        font-size: toRem(14); line-height: toEm(18, 14);
+        text-align: center;
+
+        display: flex; align-items: center; justify-content: center;
+        padding: toRem(8) toRem(16);
+        min-height: toRem(48);
+
+        position: relative;
+        &::after{
+            content: "";
+            background-color: $darkGreen; border-radius: 0 0 toRem(7) toRem(7);
+            position: absolute; z-index: 1;
+            bottom: 0; left: 50%; transform: translateX(-50%);
+            width: 100%; height: 60%;
+            transition: width 0.3s cubic-bezier(0.215, 0.610, 0.355, 1),
+            height 0.3s cubic-bezier(0.215, 0.610, 0.355, 1),
+            bottom 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+        }
+        &::before{
+            content: "";
+            background-color: #fff; border-radius: toRem(4);
+            position: absolute; z-index: 2; left: 0; top: 0;
+            width: 100%; height: 100%;
+        }
+        span{
+            position: relative;
+            z-index: 3;
+        }
+    }
+    &__link:hover::after, &__link:focus::after{
+        width: calc(100% + toRem(12)); height: calc(60% + toRem(6));
+        bottom: toRem(-6);
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__link{
+            min-height: toRem(40);
+        }
+    }
+
+    @media (min-width: toEm(769, 16)) { 
+        &__images{
+            align-self: flex-start;
+        }
+    }
+    @media (min-width: toEm(481, 16)) {
+        &__images{
+            display: grid; grid-template-columns: repeat(2, 1fr);  
+            gap: toRem(24) toRem(20);  
+        }
+        @media (max-width: toEm(992, 16)) {
+            &__images{
+                gap: toRem(16);
+            }
+        }
+    }
+
+    &__image{
+        padding-bottom: toPercent(200, 318);
+        position: relative;
+        img{
+            border-radius: toRem(20);
+            object-fit: cover;
+            position: absolute; left: 0; top: 0;
+            width: 100%; height: 100%;
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__image{
+            width: 100%;
+            padding-bottom: toPercent(200, 450);
+        }
+        &__image:not(:last-child){
+            margin-bottom: toRem(10);
         }
     }
 }

@@ -7,7 +7,8 @@ export const IntroHome : FC = () => {
     const about = useTypedSelector(state => state.home.intro);
     let isWebp = false;
 
-    let {jpeg, webp} = about.background;
+    let {heading, subheading, supheading, background} = about
+    let {jpeg, webp} = background;
     return(
         <section className="intro">
             <div 
@@ -19,9 +20,9 @@ export const IntroHome : FC = () => {
                 }}
             >
                 <div className="container">
-                    <div className="intro__supheading">{about.supheading}</div>
-                    <h1 className="intro__heading">{about.heading}</h1>
-                    <div className="intro__subheading">{about.subheading}</div>
+                    <div className="intro__supheading">{supheading}</div>
+                    <h1 className="intro__heading">{heading}</h1>
+                    <div className="intro__subheading">{subheading}</div>
                 </div>
             </div>
             <Options value={SITE_PARTS.flights} neededBlocks={NEEDED_BLOCKS.all} />

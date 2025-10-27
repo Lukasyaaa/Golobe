@@ -13,10 +13,11 @@ export const Reviews : FC = () => {
         dispatch(fetchReviews());
     }, [dispatch]);
 
-    if(about.isLoading){
+    const {isLoading, error, items, header, maxShow} = about;
+    if(isLoading){
         return <h1>Is Loading...</h1>
     }
-    if(about.error !== null){
+    if(error !== null){
         return <h1>Some Error</h1>
     }
 
@@ -24,11 +25,11 @@ export const Reviews : FC = () => {
         <section className="reviews">
             <div className="container">
                 <SectionHeader 
-                    about={about.header} parentCl="reviews" isAll={isAll} isNeedButton={about.maxShow < about.items.length}
+                    about={header} parentCl="reviews" isAll={isAll} isNeedButton={maxShow < about.items.length}
                 />
             </div>
                 <div className="reviews__items">
-                    {(isAll[0] ? about.items : about.items.slice(0, about.maxShow)).map((review, i) =>
+                    {(isAll[0] ? items : items.slice(0, maxShow)).map((review, i) =>
                         <Review key={i} {...review} />
                     )}
                 </div>
