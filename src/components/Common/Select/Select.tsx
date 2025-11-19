@@ -1,24 +1,69 @@
-import React, { type FC, Fragment, useEffect, useRef, type MouseEvent, useState } from "react";
-import type { useStateReturned } from "../../../types";
+import React, { type FC, Fragment, useEffect, useRef, type MouseEvent, useState, createElement } from "react";
+import { ICON_POSITION, SELECT_DESCRIPTION_TYPE, transformIconViewbox } from "../../../types";
+import type { IconParams, objType, SelectLink, useStateReturned } from "../../../types";
 import { UnActiveSelectLink } from "./UnActiveLink";
 import { ActiveSelectLink } from "./ActiveLink";
 
-interface SelectProps{
-    description : null | string,
-    links : string[],
-    isOpened : useStateReturned<boolean>,
-    activeLink : useStateReturned<number>,
-    onMouseEnterHandler : (() => void) | undefined,
-    onFocusHandler : (() => void) | undefined,
-    onMouseLeaveHandler : ((e : MouseEvent<HTMLButtonElement>) => void) | undefined,
-    onBlurHandler : (() => void) | undefined
+interface SelectWithActiveSubValueDescription{
+    value: string,
+    type: typeof SELECT_DESCRIPTION_TYPE.subValue
+}
+interface SelectWithActiveOnlyValueDescription{
+    value: null,
+    type: typeof SELECT_DESCRIPTION_TYPE.onlyValue
+}
+type SelectWithActiveDescription = SelectWithActiveSubValueDescription | SelectWithActiveOnlyValueDescription;
+
+interface SelectWithoutActiveDescription{
+    value: string,
+    type: typeof SELECT_DESCRIPTION_TYPE.onlyText
 }
 
-export const Select : FC<SelectProps> = (
-    {description, links, isOpened, activeLink, onMouseEnterHandler, onFocusHandler, onMouseLeaveHandler, onBlurHandler}
-) => {
+interface SelectWithActiveProps<T>{
+    parentCl: string,
+    description: SelectWithActiveDescription,
+    links: T[],
+    isOpened: useStateReturned<boolean>,
+    activeLink: useStateReturned<number>,
+    iconValue: IconParams,
+    iconPosition: objType<typeof ICON_POSITION>,
+    ChildrenComponent: FC<SelectLink<T>>,
+    onMouseEnterHandler: (() => void) | undefined,
+    onFocusHandler: (() => void) | undefined,
+    onMouseLeaveHandler: ((e : MouseEvent<HTMLButtonElement>) => void) | undefined,
+    onBlurHandler: (() => void) | undefined
+}
+
+interface SelectWithoutActiveProps<T>{
+    parentCl: string,
+    description: SelectWithoutActiveDescription,
+    links: T[],
+    isOpened: useStateReturned<boolean>,
+    iconValue: IconParams,
+    iconPosition: objType<typeof ICON_POSITION>,
+    ChildrenComponent: FC<SelectLink<T>>,
+    onLinkClickHandler: ((id : number) => void),
+    onMouseEnterHandler: (() => void) | undefined,
+    onFocusHandler: (() => void) | undefined,
+    onMouseLeaveHandler: ((e : MouseEvent<HTMLButtonElement>) => void) | undefined,
+    onBlurHandler: (() => void) | undefined
+}
+
+type SelectProps<T> = SelectWithActiveProps<T> | SelectWithoutActiveProps<T>;
+
+export function Select<T>({
+    parentCl, description, links, isOpened, iconValue, iconPosition, ChildrenComponent,
+    onMouseEnterHandler, onFocusHandler, onMouseLeaveHandler, onBlurHandler, ...props 
+} : SelectProps<T>) {
     const [isOpenedValue, setIsOpened] = isOpened;
-    const [activeLinkValue, setActiveLink] = activeLink;    
+    let activeLinkValue : number; let onLinkClickHandler : (id : number) => void;
+    if(description.type === SELECT_DESCRIPTION_TYPE.onlyText){
+        activeLinkValue = -1;
+        onLinkClickHandler = (props as SelectWithoutActiveProps<T>).onLinkClickHandler
+    } else {
+        activeLinkValue = (props as SelectWithActiveProps<T>).activeLink[0];
+        onLinkClickHandler = (id) => (props as SelectWithActiveProps<T>).activeLink[1](id);
+    }    
 
     let list = useRef<HTMLUListElement>(null);
     let container = useRef<HTMLDivElement>(null);
@@ -64,44 +109,56 @@ export const Select : FC<SelectProps> = (
     return(
         <Fragment>
             <button 
-                className="select-fieldset-options__opener" type="button" onClick={toggleIsOpened}
+                className={[
+                    parentCl + "__opener", "select__opener", (iconPosition === ICON_POSITION.left) ? "reverse" : ""
+                ].filter(Boolean).join(" ")}
+                type="button" onClick={toggleIsOpened}
                 onMouseEnter={onMouseEnterHandler} onFocus={onFocusHandler} 
                 onMouseLeave={onMouseLeaveHandler} onBlur={onBlurHandler}
             >
-                <span>{(description !== null) ? description : links[activeLinkValue]}</span>
-                <div className="select-fieldset-options__icon-parent">
-                    <svg className="select-fieldset-options__icon" width="15" height="8.25" fill="none">
-                        <path
-                            d="M 0.75,0.75 7.5,7.5 14.25,0.75"
-                            stroke="#000000" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" 
-                        />
+                <span>
+                    {
+                        (description.type === SELECT_DESCRIPTION_TYPE.onlyText) 
+                        ? description.value
+                        : (description.type === SELECT_DESCRIPTION_TYPE.onlyValue) 
+                            ? links[activeLinkValue] as string
+                            : <Fragment>{description.value as string} <strong>{links[activeLinkValue] as string}</strong></Fragment>
+                    }
+                </span>
+                <div className={[parentCl + "__icon-parent", "select__icon-parent"].join(" ")}>
+                    <svg 
+                        className={[parentCl + "__icon", "select__icon"].join(" ")} 
+                        viewBox={transformIconViewbox(iconValue.viewbox)} fill="none"
+                        width={iconValue.width} height={iconValue.height}
+                    >
+                        {iconValue.pathes.map((path, i) => <path key={i} {...path} />)}
                     </svg>
                 </div>
             </button>
-            <div className="select-fieldset-options__container" ref={container}>
-                <ul className="select-fieldset-options__list" ref={list}>
+            <div className={[parentCl + "__container", "select__container"].join(" ")} ref={container}>
+                <ul className={[parentCl + "__list", "select__list"].join(" ")} ref={list}>
                     {links.map((link, i, {length}) => {
                         if(activeLinkValue === i){
-                            return(
-                                <ActiveSelectLink key={i} description={link}/>
-                            )
+                            return(<ActiveSelectLink key={i} parentCl={parentCl}>
+                                {createElement(ChildrenComponent, {about: link, cl: parentCl})}
+                            </ActiveSelectLink>)
                         } else {
-                            return(
-                                <UnActiveSelectLink 
-                                    key={i} description={link}
-                                    onFocusHandler={() => {
-                                        makeIsHoveredOnUnActive();
-                                        if(getCondition(i, 0, 1)) open()
-                                    }} 
-                                    onBlurHandler={() => {
-                                        unMakeIsHoveredOnUnActive();
-                                        if(getCondition(i, length - 1, length - 2)) close();
-                                    }}
-                                    onClickHandler={() => setActiveLink(i)} 
-                                    onMouseEnterHandler={makeIsHoveredOnUnActive} 
-                                    onMouseLeaveHandler={unMakeIsHoveredOnUnActive}
-                                />
-                            )
+                            return(<UnActiveSelectLink 
+                                key={i} parentCl={parentCl}
+                                onFocusHandler={() => {
+                                    makeIsHoveredOnUnActive();
+                                    if(getCondition(i, 0, 1)) open()
+                                }} 
+                                onBlurHandler={() => {
+                                    unMakeIsHoveredOnUnActive();
+                                    if(getCondition(i, length - 1, length - 2)) close();
+                                }}
+                                onClickHandler={() => onLinkClickHandler(i)} 
+                                onMouseEnterHandler={makeIsHoveredOnUnActive} 
+                                onMouseLeaveHandler={unMakeIsHoveredOnUnActive}
+                            >
+                                {createElement(ChildrenComponent, {about: link, cl: parentCl})}
+                            </ UnActiveSelectLink>)
                         }
                     })}
                 </ul>

@@ -1,0 +1,107 @@
+import React, { Fragment, type FC } from "react";
+import { Breadcrumbs } from "./Blocks/Breadcrumbs";
+import { FILL_RULE, getAirport, getAirportLocation, getCity, getCountry, SITE_PARTS, STROKE_LINECAP, STROKE_LINEJOIN, type HotelImages, type Image, type objType, type ShortReview as ShortReviewType} from "../../types";
+import { Location } from "./Blocks/Location";
+import { ShortReview } from "./Blocks/ShortReview";
+import { ButtonBorder } from "./Blocks/ButtonBorder";
+import { Stars } from "./Blocks/Stars/Stars";
+import { Images } from "../Hotels/Page/Images";
+
+interface OneImage{
+    isMassive: false,
+    value: Image
+}
+interface ManyImage{
+    isMassive: true,
+    value: HotelImages
+}
+
+interface IntroductionProps{
+    parentCls: string[],
+    contentType: objType<typeof SITE_PARTS>
+    endPoint: string,
+    heading: string,
+    starsCount: number | null,
+    shortReview: ShortReviewType,
+    price: number,
+    images: OneImage | ManyImage
+}
+
+export const Introduction : FC<IntroductionProps> = ({
+    parentCls, contentType, endPoint, heading, starsCount, shortReview, price, images
+}) => {
+    const parentCl = (contentType === SITE_PARTS.flights) ? "flight" : "hotel";
+    return(
+        <section className={parentCls.join(" ") + ` introduction-${parentCl} page__introduction introduction-page`}>
+            <div className="container">
+                <Breadcrumbs 
+                    parentCl={[`introduction-${parentCl}`, "introduction-page"]} current={getAirport(endPoint)} links={[
+                        {description: getCountry(endPoint), path: "#"}, 
+                        {description: getCity(endPoint), path: "#"}
+                    ]}  
+                />
+                <div className={`introduction-${parentCl}__row introduction-page__row`}>
+                    <div className={`introduction-${parentCl}__info introduction-page__info`}>
+                        {(starsCount !== null)
+                            ? <div className="introduction-hotel__header introduction-page__header">
+                                <h2 className="introduction-hotel__heading introduction-page__heading">
+                                    {heading}
+                                </h2>
+                                <Stars starsCount={starsCount} cl="introduction-hotel" />
+                            </div>
+                            : <h2 className={`introduction-${parentCl}__heading introduction-page__heading`}>{heading}</h2>
+                        }
+                        <Location parentCls={[`introduction-${parentCl}`, "introduction-page"]} info={getAirportLocation(endPoint)} />
+                        <ShortReview about={shortReview} parentCls={[`introduction-${parentCl}`, "introduction-page"]} />
+                    </div>
+                    <div className={`introduction-${parentCl}__interaction introduction-page__interaction`}>
+                        <div className={`introduction-${parentCl}__price introduction-page__price`}>{"$" + price}</div>
+                        <div className={`introduction-${parentCl}__buttons introduction-page__buttons`}>
+                            <ButtonBorder
+                                parentCls={[`introduction-${parentCl}`, "introduction-page"]} buttonCl="favourites"
+                                value={{
+                                    viewbox: {minX: 0, minY: 0, width: 16.5, height: 15.25}, height: 15.25, width: 16.5,
+                                    pathes: [
+                                        {
+                                            d: "m 8.2504,3.25 c 0,0 -1.25,-2.5 -3.78594,-2.5 C 2.40352,0.75 0.771493,2.47422 0.750399,4.53164 0.707431,8.80234 4.13829,11.8395 7.89884,14.3918 8.00251,14.4623 8.12501,14.5 8.2504,14.5 8.37579,14.5 8.49829,14.4623 8.60196,14.3918 12.3621,11.8395 15.793,8.80234 15.7504,4.53164 15.7293,2.47422 14.0973,0.75 12.0363,0.75 c -2.5359,0 -3.7859,2.5 -3.7859,2.5 z",
+                                            fill: "unset", fillRule: FILL_RULE.nonzero,
+                                            stroke: "rgb(17, 34, 17)", strokeLinecap: STROKE_LINECAP.round,
+                                            strokeLinejoin: STROKE_LINEJOIN.round,
+                                            strokeWidth: "1.5"
+                                        }
+                                    ]
+                                }} 
+                            />
+                            <ButtonBorder
+                                parentCls={[`introduction-${parentCl}`, "introduction-page"]} buttonCl="share"
+                                value={{
+                                    viewbox: {minX: 0, minY: 0, width: 15, height: 16.25}, height: 16.25, width: 15,
+                                    pathes: [
+                                        {
+                                            d: "m 12.50155,11.241882 c -0.3367,-10e-5 -0.6699,0.068 -0.9796,0.2002 -0.3096,0.1323 -0.5892,0.326 -0.822,0.5693 L 4.91874,8.7586818 c 0.11199,-0.4206 0.11199,-0.86307 0,-1.28361 l 5.78121,-3.25274 c 0.421,0.43647 0.9867,0.70446 1.5911,0.75379 0.6044,0.04932 1.206,-0.12341 1.6922,-0.48584 0.4862,-0.36243 0.8236,-0.88969 0.9489,-1.483 0.1253,-0.59331 0.03,-1.21196 -0.268,-1.74006 -0.2981,-0.52808998 -0.7785,-0.92939998 -1.3512,-1.12872998 -0.5727,-0.19933 -1.1984,-0.18302 -1.76,0.04589 -0.5615,0.22891 -1.0203,0.65471 -1.2904,1.19761998 -0.2702,0.54291 -0.3331,1.16569 -0.177,1.75166 l -5.78126,3.25274 c -0.34533,-0.36007 -0.7905,-0.60858 -1.27823,-0.71356 -0.48773,-0.10498 -0.99571,-0.06163 -1.4586,0.12446 -0.4629,0.1861 -0.85952,0.50644 -1.13886,0.91981 C 0.14927,7.1304718 0,7.6179718 0,8.1168718 c 0,0.49891 0.14927,0.98641 0.4286,1.39971 0.27934,0.4134 0.67596,0.7337002 1.13886,0.9198002 0.46289,0.1861 0.97087,0.2295 1.4586,0.1245 0.48773,-0.105 0.9329,-0.3535 1.27823,-0.7135002 l 5.78126,3.2527002 c -0.134,0.5046 -0.1067,1.0386 0.0781,1.5269 0.1849,0.4883 0.518,0.9065 0.9526,1.1959 0.4346,0.2893 0.9489,0.4353 1.4708,0.4175 0.5218,-0.0178 1.025,-0.1985 1.4388,-0.5168 0.4139,-0.3184 0.7178,-0.7583 0.8689,-1.2581 0.1511,-0.4998 0.142,-1.0343 -0.0262,-1.5286 -0.1681,-0.4944 -0.4868,-0.9236 -0.9113,-1.2276 -0.4245,-0.304 -0.9336,-0.4675 -1.4557,-0.4674 z",
+                                            fill: "rgb(17, 34, 17)", fillRule: FILL_RULE.nonzero,
+                                            stroke: "unset", strokeLinecap: STROKE_LINECAP.butt,
+                                            strokeLinejoin: STROKE_LINEJOIN.miter,
+                                            strokeWidth: "unset"
+                                        }
+                                    ]
+                                }} 
+                            />
+                            <a className={`introduction-${parentCl}__link introduction-page__link button_green`} href="#">
+                                Book now
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {
+                    images.isMassive 
+                        ? <Images {...images.value} /> 
+                        : <picture className="introduction-flight__image">
+                        <source srcSet={images.value.srcs.webp} type="image/webp" />
+                        <img src={images.value.srcs.jpeg} alt={images.value.alt} />
+                    </picture> 
+                }
+            </div>
+        </section>
+    )
+}

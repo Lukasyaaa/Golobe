@@ -4,7 +4,7 @@
             "city": "Istanbul", 
             "image": { 
                 "srcs": { "jpeg": "/img/start/trips/1/image.jpg", "webp": "/img/start/trips/1/image.webp" },
-                "alt": ""
+                "alt": "Istanbul"
             },
             "services": ["Flights", "Hotels", "Resorts"]
         },
@@ -12,7 +12,7 @@
             "city": "Sydney", 
             "image": { 
                 "srcs": { "jpeg": "/img/start/trips/2/image.jpg", "webp": "/img/start/trips/2/image.webp" },
-                "alt": ""
+                "alt": "Sydney"
             },
             "services": ["Flights", "Hotels", "Resorts"]
         },
@@ -20,7 +20,7 @@
             "city": "Baku", 
             "image": { 
                 "srcs": { "jpeg": "/img/start/trips/3/image.jpg", "webp": "/img/start/trips/3/image.webp" },
-                "alt": ""
+                "alt": "Baku"
             },
             "services": ["Flights", "Hotels", "Resorts"]
         },
@@ -28,7 +28,7 @@
             "city": "Male", 
             "image": { 
                 "srcs": { "jpeg": "/img/start/trips/4/image.jpg", "webp": "/img/start/trips/4/image.webp" },
-                "alt": ""
+                "alt": "Male"
             },
             "services": ["Flights", "Hotels", "Resorts"]
         },
@@ -36,7 +36,7 @@
             "city": "Paris", 
             "image": { 
                 "srcs": { "jpeg": "/img/start/trips/5/image.jpg", "webp": "/img/start/trips/5/image.webp" },
-                "alt": ""
+                "alt": "Paris"
             },
             "services": ["Flights", "Hotels", "Resorts"]
         }
@@ -45,7 +45,7 @@
             "city": "New York", 
             "image": { 
                 "srcs": { "jpeg": "/img/start/trips/6/image.jpg", "webp": "/img/start/trips/6/image.webp" },
-                "alt": ""
+                "alt": "New York"
             },
             "services": ["Flights", "Hotels", "Resorts"]
         },
@@ -53,7 +53,7 @@
             "city": "London", 
             "image": { 
                 "srcs": { "jpeg": "/img/start/trips/7/image.jpg", "webp": "/img/start/trips/7/image.webp" },
-                "alt": ""
+                "alt": "London"
             },
             "services": ["Flights", "Hotels", "Resorts"]
         },
@@ -61,7 +61,7 @@
             "city": "Tokyo", 
             "image": { 
                 "srcs": { "jpeg": "/img/start/trips/8/image.jpg", "webp": "/img/start/trips/8/image.webp" },
-                "alt": ""
+                "alt": "Tokyo"
             },
             "services": ["Flights", "Hotels", "Resorts"]
         },
@@ -69,7 +69,7 @@
             "city": "Dubai", 
             "image": { 
                 "srcs": { "jpeg": "/img/start/trips/9/image.jpg", "webp": "/img/start/trips/9/image.webp" }, 
-                "alt": "" 
+                "alt": "Dubai" 
             },
             "services": ["Flights", "Hotels", "Resorts"]
         }
@@ -81,7 +81,12 @@
             "starsCount": 5,
             "author": "Olga",
             "livePlace": "Weave Studios – Kai Tak",
-            "image": { "srcs": { "jpeg": "/img/start/reviews/1/image.jpg", "webp": "/img/start/reviews/1/image.webp" }, "alt": "" } 
+            "image": { 
+                "srcs": { 
+                    "jpeg": "/img/start/reviews/1/image.jpg", "webp": "/img/start/reviews/1/image.webp" 
+                }, 
+                "alt": "Mountain Lake" 
+            } 
         },
         {
             "heading": "The facilities are superb. Clean, slick, bright.",
@@ -89,7 +94,12 @@
             "starsCount": 5,
             "author": "Thomas",
             "livePlace": "Weave Studios – Olympic",
-            "image": { "srcs": { "jpeg": "/img/start/reviews/2/image.jpg", "webp": "/img/start/reviews/2/image.webp" }, "alt": "" } 
+            "image": { 
+                "srcs": { 
+                    "jpeg": "/img/start/reviews/2/image.jpg", "webp": "/img/start/reviews/2/image.webp" 
+                }, 
+                "alt": "Northern Lights" 
+            } 
         },
         {
             "heading": "A real sense of community, nurtured",
@@ -97,26 +107,79 @@
             "starsCount": 5,
             "author": "Eliot",
             "livePlace": "Weave Studios – Kai Tak",
-            "image": { "srcs": { "jpeg": "/img/start/reviews/3/image.jpg", "webp": "/img/start/reviews/3/image.webp" }, "alt": "" } 
+            "image": { 
+                "srcs": { 
+                    "jpeg": "/img/start/reviews/3/image.jpg", "webp": "/img/start/reviews/3/image.webp" 
+                }, 
+                "alt": "Ice Cave" 
+            } 
         }
     ],
     "flightsOffers": [
         {
             "heading": "Backpacking Sri Lanka", "description": "Traveling is a unique experience as it's the best way to unplug from the pushes and pulls of daily life. It helps us to forget about our problems, frustrations, and fears at home. During our journey, we experience life in different ways. We explore new places, cultures, cuisines, traditions, and ways of living.", 
             "price": 700, "images": [
-                { "srcs": { "jpeg": "/img/flights/home/offers/1/1/image.jpg", "webp": "/img/flights/home/offers/1/1/image.webp" }, "alt": "" },
-                { "srcs": { "jpeg": "/img/flights/home/offers/1/2/image.jpg", "webp": "/img/flights/home/offers/1/2/image.webp" }, "alt": "" },
-                { "srcs": { "jpeg": "/img/flights/home/offers/1/3/image.jpg", "webp": "/img/flights/home/offers/1/3/image.webp" }, "alt": "" },
-                { "srcs": { "jpeg": "/img/flights/home/offers/1/4/image.jpg", "webp": "/img/flights/home/offers/1/4/image.webp" }, "alt": "" }
+                { 
+                    "srcs": { 
+                        "jpeg": "/img/flights/home/offers/1/1/image.jpg", 
+                        "webp": "/img/flights/home/offers/1/1/image.webp" 
+                    }, 
+                    "alt": "Tea Hills Panorama" 
+                },
+                { 
+                    "srcs": { 
+                        "jpeg": "/img/flights/home/offers/1/2/image.jpg", 
+                        "webp": "/img/flights/home/offers/1/2/image.webp" 
+                    },
+                    "alt": "Tropical Peninsula Coast" 
+                },
+                { 
+                    "srcs": { 
+                        "jpeg": "/img/flights/home/offers/1/3/image.jpg", 
+                        "webp": "/img/flights/home/offers/1/3/image.webp" 
+                    }, 
+                    "alt": "Forest Retreat Poolside" 
+                },
+                { 
+                    "srcs": { 
+                        "jpeg": "/img/flights/home/offers/1/4/image.jpg", 
+                        "webp": "/img/flights/home/offers/1/4/image.webp" 
+                    }, 
+                    "alt": "Palm Resort Oasis" 
+                }
             ]
         },
         {
             "heading": "Backpacking Sri Lanka", "description": "Traveling is a unique experience as it's the best way to unplug from the pushes and pulls of daily life. It helps us to forget about our problems, frustrations, and fears at home. During our journey, we experience life in different ways. We explore new places, cultures, cuisines, traditions, and ways of living.", 
             "price": 700, "images": [
-                { "srcs": { "jpeg": "/img/flights/home/offers/2/1/image.jpg", "webp": "/img/flights/home/offers/2/1/image.webp" }, "alt": "" },
-                { "srcs": { "jpeg": "/img/flights/home/offers/2/2/image.jpg", "webp": "/img/flights/home/offers/2/2/image.webp" }, "alt": "" },
-                { "srcs": { "jpeg": "/img/flights/home/offers/2/3/image.jpg", "webp": "/img/flights/home/offers/2/3/image.webp" }, "alt": "" },
-                { "srcs": { "jpeg": "/img/flights/home/offers/2/4/image.jpg", "webp": "/img/flights/home/offers/2/4/image.webp" }, "alt": "" }
+                { 
+                    "srcs": { 
+                        "jpeg": "/img/flights/home/offers/2/1/image.jpg", 
+                        "webp": "/img/flights/home/offers/2/1/image.webp" 
+                    }, 
+                    "alt": "Tea Hills Panorama" 
+                },
+                { 
+                    "srcs": { 
+                        "jpeg": "/img/flights/home/offers/2/2/image.jpg", 
+                        "webp": "/img/flights/home/offers/2/2/image.webp" 
+                    }, 
+                    "alt": "Tropical Peninsula Coast" 
+                },
+                { 
+                    "srcs": { 
+                        "jpeg": "/img/flights/home/offers/2/3/image.jpg", 
+                        "webp": "/img/flights/home/offers/2/3/image.webp" 
+                    }, 
+                    "alt": "Forest Retreat Poolside" 
+                },
+                { 
+                    "srcs": { 
+                        "jpeg": "/img/flights/home/offers/2/4/image.jpg", 
+                        "webp": "/img/flights/home/offers/2/4/image.webp" 
+                    }, 
+                    "alt": "Palm Resort Oasis" 
+                }
             ]
         }
     ],
@@ -124,19 +187,67 @@
         {
             "heading": "Backpacking Sri Lanka", "description": "Traveling is a unique experience as it's the best way to unplug from the pushes and pulls of daily life. It helps us to forget about our problems, frustrations, and fears at home. During our journey, we experience life in different ways. We explore new places, cultures, cuisines, traditions, and ways of living.", 
             "price": 700, "images": [
-                { "srcs": { "jpeg": "/img/flights/home/offers/1/1/image.jpg", "webp": "/img/flights/home/offers/1/1/image.webp" }, "alt": "" },
-                { "srcs": { "jpeg": "/img/flights/home/offers/1/2/image.jpg", "webp": "/img/flights/home/offers/1/2/image.webp" }, "alt": "" },
-                { "srcs": { "jpeg": "/img/flights/home/offers/1/3/image.jpg", "webp": "/img/flights/home/offers/1/3/image.webp" }, "alt": "" },
-                { "srcs": { "jpeg": "/img/flights/home/offers/1/4/image.jpg", "webp": "/img/flights/home/offers/1/4/image.webp" }, "alt": "" }
+                { 
+                    "srcs": { 
+                        "jpeg": "/img/hotels/home/offers/1/1/image.jpg", 
+                        "webp": "/img/hotels/home/offers/1/1/image.webp" 
+                        }, 
+                    "alt": "Tea Hills Panorama" 
+                },
+                { 
+                    "srcs": { 
+                        "jpeg": "/img/hotels/home/offers/1/2/image.jpg", 
+                        "webp": "/img/hotels/home/offers/1/2/image.webp" 
+                    }, 
+                    "alt": "Tropical Peninsula Coast" 
+                },
+                { 
+                    "srcs": { 
+                        "jpeg": "/img/hotels/home/offers/1/3/image.jpg", 
+                        "webp": "/img/hotels/home/offers/1/3/image.webp" 
+                    }, 
+                    "alt": "Forest Retreat Poolside" 
+                },
+                { 
+                    "srcs": { 
+                        "jpeg": "/img/hotels/home/offers/1/4/image.jpg", 
+                        "webp": "/img/hotels/home/offers/1/4/image.webp" 
+                    }, 
+                    "alt": "Palm Resort Oasis" 
+                }
             ]
         },
         {
             "heading": "Backpacking Sri Lanka", "description": "Traveling is a unique experience as it's the best way to unplug from the pushes and pulls of daily life. It helps us to forget about our problems, frustrations, and fears at home. During our journey, we experience life in different ways. We explore new places, cultures, cuisines, traditions, and ways of living.", 
             "price": 700, "images": [
-                { "srcs": { "jpeg": "/img/flights/home/offers/2/1/image.jpg", "webp": "/img/flights/home/offers/2/1/image.webp" }, "alt": "" },
-                { "srcs": { "jpeg": "/img/flights/home/offers/2/2/image.jpg", "webp": "/img/flights/home/offers/2/2/image.webp" }, "alt": "" },
-                { "srcs": { "jpeg": "/img/flights/home/offers/2/3/image.jpg", "webp": "/img/flights/home/offers/2/3/image.webp" }, "alt": "" },
-                { "srcs": { "jpeg": "/img/flights/home/offers/2/4/image.jpg", "webp": "/img/flights/home/offers/2/4/image.webp" }, "alt": "" }
+                { 
+                    "srcs": { 
+                        "jpeg": "/img/hotels/home/offers/2/1/image.jpg", 
+                        "webp": "/img/hotels/home/offers/2/1/image.webp" 
+                    }, 
+                    "alt": "Tea Hills Panorama" 
+                },
+                { 
+                    "srcs": { 
+                        "jpeg": "/img/hotels/home/offers/2/2/image.jpg", 
+                        "webp": "/img/hotels/home/offers/2/2/image.webp" 
+                        }, 
+                    "alt": "Tropical Peninsula Coast" 
+                },
+                { 
+                    "srcs": { 
+                        "jpeg": "/img/hotels/home/offers/2/3/image.jpg", 
+                        "webp": "/img/hotels/home/offers/2/3/image.webp" 
+                    }, 
+                    "alt": "Forest Retreat Poolside" 
+                },
+                { 
+                    "srcs": { 
+                        "jpeg": "/img/hotels/home/offers/2/4/image.jpg", 
+                        "webp": "/img/hotels/home/offers/2/4/image.webp" 
+                    }, 
+                    "alt": "Palm Resort Oasis" 
+                }
             ]
         }
     ],
@@ -207,7 +318,7 @@
                     "jpeg": "/img/flights/home/map/items/1/place/image.jpg", 
                     "webp": "/img/flights/home/map/items/1/place/image.webp" 
                 }, 
-                "alt": "" 
+                "alt": "Washington" 
             },
             "arrow": "/img/flights/home/map/items/1/arrow.svg",
             "boardingPass": 123,
@@ -219,7 +330,7 @@
                     "jpeg": "/img/flights/home/map/items/2/place/image.jpg", 
                     "webp": "/img/flights/home/map/items/2/place/image.webp" 
                 }, 
-                "alt": "" 
+                "alt": "Brazil" 
             },
             "arrow": "/img/flights/home/map/items/2/arrow.svg",
             "boardingPass": 123,
@@ -231,7 +342,7 @@
                     "jpeg": "/img/flights/home/map/items/3/place/image.jpg", 
                     "webp": "/img/flights/home/map/items/3/place/image.webp" 
                 }, 
-                "alt": "" 
+                "alt": "Alzhir" 
             },
             "arrow": "/img/flights/home/map/items/3/arrow.svg",
             "boardingPass": 123,
@@ -243,7 +354,7 @@
                     "jpeg": "/img/flights/home/map/items/4/place/image.jpg", 
                     "webp": "/img/flights/home/map/items/4/place/image.webp" 
                 }, 
-                "alt": "" 
+                "alt": "Astana" 
             },
             "arrow": "/img/flights/home/map/items/4/arrow.svg",
             "boardingPass": 123,
@@ -255,7 +366,7 @@
                     "jpeg": "/img/flights/home/map/items/5/place/image.jpg", 
                     "webp": "/img/flights/home/map/items/5/place/image.webp" 
                 }, 
-                "alt": "" 
+                "alt": "Japan" 
             },
             "arrow": "/img/flights/home/map/items/5/arrow.svg",
             "boardingPass": 123,
@@ -267,11 +378,2598 @@
                     "jpeg": "/img/flights/home/map/items/3/place/image.jpg", 
                     "webp": "/img/flights/home/map/items/3/place/image.webp" 
                 }, 
-                "alt": "" 
+                "alt": "Alzhir" 
             },
             "arrow": "/img/flights/home/map/items/3/arrow.svg",
             "boardingPass": 123,
             "place": "Alzhir"
+        }
+    ],
+    "flights": [
+        {
+            "id": 0,
+            "rating": 4.2,
+            "countReviews": 35,
+            "schedule": {
+                "from": {
+                    "gate": "A12",
+                    "amenities": ["Quick", "Punctuality", "Fast Food", "Comfortable Seats"],
+                    "image": {
+                        "srcs": {
+                            "webp": "/img/flights/items/container/1/depart/preview/image.webp", 
+                            "jpeg": "/img/flights/items/container/1/depart/preview/image.jpeg"
+                        }, 
+                        "alt": "Airport"
+                    },
+                    "airline": "Emirated",
+                    "plane": "A380 Airbus",
+                    "seats": {
+                        "economy": { 
+                            "images": [
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/1/depart/seats/economy/1/image.jpeg", 
+                                        "webp": "/img/flights/items/container/1/depart/seats/economy/1/image.webp"
+                                    }, "alt": "Economy class presentation №1"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/1/depart/seats/economy/2/image.jpeg", 
+                                        "webp": "/img/flights/items/container/1/depart/seats/economy/2/image.webp"
+                                    }, "alt": "Economy class presentation №2"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/1/depart/seats/economy/3/image.jpeg", 
+                                        "webp": "/img/flights/items/container/1/depart/seats/economy/3/image.webp"
+                                    }, "alt": "Economy class presentation №3"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/1/depart/seats/economy/4/image.jpeg", 
+                                        "webp": "/img/flights/items/container/1/depart/seats/economy/4/image.webp"
+                                    }, "alt": "Economy class presentation №4"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/1/depart/seats/economy/5/image.jpeg", 
+                                        "webp": "/img/flights/items/container/1/depart/seats/economy/5/image.webp"
+                                    }, "alt": "Economy class presentation №5"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/1/depart/seats/economy/6/image.jpeg", 
+                                        "webp": "/img/flights/items/container/1/depart/seats/economy/6/image.webp"
+                                    }, "alt": "Economy class presentation №6"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/1/depart/seats/economy/7/image.jpeg", 
+                                        "webp": "/img/flights/items/container/1/depart/seats/economy/7/image.webp"
+                                    }, "alt": "Economy class presentation №7"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/1/depart/seats/economy/8/image.jpeg", 
+                                        "webp": "/img/flights/items/container/1/depart/seats/economy/8/image.webp"
+                                    }, "alt": "Economy class presentation №8"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/1/depart/seats/economy/9/image.jpeg", 
+                                        "webp": "/img/flights/items/container/1/depart/seats/economy/9/image.webp"
+                                    }, "alt": "Economy class presentation №9"
+                                }
+                            ],
+                            "price": { "baseFare": 200, "discount": 0, "taxes": 5, "serviceFee": 5 },
+                            "count": 128
+                        },
+                        "business": { 
+                            "images": [
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/1/depart/seats/business/1/image.jpeg", 
+                                        "webp": "/img/flights/items/container/1/depart/seats/business/1/image.webp"
+                                    }, "alt": "Business class presentation №1"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/1/depart/seats/business/2/image.jpeg", 
+                                        "webp": "/img/flights/items/container/1/depart/seats/business/2/image.webp"
+                                    }, "alt": "Business class presentation №2"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/1/depart/seats/business/3/image.jpeg", 
+                                        "webp": "/img/flights/items/container/1/depart/seats/business/3/image.webp"
+                                    }, "alt": "Business class presentation №3"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/1/depart/seats/business/4/image.jpeg", 
+                                        "webp": "/img/flights/items/container/1/depart/seats/business/4/image.webp"
+                                    }, "alt": "Business class presentation №4"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/1/depart/seats/business/5/image.jpeg", 
+                                        "webp": "/img/flights/items/container/1/depart/seats/business/5/image.webp"
+                                    }, "alt": "Business class presentation №5"
+                                }
+                            ],
+                            "price": { "baseFare": 250, "discount": 0, "taxes": 5, "serviceFee": 5 },
+                            "count": 128
+                        },
+                        "first": { 
+                            "images": [
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/1/depart/seats/first/1/image.jpeg", 
+                                        "webp": "/img/flights/items/container/1/depart/seats/first/1/image.webp"
+                                    }, "alt": "First class presentation №1"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/1/depart/seats/first/2/image.jpeg", 
+                                        "webp": "/img/flights/items/container/1/depart/seats/first/2/image.webp"
+                                    }, "alt": "First class presentation №2"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/1/depart/seats/first/3/image.jpeg", 
+                                        "webp": "/img/flights/items/container/1/depart/seats/first/3/image.webp"
+                                    }, "alt": "First class presentation №3"
+                                }
+                            ],
+                            "price": { "baseFare": 350, "discount": 0, "taxes": 5, "serviceFee": 5 },
+                            "count": 128
+                        }
+                    },
+                    "departTime": {
+                        "day": 10, "month": 1, "year": 2026, 
+                        "units": { "hour": 12, "min": 0, "meridiem": "am" }
+                    },
+                    "arrayTime": {
+                        "day": 11, "month": 1, "year": 2025, 
+                        "units": { "hour": 5, "min": 28, "meridiem": "am" }
+                    },
+                    "route": [],
+                    "startPoint": "EWR",
+                    "place": {
+                        "webp": "/img/flights/items/container/1/from/image.webp",
+                        "jpeg": "/img/flights/items/container/1/from/image.jpeg"
+                    }
+                },
+                "to": {
+                    "gate": "A12",
+                    "amenities": ["Quick", "Punctuality"],
+                    "image": {
+                        "srcs": {
+                            "webp": "/img/flights/items/container/1/return/preview/image.webp", 
+                            "jpeg": "/img/flights/items/container/1/return/preview/image.jpeg"
+                        }, 
+                        "alt": "Airport"
+                    },
+                    "airline": "Emirated",
+                    "plane": "A380 Airbus",
+                    "seats": {
+                        "economy": { 
+                            "images": [
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/1/return/seats/economy/1/image.jpeg", 
+                                        "webp": "/img/flights/items/container/1/return/seats/economy/1/image.webp"
+                                    }, "alt": "Economy class presentation №1"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/1/return/seats/economy/2/image.jpeg", 
+                                        "webp": "/img/flights/items/container/1/return/seats/economy/2/image.webp"
+                                    }, "alt": "Economy class presentation №2"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/1/return/seats/economy/3/image.jpeg", 
+                                        "webp": "/img/flights/items/container/1/return/seats/economy/3/image.webp"
+                                    }, "alt": "Economy class presentation №3"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/1/return/seats/economy/4/image.jpeg", 
+                                        "webp": "/img/flights/items/container/1/return/seats/economy/4/image.webp"
+                                    }, "alt": "Economy class presentation №4"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/1/return/seats/economy/5/image.jpeg", 
+                                        "webp": "/img/flights/items/container/1/return/seats/economy/5/image.webp"
+                                    }, "alt": "Economy class presentation №5"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/1/return/seats/economy/6/image.jpeg", 
+                                        "webp": "/img/flights/items/container/1/return/seats/economy/6/image.webp"
+                                    }, "alt": "Economy class presentation №6"
+                                }
+                            ],
+                            "price": { "baseFare": 200, "discount": 0, "taxes": 5, "serviceFee": 5 },
+                            "count": 128
+                        },
+                        "business": { 
+                            "images": [
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/1/return/seats/business/1/image.jpeg", 
+                                        "webp": "/img/flights/items/container/1/return/seats/business/1/image.webp"
+                                    }, "alt": "Business class presentation №1"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/1/return/seats/business/2/image.jpeg", 
+                                        "webp": "/img/flights/items/container/1/return/seats/business/2/image.webp"
+                                    }, "alt": "Business class presentation №2"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/1/return/seats/business/3/image.jpeg", 
+                                        "webp": "/img/flights/items/container/1/return/seats/business/3/image.webp"
+                                    }, "alt": "Business class presentation №3"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/1/return/seats/business/4/image.jpeg", 
+                                        "webp": "/img/flights/items/container/1/return/seats/business/4/image.webp"
+                                    }, "alt": "Business class presentation №4"
+                                }
+                            ],
+                            "price": { "baseFare": 300, "discount": 0, "taxes": 5, "serviceFee": 5 },
+                            "count": 128
+                        },
+                        "first": { 
+                            "images": [
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/1/return/seats/first/1/image.jpeg", 
+                                        "webp": "/img/flights/items/container/1/return/seats/first/1/image.webp"
+                                    }, "alt": "First class presentation №1"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/1/return/seats/first/2/image.jpeg", 
+                                        "webp": "/img/flights/items/container/1/return/seats/first/2/image.webp"
+                                    }, "alt": "First class presentation №2"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/1/return/seats/first/3/image.jpeg", 
+                                        "webp": "/img/flights/items/container/1/return/seats/first/3/image.webp"
+                                    }, "alt": "First class presentation №3"
+                                }
+                            ],
+                            "price": { "baseFare": 500, "discount": 0, "taxes": 5, "serviceFee": 5 },
+                            "count": 128
+                        }
+                    },
+                    "departTime": {
+                        "day": 12, "month": 1, "year": 2026,
+                        "units": { "hour": 12, "min": 0, "meridiem": "am" }
+                    },
+                    "arrayTime": {
+                        "day": 13, "month": 1, "year": 2026,
+                        "units": { "hour": 3, "min": 15, "meridiem": "am" }
+                    },
+                    "route": [],
+                    "startPoint": "BNA",
+                    "place": {
+                        "webp": "/img/flights/items/container/1/to/image.webp",
+                        "jpeg": "/img/flights/items/container/1/to/image.jpeg"
+                    }
+                }
+            },
+            "type": "Round Trip"
+        },
+        {
+            "id": 1,
+            "rating": 3,
+            "countReviews": 98,
+            "schedule": {
+                "from": {
+                    "gate": "A12",
+                    "amenities": ["Quick"],
+                    "image": {
+                        "srcs": {
+                            "webp": "/img/flights/items/container/2/depart/preview/image.webp", 
+                            "jpeg": "/img/flights/items/container/2/depart/preview/image.jpeg"
+                        }, 
+                        "alt": "Airport"
+                    },
+                    "airline": "Fly Dubai",
+                    "plane": "A380 Airbus",
+                    "seats": {
+                        "economy": { 
+                            "images": [
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/2/depart/seats/economy/1/image.jpeg", 
+                                        "webp": "/img/flights/items/container/2/depart/seats/economy/1/image.webp"
+                                    }, "alt": "Economy class presentation №1"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/2/depart/seats/economy/2/image.jpeg", 
+                                        "webp": "/img/flights/items/container/2/depart/seats/economy/2/image.webp"
+                                    }, "alt": "Economy class presentation №2"
+                                }
+                            ],
+                            "price": { "baseFare": 200, "discount": 0, "taxes": 5, "serviceFee": 5 },
+                            "count": 128
+                        },
+                        "business": { 
+                            "images": [
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/2/depart/seats/business/1/image.jpeg", 
+                                        "webp": "/img/flights/items/container/2/depart/seats/business/1/image.webp"
+                                    }, "alt": "Business class presentation №1"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/2/depart/seats/business/2/image.jpeg", 
+                                        "webp": "/img/flights/items/container/2/depart/seats/business/2/image.webp"
+                                    }, "alt": "Business class presentation №2"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/2/depart/seats/business/3/image.jpeg", 
+                                        "webp": "/img/flights/items/container/2/depart/seats/business/3/image.webp"
+                                    }, "alt": "Business class presentation №3"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/2/depart/seats/business/4/image.jpeg", 
+                                        "webp": "/img/flights/items/container/2/depart/seats/business/4/image.webp"
+                                    }, "alt": "Business class presentation №4"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/2/depart/seats/business/5/image.jpeg", 
+                                        "webp": "/img/flights/items/container/2/depart/seats/business/5/image.webp"
+                                    }, "alt": "Business class presentation №5"
+                                }
+                            ],
+                            "price": { "baseFare": 250, "discount": 0, "taxes": 5, "serviceFee": 5 },
+                            "count": 128
+                        },
+                        "first": { 
+                            "images": [
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/2/depart/seats/first/1/image.jpeg", 
+                                        "webp": "/img/flights/items/container/2/depart/seats/first/1/image.webp"
+                                    }, "alt": "First class presentation №1"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/2/depart/seats/first/2/image.jpeg", 
+                                        "webp": "/img/flights/items/container/2/depart/seats/first/2/image.webp"
+                                    }, "alt": "First class presentation №2"
+                                }
+                            ],
+                            "price": { "baseFare": 352, "discount": 0, "taxes": 5, "serviceFee": 5 },
+                            "count": 128
+                        }
+                    },
+                    "departTime": {
+                        "day": 6, "month": 2, "year": 2026,
+                        "units": { "hour": 12, "min": 0, "meridiem": "am" }
+                    },
+                    "arrayTime": {
+                        "day": 6, "month": 2, "year": 2026,
+                        "units": { "hour": 1, "min": 28, "meridiem": "pm" }
+                    },
+                    "route": [],
+                    "startPoint": "EWR",
+                    "place": {
+                        "webp": "/img/flights/items/container/2/from/image.webp",
+                        "jpeg": "/img/flights/items/container/2/from/image.jpeg"
+                    }
+                },
+                "to": {
+                    "gate": "A12",
+                    "amenities": ["Quick", "Punctuality", "Fast Food", "Comfortable Seats"],
+                    "image": {
+                        "srcs": {
+                            "webp": "/img/flights/items/container/2/return/preview/image.webp", 
+                            "jpeg": "/img/flights/items/container/2/return/preview/image.jpeg"
+                        }, 
+                        "alt": "Airport"
+                    },
+                    "airline": "Fly Dubai",
+                    "plane": "A380 Airbus",
+                    "seats": {
+                        "economy": { 
+                            "images": [
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/2/return/seats/economy/1/image.jpeg", 
+                                        "webp": "/img/flights/items/container/2/return/seats/economy/1/image.webp"
+                                    }, "alt": "Economy class presentation №1"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/2/return/seats/economy/2/image.jpeg", 
+                                        "webp": "/img/flights/items/container/2/return/seats/economy/2/image.webp"
+                                    }, "alt": "Economy class presentation №2"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/2/return/seats/economy/3/image.jpeg", 
+                                        "webp": "/img/flights/items/container/2/return/seats/economy/3/image.webp"
+                                    }, "alt": "Economy class presentation №3"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/2/return/seats/economy/4/image.jpeg", 
+                                        "webp": "/img/flights/items/container/2/return/seats/economy/4/image.webp"
+                                    }, "alt": "Economy class presentation №4"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/2/return/seats/economy/5/image.jpeg", 
+                                        "webp": "/img/flights/items/container/2/return/seats/economy/5/image.webp"
+                                    }, "alt": "Economy class presentation №5"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/2/return/seats/economy/6/image.jpeg", 
+                                        "webp": "/img/flights/items/container/2/return/seats/economy/6/image.webp"
+                                    }, "alt": "Economy class presentation №6"
+                                }
+                            ],
+                            "price": { "baseFare": 325, "discount": 0, "taxes": 5, "serviceFee": 5 },
+                            "count": 128
+                        },
+                        "business": { 
+                            "images": [
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/2/return/seats/business/1/image.jpeg", 
+                                        "webp": "/img/flights/items/container/2/return/seats/business/1/image.webp"
+                                    }, "alt": "Business class presentation №1"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/2/return/seats/business/2/image.jpeg", 
+                                        "webp": "/img/flights/items/container/2/return/seats/business/2/image.webp"
+                                    }, "alt": "Business class presentation №2"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/2/return/seats/business/3/image.jpeg", 
+                                        "webp": "/img/flights/items/container/2/return/seats/business/3/image.webp"
+                                    }, "alt": "Business class presentation №3"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/2/return/seats/business/4/image.jpeg", 
+                                        "webp": "/img/flights/items/container/2/return/seats/business/4/image.webp"
+                                    }, "alt": "Business class presentation №4"
+                                }
+                            ],
+                            "price": { "baseFare": 400, "discount": 0, "taxes": 5, "serviceFee": 5 },
+                            "count": 128
+                        },
+                        "first": { 
+                            "images": [
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/2/return/seats/first/1/image.jpeg", 
+                                        "webp": "/img/flights/items/container/2/return/seats/first/1/image.webp"
+                                    }, "alt": "First class presentation №1"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/2/return/seats/first/2/image.jpeg", 
+                                        "webp": "/img/flights/items/container/2/return/seats/first/2/image.webp"
+                                    }, "alt": "First class presentation №2"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/2/return/seats/first/3/image.jpeg", 
+                                        "webp": "/img/flights/items/container/2/return/seats/first/3/image.webp"
+                                    }, "alt": "First class presentation №3"
+                                }
+                            ],
+                            "price": { "baseFare": 500, "discount": 0, "taxes": 5, "serviceFee": 5 },
+                            "count": 128
+                        }
+                    },
+                    "departTime": {
+                        "day": 8, "month": 1, "year": 2026,
+                        "units": { "hour": 12, "min": 0, "meridiem": "am" }
+                    },
+                    "arrayTime": {
+                        "day": 9, "month": 1, "year": 2026,
+                        "units": { "hour": 5, "min": 55, "meridiem": "am" }
+                    },
+                    "route": [],
+                    "startPoint": "BNA",
+                    "place": {
+                        "webp": "/img/flights/items/container/2/to/image.webp",
+                        "jpeg": "/img/flights/items/container/2/to/image.jpeg"
+                    }
+                }
+            },
+            "type": "Round Trip"
+        },
+        {
+            "id": 2,
+            "rating": 2,
+            "countReviews": 128,
+            "schedule": {
+                "from": {
+                    "gate": "A12",
+                    "amenities": ["Fast Food", "Comfortable Seats"],
+                    "image": {
+                        "srcs": {
+                            "webp": "/img/flights/items/container/3/depart/preview/image.webp", 
+                            "jpeg": "/img/flights/items/container/3/depart/preview/image.jpeg"
+                        }, 
+                        "alt": "Airport"
+                    },
+                    "airline": "Qatar",
+                    "plane": "A380 Airbus",
+                    "seats": {
+                        "economy": { 
+                            "images": [
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/3/depart/seats/economy/1/image.jpeg", 
+                                        "webp": "/img/flights/items/container/3/depart/seats/economy/1/image.webp"
+                                    }, "alt": "Economy class presentation №1"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/3/depart/seats/economy/2/image.jpeg", 
+                                        "webp": "/img/flights/items/container/3/depart/seats/economy/2/image.webp"
+                                    }, "alt": "Economy class presentation №2"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/3/depart/seats/economy/3/image.jpeg", 
+                                        "webp": "/img/flights/items/container/3/depart/seats/economy/3/image.webp"
+                                    }, "alt": "Economy class presentation №3"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/3/depart/seats/economy/4/image.jpeg", 
+                                        "webp": "/img/flights/items/container/3/depart/seats/economy/4/image.webp"
+                                    }, "alt": "Economy class presentation №4"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/3/depart/seats/economy/5/image.jpeg", 
+                                        "webp": "/img/flights/items/container/3/depart/seats/economy/5/image.webp"
+                                    }, "alt": "Economy class presentation №5"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/3/depart/seats/economy/6/image.jpeg", 
+                                        "webp": "/img/flights/items/container/3/depart/seats/economy/6/image.webp"
+                                    }, "alt": "Economy class presentation №6"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/3/depart/seats/economy/7/image.jpeg", 
+                                        "webp": "/img/flights/items/container/3/depart/seats/economy/7/image.webp"
+                                    }, "alt": "Economy class presentation №7"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/3/depart/seats/economy/8/image.jpeg", 
+                                        "webp": "/img/flights/items/container/3/depart/seats/economy/8/image.webp"
+                                    }, "alt": "Economy class presentation №8"
+                                }
+                            ],
+                            "price": { "baseFare": 200, "discount": 0, "taxes": 5, "serviceFee": 5 },
+                            "count": 128
+                        },
+                        "business": { 
+                            "images": [
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/3/depart/seats/business/1/image.jpeg", 
+                                        "webp": "/img/flights/items/container/3/depart/seats/business/1/image.webp"
+                                    }, "alt": "Business class presentation №1"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/3/depart/seats/business/2/image.jpeg", 
+                                        "webp": "/img/flights/items/container/3/depart/seats/business/2/image.webp"
+                                    }, "alt": "Business class presentation №2"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/3/depart/seats/business/3/image.jpeg", 
+                                        "webp": "/img/flights/items/container/3/depart/seats/business/3/image.webp"
+                                    }, "alt": "Business class presentation №3"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/3/depart/seats/business/4/image.jpeg", 
+                                        "webp": "/img/flights/items/container/3/depart/seats/business/4/image.webp"
+                                    }, "alt": "Business class presentation №4"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/3/depart/seats/business/5/image.jpeg", 
+                                        "webp": "/img/flights/items/container/3/depart/seats/business/5/image.webp"
+                                    }, "alt": "Business class presentation №5"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/3/depart/seats/business/6/image.jpeg", 
+                                        "webp": "/img/flights/items/container/3/depart/seats/business/6/image.webp"
+                                    }, "alt": "Business class presentation №6"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/3/depart/seats/business/7/image.jpeg", 
+                                        "webp": "/img/flights/items/container/3/depart/seats/business/7/image.webp"
+                                    }, "alt": "Business class presentation №7"
+                                }
+                            ],
+                            "price": { "baseFare": 300, "discount": 0, "taxes": 5, "serviceFee": 5 },
+                            "count": 128
+                        },
+                        "first": { 
+                            "images": [
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/3/depart/seats/first/1/image.jpeg", 
+                                        "webp": "/img/flights/items/container/3/depart/seats/first/1/image.webp"
+                                    }, "alt": "First class presentation №1"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/3/depart/seats/first/2/image.jpeg", 
+                                        "webp": "/img/flights/items/container/3/depart/seats/first/2/image.webp"
+                                    }, "alt": "First class presentation №2"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/3/depart/seats/first/3/image.jpeg", 
+                                        "webp": "/img/flights/items/container/3/depart/seats/first/3/image.webp"
+                                    }, "alt": "First class presentation №3"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/3/depart/seats/first/4/image.jpeg", 
+                                        "webp": "/img/flights/items/container/3/depart/seats/first/4/image.webp"
+                                    }, "alt": "First class presentation №4"
+                                }
+                            ],
+                            "price": { "baseFare": 400, "discount": 0, "taxes": 5, "serviceFee": 5 },
+                            "count": 128
+                        }
+                    },
+                    "departTime": {
+                        "day": 25, "month": 2, "year": 2026,
+                        "units": { "hour": 12, "min": 0, "meridiem": "am" }
+                    },
+                    "arrayTime": {
+                        "day": 26, "month": 2, "year": 2026,
+                        "units": { "hour": 1, "min": 15, "meridiem": "pm" }
+                    },
+                    "route": [],
+                    "startPoint": "EWR",
+                    "place": {
+                        "webp": "/img/flights/items/container/3/from/image.webp",
+                        "jpeg": "/img/flights/items/container/3/from/image.jpeg"
+                    }
+                },
+                "to": {
+                    "gate": "A12",
+                    "amenities": ["Quick", "Comfortable Seats"],
+                    "image": {
+                        "srcs": {
+                            "webp": "/img/flights/items/container/3/return/preview/image.webp", 
+                            "jpeg": "/img/flights/items/container/3/return/preview/image.jpeg"
+                        }, 
+                        "alt": "Airport"
+                    },
+                    "airline": "Qatar",
+                    "plane": "A380 Airbus",
+                    "seats": {
+                        "economy": { 
+                            "images": [
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/3/return/seats/economy/1/image.jpeg", 
+                                        "webp": "/img/flights/items/container/3/return/seats/economy/1/image.webp"
+                                    }, "alt": "Economy class presentation №1"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/3/return/seats/economy/2/image.jpeg", 
+                                        "webp": "/img/flights/items/container/3/return/seats/economy/2/image.webp"
+                                    }, "alt": "Economy class presentation №2"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/3/return/seats/economy/3/image.jpeg", 
+                                        "webp": "/img/flights/items/container/3/return/seats/economy/3/image.webp"
+                                    }, "alt": "Economy class presentation №3"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/3/return/seats/economy/4/image.jpeg", 
+                                        "webp": "/img/flights/items/container/3/return/seats/economy/4/image.webp"
+                                    }, "alt": "Economy class presentation №4"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/3/return/seats/economy/5/image.jpeg", 
+                                        "webp": "/img/flights/items/container/3/return/seats/economy/5/image.webp"
+                                    }, "alt": "Economy class presentation №5"
+                                }
+                            ],
+                            "price": { "baseFare": 200, "discount": 0, "taxes": 5, "serviceFee": 5 },
+                            "count": 128
+                        },
+                        "business": { 
+                            "images": [
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/3/return/seats/business/1/image.jpeg", 
+                                        "webp": "/img/flights/items/container/3/return/seats/business/1/image.webp"
+                                    }, "alt": "Business class presentation №1"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/3/return/seats/business/2/image.jpeg", 
+                                        "webp": "/img/flights/items/container/3/return/seats/business/2/image.webp"
+                                    }, "alt": "Business class presentation №2"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/3/return/seats/business/3/image.jpeg", 
+                                        "webp": "/img/flights/items/container/3/return/seats/business/3/image.webp"
+                                    }, "alt": "Business class presentation №3"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/3/return/seats/business/4/image.jpeg", 
+                                        "webp": "/img/flights/items/container/3/return/seats/business/4/image.webp"
+                                    }, "alt": "Business class presentation №4"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/3/return/seats/business/5/image.jpeg", 
+                                        "webp": "/img/flights/items/container/3/return/seats/business/5/image.webp"
+                                    }, "alt": "Business class presentation №5"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/3/return/seats/business/6/image.jpeg", 
+                                        "webp": "/img/flights/items/container/3/return/seats/business/6/image.webp"
+                                    }, "alt": "Business class presentation №6"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/3/return/seats/business/7/image.jpeg", 
+                                        "webp": "/img/flights/items/container/3/return/seats/business/7/image.webp"
+                                    }, "alt": "Business class presentation №7"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/3/return/seats/business/8/image.jpeg", 
+                                        "webp": "/img/flights/items/container/3/return/seats/business/8/image.webp"
+                                    }, "alt": "Business class presentation №8"
+                                }
+                            ],
+                            "price": { "baseFare": 200, "discount": 0, "taxes": 5, "serviceFee": 5 },
+                            "count": 128
+                        },
+                        "first": { 
+                            "images": [
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/3/return/seats/first/1/image.jpeg", 
+                                        "webp": "/img/flights/items/container/3/return/seats/first/1/image.webp"
+                                    }, "alt": "First class presentation №1"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/3/return/seats/first/2/image.jpeg", 
+                                        "webp": "/img/flights/items/container/3/return/seats/first/2/image.webp"
+                                    }, "alt": "First class presentation №2"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/3/return/seats/first/3/image.jpeg", 
+                                        "webp": "/img/flights/items/container/3/return/seats/first/3/image.webp"
+                                    }, "alt": "First class presentation №3"
+                                },
+                                {
+                                    "srcs": {
+                                        "jpeg": "/img/flights/items/container/3/return/seats/first/4/image.jpeg", 
+                                        "webp": "/img/flights/items/container/3/return/seats/first/4/image.webp"
+                                    }, "alt": "First class presentation №4"
+                                }
+                            ],
+                            "price": { "baseFare": 200, "discount": 0, "taxes": 5, "serviceFee": 5 },
+                            "count": 128
+                        }
+                    },
+                    "departTime": {
+                        "day": 10, "month": 1, "year": 2026,
+                        "units": { "hour": 12, "min": 0, "meridiem": "am" }
+                    },
+                    "arrayTime": {
+                        "day": 11, "month": 1, "year": 2026,
+                        "units": { "hour": 3, "min": 35, "meridiem": "pm" }
+                    },
+                    "route": [],
+                    "startPoint": "BNA",
+                    "place": {
+                        "webp": "/img/flights/items/container/3/to/image.webp",
+                        "jpeg": "/img/flights/items/container/3/to/image.jpeg"
+                    }
+                }
+            },
+            "type": "Round Trip"
+        },
+        {
+            "id": 3,
+            "rating": 3.3,
+            "countReviews": 128,
+            "schedule": {
+                "gate": "A12",
+                "amenities": ["Quick", "Punctuality", "Fast Food", "Comfortable Seats"],
+                "image": {
+                    "srcs": {
+                        "webp": "/img/flights/items/container/4/flight/preview/image.webp", 
+                        "jpeg": "/img/flights/items/container/4/flight/preview/image.jpeg"
+                    }, 
+                    "alt": "Airport"
+                },
+                "airline": "Etihad",
+                "plane": "A380 Airbus",
+                "seats": {
+                    "economy": { 
+                        "images": [
+                            {
+                                "srcs": {
+                                    "jpeg": "/img/flights/items/container/4/flight/seats/economy/1/image.jpeg", 
+                                    "webp": "/img/flights/items/container/4/flight/seats/economy/1/image.webp"
+                                }, "alt": "Economy class presentation №1"
+                            },
+                            {
+                                "srcs": {
+                                    "jpeg": "/img/flights/items/container/4/flight/seats/economy/2/image.jpeg", 
+                                    "webp": "/img/flights/items/container/4/flight/seats/economy/2/image.webp"
+                                }, "alt": "Economy class presentation №2"
+                            },
+                            {
+                                "srcs": {
+                                    "jpeg": "/img/flights/items/container/4/flight/seats/economy/3/image.jpeg", 
+                                    "webp": "/img/flights/items/container/4/flight/seats/economy/3/image.webp"
+                                }, "alt": "Economy class presentation №3"
+                            },
+                            {
+                                "srcs": {
+                                    "jpeg": "/img/flights/items/container/4/flight/seats/economy/4/image.jpeg", 
+                                    "webp": "/img/flights/items/container/4/flight/seats/economy/4/image.webp"
+                                }, "alt": "Economy class presentation №4"
+                            }, 
+                            {
+                                "srcs": {
+                                    "jpeg": "/img/flights/items/container/4/flight/seats/economy/5/image.jpeg", 
+                                    "webp": "/img/flights/items/container/4/flight/seats/economy/5/image.webp"
+                                }, "alt": "Economy class presentation №5"
+                            },
+                            {
+                                "srcs": {
+                                    "jpeg": "/img/flights/items/container/4/flight/seats/economy/6/image.jpeg", 
+                                    "webp": "/img/flights/items/container/4/flight/seats/economy/6/image.webp"
+                                }, "alt": "Economy class presentation №6"
+                            },
+                            {
+                                "srcs": {
+                                    "jpeg": "/img/flights/items/container/4/flight/seats/economy/7/image.jpeg", 
+                                    "webp": "/img/flights/items/container/4/flight/seats/economy/7/image.webp"
+                                }, "alt": "Economy class presentation №7"
+                            },
+                            {
+                                "srcs": {
+                                    "jpeg": "/img/flights/items/container/4/flight/seats/economy/8/image.jpeg", 
+                                    "webp": "/img/flights/items/container/4/flight/seats/economy/8/image.webp"
+                                }, "alt": "Economy class presentation №8"
+                            },
+                            {
+                                "srcs": {
+                                    "jpeg": "/img/flights/items/container/4/flight/seats/economy/9/image.jpeg", 
+                                    "webp": "/img/flights/items/container/4/flight/seats/economy/9/image.webp"
+                                }, "alt": "Economy class presentation №9"
+                            }
+                        ],
+                        "price": { "baseFare": 200, "discount": 0, "taxes": 5, "serviceFee": 5 },
+                        "count": 128
+                    },
+                    "business": { 
+                        "images": [
+                            {
+                                "srcs": {
+                                    "jpeg": "/img/flights/items/container/4/flight/seats/business/1/image.jpeg", 
+                                    "webp": "/img/flights/items/container/4/flight/seats/business/1/image.webp"
+                                }, "alt": "Business class presentation №1"
+                            },
+                            {
+                                "srcs": {
+                                    "jpeg": "/img/flights/items/container/4/flight/seats/business/2/image.jpeg", 
+                                    "webp": "/img/flights/items/container/4/flight/seats/business/2/image.webp"
+                                }, "alt": "Business class presentation №2"
+                            },
+                            {
+                                "srcs": {
+                                    "jpeg": "/img/flights/items/container/4/flight/seats/business/3/image.jpeg", 
+                                    "webp": "/img/flights/items/container/4/flight/seats/business/3/image.webp"
+                                }, "alt": "Business class presentation №3"
+                            }
+                        ],
+                        "price": { "baseFare": 275, "discount": 0, "taxes": 5, "serviceFee": 5 },
+                        "count": 128
+                    },
+                    "first": { 
+                        "images": [
+                            {
+                                "srcs": {
+                                    "jpeg": "/img/flights/items/container/4/flight/seats/first/1/image.jpeg", 
+                                    "webp": "/img/flights/items/container/4/flight/seats/first/1/image.webp"
+                                }, "alt": "First class presentation №1"
+                            },
+                            {
+                                "srcs": {
+                                    "jpeg": "/img/flights/items/container/4/flight/seats/first/2/image.jpeg", 
+                                    "webp": "/img/flights/items/container/4/flight/seats/first/2/image.webp"
+                                }, "alt": "First class presentation №2"
+                            },
+                            {
+                                "srcs": {
+                                    "jpeg": "/img/flights/items/container/4/flight/seats/first/3/image.jpeg", 
+                                    "webp": "/img/flights/items/container/4/flight/seats/first/3/image.webp"
+                                }, "alt": "First class presentation №3"
+                            }
+                        ],
+                        "price": { "baseFare": 350, "discount": 0, "taxes": 5, "serviceFee": 5 },
+                        "count": 128
+                    }
+                },
+                "departTime": {
+                    "day": 10, "month": 1, "year": 2026,
+                    "units": { "hour": 12, "min": 0, "meridiem": "am" }
+                },
+                "arrayTime": {
+                    "day": 11, "month": 1, "year": 2026,
+                    "units": { "hour": 11, "min": 11, "meridiem": "pm" }
+                },
+                "route": [],
+                "startPoint": "BNA",
+                "endPoint": "EWR",
+                "placeFrom": {
+                    "webp": "/img/flights/items/container/4/from/image.webp",
+                    "jpeg": "/img/flights/items/container/4/from/image.jpeg"
+                },
+                "placeTo": {
+                    "webp": "/img/flights/items/container/4/to/image.webp",
+                    "jpeg": "/img/flights/items/container/4/to/image.jpeg"
+                }
+            },
+            "type": "On Way"
+        },
+        {
+            "id": 4,
+            "rating": 1,
+            "countReviews": 95,
+            "schedule": {
+                "gate": "A12",
+                "amenities": [],
+                "image": {
+                    "srcs": {
+                        "webp": "/img/flights/items/container/4/flight/preview/image.webp", 
+                        "jpeg": "/img/flights/items/container/4/flight/preview/image.jpeg"
+                    }, 
+                    "alt": "Airport"
+                },
+                "airline": "Qatar",
+                "plane": "A380 Airbus",
+                "seats": {
+                     "economy": { 
+                        "images": [
+                            {
+                                "srcs": {
+                                    "jpeg": "/img/flights/items/container/5/flight/seats/economy/1/image.jpeg", 
+                                    "webp": "/img/flights/items/container/5/flight/seats/economy/1/image.webp"
+                                }, "alt": "Economy class presentation №1"
+                            },
+                            {
+                                "srcs": {
+                                    "jpeg": "/img/flights/items/container/5/flight/seats/economy/2/image.jpeg", 
+                                    "webp": "/img/flights/items/container/5/flight/seats/economy/2/image.webp"
+                                }, "alt": "Economy class presentation №2"
+                            },
+                            {
+                                "srcs": {
+                                    "jpeg": "/img/flights/items/container/5/flight/seats/economy/3/image.jpeg", 
+                                    "webp": "/img/flights/items/container/5/flight/seats/economy/3/image.webp"
+                                }, "alt": "Economy class presentation №3"
+                            },
+                            {
+                                "srcs": {
+                                    "jpeg": "/img/flights/items/container/5/flight/seats/economy/4/image.jpeg", 
+                                    "webp": "/img/flights/items/container/5/flight/seats/economy/4/image.webp"
+                                }, "alt": "Economy class presentation №4"
+                            }, 
+                            {
+                                "srcs": {
+                                    "jpeg": "/img/flights/items/container/5/flight/seats/economy/5/image.jpeg", 
+                                    "webp": "/img/flights/items/container/5/flight/seats/economy/5/image.webp"
+                                }, "alt": "Economy class presentation №5"
+                            },
+                            {
+                                "srcs": {
+                                    "jpeg": "/img/flights/items/container/5/flight/seats/economy/6/image.jpeg", 
+                                    "webp": "/img/flights/items/container/5/flight/seats/economy/6/image.webp"
+                                }, "alt": "Economy class presentation №6"
+                            },
+                            {
+                                "srcs": {
+                                    "jpeg": "/img/flights/items/container/5/flight/seats/economy/7/image.jpeg", 
+                                    "webp": "/img/flights/items/container/5/flight/seats/economy/7/image.webp"
+                                }, "alt": "Economy class presentation №7"
+                            },
+                            {
+                                "srcs": {
+                                    "jpeg": "/img/flights/items/container/5/flight/seats/economy/8/image.jpeg", 
+                                    "webp": "/img/flights/items/container/5/flight/seats/economy/8/image.webp"
+                                }, "alt": "Economy class presentation №8"
+                            },
+                            {
+                                "srcs": {
+                                    "jpeg": "/img/flights/items/container/5/flight/seats/economy/9/image.jpeg", 
+                                    "webp": "/img/flights/items/container/5/flight/seats/economy/9/image.webp"
+                                }, "alt": "Economy class presentation №9"
+                            }
+                        ],
+                        "price": { "baseFare": 200, "discount": 0, "taxes": 5, "serviceFee": 5 },
+                        "count": 128
+                    },
+                    "business": { 
+                        "images": [
+                            {
+                                "srcs": {
+                                    "jpeg": "/img/flights/items/container/5/flight/seats/business/1/image.jpeg", 
+                                    "webp": "/img/flights/items/container/5/flight/seats/business/1/image.webp"
+                                }, "alt": "Business class presentation №1"
+                            },
+                            {
+                                "srcs": {
+                                    "jpeg": "/img/flights/items/container/5/flight/seats/business/2/image.jpeg", 
+                                    "webp": "/img/flights/items/container/5/flight/seats/business/2/image.webp"
+                                }, "alt": "Business class presentation №2"
+                            },
+                            {
+                                "srcs": {
+                                    "jpeg": "/img/flights/items/container/5/flight/seats/business/3/image.jpeg", 
+                                    "webp": "/img/flights/items/container/5/flight/seats/business/3/image.webp"
+                                }, "alt": "Business class presentation №3"
+                            }
+                        ],
+                        "price": { "baseFare": 275, "discount": 0, "taxes": 5, "serviceFee": 5 },
+                        "count": 128
+                    },
+                    "first": { 
+                        "images": [
+                            {
+                                "srcs": {
+                                    "jpeg": "/img/flights/items/container/5/flight/seats/first/1/image.jpeg", 
+                                    "webp": "/img/flights/items/container/5/flight/seats/first/1/image.webp"
+                                }, "alt": "First class presentation №1"
+                            },
+                            {
+                                "srcs": {
+                                    "jpeg": "/img/flights/items/container/5/flight/seats/first/2/image.jpeg", 
+                                    "webp": "/img/flights/items/container/5/flight/seats/first/2/image.webp"
+                                }, "alt": "First class presentation №2"
+                            },
+                            {
+                                "srcs": {
+                                    "jpeg": "/img/flights/items/container/5/flight/seats/first/3/image.jpeg", 
+                                    "webp": "/img/flights/items/container/5/flight/seats/first/3/image.webp"
+                                }, "alt": "First class presentation №3"
+                            }
+                        ],
+                        "price": { "baseFare": 350, "discount": 0, "taxes": 5, "serviceFee": 5 },
+                        "count": 128
+                    }
+                },
+                "departTime": {
+                    "day": 19, "month": 2, "year": 2026,
+                    "units": { "hour": 11, "min": 59, "meridiem": "pm" }
+                },
+                "arrayTime": {
+                    "day": 20, "month": 2, "year": 2026,
+                    "units": { "hour": 7, "min": 55, "meridiem": "am" }
+                },
+                "route": [],
+                "startPoint": "BNA",
+                "endPoint": "EWR",
+                "placeFrom": {
+                    "webp": "/img/flights/items/container/4/from/image.webp",
+                    "jpeg": "/img/flights/items/container/4/from/image.jpeg"
+                },
+                "placeTo": {
+                    "webp": "/img/flights/items/container/4/to/image.webp",
+                    "jpeg": "/img/flights/items/container/4/to/image.jpeg"
+                }
+            },
+            "type": "On Way"
+        },
+        {
+            "id": 5,
+            "rating": 5,
+            "countReviews": 54,
+            "schedule": {
+                "parts": [
+                    {
+                        "gate": "A12",
+                        "amenities": ["Quick", "Punctuality", "Fast Food", "Comfortable Seats"],
+                        "image": {
+                            "srcs": {
+                                "webp": "/img/flights/items/container/5/1/preview/image.webp", 
+                                "jpeg": "/img/flights/items/container/5/1/preview/image.jpeg"
+                            }, 
+                            "alt": "Airport"
+                        },
+                        "airline": "Qatar",
+                        "plane": "A380 Airbus",
+                        "seats": {
+                            "economy": { 
+                                "images": [
+                                    {
+                                        "srcs": {
+                                            "jpeg": "/img/flights/items/container/6/1/seats/economy/1/image.jpeg", 
+                                            "webp": "/img/flights/items/container/6/1/seats/economy/1/image.webp"
+                                        }, "alt": "Economy class presentation №1"
+                                    },
+                                    {
+                                        "srcs": {
+                                            "jpeg": "/img/flights/items/container/6/1/seats/economy/2/image.jpeg", 
+                                            "webp": "/img/flights/items/container/6/1/seats/economy/2/image.webp"
+                                        }, "alt": "Economy class presentation №2"
+                                    },
+                                    {
+                                        "srcs": {
+                                            "jpeg": "/img/flights/items/container/6/1/seats/economy/3/image.jpeg", 
+                                            "webp": "/img/flights/items/container/6/1/seats/economy/3/image.webp"
+                                        }, "alt": "Economy class presentation №3"
+                                    },
+                                    {
+                                        "srcs": {
+                                            "jpeg": "/img/flights/items/container/6/1/seats/economy/4/image.jpeg", 
+                                            "webp": "/img/flights/items/container/6/1/seats/economy/4/image.webp"
+                                        }, "alt": "Economy class presentation №4"
+                                    }
+                                ],
+                                "price": { "baseFare": 200, "discount": 0, "taxes": 5, "serviceFee": 5 },
+                                "count": 128
+                            },
+                            "business": { 
+                                "images": [
+                                    {
+                                        "srcs": {
+                                            "jpeg": "/img/flights/items/container/6/1/seats/business/1/image.jpeg", 
+                                            "webp": "/img/flights/items/container/6/1/seats/business/1/image.webp"
+                                        }, "alt": "Business class presentation №1"
+                                    },
+                                    {
+                                        "srcs": {
+                                            "jpeg": "/img/flights/items/container/6/1/seats/business/2/image.jpeg", 
+                                            "webp": "/img/flights/items/container/6/1/seats/business/2/image.webp"
+                                        }, "alt": "Business class presentation №2"
+                                    },
+                                    {
+                                        "srcs": {
+                                            "jpeg": "/img/flights/items/container/6/1/seats/business/3/image.jpeg", 
+                                            "webp": "/img/flights/items/container/6/1/seats/business/3/image.webp"
+                                        }, "alt": "Business class presentation №3"
+                                    }
+                                ],
+                                "price": { "baseFare": 245, "discount": 0, "taxes": 5, "serviceFee": 5 },
+                                "count": 128
+                            },
+                            "first": { 
+                                "images": [
+                                    {
+                                        "srcs": {
+                                            "jpeg": "/img/flights/items/container/6/1/seats/first/1/image.jpeg", 
+                                            "webp": "/img/flights/items/container/6/1/seats/first/1/image.webp"
+                                        }, "alt": "First class presentation №1"
+                                    },
+                                    {
+                                        "srcs": {
+                                            "jpeg": "/img/flights/items/container/6/1/seats/first/2/image.jpeg", 
+                                            "webp": "/img/flights/items/container/6/1/seats/first/2/image.webp"
+                                        }, "alt": "First class presentation №2"
+                                    },
+                                    {
+                                        "srcs": {
+                                            "jpeg": "/img/flights/items/container/6/1/seats/first/3/image.jpeg", 
+                                            "webp": "/img/flights/items/container/6/1/seats/first/3/image.webp"
+                                        }, "alt": "First class presentation №3"
+                                    }
+                                ],
+                                "price": { "baseFare": 335, "discount": 0, "taxes": 5, "serviceFee": 5 },
+                                "count": 128
+                            }
+                        },
+                        "departTime": {
+                            "day": 12, "month": 4, "year": 2026,
+                            "units": { "hour": 12, "min": 0, "meridiem": "am" }
+                        },
+                        "arrayTime": {
+                            "day": 12, "month": 4, "year": 2026,
+                            "units": { "hour": 2, "min": 15, "meridiem": "am" }
+                        },
+                        "route": [],
+                        "startPoint": "KYIV",
+                        "place": {
+                            "webp": "/img/flights/items/container/5/1/place/image.webp",
+                            "jpeg": "/img/flights/items/container/5/1/place/image.jpeg"
+                        }
+                    },
+                    {
+                        "gate": "A12",
+                        "amenities": ["Quick", "Punctuality", "Fast Food", "Comfortable Seats"],
+                        "image": {
+                            "srcs": {
+                                "webp": "/img/flights/items/container/5/2/preview/image.webp", 
+                                "jpeg": "/img/flights/items/container/5/2/preview/image.jpeg"
+                            }, 
+                            "alt": ""
+                        },
+                        "airline": "Qatar",
+                        "plane": "A380 Airbus",
+                        "seats": {                            
+                            "economy": { 
+                                "images": [
+                                    {
+                                        "srcs": {
+                                            "jpeg": "/img/flights/items/container/6/2/seats/economy/1/image.jpeg", 
+                                            "webp": "/img/flights/items/container/6/2/seats/economy/1/image.webp"
+                                        }, "alt": "Economy class presentation №1"
+                                    },
+                                    {
+                                        "srcs": {
+                                            "jpeg": "/img/flights/items/container/6/2/seats/economy/2/image.jpeg", 
+                                            "webp": "/img/flights/items/container/6/2/seats/economy/2/image.webp"
+                                        }, "alt": "Economy class presentation №2"
+                                    },
+                                    {
+                                        "srcs": {
+                                            "jpeg": "/img/flights/items/container/6/2/seats/economy/3/image.jpeg", 
+                                            "webp": "/img/flights/items/container/6/2/seats/economy/3/image.webp"
+                                        }, "alt": "Economy class presentation №3"
+                                    },
+                                    {
+                                        "srcs": {
+                                            "jpeg": "/img/flights/items/container/6/2/seats/economy/4/image.jpeg", 
+                                            "webp": "/img/flights/items/container/6/2/seats/economy/4/image.webp"
+                                        }, "alt": "Economy class presentation №4"
+                                    },
+                                    {
+                                        "srcs": {
+                                            "jpeg": "/img/flights/items/container/6/2/seats/economy/5/image.jpeg", 
+                                            "webp": "/img/flights/items/container/6/2/seats/economy/5/image.webp"
+                                        }, "alt": "Economy class presentation №5"
+                                    },
+                                    {
+                                        "srcs": {
+                                            "jpeg": "/img/flights/items/container/6/2/seats/economy/6/image.jpeg", 
+                                            "webp": "/img/flights/items/container/6/2/seats/economy/6/image.webp"
+                                        }, "alt": "Economy class presentation №6"
+                                    },
+                                    {
+                                        "srcs": {
+                                            "jpeg": "/img/flights/items/container/6/2/seats/economy/7/image.jpeg", 
+                                            "webp": "/img/flights/items/container/6/2/seats/economy/7/image.webp"
+                                        }, "alt": "Economy class presentation №7"
+                                    }
+                                ],
+                                "price": { "baseFare": 200, "discount": 0, "taxes": 5, "serviceFee": 5 },
+                                "count": 128
+                            },
+                            "business": { 
+                                "images": [
+                                    {
+                                        "srcs": {
+                                            "jpeg": "/img/flights/items/container/6/2/seats/business/1/image.jpeg", 
+                                            "webp": "/img/flights/items/container/6/2/seats/business/1/image.webp"
+                                        }, "alt": "Business class presentation №1"
+                                    },
+                                    {
+                                        "srcs": {
+                                            "jpeg": "/img/flights/items/container/6/2/seats/business/2/image.jpeg", 
+                                            "webp": "/img/flights/items/container/6/2/seats/business/2/image.webp"
+                                        }, "alt": "Business class presentation №2"
+                                    },
+                                    {
+                                        "srcs": {
+                                            "jpeg": "/img/flights/items/container/6/2/seats/business/3/image.jpeg", 
+                                            "webp": "/img/flights/items/container/6/2/seats/business/3/image.webp"
+                                        }, "alt": "Business class presentation №3"
+                                    },
+                                    {
+                                        "srcs": {
+                                            "jpeg": "/img/flights/items/container/6/2/seats/business/4/image.jpeg", 
+                                            "webp": "/img/flights/items/container/6/2/seats/business/4/image.webp"
+                                        }, "alt": "Business class presentation №4"
+                                    },
+                                    {
+                                        "srcs": {
+                                            "jpeg": "/img/flights/items/container/6/2/seats/business/5/image.jpeg", 
+                                            "webp": "/img/flights/items/container/6/2/seats/business/5/image.webp"
+                                        }, "alt": "Business class presentation №5"
+                                    }
+                                ],
+                                "price": { "baseFare": 245, "discount": 0, "taxes": 5, "serviceFee": 5 },
+                                "count": 128
+                            },
+                            "first": { 
+                                "images": [
+                                    {
+                                        "srcs": {
+                                            "jpeg": "/img/flights/items/container/6/2/seats/first/1/image.jpeg", 
+                                            "webp": "/img/flights/items/container/6/2/seats/first/1/image.webp"
+                                        }, "alt": "First class presentation №1"
+                                    },
+                                    {
+                                        "srcs": {
+                                            "jpeg": "/img/flights/items/container/6/2/seats/first/2/image.jpeg", 
+                                            "webp": "/img/flights/items/container/6/2/seats/first/2/image.webp"
+                                        }, "alt": "First class presentation №2"
+                                    },
+                                    {
+                                        "srcs": {
+                                            "jpeg": "/img/flights/items/container/6/2/seats/first/3/image.jpeg", 
+                                            "webp": "/img/flights/items/container/6/2/seats/first/3/image.webp"
+                                        }, "alt": "First class presentation №3"
+                                    }
+                                ],
+                                "price": { "baseFare": 335, "discount": 0, "taxes": 5, "serviceFee": 5 },
+                                "count": 128
+                            }
+                        },
+                        "departTime": {
+                            "day": 13, "month": 4, "year": 2026,
+                            "units": { "hour": 8, "min": 32, "meridiem": "am" }
+                        },
+                        "arrayTime": {
+                            "day": 13, "month": 4, "year": 2026,
+                            "units": { "hour": 4, "min": 37, "meridiem": "pm" }
+                        },
+                        "route": [],
+                        "startPoint": "MYK",
+                        "place": {
+                            "webp": "/img/flights/items/container/5/2/place/image.webp",
+                            "jpeg": "/img/flights/items/container/5/2/place/image.jpeg"
+                        }
+                    },
+                    {
+                        "gate": "A12",
+                        "amenities": ["Quick", "Punctuality", "Fast Food", "Comfortable Seats"],
+                        "image": {
+                            "srcs": {
+                                "webp": "/img/flights/items/container/5/3/preview/image.webp", 
+                                "jpeg": "/img/flights/items/container/5/3/preview/image.jpeg"
+                            }, 
+                            "alt": "Airport"
+                        },
+                        "airline": "Emirated",
+                        "plane": "A380 Airbus",
+                        "seats": {
+                            "economy": { 
+                                "images": [
+                                    {
+                                        "srcs": {
+                                            "jpeg": "/img/flights/items/container/6/3/seats/economy/1/image.jpeg", 
+                                            "webp": "/img/flights/items/container/6/3/seats/economy/1/image.webp"
+                                        }, "alt": "Economy class presentation №1"
+                                    },
+                                    {
+                                        "srcs": {
+                                            "jpeg": "/img/flights/items/container/6/3/seats/economy/2/image.jpeg", 
+                                            "webp": "/img/flights/items/container/6/3/seats/economy/2/image.webp"
+                                        }, "alt": "Economy class presentation №2"
+                                    },
+                                    {
+                                        "srcs": {
+                                            "jpeg": "/img/flights/items/container/6/3/seats/economy/3/image.jpeg", 
+                                            "webp": "/img/flights/items/container/6/3/seats/economy/3/image.webp"
+                                        }, "alt": "Economy class presentation №3"
+                                    },
+                                    {
+                                        "srcs": {
+                                            "jpeg": "/img/flights/items/container/6/3/seats/economy/4/image.jpeg", 
+                                            "webp": "/img/flights/items/container/6/3/seats/economy/4/image.webp"
+                                        }, "alt": "Economy class presentation №4"
+                                    },
+                                    {
+                                        "srcs": {
+                                            "jpeg": "/img/flights/items/container/6/3/seats/economy/5/image.jpeg", 
+                                            "webp": "/img/flights/items/container/6/3/seats/economy/5/image.webp"
+                                        }, "alt": "Economy class presentation №5"
+                                    },
+                                    {
+                                        "srcs": {
+                                            "jpeg": "/img/flights/items/container/6/3/seats/economy/6/image.jpeg", 
+                                            "webp": "/img/flights/items/container/6/3/seats/economy/6/image.webp"
+                                        }, "alt": "Economy class presentation №6"
+                                    },
+                                    {
+                                        "srcs": {
+                                            "jpeg": "/img/flights/items/container/6/3/seats/economy/7/image.jpeg", 
+                                            "webp": "/img/flights/items/container/6/3/seats/economy/7/image.webp"
+                                        }, "alt": "Economy class presentation №7"
+                                    },
+                                    {
+                                        "srcs": {
+                                            "jpeg": "/img/flights/items/container/6/3/seats/economy/8/image.jpeg", 
+                                            "webp": "/img/flights/items/container/6/3/seats/economy/8/image.webp"
+                                        }, "alt": "Economy class presentation №8"
+                                    },
+                                    {
+                                        "srcs": {
+                                            "jpeg": "/img/flights/items/container/6/3/seats/economy/9/image.jpeg", 
+                                            "webp": "/img/flights/items/container/6/3/seats/economy/9/image.webp"
+                                        }, "alt": "Economy class presentation №9"
+                                    }
+                                ],
+                                "price": { "baseFare": 200, "discount": 0, "taxes": 5, "serviceFee": 5 },
+                                "count": 128
+                            },
+                            "business": { 
+                                "images": [
+                                    {
+                                        "srcs": {
+                                            "jpeg": "/img/flights/items/container/6/3/seats/business/1/image.jpeg", 
+                                            "webp": "/img/flights/items/container/6/3/seats/business/1/image.webp"
+                                        }, "alt": "Business class presentation №1"
+                                    },
+                                    {
+                                        "srcs": {
+                                            "jpeg": "/img/flights/items/container/6/3/seats/business/2/image.jpeg", 
+                                            "webp": "/img/flights/items/container/6/3/seats/business/2/image.webp"
+                                        }, "alt": "Business class presentation №2"
+                                    },
+                                    {
+                                        "srcs": {
+                                            "jpeg": "/img/flights/items/container/6/3/seats/business/3/image.jpeg", 
+                                            "webp": "/img/flights/items/container/6/3/seats/business/3/image.webp"
+                                        }, "alt": "Business class presentation №3"
+                                    },
+                                    {
+                                        "srcs": {
+                                            "jpeg": "/img/flights/items/container/6/3/seats/business/4/image.jpeg", 
+                                            "webp": "/img/flights/items/container/6/3/seats/business/4/image.webp"
+                                        }, "alt": "Business class presentation №4"
+                                    },
+                                    {
+                                        "srcs": {
+                                            "jpeg": "/img/flights/items/container/6/3/seats/business/5/image.jpeg", 
+                                            "webp": "/img/flights/items/container/6/3/seats/business/5/image.webp"
+                                        }, "alt": "Business class presentation №5"
+                                    }
+                                ],
+                                "price": { "baseFare": 270, "discount": 0, "taxes": 5, "serviceFee": 5 },
+                                "count": 128
+                            },
+                            "first": { 
+                                "images": [
+                                    {
+                                        "srcs": {
+                                            "jpeg": "/img/flights/items/container/6/3/seats/first/1/image.jpeg", 
+                                            "webp": "/img/flights/items/container/6/3/seats/first/1/image.webp"
+                                        }, "alt": "First class presentation №1"
+                                    },
+                                    {
+                                        "srcs": {
+                                            "jpeg": "/img/flights/items/container/6/3/seats/first/2/image.jpeg", 
+                                            "webp": "/img/flights/items/container/6/3/seats/first/2/image.webp"
+                                        }, "alt": "First class presentation №2"
+                                    },
+                                    {
+                                        "srcs": {
+                                            "jpeg": "/img/flights/items/container/6/3/seats/first/3/image.jpeg", 
+                                            "webp": "/img/flights/items/container/6/3/seats/first/3/image.webp"
+                                        }, "alt": "First class presentation №3"
+                                    }
+                                ],
+                                "price": { "baseFare": 320, "discount": 0, "taxes": 5, "serviceFee": 5 },
+                                "count": 128
+                            }
+                        },
+                        "departTime": {
+                            "day": 13, "month": 1, "year": 2026,
+                            "units": { "hour": 6, "min": 0, "meridiem": "pm" } 
+                        },
+                        "arrayTime": {
+                            "day": 13, "month": 1, "year": 2026,
+                            "units": { "hour": 11, "min": 59, "meridiem": "pm" }
+                        },
+                        "route": [],
+                        "startPoint": "ODE",
+                        "place": {
+                            "webp": "/img/flights/items/container/5/3/place/image.webp",
+                            "jpeg": "/img/flights/items/container/5/3/place/image.jpeg"
+                        }
+                    }
+                ],
+                "endPoint": "LVIV",
+                "endPlace": {
+                    "webp": "/img/flights/items/container/5/end/image.webp",
+                    "jpeg": "/img/flights/items/container/5/end/image.jpeg"
+                }
+            },
+            "type": "Multi-City"
+        }
+    ],
+    "hotels": [
+        {
+            "id": 0,
+            "type": "Hotels",
+            "name": "CVK Park Bosphorus Hotel Istanbul",
+            "rating": 4.2,
+            "starsCount": 5,
+            "logo": {"webp": "/img/hotels/items/1/logo/image.webp", "jpeg": "/img/hotels/items/1/logo/image.png"},
+            "location": {
+                "image": { 
+                    "srcs": { "jpeg": "/img/hotels/items/1/location/image.jpg", "webp": "/img/hotels/items/1/location/image.webp"}, 
+                    "alt": "Hotel Location" 
+                },
+                "text": "Gümüssuyu Mah. Inönü Cad. No:8, Istanbul 34437"
+            },
+            "amenities": {
+                "items": [
+                    "24hr front desk", "Air-conditioned", "Fitness Center", "Outdoor pool", "Indoor pool",
+                    "Spa and wellness center", "Restaurant", "Room service", "Bar/Lounge", "Tea/coffee machine"
+                ], 
+                "maxInColumn": 5, "maxShow": 9
+            },
+            "images": {
+                "main": {
+                    "srcs": { 
+                        "webp": "/img/hotels/items/1/preview/main.webp", 
+                        "jpeg": "/img/hotels/items/1/preview/main.jpg"
+                    }, 
+                    "alt": "Hotel Main Image" 
+                },
+                "another": [
+                    {
+                        "srcs": { 
+                            "webp": "/img/hotels/items/1/preview/another/1/image.webp", 
+                            "jpeg": "/img/hotels/items/1/preview/another/1/image.jpg" 
+                        }, 
+                        "alt": "Hotel Another Image №1"
+                    },
+                    {
+                        "srcs": { 
+                            "webp": "/img/hotels/items/1/preview/another/2/image.webp", 
+                            "jpeg": "/img/hotels/items/1/preview/another/2/image.jpg" 
+                        }, 
+                        "alt": "Hotel Another Image №2"
+                    },
+                    {
+                        "srcs": { 
+                            "webp": "/img/hotels/items/1/preview/another/3/image.webp", 
+                            "jpeg": "/img/hotels/items/1/preview/another/3/image.jpg" 
+                        }, 
+                        "alt": "Hotel Another Image №3"
+                    },
+                    {
+                        "srcs": { 
+                            "webp": "/img/hotels/items/1/preview/another/4/image.webp", 
+                            "jpeg": "/img/hotels/items/1/preview/another/4/image.jpg" 
+                        }, 
+                        "alt": "Hotel Another Image №4"
+                    },
+                    {
+                        "srcs": { 
+                            "webp": "/img/hotels/items/1/preview/another/5/image.webp", 
+                            "jpeg": "/img/hotels/items/1/preview/another/5/image.jpg" 
+                        }, 
+                        "alt": "Hotel Another Image №5"
+                    },
+                    {
+                        "srcs": { 
+                            "webp": "/img/hotels/items/1/preview/another/6/image.webp", 
+                            "jpeg": "/img/hotels/items/1/preview/another/6/image.jpg" 
+                        }, 
+                        "alt": "Hotel Another Image №6"
+                    },
+                    {
+                        "srcs": { 
+                            "webp": "/img/hotels/items/1/preview/another/7/image.webp", 
+                            "jpeg": "/img/hotels/items/1/preview/another/7/image.jpg" 
+                        }, 
+                        "alt": "Hotel Another Image №7"
+                    },
+                    {
+                        "srcs": { 
+                            "webp": "/img/hotels/items/1/preview/another/8/image.webp", 
+                            "jpeg": "/img/hotels/items/1/preview/another/8/image.jpg" 
+                        }, 
+                        "alt": "Hotel Another Image №8"
+                    }
+                ],
+                "maxShow": 5
+            },
+            "overview": "Located in Taksim Gmsuyu, the heart of Istanbul, the CVK Park Bosphorus Hotel Istanbul has risen from the ashes of the historic Park Hotel, which also served as Foreign Affairs Palace 120 years ago and is hosting its guests by assuming this hospitality mission. With its 452 luxurious rooms and suites, 8500 m2 SPA and fitness area, 18 meeting rooms including 4 dividable ones and 3 terraces with Bosphorus view, Istanbuls largest terrace with Bosphorus view (4500 m2) and latest technology infrastructure, CVK Park Bosphorus Hotel Istanbul is destined to be the popular attraction point of the city. Room and suite categories at various sizes with city and Bosphorus view, as well as 68 separate luxury suites, are offered to its special guests as a wide variety of selection.",
+            "features": ["Near park", "Near nightlife", "Near theater", "Clean Hotel"],
+            "rooms": [
+                {
+                    "specifics": ["Superior room"], "beds": {"twin": 2, "double": 1}, 
+                    "price": {
+                        "baseFare": 200,
+                        "discount": 0,
+                        "taxes": 10,
+                        "serviceFee": 10
+                    },
+                    "image": {
+                        "srcs": {
+                            "jpeg": "/img/hotels/items/1/rooms/1/image.jpg", 
+                            "webp": "/img/hotels/items/1/rooms/1/image.webp"
+                        }, 
+                        "alt": "Room №1 Image"
+                    }
+                },
+                {
+                    "specifics": ["Superior room", "City view"], "beds": {"twin": 2, "double": 1}, 
+                    "price": {
+                        "baseFare": 260,
+                        "discount": 5,
+                        "taxes": 15,
+                        "serviceFee": 10
+                    },
+                    "image": {
+                        "srcs": {
+                            "jpeg": "/img/hotels/items/1/rooms/2/image.jpg", 
+                            "webp": "/img/hotels/items/1/rooms/2/image.webp"
+                        }, 
+                        "alt": "Room №2 Image"
+                    }
+                },
+                {
+                    "specifics": ["Superior room", "City view"], "beds": {"twin": 2, "double": 1}, 
+                    "price": {
+                        "baseFare": 200,
+                        "discount": 0,
+                        "taxes": 10,
+                        "serviceFee": 0
+                    },
+                    "image": {
+                        "srcs": {
+                            "jpeg": "/img/hotels/items/1/rooms/3/image.jpg", 
+                            "webp": "/img/hotels/items/1/rooms/3/image.webp"
+                        }, 
+                        "alt": "Room №3 Image"
+                    }
+                },
+                {
+                    "specifics": ["Superior room", "City view"], "beds": {"twin": 2, "double": 1}, 
+                    "price": {
+                        "baseFare": 300,
+                        "discount": 5,
+                        "taxes": 10,
+                        "serviceFee": 10
+                    },
+                    "image": {
+                        "srcs": {
+                            "jpeg": "/img/hotels/items/1/rooms/4/image.jpg", 
+                            "webp": "/img/hotels/items/1/rooms/4/image.webp"
+                        }, 
+                        "alt": "Room №4 Image"
+                    }
+                }
+            ],
+            "reviews": {
+                "items": [
+                    {
+                        "grade": 5, 
+                        "author": {"firstName": "Omar", "lastName": "Siphron"}, 
+                        "review": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+                        "ava": {"jpeg": "", "webp": ""}
+                    }
+                ],
+                "maxShow": 5
+            }
+        },
+        {
+            "id": 1,
+            "type": "Resorts",
+            "name": "Eresin Hotels Sultanahmet - Boutique Class",
+            "rating": 5,
+            "starsCount": 5,
+            "logo": {"webp": "/img/hotels/items/2/logo/image.webp", "jpeg": "/img/hotels/items/2/logo/image.png"},
+            "location": {
+                "image": { 
+                    "srcs": { "jpeg": "/img/hotels/items/2/location/image.jpg", "webp": "/img/hotels/items/2/location/image.webp"}, 
+                    "alt": "Hotel Location" 
+                },
+                "text": "Gümüssuyu Mah. Inönü Cad. No:8, Istanbul 34437"
+            },
+            "amenities": {
+                "items": [
+                    "24hr front desk", "Air-conditioned", "Fitness Center", "Outdoor pool", "Indoor pool",
+                    "Spa and wellness center", "Restaurant", "Room service", "Bar/Lounge", "Tea/coffee machine"
+                ], 
+                "maxInColumn": 5, "maxShow": 9
+            },
+            "images": {
+                "main": {
+                    "srcs": { 
+                        "webp": "/img/hotels/items/2/preview/main.webp", 
+                        "jpeg": "/img/hotels/items/2/preview/main.jpg"
+                    }, 
+                    "alt": "Hotel Main Image" 
+                },
+                "another": [
+                    {
+                        "srcs": { 
+                            "webp": "/img/hotels/items/2/preview/another/1/image.webp", 
+                            "jpeg": "/img/hotels/items/2/preview/another/1/image.jpg" 
+                        }, 
+                        "alt": "Hotel Another Image №1"
+                    },
+                    {
+                        "srcs": { 
+                            "webp": "/img/hotels/items/2/preview/another/2/image.webp", 
+                            "jpeg": "/img/hotels/items/2/preview/another/2/image.jpg" 
+                        }, 
+                        "alt": "Hotel Another Image №2"
+                    },
+                    {
+                        "srcs": { 
+                            "webp": "/img/hotels/items/2/preview/another/3/image.webp", 
+                            "jpeg": "/img/hotels/items/2/preview/another/3/image.jpg" 
+                        }, 
+                        "alt": "Hotel Another Image №3"
+                    },
+                    {
+                        "srcs": { 
+                            "webp": "/img/hotels/items/2/preview/another/4/image.webp", 
+                            "jpeg": "/img/hotels/items/2/preview/another/4/image.jpg" 
+                        }, 
+                        "alt": "Hotel Another Image №4"
+                    },
+                    {
+                        "srcs": { 
+                            "webp": "/img/hotels/items/2/preview/another/5/image.webp", 
+                            "jpeg": "/img/hotels/items/2/preview/another/5/image.jpg" 
+                        }, 
+                        "alt": "Hotel Another Image №5"
+                    },
+                    {
+                        "srcs": { 
+                            "webp": "/img/hotels/items/2/preview/another/6/image.webp", 
+                            "jpeg": "/img/hotels/items/2/preview/another/6/image.jpg" 
+                        }, 
+                        "alt": "Hotel Another Image №6"
+                    },
+                    {
+                        "srcs": { 
+                            "webp": "/img/hotels/items/2/preview/another/7/image.webp", 
+                            "jpeg": "/img/hotels/items/2/preview/another/7/image.jpg" 
+                        }, 
+                        "alt": "Hotel Another Image №7"
+                    },
+                    {
+                        "srcs": { 
+                            "webp": "/img/hotels/items/2/preview/another/8/image.webp", 
+                            "jpeg": "/img/hotels/items/2/preview/another/8/image.jpg" 
+                        }, 
+                        "alt": "Hotel Another Image №8"
+                    }
+                ],
+                "maxShow": 5
+            },
+            "overview": "Located in Taksim Gmsuyu, the heart of Istanbul, the CVK Park Bosphorus Hotel Istanbul has risen from the ashes of the historic Park Hotel, which also served as Foreign Affairs Palace 120 years ago and is hosting its guests by assuming this hospitality mission. With its 452 luxurious rooms and suites, 8500 m2 SPA and fitness area, 18 meeting rooms including 4 dividable ones and 3 terraces with Bosphorus view, Istanbuls largest terrace with Bosphorus view (4500 m2) and latest technology infrastructure, CVK Park Bosphorus Hotel Istanbul is destined to be the popular attraction point of the city. Room and suite categories at various sizes with city and Bosphorus view, as well as 68 separate luxury suites, are offered to its special guests as a wide variety of selection.",
+            "features": ["Near park", "Near nightlife", "Near theater", "Clean Hotel"],
+            "rooms": [
+                {
+                    "specifics": ["Superior room"], "beds": {"twin": 2, "double": 1}, 
+                    "price": {
+                        "baseFare": 200,
+                        "discount": 0,
+                        "taxes": 10,
+                        "serviceFee": 10
+                    },
+                    "image": {
+                        "srcs": {
+                            "jpeg": "/img/hotels/items/2/rooms/1/image.jpg", 
+                            "webp": "/img/hotels/items/2/rooms/1/image.webp"
+                        }, 
+                        "alt": "Room №1 Image"
+                    }
+                },
+                {
+                    "specifics": ["Superior room", "City view"], "beds": {"twin": 2, "double": 1}, 
+                    "price": {
+                        "baseFare": 200,
+                        "discount": 0,
+                        "taxes": 10,
+                        "serviceFee": 10
+                    },
+                    "image": {
+                        "srcs": {
+                            "jpeg": "/img/hotels/items/2/rooms/2/image.jpg", 
+                            "webp": "/img/hotels/items/2/rooms/2/image.webp"
+                        }, 
+                        "alt": "Room №2 Image"
+                    }
+                },
+                {
+                    "specifics": ["Superior room", "City view"], "beds": {"twin": 2, "double": 1}, 
+                    "price": {
+                        "baseFare": 200,
+                        "discount": 0,
+                        "taxes": 10,
+                        "serviceFee": 10
+                    },
+                    "image": {
+                        "srcs": {
+                            "jpeg": "/img/hotels/items/2/rooms/3/image.jpg", 
+                            "webp": "/img/hotels/items/2/rooms/3/image.webp"
+                        }, 
+                        "alt": "Room №3 Image"
+                    }
+                },
+                {
+                    "specifics": ["Superior room", "City view"], "beds": {"twin": 2, "double": 1}, 
+                    "price": {
+                        "baseFare": 330,
+                        "discount": 0,
+                        "taxes": 10,
+                        "serviceFee": 10
+                    },
+                    "image": {
+                        "srcs": {
+                            "jpeg": "/img/hotels/items/2/rooms/4/image.jpg", 
+                            "webp": "/img/hotels/items/2/rooms/4/image.webp"
+                        }, 
+                        "alt": "Room №4 Image"
+                    }
+                }
+            ],
+            "reviews": {
+                "items": [
+                    {
+                        "grade": 5, 
+                        "author": {"firstName": "Omar", "lastName": "Siphron"}, 
+                        "review": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+                        "ava": {"jpeg": "", "webp": ""}
+                    }
+                ],
+                "maxShow": 5
+            }
+        },
+        {
+            "id": 2,
+            "type": "Resorts",
+            "name": "Eresin Hotels Sultanahmet - Boutique Class",
+            "rating": 3,
+            "starsCount": 5,
+            "logo": {"webp": "/img/hotels/items/3/logo/image.webp", "jpeg": "/img/hotels/items/3/logo/image.png"},
+            "location": {
+                "image": { 
+                    "srcs": { "jpeg": "/img/hotels/items/3/location/image.jpg", "webp": "/img/hotels/items/3/location/image.webp"}, 
+                    "alt": "Hotel Location" 
+                },
+                "text": "Gümüssuyu Mah. Inönü Cad. No:8, Istanbul 34437"
+            },
+            "amenities": {
+                "items": [
+                    "24hr front desk", "Air-conditioned", "Fitness Center", "Outdoor pool", "Indoor pool",
+                    "Spa and wellness center", "Restaurant", "Room service", "Bar/Lounge", "Tea/coffee machine"
+                ], 
+                "maxInColumn": 5, "maxShow": 9
+            },
+            "images": {
+                "main": {
+                    "srcs": { 
+                        "webp": "/img/hotels/items/3/preview/main.webp", 
+                        "jpeg": "/img/hotels/items/3/preview/main.jpg"
+                    }, 
+                    "alt": "Hotel Main Image" 
+                },
+                "another": [
+                    {
+                        "srcs": { 
+                            "webp": "/img/hotels/items/3/preview/another/1/image.webp", 
+                            "jpeg": "/img/hotels/items/3/preview/another/1/image.jpg" 
+                        }, 
+                        "alt": "Hotel Another Image №1"
+                    },
+                    {
+                        "srcs": { 
+                            "webp": "/img/hotels/items/3/preview/another/2/image.webp", 
+                            "jpeg": "/img/hotels/items/3/preview/another/2/image.jpg" 
+                        }, 
+                        "alt": "Hotel Another Image №2"
+                    },
+                    {
+                        "srcs": { 
+                            "webp": "/img/hotels/items/3/preview/another/3/image.webp", 
+                            "jpeg": "/img/hotels/items/3/preview/another/3/image.jpg" 
+                        }, 
+                        "alt": "Hotel Another Image №3"
+                    },
+                    {
+                        "srcs": { 
+                            "webp": "/img/hotels/items/3/preview/another/4/image.webp", 
+                            "jpeg": "/img/hotels/items/3/preview/another/4/image.jpg" 
+                        }, 
+                        "alt": "Hotel Another Image №4"
+                    },
+                    {
+                        "srcs": { 
+                            "webp": "/img/hotels/items/3/preview/another/5/image.webp", 
+                            "jpeg": "/img/hotels/items/3/preview/another/5/image.jpg" 
+                        }, 
+                        "alt": "Hotel Another Image №5"
+                    },
+                    {
+                        "srcs": { 
+                            "webp": "/img/hotels/items/3/preview/another/6/image.webp", 
+                            "jpeg": "/img/hotels/items/3/preview/another/6/image.jpg" 
+                        }, 
+                        "alt": "Hotel Another Image №6"
+                    },
+                    {
+                        "srcs": { 
+                            "webp": "/img/hotels/items/3/preview/another/7/image.webp", 
+                            "jpeg": "/img/hotels/items/3/preview/another/7/image.jpg" 
+                        }, 
+                        "alt": "Hotel Another Image №7"
+                    },
+                    {
+                        "srcs": { 
+                            "webp": "/img/hotels/items/3/preview/another/8/image.webp", 
+                            "jpeg": "/img/hotels/items/3/preview/another/8/image.jpg" 
+                        }, 
+                        "alt": "Hotel Another Image №8"
+                    }
+                ],
+                "maxShow": 5
+            },
+            "overview": "Located in Taksim Gmsuyu, the heart of Istanbul, the CVK Park Bosphorus Hotel Istanbul has risen from the ashes of the historic Park Hotel, which also served as Foreign Affairs Palace 120 years ago and is hosting its guests by assuming this hospitality mission. With its 452 luxurious rooms and suites, 8500 m2 SPA and fitness area, 18 meeting rooms including 4 dividable ones and 3 terraces with Bosphorus view, Istanbuls largest terrace with Bosphorus view (4500 m2) and latest technology infrastructure, CVK Park Bosphorus Hotel Istanbul is destined to be the popular attraction point of the city. Room and suite categories at various sizes with city and Bosphorus view, as well as 68 separate luxury suites, are offered to its special guests as a wide variety of selection.",
+            "features": ["Near park", "Near nightlife", "Near theater", "Clean Hotel"],
+            "rooms": [
+                {
+                    "specifics": ["Superior room"], "beds": {"twin": 2, "double": 1}, 
+                    "price": {
+                        "baseFare": 350,
+                        "discount": 15,
+                        "taxes": 10,
+                        "serviceFee": 0
+                    },
+                    "image": {
+                        "srcs": {
+                            "jpeg": "/img/hotels/items/3/rooms/1/image.jpg", 
+                            "webp": "/img/hotels/items/3/rooms/1/image.webp"
+                        }, 
+                        "alt": "Room №1 Image"
+                    }
+                },
+                {
+                    "specifics": ["Superior room", "City view"], "beds": {"twin": 2, "double": 1}, 
+                    "price": {
+                        "baseFare": 270,
+                        "discount": 15,
+                        "taxes": 10,
+                        "serviceFee": 0
+                    },
+                    "image": {
+                        "srcs": {
+                            "jpeg": "/img/hotels/items/3/rooms/2/image.jpg", 
+                            "webp": "/img/hotels/items/3/rooms/2/image.webp"
+                        }, 
+                        "alt": "Room №2 Image"
+                    }
+                },
+                {
+                    "specifics": ["Superior room", "City view"], "beds": {"twin": 2, "double": 1}, 
+                    "price": {
+                        "baseFare": 300,
+                        "discount": 15,
+                        "taxes": 10,
+                        "serviceFee": 20
+                    },
+                    "image": {
+                        "srcs": {
+                            "jpeg": "/img/hotels/items/3/rooms/3/image.jpg", 
+                            "webp": "/img/hotels/items/3/rooms/3/image.webp"
+                        }, 
+                        "alt": "Room №3 Image"
+                    }
+                },
+                {
+                    "specifics": ["Superior room", "City view"], "beds": {"twin": 2, "double": 1}, 
+                    "price": {
+                        "baseFare": 310,
+                        "discount": 0,
+                        "taxes": 10,
+                        "serviceFee": 0
+                    },
+                    "image": {
+                        "srcs": {
+                            "jpeg": "/img/hotels/items/3/rooms/4/image.jpg", 
+                            "webp": "/img/hotels/items/3/rooms/4/image.webp"
+                        }, 
+                        "alt": "Room №4 Image"
+                    }
+                }
+            ],
+            "reviews": {
+                "items": [
+                    {
+                        "grade": 5, 
+                        "author": {"firstName": "Omar", "lastName": "Siphron"}, 
+                        "review": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+                        "ava": {"jpeg": "", "webp": ""}
+                    }
+                ],
+                "maxShow": 5
+            }
+        },
+        {
+            "id": 3,
+            "type": "Hotels",
+            "name": "Eresin Hotels Sultanahmet - Boutique Class",
+            "rating": 2,
+            "starsCount": 5,
+            "logo": {"webp": "/img/hotels/items/4/logo/image.webp", "jpeg": "/img/hotels/items/4/logo/image.png"},
+            "location": {
+                "image": { 
+                    "srcs": { "jpeg": "/img/hotels/items/4/location/image.jpg", "webp": "/img/hotels/items/4/location/image.webp"}, 
+                    "alt": "Hotel Location" 
+                },
+                "text": "Gümüssuyu Mah. Inönü Cad. No:8, Istanbul 34437"
+            },
+            "amenities": {
+                "items": [
+                    "24hr front desk", "Air-conditioned", "Fitness Center", "Outdoor pool", "Indoor pool",
+                    "Spa and wellness center", "Restaurant", "Room service", "Bar/Lounge", "Tea/coffee machine",
+                    "Air-conditioned", "24hr front desk"
+                ], 
+                "maxInColumn": 5, "maxShow": 9
+            },
+            "images": {
+                "main": {
+                    "srcs": { 
+                        "webp": "/img/hotels/items/4/preview/main.webp", 
+                        "jpeg": "/img/hotels/items/4/preview/main.jpg"
+                        }, 
+                    "alt": "Hotel Main Image" 
+                },
+                "another": [
+                    {
+                        "srcs": { 
+                            "webp": "/img/hotels/items/4/preview/another/1/image.webp", 
+                            "jpeg": "/img/hotels/items/4/preview/another/1/image.jpg" 
+                        }, 
+                        "alt": "Hotel Another Image №1"
+                    },
+                    {
+                        "srcs": { 
+                            "webp": "/img/hotels/items/4/preview/another/2/image.webp", 
+                            "jpeg": "/img/hotels/items/4/preview/another/2/image.jpg" 
+                        }, 
+                        "alt": "Hotel Another Image №2"
+                    },
+                    {
+                        "srcs": { 
+                            "webp": "/img/hotels/items/4/preview/another/3/image.webp", 
+                            "jpeg": "/img/hotels/items/4/preview/another/3/image.jpg" 
+                        }, 
+                        "alt": "Hotel Another Image №3"
+                    },
+                    {
+                        "srcs": { 
+                            "webp": "/img/hotels/items/4/preview/another/4/image.webp", 
+                            "jpeg": "/img/hotels/items/4/preview/another/4/image.jpg" 
+                        }, 
+                        "alt": "Hotel Another Image №4"
+                    },
+                    {
+                        "srcs": { 
+                            "webp": "/img/hotels/items/4/preview/another/5/image.webp", 
+                            "jpeg": "/img/hotels/items/4/preview/another/5/image.jpg" 
+                        }, 
+                        "alt": "Hotel Another Image №5"
+                    },
+                    {
+                        "srcs": { 
+                            "webp": "/img/hotels/items/4/preview/another/6/image.webp", 
+                            "jpeg": "/img/hotels/items/4/preview/another/6/image.jpg" 
+                        }, 
+                        "alt": "Hotel Another Image №6"
+                    },
+                    {
+                        "srcs": { 
+                            "webp": "/img/hotels/items/4/preview/another/7/image.webp", 
+                            "jpeg": "/img/hotels/items/4/preview/another/7/image.jpg" 
+                        }, 
+                        "alt": "Hotel Another Image №7"
+                    },
+                    {
+                        "srcs": { 
+                            "webp": "/img/hotels/items/4/preview/another/8/image.webp", 
+                            "jpeg": "/img/hotels/items/4/preview/another/8/image.jpg" 
+                        }, 
+                        "alt": "Hotel Another Image №8"
+                    }
+                ],
+                "maxShow": 5
+            },
+            "overview": "Located in Taksim Gmsuyu, the heart of Istanbul, the CVK Park Bosphorus Hotel Istanbul has risen from the ashes of the historic Park Hotel, which also served as Foreign Affairs Palace 120 years ago and is hosting its guests by assuming this hospitality mission. With its 452 luxurious rooms and suites, 8500 m2 SPA and fitness area, 18 meeting rooms including 4 dividable ones and 3 terraces with Bosphorus view, Istanbuls largest terrace with Bosphorus view (4500 m2) and latest technology infrastructure, CVK Park Bosphorus Hotel Istanbul is destined to be the popular attraction point of the city. Room and suite categories at various sizes with city and Bosphorus view, as well as 68 separate luxury suites, are offered to its special guests as a wide variety of selection.",
+            "features": ["Near park", "Near nightlife", "Near theater", "Clean Hotel"],
+            "rooms": [
+                {
+                    "specifics": ["Superior room"], "beds": {"twin": 2, "double": 1}, 
+                    "price": {
+                        "baseFare": 350,
+                        "discount": 15,
+                        "taxes": 10,
+                        "serviceFee": 0
+                    },
+                    "image": {
+                        "srcs": {
+                            "jpeg": "/img/hotels/items/4/rooms/1/image.jpg", 
+                            "webp": "/img/hotels/items/4/rooms/1/image.webp"
+                        }, 
+                        "alt": "Room №1 Image"
+                    }
+                },
+                {
+                    "specifics": ["Superior room", "City view"], "beds": {"twin": 2, "double": 1}, 
+                    "price": {
+                        "baseFare": 270,
+                        "discount": 15,
+                        "taxes": 10,
+                        "serviceFee": 0
+                    },
+                    "image": {
+                        "srcs": {
+                            "jpeg": "/img/hotels/items/4/rooms/2/image.jpg", 
+                            "webp": "/img/hotels/items/4/rooms/2/image.webp"
+                        }, 
+                        "alt": "Room №2 Image"
+                    }
+                },
+                {
+                    "specifics": ["Superior room", "City view"], "beds": {"twin": 2, "double": 1}, 
+                    "price": {
+                        "baseFare": 300,
+                        "discount": 15,
+                        "taxes": 10,
+                        "serviceFee": 20
+                    },
+                    "image": {
+                        "srcs": {
+                            "jpeg": "/img/hotels/items/4/rooms/3/image.jpg", 
+                            "webp": "/img/hotels/items/4/rooms/3/image.webp"
+                        }, 
+                        "alt": "Room №3 Image"
+                    }
+                },
+                {
+                    "specifics": ["Superior room", "City view"], "beds": {"twin": 2, "double": 1}, 
+                    "price": {
+                        "baseFare": 310,
+                        "discount": 0,
+                        "taxes": 10,
+                        "serviceFee": 0
+                    },
+                    "image": {
+                        "srcs": {
+                            "jpeg": "/img/hotels/items/4/rooms/4/image.jpg", 
+                            "webp": "/img/hotels/items/4/rooms/4/image.webp"
+                        }, 
+                        "alt": "Room №4 Image"
+                    }
+                }
+            ],
+            "reviews": {
+                "items": [
+                    {
+                        "grade": 5, 
+                        "author": {"firstName": "Omar", "lastName": "Siphron"}, 
+                        "review": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+                        "ava": {"jpeg": "", "webp": ""}
+                    },
+                    {
+                        "grade": 4, 
+                        "author": {"firstName": "Omar", "lastName": "Siphron"}, 
+                        "review": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+                        "ava": {"jpeg": "", "webp": ""}
+                    },
+                    {
+                        "grade": 1, 
+                        "author": {"firstName": "Omar", "lastName": "Siphron"}, 
+                        "review": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+                        "ava": {"jpeg": "", "webp": ""}
+                    },
+                    {
+                        "grade": 5, 
+                        "author": {"firstName": "Omar", "lastName": "Siphron"}, 
+                        "review": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+                        "ava": {"jpeg": "", "webp": ""}
+                    },
+                    {
+                        "grade": 2, 
+                        "author": {"firstName": "Omar", "lastName": "Siphron"}, 
+                        "review": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+                        "ava": {"jpeg": "", "webp": ""}
+                    },
+                    {
+                        "grade": 3, 
+                        "author": {"firstName": "Omar", "lastName": "Siphron"}, 
+                        "review": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+                        "ava": {"jpeg": "", "webp": ""}
+                    }
+                ],
+                "maxShow": 5
+            }
+        },
+        {
+            "id": 4,
+            "type": "Motels",
+            "name": "Eresin Hotels Sultanahmet - Boutique Class",
+            "rating": 4,
+            "starsCount": 5,
+            "logo": {"webp": "/img/hotels/items/4/logo/image.webp", "jpeg": "/img/hotels/items/4/logo/image.png"},
+            "location": {
+                "image": { 
+                    "srcs": { "jpeg": "/img/hotels/items/3/location/image.jpg", "webp": "/img/hotels/items/3/location/image.webp"}, 
+                    "alt": "Hotel Location" 
+                },
+                "text": "Gümüssuyu Mah. Inönü Cad. No:8, Istanbul 34437"
+            },
+            "amenities": {
+                "items": [
+                    "24hr front desk", "Air-conditioned", "Fitness Center", "Outdoor pool", "Indoor pool",
+                    "Spa and wellness center", "Restaurant", "Room service", "Bar/Lounge", "Tea/coffee machine"
+                ], 
+                "maxInColumn": 5, "maxShow": 9
+            },
+            "images": {
+                "main": {
+                    "srcs": { 
+                        "webp": "/img/hotels/items/3/preview/main.webp", 
+                        "jpeg": "/img/hotels/items/3/preview/main.jpg"
+                    }, 
+                    "alt": "Hotel Main Image"
+                },
+                "another": [
+                    {
+                        "srcs": { 
+                            "webp": "/img/hotels/items/3/preview/another/1/image.webp", 
+                            "jpeg": "/img/hotels/items/3/preview/another/1/image.jpg" 
+                        }, 
+                        "alt": "Hotel Another Image №1"
+                    },
+                    {
+                        "srcs": { 
+                            "webp": "/img/hotels/items/3/preview/another/2/image.webp", 
+                            "jpeg": "/img/hotels/items/3/preview/another/2/image.jpg" 
+                        }, 
+                        "alt": "Hotel Another Image №2"
+                    },
+                    {
+                        "srcs": { 
+                            "webp": "/img/hotels/items/3/preview/another/3/image.webp", 
+                            "jpeg": "/img/hotels/items/3/preview/another/3/image.jpg" 
+                        }, 
+                        "alt": "Hotel Another Image №3"
+                    },
+                    {
+                        "srcs": { 
+                            "webp": "/img/hotels/items/3/preview/another/4/image.webp", 
+                            "jpeg": "/img/hotels/items/3/preview/another/4/image.jpg" 
+                        }, 
+                        "alt": "Hotel Another Image №4"
+                    },
+                    {
+                        "srcs": { 
+                            "webp": "/img/hotels/items/3/preview/another/5/image.webp", 
+                            "jpeg": "/img/hotels/items/3/preview/another/5/image.jpg" 
+                        }, 
+                        "alt": "Hotel Another Image №5"
+                    },
+                    {
+                        "srcs": { 
+                            "webp": "/img/hotels/items/3/preview/another/6/image.webp", 
+                            "jpeg": "/img/hotels/items/3/preview/another/6/image.jpg" 
+                        }, 
+                        "alt": "Hotel Another Image №6"
+                    },
+                    {
+                        "srcs": { 
+                            "webp": "/img/hotels/items/3/preview/another/7/image.webp", 
+                            "jpeg": "/img/hotels/items/3/preview/another/7/image.jpg" 
+                        }, 
+                        "alt": "Hotel Another Image №7"
+                    },
+                    {
+                        "srcs": { 
+                            "webp": "/img/hotels/items/3/preview/another/8/image.webp", 
+                            "jpeg": "/img/hotels/items/3/preview/another/8/image.jpg" 
+                        }, 
+                        "alt": "Hotel Another Image №8"
+                    }
+                ],
+                "maxShow": 5
+            },
+            "overview": "Located in Taksim Gmsuyu, the heart of Istanbul, the CVK Park Bosphorus Hotel Istanbul has risen from the ashes of the historic Park Hotel, which also served as Foreign Affairs Palace 120 years ago and is hosting its guests by assuming this hospitality mission. With its 452 luxurious rooms and suites, 8500 m2 SPA and fitness area, 18 meeting rooms including 4 dividable ones and 3 terraces with Bosphorus view, Istanbuls largest terrace with Bosphorus view (4500 m2) and latest technology infrastructure, CVK Park Bosphorus Hotel Istanbul is destined to be the popular attraction point of the city. Room and suite categories at various sizes with city and Bosphorus view, as well as 68 separate luxury suites, are offered to its special guests as a wide variety of selection.",
+            "features": ["Near park", "Near nightlife", "Near theater", "Clean Hotel"],
+            "rooms": [
+                {
+                    "specifics": ["Superior room"], "beds": {"twin": 2, "double": 1}, 
+                    "price": {
+                        "baseFare": 350,
+                        "discount": 15,
+                        "taxes": 10,
+                        "serviceFee": 0
+                    },
+                    "image": {
+                        "srcs": {
+                            "jpeg": "/img/hotels/items/3/rooms/1/image.jpg", 
+                            "webp": "/img/hotels/items/3/rooms/1/image.webp"
+                        }, 
+                        "alt": "Room №1 Image"
+                    }
+                },
+                {
+                    "specifics": ["Superior room", "City view"], "beds": {"twin": 2, "double": 1}, 
+                    "price": {
+                        "baseFare": 270,
+                        "discount": 15,
+                        "taxes": 10,
+                        "serviceFee": 0
+                    },
+                    "image": {
+                        "srcs": {
+                            "jpeg": "/img/hotels/items/3/rooms/2/image.jpg", 
+                            "webp": "/img/hotels/items/3/rooms/2/image.webp"
+                        }, 
+                        "alt": "Room №2 Image"
+                    }
+                },
+                {
+                    "specifics": ["Superior room", "City view"], "beds": {"twin": 2, "double": 1}, 
+                    "price": {
+                        "baseFare": 300,
+                        "discount": 15,
+                        "taxes": 10,
+                        "serviceFee": 20
+                    },
+                    "image": {
+                        "srcs": {
+                            "jpeg": "/img/hotels/items/3/rooms/3/image.jpg", 
+                            "webp": "/img/hotels/items/3/rooms/3/image.webp"
+                        }, 
+                        "alt": "Room №3 Image"
+                    }
+                },
+                {
+                    "specifics": ["Superior room", "City view"], "beds": {"twin": 2, "double": 1}, 
+                    "price": {
+                        "baseFare": 310,
+                        "discount": 0,
+                        "taxes": 10,
+                        "serviceFee": 0
+                    },
+                    "image": {
+                        "srcs": {
+                            "jpeg": "/img/hotels/items/3/rooms/4/image.jpg", 
+                            "webp": "/img/hotels/items/3/rooms/4/image.webp"
+                        }, 
+                        "alt": "Room №4 Image"
+                    }
+                }
+            ],
+            "reviews": {
+                "items": [
+                    {
+                        "grade": 5, 
+                        "author": {"firstName": "Omar", "lastName": "Siphron"}, 
+                        "review": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+                        "ava": {"jpeg": "", "webp": ""}
+                    }
+                ],
+                "maxShow": 5
+            }
+        },
+        {
+            "id": 5,
+            "type": "Hotels",
+            "name": "CVK Park Bosphorus Hotel Istanbul",
+            "rating": 1.5,
+            "starsCount": 5,
+            "logo": {"webp": "/img/hotels/items/4/logo/image.webp", "jpeg": "/img/hotels/items/4/logo/image.png"},
+            "location": {
+                "image": { 
+                    "srcs": { "jpeg": "/img/hotels/items/1/location/image.jpg", "webp": "/img/hotels/items/1/location/image.webp"}, 
+                    "alt": "Hotel Location" 
+                },
+                "text": "Gümüssuyu Mah. Inönü Cad. No:8, Istanbul 34437"
+            },
+            "amenities": {
+                "items": [
+                    "24hr front desk", "Air-conditioned", "Fitness Center", "Outdoor pool", "Indoor pool",
+                    "Spa and wellness center", "Restaurant", "Room service", "Bar/Lounge", "Tea/coffee machine"
+                ], 
+                "maxInColumn": 5, "maxShow": 9
+            },
+            "images": {
+                "main": {
+                    "srcs": { 
+                        "webp": "/img/hotels/items/1/preview/main.webp", 
+                        "jpeg": "/img/hotels/items/1/preview/main.jpg"
+                    }, 
+                    "alt": "Hotel Main Image" 
+                },
+                "another": [
+                    {
+                        "srcs": { 
+                            "webp": "/img/hotels/items/1/preview/another/1/image.webp", 
+                            "jpeg": "/img/hotels/items/1/preview/another/1/image.jpg" 
+                        }, 
+                        "alt": "Hotel Another Image №1"
+                    },
+                    {
+                        "srcs": { 
+                            "webp": "/img/hotels/items/1/preview/another/2/image.webp", 
+                            "jpeg": "/img/hotels/items/1/preview/another/2/image.jpg" 
+                        }, 
+                        "alt": "Hotel Another Image №2"
+                    },
+                    {
+                        "srcs": { 
+                            "webp": "/img/hotels/items/1/preview/another/3/image.webp", 
+                            "jpeg": "/img/hotels/items/1/preview/another/3/image.jpg" 
+                        }, 
+                        "alt": "Hotel Another Image №3"
+                    },
+                    {
+                        "srcs": { 
+                            "webp": "/img/hotels/items/1/preview/another/4/image.webp", 
+                            "jpeg": "/img/hotels/items/1/preview/another/4/image.jpg" 
+                        }, 
+                        "alt": "Hotel Another Image №4"
+                    },
+                    {
+                        "srcs": { 
+                            "webp": "/img/hotels/items/1/preview/another/5/image.webp", 
+                            "jpeg": "/img/hotels/items/1/preview/another/5/image.jpg" 
+                        }, 
+                        "alt": "Hotel Another Image №5"
+                    },
+                    {
+                        "srcs": { 
+                            "webp": "/img/hotels/items/1/preview/another/6/image.webp", 
+                            "jpeg": "/img/hotels/items/1/preview/another/6/image.jpg" 
+                        }, 
+                        "alt": "Hotel Another Image №6"
+                    },
+                    {
+                        "srcs": { 
+                            "webp": "/img/hotels/items/1/preview/another/7/image.webp", 
+                            "jpeg": "/img/hotels/items/1/preview/another/7/image.jpg" 
+                        }, 
+                        "alt": "Hotel Another Image №7"
+                    },
+                    {
+                        "srcs": { 
+                            "webp": "/img/hotels/items/1/preview/another/8/image.webp", 
+                            "jpeg": "/img/hotels/items/1/preview/another/8/image.jpg" 
+                        }, 
+                        "alt": "Hotel Another Image №8"
+                    }
+                ],
+                "maxShow": 5
+            },
+            "overview": "Located in Taksim Gmsuyu, the heart of Istanbul, the CVK Park Bosphorus Hotel Istanbul has risen from the ashes of the historic Park Hotel, which also served as Foreign Affairs Palace 120 years ago and is hosting its guests by assuming this hospitality mission. With its 452 luxurious rooms and suites, 8500 m2 SPA and fitness area, 18 meeting rooms including 4 dividable ones and 3 terraces with Bosphorus view, Istanbuls largest terrace with Bosphorus view (4500 m2) and latest technology infrastructure, CVK Park Bosphorus Hotel Istanbul is destined to be the popular attraction point of the city. Room and suite categories at various sizes with city and Bosphorus view, as well as 68 separate luxury suites, are offered to its special guests as a wide variety of selection.",
+            "features": ["Near park", "Near nightlife", "Near theater", "Clean Hotel"],
+            "rooms": [
+                {
+                    "specifics": ["Superior room"], "beds": {"twin": 2, "double": 1}, 
+                    "price": {
+                        "baseFare": 350,
+                        "discount": 15,
+                        "taxes": 10,
+                        "serviceFee": 0
+                    },
+                    "image": {
+                        "srcs": {
+                            "jpeg": "/img/hotels/items/3/rooms/1/image.jpg", 
+                            "webp": "/img/hotels/items/3/rooms/1/image.webp"
+                        }, 
+                        "alt": "Room №1 Image"
+                    }
+                },
+                {
+                    "specifics": ["Superior room", "City view"], "beds": {"twin": 2, "double": 1}, 
+                    "price": {
+                        "baseFare": 270,
+                        "discount": 15,
+                        "taxes": 10,
+                        "serviceFee": 0
+                    },
+                    "image": {
+                        "srcs": {
+                            "jpeg": "/img/hotels/items/3/rooms/2/image.jpg", 
+                            "webp": "/img/hotels/items/3/rooms/2/image.webp"
+                        }, 
+                        "alt": "Room №2 Image"
+                    }
+                },
+                {
+                    "specifics": ["Superior room", "City view"], "beds": {"twin": 2, "double": 1}, 
+                    "price": {
+                        "baseFare": 300,
+                        "discount": 15,
+                        "taxes": 10,
+                        "serviceFee": 20
+                    },
+                    "image": {
+                        "srcs": {
+                            "jpeg": "/img/hotels/items/3/rooms/3/image.jpg", 
+                            "webp": "/img/hotels/items/3/rooms/3/image.webp"
+                        }, 
+                        "alt": "Room №3 Image"
+                    }
+                },
+                {
+                    "specifics": ["Superior room", "City view"], "beds": {"twin": 2, "double": 1}, 
+                    "price": {
+                        "baseFare": 310,
+                        "discount": 0,
+                        "taxes": 10,
+                        "serviceFee": 0
+                    },
+                    "image": {
+                        "srcs": {
+                            "jpeg": "/img/hotels/items/3/rooms/4/image.jpg", 
+                            "webp": "/img/hotels/items/3/rooms/4/image.webp"
+                        }, 
+                        "alt": "Room №4 Image"
+                    }
+                }
+            ],
+            "reviews": {
+                "items": [
+                    {
+                        "grade": 5, 
+                        "author": {"firstName": "Omar", "lastName": "Siphron"}, 
+                        "review": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+                        "ava": {"jpeg": "", "webp": ""}
+                    }
+                ],
+                "maxShow": 5
+            }
         }
     ]
 }

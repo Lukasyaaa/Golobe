@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState, type FC } from "react";
 import type { Review as ReviewType } from "../../../types";
-import { Star } from "./Star";
+import { Star } from "../../Common/Blocks/Stars/Star";
 
 export const Review : FC<ReviewType> = ({heading, description, starsCount, author, livePlace, image}) => {
     let [isShow, setIsShow] = useState<boolean>(false);
@@ -31,10 +31,10 @@ export const Review : FC<ReviewType> = ({heading, description, starsCount, autho
             </button>
             <ul className="item-reviews__stars">
                 {Array.from({length: starsCount}).map((_, i) => 
-                    <Star key={i} color="#ffc107" />
+                    <Star key={i} color="#ffc107" width={22.5} height={21} cl="item-reviews" />
                 )}
                 {Array.from({length: 5 - starsCount}).map((_, i) => 
-                    <Star key={i + (5 - starsCount)} color="#112211" />
+                    <Star key={i + (5 - starsCount)} color="#112211" width={22.5} height={21} cl="item-reviews"  />
                 )}
             </ul>
             <div className="item-reviews__author">{author}</div>

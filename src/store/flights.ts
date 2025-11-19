@@ -1,62 +1,58 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createFetchThunk, type IntroVariants, type Offer, type Section, type Submap, type Travel } from "../types";
+import { AIRLINES, createFetchThunk, NAVBAR_DESCRIPTION, NAVBAR_ITEM, FLIGHTS_SORT_TYPE, TRIP_TYPE } from "../types";
+import type { Airlines, Catalog, Flight, Offer, Section, Submap, Travel} from "../types";
 
 interface FlightsStart{
-    intro: IntroVariants,
     travels: Section<Travel>,
     offers: Section<Offer>,
     map: Section<Submap>
 }
 
+export interface FlightsCatalog extends Catalog<Flight>{
+    airlines: Airlines
+}
+
 interface Flights{
-    start: FlightsStart
+    start: FlightsStart,
+    catalog: Catalog<Flight>
 }
 
 const initialState : Flights = {
     start: {
-        intro: {
-            heading: "Make your travel whishlist, we’ll do the rest",
-            subheading: "Special offers to suit your plan",
-            background: { 
-                jpeg: "/img/flights/home/banner/background.jpg", 
-                webp: "/img/flights/home/banner/background.webp" 
-            }
-        },
         travels: {
-            header: {
-                heading: "Fall into travel", 
-                description: "Going somewhere to celebrate this season? Whether you’re going home or somewhere to roam, we’ve got the travel tools to get you to your destination.", 
-                button: {active: "See All", disable: "Hide"}
-            },
-            items: [], isLoading: false, error: null, maxShow: 4
+            items: [], isLoading: false, error: null,
         },
         offers: {
-            header: {
-                heading: "Fall into travel", 
-                description: "Going somewhere to celebrate this season? Whether you’re going home or somewhere to roam, we’ve got the travel tools to get you to your destination.", 
-                button: {active: "See All", disable: "Hide"}
-            },
-            items: [], isLoading: false, error: null, maxShow: 1
+            items: [], isLoading: false, error: null,
         },
         map: {
-            header: {
-                heading: "Let's go places together", 
-                description: "Discover the latest offers and news and start planning your next trip with us.", 
-                button: {active: "See All", disable: "Hide"}
-            },
-            items: [], isLoading: false, error: null, maxShow: 5
+            items: [], isLoading: false, error: null
+        }
+    },
+    catalog: {
+        sort: [FLIGHTS_SORT_TYPE.cheapest, FLIGHTS_SORT_TYPE.best, FLIGHTS_SORT_TYPE.quickest],
+        container: {
+            items: [], isLoading: false, error: null,
         }
     }
 }
 
-export const fetchTravels = createFetchThunk<Travel[]>('travels/fetchAll', 'flightsTravels');
-export const fetchOffers = createFetchThunk<Offer[]>('offers/fetchAll', 'flightsOffers');
+export const fetchTravels = createFetchThunk<Travel[]>('flightsTravels/fetchAll', 'flightsTravels');
+export const fetchOffers = createFetchThunk<Offer[]>('flightsOffers/fetchAll', 'flightsOffers');
 export const fetchMap = createFetchThunk<Submap[]>('map/fetchAll', 'map');
+export const fetchFlights = createFetchThunk<Flight[]>('flights/fetchAll', 'flights');
 
 export const flightsSlice = createSlice({
     name: "flights",
     initialState,
-    reducers: {},
+    reducers: {
+        swapSortLinks: (state, action) => {
+            const { firstIndex, secondIndex } = action.payload;
+            const temp = state.catalog.sort[firstIndex];
+            state.catalog.sort[firstIndex] = state.catalog.sort[secondIndex];
+            state.catalog.sort[secondIndex] = temp;
+        }
+    },
     extraReducers: builder => {
         builder
         .addCase(fetchTravels.pending, state => {
@@ -94,6 +90,18 @@ export const flightsSlice = createSlice({
             let {message} = action.error;
             state.start.map.isLoading = false;
             state.start.map.error = (message === undefined) ? null : message;
+        })
+        .addCase(fetchFlights.pending, state => {
+            state.catalog.container.isLoading = true;
+        })
+        .addCase(fetchFlights.fulfilled, (state, action) => {
+            state.catalog.container.isLoading = false;
+            state.catalog.container.items = action.payload;
+        })
+        .addCase(fetchFlights.rejected, (state, action) => {
+            let {message} = action.error;
+            state.catalog.container.isLoading = false;
+            state.catalog.container.error = (message === undefined) ? null : message;
         })
     }
 });

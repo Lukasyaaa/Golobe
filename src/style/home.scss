@@ -1,4 +1,4 @@
-@use "./variables.scss";
+@use "./settings/variables.scss";
 
 .intro{
     @media (min-width: variables.toEm(1381, 16)) {
@@ -224,6 +224,7 @@
         font-size: variables.toRem(14);
         font-weight: 600;
 
+        display: inline-block;
         width: 100%; height: 100%; object-fit: cover;
     }
 
@@ -323,6 +324,8 @@
     }
 }
 .option-choose{
+    background-color: variables.$darkGreen;
+
     @media (min-width: variables.toEm(769, 16)) {
         &__inner{
             max-width: variables.toRem(389);
@@ -378,11 +381,6 @@
         transition: background-color 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
     }
     &__link:hover, &__link:focus{
-        background-color: variables.$darkGreen;
-        span{
-            color: variables.$mint;
-            text-shadow: 0 0 5px variables.$mint;
-        }
         svg{
             filter: drop-shadow(0 0 5px variables.$mint);
         }
@@ -398,12 +396,9 @@
 }
 .link-option-choose{
     &__description{
-        font-family: Montserrat; font-weight: 500;
+        font-weight: 500;
         font-size: variables.toRem(14);
         line-height: variables.toEm(18, 14);
-
-        transition: color 0.3s cubic-bezier(0.215, 0.610, 0.355, 1),
-        text-shadow 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
     }
 
     &__icon-parent{
@@ -701,7 +696,14 @@
         width: 100%; padding-bottom: variables.toPercent(200, 377);
         position: relative;
         img{
+            color: #fff;
+            font-family: "Montserrat", sans-serif;
+            font-size: variables.toRem(14);
+            font-weight: 600;
+
+            background-color: rgba($color: variables.$mint, $alpha: 0.4);
             border-radius: variables.toRem(20);
+
             position: absolute; left: 0; top: 0;
             width: 100%; height: 100%;
             object-fit: cover;

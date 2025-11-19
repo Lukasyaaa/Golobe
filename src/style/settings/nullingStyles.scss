@@ -1,0 +1,51 @@
+*, *::after, *::before{
+    box-sizing: border-box;
+}
+body, #root{
+    min-height: 100vh;
+}
+#root{
+    display: flex; flex-direction: column;
+}
+picture{
+    display: block;
+}
+main{
+    flex: 1 1 auto;
+}
+a:focus, input:focus, button:focus{
+    outline: none;
+}
+address{
+    font-family: unset;
+    font-style: unset;
+    font-weight: unset;
+}
+body, ul, h1, h2, h3, h4, h5, fieldset, input[type="radio"], input[type="checkbox"], input[type="range"], figure{
+    margin: unset;
+}
+button, input, mark{
+    background: unset;
+}
+ul, button, input, fieldset{
+    padding: unset;
+}
+ul, ol{
+    list-style: none;
+}
+a{
+    text-decoration: none;
+    color: unset;
+}
+button:not(:disabled), input[type="radio"], input[type="checkbox"]{
+    cursor: pointer;
+}
+a[tabindex="-1"]{
+    cursor: default;
+}
+fieldset, button, input{
+    border: unset;
+}
+em{
+    font-style: unset;
+}

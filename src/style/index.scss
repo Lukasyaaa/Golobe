@@ -1,10 +1,11 @@
-@use "./variables.scss";
-@use "./nullingStyles.scss";
+@use "./settings/variables.scss";
+@use "./settings/nullingStyles.scss";
 
-@use "./header.scss";
+@use "./common/header.scss";
 @use "./home.scss";
-@use "./options.scss";
-@use "./footer.scss";
+@use "./common/options.scss";
+@use "./common/footer.scss";
 
 @use "./flights.scss";
 @use "./hotels.scss";
+@use "./common/catalog.scss";

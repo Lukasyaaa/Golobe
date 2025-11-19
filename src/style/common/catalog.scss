@@ -1,0 +1,527 @@
+@use "../settings/variables.scss";
+
+.catalog{
+    @media (min-width: variables.toEm(993, 16)) {
+        &__row{
+            display: grid;
+            column-gap: variables.toRem(40);
+            grid-template-columns: variables.toPercent(343, variables.$container) 1fr;
+        }
+    }
+    &__row{
+        margin-top: variables.toRem(32);
+    }
+    @media (max-width: variables.toEm(768, 16)) {
+        &__row{
+            margin-top: variables.toRem(24);
+        }
+    }
+
+    &__supitems{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        margin: variables.toRem(24) 0;
+    }
+    @media (max-width: variables.toEm(768, 16)) {
+        &__supitems{
+            margin: variables.toRem(16) 0;
+        }
+    }
+
+    &__count{
+        color: variables.$darkGreen;
+        font-family: Montserrat; font-weight: 600;
+        font-size: variables.toRem(14);
+        line-height: variables.toEm(18, 14);
+        margin-right: variables.toRem(24);
+        strong{
+            color: variables.$red;
+        }
+    }
+
+    &__show{
+        color: #fff;
+        font-family: Montserrat; font-weight: 600;
+        font-size: variables.toRem(14);
+        line-height: variables.toEm(18, 14);
+
+        border-radius: variables.toRem(4); background-color: variables.$darkGreen;
+        width: 100%; padding: variables.toRem(8) variables.toRem(16);
+        display: flex; align-items: center; justify-content: center;
+        min-height: variables.toRem(48);
+
+        margin-top: variables.toRem(24);
+    }
+    @media (max-width: variables.toEm(480, 16)) {
+        &__show{
+            margin-top: variables.toRem(16);
+        }
+    }
+
+    &__items{
+        transition: height 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+    }
+
+    @media (max-width: variables.toEm(992, 16)) {
+        &__navbar{
+            margin-bottom: variables.toRem(32);
+        }
+    }
+    @media (max-width: variables.toEm(768, 16)) {
+        &__navbar{
+            margin-bottom: variables.toRem(24);
+        }
+    }
+}
+.select-catalog{
+    &__opener{
+        display: flex;
+        align-items: center;
+        text-align: right;
+        span{
+            color: variables.$darkGreen;
+            font-family: Montserrat; font-weight: 400;
+            font-size: variables.toRem(14);
+            line-height: variables.toEm(18, 14);
+            strong{
+                font-weight: 600;
+            }
+        }
+    }
+    &__icon-parent{
+        display: flex; align-items: center; justify-content: center;
+        width: variables.toRem(18); height: variables.toRem(18);
+    }
+}
+
+.sort{
+    @media (min-width: variables.toEm(481, 16)) {
+        display: flex;
+        min-height: variables.toRem(80);
+    }
+
+    background-color: #fff;
+    border-radius: variables.toRem(12);
+    box-shadow: 0px 4px 16px 0px rgba($color: variables.$darkGreen, $alpha: 0.05);
+
+    @media (min-width: variables.toEm(481, 16)) {
+        &__button:not(:last-child)::after{
+            content: "";
+            background: variables.$blueGray;
+            position: absolute; width: variables.toRem(1); height: calc(100% - variables.toRem(16) * 2);
+            top: 50%; right: 0; transform: translateY(-50%) translateX(-50%);
+        }
+        &:not(._hide-active) &__button:disabled::before,
+        &__button:hover::before, &__button:focus::before{
+            width: calc(100% - variables.toRem(12) * 2);
+        }
+    }
+    &__button{
+        padding: variables.toRem(16) variables.toRem(24);
+        text-align: left; flex: 0 1 25%;
+        position: relative;
+        flex: 1 1 auto;
+        &::before{
+            content: "";
+            background-color: variables.$mint;
+            position: absolute; z-index: 1;
+            width: 0; height: variables.toRem(5);
+            bottom: 0; left: 50%; transform: translateX(-50%);
+            transition: width 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+        }
+    }
+    @media (max-width: variables.toEm(480, 16)) {
+        &__button{
+            width: 100%;
+            &::before{
+                height: 100%; width: 0;
+                left: 50%; top: 50%; transform: translateX(-50%) translateY(-50%);
+            }
+            &:first-child::before{
+                border-radius: variables.toRem(12) variables.toRem(12) 0 0;
+            }
+            &:last-child::before{
+                border-radius: 0 0 variables.toRem(12) variables.toRem(12);
+            }
+            & > *{
+                position: relative;
+                z-index: 2;
+            }
+        }
+        &:not(._hide-active) &__button:disabled::before,
+        &__button:hover::before, &__button:focus::before{
+            width: 100%;
+        }
+    }
+
+    &__more{
+        position: relative;
+        flex: 0 1 calc(25% + variables.toRem(8));
+    }
+}
+.button-sort{
+    &__title, &__text{
+        color: variables.$darkGreen;
+        font-family: Montserrat; font-weight: 600;
+        font-size: variables.toRem(16);
+        line-height: variables.toEm(20, 16);
+    }
+    &__description{
+        color: variables.$darkGreen;
+        font-family: Montserrat; font-weight: 400;
+        font-size: variables.toRem(14);
+        line-height: variables.toEm(18, 14);
+
+        margin-top: variables.toRem(8);
+    }
+}
+.more-sort{
+    &__opener{
+        display: flex; align-items: center; justify-content: flex-end;
+        padding: variables.toRem(16) variables.toRem(24);
+        height: 100%; width: 100%;
+        span{
+            color: variables.$darkGreen;
+            font-family: Montserrat; font-weight: 500;
+            font-size: variables.toRem(14);
+            line-height: variables.toEm(18, 14);
+        }
+    }
+
+    &__burger-icon{
+        display: block; position: relative; margin-right: variables.toRem(8);
+        flex: 0 0 variables.toRem(17);
+        height: variables.toRem(10);
+
+        &::after, &::before{
+            content: "";
+        }
+        &::after, &::before, span{
+            border-radius: variables.toRem(1);
+            background-color: variables.$darkGreen;
+            position: absolute; left: 0; top: 0;
+            width: 100%; height: variables.toRem(2);
+        }
+        span{
+            top: 50%; transform: translateY(-50%);
+        }
+        &::before{
+            top: 100%; transform: translateY(-100%);
+        }
+    }
+
+
+    &__icon-parent{
+        margin-right: variables.toRem(8);
+    }
+}
+.link-more-sort{
+    &__button{
+        width: 100%; padding: variables.toRem(10);
+    }
+    &:last-child &__button{
+        border-radius: 0 0 variables.toRem(12) variables.toRem(12);
+    }
+
+    &__title{
+        color: inherit;
+        font-family: Montserrat; font-weight: 600;
+        font-size: variables.toRem(18);
+        line-height: variables.toEm(18, 14);
+    }
+    &__description{
+        color: inherit;
+        font-family: Montserrat; font-weight: 400;
+        font-size: variables.toRem(14);
+        line-height: variables.toEm(18, 14);
+    }
+}
+
+.navbar{
+    @media (min-width: variables.toEm(993, 16)) {
+        position: relative;
+        &::after{
+            background-color: rgba($color: variables.$darkGreen, $alpha: 0.25);
+            content: "";
+            position: absolute; right: variables.toRem(-24); top: 0;
+            width: variables.toRem(0.5); height: 100%;
+        }
+    }
+
+    &__heading{
+        color: variables.$darkGreen;
+        font-family: Montserrat; font-weight: 600;
+        font-size: variables.toRem(20);
+        line-height: variables.toEm(24, 20);
+
+        margin-bottom: variables.toRem(32);
+    }
+    @media (max-width: variables.toEm(992, 16)) {
+        &__heading{
+            margin-bottom: variables.toRem(24);
+        }
+    }
+    @media (max-width: variables.toEm(768, 16)) {
+        &__heading{
+            margin-bottom: variables.toRem(16);
+        }
+    }
+
+    &__filter:not(:last-child){
+        margin-bottom: variables.toRem(64.5);
+        position: relative;
+        &::after{
+            background-color: rgba($color: variables.$darkGreen, $alpha: 0.25);
+            content: "";
+            position: absolute;
+            width: 100%; height: variables.toRem(0.5);
+            left: 0; bottom: variables.toRem(-32);
+            transform: translateY(50%);
+        }
+    }
+    @media (max-width: variables.toEm(992, 16)) {
+        &__filter:not(:last-child){
+            margin-bottom: variables.toRem(32.5);
+            &::after{
+                bottom: variables.toRem(-16);
+            }
+        }
+    }
+    @media (max-width: variables.toEm(768, 16)) {
+        &__filter:not(:last-child){
+            margin-bottom: variables.toRem(24.5);
+            &::after{
+                bottom: variables.toRem(-12);
+            }
+        }
+    }
+}
+.filter-navbar{
+    &__label{
+        transition: margin-bottom 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+    }
+    &._active &__label{
+        margin-bottom: variables.toRem(16);
+    }
+    @media (max-width: variables.toEm(768, 16)) {
+        &._active &__label{
+            margin-bottom: variables.toRem(10);
+        }
+    }
+    
+    &__opener{
+        display: flex; justify-content: space-between; align-items: center;
+        transition: padding 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+        span{
+            color: variables.$darkGreen;
+            font-family: Montserrat; font-weight: 600;
+            font-size: variables.toRem(16);
+            line-height: variables.toEm(20, 16);
+            transition: color 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+        }
+    }
+    &__opener:hover, &__opener:focus{
+        padding: variables.toRem(4);
+        background-color: variables.$darkGreen;
+        span{
+            color: #fff;
+        }
+    }
+    &__opener:hover &__icon path,
+    &__opener:focus &__icon path{
+        stroke: #fff;
+    }
+
+    &__label, &__opener{
+        width: 100%;
+    }
+    &__icon-parent{
+        display: flex; align-items: center; justify-content: center;
+        width: variables.toRem(24); height: variables.toRem(24);
+        margin-left: variables.toRem(10);
+        transition: transform 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+    }
+    &._active &__icon-parent{
+        transform: rotate(180deg);
+    }
+
+    &__icon path{
+        transition: stroke 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+    }
+
+    &__value{
+        overflow: hidden;
+        transition: height 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+    }
+}
+.radios-navbar{
+    &__container-inner{
+        display: flex;
+        flex-wrap: wrap;
+        gap: variables.toRem(8) variables.toRem(16);
+    }
+    &__item{
+        display: inline-block; text-align: center;
+        min-width: variables.toRem(40);
+        padding: variables.toRem(8.5) variables.toRem(12);
+        position: relative;
+    }
+}
+.item-radios-navbar{
+    &__subinput{
+        display: block;
+        color: variables.$darkGreen;
+        font-family: Montserrat;
+        font-size: variables.toRem(12);
+        font-weight: 500;
+        line-height: variables.toEm(15, 12);
+        transition: color 0.3s cubic-bezier(0.215, 0.610, 0.355, 1),
+        text-shadow 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+        span{
+            position: relative; z-index: 2; pointer-events: none;
+        }
+        &::after{
+            content: "";
+            border-radius: variables.toRem(4);
+            border: variables.toRem(1) solid variables.$mint;
+            position: absolute; left: 0; top: 0; z-index: 1;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            transition: background-color 0.3s cubic-bezier(0.215, 0.610, 0.355, 1),
+            box-shadow 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+        }
+    }
+    &__input{
+        position: absolute; left: 0; top: 0;
+        width: 100%; height: 100%;
+        appearance: none;
+        border-radius: variables.toRem(4);
+    }
+    &__input:hover ~ &__subinput,
+    &__input:focus ~ &__subinput{
+        text-shadow: 0 0 5px variables.$mint;
+        &::after{
+            box-shadow: inset 0 0 5px variables.$mint;
+        }
+    }
+    &__input:checked ~ &__subinput{
+        color: #fff;
+        &::after{ background-color: variables.$mint; }
+    }
+}
+.checkboxes-navbar{
+    &__item{
+        position: relative; display: flex;
+    }
+    &__item:not(:last-child){
+        margin-bottom: variables.toRem(8);
+    }
+
+    &__more{
+        color: variables.$red;
+        font-family: Montserrat; font-weight: 700;
+        font-size: variables.toRem(14);
+        line-height: variables.toEm(18, 14);
+
+        padding-top: variables.toRem(8);
+    }
+
+    &__container-inner{
+        transition: height 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+    }
+}
+.item-checkboxes-navbar{
+    &__subinput{
+        color: variables.$darkGreen;
+        font-family: Montserrat; font-weight: 500;
+        font-size: variables.toRem(12);
+        line-height: variables.toEm(15, 12);
+        padding: calc((variables.toRem(24) - variables.toRem(15)) / 2) 0;
+        &::after{
+            content: "";
+            position: absolute; left: 0; top: variables.toRem(2);
+            border-radius: variables.toRem(4);
+            border: variables.toRem(2) solid variables.$darkGreen;
+            width: variables.toRem(19); height: variables.toRem(19);
+            pointer-events: none; transition: background-color 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+        }
+    }
+    &__input-parent{
+        display: flex; align-items: center; justify-content: center;
+        flex: 0 0 variables.toRem(24); height: variables.toRem(24);
+        margin-right: variables.toRem(8);
+    }
+    &__input[type="checkbox"]{
+        appearance: none;
+        width: variables.toRem(19); height: variables.toRem(19);
+    }
+
+    &._choosed &__subinput::after{
+        background-color: variables.$darkGreen;
+    }
+    &._hovered &__subinput::after{
+        background-color: rgba($color: variables.$darkGreen, $alpha: 0.5);
+    }
+}
+.range-navbar{
+    &__container-inner{
+        min-height: variables.toRem(47); position: relative;
+    }
+    &__progress{
+        position: absolute;
+        left: 0; top: variables.toRem(11);
+        height: variables.toRem(2); width: 100%;
+        pointer-events: none;
+    }
+    &__progress span{
+        position: absolute; top: 0;
+        background-color: variables.$darkGreen;
+        height: 100%;
+    }
+
+    &__from, &__to{
+        position: absolute;
+        left: 0; top: variables.toRem(11);
+        width: 100%; height: variables.toRem(2);
+        -webkit-appearance: none;
+        pointer-events: none;
+        background: none;
+    }
+    &__from::-webkit-slider-thumb, &__to::-webkit-slider-thumb{
+        -webkit-appearance: none;
+        pointer-events: auto;
+        background-color: variables.$mint; border-radius: 50%;
+        width: variables.toRem(24); height: variables.toRem(24);
+        cursor: pointer;
+        transition: background-color 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+    }
+    &__from:hover::-webkit-slider-thumb, &__to:hover::-webkit-slider-thumb, 
+    &__from:focus::-webkit-slider-thumb, &__to:focus::-webkit-slider-thumb{
+        background-color: variables.$darkGreen;
+    }
+
+    &__from::-moz-range-thumb, &__to::-moz-range-thumb{
+        border: none;
+        -moz-appearance: none;
+        pointer-events: auto;
+        background-color: variables.$mint; border-radius: 50%;
+        width: variables.toRem(24); height: variables.toRem(24);
+        cursor: pointer;
+        transition: background-color 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+    }
+    &__from:hover::-moz-range-thumb, &__to:hover::-moz-range-thumb, 
+    &__from:focus::-moz-range-thumb, &__to:focus::-moz-range-thumb{
+        background-color: variables.$darkGreen;
+    }
+
+    &__from-text, &__to-text{
+        color: variables.$darkGreen;
+        font-family: Montserrat; font-weight: 500;
+        font-size: variables.toRem(12);
+        line-height: variables.toEm(15, 12);
+        position: absolute; bottom: 0;
+        pointer-events: none;
+    }
+}

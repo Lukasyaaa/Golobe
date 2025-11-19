@@ -1,0 +1,460 @@
+@use "../settings/variables.scss";
+
+%field{
+    position: relative; z-index: 1;
+    border: 1px solid variables.$purpleGray;
+    border-radius: variables.toRem(4);
+    min-height: variables.toRem(56); width: 100%;
+    height: calc(100% - variables.toRem(8));
+    @media (max-width: variables.toEm(992, 16)) {
+        min-height: variables.toRem(52);
+    }
+    padding: 0 variables.toRem(12) 0 variables.toRem(16);
+    @media (max-width: variables.toEm(992, 16)) {
+        padding: 0 variables.toRem(8) 0 variables.toRem(12);
+    }
+}
+%fieldText{
+    font-family: Montserrat; font-weight: 400;
+    font-size: variables.toRem(16);
+    line-height: variables.toEm(20, 16);
+}
+
+@mixin iconBlock($size){
+    width: variables.toRem($size); height: variables.toRem($size);
+    display: flex; align-items: center; justify-content: center;
+}
+
+.options{
+    &.top-margin{
+        margin-top: variables.toRem(-97);
+        position: relative;
+        z-index: 2;
+    }
+    .intro-variants &.top-margin{
+        margin-top: variables.toRem(-76);
+    }
+
+    &__inner{
+        border-radius: variables.toRem(16); background: #fff;
+        box-shadow: 0px 4px 16px 0px rgba(141, 211, 187, 0.15);
+        padding: variables.toRem(32);
+    }
+    @media (max-width: variables.toEm(992, 16)) {
+        &__inner{
+            padding: variables.toRem(24);
+        }
+    }
+    @media (max-width: variables.toEm(480, 16)) {
+        &__inner{
+            padding: variables.toRem(16);
+        }
+    }
+    &.double-header &__inner{
+        padding-top: variables.toRem(16);
+    }
+    
+    &__header{
+        color: variables.$darkGreen;
+        font-family: Montserrat; font-weight: 600;
+        font-size: variables.toRem(20);
+        line-height: variables.toEm(24, 20);
+        margin-bottom: variables.toRem(24);
+    }
+    @media (max-width: variables.toEm(992, 16)) {
+        &__header{
+            margin-bottom: variables.toRem(20);
+        }
+    }
+    @media (max-width: variables.toEm(768, 16)) {
+        &__header{
+            font-size: variables.toRem(18);
+        }
+    }
+    @media (max-width: variables.toEm(480, 16)) {
+        &__header{
+            margin-bottom: variables.toRem(16);
+        }
+    }
+
+    &__types{
+        display: flex;
+        column-gap: variables.toRem(64);
+        min-height: variables.toRem(63);
+        margin-bottom: variables.toRem(25);
+    }
+    @media (max-width: variables.toEm(992, 16)) {
+        &__types{
+            column-gap: variables.toRem(48);
+            min-height: variables.toRem(56);
+            margin-bottom: variables.toRem(20);
+        }
+    }
+    @media (max-width: variables.toEm(480, 16)) {
+        &__types{
+            column-gap: variables.toRem(32);
+            min-height: variables.toRem(48);
+            margin-bottom: variables.toRem(16);
+        }
+    }
+
+    @media (max-width: variables.toEm(768, 16)) {
+        &__type{
+            width: 50%;
+        }
+    }
+
+    &__type:not(:last-child){
+        position: relative;
+        &::after{
+            content: ""; background: variables.$blueGray;
+            position: absolute; right: variables.toRem(-32); top: 0; 
+            transform: translateX(50%);
+            height: variables.toRem(48); width: variables.toRem(1);
+        }
+    }
+    @media (max-width: variables.toEm(992, 16)) {
+        &__type:not(:last-child)::after{
+            right: variables.toRem(-24);
+        }
+    }
+    @media (max-width: variables.toEm(480, 16)) {
+        &__type:not(:last-child)::after{
+            right: variables.toRem(-16);
+        }
+    }
+
+    @media (min-width: variables.toEm(769, 16)) {
+        &__row{
+            display: flex;
+            column-gap: variables.toRem(24);
+        }
+        @media (max-width: variables.toEm(992, 16)) {
+            &__row{
+                column-gap: variables.toRem(20);
+            }
+        }
+        @media (max-width: variables.toEm(768, 16)) {
+            &__row{
+                column-gap: variables.toRem(12);
+            }
+        }
+    }
+
+    &__fieldset{
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    &__fieldset.have-icon{
+        position: relative;
+    }
+
+    &__fieldset.input{
+        flex: 0 1 variables.toPercent(320, 1168);
+    }
+    &__fieldset.select{
+        flex: 0 0 variables.toPercent(136, 1168);
+    }
+    &__fieldset.bigger{
+        flex: 0 0 variables.toPercent(416, 1168);
+    }
+    &__fieldset.select.have-icon{
+        flex: 0 0 variables.toPercent(240, 1168);
+    }
+
+    @media (max-width: variables.toEm(768, 16)) {
+        &__fieldset{
+            width: 100%;
+            &:not(:last-child){
+                margin-bottom: variables.toRem(10);
+            }
+        }
+    }
+
+    @media (min-width: variables.toEm(769, 16)) {
+        &__footer{
+            display: flex;
+            justify-content: flex-end;
+        }   
+    }
+    &__footer{
+        margin-top: variables.toRem(32);
+    }
+    @media (max-width: variables.toEm(992, 16)) {
+        &__footer{
+            margin-top: variables.toRem(24);
+        }
+    }
+    @media (max-width: variables.toEm(768, 16)) {
+        &__footer{
+            margin-top: variables.toRem(16);
+        }
+    }
+
+    &__add, &__link{
+        display: flex;
+        align-items: center;
+    }
+    @media (max-width: variables.toEm(768, 16)) {
+        &__add, &__link{
+            justify-content: center;
+            min-height: variables.toRem(56);
+        }
+    }
+    @media (max-width: variables.toEm(480, 16)) {
+        &__add, &__link{
+            min-height: variables.toRem(48);
+        }
+    }
+
+    &__add{
+        border-radius: variables.toRem(4);
+        padding: 0 variables.toRem(24);
+        border: variables.toRem(3) solid transparent;
+        transition: border-color 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+    }
+    &__add:hover, &__add:focus{
+        border: variables.toRem(3) solid variables.$darkGreen;
+    }
+    @media (max-width: variables.toEm(768, 16)) {
+        &__add{
+            width: 100%;
+            padding: variables.toRem(15) variables.toRem(16);
+        }
+    }
+
+    &__link{
+        padding: variables.toRem(8) variables.toRem(16);
+        transition: background-color 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+    }
+    &__link:hover, &__link:focus{
+        svg{
+            filter: drop-shadow(0 0 5px variables.$mint);
+        }
+        svg path{
+            fill: variables.$mint;
+        }
+    }
+
+    @media (min-width: variables.toEm(769, 16)) {
+        &__find{
+            min-width: variables.toRem(56);
+        }
+    }
+    &__find{
+        border-radius: variables.toRem(4);
+        background-color: variables.$mint;
+        margin-top: variables.toRem(8);
+
+        display: flex; align-items: center; justify-content: center;
+        transition: box-shadow 0.3s cubic-bezier(0.215, 0.610, 0.355, 1),
+        background-color 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+        path{
+            transition: fill 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+        }
+    }
+    @media (max-width: variables.toEm(768, 16)) {
+        &__find{
+            width: 100%;
+            min-height: variables.toRem(48);
+        }
+    }
+
+    &__find:hover, &__find:focus{
+        box-shadow: inset 0 0 10px variables.$mint;
+        background-color: variables.$darkGreen;
+        path{
+            fill: variables.$mint;
+        }
+    }
+}
+.type-options{
+    @media (min-width: variables.toEm(481, 16)) {
+        &__button{
+            padding-bottom: variables.toRem(15);
+        }
+        @media (max-width: variables.toEm(992, 16)) {
+            &__button{
+                padding-bottom: variables.toRem(8);
+            }
+        }
+    }
+    &__button{
+        display: flex; align-items: center; height: 100%;
+        position: relative;
+        &::before{
+            content: ""; background: variables.$mint;
+            position: absolute; bottom: /*variables.toRem(-15)*/ 0; left: 50%;
+            transform: translateX(-50%);
+            height: variables.toRem(4); width: 0;
+            transition: width 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+        };
+    }
+    .options__types:not(._hide-active) &__button:disabled::before, 
+    &__button:focus::before, &__button:hover:not(:disabled)::before{ 
+        width: 100%; 
+    }
+    @media (max-width: variables.toEm(768, 16)) {
+        &__button{
+            width: 100%; justify-content: center;
+        }
+    }
+
+    &__icon-parent{
+        @include iconBlock(24);
+        margin-right: variables.toRem(8);
+    }
+
+    &__desc{
+        color: variables.$darkGreen;
+        font-family: Montserrat; font-weight: 600;
+        font-size: variables.toRem(16);
+        line-height: variables.toEm(19, 16);
+    }
+}
+.fieldset-options{
+    /*width: max-content - используется, чтобы не пребигать к display: inline-block(ведь ширина label, должна
+    зависеть от контента, для корректного отображения белого фона). Сочетание display: inline-block и 
+    и white-space: nowrap - приводит к появлению визуально лишнего оступа*/
+    &__label{
+        display: block; position: relative; z-index: 2;
+        color: variables.$darkGreen;
+        font-family: Montserrat; font-weight: 400;
+        font-size: variables.toRem(14);
+        line-height: variables.toEm(18, 14);
+        width: max-content; 
+
+        margin: 0 variables.toRem(12);
+        padding: 0 variables.toRem(4);
+
+        background-color: #fff;
+        white-space: nowrap; text-overflow: ellipsis; overflow: hidden;
+
+        transition: color 0.3s cubic-bezier(0.215, 0.610, 0.355, 1),
+        background-color 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+    }
+    @media (max-width: variables.toEm(992, 16)) {
+        &__label{
+            margin: 0 variables.toRem(8);
+        }
+    }
+
+    &__fieldset.input{
+        max-width: variables.toRem(320 - 12 - 16);
+    }
+    &__fieldset.select{
+        max-width: variables.toRem(136 - 12 - 16);
+    }
+    &__fieldset.bigger{
+        max-width: variables.toRem(416 - 12 - 16);
+    }
+    &__fieldset.select.have-icon{
+        max-width: variables.toRem(240 - 12 - 16);
+    }
+
+    &__field{
+        @extend %field;
+        @extend %fieldText;
+        &::placeholder{
+            color: variables.$darkPurple;
+        }
+        margin-top: variables.toRem(-10);
+    }
+    &__field:hover ~ &__label, &__field:focus ~ &__label, 
+    &._hovered &__label, &__select._active ~ &__label{
+        background: variables.$purpleGray;
+        color: #fff;
+    }
+    &.have-icon.right &__field{
+        padding-right: variables.toRem(12 + 24 + 12);
+    }
+    @media (max-width: variables.toEm(992, 16)) {
+        &.have-icon.right &__field{
+            padding-right: variables.toRem(8 + 24 + 8);
+        }
+    }
+    &.have-icon.left &__field{
+        padding-left: variables.toRem(12 + 24 + 12);
+    }
+    @media (max-width: variables.toEm(992, 16)) {
+        &.have-icon.left &__field{
+            padding-left: variables.toRem(8 + 24 + 8);
+        }
+    }
+
+    &__icon-parent{
+        @include iconBlock(24);
+        position: absolute; top: calc(50% + variables.toRem(8) / 2); 
+        transform: translateY(-50%);
+    }
+    &.right &__icon-parent{
+        right: variables.toRem(12);
+    }
+    @media (max-width: variables.toEm(992, 16)) {
+        &.right &__icon-parent{
+            right: variables.toRem(8);
+        }
+    }
+    &.left &__icon-parent, &.select &__icon-parent{
+        left: variables.toRem(12);
+    }
+    @media (max-width: variables.toEm(992, 16)) {
+        &.left &__icon-parent, &.select &__icon-parent{
+            left: variables.toRem(8);
+        }
+    }
+
+    &__select{
+        margin-top: variables.toRem(-10);
+    }
+}
+.select-fieldset-options{
+    &__opener{
+        text-align: left;
+        @extend %field;
+        padding-top: variables.toRem(8 + 6);
+        padding-bottom: variables.toRem(8 + 6);
+        span{
+            @extend %fieldText;
+        }
+        display: flex; align-items: center;
+        justify-content: space-between;
+        height: 100%;
+    }
+    .options__fieldset.select.have-icon &__opener{
+        padding-left: variables.toRem(12 + 24 + 12);
+    }
+    @media (max-width: variables.toEm(992, 16)) {
+        .options__fieldset.select.have-icon &__opener{
+            padding-left: variables.toRem(8 + 24 + 8);
+        }
+    }
+
+    &__icon-parent{
+        margin-left: variables.toRem(12);
+    }
+    &._hovered &__icon-parent{
+        transform: rotate(180deg);
+    }
+}
+.add-options, .link-options{
+    &__icon-parent{
+        @include iconBlock(16);
+        margin-right: variables.toRem(4);
+    }
+    &__icon{
+        transition: filter 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+        path{
+            transition: fill 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+        }
+    }
+    &__description{
+        font-size: variables.toRem(14);
+        font-weight: 500; line-height: variables.toEm(18, 14);
+    }
+}
+.add-options{
+    &__description{
+        color: variables.$darkGreen; font-family: Montserrat;
+    }
+}

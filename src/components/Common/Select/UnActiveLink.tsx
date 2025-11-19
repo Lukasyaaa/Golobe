@@ -1,23 +1,24 @@
-import React, { type FC } from "react";
+import React, { type FC, type ReactNode } from "react";
 
 interface UnActiveSelectLinkProps{
-    description : string,
-    onFocusHandler : (() => void) | undefined,
-    onBlurHandler : (() => void) | undefined,
-    onClickHandler : (() => void),
-    onMouseEnterHandler : (() => void) | undefined,
-    onMouseLeaveHandler : (() => void) | undefined
+    parentCl: string,
+    children: ReactNode,
+    onFocusHandler: (() => void) | undefined,
+    onBlurHandler: (() => void) | undefined,
+    onClickHandler: (() => void),
+    onMouseEnterHandler: (() => void) | undefined,
+    onMouseLeaveHandler: (() => void) | undefined
 }
 
-export const UnActiveSelectLink : FC<UnActiveSelectLinkProps> = (({description, onFocusHandler, onBlurHandler, onClickHandler, onMouseEnterHandler, onMouseLeaveHandler}) => {
+export const UnActiveSelectLink : FC<UnActiveSelectLinkProps> = (({parentCl, children, onFocusHandler, onBlurHandler, onClickHandler, onMouseEnterHandler, onMouseLeaveHandler}) => {
     return(
-        <li className="select-fieldset-options__link">
+        <li className={[parentCl + "__link", "select__link"].join(" ")}>
             <button 
-                className="select-fieldset-options__button" type="button"
+                className={[parentCl + "__button", "select__button"].join(" ")} type="button"
                 onFocus={onFocusHandler} onBlur={onBlurHandler} onClick={onClickHandler} 
                 onMouseEnter={onMouseEnterHandler} onMouseLeave={onMouseLeaveHandler}
             >
-                {description}
+                {children}
             </button>
         </li>
     )

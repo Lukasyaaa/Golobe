@@ -1,61 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createFetchThunk, type ChooseOption, type Review, type Section, type SiteSeparation, type Srcs, type Trip } from "../types";
+import { createFetchThunk, type Review, type Section, type Trip } from "../types";
 
-interface IntroSection{
-    supheading: string,
-    heading: string,
-    subheading: string,
-    background: Srcs
-}
 interface HomePage {
-    intro: IntroSection,
     trips: Section<Trip>,
-    choose: SiteSeparation<ChooseOption>,
     reviews: Section<Review>
 }
 
 const initialState: HomePage = {
-    intro: {
-        supheading: "Helping Others",
-        heading: "Live & Travel",
-        subheading: "Special offers to suit your plan",
-        background: { jpeg: "/img/start/intro/background.jpg", webp: "/img/start/intro/background.webp" }
-    },
     trips: {
-        header: {
-            heading: "Plan your perfect trip", 
-            description: "Search Flights & Places Hire to our most popular destinations",
-            button: { active: "See more places", disable: "Hide" }
-        },
-        items: [],
-        isLoading: false,
-        error: null,
-        maxShow: 9
-    },
-    choose: {
-        flightsPart:{
-            heading : "Flights",
-            description : "Search Flights & Places Hire to our most popular destinations",
-            button : "Show Filghts",
-            background : { jpeg: "/img/start/choose/flights/image.jpg", webp: "/img/start/choose/flights/image.webp" }
-        },
-        hotelsPart: {
-            heading : "Hotels",
-            description : "Search hotels & Places Hire to our most popular destinations",
-            button : "Show Hotels",
-            background : { jpeg: "/img/start/choose/hotels/image.jpg", webp: "/img/start/choose/hotels/image.webp" }
-        }
+        items: [], isLoading: false, error: null,
     },
     reviews: {
-        header: {
-            heading: "Reviews", 
-            description: "What people says about Golobe facilities",
-            button: { active: "See All", disable: "Hide" }
-        },
-        items: [],
-        isLoading: false,
-        error: null,
-        maxShow: 3
+        items: [], isLoading: false, error: null,
     },
 };
 

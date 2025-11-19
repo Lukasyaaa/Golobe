@@ -15,14 +15,14 @@ export const ChooseOption : FC<ChooseOptionProps> = ({about, linkPath}) => {
         <div 
             className="choose__option option-choose" 
             style={{
-                background: `url(${isWebp ? jpeg : webp})`,
+                backgroundImage: `url(${isWebp ? webp : jpeg})`,
                 backgroundSize: "cover", backgroundRepeat: "no-repeat"
             }}
         >
             <div className="option-choose__inner">
                 <h3 className="option-choose__title">{heading}</h3>
                 <div className="option-choose__description">{description}</div>
-                <a className="option-choose__link link-option-choose" href={linkPath}>
+                <a className="option-choose__link link-option-choose button_green" href={linkPath}>
                     <div className="link-option-choose__icon-parent">
                         <svg width="14" height="14" fill="none">
                             <path

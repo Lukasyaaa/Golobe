@@ -1,4 +1,4 @@
-@use "variables.scss";
+@use "./settings/variables.scss";
 
 .map{
     overflow: hidden;
@@ -170,17 +170,30 @@
 }
 .item-map{
     &__image{
-        flex: 0 0 variables.toRem(40);
+        width: variables.toRem(40);
         height: variables.toRem(40);
         margin-right: variables.toRem(8);
         img{
+            background-color: variables.$darkGreen;
             border-radius: variables.toRem(4);
+
+            overflow: hidden;
+            text-overflow: ellipsis;
+            color: #fff;
+            font-family: "Montserrat", sans-serif;
+            font-size: variables.toRem(10);
+            font-weight: 400;
+
+            display: inline-block;
             width: 100%; height: 100%;
         }
     }
     .map__items:not(.positioned) &__image{
         flex: 0 0 variables.toRem(56);
         height: variables.toRem(56);
+        img{
+            font-size: variables.toRem(14);
+        }
     }
 
     &__name{
@@ -283,5 +296,899 @@
         bottom: variables.toRem(-30);
         left: variables.toRem(-1);
         transform: translateY(100%);
+    }
+}
+
+.flight{
+    @media (min-width: variables.toEm(769, 16)) {
+        display: flex; column-gap: variables.toRem(24);
+    }
+    border-radius: variables.toRem(12);
+    box-shadow: 0px 4px 16px 0px rgba($color: variables.$darkGreen, $alpha: 0.05);
+    background-color: #fff;
+    padding: variables.toRem(24);
+    @media (max-width: variables.toEm(768, 16)) {
+        padding: variables.toRem(16);
+    }
+
+    &:not(:last-child){
+        margin-bottom: variables.toRem(32);
+    }
+    @media (max-width: variables.toEm(768, 16)) {
+        &:not(:last-child){
+            margin-bottom: variables.toRem(24);
+        }
+    }
+    @media (max-width: variables.toEm(480, 16)) {
+        &:not(:last-child){
+            margin-bottom: variables.toRem(16);
+        }
+    }
+
+    @media (min-width: variables.toEm(769, 16)) {
+        &__images, &:not(._many-image) &__image{
+            flex: 0 1 variables.toRem(160);
+        }
+        @media (max-width: variables.toEm(992, 16)) {
+            &__images, &:not(._many-image) &__image{
+                flex: 0 0 variables.toPercent(160, 962);
+            }
+            &__images &__image, &__image img{
+                width: 100%;
+            }
+        }
+    }
+    @media (max-width: variables.toEm(768, 16)) {
+        &__images, &:not(._many-image) &__image{
+            display: none;
+        }
+    }
+
+
+    @media (min-width: variables.toEm(769, 16)) {
+        &__info{
+            flex: 1 1 auto;
+        }
+    }
+
+    &__header{
+        display: flex; align-items: center; justify-content: space-between;
+        margin-bottom: variables.toRem(16);
+    }
+
+    &__price{
+        text-align: right;
+        color: rgba($color: variables.$darkGreen, $alpha: 0.75);
+        font-family: Montserrat; font-weight: 500;
+        font-size: variables.toRem(12);
+        line-height: variables.toEm(15, 12);
+        strong{
+            display: block;
+            color: variables.$red;
+            font-size: variables.toRem(24);
+            font-weight: 700;
+            line-height: variables.toEm(29, 24);
+        }
+        margin-left: variables.toRem(32);
+    }
+    @media (max-width: variables.toEm(768, 16)) {
+        &__price{
+            margin-left: variables.toRem(24);
+        }
+    }
+    @media (max-width: variables.toEm(480, 16)) {
+        &__price{
+            margin-left: variables.toRem(16);
+        }
+    }
+
+    &__schedule-link{
+        display: flex;
+        &:not(:last-child){
+            margin-bottom: variables.toRem(16);
+        }
+    }
+    @media (max-width: variables.toEm(480, 16)) {
+        &__schedule-link:not(:last-child){
+            margin-bottom: variables.toRem(8);
+        }
+    }
+
+    &__footer{
+        position: relative;
+        display: flex; column-gap: variables.toRem(16);
+        margin-top: variables.toRem(32.5);
+        &::after{
+            content: "";
+            position: absolute; left: 0; top: variables.toRem(-16);
+            transform: translateY(-50%);
+            background-color: rgba($color: variables.$darkGreen, $alpha: 0.25);
+            width: 100%; height: variables.toRem(0.5);
+        }
+    }
+
+    &__favourites{
+        flex: 0 0 variables.toRem(48);
+        svg path{
+            transition: stroke 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+        }
+    }
+    &__favourites:hover svg path, &__favourites:focus svg path{
+        stroke: #fff;
+    }
+
+    &__link{
+        font-size: variables.toRem(14);
+        font-weight: 600;
+        line-height: variables.toEm(18, 14);
+
+        width: 100%;
+    }
+    div.flight__link{
+        opacity: 0.25;
+    }
+}
+.link-schedule-flight{
+    @media (min-width: variables.toEm(481, 16)) {
+        &__info{
+            flex: 1 1 auto; display: flex;
+        }
+    }
+        
+    &__input-parent{
+        display: flex; align-items: center; justify-content: center;
+        width: variables.toRem(24); height: variables.toRem(24);
+        position: relative; margin-right: variables.toRem(12);
+        &::after{
+            content: ""; border: variables.toRem(2) solid rgba($color: variables.$darkGreen, $alpha: 0.3);
+            border-radius: variables.toRem(4);
+            position: absolute; left: variables.toRem(2); top: variables.toRem(2);
+            width: variables.toRem(19); height: variables.toRem(19);
+            pointer-events: none;
+            transition: background-color 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+        }
+    }
+    &._hovered &__input-parent::after{
+        background-color: rgba($color: variables.$darkGreen, $alpha: 0.5);
+    }
+    &._choosed:not(._hovered) &__input-parent::after{
+        background-color: variables.$darkGreen;
+    }
+    @media (max-width: variables.toEm(480, 16)) {
+        &__input-parent{
+            margin-right: variables.toRem(6);
+        }
+    }
+
+    &__input{
+        appearance: none; border-radius: variables.toRem(2);
+        width: variables.toRem(19); height: variables.toRem(19)
+    }
+
+    &__time{
+        color: variables.$darkGreen;
+        font-family: Montserrat; font-weight: 600;
+        font-size: variables.toRem(16);
+        line-height: variables.toEm(20, 16);
+    }
+
+    @media (min-width: variables.toEm(481, 16)) {
+        &__count-transfers{
+            margin: 0 variables.toRem(40);
+        }
+        @media (max-width: variables.toEm(992, 16)) {
+            &__count-transfers{
+                margin: 0 variables.toRem(32);
+            }
+        }
+        @media (max-width: variables.toEm(768, 16)) {
+            &__count-transfers{
+                margin: 0 variables.toRem(24);
+            }
+        }
+    }
+    &__count-transfers{
+        color: rgba($color: variables.$darkGreen, $alpha: 0.78);
+        font-family: Montserrat; font-weight: 600;
+        font-size: variables.toRem(14);
+        line-height: variables.toEm(18, 14);
+    }
+    @media (max-width: variables.toEm(768, 16)) and (min-width: variables.toEm(481, 16)) {
+        &__count-transfers{
+            flex: 1 1 auto; text-align: center;
+        }
+    }
+    @media (max-width: variables.toEm(480, 16)) {
+        &__count-transfers{
+            margin: variables.toRem(4) 0;
+        }
+    }
+
+    &__fly-duration{
+        color: variables.$darkGreen;
+        font-family: Montserrat; font-weight: 600;
+        font-size: variables.toRem(16);
+        line-height: variables.toEm(20, 16);
+    }
+
+    @media (min-width: variables.toEm(481, 16)) {
+        &__airline, &__route{
+            margin-top: variables.toRem(4);
+        }
+    }
+    &__airline, &__route{
+        color: rgba($color: variables.$darkGreen, $alpha: 0.4);
+        font-family: Montserrat; font-weight: 400;
+        font-size: variables.toRem(14);
+        line-height: variables.toEm(18, 14);
+    }
+    @media (max-width: variables.toEm(480, 16)) {
+        &__left, &__right{
+            column-gap: variables.toRem(8);
+            display: flex; align-items: center; flex-wrap: wrap;
+        }
+    }
+}
+
+.flight-page{
+    .sort{
+        margin-bottom: variables.toRem(24);
+    }
+}
+
+.introduction-flight{
+    &__image{
+        width: 100%; position: relative;
+        padding-bottom: variables.toPercent(395, variables.$container);
+        img{
+            background-color: variables.$darkGreen;
+            object-fit: cover; border-radius: variables.toRem(8);
+
+            color: #fff;
+            font-family: "Montserrat", sans-serif;
+            font-size: variables.toRem(14);
+            font-weight: 600;
+
+            position: absolute; left: 0; top: 0;
+            width: 100%; height: 100%;
+        }
+    }
+}
+
+.seats{
+    padding: variables.toRem(40) 0;
+    @media (max-width: variables.toEm(992, 16)) {
+        padding: variables.toRem(32) 0;
+    }
+    @media (max-width: variables.toEm(480, 16)) {
+        padding: variables.toRem(24) 0;
+    }
+
+    @media (min-width: variables.toEm(769, 16)) {
+        &__header{
+            display: flex; justify-content: space-between;
+        }
+    }
+    &__header{
+        margin-bottom: variables.toRem(24);
+    }
+    @media (max-width: variables.toEm(768, 16)) {
+        &__header{
+            margin-bottom: variables.toRem(16);
+        }
+    }
+
+    @media (min-width: variables.toEm(769, 16)) {
+        &__heading{
+            margin-right: variables.toRem(24);
+        }
+    }
+    &__heading{
+        color: variables.$darkGreen;
+        font-family: "TradeGothic";
+        font-size: variables.toRem(24);
+        font-weight: 700;
+        line-height: variables.toEm(30, 24);
+    }
+    @media (max-width: variables.toEm(992, 16)) {
+        &__heading{
+            font-size: variables.toRem(22);
+        }
+    }
+    @media (max-width: variables.toEm(768, 16)) {
+        &__heading{
+            font-size: variables.toRem(20);
+            margin-bottom: variables.toRem(8);
+        }
+    }
+    @media (max-width: variables.toEm(480, 16)) {
+        &__heading{
+            font-size: variables.toRem(18);
+            margin-bottom: variables.toRem(4);
+        }
+    }
+
+    &__checkboxes{
+        display: flex;
+        gap: variables.toRem(8) variables.toRem(24);
+    }
+    @media (max-width: variables.toEm(992, 16)) {
+        &__checkboxes{
+            gap: variables.toRem(8) variables.toRem(16);
+        }
+    }
+    @media (max-width: variables.toEm(480, 16)) {
+        &__checkboxes{
+            gap: variables.toRem(8);
+        }
+    }
+
+    &__checkbox{
+        display: flex; align-items: center;
+    }
+
+    &__images{
+        display: flex; flex-wrap: wrap; gap: variables.toRem(19);
+    }
+    @media (max-width: variables.toEm(992, 16)) {
+        &__images{
+            gap: variables.toRem(16);
+        }
+    }
+    @media (max-width: variables.toEm(480, 16)) {
+        &__images{
+            gap: variables.toRem(8);
+        }
+    }
+
+    &__image{
+        flex: 0 0 variables.toRem(120);
+        height: variables.toRem(120);
+        img{
+            background-color: variables.$mint;
+            color: #fff;
+            font-family: "Montserrat", sans-serif;
+            font-size: variables.toRem(14);
+            font-weight: 600;
+
+            display: inline-block;
+            object-fit: cover; border-radius: variables.toRem(12);
+            width: 100%; height: 100%;
+        }
+    }
+    @media (max-width: variables.toEm(992, 16)) {
+        &__image{
+            flex: 0 0 variables.toRem(100);
+            height: variables.toRem(100);
+        }
+    }
+    @media (max-width: variables.toEm(768, 16)) {
+        &__image{
+            flex: 0 0 variables.toRem(80);
+            height: variables.toRem(80);
+        }
+    }
+    @media (max-width: variables.toEm(480, 16)) {
+        &__image{
+            flex: 0 0 variables.toRem(60);
+            height: variables.toRem(60);
+        }
+    }
+}
+.checkbox-seats{
+    &__input-parent{
+        display: flex; align-items: center; justify-content: center;
+        width: variables.toRem(24); height: variables.toRem(24);
+        position: relative;
+        &::after{
+            content: "";
+            position: absolute; left: 50%; top: 50%; transform: translateX(-50%) translateY(-50%);
+            width: variables.toRem(20); height: variables.toRem(20);
+            border: variables.toRem(2) solid variables.$darkGreen;
+            border-radius: variables.toRem(4);
+            pointer-events: none;
+            transition: width 0.3s cubic-bezier(0.215, 0.610, 0.355, 1),
+            height 0.3s cubic-bezier(0.215, 0.610, 0.355, 1),
+            background-color 0.3s cubic-bezier(0.215, 0.610, 0.355, 1),
+            border-color 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+        }
+    }
+    &__input{
+        appearance: none;
+        width: variables.toRem(18); height: variables.toRem(18);
+    }
+    &._choosed &__input-parent::after{
+        background-color: variables.$mint; border-color: transparent;
+        width: variables.toRem(18); height: variables.toRem(18);
+    }
+    &._hovered &__input-parent::after{
+        width: variables.toRem(18); height: variables.toRem(18);
+    }
+
+    &__label{
+        display: block;
+        margin-left: variables.toRem(8);
+
+        color: variables.$darkGreen;
+        font-family: Montserrat; font-weight: 500;
+        font-size: variables.toRem(14);
+        line-height: variables.toEm(18, 14);
+    }
+    @media (max-width: variables.toEm(992, 16)) {
+        &__label{
+            margin-left: variables.toRem(4);
+        }
+    }
+}
+
+.link{
+    &__policies{
+        background-color: rgba($color: variables.$mint, $alpha: 0.6); 
+        border-radius: variables.toRem(8);
+        padding: variables.toRem(16);
+        margin-bottom: variables.toRem(40);
+    }
+    @media (max-width: variables.toEm(992, 16)) {
+        &__policies{
+            margin-bottom: variables.toRem(32);
+        }
+    }
+    @media (max-width: variables.toEm(768, 16)) {
+        &__policies{
+            margin-bottom: variables.toRem(24);
+        }
+    }
+    @media (max-width: variables.toEm(480, 16)) {
+        &__policies{
+            margin-bottom: variables.toRem(16);
+        }
+    }
+
+    &__info{
+        border-radius: variables.toRem(12);
+        box-shadow: 0px 4px 16px 0px rgba($color: variables.$darkGreen, $alpha: 0.05);
+        background-color: #fff;
+        padding: variables.toRem(32) variables.toRem(24);
+    }
+    @media (max-width: variables.toEm(992, 16)) {
+        &__info{
+            padding: variables.toRem(24);
+        }
+    }
+    @media (max-width: variables.toEm(480, 16)) {
+        &__info{
+            padding: variables.toRem(16);
+        }
+    }
+}
+.policies-link{
+    &__title{
+        color: variables.$darkGreen;
+        font-family: "TradeGothic"; font-weight: 700;
+        font-size: variables.toRem(24);
+        line-height: variables.toEm(30, 24);
+        margin-bottom: variables.toRem(16);
+    }
+    @media (max-width: variables.toEm(992, 16)) {
+        &__title{
+            font-size: variables.toRem(22);
+            margin-bottom: variables.toRem(8);
+        }
+    }
+    @media (max-width: variables.toEm(768, 16)) {
+        &__title{
+            font-size: variables.toRem(20);
+        }
+    }
+    @media (max-width: variables.toEm(480, 16)) {
+        &__title{
+            font-size: variables.toRem(18);
+        }
+    }
+
+    @media (min-width: variables.toEm(481, 16)) {
+        &__list{
+            display: grid; grid-template-columns: repeat(2, 1fr);
+            gap: variables.toRem(16);
+        }
+        @media (max-width: variables.toEm(768, 16)) {
+            &__list{
+                gap: variables.toRem(8);
+            }
+        }
+    }
+
+    &__punkt{
+        display: flex; align-items: center;
+    }
+    @media (max-width: variables.toEm(480, 16)) {
+        &__punkt:not(:last-child){
+            margin-bottom: variables.toRem(4);
+        }
+    }
+}
+.punkt-policies-link{
+    &__icon-parent{
+        display: flex; align-items: center; justify-content: center;
+        flex: 0 0 variables.toRem(24); height: variables.toRem(24);
+        margin-right: variables.toRem(16);
+    }
+    @media (max-width: variables.toEm(768, 16)) {
+        &__icon-parent{
+            margin-right: variables.toRem(8);
+        }
+    }
+    @media (max-width: variables.toEm(480, 16)) {
+        &__icon-parent{
+            margin-right: variables.toRem(4);
+        }
+    }
+
+    &__description{
+        color: variables.$darkGreen;
+        font-family: Montserrat; font-weight: 500;
+        font-size: variables.toRem(16);
+        line-height: variables.toEm(19, 16);
+    }
+    @media (max-width: variables.toEm(480, 16)) {
+        &__description{
+            font-size: variables.toRem(14);
+        }
+    }
+}
+.info-link{
+    @media (min-width: variables.toEm(481, 16)) {
+        &__header{
+            align-items: center; justify-content: space-between;
+        }
+    }
+    &__header{
+        display: flex;
+    }
+    @media (max-width: variables.toEm(480, 16)) {
+        &__header{
+            flex-direction: column-reverse;
+        }
+    }
+
+    @media (min-width: variables.toEm(481, 16)) {
+        &__date, &__main{
+            margin-right: variables.toRem(24);
+        }
+        @media (max-width: variables.toEm(768, 16)) {
+            &__date, &__main{
+                margin-right: variables.toRem(16);
+            }
+        }
+    }
+
+    &__date{
+        color: variables.$darkGreen;
+        font-family: "TradeGothic"; font-weight: 700;
+        font-size: variables.toRem(20);
+        line-height: variables.toEm(25, 20);
+    }
+    @media (max-width: variables.toEm(992, 16)) {
+        &__date{
+            font-size: variables.toRem(18);
+        }
+    }
+    @media (max-width: variables.toEm(480, 16)) {
+        &__date{
+            font-size: variables.toRem(16);
+        }
+    }
+
+    &__fly-duration{
+        color: variables.$darkGreen;
+        font-family: Montserrat; font-weight: 500;
+        font-size: variables.toRem(20);
+        line-height: variables.toEm(24, 20);
+    }
+    @media (max-width: variables.toEm(992, 16)) {
+        &__fly-duration{
+            font-size: variables.toRem(18);
+        }
+    }
+    @media (max-width: variables.toEm(480, 16)) {
+        &__fly-duration{
+            font-size: variables.toRem(16);
+        }
+    }
+
+    @media (min-width: variables.toEm(481, 16)) {
+        &__row{
+            display: flex; align-items: center; justify-content: space-between;
+        }
+    }
+    &__row{
+        margin: variables.toRem(24) 0 variables.toRem(40);
+    }
+    @media (max-width: variables.toEm(992, 16)) {
+        &__row{
+            margin: variables.toRem(24) 0 variables.toRem(32);
+        }
+    }
+    @media (max-width: variables.toEm(768, 16)) {
+        &__row{
+            margin: variables.toRem(24) 0;
+        }
+    }
+    @media (max-width: variables.toEm(480, 16)) {
+        &__row{
+            margin: variables.toRem(16) 0;
+        }
+    }
+
+    &__main{
+        border: variables.toRem(0.5) solid variables.$mint;
+        border-radius: variables.toRem(8);
+        display: flex; align-items: center;
+        padding: variables.toRem(16) variables.toRem(32);
+
+        transition: background-color 0.3s cubic-bezier(0.215, 0.610, 0.355, 1),
+        box-shadow 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+    }
+    &__main:hover, &__main:focus{
+        background-color: variables.$mint;
+        box-shadow: inset 0 0 10px #fff;
+    }
+    @media (max-width: variables.toEm(992, 16)) {
+        &__main{
+            padding: variables.toRem(16) variables.toRem(24);
+        }
+    }
+    @media (max-width: variables.toEm(768, 16)) {
+        &__main{
+            padding: variables.toRem(16);
+        }
+    }
+    @media (max-width: variables.toEm(480, 16)) {
+        &__main{
+            padding: variables.toRem(8);
+        }
+    }
+
+    @media (min-width: variables.toEm(481, 16)) {
+        &__amenities{
+            margin-left: variables.toRem(24);
+        }
+        @media (max-width: variables.toEm(768, 16)) {
+            &__amenities{
+                margin-left: variables.toRem(16);
+            }
+        }
+    }
+    @media (max-width: variables.toEm(480, 16)) {
+        &__amenities{
+            justify-content: center;
+            margin-top: variables.toRem(8);
+        }
+    }
+
+    @media (min-width: variables.toEm(481, 16)) {
+        &__schedule{
+            position: relative;
+            min-height: variables.toRem(48);
+            &::after{
+                content: "";
+                position: absolute; left: 50%; top: 50%; transform: translateY(-50%) translateX(-50%);
+                width: variables.toRem(45); height: variables.toRem(39);
+                background: url("../assets/icons/plane.svg");
+                background-size: contain; background-repeat: no-repeat;
+            }
+        }
+        @media (max-width: variables.toEm(992, 16)) {
+            &__schedule{
+                min-height: variables.toRem(33);
+                &::after{
+                    width: variables.toRem(38); height: variables.toRem(33);
+                }
+            }
+        }
+    }
+    &__schedule{
+        display: flex; align-items: center; justify-content: space-between;
+    }
+    @media (max-width: variables.toEm(480, 16)) {
+        &__schedule{
+            column-gap: variables.toRem(16);
+        }
+    }
+
+    @media (min-width: variables.toEm(993, 16)) {
+        &__schedule-part{
+            display: flex;
+        }
+    }
+    @media (min-width: variables.toEm(769, 16)) {
+        &__schedule-part{
+            position: relative;
+            &::after{
+                content: ""; 
+                background-color: variables.$darkGreen;
+                position: absolute; top: 50%; transform: translateY(-50%);
+                width: variables.toRem(33); height: variables.toRem(1);
+            }
+            &::before{
+                content: "";
+                background-color: variables.$darkGreen; border-radius: 50%;
+                position: absolute; top: 50%; transform: translateY(-50%);
+                width: variables.toRem(6); height: variables.toRem(6);
+            }
+        }
+        @media (max-width: variables.toEm(992, 16)) {
+            &__schedule-part::after{
+                width: variables.toRem(26);
+            }
+            &__schedule-part::before{
+                width: variables.toRem(4); height: variables.toRem(4);
+            }
+        }
+    }
+    &__schedule-part{
+        width: 50%;
+    }
+
+    @media (min-width: variables.toEm(993, 16)) {
+        &__schedule-part:first-child{
+            justify-content: flex-end;
+        }
+    }
+    @media (min-width: variables.toEm(769, 16)) {
+        &__schedule-part:first-child::after{
+            right: variables.toRem(25.5 + 45 / 2);
+        }
+        &__schedule-part:first-child::before{
+            right: variables.toRem(25.5 + 45 / 2 + 33);
+        }
+        @media (max-width: variables.toEm(992, 16)) {
+            &__schedule-part:first-child::after{
+                right: variables.toRem(16 + 38 / 2);
+            }
+            &__schedule-part:first-child::before{
+                right: variables.toRem(16 + 38 / 2 + 26);
+            }
+        }
+    }
+    @media (min-width: variables.toEm(481, 16)) {
+        &__schedule-part:first-child{
+            padding-right: variables.toRem(25.5 + 45 / 2 + 33 + 6);
+        }
+        @media (max-width: variables.toEm(992, 16)) {
+            &__schedule-part:first-child{
+                padding-right: variables.toRem(16 + 38 / 2 + 26 + 4);
+            }
+        }
+        @media (max-width: variables.toEm(768, 16)) {
+            &__schedule-part:first-child{
+                padding-right: variables.toRem(16 + 38 / 2);
+            }
+        }
+    }
+
+    @media (min-width: variables.toEm(993, 16)) {
+        &__schedule-part:last-child{
+            justify-content: flex-start;
+        }
+    }
+    @media (min-width: variables.toEm(769, 16)) {
+        &__schedule-part:last-child::after{
+            left: variables.toRem(25.5 + 45 / 2);
+        }
+        &__schedule-part:last-child::before{
+            left: variables.toRem(25.5 + 45 / 2 + 33);
+        }
+        @media (max-width: variables.toEm(992, 16)) {
+            &__schedule-part:last-child::after{
+                left: variables.toRem(16 + 38 / 2);
+            }
+            &__schedule-part:last-child::before{
+                left: variables.toRem(16 + 38 / 2 + 26);
+            }
+        }
+    }
+    @media (min-width: variables.toEm(481, 16)) {
+        &__schedule-part:last-child{
+            padding-left: variables.toRem(25.5 + 45 / 2 + 33 + 6);
+        }
+        @media (max-width: variables.toEm(992, 16)) {
+            &__schedule-part:last-child{
+                padding-left: variables.toRem(16 + 38 / 2 + 26 + 4);
+            }
+        }
+        @media (max-width: variables.toEm(768, 16)) {
+            &__schedule-part:last-child{
+                padding-left: variables.toRem(16 + 38 / 2);
+            }
+        }
+    }
+}
+.link-info-link{
+    &__plane{
+        color: rgba($color: variables.$darkGreen, $alpha: 0.6);
+        font-family: Montserrat; font-weight: 500;
+        font-size: variables.toRem(14);
+        line-height: variables.toEm(18, 14);
+    }
+}
+.schedule-part-info-link{
+    @media (min-width: variables.toEm(769, 16)) {
+        &:first-child &__inner{
+            padding-right: variables.toRem(24);
+        }
+        @media (max-width: variables.toEm(992, 16)) {
+            &:first-child &__inner{
+                padding-right: variables.toRem(16);
+            }
+        }
+    }
+
+    @media (min-width: variables.toEm(769, 16)) {
+        &:last-child &__inner{
+            padding-left: variables.toRem(24);
+        }
+        @media (max-width: variables.toEm(992, 16)) {
+            &:last-child &__inner{
+                padding-left: variables.toRem(16);
+            }
+        }
+    }
+
+    @media (min-width: variables.toEm(992, 16)) {
+        &__inner{
+            min-width: variables.toRem(240 + 80 + 56);
+        }
+    }
+    @media (min-width: variables.toEm(481, 16)) {
+        &__inner{
+            display: flex; flex-wrap: wrap; justify-content: center; align-items: center;
+            column-gap: variables.toRem(16);
+        }
+        @media (max-width: variables.toEm(768, 16)) {
+            &__inner{
+                column-gap: variables.toRem(8);
+            }
+        }
+    }
+    @media (max-width: variables.toEm(480, 16)) {
+        &:first-child &__inner{ text-align: left; }
+        &:last-child &__inner{ text-align: right; }
+    }
+
+    &__time{
+        color: variables.$darkGreen;
+        font-family: Montserrat; font-weight: 600;
+        font-size: variables.toRem(24);
+        line-height: variables.toEm(29, 24);
+
+        white-space: nowrap;
+    }
+    @media (max-width: variables.toEm(992, 16)) {
+        &__time{
+            font-size: variables.toRem(22);
+        }
+    }
+    @media (max-width: variables.toEm(768, 16)) {
+        &__time{
+            font-size: variables.toRem(20);
+        }
+    }
+    @media (max-width: variables.toEm(480, 16)) {
+        &__time{
+            font-size: variables.toRem(18);
+        }
+    }
+
+    &__place{
+        color: rgba($color: variables.$darkGreen, $alpha: 0.6);
+        font-family: Montserrat; font-weight: 500;
+        font-size: variables.toRem(16);
+        line-height: variables.toEm(19, 16);
+    }
+    @media (max-width: variables.toEm(480, 16)) {
+        &__place{
+            font-size: variables.toRem(14);
+        }
     }
 }

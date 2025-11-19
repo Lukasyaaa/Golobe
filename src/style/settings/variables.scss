@@ -1,0 +1,3091 @@
+@font-face {
+    font-family: "TradeGothic";
+    font-display: swap; font-weight: 700; font-style: normal;
+    src: url("../../assets/fonts/TradeGothic.woff2") format("woff2"),
+    url("../../assets/fonts/TradeGothic.woff") format("woff"),
+    url("../../assets/fonts/TradeGothic.ttf") format("truetype");
+}
+
+@function toPx($px){
+    @return $px * 1px;
+}
+@function toRem($px){
+    @return $px / 16 * 1rem;
+}
+@function toEm($ch, $pr){
+    @return $ch / $pr * 1em;
+}
+@function toPercent($ch, $pr){
+    @return $ch / $pr * 100%;
+}
+
+$container: 1232;
+$containerPadding: 15;
+$containerPaddings: $container + $containerPadding * 2;
+
+$containerHeader: 1316;
+$containerHeaderPadding: 32;
+$containerHeaderPaddings: $containerHeader + $containerHeaderPadding * 2;
+
+$containerBooking: 1280;
+$containerBookingPadding: 15;
+$containerBookingPaddings: $containerBooking + $containerBookingPadding * 2;
+
+$mint: rgba(141, 211, 187); 
+$lightMint: rgb(205, 234, 225);
+$veryLightMint: rgb(235, 246, 242);
+$darkGreen: rgb(17, 34, 17);
+$darkPurple: rgb(28, 27, 31);
+$blueGray: rgba(215, 226, 238, 1);
+$purpleGray: rgb(121, 116, 126);
+$gray: rgb(250, 251, 252);
+$darkerGray: rgb(234, 234, 234);
+$red: rgb(255, 134, 130);
+
+.container, .container_header, .container_booking{
+    padding-left: $containerPadding * 1px;
+    padding-right: $containerPadding * 1px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: toRem($containerPaddings);
+}
+.container_header{
+    padding-left: $containerHeaderPadding * 1px;
+    padding-right: $containerHeaderPadding * 1px;
+    max-width: toRem($containerHeaderPaddings);
+}
+.container_booking{
+    padding-left: $containerBookingPadding * 1px;
+    padding-right: $containerBookingPadding * 1px;
+    max-width: toRem($containerBookingPaddings);
+}
+
+#root{
+    position: relative;
+    background-color: $gray;
+}
+body._locked{
+    overflow-y: hidden;
+}
+main.home{
+    @media (min-width: toEm(1440, 16)) {
+        padding-top: toRem(30);
+    }
+    @media (max-width: toEm(1440, 16)) and (min-width: toEm(1381, 16)) {
+        padding-top: calc(30px - (1440px - 100vw) / 2);
+    }
+}
+main:not(.home){
+    margin-top: toRem(96);
+}
+@media (max-width: toEm(992, 16)) {
+    main:not(.home){
+        margin-top: toRem(86);
+    }
+}
+@media (max-width: toEm(768, 16)) {
+    main:not(.home){
+        margin-top: toRem(76);
+    }
+}
+@media (max-width: toEm(480, 16)) {
+    main:not(.home){
+        margin-top: toRem(66);
+    }
+}
+main:not(.home):not(.flights):not(.hotels){
+    padding: toRem(48) 0 toRem(120);
+}
+@media (max-width: toEm(992, 16)) {
+    main:not(.home):not(.flights):not(.hotels){
+        padding: toRem(48) 0 toRem(90);
+    }
+}
+@media (max-width: toEm(768, 16)) {
+    main:not(.home):not(.flights):not(.hotels){
+        padding: toRem(48) 0 toRem(60);
+    }
+}
+@media (max-width: toEm(480, 16)) {
+    main:not(.home):not(.flights):not(.hotels){
+        padding: toRem(32) 0;
+    }
+}
+
+/*------------FLIGHTS/HOTELS------------*/
+/*------INTRO-VARIANTS------*/
+.intro-variants{
+    &__back{
+        padding: toRem(80) 0 toRem(76 + 80);
+        min-height: toRem(537);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__back{
+            padding: toRem(64) 0 toRem(76 + 64);
+            min-height: toRem(430);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__back{
+            padding: toRem(48) 0 toRem(76 + 48);
+            min-height: toRem(320);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__back{
+            padding: toRem(32) 0 toRem(76 + 32);
+        }
+    }
+
+    @media (min-width: toEm(481, 16)) {
+        &__back .container > *{
+            max-width: toRem(440);
+        }   
+    }
+    
+    &__heading{
+        color: #fff;
+        font-family: "TradeGothic"; font-weight: 700;
+        font-size: toRem(45); line-height: toEm(54, 45);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__heading{
+            font-size: toRem(40);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__heading{
+            font-size: toRem(32);
+        }
+    }
+
+    &__subheading{
+        color: #fff;
+        font-family: Montserrat; font-weight: 500;
+        font-size: toRem(20); line-height: toEm(24, 20);
+        padding-top: toRem(8);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__subheading{
+            font-size: toRem(18);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__subheading{
+            font-size: toRem(16);
+        }
+    }
+}
+/*------TRAVELS------*/
+.travels{
+    padding-top: toRem(80);
+    @media (max-width: toEm(992, 16)) {
+        padding-top: toRem(64);
+    }
+    @media (max-width: toEm(768, 16)) {
+        padding-top: toRem(48);
+    }
+    @media (max-width: toEm(480, 16)) {
+        padding-top: toRem(32);
+    }
+
+    &__header{
+        margin-bottom: toRem(40);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__header{
+            margin-bottom: toRem(32);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__header{
+            margin-bottom: toRem(24);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__header{
+            margin-bottom: toRem(16);
+        }
+    }
+
+    &__items{
+        display: flex; align-items: center;
+        overflow-x: auto; column-gap: toRem(16);
+        padding: 0 toPx($containerPadding) 0 calc((100vw - toRem($containerPaddings)) / 2 + toPx($containerPadding));
+    }
+    @media (max-width: toEm($containerHeaderPaddings, 16)) {
+        &__items{
+            padding: 0 toPx($containerPadding);
+        }
+    }
+    &__item{
+        background-color: rgba($color: $mint, $alpha: 0.4);
+
+        border-radius: toRem(8);
+        flex: 0 0 toRem(296);
+        min-height: toRem(420);
+        padding: toRem(24);
+
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__item{
+            flex: 0 0 toRem(250);
+            min-height: toRem(350);
+            padding: toRem(16);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__item{
+            flex: 0 0 toRem(200);
+            min-height: toRem(285);
+            padding: toRem(10);
+        }
+    }
+}
+.item-travels{
+    transition: box-shadow 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+    box-shadow: inset 0 0 0 #fff;
+    &._hovered{
+        box-shadow: inset 0 0 25px #fff;
+    }
+
+    &__row{
+        display: flex; align-items: flex-end;
+        justify-content: space-between;
+        margin-bottom: toRem(16);
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__row{
+            margin-bottom: toRem(10);
+        }
+    }
+
+    &__city{
+        color: #fff;
+        font-family: Montserrat; font-weight: 600;
+        font-size: toRem(24);
+        line-height: toEm(29, 24);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__city{
+            font-size: toRem(20);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__city{
+            font-size: toRem(16);
+        }
+    }
+
+    &__description{
+        color: #fff;
+        font-family: Montserrat;
+        font-size: toRem(14);
+        font-weight: 400;
+        line-height: toEm(18, 14);
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__description{
+            font-size: toRem(12);
+        }
+    }
+
+    &__price{
+        color: #fff;
+        font-family: Montserrat; font-weight: 600;
+        font-size: toRem(24);
+        line-height: toEm(29, 24);
+
+        margin-left: toRem(10);
+        white-space: nowrap;
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__price{
+            font-size: toRem(20);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__price{
+            font-size: toRem(16);
+        }
+    }
+
+    &__link{
+        font-weight: 500;
+        font-size: toRem(14);
+        line-height: toEm(18, 14)
+    }
+}
+/*------OFFERS------*/
+.offers{
+    padding: toRem(80) 0 toRem(122);
+    @media (max-width: toEm(992, 16)) {
+        padding: toRem(64) 0;
+    }
+    @media (max-width: toEm(768, 16)) {
+        padding: toRem(48) 0;
+    }
+    @media (max-width: toEm(480, 16)) {
+        padding: toRem(32) 0;
+    }
+
+    &__header{
+        margin-bottom: toRem(24);
+    }
+    @media (min-width: toEm(769, 16)) {
+        &__item{
+            display: grid;
+            grid-template-columns: toPercent(552, $container) toPercent(656, $container);
+            column-gap: toRem(24);
+        }
+        @media (max-width: toEm(992, 16)) {
+            &__item{
+                column-gap: toRem(16);
+            }
+        }
+    }
+    
+    &__item:not(:last-child){
+        margin-bottom: toRem(32);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__item:not(:last-child){
+            margin-bottom: toRem(24);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__item:not(:last-child){
+            margin-bottom: toRem(16);
+        }
+    }
+}
+.item-offers{
+    @media (min-width: toEm(769, 16)) {
+        &__info{
+            display: flex; flex-direction: column;
+        }
+    }
+    &__info{
+        border-radius: toRem(20);
+        background: $mint;
+        padding: toRem(24);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__info{
+            padding: toRem(16);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__info{
+            margin-bottom: toRem(24);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__info{
+            margin-bottom: toRem(16);
+        }
+    }
+
+    @media (min-width: toEm(769, 16)) {
+        &__row{
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+        }
+    }
+    
+    @media (min-width: toEm(769, 16)) {
+        &__heading{
+            margin-right: toRem(16);
+        }
+        @media (max-width: toEm(992, 16)) {
+            &__heading{
+                margin-right: toRem(10);
+            }
+        }
+    }
+    &__heading{
+        color: $darkGreen;
+        font-family: "TradeGothic"; font-weight: 700;
+        font-size: toRem(40);
+        line-height: toEm(48, 40);
+        max-width: toRem(363);
+
+        overflow: hidden; text-overflow: ellipsis;
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__heading{
+            font-size: toRem(32);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__heading{
+            font-size: toRem(24);
+            margin-bottom: toRem(10);
+        }
+    }
+
+    @media (min-width: toEm(769, 16)) {
+        &__price strong{
+            display: block; margin-top: toRem(4);
+        }
+    }
+    &__price{
+        border-radius: toRem(8); padding: toRem(8);
+        background: #fff; text-align: center;
+
+        color: $darkGreen;
+        font-family: "TradeGothic";
+        font-size: toRem(14);
+        font-weight: 400;
+        line-height: toEm(18, 14);
+
+        strong{
+            font-family: Montserrat; font-weight: 600;
+            font-size: toRem(20); line-height: toEm(24, 20);
+            white-space: nowrap;
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__price{
+            display: flex; align-items: center; justify-content: center;
+            padding: toRem(4);
+            strong{
+                margin-left: toRem(4);
+            }
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__price strong{
+            font-size: toRem(18);
+        }
+    }
+
+    @media (min-width: toEm(769, 16)) {
+        &__description{
+            flex: 1 1 auto;
+        }
+    }
+    &__description{
+        color: $darkGreen;
+        font-family: Montserrat; font-weight: 400;
+        font-size: toRem(14); line-height: toEm(18, 14);
+        margin: toRem(24) 0;
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__description{
+            margin: toRem(16) 0;
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__description{
+            margin: toRem(10) 0;
+        }
+    }
+
+    &__link{
+        color: $darkGreen;
+        font-family: Montserrat; font-weight: 500;
+        font-size: toRem(14); line-height: toEm(18, 14);
+        text-align: center;
+
+        display: flex; align-items: center; justify-content: center;
+        padding: toRem(8) toRem(16);
+        min-height: toRem(48);
+
+        position: relative;
+        &::after{
+            content: "";
+            background-color: $darkGreen; border-radius: 0 0 toRem(7) toRem(7);
+            position: absolute; z-index: 1;
+            bottom: 0; left: 50%; transform: translateX(-50%);
+            width: 100%; height: 60%;
+            transition: width 0.3s cubic-bezier(0.215, 0.610, 0.355, 1),
+            height 0.3s cubic-bezier(0.215, 0.610, 0.355, 1),
+            bottom 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+        }
+        &::before{
+            content: "";
+            background-color: #fff; border-radius: toRem(4);
+            position: absolute; z-index: 2; left: 0; top: 0;
+            width: 100%; height: 100%;
+        }
+        span{
+            position: relative;
+            z-index: 3;
+        }
+    }
+    &__link:hover::after, &__link:focus::after{
+        width: calc(100% + toRem(12)); height: calc(60% + toRem(6));
+        bottom: toRem(-6);
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__link{
+            min-height: toRem(40);
+        }
+    }
+
+    @media (min-width: toEm(769, 16)) { 
+        &__images{
+            align-self: flex-start;
+        }
+    }
+    @media (min-width: toEm(481, 16)) {
+        &__images{
+            display: grid; grid-template-columns: repeat(2, 1fr);  
+            gap: toRem(24) toRem(20);  
+        }
+        @media (max-width: toEm(992, 16)) {
+            &__images{
+                gap: toRem(16);
+            }
+        }
+    }
+
+    &__image{
+        padding-bottom: toPercent(200, 318);
+        position: relative;
+        img{
+            background-color: $darkGreen;
+            border-radius: toRem(20);
+
+            color: #fff;
+            font-family: "Montserrat", sans-serif;
+            font-size: toRem(16);
+            font-weight: 600;
+
+            object-fit: cover;
+            position: absolute; left: 0; top: 0;
+            width: 100%; height: 100%;
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__image{
+            width: 100%;
+            padding-bottom: toPercent(200, 450);
+        }
+        &__image:not(:last-child){
+            margin-bottom: toRem(10);
+        }
+    }
+}
+/*------INTRODUCTION------*/
+.introduction-page{
+    @media (min-width: toEm(769, 16)) {
+        &__row{
+            display: flex; justify-content: space-between;
+        }
+    }
+    &__row{
+        margin: toRem(32) 0;
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__row{
+            margin: toRem(24) 0;
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__row{
+            margin: toRem(16) 0;
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__row{
+            margin: toRem(10) 0;
+        }
+    }
+
+    &__heading{
+        color: $darkGreen;
+        font-family: "TradeGothic";
+        font-size: toRem(24);
+        font-weight: 700;
+        line-height: toEm(30, 24);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__heading{
+            font-size: toRem(22);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__heading{
+            font-size: toRem(20);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__heading{
+            font-size: toRem(18);
+        }
+    }
+
+    &__location{
+        margin: toRem(16) 0 toRem(8);
+        display: flex; align-items: center;
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__location{
+            margin: toRem(8) 0 toRem(4);
+        }
+    }
+
+    @media (min-width: toEm(769, 16)) {
+        &__info{
+            margin-right: toRem(32);
+        }
+        @media (max-width: toEm(992, 16)) {
+            &__info{
+                margin-right: toRem(24);
+            }
+        }   
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__info{
+            margin-bottom: toRem(16);
+        }   
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__info{
+            margin-bottom: toRem(10);
+        }   
+    }
+
+    @media (min-width: toEm(769, 16)) {
+        &__interaction{
+            display: flex;
+            flex-direction: column;
+        }   
+    }
+
+    @media (min-width: toEm(769, 16)) {
+        &__price{
+            flex: 1 1 auto; align-self: flex-end;
+        }
+    }
+    &__price{
+        color: $red;
+        font-family: Montserrat;
+        font-size: toRem(32);
+        font-weight: 700;
+        line-height: toEm(39, 32);
+
+        margin-bottom: toRem(16);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__price{
+            font-size: toRem(28);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__price{
+            font-size: toRem(24);
+            margin-bottom: toRem(8);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__price{
+            font-size: toRem(20);
+        }
+    }
+
+    &__buttons{
+        display: flex;
+        column-gap: toRem(15);
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__buttons{
+            column-gap: toRem(8);
+        }
+    }
+
+    &__share, &__favourites{
+        flex: 0 0 toRem(48);
+    }
+    &__link{
+        font-size: toRem(14); font-weight: 600; line-height: toEm(18, 14);
+        min-height: toRem(48); min-width: toRem(150);
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__link{
+            flex: 1 1 auto;
+        }
+    }
+}
+
+/*------------BLOCKS------------*/
+/*------HEADING------*/
+.header-block__heading, .section__heading{
+    font-family: Montserrat; font-weight: 600;
+    font-size: toRem(32); line-height: toEm(36, 32);
+}
+@media (max-width: toEm(992, 16)) {
+    .header-block__heading, .section__heading{
+        font-size: toRem(28);
+    }
+}
+@media (max-width: toEm(480, 16)) {
+    .header-block__heading, .section__heading{
+        font-size: toRem(24);
+    }
+}
+/*------HEADER-BLOCK------*/
+@media (min-width: toEm(769, 16)) {
+    .header-block.have-button{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+.header-block{
+    & > *:not(.header-block__button){
+        max-width: toRem(768);
+    }
+
+    &__text{
+        margin: 0 toRem(24) 0 0;
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__text{
+            margin: 0 toRem(16) 0 0;
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__text{
+            margin: 0 0 toRem(16);
+        }
+    }
+
+    &__heading{
+        margin-bottom: toRem(16);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__heading{
+            margin-bottom: toRem(10);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__heading{
+            margin-bottom: toRem(6);
+        }
+    }
+
+    &__description{
+        color: rgba($color: $darkGreen, $alpha: 0.75);
+        font-family: Montserrat; font-weight: 400;
+        font-size: toRem(16); line-height: toEm(19, 16);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__description{
+            font-size: toRem(14);
+        }
+    }
+    &__button{
+        border: toRem(1) solid $mint; border-radius: toRem(4);
+        padding: toRem(10) toRem(15);
+
+        color: $darkGreen;
+        font-family: Montserrat; font-weight: 500;
+        font-size: toRem(14); line-height: toEm(18, 14);
+
+        transition: background-color 0.3s cubic-bezier(0.215, 0.610, 0.355, 1),
+        color 0.3s cubic-bezier(0.215, 0.610, 0.355, 1),
+        box-shadow 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+    }
+    &__button:hover, &__button:focus{
+        background-color: $mint;
+        color: #fff;
+        box-shadow: 0 0 10px $mint;
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__button{
+            width: 100%;
+        }
+    }
+}
+/*------SELECT------*/
+.select{
+    position: relative;
+
+    &__container{
+        position: absolute; z-index: 3; left: 0; bottom: 0; transform: translateY(100%);
+        width: 100%; overflow: hidden;
+        transition: height 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+
+        box-shadow: 0px 4px 16px 0px rgba($color: $darkGreen, $alpha: 0.3); 
+        border-radius: toRem(4);
+    }
+    &__list{
+        border: toRem(4) solid $mint;
+        background-color: $mint; border-radius: toRem(4);
+    }
+
+    &__opener.reverse{
+        flex-direction: row-reverse;
+    }
+
+    &__button{
+        border-radius: toRem(4);
+        color: #fff;
+        font-family: Montserrat; font-weight: 400;
+        font-size: toRem(16);
+        line-height: toEm(20, 16);
+
+        padding: toRem(8) toRem(16);
+        text-align: left; width: 100%;
+
+        transition: background-color 0.3s cubic-bezier(0.215, 0.610, 0.355, 1),
+        color 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+    }
+    &__list:not(._hide-active) &__button:disabled,
+    &__button:focus, &__button:hover{
+        background-color: #fff;
+        color: $mint
+    }
+
+    &__icon-parent{
+        width: toRem(24); height: toRem(24);
+        display: flex; align-items: center; justify-content: center;
+        transition: transform 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+    }
+    &._active &__icon-parent,
+    &__opener:hover &__icon-parent, &__opener:focus &__icon-parent{
+        transform: rotate(180deg);
+    }
+}
+/*------SHORT-REVIEW------*/
+.short-review{
+    display: flex;
+    align-items: center;
+
+    &__rating{
+        text-align: center;
+        color: $darkGreen;
+        font-family: Montserrat; font-weight: 500;
+        font-size: toRem(12);
+        line-height: toEm(15, 12);
+
+        border: toRem(1) solid $mint;
+        border-radius: toRem(4); padding: toRem(8.5);
+        display: inline-block; min-width: toRem(40);
+
+        margin-right: toRem(8);
+    }
+
+    &__review{
+        color: $darkGreen;
+        font-family: Montserrat; font-weight: 500;
+        font-size: toRem(12);
+        line-height: toEm(15, 12);
+        strong{
+            font-weight: 700;
+        }
+    }
+}
+/*------STARS------*/
+.stars{
+    display: flex; align-items: center;
+    &__container{ display: flex }
+    &__item{
+        flex: 0 0 toRem(16); height: toRem(16);
+        display: flex; align-items: center; justify-content: center;
+    }
+    &__count{
+        color: $darkGreen;
+        font-family: Montserrat; font-weight: 500;
+        font-size: toRem(12);
+        line-height: toEm(15, 12);
+
+        margin-left: toRem(4);
+    }
+}
+/*------BUTTON_BORDER------*/
+.button_border{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: toRem(48);
+    border: toRem(1) solid $mint;
+    border-radius: toRem(4);
+
+    transition: background-color 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+}
+.button_border:hover{
+    background-color: $mint;
+}
+/*------BUTTON_GREEN------*/
+.button_green{
+    border-radius: toRem(4);
+    background-color: $mint;
+    color: $darkGreen;
+    font-family: Montserrat;
+
+    display: flex; align-items: center; justify-content: center;
+    padding: toRem(8) toRem(16);
+    min-height: toRem(48); 
+
+    transition: color 0.3s cubic-bezier(0.215, 0.610, 0.355, 1),
+    text-shadow 0.3s cubic-bezier(0.215, 0.610, 0.355, 1),
+    background-color 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+}
+button.button_green:not(:disabled):hover, .button_green:focus,
+a.button_green:hover{
+    background-color: $darkGreen;
+    color: $mint;
+    text-shadow: 0 0 5px $mint;
+}
+/*------BREADCRUMBS------*/
+.breadcrumbs{
+    &__list{
+        display: flex;
+        gap: toRem(8) toRem(32);
+    }
+    &__link{
+        color: $red;
+        font-family: Montserrat; font-weight: 500;
+        font-size: toRem(14);
+        line-height: toEm(18, 14);
+        transition: text-shadow 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+    }
+    &__link:not(.current):hover, &__link:not(.current):focus{
+        text-shadow: 0 0 7.5px $red;
+    }
+
+    &__link.current{
+        color: rgba($color: $darkGreen, $alpha: 0.75);
+    }
+    &__link:not(:last-child){
+        position: relative;
+        &::after{
+            content: "";
+            position: absolute; right: toRem(-16); top: 50%; 
+            transform: translateY(-50%) translateX(50%) rotate(270deg);
+            background: url("../../assets/icons/arrow_bottom.svg");
+            background-repeat: no-repeat; background-size: contain;
+            width: toRem(12); height: toRem(6);
+        }
+    }
+}
+.introduction-details .breadcrumbs{
+    &__link.current{
+        color: rgba($color: $darkGreen, $alpha: 0.4);
+    }
+    &__link{
+        color: $darkGreen;
+    }
+    &__link:not(.current):hover, &__link:not(.current):focus{
+        text-shadow: 0 0 7.5px $darkGreen;
+    }
+}
+.link-breadcrumbs{
+    &__inner{
+        display: flex; align-items: center; height: 100%;
+    }
+}
+/*------LOCATION------*/
+.location-block{
+    display: flex; align-items: center;
+
+    &__icon-parent{
+        display: flex; align-items: center; justify-content: center;
+        flex: 0 0 toRem(18); height: toRem(18);
+        margin-right: toRem(4);
+    }
+    &__description{
+        color: rgba($color: $darkGreen, $alpha: 0.75);
+        font-family: Montserrat;
+        font-size: toRem(14);
+        font-weight: 500;
+        line-height: toEm(18, 14);
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__description{
+            font-size: toRem(12);
+        }
+    }
+}
+/*------FLIGHT-AMENITIES------*/
+.flight-amenities{
+    display: flex;
+
+    &__item{
+        display: flex; align-items: center; justify-content: center;
+        flex: 0 0 toRem(64); min-height: toRem(48);
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__item{
+            flex: 0 0 toRem(48);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__item{
+            flex: 0 0 toRem(32);
+            min-height: toRem(32);
+        }
+    }
+    
+    &__item:not(:last-child){
+        position: relative;
+        &::after{
+            content: "";
+            position: absolute; right: 0; top: 0;
+            width: toRem(1); height: 100%;
+            background-color: $blueGray;
+        }
+    }
+}
+
+/*------------BOOKING------------*/
+.booking{
+    &::after{
+        content: ""; background-color: rgba($color: #000, $alpha: 0.5);
+        position: fixed; z-index: 9; left: 0; top: 0;
+        width: 100%; height: 100%; transform: scale(0);
+        transition: transform 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+    }
+    &._appear-modal::after{
+        transform: scale(1);
+    }
+
+    &__introduction{
+        padding: toRem(32) toRem(24);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__introduction{
+            padding: toRem(24);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__introduction{
+            padding: toRem(16);
+        }
+    }
+
+    @media (min-width: toEm(993, 16)) {
+        &__row{
+            display: grid; align-items: flex-start;
+            column-gap: toRem(40);
+            grid-template-columns: toRem(790) toRem(450);
+        }
+        @media (max-width: toEm($containerBookingPaddings, 16)) {
+            &__row{
+                grid-template-columns: calc(toRem(790) - (toRem($containerBookingPaddings) - 100vw) / 2) calc(toRem(450) - (toRem($containerBookingPaddings) - 100vw) / 2);
+            }
+        }   
+    }
+    &__row{
+        margin-top: toRem(28);
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__row{
+            margin-top: toRem(24);
+        }
+    }
+
+    &__article{
+        border-radius: toRem(12);
+        box-shadow: 0px 4px 16px 0px rgba($color: $darkGreen, $alpha: 0.05);
+        background-color: #fff;
+        &:not(:last-child){
+            margin-bottom: toRem(40);
+        }
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__article:not(:last-child), &__left{
+            margin-bottom: toRem(32);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__article:not(:last-child), &__left{
+            margin-bottom: toRem(24);
+        }
+    }
+
+    @media (min-width: toEm(769, 16)) {
+        &__payment, &__cards{
+            padding: toRem(16);
+        }
+        &__authorization, &__total{
+            padding: toRem(24);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__article{
+            padding: toRem(16);
+        }
+    }
+}
+/*------INTRODUCTION------*/
+.introduction-booking{
+    @media (min-width: toEm(481, 16)) {
+        &__header{
+            align-items: center; justify-content: space-between;
+        }
+    }
+    &__header{
+        display: flex; 
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__header{
+            flex-direction: column-reverse;
+        }
+    }
+
+    @media (min-width: toEm(481, 16)) {
+        &__heading{
+            margin-right: toRem(24);
+        }
+        @media (max-width: toEm(768, 16)) {
+            &__heading{
+                margin-right: toRem(16);
+            }
+        }
+    }
+    &__heading{
+        color: $darkGreen;
+        font-family: "TradeGothic"; font-weight: 700;
+        font-size: toRem(24);
+        line-height: toEm(30, 24);
+
+        max-width: toRem(491);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__heading{
+            font-size: toRem(22);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__heading{
+            font-size: toRem(20);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__heading{
+            font-size: toRem(18);
+            margin-top: toRem(4);
+        }
+    }
+
+    &__price{
+        color: $red;
+        font-family: Montserrat; font-weight: 700;
+        font-size: toRem(14);
+        line-height: toEm(14, 14);
+        strong{
+            font-size: toRem(32);
+            line-height: toEm(32, 32);
+        }
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__price strong{
+            font-size: toRem(28);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__price strong{
+            font-size: toRem(24);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__price strong{
+            font-size: toRem(20);
+        }
+    }
+
+    @media (min-width: toEm(481, 16)) {
+        &__schedule{
+            display: flex; align-items: center;
+            position: relative; min-height: toRem(48);
+            &::after{
+                content: "";
+                background-size: contain; background-repeat: no-repeat;
+                position: absolute; left: 50%; top: 50%; transform: translateY(-50%) translateX(-50%);
+            }
+        }
+    }
+    &__schedule{
+        display: flex; align-items: center;
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__schedule{
+            column-gap: toRem(16);
+        }
+    }
+
+    @media (min-width: toEm(481, 16)) {
+        &__schedule-item{
+            position: relative;
+            &:first-child{
+                padding-right: toRem(24 + 24 + 33 + 6 + 24);
+            }
+            &:last-child{
+                padding-left: toRem(24 + 24 + 33 + 6 + 24);
+            }
+            &::after{
+                content: ""; 
+                border-radius: 50%; background-color: $darkGreen;
+                width: toRem(6); height: toRem(6);
+                position: absolute; top: 50%; transform: translateY(-50%);
+            }
+            &::before{
+                content: ""; 
+                background-color: $darkGreen;
+                width: toRem(33); height: toRem(1);
+                position: absolute; top: 50%; transform: translateY(-50%);
+            }
+            &:first-child{
+                &::after{ right: toRem(24 + 24 + 33); }
+                &::before{ right: toRem(24 + 24); }
+            }
+            &:last-child{
+                &::after{ left: toRem(24 + 24 + 33); }
+                &::before{ left: toRem(24 + 24); }
+            }
+        }
+        @media (max-width: toEm(768, 16)) {
+            &__schedule-item{
+                &:first-child{
+                    padding-right: toRem(20 + 16 + 33 + 6 + 16);
+                    &::after{ right: toRem(20 + 16 + 33); }
+                    &::before{ right: toRem(20 + 16); }
+                }
+                &:last-child{
+                    padding-left: toRem(20 + 16 + 33 + 6 + 16);
+                    &::after{ left: toRem(20 + 16 + 33); }
+                    &::before{ left: toRem(20 + 16); }
+                }
+            }
+        }
+    }
+    &__schedule-item{
+        width: 50%;
+        &:last-child{
+            display: flex; flex-direction: column; align-items: flex-end;
+        }
+    }
+}
+.introduction-room{
+    &__link{ margin: toRem(24) 0 toRem(40); }
+    @media (max-width: toEm(992, 16)) {
+        &__link{ margin: toRem(16) 0 toRem(32); }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__link{ margin: toRem(16) 0 toRem(24); }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__link{ margin: toRem(16) 0; }
+    }
+    
+    @media (min-width: toEm(481, 16)) {
+        &__schedule::after{
+            background-image: url("../../assets/icons/appartments.svg");
+            width: toRem(42); height: toRem(45);
+        }
+        @media (max-width: toEm(992, 16)) {
+            &__schedule{
+                min-height: toRem(38);
+                &::after{ width: toRem(35); height: toRem(38); }
+            }
+        }
+    }
+}
+.introduction-airline{
+    @media (min-width: toEm(481, 16)) {
+        &__subheader{
+            display: flex; align-items: center; justify-content: space-between;
+        }
+    }
+    &__subheader{
+        margin-top: toRem(24);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__subheader{
+            margin-top: toRem(16);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__subheader{
+            margin-top: toRem(8);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__subheader{
+            margin-top: toRem(4);
+        }
+    }
+
+    @media (min-width: toEm(481, 16)) {
+        &__date{
+            margin-right: toRem(24);
+        }
+        @media (max-width: toEm(768, 16)) {
+            &__date{
+                margin-right: toRem(16);
+            }
+        }
+    }
+    &__date{
+        color: $darkGreen;
+        font-family: "TradeGothic"; font-weight: 700;
+        font-size: toRem(20); line-height: toEm(25, 20);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__date{
+            font-size: toRem(18);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__date{
+            font-size: toRem(16);
+        }
+    }
+
+    &__fly-duration{
+        color: $darkGreen;
+        font-family: Montserrat; font-weight: 500;
+        font-size: toRem(20);
+        line-height: toEm(24, 20);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__fly-duration{
+            font-size: toRem(18);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__fly-duration{
+            font-size: toRem(16);
+        }
+    }
+
+    @media (min-width: toEm(481, 16)) {
+        &__row{
+            display: flex; justify-content: space-between; align-items: center;
+        }
+    }
+    &__row{ margin: toRem(24) 0 toRem(40); }
+    @media (max-width: toEm(992, 16)) { &__row{ margin: toRem(16) 0 toRem(32); } }
+    @media (max-width: toEm(768, 16)) { &__row{ margin: toRem(16) 0 toRem(24); } }
+    @media (max-width: toEm(480, 16)) { &__row{ margin: toRem(16) 0; } }
+
+    @media (min-width: toEm(481, 16)) {
+        &__amenities{
+            margin-left: toRem(24);
+        }
+        @media (max-width: toEm(768, 16)) {
+            &__amenities{
+                margin-left: toRem(16);
+            }
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__amenities{
+            justify-content: center;
+            margin-top: toRem(8);
+        }
+    }
+
+    @media (min-width: toEm(481, 16)) {
+        &__schedule::after{
+            background-image: url("../../assets/icons/plane.svg");
+            width: toRem(45); height: toRem(39);
+        }
+        @media (max-width: toEm(992, 16)) {
+            &__schedule{
+                min-height: toRem(33);
+                &::after{ width: toRem(38); height: toRem(33); }
+            }
+        }
+    }
+}
+.introduction{
+    &__link{
+        border: toRem(0.5) solid $mint;
+        border-radius: toRem(8);
+
+        display: flex; align-items: center;
+        padding: toRem(16) toRem(32);
+
+        transition: background-color 0.3s cubic-bezier(0.215, 0.610, 0.355, 1),
+        box-shadow 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+    }
+    &__link:hover, &__link:focus{
+        background-color: $mint;
+        box-shadow: inset 0 0 10px #fff;
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__link{
+            padding: toRem(16) toRem(24);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__link{
+            padding: toRem(16);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__link{
+            padding: toRem(10);
+        }
+    }
+}
+.link-introduction{
+    @media (min-width: toEm(481, 16)) {
+        &__logo{
+            flex: 0 0 toRem(63);
+            margin-right: toRem(24);
+            img{
+                width: 100%; height: 100%;
+            }
+        }
+        @media (max-width: toEm(768, 16)) {
+            &__logo{
+                flex: 0 0 toRem(48);
+                margin-right: toRem(16);
+            }
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__logo{
+            display: none;
+        }
+    }
+
+    &__title{
+        color: $darkGreen;
+        font-family: Montserrat; font-weight: 600;
+        font-size: toRem(24);
+        line-height: toEm(29, 24);
+
+        margin-bottom: toRem(8);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__title{
+            font-size: toRem(22);
+            margin-bottom: toRem(4);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__title{
+            font-size: toRem(20);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__title{
+            font-size: toRem(18);
+        }
+    }
+}
+@media (min-width:toEm(481, 16)) {
+    .link-introduction-room{
+        &__logo{
+            height: toRem(63);
+            img{ border-radius: toRem(12); }
+        }
+        @media (max-width: toEm(768, 16)) {
+            &__logo{
+                height: toRem(48);
+            }
+        }
+    }
+}
+.link-introduction-airline{
+    &__logo{
+        height: auto;
+    }
+    &__plane{
+        color: $darkGreen;
+        font-family: Montserrat; font-weight: 500;
+        font-size: toRem(14);
+        line-height: toEm(18, 14);
+    }
+}
+.schedule-item-introduction-booking{
+    &__time{
+        display: block;
+        color: $darkGreen;
+        font-family: Montserrat;line-height: toEm(24, 20);
+        font-size: toRem(20);
+        font-weight: 600;
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__time{
+            font-size: toRem(18);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__time{
+            font-size: toRem(16);
+        }
+    }
+
+    &__type{
+        color: rgba($color: $darkGreen, $alpha: 0.6);
+        font-family: Montserrat; font-weight: 500;
+        font-size: toRem(14);
+        line-height: toEm(18, 14);
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__type{
+            font-size: toRem(12);
+        }
+    }
+}
+.schedule-item-introduction-airline{
+    @media (min-width: toEm(769, 16)) {
+        &:first-child{
+            display: flex;
+            align-items: center;
+        }
+        &:last-child &__inner{
+            display: flex;
+            align-items: center;
+        }
+    }
+
+    @media (min-width: toEm(769, 16)) {
+        &__time{
+            margin-right: toRem(16);
+        }
+        @media (max-width: toEm(768, 16)) {
+            &__time{
+                margin-right: toRem(8);
+            }
+        }
+    }
+    &__time{
+        font-size: toRem(24);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__time{
+            font-size: toRem(22);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__time{
+            font-size: toRem(20);
+            margin-bottom: toRem(4);
+        }
+    }
+}
+.schedule-item-introduction-room{
+    &__time{
+        margin-bottom: toRem(8);
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__time{
+            margin-bottom: toRem(4);
+        }
+    }
+}
+/*------RADIOS------*/
+.radios-booking{
+    &__item{
+        min-height: toRem(80);
+        border-radius: toRem(12);
+        padding: toRem(16); position: relative;
+        transition: background-color 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__item{
+            min-height: toRem(64);
+        }
+    }
+    &:not(._hide-active) &__item._choosed, &__item._hovered{
+        background-color: $mint;
+    }
+
+    &__item::after{
+        content: "";
+        border-radius: 50%; border: toRem(2) solid $darkGreen;
+        width: toRem(20); height: toRem(20);
+        position: absolute; right: toRem(30 + 16); top: 50%; transform: translateY(-50%);
+        transition: border-color 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__item::after{ right: toRem(16); }
+    }
+    &__item::before{
+        content: "";
+        border-radius: 50%; background-color: #fff;
+        width: toRem(10); height: toRem(10);
+        position: absolute; right: toRem(30 + 16 + 5); top: 50%; 
+        transform: translateY(-50%) scale(0);
+        transition: transform 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__item::before{ right: toRem(16 + 5); }
+    }
+
+    &:not(._hide-active) &__item._choosed::after, &__item._hovered::after{
+        border-color: #fff;
+    }
+    &:not(._hide-active) &__item._choosed::before, &__item._hovered::before{
+        transform: translateY(-50%) scale(1);
+    }
+}
+.item-radios-booking{
+    &__input{
+        appearance: none;
+        position: absolute; left: 0; top: 0; z-index: 1;
+        width: 100%; height: 100%;
+    }
+}
+/*------PAYMENT------*/
+.payment{
+    &__way{
+        display: flex; flex-direction: column; justify-content: center;
+    }
+}
+.way-payment{
+    @media (min-width: toEm(481, 16)) {
+        &__title{
+            margin-bottom: toRem(8);
+        }
+        @media (max-width: toEm(768, 16)) {
+            margin-bottom: toRem(4);
+        }
+    }
+    &__title{
+        color: $darkGreen;
+        font-family: "TradeGothic"; font-weight: 700;
+        font-size: toRem(16); line-height: toEm(20, 16);
+
+        max-width: toRem(632); padding-right: toRem(30 + 20 + 16);
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__title{
+            padding-right: toRem(16 + 20 + 16);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__title{
+            font-size: toRem(14);
+        }
+    }
+
+    &__description{
+        color: $darkGreen;
+        font-family: Montserrat; font-weight: 400;
+        font-size: toRem(14); line-height: toEm(18, 14);
+
+        max-width: toRem(632); padding-right: toRem(30 + 20 + 16);
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__description{
+            padding-right: toRem(16 + 20 + 16);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__description{
+            font-size: toRem(12);
+        }
+    }
+
+    &__link{
+        align-self: flex-start;
+        position: relative; z-index: 2;
+        color: $darkGreen;
+        font-family: Montserrat; font-weight: 500;
+        font-size: toRem(12); line-height: toEm(15, 12);
+        margin-top: toRem(12); text-decoration: underline;
+        transition: text-shadow 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+    }
+    &__link:hover, &__link:focus{
+        text-shadow: 0 0 5px $darkGreen;
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__link{
+            margin-top: toRem(8);
+        }
+    }
+}
+/*------CARDS------*/
+.cards{
+    &__item{
+        display: flex; align-items: center;
+    }
+
+    &__add{
+        margin-top: toRem(16); width: 100%; min-height: toRem(190);
+        display: flex; flex-direction: column; justify-content: center; //align-items: center;
+
+        padding: toRem(16) toRem(24);
+        border: dashed toRem(2) $mint; border-radius: toRem(15);
+        transition: box-shadow 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__add{
+            min-height: toRem(160);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__add{
+            padding: toRem(16);
+            min-height: toRem(130);
+        }
+    }
+}
+.item-cards{
+    &__number{
+        color: $darkGreen;
+        font-family: "TradeGothic"; font-weight: 700;
+        font-size: toRem(16); line-height: toEm(20, 16);
+        margin: 0 toRem(8) 0 toRem(32);
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__number{
+            margin: 0 toRem(8) 0 toRem(24);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__number{
+            margin: 0 toRem(8) 0 toRem(16);
+            font-size: toRem(14);
+        }
+    }
+
+    &__exp-date{
+        color: $darkGreen;
+        font-family: Montserrat; font-weight: 400;
+        font-size: toRem(14);
+        line-height: toEm(18, 14);
+
+        padding-right: toRem(30 + 20 + 16);
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__exp-date{
+            padding-right: toRem(16 + 20 + 16);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__exp-date{
+            font-size: toRem(12);
+        }
+    }
+}
+.add-cards{
+    &:hover, &:focus{
+        box-shadow: inset 0 0 25px $mint;
+        .add-cards__icon-parent{ filter: drop-shadow(0 0 5px $mint); }
+        .add-cards__description{ text-shadow: 0 0 5px $darkGreen; }
+    }
+
+    &__icon-parent{
+        flex: 0 0 toRem(64); height: toRem(64);
+        display: flex; align-items: center; justify-content: center;
+        transition: filter 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__icon-parent{
+            flex: 0 0 toRem(56); height: toRem(56);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__icon-parent{
+            flex: 0 0 toRem(50); height: toRem(50);
+        }
+    }
+
+    &__description{
+        color: $darkGreen;
+        font-family: Montserrat; font-weight: 500;
+        font-size: toRem(12); line-height: toEm(15, 12);
+        margin-top: toRem(10); transition: text-shadow 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+    }
+}
+/*------AUTHORIZATION------*/
+.authorization-booking{
+    &__title{
+        color: $darkGreen;
+        font-family: "TradeGothic"; font-weight: 700;
+        font-size: toRem(20); line-height: toEm(24, 20);
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__title{
+            font-size: toRem(18);
+        }
+    }
+
+    &__input{
+        border: toRem(1) solid $purpleGray;
+        border-radius: toRem(4);
+        min-height: toRem(56); width: 100%;
+        padding: toRem(8) toRem(16);
+
+        margin: toRem(16) 0;
+
+        color: $darkPurple;
+        font-family: Montserrat; font-weight: 400;
+        font-size: toRem(16); line-height: toEm(20, 16);
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__input{
+            min-height: toRem(48);
+            margin: toRem(10) 0;
+        }
+    }
+
+    @media (min-width: toEm(993, 16)) {
+        &__description{
+            min-height: toRem(35);
+        }
+    }
+    &__description{
+        color: $darkGreen;
+        font-family: Montserrat; font-weight: 400;
+        font-size: toRem(14); line-height: toEm(18, 14);
+    }
+
+    &__continue{
+        font-size: toRem(16); line-height: toEm(20, 16);
+        font-weight: 500; width: 100%;
+
+        margin: toRem(16) 0 toRem(24);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__continue{ margin: toRem(16) 0; }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__continue{ margin: toRem(10) 0; }
+    }
+
+    &__or{
+        display: flex;
+        align-items: center;
+        span{
+            color: $darkGreen;
+            font-family: Montserrat; font-weight: 500;
+            font-size: toRem(16); line-height: toEm(20, 16);
+
+            background-color: #fff; padding: 0 toRem(24);
+        }
+        &::after, &::before{
+            content: ""; 
+            background-color: rgba($color: $darkGreen, $alpha: 0.25);
+            width: 100%; height: toRem(1);
+        }
+    }
+
+    &__variants{
+        margin-top: toRem(24);
+        display: grid; gap: toRem(16);
+        grid-template-columns: repeat(3, 1fr);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__variants{
+            margin-top: toRem(16);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__variants{
+            margin-top: toRem(10); gap: toRem(10);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__variants{
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    &__variant{
+        border: toRem(1) solid $mint; border-radius: toRem(4);
+        min-height: toRem(56);
+        padding: toRem(16 - 1) toRem(24 + 1);
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__variant{
+            min-height: toRem(48);
+            padding: toRem(12 - 1) toRem(16 + 1);
+        }
+    }
+
+    &__variant.bigger, &__variant:first-child:last-child{
+        grid-column: 1 / 4;
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__variant.bigger{
+            grid-column: 1 / 3;
+        }
+    }
+    &__variant.bigger.have-text{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+.variant-authorization-booking{
+    &__icon-parent{
+        width: toRem(24); height: toRem(24);
+        display: flex; align-items: center; justify-content: center;
+        margin: 0 auto;
+    }
+    &.bigger.have-text &__icon-parent{
+        margin: unset;
+    }
+    &__description{
+        color: $darkGreen;
+        font-family: Montserrat; font-weight: 500;
+        font-size: toRem(16); line-height: toEm(20, 16);
+    }
+    &.bigger &__description{
+        margin-left: toRem(16);
+    }
+}
+/*------TOTAL------*/
+.total{
+    &__header{
+        display: flex;
+    }
+
+    @media (min-width: toEm(993, 16)) {
+        &__image{
+            min-width: toRem(90);
+        }
+    }
+    @media (min-width: toEm(481, 16)) {
+        &__image{
+            flex: 0 0 toRem(120); min-height: toRem(120);
+            margin-right: toRem(24);
+            img{
+                background-color: $mint; border-radius: toRem(12);
+                object-fit: cover;
+
+                color: #fff;
+                font-family: "Montserrat", sans-serif;
+                font-size: toRem(14);
+                font-weight: 600;
+
+                display: inline-block;
+                width: 100%; height: 100%;
+            }
+        }
+    }
+    @media (max-width: toEm($containerBookingPaddings, 16)) and (min-width: toEm(993, 16)) {
+        &__image{
+            flex: 0 0 calc(toRem(120) - (toRem($containerBookingPaddings) - 100vw) / 2);
+        }
+    }
+    @media (max-width: toEm(1250, 16)) and (min-width: toEm(481, 16)) {
+        &__image{
+            margin-right: toRem(16);
+        }
+    }
+    @media (max-width: toEm(768, 16)) and (min-width: toEm(481, 16)) {
+        &__image{
+            flex: 0 0 toRem(100); min-height: toRem(100);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__image{ display: none; }
+    }
+
+    @media (min-width: toEm(993, 16)) {
+        &__subimage{
+            width: toRem(258);
+        }
+        @media (max-width: toEm(1250, 16)) {
+            &__subimage{
+                width: calc(toRem(258 + (24 - 16)) - (toRem(1250) - 100vw) / 2);
+            }
+        }
+    }
+    &__subimage{
+        display: flex;
+        flex-direction: column;
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__subimage{
+            width: calc(toRem(794) - (toRem(992) - 100vw));
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__subimage{
+            width: calc(toRem(418) - (toRem(480) - 100vw));
+        }
+    }
+
+    &__supheading{
+        max-width: 100%;
+        white-space: nowrap; text-overflow: ellipsis; overflow: hidden;
+        color: rgba($color: $darkGreen, $alpha: 0.75);
+        font-family: Montserrat; font-weight: 500;
+        font-size: toRem(16); line-height: toEm(20, 16);
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__supheading{
+            font-size: toRem(14);
+        }
+    }
+
+    &__heading{
+        color: $darkGreen;
+        font-family: Montserrat; font-weight: 600;
+        font-size: toRem(20); line-height: toEm(24, 20);
+
+        margin: toRem(4) 0 toRem(16.5);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__heading{
+            flex: 1 1 auto;
+            margin: toRem(4) 0 toRem(10.5);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__heading{ font-size: toRem(18); }
+    }
+
+    &__protect{
+        color: $darkGreen;
+        font-family: Montserrat; font-weight: 600;
+        font-size: toRem(16); line-height: toEm(20, 16);
+        margin: toRem(32.5) 0;
+        em{
+            font-weight: 700;
+        }
+
+        position: relative;
+        &::after, &::before{
+            content: ""; background-color: rgba($color: $darkGreen, $alpha: 0.25);
+            position: absolute; left: 0;
+
+            width: 100%; height: toRem(0.5);
+        }
+        &::after{
+            top: toRem(-16); transform: translateY(-50%);
+        }
+        &::before{
+            bottom: toRem(-16); transform: translateY(50%);
+        }
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__protect{
+            margin: toRem(24.5) 0;
+            &::after{ top: toRem(-12);  }
+            &::before{ bottom: toRem(-12); }
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__protect{
+            font-size: toRem(14); margin: toRem(16.5) 0;
+            &::after{ top: toRem(-8);  }
+            &::before{ bottom: toRem(-8); }
+        }
+    }
+
+    &__supdetails{
+        color: $darkGreen;
+        font-family: "TradeGothic"; font-weight: 700;
+        font-size: toRem(16); line-height: toEm(20, 16);
+        margin-bottom: toRem(16);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__supdetails{
+            margin-bottom: toRem(10);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__supdetails{
+            font-size: toRem(14);
+        }
+    }
+    
+    &__details{
+        margin-bottom: toRem(32.5);
+        position: relative;
+        &::after{
+            content: ""; background-color: rgba($color: $darkGreen, $alpha: 0.25);
+            position: absolute; left: 0; bottom: toRem(-16.5); transform: translateY(-50%);
+            width: 100%; height: toRem(0.5);
+        }
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__details{
+            margin-bottom: toRem(24.5);
+            &::after{ bottom: toRem(-12); }
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__details{
+            margin-bottom: toRem(16.5);
+            &::after{ bottom: toRem(-8); }
+        }
+    }
+
+    &__detail:not(:last-child){
+        margin-bottom: toRem(16);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__detail:not(:last-child){
+            margin-bottom: toRem(10);
+        }
+    }
+}
+.detail-total, .main-total{
+    display: flex; align-items: center; justify-content: space-between;
+
+    &__description{
+        color: $darkGreen;
+        font-family: Montserrat; font-weight: 500;
+        font-size: toRem(16); line-height: toEm(20, 16);
+
+        margin-right: toRem(16);
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__description{
+            font-size: toRem(14); margin-right: toRem(10);
+        }
+    }
+
+    &__value{
+        color: $darkGreen;
+        font-family: Montserrat; font-weight: 600;
+        font-size: toRem(16); line-height: toEm(20, 16);
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__value{
+            font-size: toRem(14);
+        }
+    }
+}
+/*------ADD-CARD------*/
+.add-card{
+    padding: toRem(64);
+    border-radius: toRem(12); background: #fff;
+    position: fixed; z-index: 10; left: 50%; top: 50%; transform: translateX(-50%) translateY(-50%) scale(0);
+    width: toRem(640); max-height: calc(100vh - toRem(32) * 2);
+    transition: transform 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+    overflow-y: auto;
+
+    @media (max-width: toEm($container, 16)) {
+        padding: toRem(48);
+    }
+    @media (max-width: toEm(992, 16)) {
+        padding: toRem(32);
+    }
+    @media (max-width: toEm(768, 16)) {
+        padding: toRem(24);
+        max-height: calc(100vh - toRem(24) * 2);
+    }
+    @media (max-width: toEm(640 + $containerPadding * 2, 16)) {
+        width: calc(100vw - toRem($containerPadding * 2));
+    }
+    @media (max-width: toEm(480, 16)) {
+        padding: toRem(16);
+        max-height: calc(100vh - toRem(16) * 2);
+    }
+
+    &__close-parent{
+        display: flex; align-items: center; justify-content: center;
+        width: toRem(24); height: toRem(24); margin-left: auto;
+    }
+    &__close{
+        position: relative;
+        width: 100%; height: 100%;
+        &::after, &::before{
+            content: ""; background-color: #000;
+            position: absolute; left: 50%; top: 50%; 
+            transform: translateY(-50%) translateX(-50%) rotate(45deg);
+            height: toRem(2); width: toRem(18.14); border-radius: toRem(1);
+        }
+        &::before{
+            transform: translateY(-50%) translateX(-50%) rotate(-45deg);
+        }
+    }
+
+    &__heading{
+        color: #000;
+        font-family: "TradeGothic"; font-weight: 700;
+        font-size: toRem(40); line-height: toEm(48, 40);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__heading{
+            font-size: toRem(34);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__heading{
+            font-size: toRem(28);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__heading{
+            font-size: toRem(24);
+        }
+    }
+
+    &__inputs{ margin: toRem(40) 0 toRem(24); }
+    @media (max-width: toEm(992, 16)) {
+        &__inputs{ margin: toRem(32) 0 toRem(16); }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__inputs{ margin: toRem(24) 0 toRem(16); }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__inputs{ margin: toRem(16) 0 toRem(10); }
+    }
+
+    &__inputs > *:not(:last-child){ margin-bottom: toRem(16); }
+    @media (max-width: toEm(480, 16)) {
+        &__inputs > *:not(:last-child){ margin-bottom: toRem(10); }
+    }
+
+    &__row{ display: flex; gap: toRem(24); }
+    @media (max-width: toEm(768, 16)) {
+        &__row{ gap: toRem(16); }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__row{ gap: toRem(10); }
+    }
+    &__row > *{ flex: 1 1 auto; }
+
+    &__checkbox{
+        display: flex;
+        align-items: center;
+    }
+
+    &__button{
+        margin: toRem(40) 0 toRem(16);
+        font-size: toRem(14); font-weight: 600; line-height: toEm(18, 14);
+        width: 100%;
+        transition: color 0.3s cubic-bezier(0.215, 0.610, 0.355, 1),
+        text-shadow 0.3s cubic-bezier(0.215, 0.610, 0.355, 1),
+        background-color 0.3s cubic-bezier(0.215, 0.610, 0.355, 1),
+        opacity 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__button{ margin: toRem(32) 0 toRem(16); }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__button{ margin: toRem(24) 0 toRem(16); }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__button{ margin: toRem(16) 0 toRem(10); }
+    }
+    &__button:disabled{
+        opacity: 0.5;
+    }
+
+    &__copyright{
+        text-align: center;
+        color: $darkGreen;
+        font-family: Montserrat; font-weight: 400;
+        font-size: toRem(12); line-height: toEm(15, 12);
+    }
+}
+.booking._appear-modal .add-card{
+    transform: translateX(-50%) translateY(-50%) scale(1);
+}
+.input-add-card{
+    &__description{
+        display: block; width: max-content; 
+        position: relative; z-index: 2;
+        color: $darkGreen; background-color: #fff;
+        font-family: Montserrat; font-weight: 400;
+        font-size: toRem(14); line-height: toEm(18, 14);
+        margin: 0 toRem(12); padding: 0 toRem(4);
+
+        white-space: nowrap; text-overflow: ellipsis; overflow: hidden;
+    }
+}
+.input-add-card__field, .select-add-card__opener{
+    border: toRem(1) solid $purpleGray; border-radius: toRem(4);
+    position: relative; z-index: 1;
+    width: 100%; min-height: toRem(56); margin-top: toRem(-10);
+    @media(max-width: toEm(768, 16)){
+        min-height: toRem(48);
+    }
+
+    color: $darkPurple;
+    font-family: Montserrat; font-weight: 400;
+    font-size: toRem(16); line-height: toEm(20, 16);
+
+    padding: toRem(8) toRem(16);
+}
+.select-add-card__opener{
+    display: flex; align-items: center; justify-content: space-between;
+    span{
+        margin-right: toRem(16);
+    }
+}
+.checkbox-add-card{
+    &__input-parent{
+        flex: 0 0 toRem(24); height: toRem(24);
+        display: flex; align-items: center; justify-content: center;
+        position: relative;
+        &::after{
+            content: ""; pointer-events: none;
+            position: absolute; left: 50%; top: 50%;
+            transform: translateX(-50%) translateY(-50%);
+
+            border: toRem(2) solid $darkGreen; border-radius: toRem(4);
+            width: toRem(19.5); height: toRem(19.5);
+
+            transition: background-color 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+        }
+    }
+    &__input{
+        appearance: none; width: toRem(19.5); height: toRem(19.5);
+    }
+    &._checked &__input-parent::after{
+        background-color: $darkGreen;
+    }
+    
+    &__subinput{
+        color: $darkGreen;
+        font-family: Montserrat; font-weight: 500;
+        font-size: toRem(14); line-height: toEm(18, 14);
+        margin-left: toRem(8);
+    }
+}
+
+/*------------Details------------*/
+.introduction-details{
+    &__breadcrumbs{
+        margin-bottom: toRem(31);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__breadcrumbs{
+            margin-bottom: toRem(24);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__breadcrumbs{
+            margin-bottom: toRem(16);
+        }
+    }
+
+    @media (min-width: toEm(769, 16)) {
+        &__row{
+            display: flex; align-items: center; justify-content: space-between;
+        }
+    }
+
+    @media (min-width: toEm(769, 16)) {
+        &__info{
+            margin-right: toRem(32);
+        }
+        @media (max-width: toEm(992, 16)) {
+            &__info{
+                margin-right: toRem(24);
+            }
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__info{
+            margin-bottom: toRem(16);
+        }
+    }
+
+    &__heading{
+        color: $darkGreen;
+        font-family: "TradeGothic"; font-weight: 700;
+        font-size: toRem(24); line-height: toEm(30, 24);
+        margin-bottom: toRem(16);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__heading{
+            font-size: toRem(22); margin-bottom: toRem(8);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__heading{
+            margin-bottom: toRem(4);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__heading{
+            font-size: toRem(20);
+        }
+    }
+
+    @media (min-width: toEm(769, 16)) {
+        &__interaction{
+            display: flex; flex-direction: column;
+            align-items: flex-end;
+        }
+    }
+
+    &__price{
+        color: $darkGreen;
+        font-family: Montserrat; font-weight: 700;
+        font-size: toRem(32); line-height: toEm(39, 32);
+        margin-bottom: toRem(16);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__price{
+            font-size: toRem(28); margin-bottom: toRem(8);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__price{
+            margin-bottom: toRem(4);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__price{
+            font-size: toRem(24);
+        }
+    }
+
+    &__buttons{
+        display: flex;
+        column-gap: toRem(15);
+    }
+
+    &__share{
+        flex: 0 0 toRem(48);
+    }
+    &__link{
+        font-size: toRem(14);
+        font-weight: 600;
+        line-height: toEm(18, 14);
+        min-width: toRem(150);
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__link{
+            width: 100%;
+        }
+    }
+}
+
+.ticket{
+    padding: toRem(40) 0 toRem(64);
+    @media (max-width: toEm(992, 16)) {
+        padding: toRem(32) 0 toRem(48);
+    }
+    @media (max-width: toEm(768, 16)) {
+        padding: toRem(32) 0;
+    }
+
+    @media (min-width: toEm(481, 16)) {
+        .container{
+            display: flex; flex-wrap: wrap;
+        }
+    }
+
+    @media (min-width: toEm(481, 16)) {
+        &__schedule{
+            flex-direction: column;
+            flex: 0 0 toPercent(247, $container);
+            min-height: toRem(309);
+        }
+        @media (max-width: toEm($containerPaddings, 16)) {
+            &__schedule{
+                min-height: toRem(280);
+            }
+        }
+        @media (max-width: toEm(992, 16)) {
+            &__schedule{
+                min-height: toRem(230);
+            }
+        }
+        @media (max-width: toEm(768, 16)) {
+            &__schedule{
+                flex: 0 0 toRem(150);
+                min-height: toRem(200);
+            }
+        }
+    }
+    &__schedule{
+        padding: toRem(24); background: $veryLightMint;
+        border-radius: toRem(16) 0 0 toRem(16);
+        border: toRem(1) solid $darkerGray;
+
+        display: flex;
+        position: relative;
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__schedule{
+            padding: toRem(16);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__schedule{
+            border-radius: toRem(16) 0 0 0;
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__schedule{
+            border-radius: toRem(16) toRem(16) 0 0;
+        }
+    }
+        
+    @media (min-width: toEm(481, 16)) {
+        &__schedule-separation{ 
+            flex-direction: column; row-gap: toRem(8);
+            max-width: toRem(36); min-height: toRem(24 + 10.5*2 + 8*2);
+            margin: toRem(16) 0;
+        }
+        @media (max-width: toEm(992, 16)) {
+            &__schedule-separation{
+                margin: toRem(8) 0;
+            }
+        }
+    }
+    &__schedule-separation{
+        flex: 1 1 auto;
+        display: flex; align-items: center; justify-content: center;
+        position: relative;
+        &::after, &::before{
+            content: ""; background-color: rgba($color: $darkGreen, $alpha: 0.25);
+            height: calc(((100% - toRem(24)) / 2) - toRem(10.5) - toRem(8)); width: toRem(1);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__schedule-separation{
+            min-width: toRem(24 + 10.5*2 + 8*2);
+            max-height: toRem(36); margin: 0 toRem(8);
+            &::after, &::before{
+                height: toRem(1);
+                width: calc(((100% - toRem(24)) / 2) - toRem(10.5));
+            }
+        }
+    }
+
+    @media (min-width: toEm(481, 16)) {
+        &__main{
+            border-radius: 0 toRem(16) toRem(16) 0; overflow: hidden;
+            flex: 0 0 toPercent(610, $container);
+        }
+        @media (max-width: toEm(768, 16)) {
+            &__main{
+                border-radius: 0 toRem(16) 0 0;
+                flex: 0 0 calc(100% - toRem(150));
+            }
+        }
+    }
+    &__main{
+        border: toRem(1) solid $darkerGray;
+        display: flex; flex-direction: column;
+    }
+
+    @media (min-width: toEm(481, 16)) {
+        &__images{
+            flex: 0 0 toPercent(375, $container);
+        }
+        @media (max-width: toEm(768, 16)) {
+            &__images{
+                flex: 0 0 100%;
+            }
+        }
+    }
+    &__images{
+        border-radius: toRem(16);
+        border: toRem(1) solid $darkerGray; 
+        background-color: #fff;
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__images{
+            border-radius: 0 0 toRem(16) toRem(16);
+        }
+    }
+
+    @media (min-width: toEm(769, 16)) {
+        &__images.airline{
+            flex-direction: column;
+            position: relative;
+            &::after{
+                content: ""; background-image: url("/public/img/flights/items/details/line.png");
+                background-repeat: no-repeat; background-size: contain;
+                position: absolute; z-index: 1; left: 50%; top: 50%; transform: translateX(-50%) translateY(-50%);
+                width: toPercent(272.37, 375); padding-bottom: toPercent(122.68, 375);
+            }
+        }
+    }
+    @media (min-width: toEm(481, 16)) {
+        &__images.airline{
+            display: flex; justify-content: space-between;
+            align-items: flex-start;
+        }
+        @media (max-width: toEm(768, 16)) {
+            &__images.airline{
+                align-items: center; column-gap: toRem(16);
+            }
+        }
+    }
+    &__images.airline{
+        padding: toRem(52) toRem(16);
+    }
+    @media (max-width: toEm($containerPaddings, 16)) {
+        &__images.airline{
+            padding: toRem(42) toRem(16);
+        }
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__images.airline{
+            padding: toRem(32) toRem(16);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__images.airline{
+            padding: toRem(24) toRem(16);
+            border-radius: 0 0 toRem(16) toRem(16);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__images.airline{
+            padding: toRem(16);
+        }
+    }
+
+    &__images.room{
+        display: flex; align-items: center; justify-content: center;
+        padding: toRem(24);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__images.room{
+            padding: toRem(16);
+        }
+    }
+}
+.separation-schedule-ticket{
+    @media (min-width: toEm(481, 16)) {
+        .ticket.flight &__icon-parent{
+            transform: rotate(90deg);
+        }
+    }
+    &__icon-parent{
+        width: toRem(24); min-height: toRem(24);
+        display: flex; align-items: center; justify-content: center;
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__icon-parent{
+            min-width: toRem(24);
+        }
+    }
+
+    @media (min-width: toEm(481, 16)) {
+        &__start, &__end{
+            left: 0; justify-content: space-between;
+        }
+    }
+    &__start, &__end{
+        position: absolute;
+        width: 100%; height: toRem(10.5);
+        display: flex;
+        &::after, &::before{
+            content: ""; background-color: rgba($color: $darkGreen, $alpha: 0.25);
+            height: toRem(1); width: 50%;
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__start, &__end{
+            height: 100%; width: toRem(10.5);
+            flex-direction: column;
+            &::after, &::before{
+                height: 50%; width: toRem(1);
+            }
+        }
+    }
+
+    &__start{
+        top: 0;
+        &::after{
+            transform: rotate(-30deg) translateY(4px) translateX(-3px);
+        }
+        &::before{
+            transform: rotate(30deg) translateY(4px) translateX(3px);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__start{
+            left: 0;
+            &::after{
+                transform: rotate(30deg) translateX(5px) translateY(-4px);
+            }
+            &::before{
+                transform: rotate(-30deg) translateX(5px) translateY(4px);
+            }
+        }
+    }
+
+    &__end{
+        bottom: 0;
+        &::after{
+            transform: rotate(30deg) translateY(4px) translateX(1.5px);
+        }
+        &::before{
+            transform: rotate(-30deg) translateY(4px) translateX(-1.5px);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__end{
+            right: 0;
+            &::after{
+                transform: rotate(-30deg) translateX(5px) translateY(1px);
+            }
+            &::before{
+                transform: rotate(30deg) translateX(5px) translateY(-1px);
+            }
+        }
+    }
+}
+.schedule-part-ticket{
+    @media (min-width: toEm(993, 16)) {
+        &__time{
+            margin-bottom: toRem(4);
+        }
+    }
+    &__time{
+        color: $darkGreen;
+        font-family: Montserrat; font-weight: 600;
+        font-size: toRem(32); line-height: toEm(39, 32);
+    }
+    @media (max-width: toEm($containerPaddings, 16)) {
+        &__time{
+            font-size: toRem(28);
+        }
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__time{
+            font-size: toRem(24);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__time{
+            font-size: toRem(18);
+        }
+    }
+
+    &__description{
+        color: rgba($color: $darkGreen, $alpha: 0.6);
+        font-family: Montserrat; font-weight: 500;
+        font-size: toRem(12); line-height: toEm(15, 12);
+    }
+}
+.main-ticket{
+    &__header{
+        display: flex; align-items: center;
+        background-color: $mint;
+        padding: toRem(24);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__header{
+            padding: toRem(16);
+        }
+    }
+
+    &__user-ava{
+        flex: 0 0 toRem(48); height: toRem(48);
+        img{
+            background-color: $darkGreen;
+            border-radius: 50%; border: toRem(1) solid #fff;
+            
+            color: #fff;
+            font-family: "Montserrat", sans-serif;
+            font-size: toRem(12);
+            font-weight: 400;
+
+            display: inline-block;
+            width: 100%; height: 100%;
+        }
+    }
+
+    &__subava, &__owner:not(.in-block){
+        margin: 0 toRem(16);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__subava, &__owner:not(.in-block){
+            margin: 0 toRem(16) 0 toRem(8);
+        }
+    }
+
+    &__owner{
+        color: $darkGreen;
+        font-family: "TradeGothic"; font-weight: 700;
+        font-size: toRem(20); line-height: toEm(24, 20);
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__owner{
+            font-size: toRem(18);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__owner{
+            font-size: toRem(16);
+        }
+    }
+
+    &__boarding-pass{
+        color: $darkGreen;
+        font-family: Montserrat; font-weight: 400;
+        font-size: toRem(14); line-height: toEm(18, 14);
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__boarding-pass{
+            font-size: toRem(12);
+        }
+    }
+
+    &__service-description{
+        margin-left: auto;
+        color: $darkGreen;
+        font-family: "TradeGothic"; font-weight: 700;
+        font-size: toRem(14); line-height: toEm(18, 14);
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__service-description{
+            font-size: toRem(12);
+        }
+    }
+
+    &__container{
+        flex: 1 1 auto;
+        display: flex; flex-direction: column;
+        background-color: #fff; padding: toRem(24);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__container{
+            padding: toRem(16);
+        }
+    }
+
+    &__features{
+        display: flex; flex-wrap: wrap;
+        gap: toRem(16) toRem(32); margin-bottom: toRem(24);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__features{
+            gap: toRem(12) toRem(24); margin-bottom: toRem(16);
+        }
+    }
+    &__feature{
+        display: flex; align-items: center;
+    }
+
+    &__codes{
+        flex: 1 1 auto; display: flex; flex-direction: column; justify-content: flex-end;
+    }
+}
+.feature-main-ticket{
+    &__icon-parent{
+        display: flex; align-items: center; justify-content: center; 
+        background-color: $veryLightMint;
+        border-radius: toRem(4);
+        width: toRem(32); height: toRem(32);
+
+        margin-right: toRem(8);
+    }
+
+    &__description{
+        color: rgba($color: $darkGreen, $alpha: 0.6);
+        font-family: Montserrat; font-weight: 600;
+        font-size: toRem(14); line-height: toEm(18, 14);
+    }
+    &__value{
+        color: $darkGreen;
+        font-family: Montserrat; font-weight: 500;
+        font-size: toRem(12); line-height: toEm(15, 12);
+    }
+}
+.codes-main-ticket{
+    @media (min-width: toEm(993, 16)) {
+        &__first{
+            margin-bottom: toRem(4);
+        }
+    }
+    &__first{
+        color: $darkGreen;
+        font-family: Montserrat; font-weight: 600;
+        font-size: toRem(32); line-height: toEm(39, 32);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__first{
+            font-size: toRem(28);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__first{
+            font-size: toRem(24);
+        }
+    }
+
+    &__second{
+        color: rgba($color: $darkGreen, $alpha: 0.6);
+        font-family: Montserrat; font-weight: 500;
+        font-size: toRem(12); line-height: toEm(15, 12);
+    }
+}
+.images-ticket{
+    &__place{
+        display: flex; align-items: center;
+        box-shadow: 0px 2px 7px 0px rgba($color: $darkGreen, $alpha: 0.06);
+        background-color: #fff;
+        padding: toRem(4); position: relative; z-index: 2;
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__place{
+            padding: toRem(8);
+        }
+    }
+    @media (max-width: toEm(480, 16)) {
+        &__place:first-child{
+            margin-bottom: toRem(8);
+        }
+    }
+
+    @media (min-width: toEm(769, 16)) {
+        &__place.from{
+            margin-left: auto;
+        }
+    }
+
+    &__hotel-logo{
+        width: toRem(161); height: toRem(161);
+        img{
+            background-color: $darkGreen;
+
+            color: #fff;
+            font-family: "Montserrat", sans-serif;
+            font-size: toRem(14);
+            font-weight: 600;
+
+            display: inline-block;
+            width: 100%; height: 100%;
+        }
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__hotel-logo{
+            width: toRem(130); height: toRem(130);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__hotel-logo{
+            width: toRem(100); height: toRem(100);
+        }
+    }
+}
+.place-images-ticket{
+    &__image{
+        width: toRem(24); height: toRem(24);
+        margin-right: toRem(8);
+        img{
+            background-color: $darkGreen; border-radius: toRem(4);
+
+            overflow: hidden;
+            text-overflow: ellipsis;
+            color: #fff;
+            font-family: "Montserrat", sans-serif;
+            font-size: toRem(6);
+            font-weight: 400;
+
+            display: inline-block; width: 100%; height: 100%;
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__image{
+            flex: 0 0 toRem(48); height: toRem(48);
+            img{
+                font-size: toRem(12);
+            }
+        }
+    }
+
+    &__user{
+        color: $darkGreen;
+        font-family: "TradeGothic"; font-weight: 700;
+        font-size: toRem(8); line-height: toEm(10, 8);
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__user{
+            font-size: toRem(16);
+        }
+    }
+
+    &__boarding-pass{
+        color: $darkGreen;
+        font-family: Montserrat; font-weight: 400;
+        font-size: toRem(4); line-height: toEm(5, 4);
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__boarding-pass{
+            font-size: toRem(12);
+        }
+    }
+}
+
+.terms{
+    &__heading{
+        color: $darkGreen;
+        font-family: Montserrat; font-weight: 600;
+        font-size: toRem(24); line-height: toEm(29, 24);
+        margin-bottom: toRem(34);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__heading{
+            font-size: toRem(22);
+            margin-bottom: toRem(24);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__heading{
+            font-size: toRem(20);
+            margin-bottom: toRem(16);
+        }
+    }
+
+    &__block:not(:last-child){
+        margin-bottom: toRem(34);
+    }
+    @media (max-width: toEm(992, 16)) {
+        &__block:not(:last-child){
+            margin-bottom: toRem(24);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__block:not(:last-child){
+            margin-bottom: toRem(16);
+        }
+    }
+}
+.block-terms{
+    &__title{
+        color: $darkGreen;
+        font-family: Montserrat; font-weight: 500;
+        font-size: toRem(20); line-height: toEm(24, 20);
+        margin-bottom: toRem(16);
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__title{
+            font-size: toRem(18);
+            margin-bottom: toRem(8);
+        }
+    }
+
+    &__link{
+        position: relative;
+        color: $darkGreen;
+        font-family: Montserrat; font-weight: 400;
+        font-size: toRem(14); line-height: toEm(20, 14);
+        &::after{
+            content: "•"; position: absolute; left: toRem(12); top: 0;
+            transform: translateX(-50%);
+        }
+        span{
+            display: block;
+            margin-left: toRem(24);
+        }
+    }
+    @media (max-width: toEm(768, 16)) {
+        &__link{
+            &::after{
+                left: toRem(8);
+            }
+            span{
+                margin-left: toRem(16);
+            }
+        }
+    }
+}
+.contact-terms{
+    &__info{
+        color: $darkGreen;
+        font-family: Montserrat; font-weight: 400;
+        font-size: toRem(14); line-height: toEm(20, 14);
+        a{
+            text-decoration: underline;
+        }
+    }
+}

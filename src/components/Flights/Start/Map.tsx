@@ -1,5 +1,5 @@
 import React, { useEffect, useState, type FC } from "react"
-import { SectionHeader } from "../../Common/SectionHeader.tsx"
+import { SectionHeader } from "../../Common/Blocks/SectionHeader.tsx"
 import { useAppDispatch, useTypedSelector } from "../../../store";
 import { fetchMap } from "../../../store/flights";
 import { Submap } from "./Submap.tsx";
@@ -8,11 +8,17 @@ import type { Submap as SubmapType } from "../../../types.ts";
 export const Map : FC = () => {
     const about = useTypedSelector(state => state.flights.start.map);
     let [visibleItems, setVisibleItems] = useState<SubmapType[]>([]);
+    let [isAll, setIsAll] = useState<boolean>(false);
+
+    const {isLoading, error, items} = about;
+    const headerAbout = {
+        heading: "Let's go places together", 
+        description: "Discover the latest offers and news and start planning your next trip with us.", 
+        button: {active: "See All", disable: "Hide"}
+    };
+    const maxShow = 5;
+
     const dispatch = useAppDispatch();
-    let isAll = useState<boolean>(false);
-
-    const {isLoading, error, header, items, maxShow} = about;
-
     useEffect(() => {
         dispatch(fetchMap());
     }, [dispatch]);
@@ -26,19 +32,31 @@ export const Map : FC = () => {
     }, [items]);
 
     if(isLoading){
-        return <h1>Is Loading...</h1>
+        return(
+            <section className="map">
+                <div className="container">
+                    <h1 className="loading message">Loading...</h1>
+                </div>
+            </section>
+        )
     }
     if(error !== null){
-        return <h1>Some Error</h1>
+        return(
+            <section className="map">
+                <div className="container">
+                    <h1 className="error message">Some Error...</h1>
+                </div>
+            </section>
+        )
     }
 
     return(
         <section className="map">
             <div className="container">
                 <SectionHeader 
-                    about={header} parentCl="map" isAll={isAll} isNeedButton={maxShow < items.length}
+                    about={headerAbout} parentCl="map" isAll={[isAll, setIsAll]} isNeedButton={maxShow < items.length}
                 />
-                {(isAll[0]) 
+                {(isAll) 
                     ? <div className="map__items">
                         <div className="map__items-inner">
                             {items.map((submap, i) => <Submap key={i} {...submap} /> )}

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, type FC } from "react";
-import { SectionHeader } from "../../Common/SectionHeader";
+import { SectionHeader } from "../../Common/Blocks/SectionHeader";
 import { useAppDispatch, useTypedSelector } from "../../../store";
 import { Trip } from "./Trip"
 import { fetchTrips } from "../../../store/home";
@@ -7,27 +7,47 @@ import { fetchTrips } from "../../../store/home";
 export const Trips : FC = () =>{
     const dispatch = useAppDispatch();
     const about = useTypedSelector(state => state.home.trips);
-    let isAll = useState<boolean>(false);
+    let [isAll, setIsAll] = useState<boolean>(false);
 
     useEffect(() => {
         dispatch(fetchTrips());
     }, [dispatch]);
 
-    if(about.isLoading){
-        return <h1>Is Loading...</h1>
+    const {isLoading, error, items} = about;
+    if(isLoading){
+        return(
+            <section className="trips">
+                <div className="container">
+                    <h1 className="loading message">Loading...</h1>
+                </div>
+            </section>
+        )
     }
-    if(about.error !== null){
-        return <h1>Some Error</h1>
+    if(error !== null){
+        return(
+            <section className="trips">
+                <div className="container">
+                    <h1 className="error message">Some Error...</h1>
+                </div>
+            </section>
+        )
     }
+
+    const headerAbout = {
+        heading: "Plan your perfect trip", 
+        description: "Search Flights & Places Hire to our most popular destinations",
+        button: { active: "See more places", disable: "Hide" }
+    }
+    const maxShow = 9;
 
     return(
         <section className="trips">
             <div className="container">
                 <SectionHeader 
-                    about={about.header} parentCl="trips" isAll={isAll} isNeedButton={about.maxShow < about.items.length}
+                    about={headerAbout} parentCl="trips" isAll={[isAll, setIsAll]} isNeedButton={maxShow < items.length}
                 />
                 <div className="trips__items">
-                    {(isAll[0] ? about.items : about.items.slice(0, about.maxShow)).map((trip, i) =>
+                    {(isAll ? items : items.slice(0, maxShow)).map((trip, i) =>
                         <Trip key={i} {...trip} />
                     )}
                 </div>

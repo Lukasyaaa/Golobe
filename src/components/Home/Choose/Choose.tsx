@@ -1,17 +1,26 @@
 import React, { type FC } from "react";
-import { useTypedSelector } from "../../../store";
 import { ChooseOption } from "./Option.tsx";
+import { flightsCatalogPath, hotelsCatalogPath } from "../../../App.tsx";
 
 export const Choose : FC = () => {
-    const about = useTypedSelector(state => state.home.choose);
-    const {flightsPart, hotelsPart} = about
+    const flightsPart = {
+        heading : "Flights",
+        description : "Search Flights & Places Hire to our most popular destinations",
+        button : "Show Filghts",
+        background : { jpeg: "/img/start/choose/flights/image.jpg", webp: "/img/start/choose/flights/image.webp" }
+    }
+    const hotelsPart = {
+        heading : "Hotels",
+        description : "Search hotels & Places Hire to our most popular destinations",
+        button : "Show Hotels",
+        background : { jpeg: "/img/start/choose/hotels/image.jpg", webp: "/img/start/choose/hotels/image.webp" }
+    }
 
     return(
         <section className="choose">
             <div className="container">
-                {[flightsPart, hotelsPart].map((item, i) => 
-                    <ChooseOption key={i} about={item} linkPath="#" />
-                )}
+                <ChooseOption about={flightsPart} linkPath={flightsCatalogPath} />
+                <ChooseOption about={hotelsPart} linkPath={hotelsCatalogPath} />
             </div>
         </section>
     )
