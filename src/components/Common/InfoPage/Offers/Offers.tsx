@@ -6,14 +6,12 @@ import { fetchOffers as fetchOffersHotels } from "../../../../store/hotels";
 import { Offer } from "./Offer";
 import { type objType, type Offer as OfferType, type SectionWithHeader, SITE_PARTS } from "../../../../types";
 
-interface OffersProps{
-    about: SectionWithHeader<OfferType>,
+interface OffersProps extends SectionWithHeader<OfferType>{
     type: objType<typeof SITE_PARTS> 
 }
 
-export const Offers : FC<OffersProps> = ({about, type}) => {
+export const Offers : FC<OffersProps> = ({header, items, isLoading, error, maxShow, type}) => {
     const dispatch = useAppDispatch();
-    const {header, items, isLoading, error, maxShow} = about;
     let [isAll, setIsAll] = useState<boolean>(false);
 
     useEffect(() => {

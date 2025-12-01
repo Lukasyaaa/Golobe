@@ -413,8 +413,13 @@
             transition: stroke 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
         }
     }
-    &__favourites:hover svg path, &__favourites:focus svg path{
+    &__favourites._active:not(:disabled):hover svg path, 
+    &__favourites._active:not(:disabled):focus svg path{
         stroke: #fff;
+    }
+    &__favourites:not(._active):not(:disabled):hover svg path, 
+    &__favourites:not(._active):not(:disabled):focus svg path{
+        fill: #fff;
     }
 
     &__link{

@@ -10,13 +10,12 @@ export const Review : FC<ReviewType> = ({heading, description, starsCount, autho
         const innerHTML = inner.current;
         const containerHTML = container.current;
         if(innerHTML && containerHTML){
-            if(isShow){
-                containerHTML.style.height = innerHTML.offsetHeight + "px";
-            } else {
-                containerHTML.style.height = ((window.innerWidth > 480) ? 37 : 31) + "px";
-            }
+            containerHTML.style.height = (isShow) 
+                ? innerHTML.offsetHeight + "px" : 
+                ((window.innerWidth > 480) ? 37 : 31) + "px"
+            ;
         }
-    }, [isShow])
+    }, [isShow]);
     
     const toggleIsShow = () => setIsShow(prev => !prev);
 

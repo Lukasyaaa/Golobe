@@ -1,0 +1,789 @@
+@use "./settings/variables.scss";
+
+.account{
+    &._appear-modal{
+        width: 100%; height: 100%;
+    }
+    & > .container{
+        margin-top: variables.toRem(32); margin-bottom: variables.toRem(40);
+    }
+    @media (max-width: variables.toEm(992, 16)) {
+        & > .container{
+            margin-top: variables.toRem(32); margin-bottom: variables.toRem(32);
+        }
+    }
+    @media (max-width: variables.toEm(768, 16)) {
+        & > .container{
+            margin-top: variables.toRem(24); margin-bottom: variables.toRem(24);
+        }
+    }
+    @media (max-width: variables.toEm(480, 16)) {
+        & > .container{
+            margin-top: variables.toRem(16); margin-bottom: variables.toRem(16);
+        }
+    }
+}
+.introduction-account{
+    &__banner, &__ava-block{
+        position: relative;
+    }
+    &__banner{ z-index: 1; }
+
+    @media (min-width: variables.toEm(769, 16)) {
+        &__user{ display: inline-block; margin-top: variables.toRem(-70); }
+        @media (max-width: variables.toEm(992, 16)) {
+            &__user{ margin-top: variables.toRem(-55); }
+        }
+    }
+    @media (max-width: variables.toEm(768, 16)) and (min-width: variables.toEm(481, 16)) {
+        &__user{
+            justify-content: center;
+            display: flex; column-gap: variables.toRem(16); align-items: center;
+        }
+    }
+    @media (max-width: variables.toEm(768, 16))  {
+        &__user{
+            margin-top: variables.toRem(16);
+        }
+    }
+    @media (max-width: variables.toEm(480, 16)) {
+        &__user{ text-align: center; }
+    }
+
+    &__ava-block{ z-index: 2; display: inline-block; }
+
+    &__ava{
+        display: block;
+        width: variables.toRem(160); height: variables.toRem(160);
+
+        color: #fff;
+        font-family: "Montserrat", sans-serif;
+        font-size: variables.toRem(14);
+        font-weight: 600;
+
+        background-color: variables.$mint;
+        border-radius: 50%; border: variables.toRem(4) solid variables.$red;
+        box-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.08);
+    }
+    @media (max-width: variables.toEm(992, 16)) {
+        &__ava{ width: variables.toRem(130); height: variables.toRem(130); }
+    }
+    @media (max-width: variables.toEm(768, 16)) {
+        &__ava{ width: variables.toRem(100); height: variables.toRem(100); }
+    }
+    @media (max-width: variables.toEm(480, 16)) {
+        &__ava{ width: variables.toRem(70); height: variables.toRem(70); }
+    }
+
+    &__subchange{
+        position: absolute; right: 0; bottom: 0;
+        background-color: variables.$red; border-radius: 50%;
+
+        width: variables.toRem(44); height: variables.toRem(44);
+        display: flex; align-items: center; justify-content: center;
+        transition: box-shadow 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+        svg{
+            width: variables.toRem(19.5); height: variables.toRem(19.5)
+        }
+    }
+    @media (max-width: variables.toEm(992, 16)) {
+        &__subchange{ width: variables.toRem(36); height: variables.toRem(36); }
+    }
+    @media (max-width: variables.toEm(768, 16)) {
+        &__subchange{ 
+            width: variables.toRem(27.5); height: variables.toRem(27.5); 
+        }
+    }
+    @media (max-width: variables.toEm(480, 16)) {
+        &__subchange{ 
+            width: variables.toRem(19.25); height: variables.toRem(19.25); 
+            svg{
+                width: variables.toRem(12.1875); height: variables.toRem(12.1875)
+            }
+        }
+    }
+    &__subchange:hover{
+        box-shadow: inset 0 0 5px rgba($color: variables.$darkGreen, $alpha: 0.75);
+    }
+    &__change:focus ~ &__subchange{
+        box-shadow: inset 0 0 5px rgba($color: variables.$darkGreen, $alpha: 0.75);
+    }
+
+    &__change{   
+        position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+        border: 0; clip: rect(0, 0, 0, 0); overflow: hidden; 
+    }
+
+    @media (min-width: variables.toEm(769, 16)) {
+        &__name, &__email{
+            text-align: center;
+        }
+    }
+    &__name, &__email{
+        display: block;
+    }
+
+    @media (min-width: variables.toEm(769, 16)) {
+        &__name{
+            margin: variables.toRem(24) 0 variables.toRem(8);
+        }
+        @media (max-width: variables.toEm(992, 16)) {
+            &__name{
+                margin: variables.toRem(16) 0 variables.toRem(4);
+            }
+        }
+    }
+    &__name{
+        color: variables.$darkGreen;
+        font-family: Montserrat; font-weight: 600;
+        font-size: variables.toRem(24);
+        line-height: variables.toEm(29, 24);
+    }
+    @media (max-width: variables.toEm(992, 16)) {
+        &__name{
+            font-size: variables.toRem(22);
+        }
+    }
+    @media (max-width: variables.toEm(768, 16)) {
+        &__name{
+            font-size: variables.toRem(20);
+        }
+    }
+
+    &__email{
+        color: rgba($color: variables.$darkGreen, $alpha: 0.75);
+        font-family: Montserrat; font-weight: 400;
+        font-size: variables.toRem(16);
+        line-height: variables.toEm(20, 16);
+    }
+}
+.banner-introduction-account{
+    &__image-block{
+        width: 100%;
+        padding-bottom: variables.toPercent(350, variables.$container);
+        position: relative; z-index: 1;
+        img{
+            object-fit: cover; 
+            background-color: variables.$darkGreen; border-radius: variables.toRem(12);
+
+            text-align: center;
+            color: #fff;
+            font-family: "Montserrat", sans-serif;
+            font-size: variables.toRem(24);
+            font-weight: 600;
+
+            position: absolute; left: 0; top: 0;
+            width: 100%; height: 100%;
+        }
+    }
+
+    @media (min-width: variables.toEm(769, 16)) {
+        &__upload{
+            position: absolute; z-index: 2; bottom: variables.toRem(26); right: variables.toRem(26);
+        }
+        @media (max-width: variables.toEm(992, 16)) {
+            &__upload{ bottom: variables.toRem(16); right: variables.toRem(16); }
+        }
+    }
+    &__upload{
+        font-size: variables.toRem(14); font-weight: 500; line-height: variables.toEm(18, 14);
+    }
+    @media (max-width: variables.toEm(768, 16)) {
+        &__upload{
+            margin-top: variables.toRem(10);
+        }
+    }
+}
+.upload-banner-introduction-account{
+    &__icon-parent{
+        width: variables.toRem(16); height: variables.toRem(16);
+        display: flex; align-items: center; justify-content: center;
+        margin-right: variables.toRem(4);
+    }
+
+    &__input{
+        position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+        border: 0; clip: rect(0, 0, 0, 0); overflow: hidden; 
+    }
+    &__input:focus ~ &__subinput{
+        background-color: variables.$darkGreen;
+        color: variables.$mint;
+        text-shadow: 0 0 5px variables.$mint;
+        svg path{
+            fill: variables.$mint;
+        }
+    }
+    &__subinput:hover svg path{
+        fill: variables.$mint;
+    }
+
+    &__description{
+        font-size: variables.toRem(14); font-weight: 500;
+        line-height: variables.toEm(18, 14);
+    }
+}
+
+.section-account{
+    &__heading{
+        color: variables.$darkGreen;
+        font-family: "TradeGothic"; font-weight: 700;
+        font-size: variables.toRem(32); line-height: variables.toEm(40, 32);
+    }
+    @media (max-width: variables.toEm(992, 16)) {
+        &__heading{
+            font-size: variables.toRem(28);
+        }
+    }
+    @media (max-width: variables.toEm(768, 16)) {
+        &__heading{
+            font-size: variables.toRem(24);
+        }
+    }
+
+    &__heading:not(.in-row){ margin-bottom: variables.toRem(16); }
+    &__heading.in-row{ margin-right: variables.toRem(32); }
+    @media (max-width: variables.toEm(992, 16)) {
+        &__heading.in-row{ margin-right: variables.toRem(24); }
+    }
+    @media (max-width: variables.toEm(768, 16)) {
+        &__heading.in-row{ margin-right: variables.toRem(16); }
+    }
+
+    @media (min-width: variables.toEm(481, 16)) {
+        &__row{
+            display: flex; align-items: center; justify-content: space-between;
+        }        
+    }
+    &__row{ margin-bottom: variables.toRem(16); }
+
+    &__container{
+        border-radius: variables.toRem(16);
+        box-shadow: 0px 4px 16px 0px rgba($color: variables.$darkGreen, $alpha: 0.05);
+        background: #fff;
+    }
+}
+
+.info-account{
+    &__list{
+        padding: variables.toRem(32) variables.toRem(24);
+    }
+    @media (max-width: variables.toEm(992, 16)) {
+        &__list{
+            padding: variables.toRem(24);
+        }
+    }
+    @media (max-width: variables.toEm(480, 16)) {
+        &__list{
+            padding: variables.toRem(16);
+        }
+    }
+    
+    @media (min-width: variables.toEm(769, 16)) {
+        &__field{
+            display: flex;
+        }
+    }
+
+    &__field:not(:last-child){
+        margin-bottom: variables.toRem(32);
+    }
+    @media (max-width: variables.toEm(992, 16)) {
+        &__field:not(:last-child){
+            margin-bottom: variables.toRem(24);
+        }
+    }
+    @media (max-width: variables.toEm(768, 16)) {
+        &__field:not(:last-child){
+            margin-bottom: variables.toRem(16);
+        }
+    }
+
+    &__modal{
+        padding: variables.toRem(32);
+    }
+    @media (max-width: variables.toEm(768, 16)) {
+        &__modal{ padding: variables.toRem(24); }
+    }
+    @media (max-width: variables.toEm(480, 16)) {
+        &__modal{ padding: variables.toRem(16); }
+    }
+    .account._appear-modal &__modal{
+        transform: translateX(-50%) translateY(-50%) scale(1);
+    }
+}
+.field-info-account{
+    @media (min-width: variables.toEm(769, 16)) {
+        &__text{
+            flex: 1 1 auto; margin-right: variables.toRem(32);
+        }
+        @media (max-width: variables.toEm(992, 16)) {
+            &__text{ margin-right: variables.toRem(24); }
+        }
+    }
+
+    @media (min-width: variables.toEm(769, 16)) {
+        &__description{ margin-bottom: variables.toRem(8); }
+        @media (max-width: variables.toEm(992, 16)) {
+            &__description{ margin-bottom: variables.toRem(4); }
+        }
+    }
+    &__description{
+        color: variables.$darkGreen;
+        font-family: Montserrat; font-weight: 400;
+        font-size: variables.toRem(16); line-height: variables.toEm(19, 16);
+    }
+    @media (max-width: variables.toEm(768, 16)) {
+        &__description{ font-size: variables.toRem(14); }
+    }
+
+    &__value{
+        color: variables.$darkGreen;
+        font-family: Montserrat; font-weight: 600;
+        font-size: variables.toRem(20); line-height: variables.toEm(24, 20);
+    }
+    @media (max-width: variables.toEm(768, 16)) {
+        &__value{ font-size: variables.toRem(18); }
+    }
+
+    &__button{
+        display: flex; align-items: center; justify-content: center;
+        min-height: 100%; min-width: variables.toRem(140);
+
+        border: variables.toRem(1) solid variables.$mint;
+        border-radius: variables.toRem(4);
+        padding: variables.toRem(8) variables.toRem(16);
+    }
+    @media (max-width: variables.toEm(768, 16)) {
+        &__button{ width: 100%; margin-top: variables.toRem(8);}
+    }
+
+    @media (min-width: variables.toEm(769, 16)) {
+        &__button:not(:last-child){
+            margin-right: variables.toRem(16);
+        }
+    }
+}
+.button-field-info-account{
+    transition: background-color 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+    &:hover{
+        background-color: variables.$mint;
+    }
+    &__icon-parent{
+        flex: 0 0 variables.toRem(16); height: variables.toRem(16);
+        display: flex; align-items: center; justify-content: center;
+        margin-right: variables.toRem(4);
+        path{
+            transition: fill 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+        }
+    }
+    &:hover &__icon-parent path{
+        fill: #fff;
+    }
+    &__description{
+        color: variables.$darkGreen;
+        font-family: Montserrat; font-weight: 500;
+        font-size: variables.toRem(14);
+        line-height: variables.toEm(18, 14);
+        transition: color 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+    }
+    &:hover &__description{
+        color: #fff;
+    }
+}
+.modal-info-account{
+    &__inputs{ margin: variables.toRem(16) 0; }
+    &__field:not(:last-child){ margin-bottom: variables.toRem(16); }
+    @media (max-width: variables.toEm(480, 16)) {
+        &__inputs{ margin: variables.toRem(8) 0; }
+        &__field:not(:last-child){ margin-bottom: variables.toRem(8); }
+    }
+
+    &__select{ margin-bottom: variables.toRem(16); }
+    @media (max-width: variables.toEm(480, 16)) {
+        &__select{ margin-bottom: variables.toRem(8); }
+    }
+
+    &__confirm{
+        font-size: variables.toRem(16); font-weight: 500; line-height: variables.toEm(20, 16);
+        width: 100%;
+    }
+}
+.select-modal-info-account{
+    &__opener{
+        width: 100%;
+        display: flex; align-items: center; justify-content: space-between;
+        span{
+            font-family: "Montserrat";
+            font-size: variables.toRem(16); font-weight: 500; line-height: variables.toEm(20, 16);
+        }
+    }
+}
+
+.history{
+    &__row{
+        transition: margin-bottom 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+    }
+    &__row:not(.margin-bottom){ margin-bottom: 0;}
+    &__sort{
+        margin-bottom: variables.toRem(16);
+    }
+
+    @media (min-width: variables.toEm(769, 16)) {
+        &__item{
+            display: flex; align-items: center;
+        }
+    }
+    &__item{
+        border-radius: variables.toRem(16);
+        box-shadow: 0px 4px 16px 0px rgba($color: variables.$darkGreen, $alpha: 0.05);
+        background: #fff; padding: variables.toRem(32) variables.toRem(24);
+        &:not(:last-child){
+            margin-bottom: variables.toRem(16);
+        }
+    }
+    @media (max-width: variables.toEm(992, 16)) {
+        &__item{ padding: variables.toRem(24); }
+    }
+}
+.select-history{
+    &__opener{
+        display: flex; align-items: center; column-gap: variables.toRem(4);
+        span{
+            color: variables.$darkGreen;
+            font-family: Montserrat; font-weight: 600;
+            font-size: variables.toRem(14);
+            line-height: variables.toEm(18, 14);
+        }
+    }
+}
+.item-history{
+    @media (min-width: variables.toEm(769, 16)) {
+        &__logo{
+            flex: 0 0 variables.toRem(80); 
+        }
+        @media (max-width: variables.toEm(992, 16)) {
+            &__logo{
+                flex: 0 0 variables.toRem(70);
+            }
+        }
+    }
+    &__logo{
+        border: variables.toRem(0.5) solid variables.$mint;
+        border-radius: variables.toRem(8); padding: variables.toRem(8);
+
+        height: variables.toRem(80);
+        display: flex; align-items: center; justify-content: center;
+    }
+    @media (max-width: variables.toEm(992, 16)) {
+        &__logo{ height: variables.toRem(70); }
+    }
+    @media (max-width: variables.toEm(768, 16)) {
+        &__logo{ 
+            justify-content: flex-start;
+            height: variables.toRem(60); 
+        }
+    }
+
+
+    @media (min-width: variables.toEm(481, 16)) {
+        &__row{
+            display: flex; align-items: center; flex: 1 1 auto;
+        }
+    }
+    &__row{ margin: 0 variables.toRem(32) 0 variables.toRem(48); }
+    @media (max-width: variables.toEm(992, 16)) {
+        &__row{ margin: 0 variables.toRem(16); }
+    }
+    @media (max-width: variables.toEm(768, 16)) {
+        &__row{ margin: variables.toRem(16) 0; }
+    }
+
+    @media (min-width: variables.toEm(481, 16)) {
+        &__schedule{
+            margin-right: variables.toRem(48);
+            position: relative;
+            &::after{
+                content: ""; height: 100%; width: variables.toRem(1);
+                position: absolute; right: variables.toRem(-24); top: 0; transform: translateX(50%);
+                background: variables.$blueGray;
+            }
+        }
+        @media (max-width: variables.toEm(992, 16)) {
+            &__schedule{ 
+                margin-right: variables.toRem(24);
+                &::after{ right: variables.toRem(-12); }
+            }
+        }
+    }
+    @media (min-width: variables.toEm(993, 16)) or (max-width: variables.toEm(480, 16)) {
+        &__schedule{
+            display: flex; align-items: center;
+        }
+    }
+    @media (max-width: variables.toEm(480, 16)) {
+        &__schedule{
+            margin-bottom: variables.toRem(10);
+        }
+    }
+
+    @media (min-width: variables.toEm(993, 16)) {
+        &__schedule-separation{
+            margin: 0 variables.toRem(16);
+        }
+    }
+    &__schedule-separation{
+        color: variables.$darkGreen;
+        font-family: Montserrat; font-weight: 600;
+        font-size: variables.toRem(20);
+        line-height: variables.toEm(24, 20);
+    }
+    @media (max-width: variables.toEm(992, 16)) {
+        &__schedule-separation{
+            font-size: variables.toRem(14);
+        }
+    }
+    @media (max-width: variables.toEm(480, 16)) {
+        &__schedule-separation{
+            margin: 0 variables.toRem(8);
+        }
+    }
+
+    &__facts{
+        display: flex; column-gap: variables.toRem(24); flex: 1 1 auto;
+    }
+    @media (max-width: variables.toEm(992, 16)) {
+        &__facts{ column-gap: variables.toRem(16); }
+    }
+
+    &__fact{
+        display: flex; align-items: center;
+        &:not(:last-child){ margin-bottom: variables.toRem(8); }
+    }
+
+    &__interaction{
+        display: flex; align-items: center;
+    }
+
+    &__download{
+        text-align: center;
+        font-size: variables.toRem(14); font-weight: 500;
+        line-height: variables.toEm(18, 14);
+        margin-right: variables.toRem(16);
+    }
+    @media (max-width: variables.toEm(992, 16)) {
+        &__download{
+            margin-right: variables.toRem(10);
+        }
+    }
+    @media (max-width: variables.toEm(768, 16)) {
+        &__download{ width: 100%; }
+    }
+
+    &__booking{
+        flex: 0 0 variables.toRem(48);
+        svg{ transform: rotate(270deg); }
+    }
+}
+.schedule-part-item-history{
+    &__subtime{
+        color: variables.$darkGreen;
+        font-family: Montserrat; font-weight: 400;
+        font-size: variables.toRem(16);
+        line-height: variables.toEm(19, 16);
+        margin-bottom: variables.toRem(8);
+    }
+    @media (max-width: variables.toEm(992, 16)) {
+        &__subtime{
+            font-size: variables.toRem(14);
+            margin-bottom: variables.toRem(4);
+        }
+    }
+
+    &__time{
+        color: variables.$darkGreen;
+        font-family: Montserrat; font-weight: 600;
+        font-size: variables.toRem(20);
+        line-height: variables.toEm(24, 20);
+    }
+    @media (max-width: variables.toEm(992, 16)) {
+        &__time{
+            font-size: variables.toRem(18);
+        }
+    }
+}
+.ticket-history{
+    &__logo img{
+        width: variables.toRem(64); height: auto;
+    }
+    @media (max-width: variables.toEm(992, 16)) {
+        &__logo img{ width: variables.toRem(56); }
+    }
+}
+.booking-history{
+    &__logo img{
+        width: variables.toRem(70); height: variables.toRem(70);
+    }
+    @media (max-width: variables.toEm(992, 16)) {
+            &__logo img{
+            width: variables.toRem(54); height: variables.toRem(54);
+        }
+    }
+}
+
+.payment{
+    @media (min-width: variables.toEm(481, 16)) {
+        &__container{
+            display: flex; flex-wrap: wrap; gap: variables.toRem(24);
+        }
+        @media (max-width: variables.toEm(992, 16)) {
+            &__container{ gap: variables.toRem(16); }
+        }
+    }
+    &__container{
+        padding: variables.toRem(24);
+    }
+    @media (max-width: variables.toEm(480, 16)) {
+        &__container{ padding: variables.toRem(16); }
+    }
+
+    &__method{
+        background-color: variables.$mint;
+        display: flex; flex-direction: column; justify-content: space-between;
+        position: relative;
+        &::after{
+            content: "";
+            background-image: url("../assets/icons/visa.svg");
+            background-repeat: no-repeat; background-size: contain;
+            position: absolute; right: variables.toRem(16); bottom: variables.toRem(30.49);
+            width: variables.toRem(51.77); height: variables.toRem(32.51);
+        }
+    }
+    @media (max-width: variables.toEm(992, 16)) {
+        &__method::after{
+            height: variables.toRem(26); width: variables.toRem(41.5);
+            bottom: variables.toRem((39 - 26) / 2 + 16);
+        }
+    }
+
+    @media (min-width: variables.toEm(481, 16)) {
+        &__add-method, &__method{
+            flex: 0 0 variables.toRem(378);
+        }
+        @media (max-width: variables.toEm(992, 16)) {
+            &__add-method, &__method{
+                flex: 0 0 calc(33.333% - variables.toRem(16));
+            }
+        }
+        @media (max-width: variables.toEm(768, 16)) {
+            &__add-method, &__method{
+                flex: 0 0 calc(50% - variables.toRem(16) / 2);
+            }
+        }
+    }
+    &__add-method, &__method{
+        border-radius: variables.toRem(16);
+        padding: variables.toRem(16);
+        min-height: variables.toRem(212);
+    }
+    @media (max-width: variables.toEm(992, 16)) {
+        &__add-method, &__method{
+            min-height: variables.toRem(170);
+        }
+    }
+    @media (max-width: variables.toEm(768, 16)) {
+        &__add-method, &__method{
+            min-height: variables.toRem(150);
+        }
+    }
+    @media (max-width: variables.toEm(480, 16)) {
+        &__add-method, &__method{
+            width: 100%;
+            &:not(:last-child){
+                margin-bottom: variables.toRem(10);
+            }
+        }
+    }
+    
+    &__add-method{
+        border: variables.toRem(2) dashed variables.$mint;
+        display: flex; flex-direction: column; 
+        align-items: center; justify-content: center;
+    }
+}
+.method-payment{
+    &__number{
+        color: variables.$darkGreen;
+        font-family: Montserrat; font-weight: 600;
+        font-size: variables.toRem(24); line-height: variables.toEm(29, 24);
+        strong{
+            font-size: variables.toRem(32); line-height: variables.toEm(39, 32);
+            margin-top: variables.toEm(-10, 32); display: block;
+        }
+        margin-right: variables.toRem(40);
+    }
+    @media (max-width: variables.toEm(992, 16)) {
+        &__number{
+            font-size: variables.toRem(20);
+            strong{ font-size: variables.toRem(26); }
+        }
+    }
+    @media (max-width: variables.toEm(768, 16)) {
+        &__number{
+            font-size: variables.toRem(16);
+            strong{ font-size: variables.toRem(22); }
+        }
+    }
+
+    @media (min-width: variables.toEm(993, 16)) {
+        &__exp-date{
+            min-height: variables.toRem(61.5);
+        }
+    }
+    &__exp-date{
+        color: variables.$darkGreen;
+        font-family: Montserrat; font-weight: 500;
+        font-size: variables.toRem(12); line-height: variables.toEm(15, 12);
+        strong{
+            font-size: variables.toRem(20);
+            font-weight: 600;
+            line-height: variables.toEm(24, 20);
+            display: block;
+        }
+        margin-right: variables.toRem(51.77 + 16);
+        display: flex; flex-direction: column; justify-content: center;
+    }
+    @media (max-width: variables.toEm(480, 16)) {
+        &__exp-date{
+            margin-right: variables.toRem(41.5 + 16);
+        }
+    }
+
+    &__remove{
+        position: absolute; top: variables.toRem(18.25); right: variables.toRem(17.5);
+    }
+}
+.add-method-payment{
+    &:hover, &:focus{
+        box-shadow: inset 0 0 25px variables.$mint;
+        .add-method-payment__icon{ filter: drop-shadow(0 0 5px variables.$mint); }
+        .add-method-payment__description{ text-shadow: 0 0 5px variables.$darkGreen; }
+    }
+    transition: box-shadow 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+
+    &__icon{
+        transition: filter 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+    }
+
+    &__description{
+        color: rgba($color: variables.$darkGreen, $alpha: 0.75);
+        font-family: Montserrat; font-weight: 500;
+        font-size: variables.toRem(12); line-height: variables.toEm(15, 12);
+        margin-top: variables.toRem(16);
+        transition: text-shadow 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+    }
+    @media (max-width: variables.toEm(768, 16)) {
+        &__description{
+            margin-top: variables.toRem(8);
+        }
+    }
+}

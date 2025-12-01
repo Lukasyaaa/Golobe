@@ -6,14 +6,13 @@ import { Review } from "./Review";
 
 export const Reviews : FC = () => {
     const dispatch = useAppDispatch();
-    const about = useTypedSelector(state => state.home.reviews);
+    const {isLoading, error, items} = useTypedSelector(state => state.home.reviews);
     let [isAll, setIsAll] = useState<boolean>(false);
 
     useEffect(() => {
         dispatch(fetchReviews());
     }, [dispatch]);
 
-    const {isLoading, error, items} = about;
     if(isLoading){
         return(
             <section className="reviews">
@@ -45,7 +44,7 @@ export const Reviews : FC = () => {
             <div className="container">
                 <SectionHeader 
                     about={headerAbout} parentCl="reviews" isAll={[isAll, setIsAll]} 
-                    isNeedButton={maxShow < about.items.length}
+                    isNeedButton={maxShow < items.length}
                 />
             </div>
                 <div className="reviews__items">

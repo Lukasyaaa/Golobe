@@ -1,11 +1,9 @@
-import React, { type FC } from "react";
-import { FILL_RULE, STROKE_LINECAP, STROKE_LINEJOIN, transformIconViewbox, type IconParams } from "../../../types";
+import React, { useState, type FC } from "react";
+import { FILL_RULE, getInputValidation, INPUT_AUTHORIZATION_VALIDATION_TYPE, STROKE_LINECAP, STROKE_LINEJOIN } from "../../../types";
+import type { AuthorizationVariant, OneDataInputValidation } from "../../../types";
+import { AuthorizationVariants } from "../Blocks/AuthorizationVariants";
+import { Input } from "../Blocks/Interaction/Input";
 
-interface AuthorizationVariant{
-    icon: IconParams,
-    isBigger: boolean,
-    subicon: string | null
-}
 
 export const Authorization: FC = () => {
     const variants : AuthorizationVariant[] = [
@@ -70,47 +68,26 @@ export const Authorization: FC = () => {
             subicon: "Continue with email"
         }
     ]
-    let biggerCount = 0;
-    const threeOrTwo = (window.innerWidth < 480) ? 2 : 3;
-    
+
+    let [phoneNumber, setPhoneNumber] = useState<string>("");
+    const phoneValidation =(getInputValidation(INPUT_AUTHORIZATION_VALIDATION_TYPE.phone) as OneDataInputValidation);
+    const phoneAbout = {
+        id: "phone-number", subinput: undefined, placeholder: "Phone number", icon: null,
+        isCanHide: false, state: phoneNumber, setState: (newValue: string) => setPhoneNumber(newValue), 
+        validation: phoneValidation, anotherValue: null,
+    }
 
     return(
         <article className="booking__article room__article booking__authorization room__authorization authorization-booking">
             <h2 className="authorization-booking__title">Login or Sign up to book</h2>
-            <input className="authorization-booking__input" type="text" placeholder="Phone number" />
+            <Input about={phoneAbout} parentCls={["authorization-booking"]} isInMassive={false} isBigger={false} />
             <div className="authorization-booking__description">We’ll call or text you to confirm your number. Standard message and data rates apply. Privacy Policy</div>
-            <button className="authorization-booking__continue button_green" type="button">Continue</button>
+            {phoneValidation(phoneNumber) !== "" 
+                ? <div className="authorization-booking__continue button_green">Continue</div>
+                : <button className="authorization-booking__continue button_green" type="button">Continue</button>
+            }
             <div className="authorization-booking__or"><span>Or</span></div>
-            <div className="authorization-booking__variants">
-                {variants.map(({isBigger, subicon, icon}, i) => {
-                    const realI = i + biggerCount;
-                    const isRealBigger = isBigger || (realI % threeOrTwo === 0 && ((i === variants.length - 1) ? true : (realI !== 0 && variants[i+1].isBigger)));
-                    biggerCount += Number(isRealBigger);
-                    return(
-                        <button 
-                            className={[
-                                "authorization-booking__variant variant-authorization-booking", 
-                                isRealBigger ? "bigger" : "", subicon !== null ? "have-text" : ""
-                            ].filter(Boolean).join(" ")} 
-                            type="button" key={i}
-                        >
-                            <div className="variant-authorization-booking__icon-parent">
-                                <svg 
-                                    className="variant-authorization-booking__icon" 
-                                    viewBox={transformIconViewbox(icon.viewbox)} 
-                                    width={icon.width} height={icon.height} fill="none"
-                                >
-                                    {icon.pathes.map((path, j) => <path key={j} {...path} />)}
-                                </svg>
-                            </div>
-                            {
-                                subicon !== null &&
-                                <span className="variant-authorization-booking__description">{subicon}</span>
-                            }
-                            </button>
-                    )
-                })}
-            </div>
+            <AuthorizationVariants parentCls={["authorization-booking"]} about={variants} />
         </article>
     )
 }

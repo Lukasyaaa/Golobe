@@ -1,70 +1,76 @@
 import React, { useMemo, useState, type FC } from "react";
-import { AIRLINES, FILL_RULE, getSchedulePartsCount, STROKE_LINECAP, STROKE_LINEJOIN, TRIP_TYPE, getPrice } from "../../../types";
-import type {Flight as FlightType, objType, SchedulePart, ScheduleSingle, Srcs} from "../../../types";
+import { AIRLINES, getSchedulePartsCount, getPrice, getAirlineSrcs, SITE_PARTS, TRIP_TYPE } from "../../../types";
+import type {Flight as FlightType, objType, SchedulePart, User} from "../../../types";
 import { ShortReview } from "../../Common/Blocks/ShortReview";
 import { FlightSchedulePart } from "./ScheduleLink";
 import { ButtonBorder } from "../../Common/Blocks/ButtonBorder";
 import { NavLink } from "react-router-dom";
-import { flightsCatalogPath } from "../../../App";
+import { flightPath } from "../../../App";
+import { useFavourites } from "../../../hooks/useFavourites";
 
 interface FlightProps{
     about: FlightType,
-    getSrcs: (desc : objType<typeof AIRLINES>) => Srcs,
+    isInFavourites: boolean,
     groupId: number,
-    prevCheckboxes: number
+    prevCheckboxes: number,
+    currentUser: User;
 }
 
-export const Flight : FC<FlightProps> = ({about, getSrcs, groupId, prevCheckboxes}) => {
-    const {rating, countReviews, schedule, type} = about
+interface FlightAbout{
+    airlines: objType<typeof AIRLINES>[],
+    scheduleMassive : SchedulePart[],
+    endPoints : (null | string)[],
+    path: string
+}
 
-    let airlines: objType<typeof AIRLINES>[] = [];
-    let classes : string[] = ["flight"];
-    let scheduleMassive : SchedulePart[] = [];
-    let endPoints : (null | string)[] = [];
-    if(type === TRIP_TYPE.onWay){
-        airlines = [schedule.airline];
-        const {endPoint, placeFrom, placeTo, ...otherSchedule} = about.schedule;
-        scheduleMassive = [{...otherSchedule, place: placeFrom}];
-        endPoints = [about.schedule.endPoint];
-    } else if(type === TRIP_TYPE.roundTrip){
-        airlines = [...new Set([schedule.from.airline, schedule.to.airline])];
-        scheduleMassive = [about.schedule.from, about.schedule.to];
-        endPoints = [about.schedule.to.startPoint, about.schedule.from.startPoint];
-    } else if(type === TRIP_TYPE.multiCity){
-        airlines = [...new Set([...schedule.parts.map(part => part.airline)])];
-        scheduleMassive = [...about.schedule.parts];
-        endPoints = [...about.schedule.parts.slice(1).map(part => part.startPoint), about.schedule.endPoint];
-    }
-    if(airlines.length !== 1) classes.push("_many-image");
+export const Flight : FC<FlightProps> = ({about, isInFavourites, groupId, prevCheckboxes, currentUser}) => {
+    const {rating, countReviews, schedule, type} = about;
 
-    let choosed = useState<number[]>([]);
-    let path = useMemo(
+    let [choosed, setChoosed] = useState<number[]>([]);
+    let {airlines, scheduleMassive, endPoints, path}: FlightAbout = useMemo(
         () => {
-            switch(type){
-                case TRIP_TYPE.onWay:
-                    return flightsCatalogPath + "/" + (Number(about.id) + 1) + "/OnWay";
-                case TRIP_TYPE.roundTrip:
-                    const neededMassive: string[] = [(choosed[0].includes(0)) ? "Depart" : "", choosed[0].includes(1) ? "Return" : ""].filter(Boolean);
-                    return flightsCatalogPath + "/" + (Number(about.id) + 1) + "/" + neededMassive.join("+");
-                case TRIP_TYPE.multiCity:{
-                    const {parts, endPoint} = schedule;
-                    const neededMassive: string[] = choosed[0].map(choosedId => {
-                        const part = parts[choosedId];
-                        return part.startPoint + "-" + (part.route.join("-")) + ((part.route.length !== 0) ? "-" : "") + ((choosedId === parts.length - 1) ? endPoint : parts[choosedId + 1].startPoint)
-                    }) 
-                    return flightsCatalogPath + "/" + (Number(about.id) + 1) + "/" + neededMassive.join("+")
-                }
+            if(type === TRIP_TYPE.onWay){
+                const {endPoint, placeFrom, placeTo, ...otherSchedule} = about.schedule;
+                return ({
+                    airlines: [schedule.airline],        
+                    scheduleMassive: [{...otherSchedule, place: placeFrom}],
+                    endPoints: [about.schedule.endPoint],
+                    path: flightPath + "/" + (Number(about.id) + 1) + "/On-Way"
+                })
+            } else if(type === TRIP_TYPE.roundTrip){
+                let neededPath;
+                if(choosed.length === 2) neededPath = "Round-Trip";
+                else neededPath = choosed.includes(0) ? "Depart" : "Return";
+                return ({ 
+                    airlines: [...new Set([schedule.from.airline, schedule.to.airline])],        
+                    scheduleMassive: [about.schedule.from, about.schedule.to],
+                    endPoints: [about.schedule.to.startPoint, about.schedule.from.startPoint],
+                    path: flightPath + "/" + (Number(about.id) + 1) + "/" + neededPath
+                })
+            } else{
+                const {parts, endPoint} = schedule;
+                const neededMassive: string[] = choosed.map(choosedId => {
+                    const part = parts[choosedId];
+                    return part.startPoint + "-" + (part.route.join("-")) + ((part.route.length !== 0) ? "-" : "") + ((choosedId === parts.length - 1) ? endPoint : parts[choosedId + 1].startPoint)
+                }) 
+                return ({
+                    airlines: [...new Set([...schedule.parts.map(part => part.airline)])],
+                    scheduleMassive: [...about.schedule.parts],
+                    endPoints: [...about.schedule.parts.slice(1).map(part => part.startPoint), about.schedule.endPoint],
+                    path: flightPath + "/" + (Number(about.id) + 1) + "/" + neededMassive.join("+")
+                })
             }
-        }, [choosed[0]]
+        }, [choosed.length, about]
     );
-    let hoveredId = useState<number>(-1);
 
+    let hoveredId = useState<number>(-1);
+    const favouritesInfo = useFavourites(isInFavourites, about.id, currentUser, SITE_PARTS.flights);
     return(
-        <article className={classes.join(" ")}>
+        <article className={["flight", airlines.length !== 1 ? "_many-images" : ""].filter(Boolean).join(" ")}>
             {airlines.length !== 1 
                 ? <div className="flight__images">
                     {airlines.map((airline, i) => {
-                        const srcs = getSrcs(airline);
+                        const srcs = getAirlineSrcs(airline);
                         return <picture className="flight__image" key={i}>
                             <source srcSet={srcs.webp} type="image/webp" />
                             <img src={srcs.jpeg} alt={airline} />
@@ -72,8 +78,8 @@ export const Flight : FC<FlightProps> = ({about, getSrcs, groupId, prevCheckboxe
                     })}
                 </div>
                 : <picture className="flight__image">
-                    <source srcSet={getSrcs(airlines[0]).webp} type="image/webp" />
-                    <img src={getSrcs(airlines[0]).jpeg} alt={airlines[0]} />
+                    <source srcSet={getAirlineSrcs(airlines[0]).webp} type="image/webp" />
+                    <img src={getAirlineSrcs(airlines[0]).jpeg} alt={airlines[0]} />
                 </picture>
             }
             <div className="flight__info">
@@ -86,7 +92,7 @@ export const Flight : FC<FlightProps> = ({about, getSrcs, groupId, prevCheckboxe
                         return(
                             <FlightSchedulePart 
                                 key={i} about={part} groupId={groupId} prevCheckboxes={prevCheckboxes} 
-                                endPoint={endPoints[i]} choosed={choosed} hoveredId={hoveredId} id={i}
+                                endPoint={endPoints[i]} choosed={[choosed, setChoosed]} hoveredId={hoveredId} id={i}
                                 checkboxesCount={getSchedulePartsCount(about)}
                             />
                         )
@@ -94,22 +100,15 @@ export const Flight : FC<FlightProps> = ({about, getSrcs, groupId, prevCheckboxe
                 </ul>
                 <div className="flight__footer">
                     <ButtonBorder
-                        parentCls={["flight"]} 
-                        buttonCl="favourites"
+                        parentCls={["flight"].filter(Boolean)} 
+                        isDisabled={currentUser.name.firstName === ""} isLink={false} isActive={!isInFavourites}
+                        buttonCl="favourites" onClick={favouritesInfo.onClickHandler}
                         value={{
                             viewbox: {minX: 0, minY: 0, width: 16.5, height: 15.25}, height: 15.25, width: 16.5,
-                            pathes: [
-                                {
-                                    d: "m 8.2504,3.25 c 0,0 -1.25,-2.5 -3.78594,-2.5 C 2.40352,0.75 0.771493,2.47422 0.750399,4.53164 0.707431,8.80234 4.13829,11.8395 7.89884,14.3918 8.00251,14.4623 8.12501,14.5 8.2504,14.5 8.37579,14.5 8.49829,14.4623 8.60196,14.3918 12.3621,11.8395 15.793,8.80234 15.7504,4.53164 15.7293,2.47422 14.0973,0.75 12.0363,0.75 c -2.5359,0 -3.7859,2.5 -3.7859,2.5 z",
-                                    fill: "unset", fillRule: FILL_RULE.nonzero,
-                                    stroke: "rgb(17, 34, 17)", strokeLinecap: STROKE_LINECAP.round,
-                                    strokeLinejoin: STROKE_LINEJOIN.round,
-                                    strokeWidth: "1.5"
-                                }
-                            ]
+                            pathes: [favouritesInfo.heartPath]
                         }} 
                     />
-                    {(choosed[0].length === 0)
+                    {(choosed.length === 0)
                         ? <div className="flight__link button_green">View Deals</div>
                         : <NavLink className="flight__link button_green" to={path}>View Deals</NavLink>
                     }

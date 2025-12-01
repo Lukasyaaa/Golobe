@@ -1,25 +1,22 @@
 import React, { type FC } from "react";
-import { intToDuration, timeTo24String, timeToInt, timeToString, FLIGHT_AMENITIES, type IconParams, type Image, type objType, type Srcs, type Time, FILL_RULE, STROKE_LINECAP, STROKE_LINEJOIN, transformIconViewbox, getMonth, getShortDayWeek, getPlaceTranscript, SITE_PARTS } from "../../../types";
-import { NavLink } from "react-router-dom";
+import { intToDuration, timeTo24String, timeToInt, timeToString, FLIGHT_AMENITIES, getMonth, getShortDayWeek, SITE_PARTS } from "../../../types";
+import type { Image, objType, Time, AirportInfo } from "../../../types";
 import { FlightAmenities } from "../../Common/Blocks/FlightAmenities";
 import { IntroductionLink } from "../../Common/Blocks/IntroductionLink";
 
 interface LinkProps{
     policiesLinks: string[],
     flightRoute: string,
-    departTime: Time,
-    from: string,
-    arrayTime: Time,
-    to: string,
+    departTime: Time, from: string, fromTranscript: string
+    arrayTime: Time, to: string, toTranscript: string
     amenities: objType<typeof FLIGHT_AMENITIES>[],
-    airline: Image,
-    plane: string,
-    path: string
+    airline: Image, plane: string, path: string
 }
 
 export const Link : FC<LinkProps> = ({
-    policiesLinks, flightRoute, departTime, from, arrayTime, to, amenities, airline, plane, path
+    policiesLinks, flightRoute, departTime, from, fromTranscript, arrayTime, to, toTranscript, amenities, airline, plane, path
 }) => {
+
     const departDate = new Date(departTime.year, departTime.month, departTime.day);
     return(
         <section className="flight-page__link link">
@@ -53,7 +50,8 @@ export const Link : FC<LinkProps> = ({
                         <IntroductionLink 
                             path={path}
                             parentCls={["info-link"]} logo={airline.srcs} text={plane} title={airline.alt}
-                            contentType={SITE_PARTS.flights}
+                            contentType={SITE_PARTS.flights} onClick={undefined}
+                            isActive={true}
                         />
                         <FlightAmenities parentCl="info-link" amenities={amenities} />
                     </div>
@@ -69,7 +67,7 @@ export const Link : FC<LinkProps> = ({
                                 >
                                     {timeToString(departTime.units)}
                                 </time>
-                                <div className="schedule-part-info-link__place">{getPlaceTranscript(from) + "(" + from + ")"}</div>
+                                <div className="schedule-part-info-link__place">{fromTranscript + "(" + from + ")"}</div>
                             </div>
                         </div>
                         <div className="info-link__schedule-part schedule-part-info-link">
@@ -83,7 +81,7 @@ export const Link : FC<LinkProps> = ({
                                 >
                                     {timeToString(arrayTime.units)}
                                 </time>
-                                <div className="schedule-part-info-link__place">{getPlaceTranscript(to) + "(" + to + ")"}</div>
+                                <div className="schedule-part-info-link__place">{toTranscript + "(" + to + ")"}</div>
                             </div>
                         </div>
                     </div>

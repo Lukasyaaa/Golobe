@@ -8,17 +8,16 @@ import { IntroductionLink } from "../Blocks/IntroductionLink";
 interface IntroductionProps{
     contentType: objType<typeof SITE_PARTS>, parentCl: string,
     heading: string, price: number,
-    linkLogo: Srcs, linkTitle: string, linkText: string, linkPath: string
+    linkLogo: Srcs, linkTitle: string, linkText: string, linkPath: string, linkOnClick: () => void
     amenities: objType<typeof FLIGHT_AMENITIES>[] | null,
     departDate: string | null, flyDuration: string | null,
-    start: Point, end: Point
+    start: Point, end: Point, isAuthorized: boolean
 }
 
-export const Introduction : FC<IntroductionProps> = (props) => {
-    const {
-        contentType, parentCl, heading, price, linkLogo, linkTitle, linkText, linkPath, 
-        amenities, departDate, flyDuration, start, end
-    } = props;
+export const Introduction : FC<IntroductionProps> = ({
+    contentType, parentCl, heading, price, linkLogo, linkTitle, linkText, linkPath, linkOnClick,
+    amenities, departDate, flyDuration, start, end, isAuthorized
+}) => {
     return(
         <article 
             className={[
@@ -47,6 +46,7 @@ export const Introduction : FC<IntroductionProps> = (props) => {
                         path={linkPath}
                         parentCls={[`introduction-${parentCl}`, "introduction-booking"]} 
                         logo={linkLogo} text={linkText} title={linkTitle} contentType={contentType}
+                        onClick={linkOnClick} isActive={isAuthorized}
                     />
                     <FlightAmenities parentCl="introduction-airline" amenities={amenities} />
                 </div>
@@ -54,6 +54,7 @@ export const Introduction : FC<IntroductionProps> = (props) => {
                     path={linkPath}
                     parentCls={[`introduction-${parentCl}`, "introduction-booking"]} 
                     logo={linkLogo} text={linkText} title={linkTitle} contentType={contentType}
+                    onClick={linkOnClick} isActive={isAuthorized}
                 />
             }
             <div className={`introduction-${parentCl}__schedule introduction-booking__schedule`}>

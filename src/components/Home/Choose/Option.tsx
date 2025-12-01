@@ -1,21 +1,17 @@
 import React, { type FC } from "react";
 import type { ChooseOption as ChooseOptionType } from "../../../types";
 
-interface ChooseOptionProps{
-    about : ChooseOptionType,
+interface ChooseOptionProps extends ChooseOptionType{
     linkPath : string
 }
 
-export const ChooseOption : FC<ChooseOptionProps> = ({about, linkPath}) => {
-    let isWebp = false;
-
-    const {background, button, heading, description} = about
+export const ChooseOption : FC<ChooseOptionProps> = ({background, button, heading, description, linkPath}) => {
     const {jpeg, webp} = background;
     return(
         <div 
             className="choose__option option-choose" 
             style={{
-                backgroundImage: `url(${isWebp ? webp : jpeg})`,
+                backgroundImage: `url(${document.body.classList.contains("webp") ? webp : jpeg})`,
                 backgroundSize: "cover", backgroundRepeat: "no-repeat"
             }}
         >

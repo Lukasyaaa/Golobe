@@ -1,12 +1,13 @@
-import React, { Fragment, useEffect, useRef, useState, type FC } from "react";
+import React, { Fragment, useEffect, useState, type FC, type MouseEvent} from "react";
 import { useTypedSelector } from "../../../store";
-import { FILL_RULE, type IconParams } from "../../../types";
-import { flightsPath, hotelsPath, startPath } from "../../../App";
+import { FILL_RULE, type IconParams, type User } from "../../../types";
+import { accountPath, favouritesPath, flightPath, flightsPath, hotelPath, hotelsPath, logInPath, signInPath, startPath } from "../../../App";
 import { NavLink, useLocation } from "react-router-dom";
 import { UnActiveLink } from "./Menu/UnActiveLink";
 import { ActiveLink } from "./Menu/ActiveLink";
 import { AuthorizationLink } from "./Authorization/Link";
 import { AuthorizationHiddenLink } from "./Authorization/HiddenLink";
+import { HeaderUser } from "./User/User";
 
 export interface MenuLink {
     description : string,
@@ -17,24 +18,24 @@ export interface MenuLink {
 
 interface TabIndexes{
     logo: number,
-    menu: number,
-    authorization: number,
+    user: number,
     burger: number
-    hiddenAuthorization: number
 }
 
 export interface AuthorizationLink{
     id: number,
     uniqueCl: string,
     description: string,
-    path: string
+    path: string,
+    isDisabled: boolean
 }
 
 export const Header : FC = () => {
+    let user = useTypedSelector(state => state.user);
     let location = useLocation();
     let [isBlackWhite, setIsBlackWhite] = useState<boolean>(location.pathname !== startPath);
     useEffect(() => {
-        setIsBlackWhite(location.pathname !== startPath)
+        setIsBlackWhite(location.pathname !== startPath);      
     }, [location.pathname]);
 
     const menuAbout : MenuLink[] = [
@@ -52,24 +53,31 @@ export const Header : FC = () => {
         }
     ]
 
-    let [isOpen, setIsOpen] = useState<boolean>(false);
+    let [isOpened, setIsOpened] = useState<boolean>(false);
+    const openMenu = () => setIsOpened(true);
+    const toggleMenu = (e: MouseEvent<HTMLButtonElement>) => {
+        setIsOpened(prev => !prev);
+        e.currentTarget.blur();
+    }
+    const closeMenu = () => setIsOpened(false);
+    useEffect(() => {
+        if (isOpened) document.body.classList.add("_locked");
+        else document.body.classList.remove("_locked");
+
+        return () => document.body.classList.remove("_locked");
+    }, [isOpened]);
 
     let tabIndexes : TabIndexes = {
-        logo: 0, menu: 0, authorization: 0, burger: 0, hiddenAuthorization: 0
+        logo: 0, user: 0, burger: 0
     }
     const setTabIndexes = () => {
         if(window.innerWidth < 768){
             if(location.pathname !== startPath) tabIndexes.logo = 1;
             if(window.innerWidth > 480){
-                tabIndexes.authorization = 1 + tabIndexes.logo;
-                tabIndexes.burger = 3 + tabIndexes.logo;
-                tabIndexes.menu = 4 + tabIndexes.logo;
-                tabIndexes.hiddenAuthorization = -1;
+                tabIndexes.user = 1 + tabIndexes.logo;
+                tabIndexes.burger = 1 + tabIndexes.logo + ((user.name.firstName === "") ? 2 : 6 + Number(user.favourites.flightsPart.length !== 0 || user.favourites.hotelsPart.length !== 0 && location.pathname !== favouritesPath));
             } else {
-                tabIndexes.authorization = -1;
                 tabIndexes.burger = 1 + tabIndexes.logo;
-                tabIndexes.menu = 2 + tabIndexes.logo;
-                tabIndexes.hiddenAuthorization = 4 + tabIndexes.logo;
             }
         }
     }
@@ -90,37 +98,32 @@ export const Header : FC = () => {
         return () => window.removeEventListener("scroll", scrollHandler);
     }, []);
 
-    let isHoveredOnUnActive = useState<boolean>(false);
-    let header = useRef<HTMLUListElement>(null);
-    useEffect(() => {
-        const headerElement = header.current;
-        if(headerElement){
-            if(isHoveredOnUnActive[0]){
-                headerElement.classList.add("_hide-active");
-            } else {
-                headerElement.classList.remove("_hide-active");
-            }
-        }
-    }, [isHoveredOnUnActive[0]])
+    let [isHoveredOnUnactive, setIsHoveredOnUnactive] = useState<boolean>(false);
 
-    const makeIsHoveredOnUnActive = () => {
-        isHoveredOnUnActive[1](true);
-    }
-    const unMakeIsHoveredOnUnActive = () => {
-        isHoveredOnUnActive[1](false);
-    }
+    const makeIsHoveredOnUnActive = () => setIsHoveredOnUnactive(true);
+    const unMakeIsHoveredOnUnActive = () => setIsHoveredOnUnactive(false);
 
-    let hoveredIndex = useState<number>(1);
+    let [hoveredIndex, setIsHoveredIndex] = useState<number>(1);
     const authorizationAbout : AuthorizationLink[] = [
-        {id: 0, uniqueCl: "header__log-in", description: "Login", path: "#"},
-        {id: 1, uniqueCl: "header__sign-up", description: "Sign up", path: "#"}
+        {id: 0, uniqueCl: "header__log-in", description: "Login", path: logInPath, isDisabled: (JSON.parse(localStorage.getItem("users") as string) as User[]).length === 0},
+        {id: 1, uniqueCl: "header__sign-up", description: "Sign up", path: signInPath, isDisabled: false}
     ]
+
+    if(location.pathname !== startPath && 
+    !location.pathname.includes(flightPath) && 
+    !location.pathname.includes(hotelPath) && 
+    location.pathname !== accountPath && 
+    location.pathname !== favouritesPath){
+        return <Fragment />
+    }
+
     return(
         <header 
             className={[
-                "header", isOpen ? "_active" : "", (isScrolled) ? "_scroll" : "", isBlackWhite ? "black-white" : "start"
+                "header", isOpened ? "_active" : "", 
+                isScrolled ? "_scroll" : "", isBlackWhite ? "black-white" : "start",
+                isHoveredOnUnactive ? "_hide-active" : ""
             ].filter(Boolean).join(" ")}
-            ref={header}
         >
             <div className="container_header">
                 <nav className="header__menu menu">
@@ -129,36 +132,46 @@ export const Header : FC = () => {
                             ? menuAbout.map((link, i, {length}) => 
                                 <ActiveLink 
                                     key={i} about={link}
-                                    tabIndex={tabIndexes.menu + Number(tabIndexes.menu !== 0 && tabIndexes.menu !== -1) * i}  
                                     makePseudoActive={makeIsHoveredOnUnActive}
                                     unMakePseudoActive={unMakeIsHoveredOnUnActive}
-                                    onFocusEvent={(i === 0 && window.innerWidth <= 768) ? (() => setIsOpen(true)) : undefined} 
-                                    onBlurEvent={(i === length - 1 && window.innerWidth <= 768) ? (() => setIsOpen(false)) : undefined}
-                                    closeHeader={() => setIsOpen(false)}
+                                    onFocusEvent={(i === 0 && window.innerWidth <= 768) ? openMenu : undefined} 
+                                    onBlurEvent={(i === length - 1 && window.innerWidth <= 768 && window.innerWidth > 480) ? closeMenu : undefined}
+                                    closeHeader={closeMenu}
                                 />
                             ) : menuAbout.map((link, i) => 
-                                (!location.pathname.includes(link.path))
+                                (!location.pathname.includes(link.path.slice(0, -1)))
                                     ? <ActiveLink 
-                                        key={i} about={link} tabIndex={tabIndexes.menu}  
+                                        key={i} about={link}
                                         makePseudoActive={makeIsHoveredOnUnActive}
                                         unMakePseudoActive={unMakeIsHoveredOnUnActive}
-                                        onFocusEvent={(window.innerWidth <= 768) ? () => setIsOpen(true) : undefined} 
-                                        onBlurEvent={(window.innerWidth <= 768) ? () => setIsOpen(false) : undefined}
-                                        closeHeader={() => setIsOpen(false)}
+                                        onFocusEvent={(window.innerWidth <= 768) ? openMenu : undefined} 
+                                        onBlurEvent={(window.innerWidth <= 768 && window.innerWidth > 480) ? closeMenu : undefined}
+                                        closeHeader={closeMenu}
                                     />
                                     : <UnActiveLink key={i} {...link} />
                             )
                         }
                     </ul>
-                    <div className="menu__authorization authorization-menu">
-                        {authorizationAbout.map((link, i, {length}) =>
-                            <AuthorizationHiddenLink 
-                                about={link} key={i}
-                                onBlurHandler={(i !== length - 1 && (window.innerWidth < 480)) ? () => setIsOpen(false) : undefined}
-                                tabIndex={tabIndexes.hiddenAuthorization + Number(tabIndexes.hiddenAuthorization !== -1) * i} 
+                    {window.innerWidth <= 480 ?
+                        user.name.firstName === ""
+                            ? <div className="menu__authorization authorization-menu">
+                                {authorizationAbout.map((link, i, {length}) =>
+                                    <AuthorizationHiddenLink 
+                                        about={link} key={i}
+                                        onBlurHandler={(i !== length - 1 && (window.innerWidth < 480)) ? closeMenu : undefined}
+                                        setIsOpened={setIsOpened}
+                                    />
+                                )}
+                            </div>
+                            : <HeaderUser 
+                                tabIndex={null}
+                                ava={user.ava} name={user.name} parentCl="menu" favourites={user.favourites} 
+                                isHoveredOnUnactive={[isHoveredOnUnactive, setIsHoveredOnUnactive]}
+                                isToStart={location.pathname === accountPath || location.pathname.includes("Details")}
+                                closeHeader={closeMenu}
                             />
-                        )}
-                    </div>
+                        : <Fragment />
+                    }
                 </nav>
                 {(isBlackWhite) 
                     ? <NavLink 
@@ -171,7 +184,7 @@ export const Header : FC = () => {
                             }
                         }} onBlur={unMakeIsHoveredOnUnActive}
                     >
-                        {(isOpen) 
+                        {(isOpened) 
                             ? <svg viewBox="0 0 110.35 36" width="110.35" height="36">
                                 <path d="M14.7282 5.57672L17.9466 8.00816L15.9805 10.5097C17.3379 12.0457 17.8382 13.7984 17.8382 15.7295C17.8382 17.9092 17.0161 20.9844 14.1195 22.3068C17.0512 23.7727 17.7649 25.8823 17.7649 28.1353C17.7649 32.9982 14.0463 36 8.93505 36C3.82384 36 0 32.8898 0 28.1353L4.32413 28.1353C4.32413 30.4233 6.43362 31.9242 8.93505 31.9242C11.4365 31.9242 13.4026 30.5667 13.4026 28.1353C13.4026 25.7038 11.1146 24.5949 8.93505 24.5949C3.4319 24.5949 0 21.2361 0 15.7295C0 10.2229 4.00229 6.79085 8.93823 6.79085C10.3339 6.79085 11.7615 6.9693 12.9788 7.79147L14.7282 5.57672ZM4.32413 15.7295C4.32413 18.8047 6.39857 20.6274 8.93505 20.6274C11.4365 20.6274 13.5109 18.7696 13.5109 15.7295C13.5109 12.6894 11.4397 10.7615 8.93823 10.7615C6.39857 10.7615 4.32413 12.6544 4.32413 15.7295Z" fill="rgb(255,255,255)"/>
                                 <path d="M50.5673 0L50.5673 24.99L46.2432 24.99L46.2432 0L50.5673 0Z" fill="rgb(255,255,255)"/>
@@ -192,7 +205,7 @@ export const Header : FC = () => {
                             </svg>
                         }
                     </NavLink>
-                    : <NavLink className="header__logo" tabIndex={-1} to={startPath}>
+                    : <div className="header__logo">
                         <svg viewBox="0 0 110.35 36" width="110.35" height="36">
                             <path d="M14.7282 5.57672L17.9466 8.00816L15.9805 10.5097C17.3379 12.0457 17.8382 13.7984 17.8382 15.7295C17.8382 17.9092 17.0161 20.9844 14.1195 22.3068C17.0512 23.7727 17.7649 25.8823 17.7649 28.1353C17.7649 32.9982 14.0463 36 8.93505 36C3.82384 36 0 32.8898 0 28.1353L4.32413 28.1353C4.32413 30.4233 6.43362 31.9242 8.93505 31.9242C11.4365 31.9242 13.4026 30.5667 13.4026 28.1353C13.4026 25.7038 11.1146 24.5949 8.93505 24.5949C3.4319 24.5949 0 21.2361 0 15.7295C0 10.2229 4.00229 6.79085 8.93823 6.79085C10.3339 6.79085 11.7615 6.9693 12.9788 7.79147L14.7282 5.57672ZM4.32413 15.7295C4.32413 18.8047 6.39857 20.6274 8.93505 20.6274C11.4365 20.6274 13.5109 18.7696 13.5109 15.7295C13.5109 12.6894 11.4397 10.7615 8.93823 10.7615C6.39857 10.7615 4.32413 12.6544 4.32413 15.7295Z" fill="rgb(255,255,255)"/>
                             <path d="M50.5673 0L50.5673 24.99L46.2432 24.99L46.2432 0L50.5673 0Z" fill="rgb(255,255,255)"/>
@@ -202,20 +215,32 @@ export const Header : FC = () => {
                             <path d="M39.7626 11.9898C38.3489 9.04023 35.4017 7.00751 31.4702 7.00751C25.8555 7.00751 22.3535 11.1534 22.3535 16.1947C22.3535 19.4132 23.733 22.2436 26.2006 23.8842C26.3412 23.779 26.4258 23.7107 26.4258 23.7107C27.6566 22.9077 28.8573 22.0623 30.0258 21.1765C27.8244 20.5287 26.7127 18.4222 26.7127 16.1947C26.7127 13.5498 28.3601 10.9749 31.5021 10.9749C34.269 10.9749 36.0793 13.2686 36.274 15.75C37.4868 14.5463 38.6507 13.292 39.7626 11.9898ZM31.0601 25.3735C34.5418 22.9057 37.7611 20.0866 40.6652 16.963C40.3328 21.6795 36.9335 25.3819 31.5052 25.3819C31.3553 25.3819 31.2069 25.3791 31.0601 25.3735Z" fill="rgb(141,211,187)"/>
                             <path d="M43.3179 4.53785C38.8631 2.89989 35.6607 6.42437 35.6607 6.42437L38.6974 8.18979C39.835 7.53652 40.3417 8.17067 40.4723 8.51802C40.5648 8.7634 40.4405 9.03108 40.3417 9.17766L39.6024 10.1114C35.6129 14.9233 30.9223 19.1042 25.6868 22.5203C25.6868 22.5203 24.1063 23.795 23.265 23.8141C22.5576 23.8301 22.2422 23.2341 22.838 22.3801L21.3722 19.0723C21.3722 19.0723 17.558 21.5707 18.2972 25.9619C18.6095 27.8166 20.3525 29.1359 22.2039 28.8013C23.1503 28.6324 24.3198 28.1703 25.7505 27.2239L28.3826 25.5031C33.6181 22.0806 38.3119 17.8869 42.2982 13.0686L43.2032 11.9756C44.567 10.4237 45.1789 9.1458 45.386 8.13562C45.7046 6.59007 44.7901 5.07959 43.3179 4.53785Z" fill="rgb(141,211,187)"/>
                         </svg>
-                    </NavLink>
+                    </div>
                 }
-                <nav className="header__authorization">
-                    {authorizationAbout.map((link, i) =>
-                        <AuthorizationLink 
-                            key={i}
-                            about={link} hoveredIndex={hoveredIndex} isHovered={hoveredIndex[0] === i}
-                            tabIndex={tabIndexes.authorization + Number(tabIndexes.authorization !== 0) * i} 
+                {window.innerWidth > 480 
+                    ? user.name.firstName === ""
+                        ? <nav className="header__authorization">
+                            {authorizationAbout.map((link, i) =>
+                                <AuthorizationLink 
+                                    key={i}
+                                    about={link} hoveredIndex={[hoveredIndex, setIsHoveredIndex]} 
+                                    isHovered={hoveredIndex === i}
+                                    tabIndex={tabIndexes.user + Number(tabIndexes.user !== 0) * i}
+                                    setIsOpened={setIsOpened}
+                                />
+                            )}
+                        </nav>  
+                        : <HeaderUser 
+                            tabIndex={(window.innerWidth < 768) ? tabIndexes.user : null}
+                            ava={user.ava} name={user.name} parentCl="header" favourites={user.favourites} 
+                            isHoveredOnUnactive={[isHoveredOnUnactive, setIsHoveredOnUnactive]}
+                            isToStart={location.pathname === accountPath || location.pathname.includes("Details")}
+                            closeHeader={undefined}
                         />
-                    )}
-                </nav>
+                    : <Fragment />
+                }
                 <button 
-                    className="header__burger" 
-                    onClick={() => setIsOpen((prev) => !prev)} tabIndex={tabIndexes.burger}
+                    className="header__burger" onClick={toggleMenu} tabIndex={tabIndexes.burger}
                 >
                     <span></span>
                 </button>

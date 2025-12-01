@@ -1,127 +1,189 @@
-import React, { useEffect, useRef, useState, type FC } from "react";
-import { OPTION_ICON_VALUE, type IconParams, type IconValue, type objType, type SiteSeparation } from "../../../types.ts";
+import React, { useEffect, useMemo, useState, type FC, } from "react";
+import { getInputSetState, getInputState, getInputValidation, INPUT_OPTIONS_VALIDATION_TYPE, STROKE_LINECAP, STROKE_LINEJOIN, type OneDataInputValidation, type Field, type IconParams, type InputState, type objType, type SiteSeparation, type TwoDataInputValidation, type AboutOneDataPart, type AboutTwoDataPart } from "../../../types.ts";
 import {FILL_RULE, NEEDED_BLOCKS, SITE_PARTS, INPUT_TYPE, ICON_POSITION} from "../../../types.ts";
-import { useTypedSelector } from "../../../store/index.ts";
-import { OptionsInput } from "./Input.tsx";
-import { OptionsSelect } from "./Select.tsx";
 import { OptionsHeaderType } from "./HeaderType.tsx";
+import { Input } from "../Blocks/Interaction/Input.tsx";
+import { OptionsLink } from "./OptionsLink.tsx";
+import { SelectDescription } from "../Blocks/Interaction/Select.tsx";
 
-interface OptionsProps{
-    neededBlocks: objType<typeof NEEDED_BLOCKS>,
-    value: objType<typeof SITE_PARTS>
-}
-
-export interface ActiveHeaderType{
-    description : string, 
-    isCurrent : true, 
+export interface HeaderType{
+    description : objType<typeof SITE_PARTS>, 
     cl : "flights" | "stays", 
     iconValue : IconParams
 }
-export interface UnActiveHeaderType{
-    description : string, 
-    isCurrent : false, 
-    cl : "flights" | "stays", 
-    iconValue : IconParams
-}
-type HeaderType = ActiveHeaderType | UnActiveHeaderType;
 
-interface OptionInput{
-    description: string, iconValue: IconValue<objType<typeof OPTION_ICON_VALUE>> | null, type: typeof INPUT_TYPE.field,
-    id : string, placeholder: string, isBigger: boolean
+export const SELECT_OPTIONS_DESCRIPTION = {
+    trip: "Trip", roomGuests: "Rooms & Guests"
+}
+interface OptionInput extends Field<typeof INPUT_OPTIONS_VALIDATION_TYPE>{
+    type: typeof INPUT_TYPE.field, isBigger: boolean
 }
 interface OptionSelect{
-    description: string, iconValue: objType<typeof OPTION_ICON_VALUE> | null, type: typeof INPUT_TYPE.select,
-    links : string[], isBigger: boolean
+    type: typeof INPUT_TYPE.select, isBigger: boolean
+    subinput: objType<typeof SELECT_OPTIONS_DESCRIPTION>, 
+    iconValue: IconParams | null,
+    links : string[]
 }
 
+export interface SelectState{
+    description: objType<typeof SELECT_OPTIONS_DESCRIPTION>,
+    value: number
+}
+
+export const getSelectState = (neededDesc: objType<typeof SELECT_OPTIONS_DESCRIPTION.trip>, selects: SelectState[]) =>{
+    return selects.find(({description}) => description === neededDesc)?.value || 0
+}
+
+interface OptionsProps{
+    neededBlocks: objType<typeof NEEDED_BLOCKS>, value: objType<typeof SITE_PARTS>
+}
 export const Options : FC<OptionsProps> = ({neededBlocks, value}) => {
-    const about : SiteSeparation<(OptionInput | OptionSelect)[]> = {
+    const about : SiteSeparation<(OptionInput | OptionSelect)[]> = useMemo(() => ({
         flightsPart: [
             { 
-                description: "From - To", iconValue: {pos: ICON_POSITION.right, value: OPTION_ICON_VALUE.fromTo}, 
+                validationType: INPUT_OPTIONS_VALIDATION_TYPE.fromTo,
+                subinput: "From - To", icon: {
+                    pos: ICON_POSITION.right, 
+                    value: {
+                        viewbox: {minX: 0, minY: 0, width: 16.5, height: 21}, width: 16.5, height: 21,
+                        pathes: [{
+                            fill: "unset", fillRule: FILL_RULE.nonzero, stroke: "rgb(17, 34, 17)", strokeWidth: "1.5", strokeLinecap: STROKE_LINECAP.round, strokeLinejoin: STROKE_LINEJOIN.round, d: "M 10.5,0.75 15.75,6 10.5,11.25 M 14.947,6 H 0.75 M 6,20.25 0.75,15 6,9.75 M 1.59375,15 H 15.75"
+                        }]
+                    }
+                }, 
                 type: INPUT_TYPE.field, id: "from-to", placeholder: "Lahore - Karachi", isBigger: false
             },
             { 
-                description: "Trip", iconValue: null, type: INPUT_TYPE.select, 
-                links: ["Return", "Depart"], isBigger: false
+                subinput: "Trip", type: INPUT_TYPE.select, 
+                links: ["Return", "Depart", "Round Trip", "Multi-City", "On Way"], isBigger: false, iconValue: null
             },
             { 
-                description: "Depart - Return", iconValue: null, type: INPUT_TYPE.field, 
+                validationType: INPUT_OPTIONS_VALIDATION_TYPE.returnDepart,
+                subinput: "Depart - Retum", icon: null, type: INPUT_TYPE.field, 
                 id: "dep-ret", placeholder: "07 Nov 22 - 13 Nov 22", isBigger: false
             },
             { 
-                description: "Passenger - Class", iconValue: null, type: INPUT_TYPE.field, 
+                validationType: INPUT_OPTIONS_VALIDATION_TYPE.passengerClass,
+                subinput: "Passenger - Class", icon: null, type: INPUT_TYPE.field, 
                 id: "pas-cl", placeholder: "1 Passenger, Economy", isBigger: false
             }
         ],
         hotelsPart: [
             { 
-                description: "Enter Destination", iconValue: {pos: ICON_POSITION.left, value: OPTION_ICON_VALUE.hotelPlace}, 
-                type: INPUT_TYPE.field, id: "from-to", placeholder: "Istanbul, Turkey", isBigger: true
+                validationType: INPUT_OPTIONS_VALIDATION_TYPE.destination,
+                subinput: "Enter Destination", icon: {
+                    pos: ICON_POSITION.left, 
+                    value: {
+                        viewbox: {minX: 0, minY: 0, width: 21, height: 16.5}, width: 21, height: 16.5,
+                        pathes: [{
+                            fill: "rgb(17, 34, 17)", fillRule: FILL_RULE.nonzero, stroke: "unset", strokeWidth: "unset", strokeLinecap: STROKE_LINECAP.butt, strokeLinejoin: STROKE_LINEJOIN.miter, d: "M18.75 7.06406C18.2772 6.85651 17.7664 6.74955 17.25 6.75L3.75 6.75C3.23368 6.7495 2.72288 6.85629 2.25 7.06359C1.58166 7.35587 1.01294 7.83652 0.613357 8.4468C0.213775 9.05708 0.000638647 9.77054 0 10.5L0 15.75C3.33067e-16 15.9489 0.0790176 16.1397 0.21967 16.2803C0.360322 16.421 0.551088 16.5 0.75 16.5C0.948912 16.5 1.13968 16.421 1.28033 16.2803C1.42098 16.1397 1.5 15.9489 1.5 15.75L1.5 15.375C1.50122 15.2759 1.54112 15.1812 1.61118 15.1112C1.68124 15.0411 1.77592 15.0012 1.875 15L19.125 15C19.2241 15.0012 19.3188 15.0411 19.3888 15.1112C19.4589 15.1812 19.4988 15.2759 19.5 15.375L19.5 15.75C19.5 15.9489 19.579 16.1397 19.7197 16.2803C19.8603 16.421 20.0511 16.5 20.25 16.5C20.4489 16.5 20.6397 16.421 20.7803 16.2803C20.921 16.1397 21 15.9489 21 15.75L21 10.5C20.9993 9.77062 20.7861 9.05726 20.3865 8.44707C19.9869 7.83688 19.4183 7.3563 18.75 7.06406ZM16.125 0L4.875 0C4.17881 0 3.51113 0.276562 3.01884 0.768845C2.52656 1.26113 2.25 1.92881 2.25 2.625L2.25 6C2.25002 6.02906 2.25679 6.05771 2.26979 6.0837C2.28278 6.10969 2.30163 6.1323 2.32486 6.14976C2.34809 6.16721 2.37505 6.17903 2.40363 6.18428C2.43221 6.18953 2.46162 6.18806 2.48953 6.18C2.89896 6.06025 3.32341 5.99964 3.75 6L3.94828 6C3.99456 6.00029 4.03932 5.98346 4.07393 5.95274C4.10855 5.92202 4.13058 5.87958 4.13578 5.83359C4.17669 5.46712 4.35115 5.12856 4.62586 4.88256C4.90056 4.63656 5.25625 4.50037 5.625 4.5L8.25 4.5C8.61899 4.50003 8.97503 4.63606 9.25002 4.88209C9.52502 5.12812 9.69969 5.46688 9.74063 5.83359C9.74583 5.87958 9.76786 5.92202 9.80247 5.95274C9.83709 5.98346 9.88184 6.00029 9.92813 6L11.0747 6C11.121 6.00029 11.1657 5.98346 11.2003 5.95274C11.235 5.92202 11.257 5.87958 11.2622 5.83359C11.3031 5.46736 11.4773 5.12899 11.7517 4.88303C12.0261 4.63707 12.3815 4.50072 12.75 4.5L15.375 4.5C15.744 4.50003 16.1 4.63606 16.375 4.88209C16.65 5.12812 16.8247 5.46688 16.8656 5.83359C16.8708 5.87958 16.8929 5.92202 16.9275 5.95274C16.9621 5.98346 17.0068 6.00029 17.0531 6L17.25 6C17.6766 5.99979 18.1011 6.06057 18.5105 6.18047C18.5384 6.18854 18.5679 6.19 18.5965 6.18473C18.6251 6.17945 18.6521 6.16759 18.6753 6.15009C18.6986 6.13258 18.7174 6.1099 18.7304 6.08385C18.7433 6.0578 18.7501 6.0291 18.75 6L18.75 2.625C18.75 1.92881 18.4734 1.26113 17.9812 0.768845C17.4889 0.276562 16.8212 0 16.125 0Z"
+                        }]
+                    }
+                }, 
+                type: INPUT_TYPE.field, id: "from-to", placeholder: "Istanbul", isBigger: true
             },
             { 
-                description: "Check In", iconValue: {pos: ICON_POSITION.right, value: OPTION_ICON_VALUE.date}, 
+                validationType: INPUT_OPTIONS_VALIDATION_TYPE.checkIn,
+                subinput: "Check In", icon: {
+                    pos: ICON_POSITION.right, 
+                    value: {
+                        viewbox: {minX: 0, minY: 0, width: 16.5, height: 16.5}, width: 16.5, height: 16.5,
+                        pathes: [{
+                            fill: "rgb(17, 34, 17)", fillRule: FILL_RULE.nonzero, stroke: "unset", strokeWidth: "unset", strokeLinecap: STROKE_LINECAP.butt, strokeLinejoin: STROKE_LINEJOIN.miter, d: "m 16.5,3.5356631 c 0,-0.62515 -0.2483,-1.2247 -0.6904,-1.66675 -0.442,-0.44205 -1.0416,-0.69039 -1.6667,-0.69039 H 13.5536 V 0.60581307 c 0,-0.31711 -0.2438,-0.58929 -0.561,-0.60512999598 -0.0796,-0.003840004 -0.1593,0.008539996 -0.234,0.036389996 -0.0748,0.02784 -0.1431,0.07057 -0.2008,0.1256 -0.0578,0.05503 -0.1038,0.12121 -0.1352,0.19453 -0.0314,0.07332 -0.0476,0.15226 -0.0476,0.23203 V 1.1785231 H 4.125 V 0.60581307 c 0,-0.31711 -0.24382,-0.58929 -0.56093,-0.60512999598 C 3.4844,-0.00315693 3.40477,0.00922307 3.33002,0.03707307 c -0.07475,0.02784 -0.14308,0.07057 -0.20082,0.1256 -0.05775,0.05503 -0.10373,0.12121 -0.13515,0.19453 -0.03141,0.07332 -0.04761,0.15226 -0.04762,0.23203 V 1.1785231 H 2.35714 c -0.62515,0 -1.2247,0.24834 -1.66675,0.69039 C 0.24834,2.3109631 0,2.9105131 0,3.5356631 v 0.44196 c 0,0.03908 0.01552,0.07655 0.04315,0.10418 0.02763,0.02762 0.0651,0.04315 0.10417,0.04315 H 16.3527 c 0.0391,0 0.0765,-0.01553 0.1042,-0.04315 0.0276,-0.02763 0.0431,-0.0651 0.0431,-0.10418 z M 0,14.142803 c 0,0.6252 0.24834,1.2247 0.69039,1.6668 0.44205,0.442 1.0416,0.6903 1.66675,0.6903 H 14.1429 c 0.6251,0 1.2247,-0.2483 1.6667,-0.6903 0.4421,-0.4421 0.6904,-1.0416 0.6904,-1.6668 V 5.4140131 c 0,-0.02931 -0.0116,-0.05741 -0.0324,-0.07813 -0.0207,-0.02072 -0.0488,-0.03236 -0.0781,-0.03236 H 0.11049 c -0.0293,0 -0.05741,0.01164 -0.07813,0.03236 C 0.01164,5.3566031 0,5.3847031 0,5.4140131 Z M 12.6696,6.4820931 c 0.1749,0 0.3458,0.05184 0.4911,0.14897 0.1454,0.09712 0.2587,0.23518 0.3256,0.39669 0.0669,0.16152 0.0844,0.33925 0.0503,0.51075 -0.0341,0.1714 -0.1183,0.3289 -0.2419,0.4525 -0.1236,0.1237 -0.2811,0.2079 -0.4526,0.242 -0.1715,0.0341 -0.3492,0.0166 -0.5107,-0.0503 -0.1615,-0.0669 -0.2996,-0.1802 -0.3967,-0.3256 -0.0971,-0.1454 -0.149,-0.3163 -0.149,-0.4911 0,-0.23441 0.0931,-0.45925 0.2589,-0.62502 0.1658,-0.16576 0.3906,-0.25889 0.625,-0.25889 z m 0,2.94641 c 0.1749,0 0.3458,0.0519 0.4911,0.149 0.1454,0.0971 0.2587,0.2352 0.3256,0.3967 0.0669,0.1614999 0.0844,0.3391999 0.0503,0.5106999 -0.0341,0.1715 -0.1183,0.329 -0.2419,0.4526 -0.1236,0.1236 -0.2811,0.2078 -0.4526,0.2419 -0.1715,0.0341 -0.3492,0.0166 -0.5107,-0.0503 -0.1615,-0.0669 -0.2996,-0.1802 -0.3967,-0.3256 -0.0971,-0.1453 -0.149,-0.3162 -0.149,-0.4911 0,-0.2344 0.0931,-0.4591999 0.2589,-0.6249999 0.1658,-0.1658 0.3906,-0.2589 0.625,-0.2589 z m -2.9464,-2.94641 c 0.1748,0 0.3457,0.05184 0.4911,0.14897 0.1454,0.09712 0.2587,0.23518 0.3256,0.39669 0.0669,0.16152 0.0844,0.33925 0.0503,0.51075 -0.0341,0.1714 -0.1183,0.3289 -0.242,0.4525 -0.1236,0.1237 -0.2811,0.2079 -0.4525,0.242 -0.1715,0.0341 -0.3492,0.0166 -0.5108,-0.0503 -0.1615,-0.0669 -0.2995,-0.1802 -0.3966,-0.3256 -0.0972,-0.1454 -0.149,-0.3163 -0.149,-0.4911 0,-0.23441 0.0931,-0.45925 0.2589,-0.62502 0.1658,-0.16576 0.3906,-0.25889 0.625,-0.25889 z m 0,2.94641 c 0.1748,0 0.3457,0.0519 0.4911,0.149 0.1454,0.0971 0.2587,0.2352 0.3256,0.3967 0.0669,0.1614999 0.0844,0.3391999 0.0503,0.5106999 -0.0341,0.1715 -0.1183,0.329 -0.242,0.4526 -0.1236,0.1236 -0.2811,0.2078 -0.4525,0.2419 -0.1715,0.0341 -0.3492,0.0166 -0.5108,-0.0503 -0.1615,-0.0669 -0.2995,-0.1802 -0.3966,-0.3256 -0.0972,-0.1453 -0.149,-0.3162 -0.149,-0.4911 0,-0.2344 0.0931,-0.4591999 0.2589,-0.6249999 0.1658,-0.1658 0.3906,-0.2589 0.625,-0.2589 z m 0,2.9463999 c 0.1748,0 0.3457,0.0519 0.4911,0.149 0.1454,0.0971 0.2587,0.2352 0.3256,0.3967 0.0669,0.1615 0.0844,0.3393 0.0503,0.5107 -0.0341,0.1715 -0.1183,0.329 -0.242,0.4526 -0.1236,0.1236 -0.2811,0.2078 -0.4525,0.2419 -0.1715,0.0341 -0.3492,0.0166 -0.5108,-0.0503 -0.1615,-0.0669 -0.2995,-0.1802 -0.3966,-0.3255 -0.0972,-0.1454 -0.149,-0.3163 -0.149,-0.4911 0,-0.2345 0.0931,-0.4593 0.2589,-0.6251 0.1658,-0.1657 0.3906,-0.2589 0.625,-0.2589 z M 6.77679,9.4285031 c 0.17482,0 0.34572,0.0519 0.49111,0.149 0.1453,0.0971 0.2586,0.2352 0.3255,0.3967 0.0669,0.1614999 0.0844,0.3391999 0.0503,0.5106999 -0.0341,0.1715 -0.1183,0.329 -0.2419,0.4526 -0.1236,0.1236 -0.2811,0.2078 -0.45257,0.2419 -0.17146,0.0341 -0.34919,0.0166 -0.51071,-0.0503 -0.16152,-0.0669 -0.29957,-0.1802 -0.39669,-0.3256 -0.09713,-0.1453 -0.14897,-0.3162 -0.14897,-0.4911 0,-0.2344 0.09312,-0.4591999 0.25889,-0.6249999 0.16577,-0.1658 0.3906,-0.2589 0.62504,-0.2589 z m 0,2.9463999 c 0.17482,0 0.34572,0.0519 0.49111,0.149 0.1453,0.0971 0.2586,0.2352 0.3255,0.3967 0.0669,0.1615 0.0844,0.3393 0.0503,0.5107 -0.0341,0.1715 -0.1183,0.329 -0.2419,0.4526 -0.1236,0.1236 -0.2811,0.2078 -0.45257,0.2419 -0.17146,0.0341 -0.34919,0.0166 -0.51071,-0.0503 -0.16152,-0.0669 -0.29957,-0.1802 -0.39669,-0.3255 -0.09713,-0.1454 -0.14897,-0.3163 -0.14897,-0.4911 0,-0.2345 0.09312,-0.4593 0.25889,-0.6251 0.16577,-0.1657 0.3906,-0.2589 0.62504,-0.2589 z M 3.83036,9.4285031 c 0.17482,0 0.34572,0.0519 0.49108,0.149 0.14536,0.0971 0.25866,0.2352 0.32556,0.3967 0.0669,0.1614999 0.08441,0.3391999 0.0503,0.5106999 -0.03411,0.1715 -0.11829,0.329 -0.24191,0.4526 -0.12362,0.1236 -0.28112,0.2078 -0.45259,0.2419 -0.17146,0.0341 -0.34919,0.0166 -0.51071,-0.0503 -0.16152,-0.0669 -0.29957,-0.1802 -0.39669,-0.3256 -0.09713,-0.1453 -0.14897,-0.3162 -0.14897,-0.4911 0,-0.2344 0.09313,-0.4591999 0.2589,-0.6249999 0.16576,-0.1658 0.39059,-0.2589 0.62503,-0.2589 z m 0,2.9463999 c 0.17482,0 0.34572,0.0519 0.49108,0.149 0.14536,0.0971 0.25866,0.2352 0.32556,0.3967 0.0669,0.1615 0.08441,0.3393 0.0503,0.5107 -0.03411,0.1715 -0.11829,0.329 -0.24191,0.4526 -0.12362,0.1236 -0.28112,0.2078 -0.45259,0.2419 -0.17146,0.0341 -0.34919,0.0166 -0.51071,-0.0503 -0.16152,-0.0669 -0.29957,-0.1802 -0.39669,-0.3255 -0.09713,-0.1454 -0.14897,-0.3163 -0.14897,-0.4911 0,-0.2345 0.09313,-0.4593 0.2589,-0.6251 0.16576,-0.1657 0.39059,-0.2589 0.62503,-0.2589 z"
+                        }]
+                    }
+                }, 
                 type: INPUT_TYPE.field, id: "check-in", placeholder: "Fri 12/2", isBigger: false
             },
             { 
-                description: "Check Out", iconValue: {pos: ICON_POSITION.right, value: OPTION_ICON_VALUE.date}, 
+                validationType: INPUT_OPTIONS_VALIDATION_TYPE.checkOut,
+                subinput: "Check Out", icon: {
+                    pos: ICON_POSITION.right, 
+                    value: {
+                        viewbox: {minX: 0, minY: 0, width: 16.5, height: 16.5}, width: 16.5, height: 16.5,
+                        pathes: [{
+                            fill: "rgb(17, 34, 17)", fillRule: FILL_RULE.nonzero, stroke: "unset", strokeWidth: "unset", strokeLinecap: STROKE_LINECAP.butt, strokeLinejoin: STROKE_LINEJOIN.miter, d: "m 16.5,3.5356631 c 0,-0.62515 -0.2483,-1.2247 -0.6904,-1.66675 -0.442,-0.44205 -1.0416,-0.69039 -1.6667,-0.69039 H 13.5536 V 0.60581307 c 0,-0.31711 -0.2438,-0.58929 -0.561,-0.60512999598 -0.0796,-0.003840004 -0.1593,0.008539996 -0.234,0.036389996 -0.0748,0.02784 -0.1431,0.07057 -0.2008,0.1256 -0.0578,0.05503 -0.1038,0.12121 -0.1352,0.19453 -0.0314,0.07332 -0.0476,0.15226 -0.0476,0.23203 V 1.1785231 H 4.125 V 0.60581307 c 0,-0.31711 -0.24382,-0.58929 -0.56093,-0.60512999598 C 3.4844,-0.00315693 3.40477,0.00922307 3.33002,0.03707307 c -0.07475,0.02784 -0.14308,0.07057 -0.20082,0.1256 -0.05775,0.05503 -0.10373,0.12121 -0.13515,0.19453 -0.03141,0.07332 -0.04761,0.15226 -0.04762,0.23203 V 1.1785231 H 2.35714 c -0.62515,0 -1.2247,0.24834 -1.66675,0.69039 C 0.24834,2.3109631 0,2.9105131 0,3.5356631 v 0.44196 c 0,0.03908 0.01552,0.07655 0.04315,0.10418 0.02763,0.02762 0.0651,0.04315 0.10417,0.04315 H 16.3527 c 0.0391,0 0.0765,-0.01553 0.1042,-0.04315 0.0276,-0.02763 0.0431,-0.0651 0.0431,-0.10418 z M 0,14.142803 c 0,0.6252 0.24834,1.2247 0.69039,1.6668 0.44205,0.442 1.0416,0.6903 1.66675,0.6903 H 14.1429 c 0.6251,0 1.2247,-0.2483 1.6667,-0.6903 0.4421,-0.4421 0.6904,-1.0416 0.6904,-1.6668 V 5.4140131 c 0,-0.02931 -0.0116,-0.05741 -0.0324,-0.07813 -0.0207,-0.02072 -0.0488,-0.03236 -0.0781,-0.03236 H 0.11049 c -0.0293,0 -0.05741,0.01164 -0.07813,0.03236 C 0.01164,5.3566031 0,5.3847031 0,5.4140131 Z M 12.6696,6.4820931 c 0.1749,0 0.3458,0.05184 0.4911,0.14897 0.1454,0.09712 0.2587,0.23518 0.3256,0.39669 0.0669,0.16152 0.0844,0.33925 0.0503,0.51075 -0.0341,0.1714 -0.1183,0.3289 -0.2419,0.4525 -0.1236,0.1237 -0.2811,0.2079 -0.4526,0.242 -0.1715,0.0341 -0.3492,0.0166 -0.5107,-0.0503 -0.1615,-0.0669 -0.2996,-0.1802 -0.3967,-0.3256 -0.0971,-0.1454 -0.149,-0.3163 -0.149,-0.4911 0,-0.23441 0.0931,-0.45925 0.2589,-0.62502 0.1658,-0.16576 0.3906,-0.25889 0.625,-0.25889 z m 0,2.94641 c 0.1749,0 0.3458,0.0519 0.4911,0.149 0.1454,0.0971 0.2587,0.2352 0.3256,0.3967 0.0669,0.1614999 0.0844,0.3391999 0.0503,0.5106999 -0.0341,0.1715 -0.1183,0.329 -0.2419,0.4526 -0.1236,0.1236 -0.2811,0.2078 -0.4526,0.2419 -0.1715,0.0341 -0.3492,0.0166 -0.5107,-0.0503 -0.1615,-0.0669 -0.2996,-0.1802 -0.3967,-0.3256 -0.0971,-0.1453 -0.149,-0.3162 -0.149,-0.4911 0,-0.2344 0.0931,-0.4591999 0.2589,-0.6249999 0.1658,-0.1658 0.3906,-0.2589 0.625,-0.2589 z m -2.9464,-2.94641 c 0.1748,0 0.3457,0.05184 0.4911,0.14897 0.1454,0.09712 0.2587,0.23518 0.3256,0.39669 0.0669,0.16152 0.0844,0.33925 0.0503,0.51075 -0.0341,0.1714 -0.1183,0.3289 -0.242,0.4525 -0.1236,0.1237 -0.2811,0.2079 -0.4525,0.242 -0.1715,0.0341 -0.3492,0.0166 -0.5108,-0.0503 -0.1615,-0.0669 -0.2995,-0.1802 -0.3966,-0.3256 -0.0972,-0.1454 -0.149,-0.3163 -0.149,-0.4911 0,-0.23441 0.0931,-0.45925 0.2589,-0.62502 0.1658,-0.16576 0.3906,-0.25889 0.625,-0.25889 z m 0,2.94641 c 0.1748,0 0.3457,0.0519 0.4911,0.149 0.1454,0.0971 0.2587,0.2352 0.3256,0.3967 0.0669,0.1614999 0.0844,0.3391999 0.0503,0.5106999 -0.0341,0.1715 -0.1183,0.329 -0.242,0.4526 -0.1236,0.1236 -0.2811,0.2078 -0.4525,0.2419 -0.1715,0.0341 -0.3492,0.0166 -0.5108,-0.0503 -0.1615,-0.0669 -0.2995,-0.1802 -0.3966,-0.3256 -0.0972,-0.1453 -0.149,-0.3162 -0.149,-0.4911 0,-0.2344 0.0931,-0.4591999 0.2589,-0.6249999 0.1658,-0.1658 0.3906,-0.2589 0.625,-0.2589 z m 0,2.9463999 c 0.1748,0 0.3457,0.0519 0.4911,0.149 0.1454,0.0971 0.2587,0.2352 0.3256,0.3967 0.0669,0.1615 0.0844,0.3393 0.0503,0.5107 -0.0341,0.1715 -0.1183,0.329 -0.242,0.4526 -0.1236,0.1236 -0.2811,0.2078 -0.4525,0.2419 -0.1715,0.0341 -0.3492,0.0166 -0.5108,-0.0503 -0.1615,-0.0669 -0.2995,-0.1802 -0.3966,-0.3255 -0.0972,-0.1454 -0.149,-0.3163 -0.149,-0.4911 0,-0.2345 0.0931,-0.4593 0.2589,-0.6251 0.1658,-0.1657 0.3906,-0.2589 0.625,-0.2589 z M 6.77679,9.4285031 c 0.17482,0 0.34572,0.0519 0.49111,0.149 0.1453,0.0971 0.2586,0.2352 0.3255,0.3967 0.0669,0.1614999 0.0844,0.3391999 0.0503,0.5106999 -0.0341,0.1715 -0.1183,0.329 -0.2419,0.4526 -0.1236,0.1236 -0.2811,0.2078 -0.45257,0.2419 -0.17146,0.0341 -0.34919,0.0166 -0.51071,-0.0503 -0.16152,-0.0669 -0.29957,-0.1802 -0.39669,-0.3256 -0.09713,-0.1453 -0.14897,-0.3162 -0.14897,-0.4911 0,-0.2344 0.09312,-0.4591999 0.25889,-0.6249999 0.16577,-0.1658 0.3906,-0.2589 0.62504,-0.2589 z m 0,2.9463999 c 0.17482,0 0.34572,0.0519 0.49111,0.149 0.1453,0.0971 0.2586,0.2352 0.3255,0.3967 0.0669,0.1615 0.0844,0.3393 0.0503,0.5107 -0.0341,0.1715 -0.1183,0.329 -0.2419,0.4526 -0.1236,0.1236 -0.2811,0.2078 -0.45257,0.2419 -0.17146,0.0341 -0.34919,0.0166 -0.51071,-0.0503 -0.16152,-0.0669 -0.29957,-0.1802 -0.39669,-0.3255 -0.09713,-0.1454 -0.14897,-0.3163 -0.14897,-0.4911 0,-0.2345 0.09312,-0.4593 0.25889,-0.6251 0.16577,-0.1657 0.3906,-0.2589 0.62504,-0.2589 z M 3.83036,9.4285031 c 0.17482,0 0.34572,0.0519 0.49108,0.149 0.14536,0.0971 0.25866,0.2352 0.32556,0.3967 0.0669,0.1614999 0.08441,0.3391999 0.0503,0.5106999 -0.03411,0.1715 -0.11829,0.329 -0.24191,0.4526 -0.12362,0.1236 -0.28112,0.2078 -0.45259,0.2419 -0.17146,0.0341 -0.34919,0.0166 -0.51071,-0.0503 -0.16152,-0.0669 -0.29957,-0.1802 -0.39669,-0.3256 -0.09713,-0.1453 -0.14897,-0.3162 -0.14897,-0.4911 0,-0.2344 0.09313,-0.4591999 0.2589,-0.6249999 0.16576,-0.1658 0.39059,-0.2589 0.62503,-0.2589 z m 0,2.9463999 c 0.17482,0 0.34572,0.0519 0.49108,0.149 0.14536,0.0971 0.25866,0.2352 0.32556,0.3967 0.0669,0.1615 0.08441,0.3393 0.0503,0.5107 -0.03411,0.1715 -0.11829,0.329 -0.24191,0.4526 -0.12362,0.1236 -0.28112,0.2078 -0.45259,0.2419 -0.17146,0.0341 -0.34919,0.0166 -0.51071,-0.0503 -0.16152,-0.0669 -0.29957,-0.1802 -0.39669,-0.3255 -0.09713,-0.1454 -0.14897,-0.3163 -0.14897,-0.4911 0,-0.2345 0.09313,-0.4593 0.2589,-0.6251 0.16576,-0.1657 0.39059,-0.2589 0.62503,-0.2589 z"
+                        }]
+                    }
+                }, 
                 type: INPUT_TYPE.field, id: "check-out", placeholder: "Sun 12/4", isBigger: false
             },
             { 
-                description: "Rooms & Guests", iconValue: OPTION_ICON_VALUE.people, 
+                subinput: SELECT_OPTIONS_DESCRIPTION.roomGuests, iconValue: {
+                    viewbox: {minX: 0, minY: 0, width: 14.625, height: 15.75}, width: 14.625, height: 15.75,
+                    pathes: [{
+                        fill: "rgb(17, 34, 17)", fillRule: FILL_RULE.nonzero, stroke: "unset", strokeWidth: "unset", strokeLinecap: STROKE_LINECAP.butt, strokeLinejoin: STROKE_LINEJOIN.miter, d: "M 10.007101,1.14539 C 9.3229014,0.40676 8.3674014,0 7.3127014,0 c -1.06031,0 -2.01902,0.4043 -2.7,1.13836 -0.68836,0.74215 -1.02375,1.75078 -0.945,2.83992 0.1561,2.14875 1.79121,3.89672 3.645,3.89672 1.8538,0 3.4860996,-1.74762 3.6445996,-3.89602 0.0799,-1.07929 -0.2576,-2.08582 -0.9502,-2.83359 z M 13.500201,15.75 H 1.1252014 c -0.16198001,0.0021 -0.32239001,-0.0319 -0.46956001,-0.0996 -0.14717,-0.0677 -0.2774,-0.1673 -0.38122,-0.2917 -0.22852,-0.2732 -0.32063,-0.6462 -0.25242,-1.0234 0.29672,-1.646 1.22273001,-3.0287 2.67820001,-3.9994 C 3.9932514,9.4743 5.6311814,9 7.3127014,9 c 1.6815,0 3.3194996,0.4746 4.6124996,1.3359 1.4555,0.9703 2.3815,2.353 2.6782,3.9991 0.0682,0.3772 -0.0239,0.7502 -0.2524,1.0234 -0.1038,0.1244 -0.234,0.2241 -0.3812,0.2918 -0.1472,0.0678 -0.3076,0.1019 -0.4696,0.0998 z"
+                    }]
+                }, 
                 type: INPUT_TYPE.select, links: ["1 room, 2 guests", "2 room, 2 guests"], isBigger: false
             }
         ]
-    };
+    }), [])
 
     let [currentSitePart, setCurrentSitePart] = useState<objType<typeof SITE_PARTS>>(value);
-    let isHoveredOnUnActive = useState<boolean>(false);
-    let header = useRef<HTMLUListElement>(null);
-    useEffect(() => {
-        const headerElement = header.current;
-        if(headerElement){
-            if(isHoveredOnUnActive[0]){
-                headerElement.classList.add("_hide-active");
-            } else {
-                headerElement.classList.remove("_hide-active");
-            }
-        }
-    }, [isHoveredOnUnActive[0]]);
+    let [isHoveredOnUnActive, setIsHoveredOnUnActive] = useState<boolean>(false);
+    const hidePseudoActive = () => setIsHoveredOnUnActive(false);
 
     const currentAbout = (currentSitePart === SITE_PARTS.flights) ? about.flightsPart : about.hotelsPart;
-    const getDestination = () : string => {
-        switch(value){
-            case SITE_PARTS.flights: return "Flights";
-            case SITE_PARTS.stays: return "Stays";
-        }
-    }
-    const getSitePart = (cl : "flights" | "stays") : objType<typeof SITE_PARTS> => {
-        switch(cl){
-            case "flights": return SITE_PARTS.flights;
-            case "stays": return SITE_PARTS.stays;
-        }
-    }
 
-    const headerTypes : HeaderType[] = [
+    const initializeInputs = (): InputState<typeof INPUT_OPTIONS_VALIDATION_TYPE>[] => {
+        if(currentSitePart === SITE_PARTS.flights){
+            return [
+                { description: INPUT_OPTIONS_VALIDATION_TYPE.fromTo, value: "" },
+                { description: INPUT_OPTIONS_VALIDATION_TYPE.returnDepart, value: "" },
+                { description: INPUT_OPTIONS_VALIDATION_TYPE.passengerClass, value: "" }
+            ]
+        } else {
+            return[
+                { description: INPUT_OPTIONS_VALIDATION_TYPE.destination, value: "" },
+                { description: INPUT_OPTIONS_VALIDATION_TYPE.checkIn, value: "" },
+                { description: INPUT_OPTIONS_VALIDATION_TYPE.checkOut, value: "" },
+            ]
+        }
+    }
+    let [inputs, setInputs] = useState<InputState<typeof INPUT_OPTIONS_VALIDATION_TYPE>[]>(initializeInputs());
+    
+    const getSelectSetState = (neededDesc: objType<typeof SELECT_OPTIONS_DESCRIPTION.trip>) =>{
+        return (newValue: number) => setSelects(prev => prev.map(i =>
+            i.description === neededDesc ? { ...i, value: newValue } : i
+        ))
+    }
+    const initializeSelects = (): SelectState[] => {
+        if(currentSitePart === SITE_PARTS.flights){
+            return [
+                { description: SELECT_OPTIONS_DESCRIPTION.trip, value: 0 }
+            ]
+        } else {
+            return[
+                { description: SELECT_OPTIONS_DESCRIPTION.roomGuests, value: 0 }
+            ]
+        }
+    }
+    let [selects, setSelects] = useState<SelectState[]>(initializeSelects());
+
+    const headerTypes : HeaderType[] = useMemo(() => [
         {
-            description: "Flights", isCurrent: currentSitePart === SITE_PARTS.flights, cl: "flights",
+            description: SITE_PARTS.flights, cl: "flights",
             iconValue: {
                 viewbox: {minX: 0, minY: 0, width: 22.5, height: 19.5}, width: 22.5, height: 19.5, pathes: [{fill: "#111122", fillRule: FILL_RULE.nonzero, stroke: "unset", strokeWidth: "unset", strokeLinecap: "butt", strokeLinejoin: "miter", d: "M7.99733 19.5L6.74952 19.5C6.62414 19.5 6.50077 19.4685 6.39069 19.4085C6.28062 19.3484 6.18735 19.2618 6.11941 19.1564C6.05147 19.051 6.01104 18.9303 6.0018 18.8052C5.99257 18.6802 6.01483 18.5548 6.06655 18.4406L9.08811 11.7727L4.55108 11.6719L2.89639 13.6767C2.58092 14.0733 2.32921 14.25 1.68702 14.25L0.847018 14.25C0.714021 14.2543 0.581951 14.2264 0.462001 14.1688C0.342051 14.1112 0.237757 14.0255 0.157956 13.9191C0.0463932 13.7686 -0.0632942 13.5136 0.0435808 13.1498L0.972643 9.82172C0.979674 9.79688 0.988112 9.77203 0.997487 9.74766C0.997954 9.74534 0.997954 9.74295 0.997487 9.74063C0.987806 9.71627 0.979512 9.69139 0.972643 9.66609L0.0426433 6.31687C-0.058138 5.96016 0.0520182 5.71078 0.162643 5.56406C0.236929 5.46549 0.333306 5.38573 0.444026 5.33118C0.554747 5.27664 0.676722 5.24883 0.800143 5.25L1.68702 5.25C2.16655 5.25 2.63202 5.46516 2.90577 5.8125L4.52624 7.78359L9.08811 7.71609L6.06749 1.05984C6.0157 0.94568 5.99335 0.820355 6.00249 0.695327C6.01163 0.570298 6.05196 0.449555 6.1198 0.344135C6.18764 0.238715 6.28082 0.151982 6.39083 0.0918644C6.50083 0.0317468 6.62416 0.000162838 6.74952 0L8.01092 0C8.1869 0.00353644 8.35983 0.0466697 8.51685 0.126197C8.67388 0.205724 8.81097 0.319602 8.91796 0.459375L14.7797 7.58437L17.4876 7.51312C17.6859 7.50234 18.2353 7.49859 18.3623 7.49859C20.9526 7.5 22.4995 8.34094 22.4995 9.75C22.4995 10.1934 22.3223 11.0156 21.1369 11.5387C20.437 11.8481 19.5033 12.0047 18.3614 12.0047C18.2358 12.0047 17.6878 12.0009 17.4867 11.9902L14.7792 11.918L8.90296 19.043C8.79588 19.1821 8.65891 19.2954 8.50216 19.3746C8.3454 19.4537 8.17288 19.4965 7.99733 19.5Z"}]
             }
         }, 
         {
-            description: "Stays", isCurrent: currentSitePart === SITE_PARTS.stays, cl: "stays",
+            description: SITE_PARTS.stays, cl: "stays",
             iconValue: {
                 viewbox: {minX: 0, minY: 0, width: 21, height: 16.5}, width: 21, height: 16.5, pathes: [{fill: "#111122", fillRule: FILL_RULE.nonzero, stroke: "unset", strokeWidth: "unset", strokeLinecap: "butt", strokeLinejoin: "miter", d: "M18.75 7.06406C18.2772 6.85651 17.7664 6.74955 17.25 6.75L3.75 6.75C3.23368 6.7495 2.72288 6.85629 2.25 7.06359C1.58166 7.35587 1.01294 7.83652 0.613357 8.4468C0.213775 9.05708 0.000638647 9.77054 0 10.5L0 15.75C3.33067e-16 15.9489 0.0790176 16.1397 0.21967 16.2803C0.360322 16.421 0.551088 16.5 0.75 16.5C0.948912 16.5 1.13968 16.421 1.28033 16.2803C1.42098 16.1397 1.5 15.9489 1.5 15.75L1.5 15.375C1.50122 15.2759 1.54112 15.1812 1.61118 15.1112C1.68124 15.0411 1.77592 15.0012 1.875 15L19.125 15C19.2241 15.0012 19.3188 15.0411 19.3888 15.1112C19.4589 15.1812 19.4988 15.2759 19.5 15.375L19.5 15.75C19.5 15.9489 19.579 16.1397 19.7197 16.2803C19.8603 16.421 20.0511 16.5 20.25 16.5C20.4489 16.5 20.6397 16.421 20.7803 16.2803C20.921 16.1397 21 15.9489 21 15.75L21 10.5C20.9993 9.77062 20.7861 9.05726 20.3865 8.44707C19.9869 7.83688 19.4183 7.3563 18.75 7.06406ZM16.125 0L4.875 0C4.17881 0 3.51113 0.276562 3.01884 0.768845C2.52656 1.26113 2.25 1.92881 2.25 2.625L2.25 6C2.25002 6.02906 2.25679 6.05771 2.26979 6.0837C2.28278 6.10969 2.30163 6.1323 2.32486 6.14976C2.34809 6.16721 2.37505 6.17903 2.40363 6.18428C2.43221 6.18953 2.46162 6.18806 2.48953 6.18C2.89896 6.06025 3.32341 5.99964 3.75 6L3.94828 6C3.99456 6.00029 4.03932 5.98346 4.07393 5.95274C4.10855 5.92202 4.13058 5.87958 4.13578 5.83359C4.17669 5.46712 4.35115 5.12856 4.62586 4.88256C4.90056 4.63656 5.25625 4.50037 5.625 4.5L8.25 4.5C8.61899 4.50003 8.97503 4.63606 9.25002 4.88209C9.52502 5.12812 9.69969 5.46688 9.74063 5.83359C9.74583 5.87958 9.76786 5.92202 9.80247 5.95274C9.83709 5.98346 9.88184 6.00029 9.92813 6L11.0747 6C11.121 6.00029 11.1657 5.98346 11.2003 5.95274C11.235 5.92202 11.257 5.87958 11.2622 5.83359C11.3031 5.46736 11.4773 5.12899 11.7517 4.88303C12.0261 4.63707 12.3815 4.50072 12.75 4.5L15.375 4.5C15.744 4.50003 16.1 4.63606 16.375 4.88209C16.65 5.12812 16.8247 5.46688 16.8656 5.83359C16.8708 5.87958 16.8929 5.92202 16.9275 5.95274C16.9621 5.98346 17.0068 6.00029 17.0531 6L17.25 6C17.6766 5.99979 18.1011 6.06057 18.5105 6.18047C18.5384 6.18854 18.5679 6.19 18.5965 6.18473C18.6251 6.17945 18.6521 6.16759 18.6753 6.15009C18.6986 6.13258 18.7174 6.1099 18.7304 6.08385C18.7433 6.0578 18.7501 6.0291 18.75 6L18.75 2.625C18.75 1.92881 18.4734 1.26113 17.9812 0.768845C17.4889 0.276562 16.8212 0 16.125 0Z"}],
             }
         }
-    ]
+    ], [])
 
-    const makeActive = (cl : "flights" | "stays") =>{
-        setCurrentSitePart(getSitePart(cl));
-        isHoveredOnUnActive[1](false);
+    useEffect(() => {
+        setInputs(initializeInputs);
+        setSelects(initializeSelects);
+    }, [currentSitePart])
+    const makeActive = (about : objType<typeof SITE_PARTS>) =>{
+        setCurrentSitePart(about);
+        setIsHoveredOnUnActive(false);
     }
-
     return(
         <article 
             className={[
@@ -134,18 +196,22 @@ export const Options : FC<OptionsProps> = ({neededBlocks, value}) => {
                 {
                     neededBlocks !== NEEDED_BLOCKS.onlyInputs &&
                     ((neededBlocks !== NEEDED_BLOCKS.withoutHeader) 
-                        ? <ul className="options__types" ref={header}>
+                        ? <ul 
+                            className={[
+                                "options__types", isHoveredOnUnActive ? "_hide-active" : ""
+                            ].filter(Boolean).join(" ")}
+                        >
                             {headerTypes.map((headerType, i) => {
-                                if(headerType.isCurrent){
+                                if(headerType.description === currentSitePart){
                                     return (
-                                        <OptionsHeaderType key={i} about={headerType} />
+                                        <OptionsHeaderType key={i} about={headerType} isActive={false} />
                                     )
                                 }
                                 return(
                                     <OptionsHeaderType 
-                                        key={i} about={headerType} 
-                                        onClickHandler={() => makeActive(headerType.cl)}
-                                        isHoveredOnUnActive={isHoveredOnUnActive}
+                                        key={i} about={headerType} isActive={true}
+                                        onClickHandler={() => { makeActive(headerType.description); hidePseudoActive()}}
+                                        isHoveredOnUnActive={[isHoveredOnUnActive, setIsHoveredOnUnActive]}
                                     />
                                 )
                             })}
@@ -162,20 +228,54 @@ export const Options : FC<OptionsProps> = ({neededBlocks, value}) => {
                                 ? about.flightsPart : about.hotelsPart
                             ).slice(i*4, (i+1)*4).map((option, j) => {
                                 if(option.type === INPUT_TYPE.field){
-                                    return <OptionsInput 
-                                        key={i * 4 + j} id={option.id} placeholder={option.placeholder} description={option.description}
-                                        iconValue={option.iconValue} isBigger={option.isBigger}
+                                    const {isBigger, type, ...anotherOption} = option;
+                                    let data: AboutOneDataPart | AboutTwoDataPart;
+                                    if(option.validationType === INPUT_OPTIONS_VALIDATION_TYPE.checkOut){
+                                        data = {
+                                            anotherValue: getInputState(INPUT_OPTIONS_VALIDATION_TYPE.checkIn, inputs),
+                                            validation: getInputValidation(option.validationType) as TwoDataInputValidation
+                                        }
+                                    } else {
+                                        data = {
+                                            anotherValue: null,
+                                            validation: getInputValidation(option.validationType) as OneDataInputValidation
+                                        }
+                                    }
+                                    return <Input 
+                                        key={i * 4 + j} parentCls={["options", "options_input"]} about={{
+                                            ...anotherOption, isCanHide: false, 
+                                            state: getInputState(option.validationType, inputs),
+                                            setState: getInputSetState(option.validationType, setInputs),
+                                            ...data
+                                        }} isInMassive={false} isBigger={option.isBigger}
                                     />
                                 } else {
-                                    return <OptionsSelect 
-                                        key={i * 4 + j} links={option.links} 
-                                        description={option.description} iconValue={option.iconValue}
+                                    return <SelectDescription 
+                                        parentCls={["options__field", "options__field_select"]}
+                                        key={i * 4 + j} links={option.links}
+                                        state={getSelectState(option.subinput, selects)}
+                                        setState={getSelectSetState(option.subinput)}
+                                        description={option.subinput} 
+                                        icon={(option.iconValue === null) 
+                                            ? null : {value: option.iconValue, pos: ICON_POSITION.left}
+                                        }
                                     />
                                 }
                             })}
                             {
-                                i === 0 && neededBlocks === NEEDED_BLOCKS.onlyInputs &&
-                                <button className="options__find">
+                                i === 0 && neededBlocks === NEEDED_BLOCKS.onlyInputs && <OptionsLink 
+                                    isActive={!inputs.map(i => {
+                                        if(i.description === INPUT_OPTIONS_VALIDATION_TYPE.checkOut){
+                                            return (getInputValidation(i.description) as TwoDataInputValidation)(getInputState(i.description, inputs), getInputState(INPUT_OPTIONS_VALIDATION_TYPE.checkIn, inputs));
+                                        } else {
+                                            return (getInputValidation(i.description) as OneDataInputValidation)(getInputState(i.description, inputs));
+                                        }
+                                    }).some(v => v !== "")} 
+                                    currentSitePart={currentSitePart}
+                                    inputs={inputs} selects={selects} 
+                                    selectsLinks={[...(currentAbout.filter(f => f.type === INPUT_TYPE.select) as OptionSelect[]).map(s => s.links)]}
+                                    cls={["options__find"]}
+                                >
                                     <svg viewBox="0 0 19.45 19.45" width="19.45" height="19.45" fill="none">
                                         <path
                                             d="M 19.1573,17.5027 14.7469,13.0922 C 15.8087,11.6786 16.3819,9.958 16.38,8.19 16.38,3.67406 12.7059,0 8.19,0 3.67406,0 0,3.67406 0,8.19 c 0,4.5159 3.67406,8.19 8.19,8.19 1.768,0.0019 3.4886,-0.5713 4.9022,-1.6331 l 4.4105,4.4104 c 0.2232,0.1996 0.5144,0.3061 0.8137,0.2978 0.2994,-0.0084 0.5842,-0.1311 0.7959,-0.3428 0.2117,-0.2117 0.3344,-0.4965 0.3428,-0.7959 0.0083,-0.2993 -0.0982,-0.5905 -0.2978,-0.8137 z M 2.34,8.19 c 0,-1.15702 0.3431,-2.28806 0.9859,-3.25009 0.64281,-0.96202 1.55645,-1.71183 2.6254,-2.1546 1.06895,-0.44278 2.2452,-0.55863 3.38,-0.3329 1.1348,0.22572 2.1771,0.78288 2.9953,1.60102 0.8181,0.81813 1.3753,1.8605 1.601,2.99529 0.2257,1.13478 0.1099,2.31108 -0.3329,3.37998 -0.4428,1.0689 -1.1926,1.9826 -2.1546,2.6254 C 10.4781,13.6969 9.347,14.04 8.19,14.04 6.63906,14.0381 5.15217,13.4212 4.05548,12.3245 2.9588,11.2278 2.34186,9.7409 2.34,8.19 Z"
@@ -183,7 +283,7 @@ export const Options : FC<OptionsProps> = ({neededBlocks, value}) => {
                                             fillRule="nonzero" 
                                         />
                                     </svg>
-                                </button>
+                                </OptionsLink>
                             }
                         </div>
                     )}
@@ -202,7 +302,19 @@ export const Options : FC<OptionsProps> = ({neededBlocks, value}) => {
                             </div>
                             <span className="add-options__description">Add Promo Code</span>
                         </button>
-                        <a className="options__link link-options button_green" href="#">
+                        <OptionsLink 
+                            isActive={!inputs.map(i => {
+                                if(i.description === INPUT_OPTIONS_VALIDATION_TYPE.checkOut){
+                                    return (getInputValidation(i.description) as TwoDataInputValidation)(getInputState(i.description, inputs), getInputState(INPUT_OPTIONS_VALIDATION_TYPE.checkIn, inputs));
+                                } else {
+                                    return (getInputValidation(i.description) as OneDataInputValidation)(getInputState(i.description, inputs));
+                                }
+                            }).some(v => v !== "")} 
+                            currentSitePart={currentSitePart}
+                            inputs={inputs} selects={selects} 
+                            selectsLinks={[...(currentAbout.filter(f => f.type === INPUT_TYPE.select) as OptionSelect[]).map(s => s.links)]}
+                            cls={["options__link", "link-options", "button_green"]}
+                        >
                             {currentSitePart === SITE_PARTS.flights 
                                 ? <div className="link-options__icon-parent">
                                     <svg width="14" height="13.999" fill="none">
@@ -225,8 +337,8 @@ export const Options : FC<OptionsProps> = ({neededBlocks, value}) => {
                                     </svg>
                                 </div>
                             }
-                            <span className="link-options__description">Show {getDestination()}</span>
-                        </a>
+                            <span className="link-options__description">Show {currentSitePart}</span>
+                        </OptionsLink>
                     </div>
                 }
             </div>

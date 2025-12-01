@@ -1,31 +1,22 @@
 import React, { type FC } from "react";
 import type { IconParams, useStateReturned } from "../../../types";
+import type { HeaderType } from "./Options";
 
-export interface ActiveHeaderType{
-    description: string, 
-    isCurrent: true, 
-    cl: "flights" | "stays", 
-    iconValue: IconParams
-}
-export interface UnActiveHeaderType{
-    description: string, 
-    isCurrent: false, 
-    cl: "flights" | "stays", 
-    iconValue: IconParams
-}
 
-interface OptionsActiveHeaderType{
-    about: ActiveHeaderType
-}
 interface OptionsUnActiveHeaderType{
-    about: UnActiveHeaderType,
+    about: HeaderType,
+    isActive: false
+}
+interface OptionsActiveHeaderType{
+    about: HeaderType,
+    isActive: true
     onClickHandler: () => void,
     isHoveredOnUnActive: useStateReturned<boolean>
 }
 
-export const OptionsHeaderType : FC<OptionsActiveHeaderType | OptionsUnActiveHeaderType> = (props) => {
-    const {description, cl, isCurrent, iconValue} = props.about;
-    if(isCurrent){
+export const OptionsHeaderType : FC<OptionsActiveHeaderType | OptionsUnActiveHeaderType> = ({about, isActive, ...props}) => {
+    const {description, cl, iconValue} = about;
+    if(!isActive){
         return(
             <li className={["options__type", "type-options", cl].join(" ")}>
                 <button className="type-options__button" type="button" disabled>
@@ -41,18 +32,16 @@ export const OptionsHeaderType : FC<OptionsActiveHeaderType | OptionsUnActiveHea
             </li>
         )
     }
-    const makeIsHovered = () => {
-        (props as OptionsUnActiveHeaderType).isHoveredOnUnActive[1](true);
-    }
-    const unMakeIsHovered = () => {
-        (props as OptionsUnActiveHeaderType).isHoveredOnUnActive[1](false);
-    }
+
+    let [isHoveredOnUnActiveValue, setIsHoveredOnUnActive] = (props as OptionsActiveHeaderType).isHoveredOnUnActive;
+    const makeIsHovered = () => setIsHoveredOnUnActive(true);
+    const unMakeIsHovered = () => setIsHoveredOnUnActive(false);
 
     return(
         <li className={["options__type", "type-options", cl].join(" ")}>
             <button 
                 className="type-options__button" type="button"
-                onClick={(props as OptionsUnActiveHeaderType).onClickHandler}
+                onClick={(props as OptionsActiveHeaderType).onClickHandler}
                 onMouseEnter={makeIsHovered} onMouseLeave={(e) => {
                     if(document.activeElement !== e.currentTarget){
                         unMakeIsHovered();

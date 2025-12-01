@@ -3,12 +3,14 @@ import { useDispatch, useSelector, type TypedUseSelectorHook } from 'react-redux
 import { homeSlice } from './home'
 import { flightsSlice } from './flights'
 import { hotelsSlice } from './hotels'
+import { userSlice } from './user.ts'
 
 export const store = configureStore({
     reducer: {
         home: homeSlice.reducer,
         flights: flightsSlice.reducer,
-        hotels: hotelsSlice.reducer
+        hotels: hotelsSlice.reducer,
+        user: userSlice.reducer
     },
 })
 

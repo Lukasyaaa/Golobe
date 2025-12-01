@@ -1,14 +1,5 @@
 import React, { useState, type FC } from "react";
-import { addZero, type useStateReturned } from "../../../types";
-
-interface ExpDate{
-    month: number,
-    year: number    
-}
-interface Card{
-    number: number,
-    expDate: ExpDate
-}
+import { addZero, type Card, type useStateReturned } from "../../../types";
 
 interface CardsProps{
     isOpened: useStateReturned<boolean>
@@ -16,8 +7,14 @@ interface CardsProps{
 
 export const Cards : FC<CardsProps> = ({isOpened}) => {
     const about: Card[] = [ 
-        {number: 4321432143214321, expDate: {month: 2, year: 2027}},
+        {number: 4321432143214321, expDate: {month: 2, year: 2027}, cvc: 304, name: {firstName: "John", lastName: "Doe"}},
     ];
+    let [_, setIsOpened] = isOpened;
+    const openModal = () => {
+        setIsOpened(true);
+        document.body.classList.add("_locked");
+    }
+
     let [choosed, setChoosed] = useState<number>(0);
     let [hovered, setHovered] = useState<number>(-1);
 
@@ -65,21 +62,17 @@ export const Cards : FC<CardsProps> = ({isOpened}) => {
                     )
                 })}
             </ul>
-            <button className="cards__add add-cards" type="button" onClick={() => {
-                isOpened[1](true); document.body.classList.add("_locked");
-            }}>
-                <div className="add-cards__icon-parent">
-                    <svg className="add-cards__icon" width="50" height="50" fill="none">
-                        <path
-                            d="M 25,1 C 11.75,1 1,11.75 1,25 1,38.25 11.75,49 25,49 38.25,49 49,38.25 49,25 49,11.75 38.25,1 25,1 Z"
-                            fillRule="nonzero" stroke="#8dd3bb" strokeWidth="2" 
-                        />
-                        <path
-                            d="M 25,15 V 35 M 35,25 H 15" fillRule="nonzero"
-                            stroke="#8dd3bb" strokeLinejoin="round" strokeLinecap="round" strokeWidth="2" 
-                        />
-                    </svg>
-                </div>
+            <button className="cards__add add-cards" type="button" onClick={openModal}>
+                <svg className="add-cards__icon" width="50" height="50" fill="none">
+                    <path
+                        d="M 25,1 C 11.75,1 1,11.75 1,25 1,38.25 11.75,49 25,49 38.25,49 49,38.25 49,25 49,11.75 38.25,1 25,1 Z"
+                        fillRule="nonzero" stroke="#8dd3bb" strokeWidth="2" 
+                    />
+                    <path
+                        d="M 25,15 V 35 M 35,25 H 15" fillRule="nonzero"
+                        stroke="#8dd3bb" strokeLinejoin="round" strokeLinecap="round" strokeWidth="2" 
+                    />
+                </svg>
                 <div className="add-cards__description">Add a new card</div>
             </button>
         </article>

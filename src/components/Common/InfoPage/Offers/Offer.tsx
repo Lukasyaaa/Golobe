@@ -13,10 +13,10 @@ export const Offer : FC<OfferType> = ({heading, description, price, images}) => 
                 <a className="item-offers__link" href="#"><span>Book Flight</span></a>
             </div>
             <div className="item-offers__images">
-                {images.map(((img, i) => 
+                {images.map((({srcs, alt}, i) => 
                     <picture className="item-offers__image" key={i}>
-                        <source srcSet={img.srcs.webp + "1"} type="image/webp" />
-                        <img src={img.srcs.jpeg} alt={img.alt} />
+                        <source srcSet={srcs.webp} type="image/webp" />
+                        <img src={srcs.jpeg} alt={alt} />
                     </picture>
                 ))}
             </div>

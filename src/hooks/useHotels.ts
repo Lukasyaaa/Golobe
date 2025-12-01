@@ -1,13 +1,34 @@
 import { useEffect, useMemo } from "react";
-import { AMENITIES, FREEBIES, HOTEL_TYPE, HOTELS_SORT_TYPE, NAVBAR_DESCRIPTION, NAVBAR_ITEM, SITE_PARTS, transformPrice, type Flight, type Hotel, type NavbarFilter, type NavbarRangeValue, type objType } from "../types";
-import type { NavbarFilterState } from "../pages/Catalog";
+import { AMENITIES, FREEBIES, HOTEL_TYPE, HOTELS_SORT_TYPE, NAVBAR_DESCRIPTION, SITE_PARTS, transformPrice, type Flight, type Hotel, type NavbarFilter, type NavbarRangeValue, type objType, type User } from "../types";
+import type { FetchedState, NavbarFilterAbout, NavbarFilterState } from "../pages/Catalog";
+
+const guestsInRoomCombinations = (guests: number, rooms: number) => {
+    const result: number[][] = [];
+
+    const dfs = (guestsLeft: number, roomsLeft: number, minVal: number, current: number[]) => {
+        if (guestsLeft === 0 && roomsLeft === 0) {
+            result.push([...current]); return;
+        }
+        if (guestsLeft <= 0 || roomsLeft <= 0) return;
+
+        for (let x = minVal; x <= guestsLeft - (roomsLeft - 1); x++) {
+            dfs(guestsLeft - x, roomsLeft - 1, x, [...current, x]);
+        }
+    }
+
+    dfs(guests, rooms, 1, []);
+    return result;
+}
 
 export const useHotels = (
-    massive: Hotel[], navbarFilters: NavbarFilter[],
-    navbarFiltersState: NavbarFilterState[], activeCategory: objType<typeof HOTELS_SORT_TYPE>, 
-    contentType: objType<typeof SITE_PARTS>,
+    massive: Hotel[], navbarFiltersState: NavbarFilterState[], navbarFilters: NavbarFilterAbout[], 
+    activeCategory: objType<typeof HOTELS_SORT_TYPE>, 
+    contentType: objType<typeof SITE_PARTS>, cities: (FetchedState<string> | null)[],
+    city: string | undefined, checkInCheckOut: string | undefined, roomsGuests: string,
+    location: string
 ) => {
     return useMemo(() => {
+        const users = JSON.parse(localStorage.getItem("users") as string) as User[];
         if(contentType === SITE_PARTS.flights){
             return { hotelsCount: -1, motelsCount: -1, resortsCount: -1, filtredMassive: [] }
         }
@@ -16,17 +37,13 @@ export const useHotels = (
         let ratingMassive: string[] = [];
         let freebiesMassive: objType<typeof FREEBIES>[] = [];
         let amenitiesMassive: objType<typeof AMENITIES>[] = [];
-        navbarFilters.forEach(({type, description, value}) => {
-            if(type === NAVBAR_ITEM.radios){
-                if(description === NAVBAR_DESCRIPTION.rating){
-                    ratingMassive = [...value];
-                }
-            } else if(type === NAVBAR_ITEM.checkboxes){
-                if(description === NAVBAR_DESCRIPTION.freebies){
-                    freebiesMassive = [...value as objType<typeof FREEBIES>[]];
-                } else if(description === NAVBAR_DESCRIPTION.amenities){
-                    amenitiesMassive = [...value as objType<typeof AMENITIES>[]];
-                }
+        navbarFilters.forEach(({description, value}) => {
+            if(description === NAVBAR_DESCRIPTION.rating){
+                ratingMassive = [...value];
+            } else if(description === NAVBAR_DESCRIPTION.freebies){
+                freebiesMassive = [...value as objType<typeof FREEBIES>[]];
+            } else if(description === NAVBAR_DESCRIPTION.amenities){
+                amenitiesMassive = [...value as objType<typeof AMENITIES>[]];
             }
         });
 
@@ -86,12 +103,48 @@ export const useHotels = (
         });
         filtredMassive = [...futureMassive];
 
+        if(!cities.includes(null) && cities.length !== 0){
+            let futureFiltredMassive: Hotel[] = [];
+            filtredMassive.forEach(h => {
+                if(city !== undefined){
+                    const neededCity = cities.find(c => (c as FetchedState<string>).id === h.id) as FetchedState<string>;
+                    const inputedCity = city.split(", ")[0];
+                    if(inputedCity !== neededCity.value) return;
+                }
+                
+                if(checkInCheckOut !== undefined){
+                    const [checkInStr, ] = checkInCheckOut.split("+");
+                    const [checkInMonth, checkInDay] = checkInStr.split("-");
+                    const today = new Date();
+                    const checkInDate = new Date(today.getFullYear(), parseInt(checkInMonth) - 1, parseInt(checkInDay));
+                    if(users.some(u => u.bookings.map(({checkOutDate: bCheckOut}) => {
+                        const bCheckOutDate = new Date(bCheckOut.year, bCheckOut.month - 1, bCheckOut.day);
+                        return checkInDate >= bCheckOutDate
+                    }).includes(false))){
+                        return;
+                    }
+                }
+
+                const [rooms,] = roomsGuests.split("+")[0].split("-");
+                const [guests, ] = roomsGuests.split("+")[1].split("-");
+                const roomsCount = parseInt(rooms); const guestsCount = parseInt(guests);
+                const combinations = guestsInRoomCombinations(guestsCount, roomsCount).map(rooms => rooms.reverse());
+                const roomsBeds = h.rooms.map(r => r.beds.double * 2 + r.beds.twin).sort((a, b) => a - b).slice(0, roomsCount);
+                if(!combinations.some(c => c.every((cP, i) => cP <= roomsBeds[i]))){
+                    return;
+                }
+
+                futureFiltredMassive.push(h);
+            });
+            filtredMassive = [...futureFiltredMassive];
+        }
+
         const hotelsCount = filtredMassive.filter(h => h.type === HOTEL_TYPE.hotels).length;
         const motelsCount = filtredMassive.filter(h => h.type === HOTEL_TYPE.motels).length;
         const resortsCount = filtredMassive.filter(h => h.type === HOTEL_TYPE.resorts).length;
 
-        filtredMassive = [...(filtredMassive as Hotel[]).filter(hotel => hotel.type === activeCategory)];
+        filtredMassive = [...filtredMassive].filter(hotel => hotel.type === activeCategory);
 
         return { hotelsCount, motelsCount, resortsCount, filtredMassive };
-    }, [navbarFiltersState, activeCategory, massive]);
+    }, [navbarFiltersState, activeCategory, massive, cities, location]);
 }

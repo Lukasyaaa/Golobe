@@ -15,7 +15,8 @@ export const Introduction: FC<IntroductionProps> = ({locationMas, current, headi
         <section className="details__introduction introduction-details">
             <div className="container">
                 <Breadcrumbs 
-                    parentCl={["introduction-details"]} current={current} links={locationMas.map(description => ({
+                    parentCl={["introduction-details"]} current={current} 
+                    links={locationMas.map(description => ({
                         description, path: "#"
                     }))} 
                 />
@@ -29,6 +30,7 @@ export const Introduction: FC<IntroductionProps> = ({locationMas, current, headi
                         <div className="introduction-details__buttons">
                             <ButtonBorder
                                 parentCls={["introduction-details"]} buttonCl="share"
+                                isDisabled={false} isLink={false} isActive={false} onClick={undefined}
                                 value={{
                                     viewbox: {minX: 0, minY: 0, width: 15, height: 16.25}, height: 16.25, width: 15,
                                     pathes: [

@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { AIRLINES, createFetchThunk, NAVBAR_DESCRIPTION, NAVBAR_ITEM, FLIGHTS_SORT_TYPE, TRIP_TYPE } from "../types";
-import type { Airlines, Catalog, Flight, Offer, Section, Submap, Travel} from "../types";
+import { createFetchThunk, FLIGHTS_SORT_TYPE } from "../types";
+import type { Catalog, Flight, objType, Offer, Section, Submap, Travel} from "../types";
 
 interface FlightsStart{
     travels: Section<Travel>,
@@ -8,13 +8,9 @@ interface FlightsStart{
     map: Section<Submap>
 }
 
-export interface FlightsCatalog extends Catalog<Flight>{
-    airlines: Airlines
-}
-
 interface Flights{
     start: FlightsStart,
-    catalog: Catalog<Flight>
+    catalog: Catalog<Flight, objType<typeof FLIGHTS_SORT_TYPE>>
 }
 
 const initialState : Flights = {

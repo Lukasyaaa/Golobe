@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState, type FC } from "react";
 import { getGrade, getRating, type HotelReviews, type ShortReview } from "../../../../types";
 import { Review } from "./Review";
+import { useTypedSelector } from "../../../../store";
 
 interface ReviewsProps{
     reviews: HotelReviews,
@@ -8,7 +9,9 @@ interface ReviewsProps{
 }
 
 export const Reviews : FC<ReviewsProps> = ({reviews, shortReview}) => {
+    const {items, maxShow} = reviews;
     let [currentPage, setCurrentPage] = useState<number>(0);
+    let user = useTypedSelector(state => state.user);
 
     let container = useRef<HTMLDivElement>(null);
     let inner = useRef<HTMLDivElement>(null);
@@ -20,14 +23,17 @@ export const Reviews : FC<ReviewsProps> = ({reviews, shortReview}) => {
         }
     }, [currentPage]);
 
-    const {items, maxShow} = reviews;
-    const sliceEnd = Math.min((currentPage + 1) * maxShow, items.length);
     return(
         <section className="hotel-page__reviews hotel-page__section section-hotel-page reviews-hotel">
             <div className="container">
                 <div className="section-hotel-page__header reviews-hotel__header">
                     <h2 className="section-hotel-page__heading reviews-hotel__heading">Reviews</h2>
-                    <button className="section-hotel-page__button reviews-hotel__button button_green" type="button">Give your review</button>
+                    <button 
+                        className="section-hotel-page__button reviews-hotel__button button_green" type="button"
+                        disabled={user.name.firstName === ""}
+                    >
+                        Give your review
+                    </button>
                 </div>
                 <div className="reviews-hotel__grade grade-reviews-hotel">
                     <div className="grade-reviews-hotel__rating">{getRating(shortReview.rating)}</div>
@@ -38,7 +44,9 @@ export const Reviews : FC<ReviewsProps> = ({reviews, shortReview}) => {
                 </div>
                 <div className="reviews-hotel__items" ref={container}>
                     <div className="reviews-hotel__items-inner" ref={inner}>
-                        {items.slice(currentPage * maxShow, sliceEnd).map((review, i) => <Review {...review} key={i}/>)}
+                        {items.slice(
+                            currentPage * maxShow, Math.min((currentPage + 1) * maxShow, items.length)
+                        ).map((review, i) => <Review {...review} key={i}/>)}
                     </div>
                 </div>
                 {items.length > maxShow && <div className="reviews-hotel__pagination">
@@ -48,8 +56,7 @@ export const Reviews : FC<ReviewsProps> = ({reviews, shortReview}) => {
                     >
                         <svg className="reviews-hotel__arrow-icon" viewBox="0 0 15 8.25" width="15" height="8.25" fill="none">
                             <path
-                                d="M 0.75,0.75 7.5,7.5 14.25,0.75"
-                                fillRule="nonzero" stroke="#000000" strokeWidth="1.5" 
+                                fillRule="nonzero" stroke="#000000" strokeWidth="1.5" d="M 0.75,0.75 7.5,7.5 14.25,0.75"
                                 strokeLinecap="round" strokeLinejoin="round"
                             />
                         </svg>

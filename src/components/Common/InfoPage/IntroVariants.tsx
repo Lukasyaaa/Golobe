@@ -3,29 +3,25 @@ import { NEEDED_BLOCKS, SITE_PARTS } from "../../../types";
 import type {IntroVariants as IntroVariantsType, objType} from "../../../types";
 import { Options } from "../Options/Options";
 
-interface IntroVariantsProps{
+interface IntroVariantsProps extends IntroVariantsType{
     type: objType<typeof SITE_PARTS>,
-    about: IntroVariantsType
 }
 
-export const IntroVariants : FC<IntroVariantsProps> = ({type, about}) => {
-    const parentCl = (type === SITE_PARTS.flights) ? "flights" : "stays"
+export const IntroVariants : FC<IntroVariantsProps> = ({type, heading, subheading, background}) => {
+    const parentCl = (type === SITE_PARTS.flights) ? "flights" : "stays";
+    const {webp, jpeg} = background
     return(
-        <section className={["intro_" + parentCl, "intro-variants"].join(" ")}>
+        <section className={`intro_${parentCl} intro-variants`}>
             <div 
-                className={["intro_" + parentCl + "__back", "intro-variants__back"].join(" ")}
+                className={`intro_${parentCl}__back intro-variants__back`}
                 style={{
-                    background: `url(${about.background.jpeg})`,
+                    backgroundImage: `url(${(document.body.classList.contains("webp") ? webp : jpeg)})`,
                     backgroundRepeat: "no-repeat", backgroundSize: "cover"
                 }}
             >
                 <div className="container">
-                    <h1 className={["intro_" + parentCl + "__heading", "intro-variants__heading"].join(" ")}>
-                        {about.heading}
-                    </h1>
-                    <div className={["intro_" + parentCl + "__subheading", "intro-variants__subheading"].join(" ")}>
-                        {about.subheading}
-                    </div>
+                    <h1 className={`intro_${parentCl}__heading intro-variants__heading`}>{heading}</h1>
+                    <div className={`intro_${parentCl}__subheading intro-variants__subheading`}>{subheading}</div>
                 </div>
             </div>
             <Options neededBlocks={NEEDED_BLOCKS.withoutHeader} value={type} />

@@ -3,18 +3,23 @@ import { SectionHeader } from "../../Common/Blocks/SectionHeader";
 import { useAppDispatch, useTypedSelector } from "../../../store";
 import { Trip } from "./Trip"
 import { fetchTrips } from "../../../store/home";
+import { getCountriesByCities } from "../../../types";
 
 export const Trips : FC = () =>{
     const dispatch = useAppDispatch();
-    const about = useTypedSelector(state => state.home.trips);
+    const {isLoading, error, items} = useTypedSelector(state => state.home.trips);
     let [isAll, setIsAll] = useState<boolean>(false);
 
     useEffect(() => {
         dispatch(fetchTrips());
     }, [dispatch]);
 
-    const {isLoading, error, items} = about;
-    if(isLoading){
+    let [countries, setCountries] = useState<(string | null)[]>([]);
+    useEffect(() => {
+        getCountriesByCities(items.map(i => i.city)).then(setCountries)
+    }, [items])
+
+    if(isLoading || countries.length === 0){
         return(
             <section className="trips">
                 <div className="container">
@@ -23,7 +28,7 @@ export const Trips : FC = () =>{
             </section>
         )
     }
-    if(error !== null){
+    if(error !== null || countries.includes(null)){
         return(
             <section className="trips">
                 <div className="container">
@@ -44,11 +49,12 @@ export const Trips : FC = () =>{
         <section className="trips">
             <div className="container">
                 <SectionHeader 
-                    about={headerAbout} parentCl="trips" isAll={[isAll, setIsAll]} isNeedButton={maxShow < items.length}
+                    about={headerAbout} parentCl="trips" isAll={[isAll, setIsAll]} 
+                    isNeedButton={maxShow < items.length}
                 />
                 <div className="trips__items">
                     {(isAll ? items : items.slice(0, maxShow)).map((trip, i) =>
-                        <Trip key={i} {...trip} />
+                        <Trip key={i} {...trip} country={countries[i] as string} />
                     )}
                 </div>
             </div>

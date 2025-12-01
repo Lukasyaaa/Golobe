@@ -1,7 +1,10 @@
 import React, { type FC } from "react";
 import type { Trip as TripType } from "../../../types.ts";
 
-export const Trip : FC<TripType> = ({image, services, city}) => {
+interface TripProps extends TripType{
+    country: string
+}
+export const Trip : FC<TripProps> = ({image, services, city, country}) => {
     return(
         <a className="trips__item item-trips" href="#">
             <picture className="item-trips__image">
@@ -9,7 +12,7 @@ export const Trip : FC<TripType> = ({image, services, city}) => {
                 <img src={image.srcs.jpeg} alt={image.alt} />
             </picture>
             <div className="item-trips__subimage">
-                <h3 className="item-trips__location">{city}, Turkey</h3>
+                <h3 className="item-trips__location">{city + ", " + country}</h3>
                 <ul className="item-trips__services">
                     {services.map((service, i) => 
                         <li className="item-trips__service" key={i}><span>{service}</span></li>

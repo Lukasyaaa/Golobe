@@ -461,7 +461,7 @@
                                     }, "alt": "Economy class presentation №9"
                                 }
                             ],
-                            "price": { "baseFare": 200, "discount": 0, "taxes": 5, "serviceFee": 5 },
+                            "price": { "baseFare": 225, "discount": 0, "taxes": 5, "serviceFee": 5 },
                             "count": 128
                         },
                         "business": { 
@@ -527,11 +527,11 @@
                     },
                     "departTime": {
                         "day": 10, "month": 1, "year": 2026, 
-                        "units": { "hour": 12, "min": 0, "meridiem": "am" }
+                        "units": { "hour": 12, "min": 0, "meridiem": "AM" }
                     },
                     "arrayTime": {
-                        "day": 11, "month": 1, "year": 2025, 
-                        "units": { "hour": 5, "min": 28, "meridiem": "am" }
+                        "day": 11, "month": 1, "year": 2026, 
+                        "units": { "hour": 5, "min": 28, "meridiem": "AM" }
                     },
                     "route": [],
                     "startPoint": "EWR",
@@ -652,11 +652,11 @@
                     },
                     "departTime": {
                         "day": 12, "month": 1, "year": 2026,
-                        "units": { "hour": 12, "min": 0, "meridiem": "am" }
+                        "units": { "hour": 12, "min": 0, "meridiem": "AM" }
                     },
                     "arrayTime": {
                         "day": 13, "month": 1, "year": 2026,
-                        "units": { "hour": 3, "min": 15, "meridiem": "am" }
+                        "units": { "hour": 3, "min": 15, "meridiem": "AM" }
                     },
                     "route": [],
                     "startPoint": "BNA",
@@ -701,7 +701,7 @@
                                     }, "alt": "Economy class presentation №2"
                                 }
                             ],
-                            "price": { "baseFare": 200, "discount": 0, "taxes": 5, "serviceFee": 5 },
+                            "price": { "baseFare": 175, "discount": 0, "taxes": 5, "serviceFee": 5 },
                             "count": 128
                         },
                         "business": { 
@@ -761,11 +761,11 @@
                     },
                     "departTime": {
                         "day": 6, "month": 2, "year": 2026,
-                        "units": { "hour": 12, "min": 0, "meridiem": "am" }
+                        "units": { "hour": 12, "min": 0, "meridiem": "AM" }
                     },
                     "arrayTime": {
                         "day": 6, "month": 2, "year": 2026,
-                        "units": { "hour": 1, "min": 28, "meridiem": "pm" }
+                        "units": { "hour": 1, "min": 28, "meridiem": "PM" }
                     },
                     "route": [],
                     "startPoint": "EWR",
@@ -886,11 +886,11 @@
                     },
                     "departTime": {
                         "day": 8, "month": 1, "year": 2026,
-                        "units": { "hour": 12, "min": 0, "meridiem": "am" }
+                        "units": { "hour": 12, "min": 0, "meridiem": "AM" }
                     },
                     "arrayTime": {
                         "day": 9, "month": 1, "year": 2026,
-                        "units": { "hour": 5, "min": 55, "meridiem": "am" }
+                        "units": { "hour": 5, "min": 55, "meridiem": "AM" }
                     },
                     "route": [],
                     "startPoint": "BNA",
@@ -1055,11 +1055,11 @@
                     },
                     "departTime": {
                         "day": 25, "month": 2, "year": 2026,
-                        "units": { "hour": 12, "min": 0, "meridiem": "am" }
+                        "units": { "hour": 12, "min": 0, "meridiem": "AM" }
                     },
                     "arrayTime": {
                         "day": 26, "month": 2, "year": 2026,
-                        "units": { "hour": 1, "min": 15, "meridiem": "pm" }
+                        "units": { "hour": 1, "min": 15, "meridiem": "PM" }
                     },
                     "route": [],
                     "startPoint": "EWR",
@@ -1204,11 +1204,11 @@
                     },
                     "departTime": {
                         "day": 10, "month": 1, "year": 2026,
-                        "units": { "hour": 12, "min": 0, "meridiem": "am" }
+                        "units": { "hour": 12, "min": 0, "meridiem": "AM" }
                     },
                     "arrayTime": {
                         "day": 11, "month": 1, "year": 2026,
-                        "units": { "hour": 3, "min": 35, "meridiem": "pm" }
+                        "units": { "hour": 3, "min": 35, "meridiem": "PM" }
                     },
                     "route": [],
                     "startPoint": "BNA",
@@ -1348,11 +1348,11 @@
                 },
                 "departTime": {
                     "day": 10, "month": 1, "year": 2026,
-                    "units": { "hour": 12, "min": 0, "meridiem": "am" }
+                    "units": { "hour": 12, "min": 0, "meridiem": "AM" }
                 },
                 "arrayTime": {
                     "day": 11, "month": 1, "year": 2026,
-                    "units": { "hour": 11, "min": 11, "meridiem": "pm" }
+                    "units": { "hour": 11, "min": 11, "meridiem": "PM" }
                 },
                 "route": [],
                 "startPoint": "BNA",
@@ -1496,11 +1496,11 @@
                 },
                 "departTime": {
                     "day": 19, "month": 2, "year": 2026,
-                    "units": { "hour": 11, "min": 59, "meridiem": "pm" }
+                    "units": { "hour": 11, "min": 59, "meridiem": "PM" }
                 },
                 "arrayTime": {
                     "day": 20, "month": 2, "year": 2026,
-                    "units": { "hour": 7, "min": 55, "meridiem": "am" }
+                    "units": { "hour": 7, "min": 55, "meridiem": "AM" }
                 },
                 "route": [],
                 "startPoint": "BNA",
@@ -1527,8 +1527,8 @@
                         "amenities": ["Quick", "Punctuality", "Fast Food", "Comfortable Seats"],
                         "image": {
                             "srcs": {
-                                "webp": "/img/flights/items/container/5/1/preview/image.webp", 
-                                "jpeg": "/img/flights/items/container/5/1/preview/image.jpeg"
+                                "webp": "/img/flights/items/container/6/1/preview/image.webp", 
+                                "jpeg": "/img/flights/items/container/6/1/preview/image.jpeg"
                             }, 
                             "alt": "Airport"
                         },
@@ -1616,17 +1616,17 @@
                         },
                         "departTime": {
                             "day": 12, "month": 4, "year": 2026,
-                            "units": { "hour": 12, "min": 0, "meridiem": "am" }
+                            "units": { "hour": 12, "min": 0, "meridiem": "AM" }
                         },
                         "arrayTime": {
                             "day": 12, "month": 4, "year": 2026,
-                            "units": { "hour": 2, "min": 15, "meridiem": "am" }
+                            "units": { "hour": 2, "min": 15, "meridiem": "AM" }
                         },
                         "route": [],
-                        "startPoint": "KYIV",
+                        "startPoint": "EWR",
                         "place": {
-                            "webp": "/img/flights/items/container/5/1/place/image.webp",
-                            "jpeg": "/img/flights/items/container/5/1/place/image.jpeg"
+                            "webp": "/img/flights/items/container/6/1/place/image.webp",
+                            "jpeg": "/img/flights/items/container/6/1/place/image.jpeg"
                         }
                     },
                     {
@@ -1634,8 +1634,8 @@
                         "amenities": ["Quick", "Punctuality", "Fast Food", "Comfortable Seats"],
                         "image": {
                             "srcs": {
-                                "webp": "/img/flights/items/container/5/2/preview/image.webp", 
-                                "jpeg": "/img/flights/items/container/5/2/preview/image.jpeg"
+                                "webp": "/img/flights/items/container/6/2/preview/image.webp", 
+                                "jpeg": "/img/flights/items/container/6/2/preview/image.jpeg"
                             }, 
                             "alt": ""
                         },
@@ -1753,17 +1753,17 @@
                         },
                         "departTime": {
                             "day": 13, "month": 4, "year": 2026,
-                            "units": { "hour": 8, "min": 32, "meridiem": "am" }
+                            "units": { "hour": 8, "min": 32, "meridiem": "AM" }
                         },
                         "arrayTime": {
                             "day": 13, "month": 4, "year": 2026,
-                            "units": { "hour": 4, "min": 37, "meridiem": "pm" }
+                            "units": { "hour": 4, "min": 37, "meridiem": "PM" }
                         },
                         "route": [],
-                        "startPoint": "MYK",
+                        "startPoint": "BNA",
                         "place": {
-                            "webp": "/img/flights/items/container/5/2/place/image.webp",
-                            "jpeg": "/img/flights/items/container/5/2/place/image.jpeg"
+                            "webp": "/img/flights/items/container/6/2/place/image.webp",
+                            "jpeg": "/img/flights/items/container/6/2/place/image.jpeg"
                         }
                     },
                     {
@@ -1771,8 +1771,8 @@
                         "amenities": ["Quick", "Punctuality", "Fast Food", "Comfortable Seats"],
                         "image": {
                             "srcs": {
-                                "webp": "/img/flights/items/container/5/3/preview/image.webp", 
-                                "jpeg": "/img/flights/items/container/5/3/preview/image.jpeg"
+                                "webp": "/img/flights/items/container/6/3/preview/image.webp", 
+                                "jpeg": "/img/flights/items/container/6/3/preview/image.jpeg"
                             }, 
                             "alt": "Airport"
                         },
@@ -1901,22 +1901,22 @@
                             }
                         },
                         "departTime": {
-                            "day": 13, "month": 1, "year": 2026,
-                            "units": { "hour": 6, "min": 0, "meridiem": "pm" } 
+                            "day": 13, "month": 4, "year": 2026,
+                            "units": { "hour": 6, "min": 0, "meridiem": "PM" } 
                         },
                         "arrayTime": {
-                            "day": 13, "month": 1, "year": 2026,
-                            "units": { "hour": 11, "min": 59, "meridiem": "pm" }
+                            "day": 13, "month": 4, "year": 2026,
+                            "units": { "hour": 11, "min": 59, "meridiem": "PM" }
                         },
                         "route": [],
-                        "startPoint": "ODE",
+                        "startPoint": "JFK",
                         "place": {
-                            "webp": "/img/flights/items/container/5/3/place/image.webp",
-                            "jpeg": "/img/flights/items/container/5/3/place/image.jpeg"
+                            "webp": "/img/flights/items/container/6/3/place/image.webp",
+                            "jpeg": "/img/flights/items/container/6/3/place/image.jpeg"
                         }
                     }
                 ],
-                "endPoint": "LVIV",
+                "endPoint": "LHR",
                 "endPlace": {
                     "webp": "/img/flights/items/container/5/end/image.webp",
                     "jpeg": "/img/flights/items/container/5/end/image.jpeg"

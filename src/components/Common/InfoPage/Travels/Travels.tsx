@@ -7,15 +7,13 @@ import { fetchTravels as fetchTravelsFlights } from "../../../../store/flights";
 import { fetchTravels as fetchTravelsHotels } from "../../../../store/hotels";
 import { Travel } from "./Travel";
 
-interface TravelsProps{
-    about: SectionWithHeader<TravelType>,
+interface TravelsProps extends SectionWithHeader<TravelType>{
     type: objType<typeof SITE_PARTS> 
 }
 
-export const Travels : FC<TravelsProps> = ({about, type}) => {
+export const Travels : FC<TravelsProps> = ({header, items, isLoading, error, maxShow, type}) => {
     let [isAll, setIsAll] = useState<boolean>(false);
     const dispatch = useAppDispatch();
-    const {header, items, isLoading, error, maxShow} = about;
 
     useEffect(() => {
         if(type === SITE_PARTS.flights){
@@ -48,12 +46,14 @@ export const Travels : FC<TravelsProps> = ({about, type}) => {
         <section className="travels">
             <div className="container">
                 <SectionHeader 
-                    about={header} parentCl="travels" isNeedButton={maxShow > items.length}
-                    isAll={[isAll, setIsAll]}
+                    about={header} parentCl="travels" isAll={[isAll, setIsAll]}
+                    isNeedButton={maxShow > items.length}
                 />
             </div>
             <div className="travels__items">
-                {items.map((travel, i) => <Travel key={i} {...travel} />)}
+                {(isAll ? items : items.slice(0, maxShow)).map((travel, i) => 
+                    <Travel key={i} {...travel} />
+                )}
             </div>
         </section>
     )

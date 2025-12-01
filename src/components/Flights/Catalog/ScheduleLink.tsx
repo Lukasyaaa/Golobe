@@ -1,5 +1,5 @@
 import React, { type FC } from "react";
-import { intToDuration, timeToInt, timeToString } from "../../../types";
+import { getDuration, intToDuration, timeToInt, timeToString } from "../../../types";
 import type { SchedulePart, useStateReturned } from "../../../types";
 
 interface FlightScheduleLinkProps{
@@ -16,32 +16,31 @@ interface FlightScheduleLinkProps{
 export const FlightSchedulePart : FC<FlightScheduleLinkProps> = ({
     prevCheckboxes, groupId, checkboxesCount, about, endPoint, hoveredId, choosed, id
 }) => {
-    return(
+    let [choosedValue, setChoosed] = choosed;
+    let [hoveredIdValue, setHoveredId] = hoveredId;
+    const makeUnHoveredId = () => setHoveredId(-1);
+    const makeHoveredId = () => setHoveredId(id);
+    return( 
         <li 
             className={[
-                "flight__schedule-link", "link-schedule-flight", (hoveredId[0] === id) ? "_hovered" : "",
-                (choosed[0].includes(id)) ? "_choosed" : ""
+                "flight__schedule-link", "link-schedule-flight", (hoveredIdValue === id) ? "_hovered" : "",
+                (choosedValue.includes(id)) ? "_choosed" : ""
             ].filter(Boolean).join(" ")}
         >
             <div className="link-schedule-flight__input-parent">
                 <input 
-                    className="link-schedule-flight__input" type="checkbox" 
-                    name={"schedule_" + groupId} 
+                    className="link-schedule-flight__input" type="checkbox" name={"schedule_" + groupId} 
                     id={"schedule_" + Number(prevCheckboxes - checkboxesCount + id)} 
                     onChange={(e) => {
-                        if(!e.currentTarget.checked){
-                            choosed[1](prev => [...prev.filter(checkboxId => checkboxId !== id)]);
-                        } else {
-                            choosed[1](prev => [...prev, id]);
-                        }
+                        setChoosed(!e.currentTarget.checked ? (prev) => [...prev].filter(cId => cId !== id) : (prev) => [...prev, id])
                         e.currentTarget.blur();
-                        hoveredId[1](-1);
-                    }} checked={choosed[0].includes(id)}
-                    onMouseEnter={() => hoveredId[1](id)} onMouseLeave={(e) => {
+                        setHoveredId(-1);
+                    }} checked={choosedValue.includes(id)}
+                    onMouseEnter={makeHoveredId} onMouseLeave={(e) => {
                         if(e.currentTarget !== document.activeElement){
-                            hoveredId[1](-1);
+                            setHoveredId(-1);
                         }
-                    }} onFocus={() => hoveredId[1](id)} onBlur={() => hoveredId[1](-1)}
+                    }} onFocus={makeHoveredId} onBlur={makeUnHoveredId}
                 />
             </div>
             <div className="link-schedule-flight__info">
@@ -56,7 +55,7 @@ export const FlightSchedulePart : FC<FlightScheduleLinkProps> = ({
                 </div>
                 <div className="link-schedule-flight__right">
                     <div className="link-schedule-flight__fly-duration">
-                        {intToDuration((timeToInt(about.arrayTime.units, false) - timeToInt(about.departTime.units, false)))}
+                        {intToDuration(getDuration(about.departTime, about.arrayTime))}
                     </div>
                     <div className="link-schedule-flight__route">
                         {about.startPoint + "-" + about.route.map(place => place + "-") + ((endPoint !== null) ? endPoint : "")}

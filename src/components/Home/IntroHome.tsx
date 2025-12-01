@@ -3,13 +3,15 @@ import { Options } from "../Common/Options/Options";
 import { NEEDED_BLOCKS, SITE_PARTS } from "../../types";
 
 export const IntroHome : FC = () => {
-    let isWebp = false;
     return(
         <section className="intro">
             <div 
                 className="intro__inner" 
                 style={{
-                    backgroundImage: `url(${isWebp ? "/img/start/intro/background.webp" : "/img/start/intro/background.jpg"})`,
+                    backgroundImage: `url(${document.body.classList.contains("webp") 
+                        ? "/img/start/intro/background.webp" 
+                        : "/img/start/intro/background.jpg"
+                    })`,
                     backgroundSize: "cover", backgroundRepeat: "no-repeat",
                     backgroundPosition: "center"
                 }}

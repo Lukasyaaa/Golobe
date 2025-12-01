@@ -2,7 +2,7 @@ import type { Flight, ScheduleMassive, SchedulePart, ScheduleParts, ScheduleSing
 
 export const useSchedulePart = (options: string, flight: Flight) => {
     let flightPart: SchedulePart; let flightEndPoint: string; let flightRoute: string; let flightEndPlace: Srcs;
-    if(options === "OnWay"){
+    if(options === "On-Way"){
         const {endPoint, placeFrom, placeTo, ...scheduleRest} = flight.schedule as ScheduleSingle;
         flightPart = {...scheduleRest, place: placeFrom};
         flightEndPoint = endPoint;

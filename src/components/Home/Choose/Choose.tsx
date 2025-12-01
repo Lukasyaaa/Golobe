@@ -1,6 +1,6 @@
 import React, { type FC } from "react";
 import { ChooseOption } from "./Option.tsx";
-import { flightsCatalogPath, hotelsCatalogPath } from "../../../App.tsx";
+import { flightsPath, hotelsPath } from "../../../App.tsx";
 
 export const Choose : FC = () => {
     const flightsPart = {
@@ -19,8 +19,8 @@ export const Choose : FC = () => {
     return(
         <section className="choose">
             <div className="container">
-                <ChooseOption about={flightsPart} linkPath={flightsCatalogPath} />
-                <ChooseOption about={hotelsPart} linkPath={hotelsCatalogPath} />
+                <ChooseOption {...flightsPart} linkPath={flightsPath} />
+                <ChooseOption {...hotelsPart} linkPath={hotelsPath} />
             </div>
         </section>
     )

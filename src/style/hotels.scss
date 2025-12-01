@@ -142,12 +142,6 @@
         &__image-parent{
             position: relative;
         }
-        &__image{
-            position: relative; z-index: 1;
-        }
-        &__image, &__image img{
-            height: 100%;
-        }
         &__images-count{
             border-radius: variables.toRem(8);
             backdrop-filter: blur(variables.toRem(4));
@@ -173,8 +167,7 @@
             font-size: variables.toRem(16);
             font-weight: 600;
 
-            display: inline-block;
-            width: 100%;
+            position: absolute; z-index: 1; left: 0; top: 0; width: 100%; height: 100%;
         }
     }
     @media (max-width: variables.toEm(480, 16)) {
@@ -195,40 +188,49 @@
     }
 
     @media (min-width: variables.toEm(481, 16)) {
-        &__header{
-            justify-content: space-between;
-        }
+        &__main{ justify-content: space-between; align-items: flex-start;  }
     }
-    &__header{
-        display: flex;
-        margin-bottom: variables.toRem(7);
-    }
+    &__main{ display: flex; }
     @media (max-width: variables.toEm(480, 16)) {
-        &__header{
-            flex-direction: column-reverse;
-            row-gap: variables.toRem(4);
-        }
+        &__main{ flex-direction: column-reverse; }
     }
 
     @media (min-width: variables.toEm(481, 16)) {
-        &__heading{
-            margin-right: variables.toRem(24);
+        &__subprice{
+            margin-right: variables.toRem(32);
+        }
+        @media (max-width: variables.toEm(992, 16)) {
+            &__subprice{
+                margin-right: variables.toRem(24);
+            }
         }
         @media (max-width: variables.toEm(768, 16)) {
-            &__heading{
+            &__subprice{
                 margin-right: variables.toRem(16);
             }
         }
     }
+    @media (max-width: variables.toEm(480, 16)) {
+        &__subprice{
+            margin-top: variables.toRem(10);
+        }
+    }
+
     &__heading{
         color: variables.$darkGreen;
         font-family: "TradeGothic"; font-weight: 700;
         font-size: variables.toRem(20);
         line-height: variables.toEm(24, 20);
+        margin-bottom: variables.toRem(16);
     }
     @media (max-width: variables.toEm(768, 16)) {
         &__heading{
             font-size: variables.toRem(18);
+        }
+    }
+    @media (max-width: variables.toEm(480, 16)) {
+        &__heading{
+            margin-bottom: variables.toRem(10);
         }
     }
 
@@ -296,36 +298,46 @@
 
     &__short-review{
         margin: variables.toRem(12) 0 variables.toRem(48.5);
-        position: relative;
-        &::after{
-            background-color: rgba($color: variables.$darkGreen, $alpha: 0.25);
-            content: "";
-            position: absolute; left: 0; bottom: variables.toRem(-24);
-            transform: translateY(50%);
-            width: 100%; height: variables.toRem(0.5);
-        }
     }
+    
     @media (max-width: variables.toEm(768, 16)) {
         &__short-review{
             margin: variables.toRem(8) 0 variables.toRem(32.5);
-            &::after{
-                bottom: variables.toRem(-16);
-            }
         }
     }
 
     &__footer{
         display: flex;
+        position: relative;
+        &::after{
+            background-color: rgba($color: variables.$darkGreen, $alpha: 0.25);
+            content: "";
+            position: absolute; left: 0; top: variables.toRem(-24);
+            transform: translateY(50%);
+            width: 100%; height: variables.toRem(0.5);
+        }
     }
+    @media (max-width: variables.toEm(768, 16)) {
+        &__footer::after{
+            top: variables.toRem(-16);
+        }
+    }
+
     &__favourites{
         flex: 0 0 variables.toRem(48);
         svg path{
             transition: stroke 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
         }
     }
-    &__favourites:hover svg path, &__favourites:focus svg path{
+    &__favourites._active:not(:disabled):hover svg path, 
+    &__favourites._active:not(:disabled):focus svg path{
         stroke: #fff;
     }
+    &__favourites:not(._active):not(:disabled):hover svg path, 
+    &__favourites:not(._active):not(:disabled):focus svg path{
+        fill: #fff;
+    }
+
 
     &__link{
         font-weight: 600;
@@ -334,6 +346,9 @@
 
         width: 100%;
         margin-left: variables.toRem(16);
+    }
+    div.hotel__link{
+        opacity: 0.25;
     }
 }
 .location-hotel{
@@ -1138,7 +1153,7 @@
 }
 .item-reviews-hotel{
     &__ava{
-        width: variables.toRem(45);
+        min-width: variables.toRem(45);
         height: variables.toRem(45);
         img{
             background-color: variables.$mint;

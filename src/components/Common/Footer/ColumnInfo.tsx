@@ -1,5 +1,5 @@
 import React, { type FC } from "react";
-import type { Column } from "../../../store/footer";
+import type { Column } from "../../../types";
 
 export const ColumnInfo : FC<Column> = ({title, links}) => {
     return(

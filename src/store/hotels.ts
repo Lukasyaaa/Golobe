@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { AMENITIES, createFetchThunk, FREEBIES, NAVBAR_DESCRIPTION, NAVBAR_ITEM, HOTELS_SORT_TYPE} from "../types";
-import type { Catalog, Hotel, Offer, RecentItem, Section, Travel } from "../types";
+import { createFetchThunk, HOTELS_SORT_TYPE} from "../types";
+import type { Catalog, Hotel, objType, Offer, RecentItem, Section, Travel } from "../types";
 
 interface HotelsStart{
     travels: Section<Travel>,
@@ -10,7 +10,7 @@ interface HotelsStart{
 
 interface Hotels{
     start: HotelsStart,
-    catalog: Catalog<Hotel>
+    catalog: Catalog<Hotel, objType<typeof HOTELS_SORT_TYPE>>
 }
 
 const initialState : Hotels = {

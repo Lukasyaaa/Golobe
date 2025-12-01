@@ -3,16 +3,16 @@ import type { Travel as TravelType } from "../../../../types";
 
 export const Travel : FC<TravelType> = ({city, description, price, image}) => {
     let [isHovered, setIsHovered] = useState<boolean>(false);
-
     const makeHovered = () => setIsHovered(true);
     const unMakeHovered = () => setIsHovered(false);
 
     return(
         <div  
-            className={["travels__item", "item-travels", (isHovered) ? "_hovered" : ""].filter(Boolean).join(" ")}
+            className={[
+                "travels__item", "item-travels", (isHovered) ? "_hovered" : ""
+            ].filter(Boolean).join(" ")}
             style={{
-                backgroundImage: `url("${image.webp}")`, backgroundRepeat: "no-repeat",
-                backgroundSize: "cover"
+                backgroundImage: `url("${(document.body.classList.contains("webp")) ? image.webp : image.jpeg}")`, backgroundRepeat: "no-repeat", backgroundSize: "cover"
             }}
         >
             <div className="item-travels__row">

@@ -37,7 +37,7 @@ a{
     text-decoration: none;
     color: unset;
 }
-button:not(:disabled), input[type="radio"], input[type="checkbox"]{
+button:not(:disabled), input[type="radio"], input[type="checkbox"], input[type="file"], label{
     cursor: pointer;
 }
 a[tabindex="-1"]{

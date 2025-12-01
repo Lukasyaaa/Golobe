@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState, type FC } from "react";
-import type { Column } from "../../../store/footer";
+import type { Column } from "../../../types";
 
 export const ColumnSpoiler : FC<Column> = ({title, links}) => {
     let [isOpened, setIsOpened] = useState<boolean>(false);

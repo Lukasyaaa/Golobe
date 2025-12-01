@@ -1,8 +1,10 @@
-import React, { type FC } from "react";
+import React, { Fragment, type FC } from "react";
 import { FILL_RULE } from "../../../types";
 import type { IconParams, objType} from "../../../types";
 import { ColumnSpoiler } from "./ColumnSpoiler";
 import { ColumnInfo } from "./ColumnInfo";
+import { useLocation } from "react-router-dom";
+import { accountPath, favouritesPath, flightPath, hotelPath, startPath } from "../../../App";
 
 const SOCIALS = {
     facebook: "Facebook",
@@ -12,6 +14,7 @@ const SOCIALS = {
 } as const;
 
 export const Footer : FC = () => {
+    let location = useLocation();
     const getIcon = (about : objType<typeof SOCIALS>) : IconParams => {
         switch(about){
             case SOCIALS.facebook:
@@ -87,6 +90,13 @@ export const Footer : FC = () => {
         }
     ]
 
+    if(location.pathname !== startPath && 
+    !location.pathname.includes(flightPath) && 
+    !location.pathname.includes(hotelPath) && 
+    location.pathname !== accountPath && 
+    location.pathname !== favouritesPath){
+        return <Fragment />
+    }
     return(
         <footer className="footer">
             <div className="container">

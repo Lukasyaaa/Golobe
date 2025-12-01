@@ -103,6 +103,7 @@
 }
 
 .trips{
+    overflow: hidden;
     padding: variables.toRem(80) 0 variables.toRem(78);
     @media (max-width: variables.toEm(992, 16)) {
         padding: variables.toRem(64) 0;
@@ -374,19 +375,13 @@
     }
 
     &__link{
-        border-radius: variables.toRem(4);
-        background-color: variables.$mint; color: variables.$darkGreen;
         display: inline-flex; align-items: center;
         padding: variables.toRem(15) variables.toRem(16);
         transition: background-color 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
     }
     &__link:hover, &__link:focus{
-        svg{
-            filter: drop-shadow(0 0 5px variables.$mint);
-        }
-        svg path{
-            fill: variables.$mint;
-        }
+        svg{ filter: drop-shadow(0 0 5px variables.$mint); }
+        svg path{ fill: variables.$mint; }
     }
     @media (max-width: variables.toEm(768, 16)) {
         &__link{
@@ -714,6 +709,7 @@
     &__icon-parent{
         display: flex; align-items: center; justify-content: center;
         width: variables.toRem(24); height: variables.toRem(24);
+        margin-right: variables.toRem(8);
     }
 
     &__description{
