@@ -62,17 +62,16 @@ export const App : FC = () =>  {
         localStorage.setItem("hotelsReviews", "[]");
     }
     useEffect(() => {
-        if(localStorage.getItem("currentUser") !== "-1") {
-            const users = JSON.parse(localStorage.getItem("users") as string) as User[];
-            const currentUser = JSON.parse(localStorage.getItem("currentUser") as string) as number;
+        const currentUser = JSON.parse(localStorage.getItem("currentUser") as string);
+        if(currentUser !== -1) {
+            const users = JSON.parse(localStorage.getItem("users") || "[]") as User[];
             dispatch(userSlice.actions.loadUser(users[currentUser]));
         }
-        dispatch(hotelsSlice.actions.loadReviews(JSON.parse(localStorage.getItem("hotelsReviews") as string)));
+        dispatch(hotelsSlice.actions.loadReviews(JSON.parse(localStorage.getItem("hotelsReviews") || "[]")));
         supportsWebp().then((supported) => {
             document.body.classList.add(supported ? "webp" : "no-webp");
         });
     }, []);
-    console.log(JSON.parse(localStorage.getItem("users") as string));
 
     return (
         <Fragment >
