@@ -20,6 +20,7 @@ import { VerifyCode } from "./pages/Authorization/VerifyCode";
 import { SetPassword } from "./pages/Authorization/SetPassword";
 import { Account } from "./pages/Account";
 import { Favoutires } from "./pages/Favourites";
+import { hotelsSlice } from "./store/hotels";
 
 export const startPath = "/";
 
@@ -57,17 +58,21 @@ export const App : FC = () =>  {
     if(localStorage.getItem("currentUser") === null){
         localStorage.setItem("currentUser", "-1");
     }
+    if(localStorage.getItem("hotelsReviews") === null){
+        localStorage.setItem("hotelsReviews", "[]");
+    }
     useEffect(() => {
         if(localStorage.getItem("currentUser") !== "-1") {
             const users = JSON.parse(localStorage.getItem("users") as string) as User[];
             const currentUser = JSON.parse(localStorage.getItem("currentUser") as string) as number;
             dispatch(userSlice.actions.loadUser(users[currentUser]));
         }
+        dispatch(hotelsSlice.actions.loadReviews(JSON.parse(localStorage.getItem("hotelsReviews") as string)));
         supportsWebp().then((supported) => {
             document.body.classList.add(supported ? "webp" : "no-webp");
         });
     }, []);
-    console.log(JSON.parse(localStorage.getItem("users") as string) as User[]);
+    console.log(JSON.parse(localStorage.getItem("users") as string));
 
     return (
         <Fragment >
@@ -77,24 +82,21 @@ export const App : FC = () =>  {
                 
                 <Route path={flightsPath} element={<Flights />} />
                 <Route path={flightsCatalogPath + "/:tripType"} element={<Catalog contentType={SITE_PARTS.flights} />} />
-                <Route path={flightsCatalogPath + "/:fromTo/:tripType"} element={<Catalog contentType={SITE_PARTS.flights} />} />
-                <Route path={flightsCatalogPath + "/:passengersClass/:tripType"} element={<Catalog contentType={SITE_PARTS.flights} />} />
-                <Route path={flightsCatalogPath + "/:departReturn/:tripType"} element={<Catalog contentType={SITE_PARTS.flights} />} />
-                <Route path={flightsCatalogPath + "/:fromTo/:passengersClass/:tripType"} element={<Catalog contentType={SITE_PARTS.flights} />} />
-                <Route path={flightsCatalogPath + "/:fromTo/:departReturn/:tripType"} element={<Catalog contentType={SITE_PARTS.flights} />} />
-                <Route path={flightsCatalogPath + "/:fromTo/:passengersClass/:departReturn/:tripType"} element={<Catalog contentType={SITE_PARTS.flights} />} />
+                <Route path={flightsCatalogPath + "/:filter_1/:tripType"} element={<Catalog contentType={SITE_PARTS.flights} />} />
+                <Route path={flightsCatalogPath + "/:filter_1/:filter_2/:tripType"} element={<Catalog contentType={SITE_PARTS.flights} />} />
+                <Route path={flightsCatalogPath + "/:filter_1/:filter_2/:filter_3/:tripType"} element={<Catalog contentType={SITE_PARTS.flights} />} />
+
                 <Route path={flightPath + "/:id/:options"} element={<Flight />} />
                 <Route path={flightPath + "/:id/:options/:seatsType"} element={<Booking contentType={SITE_PARTS.flights} />} />
                 <Route path={flightPath + "/:id/:options/:seatsType/Details"} element={<Details contentType={SITE_PARTS.flights} />} />
 
                 <Route path={hotelsPath} element={<Hotels />} />
-                <Route path={hotelsCatalogPath + "/:roomsGuests"} element={<Catalog contentType={SITE_PARTS.stays} />} />
-                <Route path={hotelsCatalogPath + "/:city/:roomsGuests"} element={<Catalog contentType={SITE_PARTS.stays} />} />
-                <Route path={hotelsCatalogPath + "/:checkInCheckOut/:roomsGuests"} element={<Catalog contentType={SITE_PARTS.stays} />} />
-                <Route path={hotelsCatalogPath + "/:city/:checkInCheckOut/:roomsGuests"} element={<Catalog contentType={SITE_PARTS.stays} />} />
-                <Route path={hotelPath + "/:id"} element={<Hotel />} />
-                <Route path={hotelPath + "/:hotelId/Rooms/:roomId"} element={<Booking contentType={SITE_PARTS.stays} />} />
-                <Route path={hotelPath + "/:hotelId/Rooms/:roomId/Details"} element={<Details contentType={SITE_PARTS.stays} />} />
+                <Route path={hotelsCatalogPath + "/:filter_1/:roomsGuests"} element={<Catalog contentType={SITE_PARTS.stays} />} />
+                <Route path={hotelsCatalogPath + "/:filter_1/:filter_2/:roomsGuests"} element={<Catalog contentType={SITE_PARTS.stays} />} />
+                <Route path={hotelsCatalogPath + "/:filter_1/:filter_2/:filter_3/:roomsGuests"} element={<Catalog contentType={SITE_PARTS.stays} />} />
+                <Route path={hotelPath + "/:id/:checkInCheckOut"} element={<Hotel />} />
+                <Route path={hotelPath + "/:hotelId/:checkInCheckOut/Rooms/:roomId"} element={<Booking contentType={SITE_PARTS.stays} />} />
+                <Route path={hotelPath + "/:hotelId/:checkInCheckOut/Rooms/:roomId/Details"} element={<Details contentType={SITE_PARTS.stays} />} />
             
                 <Route path={logInPath} element={<Authorization type={AUTHORIZATION_TYPE.login} />} />
                 <Route path={signInPath} element={<Authorization type={AUTHORIZATION_TYPE.signIn} />} />

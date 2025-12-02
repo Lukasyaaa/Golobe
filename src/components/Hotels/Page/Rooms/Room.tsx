@@ -6,10 +6,11 @@ import { hotelPath } from "../../../../App";
 interface RoomProps{
     about: RoomType,
     id: number,
-    hotelId: number
+    hotelId: number,
+    checkInCheckOut: string
 }
 
-export const Room : FC<RoomProps> = ({about, id, hotelId}) => {
+export const Room : FC<RoomProps> = ({about, id, hotelId, checkInCheckOut}) => {
     const {beds, specifics, image, price} = about;
     return(
         <div className="rooms__item item-rooms">
@@ -21,7 +22,7 @@ export const Room : FC<RoomProps> = ({about, id, hotelId}) => {
                 <div className="item-rooms__specifies">{getRoomInfo(beds, specifics)}</div>
                 <div className="item-rooms__price"><strong>{"$" + transformPrice(price)}</strong>/night</div>
             </div>
-            <NavLink className="item-rooms__link button_green" to={hotelPath + "/" + hotelId + "/Rooms/" + (Number(id) + 1)}>
+            <NavLink className="item-rooms__link button_green" to={hotelPath + "/" + hotelId + "/" + checkInCheckOut + "/Rooms/" + (Number(id) + 1)}>
                 Book now
             </NavLink>
         </div>

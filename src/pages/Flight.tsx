@@ -19,6 +19,7 @@ interface AirporitState{
 
 export const Flight : FC = () => {
     const {options, id} = useParams();
+    console.log(options);
     const {container} = useTypedSelector(state => state.flights.catalog);
     const {isLoading, items, error} = container;
 
@@ -130,7 +131,7 @@ export const Flight : FC = () => {
                     />
                 </div>}
                 <Introduction 
-                    id={flight.id} contentType={SITE_PARTS.flights} 
+                    id={Number(flight.id)} contentType={SITE_PARTS.flights} 
                     city={(airports[choosedPart] as AirporitState).to.city} 
                     country={(airports[choosedPart] as AirporitState).to.country} 
                     endPoint={(airports[choosedPart] as AirporitState).to.airportName} 
@@ -140,6 +141,7 @@ export const Flight : FC = () => {
                     starsCount={null} shortReview={{countReviews: flight.countReviews, rating: flight.rating}}
                     price={transformPrice(getSeatsGroup(choosedSeats, flightPart).price)}
                     images={{isMassive: false, value: flightPart.image}}
+                    tripTypes={String(options)}
                 />
                 <Seats 
                     choosed={[choosedSeats, setChoosedSeats]} 

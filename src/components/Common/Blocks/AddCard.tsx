@@ -1,8 +1,8 @@
 import React, { useState, type FC } from "react";
-import { ADD_CARD_TITLE_FIELD, ADD_CARD_TITLE_SELECT, FILL_RULE, getCurrentUser, getInputSetState, getInputState, getInputValidation, ICON_POSITION, INPUT_CARD_VALIDATION_TYPE, INPUT_TYPE, STROKE_LINECAP, STROKE_LINEJOIN } from "../../../types";
+import { ADD_CARD_TITLE_FIELD, ADD_CARD_TITLE_SELECT, FILL_RULE, getInputSetState, getInputState, getInputValidation, ICON_POSITION, INPUT_CARD_VALIDATION_TYPE, INPUT_TYPE, STROKE_LINECAP, STROKE_LINEJOIN } from "../../../types";
 import type { OneDataInputValidation, Card, Field, FieldItem, FieldsItem, Icon, InputState, objType, User, useStateReturned } from "../../../types";
 import { Input } from "./Interaction/Input";
-import { useAppDispatch } from "../../../store";
+import { useAppDispatch, useTypedSelector } from "../../../store";
 import { userSlice } from "../../../store/user";
 import { SelectDescription } from "./Interaction/Select";
 
@@ -88,7 +88,7 @@ export const AddCard: FC<AddCardProps> = ({isOpened, parentCl}) => {
         return validationResults.some(r => r !== "");
     }
 
-    const currentUser = getCurrentUser() as User;
+    const currentUser = useTypedSelector(state => state.user);
     const users = JSON.parse((localStorage.getItem("users") as string)) as User[]
     return(
         <div className={[parentCl + "__add-card", "add-card", "modal", isOpenedValue ? "_show" : ""].filter(Boolean).join(" ")}>
@@ -116,7 +116,7 @@ export const AddCard: FC<AddCardProps> = ({isOpened, parentCl}) => {
                                                     validation: getInputValidation(input.validationType) as OneDataInputValidation,
                                                     anotherValue: null
                                                 }}
-                                                parentCls={["add-card"]} isInMassive={true} isBigger={false} 
+                                                parentCls={["add-card__field"]} isInMassive={true} isBigger={false} 
                                             />
                                         )
                                     }
@@ -144,7 +144,7 @@ export const AddCard: FC<AddCardProps> = ({isOpened, parentCl}) => {
                                     validation: getInputValidation(item.value.validationType) as OneDataInputValidation,
                                     anotherValue: null
                                 }}
-                                parentCls={["add-card"]} isInMassive={true} isBigger={false} 
+                                parentCls={["add-card__field"]} isInMassive={true} isBigger={false} 
                             />
                         )
                     }
@@ -188,7 +188,8 @@ export const AddCard: FC<AddCardProps> = ({isOpened, parentCl}) => {
                             {...currentUser, cards: [...currentUser.cards, newCard]} : u
                     )));
                     dispatch(userSlice.actions.addCard(newCard));
-                    setIsOpened(false);
+                    setIsOpened(false); 
+                    document.body.classList.remove("_locked");
                 }}
             >
                 Add Card

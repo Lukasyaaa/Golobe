@@ -1,6 +1,6 @@
 import React, { type FC, type ReactNode } from "react";
 import { getInputSetState, getInputState, INPUT_OPTIONS_VALIDATION_TYPE, MONTHS, SITE_PARTS, type InputState, type objType } from "../../../types";
-import { NavLink } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import { flightsCatalogPath, hotelsCatalogPath } from "../../../App";
 import { getSelectState, SELECT_OPTIONS_DESCRIPTION, type SelectState } from "./Options";
 
@@ -16,13 +16,17 @@ interface OptionsLink{
 export const OptionsLink: FC<OptionsLink> = ({
     isActive, currentSitePart, inputs, selects, selectsLinks, children, cls
 }) => {
+    const {filter_1} = useParams();
+    
     if(isActive){
         let path;
         if(currentSitePart === SITE_PARTS.flights){
             let pathComponents: string[] = [];
             const fromTo = getInputState(INPUT_OPTIONS_VALIDATION_TYPE.fromTo, inputs);
             if(fromTo !== ""){
-                pathComponents.push(fromTo.split(" - ").join("-"))
+                pathComponents.push(fromTo.replaceAll(" - ", "+"))
+            } else if(filter_1 !== undefined && filter_1.split("+").length !== 2){
+                pathComponents.push(filter_1);
             }
             const passengerClass = getInputState(INPUT_OPTIONS_VALIDATION_TYPE.passengerClass, inputs);
             if(passengerClass !== ""){
@@ -43,7 +47,7 @@ export const OptionsLink: FC<OptionsLink> = ({
             let pathComponents: string[] = [];
             const destination = getInputState(INPUT_OPTIONS_VALIDATION_TYPE.destination, inputs);
             if(destination !== ""){
-                pathComponents.push(destination);
+                pathComponents.push(destination.split(", ").join("+"));
             }
             const checkInDate = getInputState(INPUT_OPTIONS_VALIDATION_TYPE.checkIn, inputs);
             const checkOutDate = getInputState(INPUT_OPTIONS_VALIDATION_TYPE.checkOut, inputs);

@@ -1,6 +1,7 @@
 import React, { type FC } from "react";
-import { FILL_RULE, getCurrentUser, SITE_PARTS, STROKE_LINECAP, STROKE_LINEJOIN, transformIconViewbox, type Fact as FactType, type IconParams, type Image, type objType, type User } from "../../../types";
+import { FILL_RULE, SITE_PARTS, STROKE_LINECAP, STROKE_LINEJOIN, transformIconViewbox, type Fact as FactType, type IconParams, type Image, type objType, type User } from "../../../types";
 import { Fact } from "../Blocks/Fact";
+import { useTypedSelector } from "../../../store";
 
 interface TicketProps{
     startString: string, startDescription: string, startDate: string
@@ -14,7 +15,7 @@ export const Ticket: FC<TicketProps> = ({
     startString, endString, startDate, endDate, startDescription, endDescription, 
     serviceDescription, facts, images, contentType
 }) => {
-    const user = getCurrentUser() as User;
+    const user = useTypedSelector(state => state.user);
     const iconValue: IconParams = (contentType === SITE_PARTS.flights) 
         ? {
             viewbox: {minX: 0, minY: 0, width: 22.5, height: 19.5}, width: 22.5, height: 19.5, pathes: [

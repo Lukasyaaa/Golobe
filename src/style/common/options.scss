@@ -125,18 +125,17 @@
     &__field{
         display: flex; flex-direction: column;
     }
-    &__field.select{ flex-direction: column-reverse; }
 
-    &_input__field{
+    &__field_input{
         flex: 0 1 variables.toPercent(320, 1168);
     }
-    &__field.select{
-        flex: 0 0 variables.toPercent(136, 1168);
-    }
-    &_input__field.bigger{
+    &__field_input.bigger{
         flex: 0 0 variables.toPercent(416, 1168);
     }
-    &__field.select.have-icon{
+    &__field_select{
+        flex: 0 0 variables.toPercent(136, 1168);
+    }
+    &__field_select.have-icon{
         flex: 0 0 variables.toPercent(240, 1168);
     }
 

@@ -72,6 +72,22 @@
                 "alt": "Dubai" 
             },
             "services": ["Flights", "Hotels", "Resorts"]
+        },
+        { 
+            "city": "Tokyo", 
+            "image": { 
+                "srcs": { "jpeg": "/img/start/trips/8/image.jpg", "webp": "/img/start/trips/8/image.webp" },
+                "alt": "Tokyo"
+            },
+            "services": ["Flights", "Hotels", "Resorts"]
+        },
+        { 
+            "city": "Dubai", 
+            "image": { 
+                "srcs": { "jpeg": "/img/start/trips/9/image.jpg", "webp": "/img/start/trips/9/image.webp" }, 
+                "alt": "Dubai" 
+            },
+            "services": ["Flights", "Hotels", "Resorts"]
         }
     ],
     "reviews": [
@@ -1930,7 +1946,6 @@
             "id": 0,
             "type": "Hotels",
             "name": "CVK Park Bosphorus Hotel Istanbul",
-            "rating": 4.2,
             "starsCount": 5,
             "logo": {"webp": "/img/hotels/items/1/logo/image.webp", "jpeg": "/img/hotels/items/1/logo/image.png"},
             "location": {
@@ -2099,7 +2114,6 @@
             "id": 1,
             "type": "Resorts",
             "name": "Eresin Hotels Sultanahmet - Boutique Class",
-            "rating": 5,
             "starsCount": 5,
             "logo": {"webp": "/img/hotels/items/2/logo/image.webp", "jpeg": "/img/hotels/items/2/logo/image.png"},
             "location": {
@@ -2268,7 +2282,6 @@
             "id": 2,
             "type": "Resorts",
             "name": "Eresin Hotels Sultanahmet - Boutique Class",
-            "rating": 3,
             "starsCount": 5,
             "logo": {"webp": "/img/hotels/items/3/logo/image.webp", "jpeg": "/img/hotels/items/3/logo/image.png"},
             "location": {
@@ -2437,7 +2450,6 @@
             "id": 3,
             "type": "Hotels",
             "name": "Eresin Hotels Sultanahmet - Boutique Class",
-            "rating": 2,
             "starsCount": 5,
             "logo": {"webp": "/img/hotels/items/4/logo/image.webp", "jpeg": "/img/hotels/items/4/logo/image.png"},
             "location": {
@@ -2637,7 +2649,6 @@
             "id": 4,
             "type": "Motels",
             "name": "Eresin Hotels Sultanahmet - Boutique Class",
-            "rating": 4,
             "starsCount": 5,
             "logo": {"webp": "/img/hotels/items/4/logo/image.webp", "jpeg": "/img/hotels/items/4/logo/image.png"},
             "location": {
@@ -2806,7 +2817,6 @@
             "id": 5,
             "type": "Hotels",
             "name": "CVK Park Bosphorus Hotel Istanbul",
-            "rating": 1.5,
             "starsCount": 5,
             "logo": {"webp": "/img/hotels/items/4/logo/image.webp", "jpeg": "/img/hotels/items/4/logo/image.png"},
             "location": {

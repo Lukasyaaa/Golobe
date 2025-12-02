@@ -48,13 +48,13 @@ export const userSlice = createSlice({
             state.favourites.flightsPart = [...state.favourites.flightsPart, action.payload];
         },
         removeFavouriteFlight(state, action: PayloadAction<number>){
-            state.favourites.flightsPart.splice(action.payload, 1);
+            state.favourites.flightsPart = state.favourites.flightsPart.filter(val => val !== action.payload);
         },
         addFavouriteHotel(state, action: PayloadAction<number>){
             state.favourites.hotelsPart = [...state.favourites.hotelsPart, action.payload];
         },
         removeFavouriteHotel(state, action: PayloadAction<number>){
-            state.favourites.hotelsPart.splice(action.payload, 1);
+            state.favourites.hotelsPart = state.favourites.hotelsPart.filter(val => val !== action.payload);
         },
         addTicket(state, action: PayloadAction<Ticket>){
             state.tickets.push(action.payload)

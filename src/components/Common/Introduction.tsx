@@ -9,6 +9,7 @@ import { Stars } from "./Blocks/Stars/Stars";
 import { Images } from "../Hotels/Page/Images";
 import { useTypedSelector } from "../../store";
 import { useFavourites } from "../../hooks/useFavourites";
+import { flightsCatalogPath, hotelsCatalogPath } from "../../App";
 
 interface OneImage{
     isMassive: false,
@@ -19,8 +20,8 @@ interface ManyImage{
     value: HotelImages
 }
 
-interface IntroductionProps{
-    parentCls: string[], contentType: objType<typeof SITE_PARTS>,
+interface IntroductionPropsBase{
+    parentCls: string[],
     id: number,
     endPoint: string, city: string, country: string,
     locationInfo: string,
@@ -28,24 +29,39 @@ interface IntroductionProps{
     starsCount: number | null,
     shortReview: ShortReviewType,
     price: number,
-    images: OneImage | ManyImage
+    images: OneImage | ManyImage,
 }
+interface IntroductionFlightProps extends IntroductionPropsBase{
+    contentType: typeof SITE_PARTS.flights,
+    tripTypes: string
+}
+interface IntroductionHotelProps extends IntroductionPropsBase{
+    contentType: typeof SITE_PARTS.stays,
+}
+type IntroductionProps = IntroductionFlightProps | IntroductionHotelProps;
 
 export const Introduction : FC<IntroductionProps> = ({
-    parentCls, contentType, id, heading, endPoint, city, country, locationInfo, starsCount, shortReview, price, images
+    parentCls, contentType, id, heading, endPoint, city, country, locationInfo, starsCount, shortReview, price, images,
+    ...props
 }) => {
     const user = useTypedSelector(state => state.user);
     const parentCl = (contentType === SITE_PARTS.flights) ? "flight" : "hotel";
     const isInFavourites = (contentType === SITE_PARTS.flights) ? user.favourites.flightsPart.includes(id) : user.favourites.hotelsPart.includes(id);
     const favourites = useFavourites(isInFavourites, id, user, contentType);
 
+    const neededCountryPath = (contentType === SITE_PARTS.flights) 
+        ? flightsCatalogPath + "/" + country.replaceAll(" ", "-") + "/" + (props as {tripTypes: string}).tripTypes
+        : hotelsCatalogPath + "/" + country.replaceAll(" ", "-") + "/1-Room+2-Guests";
+    const neededCityPath = (contentType === SITE_PARTS.flights) 
+        ? flightsCatalogPath + "/" + city.replaceAll(" ", "-") + "/" + (props as {tripTypes: string}).tripTypes
+        : hotelsCatalogPath + "/" + city.replaceAll(" ", "-") + "/1-Room+2-Guests";
     return(
         <section className={parentCls.join(" ") + ` introduction-${parentCl} page__introduction introduction-page`}>
             <div className="container">
                 <Breadcrumbs 
                     parentCl={[`introduction-${parentCl}`, "introduction-page"]} current={endPoint} links={[
-                        {description: country, path: "#"}, 
-                        {description: city, path: "#"}
+                        {description: country, path: neededCountryPath}, 
+                        {description: city, path: neededCityPath}
                     ]}  
                 />
                 <div className={`introduction-${parentCl}__row introduction-page__row`}>

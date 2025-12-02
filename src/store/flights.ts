@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createFetchThunk, FLIGHTS_SORT_TYPE } from "../types";
+import { createFetchThunk, FLIGHTS_CHOOSE_TYPE } from "../types";
 import type { Catalog, Flight, objType, Offer, Section, Submap, Travel} from "../types";
 
 interface FlightsStart{
@@ -10,7 +10,7 @@ interface FlightsStart{
 
 interface Flights{
     start: FlightsStart,
-    catalog: Catalog<Flight, objType<typeof FLIGHTS_SORT_TYPE>>
+    catalog: Catalog<Flight, objType<typeof FLIGHTS_CHOOSE_TYPE>>
 }
 
 const initialState : Flights = {
@@ -26,7 +26,7 @@ const initialState : Flights = {
         }
     },
     catalog: {
-        sort: [FLIGHTS_SORT_TYPE.cheapest, FLIGHTS_SORT_TYPE.best, FLIGHTS_SORT_TYPE.quickest],
+        sort: [FLIGHTS_CHOOSE_TYPE.cheapest, FLIGHTS_CHOOSE_TYPE.best, FLIGHTS_CHOOSE_TYPE.quickest],
         container: {
             items: [], isLoading: false, error: null,
         }

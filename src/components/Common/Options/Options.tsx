@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState, type FC, } from "react";
-import { getInputSetState, getInputState, getInputValidation, INPUT_OPTIONS_VALIDATION_TYPE, STROKE_LINECAP, STROKE_LINEJOIN, type OneDataInputValidation, type Field, type IconParams, type InputState, type objType, type SiteSeparation, type TwoDataInputValidation, type AboutOneDataPart, type AboutTwoDataPart } from "../../../types.ts";
+import { getInputSetState, getInputState, getInputValidation, INPUT_OPTIONS_VALIDATION_TYPE, STROKE_LINECAP, STROKE_LINEJOIN, type OneDataInputValidation, type Field, type IconParams, type InputState, type objType, type SiteSeparation, type TwoDataInputValidation, type AboutOneDataPart, type AboutTwoDataPart, type CheckDateInputValidation, type AboutCheckDateDataPart } from "../../../types.ts";
 import {FILL_RULE, NEEDED_BLOCKS, SITE_PARTS, INPUT_TYPE, ICON_POSITION} from "../../../types.ts";
 import { OptionsHeaderType } from "./HeaderType.tsx";
 import { Input } from "../Blocks/Interaction/Input.tsx";
@@ -229,11 +229,17 @@ export const Options : FC<OptionsProps> = ({neededBlocks, value}) => {
                             ).slice(i*4, (i+1)*4).map((option, j) => {
                                 if(option.type === INPUT_TYPE.field){
                                     const {isBigger, type, ...anotherOption} = option;
-                                    let data: AboutOneDataPart | AboutTwoDataPart;
-                                    if(option.validationType === INPUT_OPTIONS_VALIDATION_TYPE.checkOut){
+                                    let data: AboutOneDataPart | AboutCheckDateDataPart;
+                                    if(option.validationType === INPUT_OPTIONS_VALIDATION_TYPE.checkIn || 
+                                    option.validationType === INPUT_OPTIONS_VALIDATION_TYPE.checkOut){
+                                        const anotherValue = (option.validationType === INPUT_OPTIONS_VALIDATION_TYPE.checkIn) 
+                                            ? getInputState(INPUT_OPTIONS_VALIDATION_TYPE.checkOut, inputs)
+                                            : getInputState(INPUT_OPTIONS_VALIDATION_TYPE.checkIn, inputs)
                                         data = {
-                                            anotherValue: getInputState(INPUT_OPTIONS_VALIDATION_TYPE.checkIn, inputs),
-                                            validation: getInputValidation(option.validationType) as TwoDataInputValidation
+                                            anotherValue,
+                                            validation: getInputValidation(option.validationType) as CheckDateInputValidation,
+                                            isInDate: option.validationType === INPUT_OPTIONS_VALIDATION_TYPE.checkIn,
+                                            isCheckDate: true
                                         }
                                     } else {
                                         data = {
@@ -242,7 +248,7 @@ export const Options : FC<OptionsProps> = ({neededBlocks, value}) => {
                                         }
                                     }
                                     return <Input 
-                                        key={i * 4 + j} parentCls={["options", "options_input"]} about={{
+                                        key={i * 4 + j} parentCls={["options__field", "options__field_input"]} about={{
                                             ...anotherOption, isCanHide: false, 
                                             state: getInputState(option.validationType, inputs),
                                             setState: getInputSetState(option.validationType, setInputs),
@@ -265,8 +271,12 @@ export const Options : FC<OptionsProps> = ({neededBlocks, value}) => {
                             {
                                 i === 0 && neededBlocks === NEEDED_BLOCKS.onlyInputs && <OptionsLink 
                                     isActive={!inputs.map(i => {
-                                        if(i.description === INPUT_OPTIONS_VALIDATION_TYPE.checkOut){
-                                            return (getInputValidation(i.description) as TwoDataInputValidation)(getInputState(i.description, inputs), getInputState(INPUT_OPTIONS_VALIDATION_TYPE.checkIn, inputs));
+                                        if(i.description === INPUT_OPTIONS_VALIDATION_TYPE.checkOut || 
+                                        i.description === INPUT_OPTIONS_VALIDATION_TYPE.checkIn){
+                                            const anotherValue = (i.description === INPUT_OPTIONS_VALIDATION_TYPE.checkIn) 
+                                                ? getInputState(INPUT_OPTIONS_VALIDATION_TYPE.checkOut, inputs)
+                                                : getInputState(INPUT_OPTIONS_VALIDATION_TYPE.checkIn, inputs)
+                                            return (getInputValidation(i.description) as CheckDateInputValidation)(getInputState(i.description, inputs), anotherValue, i.description === INPUT_OPTIONS_VALIDATION_TYPE.checkIn);
                                         } else {
                                             return (getInputValidation(i.description) as OneDataInputValidation)(getInputState(i.description, inputs));
                                         }
@@ -304,8 +314,12 @@ export const Options : FC<OptionsProps> = ({neededBlocks, value}) => {
                         </button>
                         <OptionsLink 
                             isActive={!inputs.map(i => {
-                                if(i.description === INPUT_OPTIONS_VALIDATION_TYPE.checkOut){
-                                    return (getInputValidation(i.description) as TwoDataInputValidation)(getInputState(i.description, inputs), getInputState(INPUT_OPTIONS_VALIDATION_TYPE.checkIn, inputs));
+                                if(i.description === INPUT_OPTIONS_VALIDATION_TYPE.checkOut || 
+                                i.description === INPUT_OPTIONS_VALIDATION_TYPE.checkIn){
+                                    const anotherValue = (i.description === INPUT_OPTIONS_VALIDATION_TYPE.checkIn) 
+                                        ? getInputState(INPUT_OPTIONS_VALIDATION_TYPE.checkOut, inputs)
+                                        : getInputState(INPUT_OPTIONS_VALIDATION_TYPE.checkIn, inputs)
+                                    return (getInputValidation(i.description) as CheckDateInputValidation)(getInputState(i.description, inputs), anotherValue, i.description === INPUT_OPTIONS_VALIDATION_TYPE.checkIn);
                                 } else {
                                     return (getInputValidation(i.description) as OneDataInputValidation)(getInputState(i.description, inputs));
                                 }

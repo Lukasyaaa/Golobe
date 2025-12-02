@@ -21,12 +21,18 @@ export const Favoutires : FC = () => {
     const user = useTypedSelector(state => state.user);
     const flights = useTypedSelector(state => state.flights.catalog.container);
     const hotels = useTypedSelector(state => state.hotels.catalog.container);
+    const hotelsReviews = useTypedSelector(state => state.hotels.reviews);
+
     useEffect(() => {
         dispatch(fetchFlights());
         dispatch(fetchHotels());
     }, [dispatch])
     let [activeOption, setActiveOption] = useState<number>(0);
     const sortLinks = useMemo(() => {
+        if(user.name.firstName !== "" && user.favourites.flightsPart.length === 0 && user.favourites.hotelsPart.length === 0){
+            navigate(startPath);
+        }
+
         const tempSortLinks = [];
         if(user.favourites.flightsPart.length !== 0){
             tempSortLinks.push({
@@ -41,13 +47,7 @@ export const Favoutires : FC = () => {
             })
         }
         return tempSortLinks;
-    }, [])
-
-    useEffect(() => {
-        if(user.favourites.flightsPart.length === 0 && user.favourites.hotelsPart.length === 0){
-            navigate(startPath);
-        }
-    }, [user.favourites])
+    }, [user]);
 
     if(flights.isLoading || flights.items.length === 0 || hotels.isLoading || hotels.items.length === 0){
         return(
@@ -74,23 +74,35 @@ export const Favoutires : FC = () => {
             <div className="container">
                 <div className="favourites__heading">Favourites</div>
                 {sortLinks.length === 2 && <ChooseFull 
-                        links={sortLinks} maxShow={3} opener="Show More"
-                        activeOption={[activeOption, setActiveOption]}
-                        ChildrenComponent={FullOption}
-                    />
+                    links={sortLinks} maxShow={3} opener="Show More"
+                    activeOption={[activeOption, setActiveOption]}
+                    ChildrenComponent={FullOption}
+                />
                 }
                 <div className="favourites__container">
                     {sortLinks[activeOption].title === SORT_LINKS_TITLES.flights 
                         ? user.favourites.flightsPart.map((flightId, i) => {
                             prevCheckboxes += getSchedulePartsCount(flights.items[flightId]);
                             return(<Flight 
-                                key={i} about={flights.items[flightId]} isInFavourites={true} currentUser={user} 
+                                key={i} about={{
+                                    ...flights.items[flightId],
+                                    id: Number(flights.items[flightId].id)
+                                }} isInFavourites={true} 
+                                currentUser={user} 
                                 groupId={i} prevCheckboxes={prevCheckboxes} 
                             />)
                         })
                         : user.favourites.hotelsPart.map((hotelId, i) => 
-                            <Hotel key={i} about={hotels.items[hotelId]} isInFavourites={true} currentUser={user} 
-                        />)
+                            <Hotel 
+                                key={i} about={{
+                                    ...hotels.items[Number(hotelId)], 
+                                    id: Number(hotels.items[Number(hotelId)].id)
+                                }} isInFavourites={true} 
+                                currentUser={user}
+                                hotelsReviews={hotelsReviews.filter(r => r.hotelId === Number(hotelId))} 
+                                checkInCheckOut=""
+                            />
+                        )
                     }
                 </div>
              </div>

@@ -1,9 +1,9 @@
 import React, { useState, type FC } from "react";
-import { FILL_RULE, getCurrentUser, getInputValidation, ICON_POSITION, INPUT_AUTHORIZATION_VALIDATION_TYPE, SELECT_DESCRIPTION_TYPE, STROKE_LINECAP, STROKE_LINEJOIN } from "../../../types";
+import { FILL_RULE, getInputValidation, ICON_POSITION, INPUT_AUTHORIZATION_VALIDATION_TYPE, SELECT_DESCRIPTION_TYPE, STROKE_LINECAP, STROKE_LINEJOIN } from "../../../types";
 import type { OneDataInputValidation, TwoDataInputValidation, Field, UniqueEmailInputValidation, User, useStateReturned} from "../../../types";
 import { Input } from "../../Common/Blocks/Interaction/Input";
 import type { ChangeAnother, ChangeEmail } from "./Info";
-import { useAppDispatch } from "../../../store";
+import { useAppDispatch, useTypedSelector } from "../../../store";
 import { userSlice } from "../../../store/user";
 import { Select } from "../../Common/Blocks/Select/Select";
 import { Text } from "../../Common/Blocks/Select/Text";
@@ -12,7 +12,7 @@ type ChangeInfoProps = (ChangeEmail | ChangeAnother) & { isOpened: useStateRetur
 
 export const ChangeInfo: FC<ChangeInfoProps> = ({heading, field, isOpened, isEmail, ...props}) => {
     const dispatch = useAppDispatch();
-    const currentUser = getCurrentUser() as User;
+    const currentUser = useTypedSelector(state => state.user);
     const [_, setIsOpened] = isOpened;
 
     let [state, setState] = useState<string>("");
@@ -94,15 +94,15 @@ export const ChangeInfo: FC<ChangeInfoProps> = ({heading, field, isOpened, isEma
                         ...inputAbout, 
                         isCanHide: isTwoInputs,
                         state: state, setState: setState, validation: realValidation, anotherValue: null
-                    }} parentCls={["modal-info-account"]} isInMassive={false} isBigger={false} 
+                    }} parentCls={["modal-info-account__field"]} isInMassive={false} isBigger={false} 
                 />
                 {isTwoInputs && <Input 
                         about={{
                             placeholder: "Confirm password", id: "con-password", subinput: "Password", icon: null, 
-                            isCanHide: true,state: confirm, setState: setConfirm, 
+                            isCanHide: true, state: confirm, setState: setConfirm, 
                             validation: getInputValidation(INPUT_AUTHORIZATION_VALIDATION_TYPE.confirmPassword) as TwoDataInputValidation,
-                            anotherValue: state
-                        }} parentCls={["modal-info-account"]} isInMassive={false} isBigger={false} 
+                            anotherValue: state, isCheckDate: false
+                        }} parentCls={["modal-info-account__field"]} isInMassive={false} isBigger={false} 
                     />
                 }
             </div>

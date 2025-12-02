@@ -321,7 +321,8 @@ export const Authorization: FC<AuthorizationProps> = ({type}) => {
         if(isConfirm){
             aboutPart = {
                 validation: getInputValidation(INPUT_AUTHORIZATION_VALIDATION_TYPE.confirmPassword) as TwoDataInputValidation, 
-                anotherValue: getInputState(INPUT_AUTHORIZATION_VALIDATION_TYPE.password, inputs)
+                anotherValue: getInputState(INPUT_AUTHORIZATION_VALIDATION_TYPE.password, inputs),
+                isCheckDate: false
             }
         }
     
@@ -334,7 +335,7 @@ export const Authorization: FC<AuthorizationProps> = ({type}) => {
                     setState: getInputSetState(input.validationType, setInputs),
                     ...aboutPart,
                 }}
-                parentCls={[info.parentCl, "authorization-page", "authorization-part"]} 
+                parentCls={[info.parentCl, "authorization-page__field", "authorization-part__field"]} 
                 isInMassive={isInMassive} isBigger={false}
             />
         );

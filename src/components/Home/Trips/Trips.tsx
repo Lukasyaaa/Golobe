@@ -1,4 +1,4 @@
-import React, { useEffect, useState, type FC } from "react";
+import React, { useEffect, useRef, useState, type FC } from "react";
 import { SectionHeader } from "../../Common/Blocks/SectionHeader";
 import { useAppDispatch, useTypedSelector } from "../../../store";
 import { Trip } from "./Trip"
@@ -18,6 +18,16 @@ export const Trips : FC = () =>{
     useEffect(() => {
         getCountriesByCities(items.map(i => i.city)).then(setCountries)
     }, [items])
+
+    let containerEl = useRef<HTMLDivElement>(null);
+    let containerInnerEl = useRef<HTMLDivElement>(null);
+    useEffect(() => {
+        let containerHTML = containerEl.current;
+        let containerInnerHTML = containerInnerEl.current;
+        if(containerHTML && containerInnerHTML){
+            containerHTML.style.height = containerInnerHTML.offsetHeight + "px"
+        }
+    }, [isAll, isLoading, countries.length]);
 
     if(isLoading || countries.length === 0){
         return(
@@ -52,10 +62,12 @@ export const Trips : FC = () =>{
                     about={headerAbout} parentCl="trips" isAll={[isAll, setIsAll]} 
                     isNeedButton={maxShow < items.length}
                 />
-                <div className="trips__items">
-                    {(isAll ? items : items.slice(0, maxShow)).map((trip, i) =>
-                        <Trip key={i} {...trip} country={countries[i] as string} />
-                    )}
+                <div className="trips__items" ref={containerEl}>
+                    <div className="trips__items-inner" ref={containerInnerEl}>
+                        {(isAll ? items : items.slice(0, maxShow)).map((trip, i) =>
+                            <Trip key={i} {...trip} country={countries[i] as string} />
+                        )}
+                    </div>
                 </div>
             </div>
         </section>

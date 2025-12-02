@@ -79,7 +79,7 @@ export const AccountHistory: FC<AccountHistoryProps> = ({tickets, bookings, plac
                     </h2>
                     <div className="history__select select-history select">
                         <Select 
-                            parentCl="select-history"
+                            parentCls={["select-history"]}
                             iconValue={{
                                 viewbox: {minX: 0, minY: 0, width: 15, height: 8.5}, width: 15, height: 8.5, pathes: [{
                                     fill: "unset", fillRule: FILL_RULE.nonzero, stroke: "#000000", strokeLinecap: STROKE_LINECAP.round, strokeLinejoin: STROKE_LINEJOIN.round, strokeWidth: "1.5", d: "M 0.75,0.75 7.5,7.5 14.25,0.75",

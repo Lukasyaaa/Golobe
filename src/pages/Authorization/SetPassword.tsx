@@ -18,7 +18,7 @@ export const SetPassword: FC = () => {
         placeholder: "7789BM6X@@H&$K_", subinput: "Re-enter Password", id: "confirm-pasword", 
         isCanHide: true, state: confirm, setState: setConfirm,
         validation: getInputValidation(INPUT_AUTHORIZATION_VALIDATION_TYPE.confirmPassword) as TwoDataInputValidation, 
-        anotherValue: password, icon: null
+        anotherValue: password, icon: null, isCheckDate: false
     }
 
     let [error, setError] = useState<string>("");
@@ -61,8 +61,8 @@ export const SetPassword: FC = () => {
                     <h1 className="set-password__heading authorization-part__heading">Set a password</h1>
                     <div className="set-password__description authorization-part__description">Your previous password has been reseted. Please set a new password for your account.</div>
                     <div className="set-password__fields authorization-part__fields">
-                        <Input about={passwordAbout} parentCls={["set-password", "authorization-part"]} isBigger={false} isInMassive={false}/>
-                        <Input about={confirmAbout} parentCls={["set-password", "authorization-part"]} isBigger={false} isInMassive={false} />
+                        <Input about={passwordAbout} parentCls={["set-password__field", "authorization-part__field"]} isBigger={false} isInMassive={false}/>
+                        <Input about={confirmAbout} parentCls={["set-password__field", "authorization-part__field"]} isBigger={false} isInMassive={false} />
                     </div>
                     {passwordAbout.validation(password) === "" && confirmAbout.validation(confirm, password) === ""
                         ? <NavLink 

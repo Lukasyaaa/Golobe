@@ -1,5 +1,6 @@
 import React, { type FC } from "react";
-import { addZero, getCurrentUser, type Card, type User } from "../../../types";
+import { addZero, type Card, type User } from "../../../types";
+import { useTypedSelector } from "../../../store";
 
 interface AccountPaymentMethodProps extends Card{
     id: number,
@@ -7,7 +8,7 @@ interface AccountPaymentMethodProps extends Card{
 }
 
 export const AccountPaymentMethod: FC<AccountPaymentMethodProps> = ({number, expDate, id, removeCard}) => {
-    const currentUser = getCurrentUser() as User;
+    const currentUser = useTypedSelector(state => state.user);
     const users = JSON.parse(localStorage.getItem("users") as string) as User[];
     return(
         <div className="payment__method method-payment">

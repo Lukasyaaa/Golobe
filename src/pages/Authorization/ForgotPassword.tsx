@@ -3,7 +3,7 @@ import { AuthorizationImages } from "../../components/Authorization/Images";
 import { NavLink } from "react-router-dom";
 import { startPath, verifyCodePath } from "../../App";
 import { AuthorizationVariants } from "../../components/Common/Blocks/AuthorizationVariants";
-import { FILL_RULE, INPUT_VALIDATIONS, STROKE_LINECAP, STROKE_LINEJOIN, type AuthorizationVariant } from "../../types";
+import { FILL_RULE, INPUT_VALIDATIONS, STROKE_LINECAP, STROKE_LINEJOIN, type AuthorizationVariant, type OneDataInputValidation } from "../../types";
 import { AuthorizationBack } from "../../components/Authorization/Back";
 import { Input, type InputAnother } from "../../components/Common/Blocks/Interaction/Input";
 
@@ -12,12 +12,12 @@ export const ForgotPassword: FC = () => {
     const emailAbout : InputAnother = {
         placeholder: "john.doe@gmail.com", subinput: "Email", id: "email", 
         isCanHide: false, state: email, setState: setEmail, 
-        validation: INPUT_VALIDATIONS.email, anotherValue: null,
+        validation: INPUT_VALIDATIONS.email as OneDataInputValidation, anotherValue: null,
         icon: null
     }
 
     let [error, setError] = useState<string>("");
-    const checkinInput = () => setError(INPUT_VALIDATIONS.email(email));
+    const checkinInput = () => setError(emailAbout.validation(email));
 
     const variants: AuthorizationVariant[] = useMemo(() => [
         {
@@ -93,7 +93,7 @@ export const ForgotPassword: FC = () => {
                     <AuthorizationBack parentCls={["forgot-password", "authorization-part"]} />
                     <h1 className="forgot-password__heading authorization-part__heading">Forgot your password?</h1>
                     <div className="forgot-password__description authorization-part__description">Don’t worry, happens to all of us. Enter your email below to recover your password</div>
-                    <Input about={emailAbout} parentCls={["forgot-password", "authorization-part"]} isBigger={false} isInMassive={false}/>
+                    <Input about={emailAbout} parentCls={["forgot-password__field", "authorization-part__field"]} isBigger={false} isInMassive={false}/>
                     {emailAbout.validation(emailAbout.state) === ""
                         ? <NavLink 
                             className="forgot-password__button authorization-part__button button_green" 

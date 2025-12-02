@@ -9,11 +9,13 @@ import { Location } from "../components/Hotels/Page/Location";
 import { Amenities } from "../components/Hotels/Page/Amenities";
 import { Reviews } from "../components/Hotels/Page/Reviews/Reviews";
 import { Introduction } from "../components/Common/Introduction";
+import { AddReview } from "../components/Hotels/Page/Reviews/AddReview";
 
 export const Hotel : FC = () => {
-    const {id} = useParams();
+    const {id, checkInCheckOut} = useParams();
     const dispatch = useAppDispatch();
-    const {items, isLoading, error} = useTypedSelector(state => state.hotels.catalog.container);
+    let {items, isLoading, error} = useTypedSelector(state => state.hotels.catalog.container);
+    const hotelsReviews = useTypedSelector(state => state.hotels.reviews);
 
     useEffect(() => {
         dispatch(fetchHotels());
@@ -24,18 +26,21 @@ export const Hotel : FC = () => {
         [items]
     );
 
-    let [location, setLocation] = useState<ShortLocation | null>(null);
+    let [location, setLocation] = useState<ShortLocation | null | undefined>(undefined);
     useEffect(() => {
         if (about !== null) {
             const fetchLocation = async () => {
-                const location = await getLocaitonByAddress(about.location.text);
+                //const location = await getLocaitonByAddress(about.location.text);
+                const location = { country: "Turkey", city: "Istanbul" };
                 setLocation(location);
             };
             fetchLocation();
         }
     }, [about]);
 
-    if(isLoading || location === null){
+    let [isOpened, setIsOpened] = useState<boolean>(false);
+
+    if(isLoading || location === undefined){
         return(
             <main className="flight-page">
                 <div className="container">
@@ -44,7 +49,7 @@ export const Hotel : FC = () => {
             </main>
         )
     } 
-    if(error !== null){
+    if(error !== null || location === null){
         return(
             <main className="flight-page">
                 <div className="container">
@@ -55,26 +60,45 @@ export const Hotel : FC = () => {
     }
 
     if(about !== null){
+        const currentHotelReviews = hotelsReviews.filter(r => r.hotelId === Number(about.id));
+        let realGrade : number | "Unset" = "Unset";
+        if(currentHotelReviews.length !== 0){
+            const grade = currentHotelReviews.reduce((sum, r) => sum += r.grade, 0) / currentHotelReviews.length;
+            realGrade = isNaN(grade) ? "Unset" : grade;
+        }
         return(
-            <main className="hotel-page">
+            <main className={["hotel-page", isOpened ? "_appear-modal" : ""].filter(Boolean).join(" ")}>
                 <Introduction 
-                    id={about.id} contentType={SITE_PARTS.stays} parentCls={["hotel-page__introduction", "hotel-page__section", "section-hotel-page"]}
+                    id={Number(about.id)} contentType={SITE_PARTS.stays} parentCls={["hotel-page__introduction", "hotel-page__section", "section-hotel-page"]}
                     heading={about.name} 
                     city={location.city} country={location.country} endPoint={about.location.text}
                     locationInfo={about.location.text} 
                     starsCount={about.starsCount} 
                     price={Math.min(...about.rooms.map(room => transformPrice(room.price)))} 
-                    shortReview={{countReviews: about.reviews.items.length, rating: about.rating}}
+                    shortReview={{
+                        countReviews: currentHotelReviews.length, 
+                        rating: realGrade
+                    }}
                     images={{isMassive: true, value: about.images}}
                 />
                 <Overview 
                     main={about.overview} features={about.features} 
-                    shortReview={{countReviews: about.reviews.items.length, rating: about.rating}}
+                    shortReview={{
+                        countReviews: currentHotelReviews.length, 
+                        rating: realGrade
+                    }}
                 />
-                <Rooms about={about.rooms} hotelId={Number(id)} />
+                <Rooms about={about.rooms} hotelId={Number(id)} checkInCheckOut={checkInCheckOut as string} />
                 <Location {...about.location} />
                 <Amenities {...about.amenities} />
-                <Reviews reviews={about.reviews} shortReview={{countReviews: about.reviews.items.length, rating: about.rating}} />
+                <Reviews 
+                    reviews={currentHotelReviews} 
+                    shortReview={{
+                        countReviews: currentHotelReviews.length, 
+                        rating: realGrade
+                    }} isOpened={[isOpened, setIsOpened]}
+                />
+                {isOpened && <AddReview isOpened={[isOpened, setIsOpened]} hotelId={Number(about.id)} />}
             </main>
         )
     } else{

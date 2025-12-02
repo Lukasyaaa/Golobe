@@ -5,7 +5,7 @@ import { useAppDispatch, useTypedSelector } from "../store";
 import { fetchFlights } from "../store/flights";
 import { fetchHotels } from "../store/hotels";
 import { useParams } from "react-router-dom";
-import { flightPath, hotelPath } from "../App";
+import { flightPath, flightsCatalogPath, hotelPath, hotelsCatalogPath } from "../App";
 import { Introduction } from "../components/Common/Booking/Introduction";
 import { Total } from "../components/Common/Booking/Total";
 import { AddCard } from "../components/Common/Blocks/AddCard";
@@ -40,8 +40,9 @@ interface Data{
 }
 
 export const Booking: FC<BookingProps> = ({contentType}) => {
-    const {id, options, seatsType, hotelId, roomId} = useParams(); 
+    const {id, options, seatsType, hotelId, roomId, checkInCheckOut} = useParams(); 
     let state; let realId: number = -1; let parentCl = "";
+    const hotelsReviews = useTypedSelector(state => state.hotels.reviews);
     if(contentType === SITE_PARTS.flights){
         state = useTypedSelector(state => state.flights.catalog);
         realId = Number(id); parentCl = "airline";
@@ -70,7 +71,7 @@ export const Booking: FC<BookingProps> = ({contentType}) => {
 
     let [isShowModal, setIsShowModal] = useState<boolean>(false);
 
-    let [data, setData] = useState<Data | null>(null);
+    let [data, setData] = useState<Data | null | undefined>(undefined);
     useEffect(() => {
         if (about !== null) {
             if(contentType === SITE_PARTS.stays){
@@ -95,7 +96,7 @@ export const Booking: FC<BookingProps> = ({contentType}) => {
 
     const users = JSON.parse(localStorage.getItem("users") as string) as User[];
     const info: About = useMemo(() => {
-        if(data === null || about === null){
+        if(data === null || data === undefined || about === null){
             return({
                 current: "",
                 image: {srcs: {webp: "", jpeg: ""}, alt: ""}, title: "", suptitle: "",
@@ -116,7 +117,7 @@ export const Booking: FC<BookingProps> = ({contentType}) => {
             
             const usedSeats = 
                 users.flatMap(u => u.tickets)
-                .filter(t => t.id === (about as Flight).id)
+                .filter(t => t.id === Number((about as Flight).id))
                 .filter(t => t.seatType === seatsType)
                 .map(t => t.seatNumber)
             ;
@@ -144,7 +145,7 @@ export const Booking: FC<BookingProps> = ({contentType}) => {
                 linkPath: flightPath + "/" + id + "/" + options + "/" + seatsType + "/Details",
                 linkOnClick: () => {
                     const newTicket: Ticket = {
-                        id: flight.id, seatType: seatsType as objType<typeof SEATS_TYPE>,
+                        id: Number(flight.id), seatType: seatsType as objType<typeof SEATS_TYPE>,
                         airline: flightPart.airline, gate: flightPart.gate, seatNumber: seatsNumber,
                         departDate: flightPart.departTime, arrayDate: flightPart.arrayTime,
                         from: flightPart.startPoint, to: flightEndPoint,
@@ -158,26 +159,35 @@ export const Booking: FC<BookingProps> = ({contentType}) => {
                 amenities: flightPart.amenities,
                 departDate: flightRoute + " " + getShortDayWeek(departDate.getDay()) + ", " + getMonth(departDate.getMonth()) + " " + departDate.getDate(), 
                 flyDuration: intToDuration(getDuration(departTime, arrayTime)),
-                start: {timeFunctionable: startTimeFunctionable, timeVisible: timeToString(departTime.units), description: (data.fromCity as string) + "(" + flightPart.startPoint + ")"}, 
-                end: {timeFunctionable: endTimeFunctionable, timeVisible: timeToString(arrayTime.units), description: data.city + "(" + flightEndPoint + ")"}
+                start: {timeFunctionable: startTimeFunctionable, timeVisible: timeToString(departTime.units), description: ((data as Data).fromCity as string) + "(" + flightPart.startPoint + ")"}, 
+                end: {timeFunctionable: endTimeFunctionable, timeVisible: timeToString(arrayTime.units), description: (data as Data).city + "(" + flightEndPoint + ")"}
             })
         }
         const hotel = about as Hotel;
         const room = hotel.rooms[Number(roomId) - 1];
 
-        const checkInDate = new Date();
+        const today = new Date();
+        const [checkIn, checkOut] = checkInCheckOut as string;
+        const [checkInMonth, checkInDay] = checkIn;
+        const [checkOutMonth, checkOutDay] = checkOut;
+
+        const checkInDate = new Date(today.getFullYear(), parseInt(checkInMonth) - 1, parseInt(checkInDay));
         const startTimeVisble = getDayWeek(checkInDate.getDay()) + ", " + getMonth(checkInDate.getMonth()) + " " + checkInDate.getDate();
         const startTimeFunctionable = checkInDate.getFullYear() + "-" + addZero(checkInDate.getMonth()) + "-" + addZero(checkInDate.getDate());
 
-        const checkOutDate = new Date(checkInDate.getTime() + 24*60*60*1000);
+        const checkOutDate = new Date(today.getFullYear(), parseInt(checkOutMonth) - 1, parseInt(checkOutDay));
         const endTimeVisible = getDayWeek(checkOutDate.getDay()) + ", " + getMonth(checkOutDate.getMonth()) + " " + checkOutDate.getDate();
         const endTimeFunctionable = checkOutDate.getFullYear() + "-" + addZero(checkOutDate.getMonth()) + "-" + addZero(checkOutDate.getDate());
+        
+        const hotelReviews = hotelsReviews.filter(r => r.hotelId === Number(about.id));
+        const grade = hotelsReviews.reduce((sum, r) => sum += r.grade, 0) / hotelReviews.length;
+        const realGrade = isNaN(grade) ? "Unset" : grade;
         return({
             current: hotel.name,
             image: hotel.images.main, 
             title: getRoomInfo(room.beds, room.specifics), 
             suptitle: hotel.name,
-            shortReview: {countReviews: hotel.reviews.items.length, rating: hotel.rating}, 
+            shortReview: { countReviews: hotelReviews.length,rating: realGrade }, 
             priceDetails: room.price,
             heading: getRoomInfo(room.beds, room.specifics), 
             price: transformPrice(room.price),
@@ -186,7 +196,7 @@ export const Booking: FC<BookingProps> = ({contentType}) => {
             linkPath: hotelPath + "/" + hotelId + "/Rooms/" + roomId + "/Details",
             linkOnClick: () => {
                 const newBooking: BookingHotel = {
-                    id: hotel.id,
+                    id: Number(hotel.id),
                     hotelLogo: {srcs: hotel.logo, alt: hotel.name}, 
                     checkInDate: {
                         day: checkInDate.getDate(), month: checkInDate.getMonth() + 1, year: checkInDate.getFullYear(),
@@ -217,7 +227,7 @@ export const Booking: FC<BookingProps> = ({contentType}) => {
         })
     }, [data, about])
 
-    if(isLoading || data === null){
+    if(isLoading || data === undefined){
         return(
             <main className={[parentCl, "booking"].join(" ")}>
                 <div className="container">
@@ -226,7 +236,7 @@ export const Booking: FC<BookingProps> = ({contentType}) => {
             </main>
         )
     } 
-    if(error !== null){
+    if(error !== null || data === null){
         return(
             <main className={[parentCl, "booking"].join(" ")}>
                 <div className="container">
@@ -246,13 +256,20 @@ export const Booking: FC<BookingProps> = ({contentType}) => {
             current: copyCurrent, ...introduction
         } = info;
 
+        const neededCountryPath = (contentType === SITE_PARTS.flights) 
+            ? flightsCatalogPath + "/" + data.country.replaceAll(" ", "-") + "/" + options
+            : hotelsCatalogPath + "/" + data.country.replaceAll(" ", "-") + "/1-Room+2-Guests";
+        const neededCityPath = (contentType === SITE_PARTS.flights) 
+            ? flightsCatalogPath + "/" + data.city.replaceAll(" ", "-") + "/" + options
+            : hotelsCatalogPath + "/" + data.city.replaceAll(" ", "-") + "/1-Room+2-Guests";
+
         return(
             <main className={[parentCl, "booking", isShowModal ? "_appear-modal" : ""].join(" ")}>
                 <div className="container_booking">
                     <Breadcrumbs 
                         parentCl={[parentCl, "booking"]} current={current} links={[
-                            {description: data.city, path: "#"}, 
-                            {description: data.country, path: "#"}
+                            {description: data.country, path: neededCountryPath},
+                            {description: data.city, path: neededCityPath}, 
                         ]} 
                     />
                     <div className="booking__row">
@@ -260,7 +277,7 @@ export const Booking: FC<BookingProps> = ({contentType}) => {
                             <Introduction {...introduction} parentCl={parentCl} contentType={contentType} isAuthorized={(currentUser.name.firstName !== "")} />
                             <Payment />
                             {(currentUser.name.firstName !== "") 
-                                ? <Cards isOpened={[isShowModal, setIsShowModal]} /> : <Authorization /> 
+                                ? <Cards isOpened={[isShowModal, setIsShowModal]} about={currentUser.cards} /> : <Authorization /> 
                             }
                         </div>
                         <Total {...total}/>

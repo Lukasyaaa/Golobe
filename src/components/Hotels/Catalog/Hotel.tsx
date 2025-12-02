@@ -1,5 +1,5 @@
 import React, { type FC } from "react";
-import { SITE_PARTS, transformPrice, type Hotel as HotelType, type User } from "../../../types";
+import { SITE_PARTS, transformPrice, type HotelReview, type Hotel as HotelType, type User } from "../../../types";
 import { ShortReview } from "../../Common/Blocks/ShortReview";
 import { NavLink } from "react-router-dom";
 import { hotelPath } from "../../../App";
@@ -11,13 +11,17 @@ import { Location } from "../../Common/Blocks/Location";
 interface HotelProps{
     about: HotelType
     currentUser: User
-    isInFavourites: boolean
+    isInFavourites: boolean,
+    hotelsReviews: HotelReview[],
+    checkInCheckOut: string
 }
 export const Hotel : FC<HotelProps> = ({
-   about, currentUser, isInFavourites
+   about, currentUser, isInFavourites, hotelsReviews, checkInCheckOut
 }) => {
-    const { id, name, rating, location, amenities, images, reviews, starsCount, rooms } = about
+    const { id, name, location, amenities, images, starsCount, rooms } = about;
     const favouritesInfo = useFavourites(isInFavourites, id, currentUser, SITE_PARTS.stays);
+    const grade = hotelsReviews.reduce((sum, r) => sum += r.grade, 0) / hotelsReviews.length;
+    const realGrade = isNaN(grade) ? "Unset" : grade;
     return(
         <article className="hotel">
             <div className="hotel__image-parent">
@@ -48,7 +52,10 @@ export const Hotel : FC<HotelProps> = ({
                                 </span>
                             </div>
                         </div>
-                        <ShortReview about={{rating: rating, countReviews: reviews.items.length}} parentCls={["hotel"]} />
+                        <ShortReview 
+                            about={{rating: realGrade, countReviews: hotelsReviews.length}} 
+                            parentCls={["hotel"]} 
+                        />
                     </div>
                     <div className="hotel__price">
                         <span>starting from</span><mark><strong>${Math.min(...rooms.map(room => transformPrice(room.price)))}</strong>/night</mark><span>excl. tax</span>
@@ -63,7 +70,14 @@ export const Hotel : FC<HotelProps> = ({
                             pathes: [favouritesInfo.heartPath]
                         }} 
                     />
-                    <NavLink className="hotel__link button_green" to={`${hotelPath}/${Number(id)+1}`}>View Place</NavLink>
+                    {checkInCheckOut !== "" ? <NavLink 
+                        className="hotel__link button_green" 
+                        to={`${hotelPath}/${id+1}/${checkInCheckOut}`}
+                    >
+                        View Place
+                    </NavLink>
+                    : <div className="hotel__link button_green _disabled">View Place</div>
+                    }
                 </div>
             </div>
         </article>

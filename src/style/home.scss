@@ -134,13 +134,17 @@
         }
     }
 
+    &__items{
+        transition: height 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+    }
+
     @media (min-width: variables.toEm(769, 16)) {
-        &__items{
+        &__items-inner{
             display: grid; gap: variables.toRem(32);
             grid-template-columns: repeat(3, 1fr);
         }
         @media (max-width: variables.toEm(992, 16)) {
-            &__items{
+            &__items-inner{
                 gap: variables.toRem(24);
                 grid-template-columns: repeat(2, 1fr);
             }

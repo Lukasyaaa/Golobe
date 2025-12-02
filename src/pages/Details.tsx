@@ -3,15 +3,16 @@ import { Introduction } from "../components/Common/Details/Introduction";
 import { useParams } from "react-router-dom";
 import { useAppDispatch, useTypedSelector } from "../store";
 import { fetchFlights } from "../store/flights";
-import { addZero, FILL_RULE, getAirportByIATA, getDayWeek, getDuration, getFromToIATA, getLocaitonByAddress, getMonth, getSeatsGroup, intToDuration, SEATS_TYPE, SITE_PARTS, STROKE_LINECAP, STROKE_LINEJOIN, timeToInt, timeToString, transformPrice, type Fact, type Flight, type Hotel, type Image, type objType, type ScheduleParts, type ScheduleSingle } from "../types";
+import { addZero, FILL_RULE, getAirportByIATA, getDayWeek, getDuration, getFromToIATA, getLocaitonByAddress, getMonth, getSeatsGroup, intToDuration, SEATS_TYPE, SITE_PARTS, STROKE_LINECAP, STROKE_LINEJOIN, timeToInt, timeToString, transformPrice, type Fact, type Flight, type Hotel, type Image, type Link, type objType, type ScheduleParts, type ScheduleSingle } from "../types";
 import { Terms } from "../components/Common/Details/Terms";
 import { fetchHotels } from "../store/hotels";
 import { useSchedulePart } from "../hooks/useSchedulePart";
 import { Ticket } from "../components/Common/Details/Ticket";
+import { flightsCatalogPath, hotelsCatalogPath } from "../App";
 
 
 interface About{
-    locationMas: string[], locationText: string, current: string, heading: string, price: number,
+    locationMas: Link[], locationText: string, current: string, heading: string, price: number,
     startString: string, startDescription: string, startDate: string,
     endString: string, endDescription: string, endDate: string,
     serviceDescription: string,
@@ -29,7 +30,7 @@ interface DetailsProps{
     contentType: objType<typeof SITE_PARTS>
 }
 export const Details : FC<DetailsProps> = ({contentType}) => {
-    const {id, options, seatsType, hotelId, roomId} = useParams();    
+    const {id, options, seatsType, hotelId, roomId, checkInCheckOut} = useParams();    
     let state; let realId: number = -1;
     if(contentType === SITE_PARTS.flights){
         state = useTypedSelector(state => state.flights.catalog);
@@ -41,11 +42,8 @@ export const Details : FC<DetailsProps> = ({contentType}) => {
 
     const dispatch = useAppDispatch();
     useEffect(() => {
-        if(contentType === SITE_PARTS.flights){
-            dispatch(fetchFlights());
-        } else{
-            dispatch(fetchHotels());
-        }
+        if(contentType === SITE_PARTS.flights) dispatch(fetchFlights());
+        else dispatch(fetchHotels());
     }, [dispatch]);
     const {container} = state;
     const {isLoading, error, items} = container;
@@ -55,7 +53,7 @@ export const Details : FC<DetailsProps> = ({contentType}) => {
         [state]
     );
 
-    let [data, setData] = useState<Data | null>(null);
+    let [data, setData] = useState<Data | null | undefined>(undefined);
     useEffect(() => {
         if (about !== null) {
             if(contentType === SITE_PARTS.stays){
@@ -81,7 +79,7 @@ export const Details : FC<DetailsProps> = ({contentType}) => {
         }
     }, [about]);
 
-    if(isLoading || data === null){
+    if(isLoading || data === null || data === undefined){
         return(
             <main className="details">
                 <div className="container">
@@ -112,8 +110,13 @@ export const Details : FC<DetailsProps> = ({contentType}) => {
         if(contentType === SITE_PARTS.flights){
             const {flightEndPlace, flightEndPoint, flightPart} = useSchedulePart(String(options), about as Flight);
             
+            const neededCountryPath = flightsCatalogPath + "/" + data.country.replaceAll(" ", "-") + "/" + options;
+            const neededCityPath = flightsCatalogPath + "/" +data.city.replaceAll(" ", "-") + "/" + options;
             info = {
-                locationMas: [data.city, data.country],
+                locationMas: [
+                    {description: data.country, path: neededCountryPath},
+                    {description: data.city, path: neededCityPath}
+                ],
                 locationText: data.fromAddress as string,
                 current: data.toAirport as string,
                 heading: flightPart.airline + " " + flightPart.plane,
@@ -163,14 +166,25 @@ export const Details : FC<DetailsProps> = ({contentType}) => {
             const hotel = about as Hotel;
             const room = hotel.rooms[Number(roomId) - 1];
 
-            const checkOutDate = new Date(2025, 10, 28);
-            const checkInDate = new Date(2025, 10, 25);
+        const today = new Date();
+        const [checkIn, checkOut] = checkInCheckOut as string;
+        const [checkInMonth, checkInDay] = checkIn;
+        const checkInDate = new Date(today.getFullYear(), parseInt(checkInMonth) - 1, parseInt(checkInDay));
+
+        const [checkOutMonth, checkOutDay] = checkOut;
+        const checkOutDate = new Date(today.getFullYear(), parseInt(checkOutMonth) - 1, parseInt(checkOutDay));
 
             const doubleBeds = room.beds.double + " double bed" + ((room.beds.double > 1) ? "s" : "");
             const twinBeds = room.beds.twin + " twin bed" + ((room.beds.twin > 1) ? "s" : "");
             const bedsString = [doubleBeds, twinBeds].filter(beds => !beds.includes("0")).join(" or ");
+
+            const neededCountryPath = hotelsCatalogPath + "/" + data.country.replaceAll(" ", "-") + "/1-Room+2-Guests";
+            const neededCityPath = hotelsCatalogPath + "/" + data.city.replaceAll(" ", "-") + "/1-Room+2-Guests";
             info = {
-                locationMas: [data.city, data.country],
+                locationMas: [
+                    {description: data.country, path: neededCountryPath},
+                    {description: data.city, path: neededCityPath}
+                ],
                 locationText: hotel.location.text,
                 current: hotel.name,
                 heading: hotel.name,

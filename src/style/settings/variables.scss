@@ -348,6 +348,10 @@ main:not(.home):not(.flights):not(.hotels):not(.authorization-page):not(.forgot-
         }
     }
     
+    &__items{
+        transition: height 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+    }
+
     &__item:not(:last-child){
         margin-bottom: toRem(32);
     }
@@ -935,7 +939,8 @@ main:not(.home):not(.flights):not(.hotels):not(.authorization-page):not(.forgot-
 
     transition: color 0.3s cubic-bezier(0.215, 0.610, 0.355, 1),
     text-shadow 0.3s cubic-bezier(0.215, 0.610, 0.355, 1),
-    background-color 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+    background-color 0.3s cubic-bezier(0.215, 0.610, 0.355, 1),
+    opacity 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
 }
 .button_green:disabled{ opacity: 0.5; }
 label.button_green:not(:disabled):hover, button.button_green:not(:disabled):hover, 
@@ -2469,7 +2474,7 @@ div.authorization-booking__continue{
     }
 }
 /*------ADD-CARD------*/
-.booking, .account{
+.booking, .account, .hotel-page{
     &::after{
         content: ""; background-color: rgba($color: #000, $alpha: 0.5);
         position: fixed; z-index: 9; left: 0; top: 0;
@@ -2551,7 +2556,7 @@ div.authorization-booking__continue{
         font-size: toRem(12); line-height: toEm(15, 12);
     }
 }
-main._appear-modal .add-card{
+main._appear-modal .modal{
     transform: translateX(-50%) translateY(-50%) scale(1);
 }
 .select-add-card__opener{
@@ -2603,7 +2608,7 @@ main._appear-modal .add-card{
         margin-left: toRem(8);
     }
 }
-//
+
 .loading, .error, .error-message{
     color: #000;
     font-family: "TradeGothic"; font-weight: 700;

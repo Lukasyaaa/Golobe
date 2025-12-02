@@ -1,4 +1,4 @@
-import React, { useEffect, useState, type FC } from "react"
+import React, { useEffect, useRef, useState, type FC } from "react"
 import { SectionHeader } from "../../Blocks/SectionHeader"
 import { useAppDispatch } from "../../../../store";
 import { fetchOffers as fetchOffersFlights } from "../../../../store/flights";
@@ -21,6 +21,16 @@ export const Offers : FC<OffersProps> = ({header, items, isLoading, error, maxSh
             dispatch(fetchOffersHotels());
         }
     }, [dispatch]);
+
+    let containerEl = useRef<HTMLDivElement>(null);
+    let containerInnerEl = useRef<HTMLDivElement>(null);
+    useEffect(() => {
+        let containerHTML = containerEl.current;
+        let containerInnerHTML = containerInnerEl.current;
+        if(containerHTML && containerInnerHTML){
+            containerHTML.style.height = containerInnerHTML.offsetHeight + "px"
+        }
+    }, [isAll, isLoading]);
 
     if(isLoading){
         return(
@@ -48,10 +58,12 @@ export const Offers : FC<OffersProps> = ({header, items, isLoading, error, maxSh
                     about={header} parentCl="offers" isAll={[isAll, setIsAll]} 
                     isNeedButton={maxShow < items.length}
                 />
-                <div className="offers__items">
-                    {(isAll ? items : items.slice(0, maxShow)).map((offer, i) =>
-                        <Offer key={i} {...offer} />
-                    )}
+                <div className="offers__items" ref={containerEl}>
+                    <div className="offers__items-inner" ref={containerInnerEl}>
+                        {(isAll ? items : items.slice(0, maxShow)).map((offer, i) =>
+                            <Offer key={i} {...offer} />
+                        )}
+                    </div>
                 </div>
             </div>
         </section>

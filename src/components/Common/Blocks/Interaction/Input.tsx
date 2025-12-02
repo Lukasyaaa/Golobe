@@ -1,18 +1,25 @@
-import React, { Fragment, useEffect, useState, type FC } from "react";
+import React, { Fragment, useEffect, useRef, useState, type FC } from "react";
 import { ICON_POSITION, transformIconViewbox} from "../../../../types";
-import type { OneDataInputValidation, TwoDataInputValidation, Icon } from "../../../../types";
+import type { OneDataInputValidation, TwoDataInputValidation, Icon, CheckDateInputValidation } from "../../../../types";
 
+export interface InputCheckDate{
+    id: string, subinput: string | undefined, placeholder: string, icon: null | Icon,
+    isCanHide: boolean, state: string, setState: (newValue: string) => void, 
+    validation: CheckDateInputValidation, anotherValue: string, isCheckDate: true, 
+    isInDate: boolean,
+}
 export interface InputConfirm{
     id: string, subinput: string | undefined, placeholder: string, icon: null | Icon,
     isCanHide: boolean, state: string, setState: (newValue: string) => void, 
     validation: TwoDataInputValidation, anotherValue: string,
+    isCheckDate: false
 }
 export interface InputAnother{
     id: string, subinput: string | undefined, placeholder: string, icon: null | Icon,
     isCanHide: boolean, state: string, setState: (newValue: string) => void, 
     validation: OneDataInputValidation, anotherValue: null,
 }
-type AuthorizationInputValue = InputConfirm | InputAnother;
+type AuthorizationInputValue = InputConfirm | InputAnother | InputCheckDate;
 
 interface InputProps{
     about: AuthorizationInputValue,
@@ -29,11 +36,21 @@ export const Input: FC<InputProps> = ({about, parentCls, isInMassive, isBigger})
     const {id, subinput, placeholder, isCanHide, state, setState, validation, anotherValue, icon} = about;
     let [isShow, setIsShow] = useState<boolean>(!isCanHide);
     
+    const nullError = () => {setError(""); setIsGood(false)};
     const makeValidation = () => {
-        const validationResults = (anotherValue !== null) ? validation(state, anotherValue) : validation(state);
+        const validationResults = (anotherValue !== null) 
+            ? ((about.isCheckDate)
+                ? validation(state, anotherValue, about.isInDate) 
+                : (validation as TwoDataInputValidation)(state, anotherValue))
+            : validation(state)
+        ;
         setError(validationResults); setIsGood(validationResults === "");
     }
-    const nullError = () => {setError(""); setIsGood(false)};
+    useEffect(() => {
+        if(anotherValue !== null && about.isCheckDate && error !== ""){
+            makeValidation();
+        }
+    }, [anotherValue]);
 
     let [isHovered, setIsHovered] = useState<boolean>(false);
     const makeHovered = () => setIsHovered(true);
@@ -70,10 +87,15 @@ export const Input: FC<InputProps> = ({about, parentCls, isInMassive, isBigger})
     }
 
     const iconClass = (icon !== null) ? "have-icon " + ((icon.pos === ICON_POSITION.left) ? "left" : "right") : "";
+    let innerCls = parentCls.map(cl => {
+        const splitted = cl.split("__");
+        if(splitted.length > 1) return splitted[1] + "-" + splitted[0];
+        return cl;
+    })
     return(
         <div 
             className={[
-                ...parentCls.map(cl => cl + "__field"), ...parentCls.map(cl => "field-" + cl),
+                ...parentCls, ...innerCls,
                 "field", iconClass, isInMassive ? "in-massive" : "", 
                 (isCanHide) ? "password" : "", error !== "" ? "_error" : "", isGood ? "_good" : "",
                 isBigger ? "bigger" : "",
@@ -82,14 +104,14 @@ export const Input: FC<InputProps> = ({about, parentCls, isInMassive, isBigger})
             ].filter(Boolean).join(" ")}
         >
             {subinput !== undefined && <label 
-                    className={[...parentCls.map(cl => "field-" + cl + "__subinput"), "field__subinput"].join(" ")} 
+                    className={[...innerCls.map(cl => cl + "__subinput"), "field__subinput"].join(" ")} 
                     htmlFor={id}
                 >
                     {subinput}
                 </label>
             }
             <input 
-                className={[...parentCls.map(cl => "field-" + cl + "__input"), "field__input"].join(" ")} 
+                className={[...innerCls.map(cl => cl + "__input"), "field__input"].join(" ")} 
                 id={id} type={isShow ? "text" : "password"} placeholder={placeholder}
                 value={state} onInput={(e) => setState(e.currentTarget.value)}
                 onBlur={() => { makeValidation(); unMakeHovered(); }} 
@@ -98,13 +120,13 @@ export const Input: FC<InputProps> = ({about, parentCls, isInMassive, isBigger})
             />
             <div 
                 className={[
-                    ...parentCls.map(cl => "field-" + cl + "__error-icon"), "field__error-icon",
-                    ...parentCls.map(cl => "error-icon-field-" + cl), "error-icon-field"
+                    ...innerCls.map(cl => cl + "__error-icon"), "field__error-icon",
+                    ...innerCls.map(cl => "error-icon-" + cl), "error-icon-field"
                 ].join(" ")}
             >
                 <svg 
                     className={[
-                        ...parentCls.map(cl => "error-icon-field-" + cl + "__icon").join(" "), "error-icon-field__icon"
+                        ...innerCls.map(cl => "error-icon-" + cl).join(" "), "error-icon-field__icon"
                     ].join(" ")} 
                     viewBox="0 0 19.5 19.5" width="19.500000" height="19.500000" fill="none"
                 >
@@ -114,14 +136,14 @@ export const Input: FC<InputProps> = ({about, parentCls, isInMassive, isBigger})
             {HideButton}
             {icon !== null &&
                 <div 
-                    className={[...parentCls.map(cl => "field-" + cl + "__icon-parent"), "field__icon-parent"].join(" ")}
+                    className={[...innerCls.map(cl => cl + "__icon-parent"), "field__icon-parent"].join(" ")}
                     >
-                    <svg className="fieldset-options__icon" width={icon.value.width} height={icon.value.height} viewBox={transformIconViewbox(icon.value.viewbox)} fill="none">
+                    <svg className={[...innerCls.map(cl => cl + "__icon")].join(" ")} width={icon.value.width} height={icon.value.height} viewBox={transformIconViewbox(icon.value.viewbox)} fill="none">
                         {icon.value.pathes.map((path, i) => <path key={i} {...path} />)}
                     </svg>
                 </div>
             }
-            <output className={[...parentCls.map(cl => "field-" + cl + "__error"), "field__error"].join(" ")}>
+            <output className={[...innerCls.map(cl => cl + "__error"), "field__error"].join(" ")}>
                 {error}
             </output>
         </div>

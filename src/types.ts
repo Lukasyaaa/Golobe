@@ -3,7 +3,7 @@ import type { Dispatch, SetStateAction } from "react";
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import airports from "../airports.json";
 
-//----Common----
+/*------------COMMON------------*/
 export type useStateReturned<T> = [T, Dispatch<SetStateAction<T>>]
 export type objType<T> = T[keyof T];
 export const createFetchThunk = <T>(typePrefix: string, endPoint: string) => {
@@ -23,21 +23,25 @@ export interface SiteSeparation<T>{
     hotelsPart: T
 }
 
-export const getGrade = (rating: number) => {
+/*------GRADE------*/
+export const getGrade = (rating: number | "Unset") => {
+    if(rating === "Unset") return "Unset";
     if(rating > 4) return "Very Good";
     if(rating > 3) return "Good";
     if(rating > 2) return "Normal";
     if(rating > 1) return "Bad";
     return "Very Bad";
 }
-export const getRating = (rating: number) => {
+export const getRating = (rating: number | "Unset") => {
+    if(rating === "Unset") return "Unset";
     return rating + ((Math.ceil(rating) === Math.floor(rating)) ? ".0" : "")
 }
 export interface ShortReview{
-    rating : number,
+    rating : number | "Unset",
     countReviews : number
 }
 
+/*------ICON------*/
 export const FILL_RULE = {
     nonzero: "nonzero",
     evenodd: "evenodd",
@@ -74,12 +78,17 @@ export interface IconParams{
 export const transformIconViewbox = ({minX, minY, width, height}: IconViewbox) : string => 
     minX + " " + minY + " " + width + " " + height;
 
+export const ICON_POSITION = {
+    left: "LEFT",
+    right: "RIGHT"
+} as const;
 
-export interface Person{
-    firstName: string,
-    lastName: string
+export interface Icon{
+    pos: objType<typeof ICON_POSITION>,
+    value: IconParams
 }
 
+/*------SECTION------*/
 export interface ButtonTwoStates{
     active: string,
     disable: string
@@ -102,6 +111,7 @@ export interface SectionWithHeader<T>{
     header: DefaultBlock<ButtonTwoStates>
 }
 
+/*------IMAGE------*/
 export interface Srcs{
     webp: string,
     jpeg: string
@@ -111,11 +121,28 @@ export interface Image{
     alt: string
 }
 
+//--------ADD_CARD--------
+export const ADD_CARD_ICON_VALUE = {
+    visa: "Visa",
+} as const;
+
+export const ADD_CARD_TITLE_FIELD = {
+    cardNumber: "Card Number",
+    expDate: "Exp. Date",
+    cvc: "CVC",
+    name: "Name on Card",
+} as const;
+export const ADD_CARD_TITLE_SELECT = {
+    country: "Country or Region"
+} as const;
+
+/*------LINK------*/
 export interface Link<T = string>{
     description: T,
     path: string
 }
 
+/*------TIME------*/
 export const MERIDIEM = {
     am: "AM",
     pm: "PM"
@@ -123,13 +150,13 @@ export const MERIDIEM = {
 interface Units{
     hour: number, min: number, meridiem: objType<typeof MERIDIEM>
 }
+export interface DateType{
+    day: number, month: number, year: number
+}
 export interface Time{
     day: number, month: number, year: number, units: Units
 }
 
-export interface DateType{
-    day: number, month: number, year: number
-}
 export const dateToString = ({day, month, year}: DateType) : string => {
     return addZero(day) + "-" + addZero(month) + "-" + year
 }
@@ -174,7 +201,6 @@ export const getMonth = (about: number) : string => {
         default: return "Error Month";
     }
 }
-
 export const intToDuration = (numb : number) : string => {
     const days = Math.floor(numb / (60*24));
     const hours = Math.floor((numb - days*60*24) / 60);
@@ -185,12 +211,6 @@ export const intToDuration = (numb : number) : string => {
     })
     return result.join(" ") + " " + min + "m";
 }
-export const intToTime = (numb: number): Units => {
-    const meridiem: objType<typeof MERIDIEM> = (numb >= 720 && numb !== 1440) ? MERIDIEM.pm : MERIDIEM.am;
-    const hour: number = Math.floor(numb / 60) % 12 || 12;
-    const min: number = numb % 60;
-    return {hour, min, meridiem}
-}
 export const getDuration = (depart: Time, array: Time) => {
     const departPlus12 = 12 * Number(depart.units.meridiem === MERIDIEM.pm);
     const departMinus12 = 12 * Number(depart.units.meridiem === MERIDIEM.am && depart.units.hour === 12);
@@ -199,51 +219,35 @@ export const getDuration = (depart: Time, array: Time) => {
     const arrayDate = new Date(array.year, array.month - 1, array.day, array.units.hour + arrayPlus12, array.units.min)
     return (arrayDate.getTime() - departDate.getTime()) / (1000 * 60);
 }
-export const timeToInt = (time: Units, isToBigger: boolean): number => {
-    const min = time.min;
-    const plus12 = 12 * 60 * Number(time.meridiem === MERIDIEM.pm || isToBigger ? time.hour === 12 : false);
-    const hour = time.hour * 60 * Number(time.meridiem === MERIDIEM.pm || time.hour !== 12) + plus12;
-    return hour + min;
+export const intToTime = (numb: number): Units => {
+    const meridiem: objType<typeof MERIDIEM> = (numb >= 720 && numb !== 1440) ? MERIDIEM.pm : MERIDIEM.am;
+    const hour: number = Math.floor(numb / 60) % 12 || 12;
+    const min: number = numb % 60;
+    return {hour, min, meridiem}
+}
+export const timeToInt = ({hour, min, meridiem}: Units, isToBigger: boolean): number => {
+    const plus12 = 12 * 60 * Number(meridiem === MERIDIEM.pm || isToBigger ? hour === 12 : false);
+    const hourValue = hour * 60 * Number(meridiem === MERIDIEM.pm || hour !== 12) + plus12;
+    return hourValue + min;
 }
 export const addZero = (numb : number) => {
     return (numb >= 10) ? numb : "0" + numb;
 }
-export const timeToString = (time : Units): string => {
-    return addZero(time.hour) + ":" + addZero(time.min) + " " + time.meridiem.toLowerCase();
+export const timeToString = ({hour, min, meridiem} : Units): string => {
+    return addZero(hour) + ":" + addZero(min) + " " + meridiem.toLowerCase();
 }
-export const timeTo24String = (time : Units): string => {
-    return addZero(time.hour + 12 * Number(time.meridiem === MERIDIEM.pm)) + ":" + addZero(time.min);
-}
-
-export const getFromToIATA = (options: string, about: Flight) : [string, string] => {
-    if(String(options).split("-").length !== 1){
-        return [String(options).split("-")[0], String(options).split("-")[1]];
-    } else {
-        if(options === "On-Way"){
-            return [
-                (about.schedule as ScheduleSingle).startPoint, 
-                (about.schedule as ScheduleSingle).endPoint
-            ];
-        } else if(options === "Return"){
-            return [
-                (about.schedule as ScheduleParts).to.startPoint, 
-                (about.schedule as ScheduleParts).from.startPoint
-            ];
-        } else {
-            return [
-                (about.schedule as ScheduleParts).from.startPoint, 
-                (about.schedule as ScheduleParts).to.startPoint
-            ];
-        }
-    }
+export const timeTo24String = ({hour, min, meridiem} : Units): string => {
+    return addZero(hour + 12 * Number(meridiem === MERIDIEM.pm)) + ":" + addZero(min);
 }
 
+/*------FACT------*/
 export interface Fact{
     description: string,
     value: string,
     iconValue: IconParams
 }
 
+/*------INPUT------*/
 export const INPUT_TYPE = {
     field: "FIELD",
     select: "SELECT"
@@ -272,30 +276,40 @@ export const MONTHS: Record<string, number> = {
 export type TwoDataInputValidation = (value: string, anotherValue: string) => string;
 export type OneDataInputValidation = (value: string) => string;
 export type UniqueEmailInputValidation = (value: string, anotherEmails: string[]) => string;
-export type InputValidation = TwoDataInputValidation | OneDataInputValidation | UniqueEmailInputValidation;
-interface InputValidations{
-    email: OneDataInputValidation, uniqueEmail: UniqueEmailInputValidation,
-    password: OneDataInputValidation,
-    partName: OneDataInputValidation, fullName: OneDataInputValidation,
-    phone: OneDataInputValidation, confirmPassword: TwoDataInputValidation,
-    date: OneDataInputValidation, address: OneDataInputValidation
-    cardNumber: OneDataInputValidation, cvc: OneDataInputValidation,
-    expDate: OneDataInputValidation,
-    checkDate: OneDataInputValidation, checkOutDate: TwoDataInputValidation,
-    fromTo: OneDataInputValidation,
-    returnDepart: OneDataInputValidation, passengerClass: OneDataInputValidation
-    destination: OneDataInputValidation,
+export type CheckDateInputValidation = (value: string, anotherValue: string, isInDate: boolean) => string
+export type InputValidation = 
+    TwoDataInputValidation | OneDataInputValidation | 
+    UniqueEmailInputValidation | CheckDateInputValidation
+;
+const checkDate = (value: string) => {
+    if(value.length === 0) return "Fill Field";
+    const regex = /^(Mon|Tue|Wed|Thu|Fri|Sat|Sun)\s(1[0-2]|[1-9])\/(3[01]|[12][0-9]|[1-9])$/;
+    if(!regex.test(value)) return "Incorrect Input";
+
+    const [, weekday, monthStr, dayStr] = value.match(regex)!;
+    const month = Number(monthStr); 
+    const day = Number(dayStr);
+    
+    const today = new Date(); 
+    const checkedDate = new Date(today.getFullYear(), month - 1, day);
+
+    const weekdayIndex = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    const realWeekday = weekdayIndex[checkedDate.getDay()];
+    /*Если Пользователь ввел некорректную Дату, например: 30.02.2026*/
+    if(checkedDate.getMonth() + 1 !== month || checkedDate.getDate() !== day || realWeekday !== weekday) return "Incorrect Date";
+    return "";
 }
-export const INPUT_VALIDATIONS: InputValidations = {
+export const INPUT_VALIDATIONS: Record<string, InputValidation> = {
     email: (value: string) => {
         if(value.length === 0) return "Fill field";  
         if(!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value)) return "Incorrect Input"; 
         return "";
     },
     uniqueEmail: (value: string, anotherEmails: string[]) => {
-        if(INPUT_VALIDATIONS.email(value) !== "") return INPUT_VALIDATIONS.email(value);
+        const emailValidation = INPUT_VALIDATIONS.email as OneDataInputValidation;
+        if(emailValidation(value) !== "") return emailValidation(value);
         if(anotherEmails.includes(value)) return "Already exist this Email";
-        return ""
+        return "";
     },
     password: (value: string) => {
         if(value.length === 0) return "Fill field"; 
@@ -356,35 +370,26 @@ export const INPUT_VALIDATIONS: InputValidations = {
         if(inputedDate < today) return "Incorrect Date";
         return "";
     },
-    checkDate: (value: string) => {
-        if(value.length === 0) return "";
+    checkDate: (value: string, anotherValue: string, isInDate: boolean) => {
+        if(checkDate(value) !== "") return checkDate(value);
+        if(checkDate(anotherValue) !== "") return checkDate(anotherValue) + " in Another Input";
+    
         const regex = /^(Mon|Tue|Wed|Thu|Fri|Sat|Sun)\s(1[0-2]|[1-9])\/(3[01]|[12][0-9]|[1-9])$/;
-        if(!regex.test(value)) return "Incorrect Input";
-        const [, weekday, monthStr, dayStr] = value.match(regex)!;
+        const [, , monthStr, dayStr] = value.match(regex)!;
         const month = Number(monthStr); const day = Number(dayStr);
-        const today = new Date(); const checkedDate = new Date(today.getFullYear(), month - 1, day);
-        const weekdayIndex = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-        const realWeekday = weekdayIndex[checkedDate.getDay()];
-        if(checkedDate.getMonth() + 1 !== month || checkedDate.getDate() !== day || realWeekday !== weekday && checkedDate > today) return "Incorrect Date";
-        return "";
-    },
-    checkOutDate: (value: string, anotherValue: string) => {
-        if(value.length === 0) return "";
-        const regex = /^(Mon|Tue|Wed|Thu|Fri|Sat|Sun)\s(1[0-2]|[1-9])\/(3[01]|[12][0-9]|[1-9])$/;
-        if(!regex.test(value)) return "Incorrect Input";
-        const [, weekday, monthStr, dayStr] = value.match(regex)!;
-        const month = Number(monthStr); const day = Number(dayStr);
-        const today = new Date(); 
-        const checkedDate = new Date(today.getFullYear(), month - 1, day);
-        const weekdayIndex = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-        const realWeekday = weekdayIndex[checkedDate.getDay()];
-        if(checkedDate.getMonth() + 1 !== month || checkedDate.getDate() !== day || realWeekday !== weekday && checkedDate > today) return "Incorrect Date";
-        
-        if(anotherValue.length === 0) return ""
+
         const [, , anotherMonthStr, anotherDayStr] = anotherValue.match(regex)!;
         const anotherMonth = Number(anotherMonthStr); const anotherDay = Number(anotherDayStr);
+
+        const today = new Date(); 
+        const checkedDate = new Date(today.getFullYear(), month - 1, day);
         const anotherCheckedDate = new Date(today.getFullYear(), anotherMonth - 1, anotherDay);
-        if(checkedDate <= anotherCheckedDate) return "Check-Out date earlier than Check-In date";
+        
+        if(isInDate){
+            if(checkedDate >= anotherCheckedDate) return "Check-In date later than Check-Out date";
+        } else {
+            if(checkedDate <= anotherCheckedDate) return "Check-Out date earlier than Check-In date";
+        }
         return "";
     },
     fromTo: (value: string) => {
@@ -398,15 +403,16 @@ export const INPUT_VALIDATIONS: InputValidations = {
         if(!regex.test(value)) return "Incorrect Input";
 
         const [, d1, m1, y1, d2, m2, y2] = value.match(regex) as RegExpExecArray;
-        const year1 = 2000 + parseInt(y1); const year2 = 2000 + parseInt(y2);
+        const year1 = 2000 + parseInt(y1); 
+        const year2 = 2000 + parseInt(y2);
         const today = new Date();
         const date1 = new Date(year1, MONTHS[m1], parseInt(d1), 23, 59, 59, 999);
         const date2 = new Date(year2, MONTHS[m2], parseInt(d2), 23, 59, 59, 999);
         if(date1.getDate() !== parseInt(d1)) return "Incorrect Depart Date";
         if(date2.getDate() !== parseInt(d2)) return "Incorrect Return Date";
-        if (date2 < date1) return "Return date is earlier than departure";
-        if (today > date1) return "Departure date is already in the past";
-        if (today > date2) return "Return date is already in the past";
+        if(date2 < date1) return "Return date is earlier than departure";
+        if(today > date1) return "Departure date is already in the past";
+        if(today > date2) return "Return date is already in the past";
   
         return "";
     },
@@ -421,7 +427,7 @@ export const INPUT_VALIDATIONS: InputValidations = {
     },
     destination: (value: string) => {
         if(value.length === 0) return "";
-        if (!/^[A-Za-z]+$/.test(value)) return "Only Letters"; 
+        if (!/^[A-Za-zÀ-ÖØ-öø-ÿ\s'-]+,\s[A-Za-zÀ-ÖØ-öø-ÿ\s'-]+$/.test(value)) return "Incorrect Input"; 
         return "";
     },
 } as const;
@@ -453,10 +459,13 @@ export const INPUT_OPTIONS_VALIDATION_TYPE = {
 } as const;
 
 export interface AboutTwoDataPart{
-    anotherValue: string, validation: TwoDataInputValidation
+    anotherValue: string, validation: TwoDataInputValidation, isCheckDate: false
 }
 export interface AboutOneDataPart{
     anotherValue: null, validation: OneDataInputValidation
+}
+export interface AboutCheckDateDataPart{
+    anotherValue: string, validation: CheckDateInputValidation, isInDate: boolean, isCheckDate: true
 }
 export interface InputState<T>{
     description: objType<T>,
@@ -496,16 +505,14 @@ export const getInputValidation = <T extends AllValidationValues>(
         case INPUT_OPTIONS_VALIDATION_TYPE.returnDepart: return INPUT_VALIDATIONS.returnDepart;
         case INPUT_OPTIONS_VALIDATION_TYPE.passengerClass: return INPUT_VALIDATIONS.passengerClass;
         case INPUT_OPTIONS_VALIDATION_TYPE.destination: return INPUT_VALIDATIONS.destination;
-        case INPUT_OPTIONS_VALIDATION_TYPE.checkIn: return INPUT_VALIDATIONS.checkDate;
-        case INPUT_OPTIONS_VALIDATION_TYPE.checkOut: return INPUT_VALIDATIONS.checkOutDate;
+        case INPUT_OPTIONS_VALIDATION_TYPE.checkIn: case INPUT_OPTIONS_VALIDATION_TYPE.checkOut: return INPUT_VALIDATIONS.checkDate;
     }
 }
 
-
+/*------AIRPORTS------*/
 export interface AirportInfo {
     airportName: string, city: string, country: string; address: string;
 }
-
 export interface AirportItem{
     id: number,
     airportName: string, city: string, country: string,
@@ -515,30 +522,43 @@ export interface ShortLocation{
     city: string,
     country: string
 }
+export interface FetchedAirporstValue{
+    from: AirportInfo, to: AirportInfo
+}
 const API_KEY = "a1effb76c9d44124946fe66cb85fd57f";
 export async function getCountriesByCities(cities : string[]): Promise<(string | null)[]>{
     const promises = cities.map(async (city) => {
         const url = `https://api.opencagedata.com/geocode/v1/json?q=${city}&key=${API_KEY}&language=en`;
-        const res = await fetch(url);
-        if(res.ok){
-            const data = await res.json();
-            return data.results[0].components.country
+        try{
+            const res = await fetch(url);
+            if(res.ok){
+                const data = await res.json();
+                return data.results[0].components.country;
+            }
+            return null;
+        } catch(e){
+            console.log("Error: ", e);
+            return null;
         }
-        return null;
     });
     return Promise.all(promises);
 }
 export async function getLocaitonByAddress(address: string): Promise<ShortLocation | null>{
     const url = `https://api.opencagedata.com/geocode/v1/json?q=${address}&key=${API_KEY}&language=en`;
-    const res = await fetch(url);
-    if (res.ok) {
-        const data = await res.json();
-        return {
-            city: data.results[0].components.state,
-            country: data.results[0].components.country
-        } 
+    try{
+        const res = await fetch(url);
+        if (res.ok) {
+            const data = await res.json();
+            return {
+                city: data.results[0].components.state,
+                country: data.results[0].components.country
+            } 
+        }
+        return null;
+    } catch(e){
+        console.error("Error:", e);
+        return null;
     }
-    return null;
 }
 export async function getCityFromAddress(address: string): Promise<string | null> {
     const url = `https://api.opencagedata.com/geocode/v1/json?q=${address}&key=${API_KEY}&language=en`;
@@ -578,23 +598,41 @@ export async function getAirportByIATA(iata: string): Promise<AirportInfo | null
     }
 
     const url = `https://api.opencagedata.com/geocode/v1/json?q=${lat}+${lon}&key=${API_KEY}&language=en`;
-    const res = await fetch(url);
-    let address = "Unknown address";
-    if (res.ok) {
-        const data = await res.json();
-        if (data?.results[0].formatted) address = data.results[0].formatted;
+    try{
+        const res = await fetch(url);
+        let address = "Unknown address";
+        if (res.ok) {
+            const data = await res.json();
+            if (data.results[0].formatted) address = data.results[0].formatted;
+        }
+        return {
+            airportName: airport.airportName, city: airport.city, country: airport.country, address
+        };
+    } catch(e){
+        console.log("Error:", e);
+        return null
     }
-    return {
-        airportName: airport.airportName, city: airport.city, country: airport.country,address
-    };
 }
 
+/*------AUTHORIZATION_VARIANT------*/
+export interface AuthorizationVariant{
+    icon: IconParams,
+    isBigger: boolean,
+    subicon: string | null
+}
+
+/*------SCHEDULE------*/
 export interface Point{
     timeVisible: string,
     timeFunctionable: string,
     description: string
 }
 
+/*------ACCOUNT------*/
+export interface Person{
+    firstName: string,
+    lastName: string
+}
 export interface ExpDate{
     month: number,
     year: number    
@@ -634,29 +672,52 @@ export interface User{
     tickets: Ticket[], bookings: Booking[],
     favourites: SiteSeparation<number[]>
 }
-export const getCurrentUser = () : User | null => {
+/*export const getCurrentUser = () : User | null => {
     const id = JSON.parse(localStorage.getItem("currentUser") as string);
     if(id !== -1){
         const users = JSON.parse(localStorage.getItem("users") as string);
         return users[id];
     }
     return null;
+}*/
+
+//--------HOME--------
+//------TRIP------
+export interface Trip{
+    image: Image, city: string, services: string[]
+}
+//------CHOOSE------
+export interface ChooseOption{
+    heading : string,
+    description : string,
+    button : string,
+    background : Srcs
+}
+//------REVIEWS------
+export interface Review{
+    heading : string,
+    description : string,
+    starsCount : number,
+    author : string,
+    livePlace : string,
+    image : Image
 }
 
-//--------Flights/Hotels Home Page--------
+//--------FLIGHTS/HOTELS_HOME_PAGE--------
+//------INTRO_VARIANTS------
 export interface IntroVariants{
     heading: string,
     subheading: string,
     background: Srcs
 }
-
+//------TRAVEL------
 export interface Travel{
     city: string,
     price: number,
     description: string,
     image: Srcs
 }
-
+//------OFFER------
 export interface Offer{
     heading: string,
     price: number,
@@ -664,7 +725,24 @@ export interface Offer{
     images: Image[]
 }
 
-//--------Select--------
+//------------FLIGHTS_HOME_PAGE------------
+//------MAP------
+export interface Submap{
+    image: Image,
+    arrow: string,
+    boardingPass: number,
+    place: string
+}
+
+//------------HOTELS_HOME_PAGE------------
+//------RECENT------
+export interface RecentItem{
+    image: Image,
+    city: string,
+    countPlaces: number
+}
+
+//--------SELECT--------
 export const SELECT_DESCRIPTION_TYPE = {
     subValue: "SubValue",
     onlyValue: "OnlyValue",
@@ -675,15 +753,46 @@ export interface SelectLink<T>{
     cls: string[]
 }
 
-//--------Catalog--------
+//--------CATALOG--------
 export interface PriceDetails{
-    baseFare: number,
-    discount: number,
-    taxes: number,
-    serviceFee: number
+    baseFare: number, discount: number,
+    taxes: number, serviceFee: number
 }
 export const transformPrice = ({baseFare, discount, taxes, serviceFee} : PriceDetails) : number =>
     baseFare + taxes + serviceFee - discount
+
+export const SORT_BY = {
+    recommended: "Recommended",
+    unRecommended: "Not Recommended"
+} as const;
+export interface Catalog<T, K>{
+    sort: K[],
+    container: Section<T>
+}
+
+//------------CATALOG_FLIGHTS------------
+export const FLIGHT_AMENITIES = {
+    quick: "Quick",
+    punctuality: "Punctuality",
+    fastFood: "Fast Food",
+    comfortableSeats: "Comfortable Seats"
+} as const;
+export const AIRLINES = {
+    emirated: "Emirated",
+    flyDubai: "Fly Dubai",
+    qatar: "Qatar",
+    etihad: "Etihad"
+} as const;
+export const TRIP_TYPE = {
+    roundTrip: "Round Trip",
+    multiCity: "Multi-City",
+    onWay: "On Way"
+} as const;
+export const SEATS_TYPE = {
+    economy: "Economy",
+    business: "Business",
+    first: "First Class"
+} as const;
 
 export const getPrice = ({type, schedule} : Flight): number => {
     switch(type){
@@ -698,30 +807,56 @@ export const getPrice = ({type, schedule} : Flight): number => {
             );
     }
 }
+export const getFromToIATA = (options: string, about: Flight) : [string, string] => {
+    if(String(options).split("-").length !== 1){
+        return [String(options).split("-")[0], String(options).split("-")[1]];
+    } else {
+        if(options === "On-Way"){
+            return [
+                (about.schedule as ScheduleSingle).startPoint, 
+                (about.schedule as ScheduleSingle).endPoint
+            ];
+        } else if(options === "Return"){
+            return [
+                (about.schedule as ScheduleParts).to.startPoint, 
+                (about.schedule as ScheduleParts).from.startPoint
+            ];
+        } else {
+            return [
+                (about.schedule as ScheduleParts).from.startPoint, 
+                (about.schedule as ScheduleParts).to.startPoint
+            ];
+        }
+    }
+}
 export const getFlyDuration = (
-    {type, schedule}: Flight, airline: number[], airlinesMassive: objType<typeof AIRLINES>[]
+    {type, schedule}: Flight, choosedAirlines: number[], airlinesMassive: objType<typeof AIRLINES>[], 
+    opts: string
 ): number => {
     switch(type){
         case TRIP_TYPE.onWay:
             return getDuration(schedule.departTime, schedule.arrayTime)
         case TRIP_TYPE.roundTrip:
-            return Math.min(
-                getDuration(schedule.from.departTime, schedule.from.arrayTime),
-                getDuration(schedule.to.departTime, schedule.to.arrayTime)
-            )
+            if(opts === "Return"){
+                return getDuration(schedule.to.departTime, schedule.to.arrayTime);
+            } else if(opts === "Depart"){
+                return getDuration(schedule.from.departTime, schedule.from.arrayTime);
+            } else{
+                return Math.min(
+                    getDuration(schedule.from.departTime, schedule.from.arrayTime),
+                    getDuration(schedule.to.departTime, schedule.to.arrayTime)
+                )
+            }
         case TRIP_TYPE.multiCity:
             let flyTimes: number[] = [];
-            if(airline.length === 0){
+            if(choosedAirlines.length === 0){
                 schedule.parts.forEach(schedulePart => {
                     flyTimes.push(getDuration(schedulePart.departTime, schedulePart.arrayTime))
                 })
             } else {
                 schedule.parts.forEach(schedulePart => {
-                    for(const airlineI of airline){
-                        if(airlinesMassive[airlineI] === schedulePart.airline){
-                            flyTimes.push(getDuration(schedulePart.departTime, schedulePart.arrayTime))
-                            break;
-                        }
+                    if(airlinesMassive.includes(schedulePart.airline)){
+                        flyTimes.push(getDuration(schedulePart.departTime, schedulePart.arrayTime));
                     }
                 })
             }
@@ -753,75 +888,16 @@ export const getAirlineSrcs = (desc : objType<typeof AIRLINES>) : Srcs => {
     }
 }
 
-export const SORT_BY = {
-    recommended: "Recommended",
-    unRecommended: "Not Recommended"
-} as const;
-export interface CatalogContainer<T>{
-    items: T[],
-    isLoading: boolean,
-    error: null | string
-}
-export interface Catalog<T, K>{
-    sort: K[],
-    container: CatalogContainer<T>
-}
-
-export interface AuthorizationVariant{
-    icon: IconParams,
-    isBigger: boolean,
-    subicon: string | null
-}
-
-//--------Booking--------
-export const BOOKING_ICON_VALUE = {
-    visa: "Visa",
-} as const;
-
-export const ADD_CARD_TITLE_FIELD = {
-    cardNumber: "Card Number",
-    expDate: "Exp. Date",
-    cvc: "CVC",
-    name: "Name on Card",
-} as const;
-export const ADD_CARD_TITLE_SELECT = {
-    country: "Country or Region"
-} as const;
-
-//------------Catalog Flights------------
-export const FLIGHT_AMENITIES = {
-    quick: "Quick",
-    punctuality: "Punctuality",
-    fastFood: "Fast Food",
-    comfortableSeats: "Comfortable Seats"
-} as const;
-export const AIRLINES = {
-    emirated: "Emirated",
-    flyDubai: "Fly Dubai",
-    qatar: "Qatar",
-    etihad: "Etihad"
-} as const;
-export const TRIP_TYPE = {
-    roundTrip: "Round Trip",
-    multiCity: "Multi-City",
-    onWay: "On Way"
-} as const;
-export const SEATS_TYPE = {
-    economy: "Economy",
-    business: "Business",
-    first: "First Class"
-} as const;
-
-export interface Airline{
+/*export interface Airline{
     description: objType<typeof AIRLINES>,
     srcs: Srcs
-}
-export interface Airlines{
+}*/
+/*export interface Airlines{
     emirated: Srcs,
     etihad: Srcs,
     flyDubai: Srcs,
     qatar: Srcs
-}
+}*/
 
 export interface SeatVariant{
     images: Image[],
@@ -834,7 +910,7 @@ export interface SeatsVariants{
     first: SeatVariant
 }
 
-export interface SchedulePart{
+interface ScheduleBase{
     gate: string,
     airline: objType<typeof AIRLINES>,
     amenities: objType<typeof FLIGHT_AMENITIES>[],
@@ -845,19 +921,11 @@ export interface SchedulePart{
     arrayTime: Time,
     route: string[],
     startPoint: string,
+}
+export interface SchedulePart extends ScheduleBase{
     place: Srcs
 }
-export interface ScheduleSingle{
-    gate: string,
-    airline: objType<typeof AIRLINES>,
-    amenities: objType<typeof FLIGHT_AMENITIES>[],
-    image: Image,
-    plane: string,
-    seats: SeatsVariants,
-    departTime: Time,
-    arrayTime: Time,
-    route: string[],
-    startPoint: string,
+export interface ScheduleSingle extends ScheduleBase{
     endPoint: string,
     placeFrom: Srcs,
     placeTo: Srcs
@@ -886,7 +954,7 @@ interface FlightScheduleParts{
     schedule: ScheduleParts,
     type: typeof TRIP_TYPE.roundTrip
 }
-export interface FlightScheduleMassive{
+interface FlightScheduleMassive{
     id: number,
     rating: number,
     countReviews: number,
@@ -914,7 +982,7 @@ export const getSeatsGroup = (type : objType<typeof SEATS_TYPE>, flightPart: Sch
     }
 }
 
-//------------Catalog Hotels------------\
+//------------CATALOG_HOTELS------------
 export const HOTEL_TYPE = {
     hotels: "Hotels",
     motels: "Motels",
@@ -946,10 +1014,11 @@ export interface Room{
     image: Image
 }
 export interface HotelReview{
+    hotelId: number,
     grade: number,
     author: Person,
     review: string,
-    ava: Srcs
+    ava: string
 }
 export interface HotelReviews{
     items: HotelReview[],
@@ -964,7 +1033,6 @@ export interface Hotel{
     id: number,
     type: objType<typeof HOTEL_TYPE>
     name: string,
-    rating: number,
     starsCount: number,
     location: HotelLocation,
     amenities: HotelAmenities,
@@ -972,17 +1040,16 @@ export interface Hotel{
     overview: string,
     features: objType<typeof FEATURES>[],
     rooms: Room[],
-    reviews: HotelReviews,
     logo: Srcs
 }
 
-//--------Sort--------
-export const FLIGHTS_SORT_TYPE ={
+//------------CHOOSE------------
+export const FLIGHTS_CHOOSE_TYPE ={
     cheapest: "Cheapest",
     best: "Best",
     quickest: "Quickest",
 } as const;
-export const HOTELS_SORT_TYPE = {
+export const HOTELS_CHOOSE_TYPE = {
     hotels: "Hotels",
     motels: "Motels",
     resorts: "Resorts"
@@ -997,7 +1064,7 @@ export interface IconOptionValue{
     icon: IconParams
 }
 
-//--------Navbar--------
+//------------NAVBAR------------
 export const FREEBIES = {
     breakfast: "Free breakfast",
     parking: "Free parking",
@@ -1042,23 +1109,16 @@ export const NAVBAR_DESCRIPTION = {
 } as const;
 
 export interface NavbarRangeValue<T>{ from: T, to: T}
-export interface NavbarPriceRange{
+export interface NavbarRange{
     description: objType<typeof NAVBAR_DESCRIPTION>,
-    type: typeof NAVBAR_ITEM.priceRange,
+    type: typeof NAVBAR_ITEM.priceRange | typeof NAVBAR_ITEM.timeRange,
     value: NavbarRangeValue<number>
 }
-export interface NavbarTimeRange{
-    description: objType<typeof NAVBAR_DESCRIPTION>,
-    type: typeof NAVBAR_ITEM.timeRange,
-    value: NavbarRangeValue<number>
-}
-
 export interface NavbarRadios{
     description: objType<typeof NAVBAR_DESCRIPTION>,
     type: typeof NAVBAR_ITEM.radios,
     value: string[]
 }
-
 export interface NavbarCheckboxes{
     description: objType<typeof NAVBAR_DESCRIPTION>,
     type: typeof NAVBAR_ITEM.checkboxes,
@@ -1066,55 +1126,17 @@ export interface NavbarCheckboxes{
     maxShow: number
 }
 
-export type NavbarFilter = NavbarPriceRange | NavbarTimeRange | NavbarRadios | NavbarCheckboxes;
+export type NavbarFilter = NavbarRange | NavbarRadios | NavbarCheckboxes;
 
-
-//----Options----
+//------------OPTIONS------------
 export const NEEDED_BLOCKS = {
     all: "OPTIONS_ALL-BLOCKS",
     onlyInputs: "OPTIONS_ONLY-INPUTS",
     withoutHeader: "OPTIONS_WITHOUT-HEADER"
 } as const;
 
-export const ICON_POSITION = {
-    left: "LEFT",
-    right: "RIGHT"
-} as const;
-export const OPTION_ICON_VALUE = {
-    fromTo: "FROM-TO",
-    hotelPlace: "BED",
-    date: "CALENDAR",
-    people: "PEOPLE-COUNT"
-} as const;
 
-export interface Icon{
-    pos: objType<typeof ICON_POSITION>,
-    value: IconParams
-}
-
-//----Intro----
-//--------Trip--------
-export interface Trip{
-    image: Image, city: string, services: string[]
-}
-//--------Choose--------
-export interface ChooseOption{
-    heading : string,
-    description : string,
-    button : string,
-    background : Srcs
-}
-//--------Reviews--------
-export interface Review{
-    heading : string,
-    description : string,
-    starsCount : number,
-    author : string,
-    livePlace : string,
-    image : Image
-}
-
-//----Footer----
+//------------FOOTER------------
 export interface Newsletter{
     heading: string,
     supdescription: string,
@@ -1125,21 +1147,4 @@ export interface Newsletter{
 export interface Column{
     links: Link[],
     title: string
-}
-
-//----Flights----
-//--------Map--------
-export interface Submap{
-    image: Image,
-    arrow: string,
-    boardingPass: number,
-    place: string
-}
-
-//----Hotels----
-//--------Recent--------
-export interface RecentItem{
-    image: Image,
-    city: string,
-    countPlaces: number
 }

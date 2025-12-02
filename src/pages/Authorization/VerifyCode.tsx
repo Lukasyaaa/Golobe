@@ -47,7 +47,7 @@ export const VerifyCode: FC = () => {
                     <AuthorizationBack parentCls={["verify-code", "authorization-part"]} />
                     <h1 className="verify-code__heading authorization-part__heading">Verify code?</h1>
                     <div className="verify-code__description authorization-part__description">An authentication code has been sent to your email.</div>
-                    <Input about={codeAbout} parentCls={["verify-code", "authorization-part"]} isInMassive={false} isBigger={false} />
+                    <Input about={codeAbout} parentCls={["verify-code__field", "authorization-part__field"]} isInMassive={false} isBigger={false} />
                     <div className="verify-code__resend">Didn’t receive a code? <button type="button">Resend</button></div>
                     {codeAbout.validation(codeAbout.state) === ""
                         ? <NavLink 

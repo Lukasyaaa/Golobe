@@ -25,7 +25,7 @@ export const Flights : FC = () =>{
                 heading: "Fall into travel", 
                 description: "Going somewhere to celebrate this season? Whether you’re going home or somewhere to roam, we’ve got the travel tools to get you to your destination.", 
                 button: {active: "See All", disable: "Hide"}
-            }, maxShow: 3
+            }, maxShow: 4
         }), []
     )
     const offersAbout = useMemo(

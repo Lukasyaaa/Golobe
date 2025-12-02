@@ -20,7 +20,7 @@ export interface PlacesTranscript{
 }
 export const Account: FC = () => {
     const user = useTypedSelector(state => state.user);
-    const [activeCategory, setActiveCategory] = useState<number>(1);
+    const [activeCategory, setActiveCategory] = useState<number>(0);
     const sortLinks: objType<typeof ACCOUNT_SORT_TITLES>[] = useMemo(() => {
         return([
             ACCOUNT_SORT_TITLES.info, 

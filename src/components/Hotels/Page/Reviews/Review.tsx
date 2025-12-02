@@ -5,8 +5,7 @@ export const Review : FC<HotelReview> = ({grade, author, review, ava}) => {
     return(
         <div className="reviews-hotel__item item-reviews-hotel">
             <picture className="item-reviews-hotel__ava">
-                <source srcSet={ava.webp} type="image/webp" />
-                <img src={ava.jpeg} alt={author.firstName + "s review"} />
+                <img src={ava} alt={author.firstName + "s review"} />
             </picture>
             <div className="item-reviews-hotel__info">
                 <div className="item-reviews-hotel__header">

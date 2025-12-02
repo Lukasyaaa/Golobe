@@ -26,7 +26,6 @@ export const SelectDescription : FC<SelectDescriptionProps> = ({parentCls, icon,
         if(splitted.length > 1) return splitted[1] + "-" + splitted[0];
         return cl;
     })
-    console.log(innerCls);
     let cls = [...parentCls, ...innerCls];
     let DecorableIcon = <Fragment />
     if(icon !== null){
@@ -37,9 +36,9 @@ export const SelectDescription : FC<SelectDescriptionProps> = ({parentCls, icon,
             selectIconPos = ICON_POSITION.left;
             cls.push("have-icon", "right");
         }
-        DecorableIcon = <div className={innerCls.map(cl => cl + "__icon-parent").join(" ")}>
+        DecorableIcon = <div className={[...innerCls.map(cl => cl + "__icon-parent"), "select_description__icon-parent"].join(" ")}>
             <svg 
-                className={innerCls.map(cl => cl + "__icon").join(" ")}
+                className={[...innerCls.map(cl => cl + "__icon"), "select_description__icon"].join(" ")}
                 viewBox={transformIconViewbox(icon.value.viewbox)} 
                 width={icon.value.width} height={icon.value.height}
             >

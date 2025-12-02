@@ -1,9 +1,9 @@
 import React, { useEffect, useMemo, useRef, useState, type FC } from "react";
 import { intToTime, NAVBAR_ITEM, timeToString } from "../../../types";
-import type { NavbarPriceRange, NavbarRangeValue, NavbarTimeRange} from "../../../types";
+import type { NavbarRangeValue, NavbarRange as NavbarRangeType} from "../../../types";
 
 interface NavbarRangeProps{
-    about: NavbarPriceRange | NavbarTimeRange,
+    about: NavbarRangeType,
     setState: (newValue: NavbarRangeValue<number>) => void;
 }
 

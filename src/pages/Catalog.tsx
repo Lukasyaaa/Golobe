@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useMemo, useRef, useState, type FC } from "react";
 import { useAppDispatch, useTypedSelector } from "../store";
-import { SITE_PARTS, NEEDED_BLOCKS, NAVBAR_DESCRIPTION, NAVBAR_ITEM, getPrice, getFlyDuration, FLIGHTS_SORT_TYPE, intToDuration, HOTELS_SORT_TYPE, SELECT_DESCRIPTION_TYPE, FILL_RULE, STROKE_LINECAP, STROKE_LINEJOIN, ICON_POSITION, getSchedulePartsCount, SORT_BY, FREEBIES, AMENITIES, TRIP_TYPE, AIRLINES, getAirportByIATA, getCityFromAddress } from "../types";
-import type { NavbarRangeValue, Hotel as HotelType, objType, FullOptionValue, Flight as FlightType, AirportInfo } from "../types";
+import { SITE_PARTS, NEEDED_BLOCKS, NAVBAR_DESCRIPTION, NAVBAR_ITEM, getPrice, getFlyDuration, FLIGHTS_CHOOSE_TYPE, intToDuration, HOTELS_CHOOSE_TYPE, SELECT_DESCRIPTION_TYPE, FILL_RULE, STROKE_LINECAP, STROKE_LINEJOIN, ICON_POSITION, getSchedulePartsCount, SORT_BY, FREEBIES, AMENITIES, TRIP_TYPE, AIRLINES, getAirportByIATA, getCityFromAddress, getLocaitonByAddress } from "../types";
+import type { NavbarRangeValue, Hotel as HotelType, objType, FullOptionValue, Flight as FlightType, AirportInfo, FetchedAirporstValue, ShortLocation } from "../types";
 import { fetchFlights } from "../store/flights";
 import { fetchHotels } from "../store/hotels";
 import { Options } from "../components/Common/Options/Options";
@@ -45,9 +45,6 @@ export interface CheckboxesAbout extends CheckboxesState<string[]>{
 export type NavbarFilterState = Range | RadiosState<number> | CheckboxesState<number[]>
 export type NavbarFilterAbout = RangeAbout | RadiosAbout | CheckboxesAbout
 
-export interface FetchedAirporstValue{
-    from: AirportInfo, to: AirportInfo
-}
 export interface FetchedState<T>{
     value: T,
     id: number
@@ -60,7 +57,65 @@ export const Catalog: FC<CatalogProps> = ({contentType}) => {
     const {sort, container} = useTypedSelector(state => 
         ((contentType === SITE_PARTS.flights) ? state.flights : state.hotels).catalog
     );
+    const hotelsReviews = useTypedSelector(state => state.hotels.reviews);
     const {items, isLoading, error} = container; const maxShow = 4;
+    const { filter_1, filter_2, filter_3, tripType, roomsGuests } = useParams();
+    let fromTo: undefined | string = undefined;
+    let departReturn: undefined | string = undefined;
+    let passengersClass: undefined | string = undefined;
+    let destination: undefined | string = undefined;
+    let checkInCheckOut: string = "";
+    let cityOrCountry: undefined | string = undefined;
+    if(contentType === SITE_PARTS.flights){
+        if(filter_1 !== undefined){
+            if(filter_2 !== undefined){
+                const filterParts = filter_1.split("+");
+                if(filterParts.length === 1) cityOrCountry = filter_1;
+                else fromTo = filter_1;
+
+                if(filter_3 !== undefined){
+                    departReturn = filter_2;
+                    passengersClass = filter_3;
+                } else {
+                    const filterParts = filter_2.split("+");
+                    const secondFilter = filterParts[0].split("-")[1];
+                    if(/^[0-9-]+$/.test(filterParts[0])) {
+                        departReturn = filter_2;
+                    } else if(filterParts.length === 2 && (secondFilter === "Passenger" || secondFilter === "Passengers")){
+                        passengersClass = filter_2;
+                    } 
+                }
+            } else {
+                const filterParts = filter_1.split("+");
+                const secondFilter = filterParts[0].split("-")[1];
+                if(filterParts.length === 1){
+                    cityOrCountry = filter_1
+                } else if(/^[0-9-]+$/.test(filterParts[0])) {
+                    departReturn = filter_1;
+                } else if(filterParts.length === 2 && (secondFilter === "Passenger" || secondFilter === "Passengers")){
+                    passengersClass = filter_1;
+                } else {
+                    fromTo = filter_1;
+                }
+            }
+        }
+    } else {
+        const realFilter_1 = String(filter_1);
+
+        const filtedParts = realFilter_1.split("+");
+        if(filtedParts.length === 1) cityOrCountry = realFilter_1;
+        else checkInCheckOut = realFilter_1;
+
+        if(filter_2 !== undefined){
+            if(checkInCheckOut === undefined) checkInCheckOut = filter_2;
+            else destination = filter_2;
+
+            if(filter_3 !== undefined){
+                destination = filter_3
+            }
+        }
+    }
+
     const navigate = useNavigate();
     const location = useLocation();
     const navbar: NavbarFilterAbout[] = useMemo(
@@ -114,7 +169,6 @@ export const Catalog: FC<CatalogProps> = ({contentType}) => {
             }
         }, []
     )
-    const {fromTo, passengersClass, departReturn, tripType, city, checkInCheckOut, roomsGuests} = useParams();
     const dispatch = useAppDispatch();
     useEffect(() => {
         if(contentType === SITE_PARTS.flights) dispatch(fetchFlights());
@@ -140,7 +194,7 @@ export const Catalog: FC<CatalogProps> = ({contentType}) => {
                 choosedTrips.push(0);
             }
             if(neededTripTypes.includes("On-Way")){
-                choosedTrips.push(1)
+                choosedTrips.push(1);
             } 
             if(neededTripTypes.includes("Multi-City")){
                 choosedTrips.push(2);
@@ -169,10 +223,12 @@ export const Catalog: FC<CatalogProps> = ({contentType}) => {
     });
 
     const choosedTripsState = (navbarFilters.find(f => f.description === NAVBAR_DESCRIPTION.trips) as CheckboxesState<number[]>) || {value: undefined}
+    let isFirst = useRef<boolean>(true);
     useEffect(() => {
-        if(choosedTripsState.value != undefined){
+        if(choosedTripsState.value != undefined && !isFirst.current){
             const pathMassive: string[] = [];
-            const tripsTypes: string[] = []
+            const tripsTypes: string[] = [];
+            if(cityOrCountry !== undefined && fromTo === undefined) pathMassive.push(cityOrCountry);
             if(fromTo !== undefined) pathMassive.push(fromTo);
             if(departReturn !== undefined) pathMassive.push(departReturn);
             if(passengersClass !== undefined) pathMassive.push(passengersClass);
@@ -181,13 +237,15 @@ export const Catalog: FC<CatalogProps> = ({contentType}) => {
                     ? "Depart"
                     : ((String(tripType).split("+").includes("Return")) ? "Return" : "Round-Trip")
                 )
-            ) 
+            )
+
             if(choosedTripsState.value.includes(1)) tripsTypes.push("On-Way");
             if(choosedTripsState.value.includes(2)) tripsTypes.push("Multi-City");
             pathMassive.push(tripsTypes.join("+"));
-            navigate(flightsCatalogPath + "/" + pathMassive.join("/"))
-         }
-    }, [choosedTripsState.value])
+            navigate(flightsCatalogPath + "/" + pathMassive.join("/"));
+        }
+        isFirst.current = false;
+    }, [choosedTripsState.value]);
 
     let [activeCategory, setActiveCategory] = useState<number>(Number(contentType === SITE_PARTS.stays));
 
@@ -196,22 +254,25 @@ export const Catalog: FC<CatalogProps> = ({contentType}) => {
 
     let [airports, setAirports] = useState<(FetchedState<FetchedAirporstValue> | null)[]>([]);
     useEffect(() => {
-        if(contentType === SITE_PARTS.flights && fromTo !== undefined){
+        if(contentType === SITE_PARTS.flights && (fromTo !== undefined || cityOrCountry !== undefined)){
             async function fetchPlaces() {
                 const results: (FetchedState<FetchedAirporstValue> | null)[] = await Promise.all(
                     (items as FlightType[]).map(async (f) => {
                         if(f.type === TRIP_TYPE.onWay){
                             const from = await getAirportByIATA(f.schedule.startPoint);
                             const to = await getAirportByIATA(f.schedule.endPoint);
-                            return from && to ? { value: {from, to}, id: f.id } : null;
+                            return from && to ? { value: {from, to}, id: Number(f.id) } : null;
                         } else if(f.type === TRIP_TYPE.roundTrip){
                             const from = await getAirportByIATA(f.schedule.from.startPoint);
                             const to = await getAirportByIATA(f.schedule.to.startPoint);
-                            return from && to ? { value: {from, to}, id: f.id } : null;
+                            if(String(tripType).includes("Return")){
+                                return from && to ? { value: {from: to, to: from}, id: Number(f.id) } : null;
+                            }
+                            return from && to ? { value: {from, to}, id: Number(f.id) } : null;
                         } else{
                             const from = await getAirportByIATA(f.schedule.parts[0].startPoint);
                             const to = await getAirportByIATA(f.schedule.endPoint);
-                            return from && to ? { value: {from, to}, id: f.id } : null;
+                            return from && to ? { value: {from, to}, id: Number(f.id) } : null;
                         }
                     })
                 );
@@ -219,22 +280,24 @@ export const Catalog: FC<CatalogProps> = ({contentType}) => {
             }
             fetchPlaces();
         }
-    }, [items])
+    }, [items]);
     const flightStats = useFlight(
         items as FlightType[], navbarFilters, navbar, 
-        sort[activeCategory] as objType<typeof FLIGHTS_SORT_TYPE>, 
+        sort[activeCategory] as objType<typeof FLIGHTS_CHOOSE_TYPE>, 
         contentType, airports, fromTo, passengersClass, departReturn, String(tripType),
-        location.pathname
+        cityOrCountry, location.pathname
     );
     
-    let [cities, setCities] = useState<(FetchedState<string> | null)[]>([]);
+    let [cities, setCities] = useState<(FetchedState<ShortLocation> | null)[]>([]);
     useEffect(() => {
-        if(contentType === SITE_PARTS.stays && city !== undefined){
+        if(contentType === SITE_PARTS.stays && (destination !== undefined || cityOrCountry !== undefined)){
+            const locations = items.map(_ => ({country: "Turkey", city: "Istanbul"}));
             async function fetchCities() {
-                const results: (FetchedState<string> | null)[] = await Promise.all(
-                    (items as HotelType[]).map(async (h) => {
-                        const location = await getCityFromAddress(h.location.text);
-                        return location === null ? null : {id: h.id, value: location};
+                const results: (FetchedState<ShortLocation> | null)[] = await Promise.all(
+                    (items as HotelType[]).map(async (h, i) => {
+                        /*const location = await getLocaitonByAddress(h.location.text);
+                        return location === null ? null : {id: h.id, value: location};*/
+                        return {id: Number(h.id), value: locations[i]}
                     })
                 );
                 setCities(results);
@@ -244,8 +307,8 @@ export const Catalog: FC<CatalogProps> = ({contentType}) => {
     }, [items])
     const hotelsStats = useHotels(
         items as HotelType[], navbarFilters, navbar, 
-        sort[activeCategory] as objType<typeof HOTELS_SORT_TYPE>, 
-        contentType, cities, city, checkInCheckOut, String(roomsGuests),
+        sort[activeCategory] as objType<typeof HOTELS_CHOOSE_TYPE>, 
+        contentType, cities, destination, checkInCheckOut, String(roomsGuests), cityOrCountry,
         location.pathname
     );
     
@@ -253,7 +316,6 @@ export const Catalog: FC<CatalogProps> = ({contentType}) => {
 
     let [isShowAll, setIsShowAll] = useState<boolean>(false);
     const toggleIsShowAll = () => setIsShowAll(prev => !prev);
-
     let itemsEl = useRef<HTMLDivElement>(null);
     let itemsInnerEl = useRef<HTMLDivElement>(null);
     useEffect(() => {
@@ -271,45 +333,49 @@ export const Catalog: FC<CatalogProps> = ({contentType}) => {
 
     let sortLinks: FullOptionValue[] = useMemo(() => {
         if(contentType === SITE_PARTS.flights){
-            const getTheMost = (about: objType<typeof FLIGHTS_SORT_TYPE>) : FlightType | null => {
+            const getTheMost = (about: objType<typeof FLIGHTS_CHOOSE_TYPE>) : FlightType | null => {
                 switch(about){
-                    case FLIGHTS_SORT_TYPE.best: return flightStats.theBest;
-                    case FLIGHTS_SORT_TYPE.cheapest: return flightStats.theCheapest;
-                    case FLIGHTS_SORT_TYPE.quickest: return flightStats.theQuickest;
+                    case FLIGHTS_CHOOSE_TYPE.best: return flightStats.theBest;
+                    case FLIGHTS_CHOOSE_TYPE.cheapest: return flightStats.theCheapest;
+                    case FLIGHTS_CHOOSE_TYPE.quickest: return flightStats.theQuickest;
                 }
             }
 
-            return (sort as objType<typeof FLIGHTS_SORT_TYPE>[]).map(link => {
+            return (sort as objType<typeof FLIGHTS_CHOOSE_TYPE>[]).map(link => {
                 const theMost: FlightType | null = getTheMost(link);
                 if(theMost === null) return({ title: link, description: "" })
+                const tripsTypes = String(tripType).split("+");
+                let opts: string = (tripsTypes.includes("Depart") 
+                    ? "Depart" : (tripsTypes.includes("Return") ? "Return" : "Round-Trip")
+                );
                 return({
                     title: link, 
                     description: "$" + getPrice(theMost) + " . " + 
-                    intToDuration(getFlyDuration(theMost, flightStats.airlineState, flightStats.airlinesMassive))
+                    intToDuration(
+                        getFlyDuration(theMost, flightStats.airlineState, flightStats.airlinesMassive, opts),
+                    )
                 })
             });
         } else {
-            const getNeededCount = (about: objType<typeof HOTELS_SORT_TYPE>): number => {
+            const getNeededCount = (about: objType<typeof HOTELS_CHOOSE_TYPE>): number => {
                 switch(about){
-                    case HOTELS_SORT_TYPE.hotels: return hotelsStats.hotelsCount;
-                    case HOTELS_SORT_TYPE.resorts: return hotelsStats.resortsCount;
-                    case HOTELS_SORT_TYPE.motels: return hotelsStats.motelsCount;
+                    case HOTELS_CHOOSE_TYPE.hotels: return hotelsStats.hotelsCount;
+                    case HOTELS_CHOOSE_TYPE.resorts: return hotelsStats.resortsCount;
+                    case HOTELS_CHOOSE_TYPE.motels: return hotelsStats.motelsCount;
                 }
             }
 
-            return (sort as objType<typeof HOTELS_SORT_TYPE>[]).map(link => ({
+            return (sort as objType<typeof HOTELS_CHOOSE_TYPE>[]).map(link => ({
                 title: link, 
                 description: getNeededCount(link) + " count places"
             }))
         }
     }, [activeCategory, flightStats.filtredMassive, hotelsStats.filtredMassive]);
 
-    if(
-        isLoading || items.length === 0 || 
-        (contentType === SITE_PARTS.flights 
-            ? airports.length === 0 && fromTo !== undefined 
-            : cities.length === 0 && city !== undefined
-        )){
+    if(isLoading || items.length === 0 || (contentType === SITE_PARTS.flights 
+        ? airports.length === 0 && (fromTo !== undefined || cityOrCountry !== undefined)
+        : cities.length === 0 && (destination !== undefined || cityOrCountry !== undefined)
+    )){
         return(
             <main className="catalog">
                 <div className="container">
@@ -329,7 +395,6 @@ export const Catalog: FC<CatalogProps> = ({contentType}) => {
             </main>
         )
     }
-
     let prevCheckboxes = 1;
     return(
         <main className="catalog">
@@ -345,7 +410,7 @@ export const Catalog: FC<CatalogProps> = ({contentType}) => {
                         <output className="catalog__count">
                             {usedItemsLength > maxShow && !isShowAll
                                 ? <Fragment>
-                                    {"Showing " + (isShowAll ? usedItemsLength : maxShow) + " of "}
+                                    {"Showing " + usedItemsLength + " of "}
                                     <strong>{usedItemsLength + " places"}</strong>
                                 </Fragment>
                                 : "Showing All"
@@ -375,9 +440,11 @@ export const Catalog: FC<CatalogProps> = ({contentType}) => {
                                     prevCheckboxes += getSchedulePartsCount(item);
                                     return(
                                         <Flight 
-                                            key={i} about={item} currentUser={user} 
+                                            key={i} about={{...item, id: Number(item.id)}} currentUser={user} 
                                             groupId={i} prevCheckboxes={prevCheckboxes} 
-                                            isInFavourites={user.favourites.flightsPart.includes(item.id)}
+                                            isInFavourites={
+                                                user.favourites.flightsPart.includes(Number(item.id))
+                                            }
                                         />
                                     )
                                 })
@@ -385,19 +452,21 @@ export const Catalog: FC<CatalogProps> = ({contentType}) => {
                                     hotelsStats.filtredMassive : hotelsStats.filtredMassive.slice(0, maxShow)
                                 ).map((item, i) => 
                                     <Hotel 
-                                        key={i} about={item} currentUser={user} 
-                                        isInFavourites={user.favourites.hotelsPart.includes(item.id)}
+                                        key={i} about={{...item, id: Number(item.id)}} currentUser={user} 
+                                        isInFavourites={user.favourites.hotelsPart.includes(Number(item.id))}
+                                        hotelsReviews={hotelsReviews.filter(r => r.hotelId === Number(item.id))}
+                                        checkInCheckOut={checkInCheckOut}
                                     />
                                 )
                             }
                         </div>
                     </div>
-                        {
-                            usedItemsLength > maxShow && 
-                            <button className="catalog__show" type="button" onClick={toggleIsShowAll}>
-                                {isShowAll ? "Hide" : "Show more results"}
-                            </button>
-                        }
+                    {
+                        usedItemsLength > maxShow && 
+                        <button className="catalog__show" type="button" onClick={toggleIsShowAll}>
+                            {isShowAll ? "Hide" : "Show more results"}
+                        </button>
+                    }
                 </div>
             </div>
         </main>

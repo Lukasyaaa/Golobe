@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createFetchThunk, HOTELS_SORT_TYPE} from "../types";
-import type { Catalog, Hotel, objType, Offer, RecentItem, Section, Travel } from "../types";
+import { createFetchThunk, HOTELS_CHOOSE_TYPE} from "../types";
+import type { Catalog, Hotel, HotelReview, objType, Offer, RecentItem, Section, Travel } from "../types";
 
 interface HotelsStart{
     travels: Section<Travel>,
@@ -10,7 +10,8 @@ interface HotelsStart{
 
 interface Hotels{
     start: HotelsStart,
-    catalog: Catalog<Hotel, objType<typeof HOTELS_SORT_TYPE>>
+    catalog: Catalog<Hotel, objType<typeof HOTELS_CHOOSE_TYPE>>,
+    reviews: HotelReview[]
 }
 
 const initialState : Hotels = {
@@ -24,11 +25,14 @@ const initialState : Hotels = {
         recent: [],
     },
     catalog: {
-        sort: [HOTELS_SORT_TYPE.hotels, HOTELS_SORT_TYPE.motels, HOTELS_SORT_TYPE.resorts],
+        sort: [HOTELS_CHOOSE_TYPE.hotels, HOTELS_CHOOSE_TYPE.motels, HOTELS_CHOOSE_TYPE.resorts],
         container: {
             items: [], isLoading: false, error: null
         }
-    }
+    },
+    reviews: [
+
+    ]
 }
 
 export const fetchTravels = createFetchThunk<Travel[]>('hotelsTravels/fetchAll', 'hotelsTravels');
@@ -54,6 +58,12 @@ export const hotelsSlice = createSlice({
             const temp = state.catalog.sort[firstIndex];
             state.catalog.sort[firstIndex] = state.catalog.sort[secondIndex];
             state.catalog.sort[secondIndex] = temp;
+        },
+        loadReviews: (state, action) => {
+            state.reviews = action.payload
+        },
+        addReview: (state, action) => {
+            state.reviews.push(action.payload);
         }
     },
     extraReducers: builder => {

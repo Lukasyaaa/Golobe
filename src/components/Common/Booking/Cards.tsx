@@ -2,13 +2,12 @@ import React, { useState, type FC } from "react";
 import { addZero, type Card, type useStateReturned } from "../../../types";
 
 interface CardsProps{
-    isOpened: useStateReturned<boolean>
+    isOpened: useStateReturned<boolean>,
+    about: Card[]
 }
 
-export const Cards : FC<CardsProps> = ({isOpened}) => {
-    const about: Card[] = [ 
-        {number: 4321432143214321, expDate: {month: 2, year: 2027}, cvc: 304, name: {firstName: "John", lastName: "Doe"}},
-    ];
+export const Cards : FC<CardsProps> = ({isOpened, about}) => {
+
     let [_, setIsOpened] = isOpened;
     const openModal = () => {
         setIsOpened(true);

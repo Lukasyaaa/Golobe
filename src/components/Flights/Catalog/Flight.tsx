@@ -35,7 +35,7 @@ export const Flight : FC<FlightProps> = ({about, isInFavourites, groupId, prevCh
                     airlines: [schedule.airline],        
                     scheduleMassive: [{...otherSchedule, place: placeFrom}],
                     endPoints: [about.schedule.endPoint],
-                    path: flightPath + "/" + (Number(about.id) + 1) + "/On-Way"
+                    path: flightPath + "/" + (about.id + 1) + "/On-Way"
                 })
             } else if(type === TRIP_TYPE.roundTrip){
                 let neededPath;
@@ -45,7 +45,7 @@ export const Flight : FC<FlightProps> = ({about, isInFavourites, groupId, prevCh
                     airlines: [...new Set([schedule.from.airline, schedule.to.airline])],        
                     scheduleMassive: [about.schedule.from, about.schedule.to],
                     endPoints: [about.schedule.to.startPoint, about.schedule.from.startPoint],
-                    path: flightPath + "/" + (Number(about.id) + 1) + "/" + neededPath
+                    path: flightPath + "/" + (about.id + 1) + "/" + neededPath
                 })
             } else{
                 const {parts, endPoint} = schedule;
@@ -57,7 +57,7 @@ export const Flight : FC<FlightProps> = ({about, isInFavourites, groupId, prevCh
                     airlines: [...new Set([...schedule.parts.map(part => part.airline)])],
                     scheduleMassive: [...about.schedule.parts],
                     endPoints: [...about.schedule.parts.slice(1).map(part => part.startPoint), about.schedule.endPoint],
-                    path: flightPath + "/" + (Number(about.id) + 1) + "/" + neededMassive.join("+")
+                    path: flightPath + "/" + (about.id + 1) + "/" + neededMassive.join("+")
                 })
             }
         }, [choosed.length, about]
@@ -101,7 +101,8 @@ export const Flight : FC<FlightProps> = ({about, isInFavourites, groupId, prevCh
                 <div className="flight__footer">
                     <ButtonBorder
                         parentCls={["flight"].filter(Boolean)} 
-                        isDisabled={currentUser.name.firstName === ""} isLink={false} isActive={!isInFavourites}
+                        isDisabled={currentUser.name.firstName === ""} 
+                        isLink={false} isActive={!isInFavourites}
                         buttonCl="favourites" onClick={favouritesInfo.onClickHandler}
                         value={{
                             viewbox: {minX: 0, minY: 0, width: 16.5, height: 15.25}, height: 15.25, width: 16.5,

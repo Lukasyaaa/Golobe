@@ -2,10 +2,10 @@ import React, { type FC } from "react";
 import { Breadcrumbs } from "../Blocks/Breadcrumbs";
 import { Location } from "../Blocks/Location";
 import { ButtonBorder } from "../Blocks/ButtonBorder";
-import { FILL_RULE, STROKE_LINECAP, STROKE_LINEJOIN } from "../../../types";
+import { FILL_RULE, STROKE_LINECAP, STROKE_LINEJOIN, type Link } from "../../../types";
 
 interface IntroductionProps{
-    locationMas: string[], current: string,
+    locationMas: Link[], current: string,
     heading: string, locationText: string,
     price: number
 }
@@ -16,9 +16,7 @@ export const Introduction: FC<IntroductionProps> = ({locationMas, current, headi
             <div className="container">
                 <Breadcrumbs 
                     parentCl={["introduction-details"]} current={current} 
-                    links={locationMas.map(description => ({
-                        description, path: "#"
-                    }))} 
+                    links={locationMas.map(({description, path}) => ({ description, path }))} 
                 />
                 <div className="introduction-details__row">
                     <div className="introduction-details__info">

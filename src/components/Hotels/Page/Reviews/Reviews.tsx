@@ -1,15 +1,16 @@
 import React, { useEffect, useRef, useState, type FC } from "react";
-import { getGrade, getRating, type HotelReviews, type ShortReview } from "../../../../types";
+import { getGrade, getRating, type HotelReview, type ShortReview, type useStateReturned } from "../../../../types";
 import { Review } from "./Review";
-import { useTypedSelector } from "../../../../store";
+import { useAppDispatch, useTypedSelector } from "../../../../store";
 
 interface ReviewsProps{
-    reviews: HotelReviews,
-    shortReview: ShortReview
+    reviews: HotelReview[],
+    shortReview: ShortReview,
+    isOpened: useStateReturned<boolean>,
 }
 
-export const Reviews : FC<ReviewsProps> = ({reviews, shortReview}) => {
-    const {items, maxShow} = reviews;
+export const Reviews : FC<ReviewsProps> = ({reviews, shortReview, isOpened}) => {
+    const maxShow = 10;
     let [currentPage, setCurrentPage] = useState<number>(0);
     let user = useTypedSelector(state => state.user);
 
@@ -23,6 +24,8 @@ export const Reviews : FC<ReviewsProps> = ({reviews, shortReview}) => {
         }
     }, [currentPage]);
 
+    let [, setIsOpened] = isOpened;
+
     return(
         <section className="hotel-page__reviews hotel-page__section section-hotel-page reviews-hotel">
             <div className="container">
@@ -30,7 +33,7 @@ export const Reviews : FC<ReviewsProps> = ({reviews, shortReview}) => {
                     <h2 className="section-hotel-page__heading reviews-hotel__heading">Reviews</h2>
                     <button 
                         className="section-hotel-page__button reviews-hotel__button button_green" type="button"
-                        disabled={user.name.firstName === ""}
+                        disabled={user.name.firstName === ""} onClick={() => setIsOpened(true)}
                     >
                         Give your review
                     </button>
@@ -44,12 +47,12 @@ export const Reviews : FC<ReviewsProps> = ({reviews, shortReview}) => {
                 </div>
                 <div className="reviews-hotel__items" ref={container}>
                     <div className="reviews-hotel__items-inner" ref={inner}>
-                        {items.slice(
-                            currentPage * maxShow, Math.min((currentPage + 1) * maxShow, items.length)
+                        {reviews.slice(
+                            currentPage * maxShow, Math.min((currentPage + 1) * maxShow, reviews.length)
                         ).map((review, i) => <Review {...review} key={i}/>)}
                     </div>
                 </div>
-                {items.length > maxShow && <div className="reviews-hotel__pagination">
+                {reviews.length > maxShow && <div className="reviews-hotel__pagination">
                     <button 
                         className="reviews-hotel__arrow prev" type="button" 
                         disabled={currentPage === 0} onClick={() => setCurrentPage(prev => prev - 1)}
@@ -61,10 +64,11 @@ export const Reviews : FC<ReviewsProps> = ({reviews, shortReview}) => {
                             />
                         </svg>
                     </button>
-                    <div className="reviews-hotel__current">{(currentPage + 1) + " of " + Math.ceil(items.length / maxShow)}</div>
+                    <div className="reviews-hotel__current">{(currentPage + 1) + " of " + Math.ceil(reviews.length / maxShow)}</div>
                     <button 
                         className="reviews-hotel__arrow next" type="button" 
-                        disabled={currentPage === Math.ceil(items.length / maxShow) - 1} onClick={() => setCurrentPage(prev => prev + 1)}
+                        disabled={currentPage === Math.ceil(reviews.length / maxShow) - 1} 
+                        onClick={() => setCurrentPage(prev => prev + 1)}
                     >
                         <svg className="reviews-hotel__arrow-icon" viewBox="0 0 15 8.25" width="15" height="8.25" fill="none">
                             <path
@@ -74,8 +78,7 @@ export const Reviews : FC<ReviewsProps> = ({reviews, shortReview}) => {
                             />
                         </svg>
                     </button>
-                </div>
-                }
+                </div>}
             </div>
         </section>
     )

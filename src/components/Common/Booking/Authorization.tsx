@@ -80,7 +80,7 @@ export const Authorization: FC = () => {
     return(
         <article className="booking__article room__article booking__authorization room__authorization authorization-booking">
             <h2 className="authorization-booking__title">Login or Sign up to book</h2>
-            <Input about={phoneAbout} parentCls={["authorization-booking"]} isInMassive={false} isBigger={false} />
+            <Input about={phoneAbout} parentCls={["authorization-booking__field"]} isInMassive={false} isBigger={false} />
             <div className="authorization-booking__description">We’ll call or text you to confirm your number. Standard message and data rates apply. Privacy Policy</div>
             {phoneValidation(phoneNumber) !== "" 
                 ? <div className="authorization-booking__continue button_green">Continue</div>
