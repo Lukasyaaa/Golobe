@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { AMENITIES, FREEBIES, HOTEL_TYPE, HOTELS_CHOOSE_TYPE, NAVBAR_DESCRIPTION, SITE_PARTS, transformPrice, type Flight, type Hotel, type NavbarFilter, type NavbarRangeValue, type objType, type ShortLocation, type User } from "../types";
+import { AMENITIES, FREEBIES, HOTEL_TYPE, HOTELS_CHOOSE_TYPE, NAVBAR_DESCRIPTION, SITE_PARTS, transformPrice, type Flight, type Hotel, type HotelReview, type NavbarFilter, type NavbarRangeValue, type objType, type ShortLocation, type User } from "../types";
 import type { FetchedState, NavbarFilterAbout, NavbarFilterState } from "../pages/Catalog";
 
 const guestsInRoomCombinations = (guests: number, rooms: number) => {
@@ -71,8 +71,14 @@ export const useHotels = (
         let futureMassive: Hotel[] = [];
         massive.forEach(h => {
             if(ratingMassive.length !== 0){
-                const grades = h.reviews.items.map(r => r.grade);
-                if(grades.reduce((sum, n) => sum + n, 0) / grades.length < parseFloat(ratingMassive[currentRating])){
+                const hotelsReviews = JSON.parse(localStorage.getItem("hotelsReviews") || "[]") as HotelReview[];
+                const currentHotelReviews = hotelsReviews.filter(r => r.hotelId === Number(h.id));
+                let realGrade : number = 0;
+                if(currentHotelReviews.length !== 0){
+                    const grade = currentHotelReviews.reduce((sum, r) => sum += r.grade, 0) / currentHotelReviews.length;
+                    realGrade = grade;
+                }
+                if(realGrade < parseFloat(ratingMassive[currentRating])){
                     return;
                 }
             }

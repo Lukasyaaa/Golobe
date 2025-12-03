@@ -20,8 +20,11 @@ export const Hotel : FC<HotelProps> = ({
 }) => {
     const { id, name, location, amenities, images, starsCount, rooms } = about;
     const favouritesInfo = useFavourites(isInFavourites, id, currentUser, SITE_PARTS.stays);
-    const grade = hotelsReviews.reduce((sum, r) => sum += r.grade, 0) / hotelsReviews.length;
-    const realGrade = isNaN(grade) ? "Unset" : grade;
+    let realGrade : number | "Unset" = "Unset";
+    if(hotelsReviews.length !== 0){
+        const grade = hotelsReviews.reduce((sum, r) => sum += r.grade, 0) / hotelsReviews.length;
+        realGrade = grade;
+    }
     return(
         <article className="hotel">
             <div className="hotel__image-parent">

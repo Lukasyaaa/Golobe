@@ -11,7 +11,7 @@ const getIsHaveSeats = (
         ? "business" : (seatsType === SEATS_TYPE.economy) ? "economy" : "first"
     const usedSeats = 
         users.flatMap(u => u.tickets)
-        .filter(t => t.id === flight.id)
+        .filter(t => t.id ===  Number(flight.id))
         .filter(t => t.seatType === seatsType)
         .map(t => t.seatNumber)
     ;
@@ -215,13 +215,13 @@ export const useFlight = (
             if(airports.length !== 0){
                 if(fromTo !== undefined){
                     const [neededFrom, neededTo] = fromTo.split("-");
-                    const neededAirport = airports.find(a => (a as FetchedState<FetchedAirporstValue>).id === f.id) as FetchedState<FetchedAirporstValue>;
+                    const neededAirport = airports.find(a => (a as FetchedState<FetchedAirporstValue>).id ===  Number(f.id)) as FetchedState<FetchedAirporstValue>;
                     if((neededAirport.value.from.city !== neededFrom || 
                     neededAirport.value.to.city !== neededTo)){
                         return;
                     }
                 } else if(cityOrCountry !== undefined){
-                    const neededAirport = airports.find(a => (a as FetchedState<FetchedAirporstValue>).id === f.id) as FetchedState<FetchedAirporstValue>;
+                    const neededAirport = airports.find(a => (a as FetchedState<FetchedAirporstValue>).id ===  Number(f.id)) as FetchedState<FetchedAirporstValue>;
                     if(cityOrCountry.replace("-", " ") !== neededAirport.value.to.city && 
                     cityOrCountry.replace("-", " ") !== neededAirport.value.to.country) 
                         return;

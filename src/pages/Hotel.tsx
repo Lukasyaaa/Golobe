@@ -63,7 +63,7 @@ export const Hotel : FC = () => {
         let realGrade : number | "Unset" = "Unset";
         if(currentHotelReviews.length !== 0){
             const grade = currentHotelReviews.reduce((sum, r) => sum += r.grade, 0) / currentHotelReviews.length;
-            realGrade = isNaN(grade) ? "Unset" : grade;
+            realGrade = grade;
         }
         return(
             <main className={["hotel-page", isOpened ? "_appear-modal" : ""].filter(Boolean).join(" ")}>
