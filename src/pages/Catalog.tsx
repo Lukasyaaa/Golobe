@@ -291,13 +291,11 @@ export const Catalog: FC<CatalogProps> = ({contentType}) => {
     let [cities, setCities] = useState<(FetchedState<ShortLocation> | null)[]>([]);
     useEffect(() => {
         if(contentType === SITE_PARTS.stays && (destination !== undefined || cityOrCountry !== undefined)){
-            const locations = items.map(_ => ({country: "Turkey", city: "Istanbul"}));
             async function fetchCities() {
                 const results: (FetchedState<ShortLocation> | null)[] = await Promise.all(
-                    (items as HotelType[]).map(async (h, i) => {
-                        /*const location = await getLocaitonByAddress(h.location.text);
-                        return location === null ? null : {id: h.id, value: location};*/
-                        return {id: Number(h.id), value: locations[i]}
+                    (items as HotelType[]).map(async (h) => {
+                        const location = await getLocaitonByAddress(h.location.text);
+                        return location === null ? null : {id: h.id, value: location};
                     })
                 );
                 setCities(results);

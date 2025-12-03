@@ -30,8 +30,7 @@ export const Hotel : FC = () => {
     useEffect(() => {
         if (about !== null) {
             const fetchLocation = async () => {
-                //const location = await getLocaitonByAddress(about.location.text);
-                const location = { country: "Turkey", city: "Istanbul" };
+                const location = await getLocaitonByAddress(about.location.text);
                 setLocation(location);
             };
             fetchLocation();
