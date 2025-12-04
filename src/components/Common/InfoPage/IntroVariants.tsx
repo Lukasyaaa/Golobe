@@ -1,4 +1,4 @@
-import React, { type FC } from "react";
+import { type FC } from "react";
 import { NEEDED_BLOCKS, SITE_PARTS } from "../../../types";
 import type {IntroVariants as IntroVariantsType, objType} from "../../../types";
 import { Options } from "../Options/Options";

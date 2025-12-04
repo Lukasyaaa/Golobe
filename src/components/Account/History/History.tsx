@@ -1,6 +1,6 @@
-import React, { useEffect, useMemo, useState, type FC } from "react";
-import { Select } from "../../Common/Blocks/Select/Select";
-import { addZero, FILL_RULE, getAirlineSrcs, getAirportByIATA, getMonth, getShortDayWeek, ICON_POSITION, MERIDIEM, SELECT_DESCRIPTION_TYPE, SITE_PARTS, STROKE_LINECAP, STROKE_LINEJOIN, timeTo24String, timeToString, type Booking, type Fact, type IconOptionValue, type Ticket, type Time } from "../../../types";
+import { useMemo, useState, type FC } from "react";
+import { SelectText as Select } from "../../Common/Blocks/Select/Select";
+import { addZero, FILL_RULE, getAirlineSrcs, getMonth, getShortDayWeek, ICON_POSITION, MERIDIEM, SELECT_DESCRIPTION_TYPE, SITE_PARTS, STROKE_LINECAP, STROKE_LINEJOIN, timeTo24String, timeToString, type Booking, type Fact, type IconOptionValue, type Ticket, type Time } from "../../../types";
 import { Text } from "../../Common/Blocks/Select/Text";
 import { ChooseIcon } from "../../Common/Blocks/Choose/Choose";
 import { IconOption } from "../../Common/Blocks/Choose/IconOption";

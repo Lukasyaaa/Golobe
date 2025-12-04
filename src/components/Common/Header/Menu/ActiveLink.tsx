@@ -1,4 +1,4 @@
-import React, { type FC, type MouseEvent } from "react";
+import { type FC, type MouseEvent } from "react";
 import { NavLink } from "react-router-dom";
 import type { MenuLink } from "../Header";
 

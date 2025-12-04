@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, type FC } from "react"
+import { Fragment, useEffect, type FC } from "react"
 import { Route, Routes } from "react-router-dom";
 import { useAppDispatch } from "./store";
 import { userSlice } from "./store/user";

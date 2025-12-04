@@ -1,4 +1,4 @@
-import React, {type FC } from "react";
+import {type FC } from "react";
 import { NAVBAR_ITEM } from "../../../types";
 import type { NavbarRangeValue, useStateReturned } from "../../../types";
 import type { CheckboxesState, NavbarFilterAbout, NavbarFilterState, RadiosState } from "../../../pages/Catalog";

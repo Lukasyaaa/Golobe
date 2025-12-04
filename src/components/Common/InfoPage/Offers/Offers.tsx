@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, type FC } from "react"
+import { useEffect, useRef, useState, type FC } from "react"
 import { SectionHeader } from "../../Blocks/SectionHeader"
 import { useAppDispatch } from "../../../../store";
 import { fetchOffers as fetchOffersFlights } from "../../../../store/flights";

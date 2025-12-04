@@ -1,9 +1,9 @@
-import React, { useEffect, useMemo, useState, type FC } from "react";
+import { useEffect, useMemo, useState, type FC } from "react";
 import { Introduction } from "../components/Common/Details/Introduction";
 import { useParams } from "react-router-dom";
 import { useAppDispatch, useTypedSelector } from "../store";
 import { fetchFlights } from "../store/flights";
-import { addZero, FILL_RULE, getAirportByIATA, getDayWeek, getDuration, getFromToIATA, getLocaitonByAddress, getMonth, getSeatsGroup, intToDuration, SEATS_TYPE, SITE_PARTS, STROKE_LINECAP, STROKE_LINEJOIN, timeToInt, timeToString, transformPrice, type Fact, type Flight, type Hotel, type Image, type Link, type objType, type ScheduleParts, type ScheduleSingle } from "../types";
+import { addZero, FILL_RULE, getAirportByIATA, getDayWeek, getDuration, getFromToIATA, getLocaitonByAddress, getMonth, getSeatsGroup, intToDuration, SEATS_TYPE, SITE_PARTS, STROKE_LINECAP, STROKE_LINEJOIN, timeToString, transformPrice, type Fact, type Flight, type Hotel, type Image, type Link, type objType } from "../types";
 import { Terms } from "../components/Common/Details/Terms";
 import { fetchHotels } from "../store/hotels";
 import { useSchedulePart } from "../hooks/useSchedulePart";

@@ -1,6 +1,6 @@
-import React, { useEffect, useMemo, useState, type FC } from "react";
-import { addZero, FLIGHT_AMENITIES, getDayWeek, getMonth, getSeatsGroup, getShortDayWeek, getAirlineSrcs, SEATS_TYPE, SITE_PARTS, timeToInt, timeToString, transformPrice, MERIDIEM, getLocaitonByAddress, getAirportByIATA, getRoomInfo, getDuration, intToDuration, getFromToIATA} from "../types";
-import type {  Flight, Hotel, Image, objType, Point, PriceDetails, ShortReview, Srcs, User, Ticket, Booking as BookingHotel, ScheduleSingle, ScheduleParts } from "../types";
+import { useEffect, useMemo, useState, type FC } from "react";
+import { addZero, FLIGHT_AMENITIES, getDayWeek, getMonth, getSeatsGroup, getShortDayWeek, getAirlineSrcs, SEATS_TYPE, SITE_PARTS, timeToString, transformPrice, MERIDIEM, getLocaitonByAddress, getAirportByIATA, getRoomInfo, getDuration, intToDuration, getFromToIATA} from "../types";
+import type {  Flight, Hotel, Image, objType, Point, PriceDetails, ShortReview, Srcs, User, Ticket, Booking as BookingHotel } from "../types";
 import { useAppDispatch, useTypedSelector } from "../store";
 import { fetchFlights } from "../store/flights";
 import { fetchHotels } from "../store/hotels";

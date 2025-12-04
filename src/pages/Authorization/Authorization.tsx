@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState, type FC } from "react";
+import { useEffect, useMemo, useState, type FC } from "react";
 import { AUTHORIZATION_TYPE, FILL_RULE, STROKE_LINECAP, STROKE_LINEJOIN, FIELD_TYPE, getInputValidation, getInputState, getInputSetState, INPUT_AUTHORIZATION_VALIDATION_TYPE } from "../../types";
 import type { AuthorizationVariant, objType, User, FieldItem, FieldsItem, Field, TwoDataInputValidation, OneDataInputValidation, AboutOneDataPart, AboutTwoDataPart, InputState } from "../../types";
 import { forgotPasswordPath, logInPath, signInPath, startPath } from "../../App";

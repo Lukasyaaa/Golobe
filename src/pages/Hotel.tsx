@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState, type FC } from "react";
+import { useEffect, useMemo, useState, type FC } from "react";
 import { useParams } from "react-router-dom";
 import { useAppDispatch, useTypedSelector } from "../store";
 import { fetchHotels } from "../store/hotels";

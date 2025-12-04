@@ -1,4 +1,4 @@
-import React, { type FC } from "react";
+import { type FC } from "react";
 import { getGrade, getRating, type HotelReview } from "../../../../types";
 
 export const Review : FC<HotelReview> = ({grade, author, review, ava}) => {

@@ -1,5 +1,5 @@
-import React, { type FC } from "react";
-import { FILL_RULE, SITE_PARTS, STROKE_LINECAP, STROKE_LINEJOIN, transformIconViewbox, type Fact as FactType, type IconParams, type Image, type objType, type User } from "../../../types";
+import { type FC } from "react";
+import { FILL_RULE, SITE_PARTS, STROKE_LINECAP, STROKE_LINEJOIN, transformIconViewbox, type Fact as FactType, type IconParams, type Image, type objType} from "../../../types";
 import { Fact } from "../Blocks/Fact";
 import { useTypedSelector } from "../../../store";
 

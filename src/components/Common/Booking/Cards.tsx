@@ -1,4 +1,4 @@
-import React, { useState, type FC } from "react";
+import { useState, type FC } from "react";
 import { addZero, type Card, type useStateReturned } from "../../../types";
 
 interface CardsProps{

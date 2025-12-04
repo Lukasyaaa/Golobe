@@ -1,4 +1,4 @@
-import React, { type FC } from "react";
+import { type FC } from "react";
 import type { Card, useStateReturned } from "../../../types";
 import { AccountPaymentMethod } from "./Method";
 import { AddCard } from "../../Common/Blocks/AddCard";

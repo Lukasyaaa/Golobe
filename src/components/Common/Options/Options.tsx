@@ -1,5 +1,5 @@
-import React, { useEffect, useMemo, useState, type FC, } from "react";
-import { getInputSetState, getInputState, getInputValidation, INPUT_OPTIONS_VALIDATION_TYPE, STROKE_LINECAP, STROKE_LINEJOIN, type OneDataInputValidation, type Field, type IconParams, type InputState, type objType, type SiteSeparation, type TwoDataInputValidation, type AboutOneDataPart, type AboutTwoDataPart, type CheckDateInputValidation, type AboutCheckDateDataPart } from "../../../types.ts";
+import { useEffect, useMemo, useState, type FC, } from "react";
+import { getInputSetState, getInputState, getInputValidation, INPUT_OPTIONS_VALIDATION_TYPE, STROKE_LINECAP, STROKE_LINEJOIN, type OneDataInputValidation, type Field, type IconParams, type InputState, type objType, type SiteSeparation, type AboutOneDataPart, type CheckDateInputValidation, type AboutCheckDateDataPart } from "../../../types.ts";
 import {FILL_RULE, NEEDED_BLOCKS, SITE_PARTS, INPUT_TYPE, ICON_POSITION} from "../../../types.ts";
 import { OptionsHeaderType } from "./HeaderType.tsx";
 import { Input } from "../Blocks/Interaction/Input.tsx";

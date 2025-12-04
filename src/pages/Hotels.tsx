@@ -1,4 +1,4 @@
-import React, { useMemo, type FC } from "react";
+import { useMemo, type FC } from "react";
 import { IntroVariants } from "../components/Common/InfoPage/IntroVariants";
 import { Offers } from "../components/Common/InfoPage/Offers/Offers";
 import { useTypedSelector } from "../store";

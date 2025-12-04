@@ -1,5 +1,5 @@
-import React, { type FC } from "react";
-import type { IconParams, useStateReturned } from "../../../types";
+import { type FC } from "react";
+import type { useStateReturned } from "../../../types";
 import type { HeaderType } from "./Options";
 
 
@@ -33,7 +33,7 @@ export const OptionsHeaderType : FC<OptionsActiveHeaderType | OptionsUnActiveHea
         )
     }
 
-    let [isHoveredOnUnActiveValue, setIsHoveredOnUnActive] = (props as OptionsActiveHeaderType).isHoveredOnUnActive;
+    let [, setIsHoveredOnUnActive] = (props as OptionsActiveHeaderType).isHoveredOnUnActive;
     const makeIsHovered = () => setIsHoveredOnUnActive(true);
     const unMakeIsHovered = () => setIsHoveredOnUnActive(false);
 

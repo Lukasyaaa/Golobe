@@ -1,4 +1,4 @@
-import React, { type FC } from "react";
+import { type FC } from "react";
 import { SITE_PARTS, transformPrice, type HotelReview, type Hotel as HotelType, type User } from "../../../types";
 import { ShortReview } from "../../Common/Blocks/ShortReview";
 import { NavLink } from "react-router-dom";

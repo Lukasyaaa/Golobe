@@ -1,5 +1,5 @@
-import React, { type FC } from "react";
-import { getDuration, intToDuration, timeToInt, timeToString } from "../../../types";
+import { type FC } from "react";
+import { getDuration, intToDuration, timeToString } from "../../../types";
 import type { SchedulePart, useStateReturned } from "../../../types";
 
 interface FlightScheduleLinkProps{

@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { AMENITIES, FREEBIES, HOTEL_TYPE, HOTELS_CHOOSE_TYPE, NAVBAR_DESCRIPTION, SITE_PARTS, transformPrice, type Flight, type Hotel, type HotelReview, type NavbarFilter, type NavbarRangeValue, type objType, type ShortLocation, type User } from "../types";
+import { AMENITIES, FREEBIES, HOTEL_TYPE, HOTELS_CHOOSE_TYPE, NAVBAR_DESCRIPTION, SITE_PARTS, transformPrice, type Hotel, type HotelReview, type NavbarRangeValue, type objType, type ShortLocation, type User } from "../types";
 import type { FetchedState, NavbarFilterAbout, NavbarFilterState } from "../pages/Catalog";
 
 const guestsInRoomCombinations = (guests: number, rooms: number) => {

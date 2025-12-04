@@ -1,4 +1,4 @@
-import React, { type FC } from "react";
+import { type FC } from "react";
 import type { SelectLink } from "../../../../types";
 
 export const TextOption: FC<SelectLink<string>> = ({about, cls}) => {

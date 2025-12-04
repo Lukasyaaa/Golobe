@@ -1,4 +1,4 @@
-import React, { type FC } from "react";
+import { type FC } from "react";
 import { NavLink } from "react-router-dom";
 import type { UserSpoilerItem as UserSpoilerItemType } from "./User";
 import { transformIconViewbox } from "../../../../types";

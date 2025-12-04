@@ -1,11 +1,11 @@
-import React, { useState, type FC } from "react";
+import { useState, type FC } from "react";
 import { FILL_RULE, getInputValidation, ICON_POSITION, INPUT_AUTHORIZATION_VALIDATION_TYPE, SELECT_DESCRIPTION_TYPE, STROKE_LINECAP, STROKE_LINEJOIN } from "../../../types";
-import type { OneDataInputValidation, TwoDataInputValidation, Field, UniqueEmailInputValidation, User, useStateReturned} from "../../../types";
+import type { OneDataInputValidation, TwoDataInputValidation, UniqueEmailInputValidation, User, useStateReturned} from "../../../types";
 import { Input } from "../../Common/Blocks/Interaction/Input";
 import type { ChangeAnother, ChangeEmail } from "./Info";
 import { useAppDispatch, useTypedSelector } from "../../../store";
 import { userSlice } from "../../../store/user";
-import { Select } from "../../Common/Blocks/Select/Select";
+import { SelectText as Select } from "../../Common/Blocks/Select/Select";
 import { Text } from "../../Common/Blocks/Select/Text";
 
 type ChangeInfoProps = (ChangeEmail | ChangeAnother) & { isOpened: useStateReturned<boolean> };

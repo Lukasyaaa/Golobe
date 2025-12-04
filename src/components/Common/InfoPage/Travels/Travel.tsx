@@ -1,4 +1,4 @@
-import React, { useState, type FC } from "react";
+import { useState, type FC } from "react";
 import type { Travel as TravelType } from "../../../../types";
 
 export const Travel : FC<TravelType> = ({city, description, price, image}) => {

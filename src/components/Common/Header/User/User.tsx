@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, type FC, type MouseEvent} from "react";
+import { useEffect, useRef, useState, type FC, type MouseEvent} from "react";
 import { FILL_RULE, STROKE_LINECAP, STROKE_LINEJOIN, type IconParams, type Person, type SiteSeparation, type useStateReturned } from "../../../../types";
 import { UserSpoilerItem } from "./SpoilerItem";
 import { accountPath, favouritesPath, startPath } from "../../../../App";

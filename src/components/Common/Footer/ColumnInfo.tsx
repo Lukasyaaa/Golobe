@@ -1,4 +1,4 @@
-import React, { type FC } from "react";
+import { type FC } from "react";
 import type { Column } from "../../../types";
 
 export const ColumnInfo : FC<Column> = ({title, links}) => {

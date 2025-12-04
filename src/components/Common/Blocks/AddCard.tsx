@@ -1,4 +1,4 @@
-import React, { useState, type FC } from "react";
+import { useState, type FC } from "react";
 import { ADD_CARD_TITLE_FIELD, ADD_CARD_TITLE_SELECT, FILL_RULE, getInputSetState, getInputState, getInputValidation, ICON_POSITION, INPUT_CARD_VALIDATION_TYPE, INPUT_TYPE, STROKE_LINECAP, STROKE_LINEJOIN } from "../../../types";
 import type { OneDataInputValidation, Card, Field, FieldItem, FieldsItem, Icon, InputState, objType, User, useStateReturned } from "../../../types";
 import { Input } from "./Interaction/Input";

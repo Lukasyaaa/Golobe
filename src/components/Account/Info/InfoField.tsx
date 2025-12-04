@@ -1,4 +1,4 @@
-import React, { type FC } from "react";
+import { type FC } from "react";
 import { FILL_RULE, INPUT_AUTHORIZATION_VALIDATION_TYPE, type Field } from "../../../types";
 import type { ChangeInfoField } from "./Info";
 

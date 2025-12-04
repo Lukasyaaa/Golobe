@@ -1,4 +1,4 @@
-import React, { type FC } from "react";
+import { type FC } from "react";
 import type { Room as RoomType } from "../../../../types";
 import { Room } from "./Room";
 

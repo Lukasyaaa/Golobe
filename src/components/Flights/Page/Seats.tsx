@@ -1,4 +1,4 @@
-import React, { Fragment, useState, type FC } from "react";
+import { useState, type FC } from "react";
 import { SEATS_TYPE, type objType, type SeatVariant, type useStateReturned } from "../../../types";
 
 interface SeatsProps{

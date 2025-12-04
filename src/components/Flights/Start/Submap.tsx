@@ -1,4 +1,4 @@
-import React, { type FC } from "react";
+import { type FC } from "react";
 import type { Submap as SubmapType } from "../../../types";
 
 export const Submap : FC<SubmapType> = ({image, arrow, place, boardingPass}) => {

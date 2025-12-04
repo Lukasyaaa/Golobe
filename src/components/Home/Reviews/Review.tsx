@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, type FC } from "react";
+import { useEffect, useRef, useState, type FC } from "react";
 import type { Review as ReviewType } from "../../../types";
 import { Star } from "../../Common/Blocks/Stars/Star";
 

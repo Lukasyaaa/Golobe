@@ -1,5 +1,5 @@
-import React, { useState, type FC } from "react";
-import { dateToString, INPUT_AUTHORIZATION_VALIDATION_TYPE, type DateType, type Field, type objType, type Person, type User, type useStateReturned } from "../../../types";
+import { useState, type FC } from "react";
+import { dateToString, INPUT_AUTHORIZATION_VALIDATION_TYPE, type DateType, type Field, type Person, type useStateReturned } from "../../../types";
 import { AccountInfoField } from "./InfoField";
 import { ChangeInfo } from "./ChangeInfo";
 

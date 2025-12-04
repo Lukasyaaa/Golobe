@@ -1,7 +1,7 @@
-import React, { Fragment, useEffect, useRef, useState, type Dispatch, type FC, type MouseEvent, type SetStateAction } from "react";
+import { Fragment, useState, type Dispatch, type FC, type MouseEvent, type SetStateAction } from "react";
 import { FILL_RULE, ICON_POSITION, SELECT_DESCRIPTION_TYPE, STROKE_LINECAP, STROKE_LINEJOIN, transformIconViewbox} from "../../../../types";
-import type { Icon, objType, useStateReturned } from "../../../../types";
-import { Select } from "../Select/Select";
+import type { Icon, objType } from "../../../../types";
+import { SelectText as Select } from "../Select/Select";
 import { Text } from "../Select/Text";
 
 interface SelectDescriptionProps{
@@ -16,7 +16,7 @@ interface SelectDescriptionProps{
 export const SelectDescription : FC<SelectDescriptionProps> = ({parentCls, icon, description, links, state, setState}) => {
     let [isOpened, setIsOpened] = useState<boolean>(false);
 
-    let [isHovered, setIsHovered] = useState<boolean>(false);
+    let [, setIsHovered] = useState<boolean>(false);
     const makeIsHovered = () => setIsHovered(true);
     const unMakeIsHovered = () => setIsHovered(false);
 

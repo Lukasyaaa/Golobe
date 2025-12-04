@@ -1,4 +1,4 @@
-import React, { useState, type FC } from "react";
+import { useState, type FC } from "react";
 import { AuthorizationImages } from "../../components/Authorization/Images";
 import { NavLink } from "react-router-dom";
 import { setPasswordPath, startPath } from "../../App";

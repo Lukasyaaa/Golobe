@@ -1,4 +1,4 @@
-import React, { useEffect, useState, type FC } from "react"
+import { useEffect, useState, type FC } from "react"
 import { SectionHeader } from "../../Common/Blocks/SectionHeader.tsx"
 import { useAppDispatch, useTypedSelector } from "../../../store";
 import { fetchMap } from "../../../store/flights";

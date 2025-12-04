@@ -1,10 +1,10 @@
-import React, { type FC } from "react";
+import { type FC } from "react";
 import { FILL_RULE, STROKE_LINECAP, STROKE_LINEJOIN } from "../../../../types";
 import { ButtonBorder } from "../../../Common/Blocks/ButtonBorder";
 import { AccountHistorySchedule } from "../Item/Schedule";
-import { SITE_PARTS, type Fact as FactType, type Image, type objType } from "../../../../types";
+import { SITE_PARTS, type Fact as FactType, type Image } from "../../../../types";
 import { Fact } from "../../../Common/Blocks/Fact";
-import { flightsCatalogPath, hotelsCatalogPath, startPath } from "../../../../App";
+import { flightsCatalogPath, hotelsCatalogPath } from "../../../../App";
 
 interface AccountHistoryItemSchedulePart{
     timeFunctionable: string,

@@ -1,4 +1,4 @@
-import React, { useState, type FC } from "react";
+import { useState, type FC } from "react";
 import { FILL_RULE, getInputValidation, INPUT_AUTHORIZATION_VALIDATION_TYPE, STROKE_LINECAP, STROKE_LINEJOIN } from "../../../types";
 import type { AuthorizationVariant, OneDataInputValidation } from "../../../types";
 import { AuthorizationVariants } from "../Blocks/AuthorizationVariants";

@@ -1,4 +1,4 @@
-import React, { type FC } from "react";
+import { type FC } from "react";
 import { NavLink } from "react-router-dom";
 import { favouritesPath } from "../../../../App";
 import type { useStateReturned } from "../../../../types";

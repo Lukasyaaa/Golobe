@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, type FC } from "react";
+import { useEffect, useRef, useState, type FC } from "react";
 import type { CheckboxesAbout } from "../../../pages/Catalog";
 import { NAVBAR_DESCRIPTION } from "../../../types";
 

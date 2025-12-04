@@ -1,4 +1,4 @@
-import React, { type FC } from "react";
+import { type FC } from "react";
 import { transformPrice, type Image, type PriceDetails, type ShortReview as ShortReviewType } from "../../../types";
 import { ShortReview } from "../Blocks/ShortReview";
 

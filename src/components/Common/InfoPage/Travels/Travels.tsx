@@ -1,4 +1,4 @@
-import React, { useEffect, useState, type FC } from "react";
+import { useEffect, useState, type FC } from "react";
 import { SITE_PARTS } from "../../../../types";
 import type {objType, SectionWithHeader, Travel as TravelType} from "../../../../types";
 import { SectionHeader } from "../../Blocks/SectionHeader";

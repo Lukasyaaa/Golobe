@@ -1,4 +1,4 @@
-import React, { type FC } from "react";
+import { type FC } from "react";
 import { transformIconViewbox, type IconOptionValue, type SelectLink } from "../../../../types";
 
 export const IconOption: FC<SelectLink<IconOptionValue>> = ({about, cls}) => {

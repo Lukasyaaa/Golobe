@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useRef, useState, type FC } from "react";
+import { Fragment, useEffect, useState, type FC } from "react";
 import { ICON_POSITION, transformIconViewbox} from "../../../../types";
 import type { OneDataInputValidation, TwoDataInputValidation, Icon, CheckDateInputValidation } from "../../../../types";
 

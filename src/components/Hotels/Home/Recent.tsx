@@ -1,4 +1,4 @@
-import React, { Fragment, type FC } from "react";
+import { Fragment, type FC } from "react";
 import { RecentItem } from "./RecentItem";
 import { useTypedSelector } from "../../../store";
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState, type FC } from "react";
+import { useEffect, useMemo, useState, type FC } from "react";
 import { useParams } from "react-router-dom";
 import { getSeatsGroup, getAirlineSrcs, SEATS_TYPE, SITE_PARTS, transformPrice, getAirportByIATA } from "../types";
 import type { Flight as FlightType, objType, AirportInfo, ScheduleSingle, ScheduleParts} from "../types";

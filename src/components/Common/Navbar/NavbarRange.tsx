@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState, type FC } from "react";
+import { useEffect, useMemo, useRef, useState, type FC } from "react";
 import { intToTime, NAVBAR_ITEM, timeToString } from "../../../types";
 import type { NavbarRangeValue, NavbarRange as NavbarRangeType} from "../../../types";
 

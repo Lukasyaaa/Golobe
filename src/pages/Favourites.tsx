@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState, type FC } from "react";
+import { useEffect, useMemo, useState, type FC } from "react";
 import { useAppDispatch, useTypedSelector } from "../store";
 import { ChooseFull } from "../components/Common/Blocks/Choose/Choose";
 import { FullOption } from "../components/Common/Blocks/Choose/FullOption";

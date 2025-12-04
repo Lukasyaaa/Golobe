@@ -1,4 +1,4 @@
-import React, { type FC } from "react";
+import { type FC } from "react";
 import { ChooseOption } from "./Option.tsx";
 import { flightsPath, hotelsPath } from "../../../App.tsx";
 

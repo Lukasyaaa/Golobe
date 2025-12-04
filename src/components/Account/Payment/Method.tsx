@@ -1,4 +1,4 @@
-import React, { type FC } from "react";
+import { type FC } from "react";
 import { addZero, type Card, type User } from "../../../types";
 import { useTypedSelector } from "../../../store";
 

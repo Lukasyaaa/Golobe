@@ -1,4 +1,4 @@
-import React, { type FC } from "react";
+import { type FC } from "react";
 import { FLIGHT_AMENITIES, type Point } from "../../../types";
 import {SITE_PARTS, type objType, type Srcs} from "../../../types";
 import { FlightAmenities } from "../Blocks/FlightAmenities";

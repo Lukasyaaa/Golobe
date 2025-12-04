@@ -1,5 +1,5 @@
-import React, { Fragment, type ChangeEvent, type FC } from "react";
-import { STROKE_LINECAP, STROKE_LINEJOIN, type Person, type Srcs, type User } from "../../types";
+import { Fragment, type ChangeEvent, type FC } from "react";
+import { STROKE_LINECAP, STROKE_LINEJOIN, type Person, type User } from "../../types";
 import { useAppDispatch } from "../../store";
 import { userSlice } from "../../store/user";
 

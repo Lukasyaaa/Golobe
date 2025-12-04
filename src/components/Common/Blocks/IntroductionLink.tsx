@@ -1,4 +1,4 @@
-import React, { Fragment, type FC } from "react";
+import { Fragment, type FC } from "react";
 import { SITE_PARTS, type objType, type Srcs } from "../../../types";
 import { Location } from "./Location";
 import { NavLink } from "react-router-dom";

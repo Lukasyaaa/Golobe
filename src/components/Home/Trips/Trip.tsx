@@ -1,4 +1,4 @@
-import React, { type FC } from "react";
+import { type FC } from "react";
 import type { Trip as TripType } from "../../../types.ts";
 
 interface TripProps extends TripType{

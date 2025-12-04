@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useRef, useState, type FC } from "react";
+import { useEffect, useRef, useState, type FC } from "react";
 import { AMENITIES, FILL_RULE, FREEBIES, STROKE_LINECAP, STROKE_LINEJOIN, transformIconViewbox, type HotelAmenities, type IconParams, type objType } from "../../../types";
 
 export const Amenities : FC<HotelAmenities> = ({items, maxInColumn, maxShow}) => {

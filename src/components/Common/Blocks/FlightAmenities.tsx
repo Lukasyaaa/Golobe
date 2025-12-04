@@ -1,4 +1,4 @@
-import React, { type FC } from "react";
+import { type FC } from "react";
 import { FILL_RULE, FLIGHT_AMENITIES, STROKE_LINECAP, STROKE_LINEJOIN, transformIconViewbox, type IconParams, type objType } from "../../../types";
 
 interface FlightAmentiesProps{

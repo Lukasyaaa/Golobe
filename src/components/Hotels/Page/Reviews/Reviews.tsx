@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState, type FC } from "react";
+import { useEffect, useRef, useState, type FC } from "react";
 import { getGrade, getRating, type HotelReview, type ShortReview, type useStateReturned } from "../../../../types";
 import { Review } from "./Review";
-import { useAppDispatch, useTypedSelector } from "../../../../store";
+import { useTypedSelector } from "../../../../store";
 
 interface ReviewsProps{
     reviews: HotelReview[],

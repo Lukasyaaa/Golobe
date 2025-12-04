@@ -1,4 +1,4 @@
-import React, { useState, type FC } from "react";
+import { useState, type FC } from "react";
 import type { HotelReview, useStateReturned } from "../../../../types";
 import { useAppDispatch, useTypedSelector } from "../../../../store";
 import { hotelsSlice } from "../../../../store/hotels";

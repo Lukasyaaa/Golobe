@@ -1,4 +1,4 @@
-import React, { type FC } from "react";
+import { type FC } from "react";
 import type { MenuLink } from "../Header";
 
 export const UnActiveLink : FC<MenuLink> = ({uniqueCl, iconValue, description}) => {

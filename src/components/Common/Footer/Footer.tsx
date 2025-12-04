@@ -1,4 +1,4 @@
-import React, { Fragment, type FC } from "react";
+import { Fragment, type FC } from "react";
 import { FILL_RULE } from "../../../types";
 import type { IconParams, objType} from "../../../types";
 import { ColumnSpoiler } from "./ColumnSpoiler";

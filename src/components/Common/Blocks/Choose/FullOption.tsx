@@ -1,4 +1,4 @@
-import React, { Fragment, type FC } from "react";
+import { Fragment, type FC } from "react";
 import type { FullOptionValue, SelectLink } from "../../../../types";
 
 export const FullOption : FC<SelectLink<FullOptionValue>> = ({about, cls}) =>{

@@ -1,4 +1,4 @@
-import React, { type FC } from "react";
+import { type FC } from "react";
 import type { Offer as OfferType } from "../../../../types";
 
 export const Offer : FC<OfferType> = ({heading, description, price, images}) => {

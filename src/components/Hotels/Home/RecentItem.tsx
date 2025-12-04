@@ -1,4 +1,4 @@
-import React, { type FC } from "react";
+import { type FC } from "react";
 import type { RecentItem as RecentItemType } from "../../../types";
 
 export const RecentItem : FC<RecentItemType> = ({image, city, countPlaces}) => {

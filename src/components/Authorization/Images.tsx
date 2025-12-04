@@ -1,4 +1,4 @@
-import React, { useMemo, useState, type FC } from "react";
+import { useMemo, useState, type FC } from "react";
 import type { Image } from "../../types";
 import { useInterval } from "../../hooks/useTimer";
 

@@ -1,6 +1,6 @@
-import React, { type FC, Fragment, useEffect, useRef, type MouseEvent, useState, createElement } from "react";
+import { type FC, Fragment, useEffect, useRef, type MouseEvent, useState, createElement } from "react";
 import { ICON_POSITION, SELECT_DESCRIPTION_TYPE, transformIconViewbox } from "../../../../types";
-import type { IconParams, objType, SelectLink, useStateReturned } from "../../../../types";
+import type { FullOptionValue, IconOptionValue, IconParams, objType, SelectLink, useStateReturned } from "../../../../types";
 import { UnActiveSelectLink } from "./UnActiveLink";
 import { ActiveSelectLink } from "./ActiveLink";
 
@@ -49,7 +49,7 @@ interface SelectWithoutActiveProps<T>{
     onBlurHandler: (() => void) | undefined
 }
 
-type SelectProps<T> = SelectWithActiveProps<T> | SelectWithoutActiveProps<T>;
+export type SelectProps<T> = SelectWithActiveProps<T> | SelectWithoutActiveProps<T>;
 
 export function Select<T>({
     parentCls, description, links, isOpened, iconValue, iconPosition, ChildrenComponent,
@@ -170,3 +170,7 @@ export function Select<T>({
         </Fragment>
     )
 }
+
+export const SelectText = Select<string>;
+export const SelectFullCategory = Select<FullOptionValue>;
+export const SelectIconCategory = Select<IconOptionValue>;

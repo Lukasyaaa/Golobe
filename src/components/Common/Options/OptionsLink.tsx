@@ -1,5 +1,5 @@
-import React, { type FC, type ReactNode } from "react";
-import { getInputSetState, getInputState, INPUT_OPTIONS_VALIDATION_TYPE, MONTHS, SITE_PARTS, type InputState, type objType } from "../../../types";
+import { type FC, type ReactNode } from "react";
+import { getInputState, INPUT_OPTIONS_VALIDATION_TYPE, MONTHS, SITE_PARTS, type InputState, type objType } from "../../../types";
 import { NavLink, useParams } from "react-router-dom";
 import { flightsCatalogPath, hotelsCatalogPath } from "../../../App";
 import { getSelectState, SELECT_OPTIONS_DESCRIPTION, type SelectState } from "./Options";

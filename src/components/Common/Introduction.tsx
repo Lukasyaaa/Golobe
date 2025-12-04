@@ -1,7 +1,7 @@
-import React, { type FC } from "react";
+import { type FC } from "react";
 import { Breadcrumbs } from "./Blocks/Breadcrumbs";
 import { FILL_RULE, SITE_PARTS, STROKE_LINECAP, STROKE_LINEJOIN } from "../../types";
-import { type HotelImages, type Image, type objType, type ShortReview as ShortReviewType } from "../../types";
+import { type HotelImages, type Image, type ShortReview as ShortReviewType } from "../../types";
 import { Location } from "./Blocks/Location";
 import { ShortReview } from "./Blocks/ShortReview";
 import { ButtonBorder } from "./Blocks/ButtonBorder";

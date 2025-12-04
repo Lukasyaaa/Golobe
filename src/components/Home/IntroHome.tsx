@@ -1,4 +1,4 @@
-import React, { type FC } from "react";
+import { type FC } from "react";
 import { Options } from "../Common/Options/Options";
 import { NEEDED_BLOCKS, SITE_PARTS } from "../../types";
 

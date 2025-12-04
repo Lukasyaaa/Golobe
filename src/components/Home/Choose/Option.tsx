@@ -1,4 +1,4 @@
-import React, { type FC } from "react";
+import { type FC } from "react";
 import type { ChooseOption as ChooseOptionType } from "../../../types";
 
 interface ChooseOptionProps extends ChooseOptionType{

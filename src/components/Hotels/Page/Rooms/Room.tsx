@@ -1,4 +1,4 @@
-import React, { type FC } from "react";
+import { type FC } from "react";
 import { getRoomInfo, transformPrice, type Room as RoomType } from "../../../../types";
 import { NavLink } from "react-router-dom";
 import { hotelPath } from "../../../../App";

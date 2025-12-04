@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, type FC } from "react";
+import { useEffect, useRef, useState, type FC } from "react";
 import type { RadiosAbout } from "../../../pages/Catalog";
 
 interface NavbarRadiosProps{

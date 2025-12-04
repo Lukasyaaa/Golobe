@@ -1,4 +1,4 @@
-import React, { useMemo, useState, type FC } from "react";
+import { useMemo, useState, type FC } from "react";
 import { AuthorizationImages } from "../../components/Authorization/Images";
 import { NavLink } from "react-router-dom";
 import { startPath, verifyCodePath } from "../../App";

@@ -1,4 +1,4 @@
-import React, { type FC } from "react";
+import { type FC } from "react";
 import type { HotelLocation } from "../../../types";
 import { Location as LocationRow } from "../../Common/Blocks/Location";
 

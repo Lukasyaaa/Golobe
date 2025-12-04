@@ -1,4 +1,4 @@
-import React, { type FC } from "react";
+import { type FC } from "react";
 
 interface StarProps{
     color: string, width: number, height: number, cl: string

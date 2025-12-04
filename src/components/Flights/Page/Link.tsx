@@ -1,6 +1,6 @@
-import React, { type FC } from "react";
+import { type FC } from "react";
 import { intToDuration, timeTo24String, timeToInt, timeToString, FLIGHT_AMENITIES, getMonth, getShortDayWeek, SITE_PARTS } from "../../../types";
-import type { Image, objType, Time, AirportInfo } from "../../../types";
+import type { Image, objType, Time } from "../../../types";
 import { FlightAmenities } from "../../Common/Blocks/FlightAmenities";
 import { IntroductionLink } from "../../Common/Blocks/IntroductionLink";
 

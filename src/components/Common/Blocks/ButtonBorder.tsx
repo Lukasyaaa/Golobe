@@ -1,4 +1,4 @@
-import React, { type FC } from "react";
+import { type FC } from "react";
 import { transformIconViewbox, type IconParams } from "../../../types";
 import { NavLink } from "react-router-dom";
 

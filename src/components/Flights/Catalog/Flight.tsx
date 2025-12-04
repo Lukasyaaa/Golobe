@@ -1,4 +1,4 @@
-import React, { useMemo, useState, type FC } from "react";
+import { useMemo, useState, type FC } from "react";
 import { AIRLINES, getSchedulePartsCount, getPrice, getAirlineSrcs, SITE_PARTS, TRIP_TYPE } from "../../../types";
 import type {Flight as FlightType, objType, SchedulePart, User} from "../../../types";
 import { ShortReview } from "../../Common/Blocks/ShortReview";

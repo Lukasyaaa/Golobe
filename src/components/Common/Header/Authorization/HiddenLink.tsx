@@ -1,4 +1,4 @@
-import React, { type FC } from "react";
+import { type FC } from "react";
 import type { AuthorizationLink } from "../Header";
 import { NavLink } from "react-router-dom";
 import type { useStateReturned } from "../../../../types";

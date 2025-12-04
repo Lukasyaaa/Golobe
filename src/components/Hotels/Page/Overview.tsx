@@ -1,4 +1,4 @@
-import React, { type FC } from "react";
+import { type FC } from "react";
 import { getGrade, getRating, type ShortReview } from "../../../types";
 
 interface OverviewProps{

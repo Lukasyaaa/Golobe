@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState, type FC } from "react";
+import { useEffect, useMemo, useState, type FC } from "react";
 import { Introduction } from "../components/Account/Introduction";
 import { getAirportByIATA, type objType } from "../types";
 import { ChooseText } from "../components/Common/Blocks/Choose/Choose";

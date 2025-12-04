@@ -1,4 +1,4 @@
-import React, { useEffect, useState, type FC } from "react";
+import { useEffect, useState, type FC } from "react";
 import { SectionHeader } from "../../Common/Blocks/SectionHeader";
 import { useAppDispatch, useTypedSelector } from "../../../store";
 import { fetchReviews } from "../../../store/home";

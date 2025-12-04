@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState, type FC, type MouseEvent} from "react";
+import { Fragment, useEffect, useState, type FC, type MouseEvent} from "react";
 import { useTypedSelector } from "../../../store";
 import { FILL_RULE, type IconParams, type User } from "../../../types";
 import { accountPath, favouritesPath, flightPath, flightsPath, hotelPath, hotelsPath, logInPath, signInPath, startPath } from "../../../App";

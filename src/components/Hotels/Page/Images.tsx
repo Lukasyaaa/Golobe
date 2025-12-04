@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, type FC } from "react";
+import { useEffect, useRef, useState, type FC } from "react";
 import type { HotelImages } from "../../../types";
 
 export const Images: FC<HotelImages> = ({another, main, maxShow}) => {
