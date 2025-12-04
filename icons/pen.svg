@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 19.5 19.5"
+   width="19.5"
+   height="19.5"
+   fill="none"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="pen.svg"
+   inkscape:version="1.4.2 (f4327f4, 2025-05-13)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="32.208333"
+     inkscape:cx="12"
+     inkscape:cy="12"
+     inkscape:window-width="1920"
+     inkscape:window-height="991"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg1" />
+  <path
+     id="Vector"
+     d="m 1.8041331,16.59732 -0.77297,1.8713 1.87125,-0.773 12.7874999,-12.7561 -1.1297,-1.12969 z M 16.559913,1.81014 l 1.1297,1.12969 0.5526,-0.55265 c 0.1451,-0.14512 0.2265,-0.34188 0.2265,-0.54704 0,-0.20515 -0.0814,-0.40191 -0.2265,-0.54703 l -0.0351,-0.03515 c -0.0719,-0.07188 -0.1572,-0.12889 -0.2511,-0.16779 -0.0939,-0.0389 -0.1945,-0.05892 -0.2962,-0.05892 -0.1016,0 -0.2023,0.02002 -0.2962,0.05892 -0.0939,0.0389 -0.1792,0.09591 -0.251,0.16779 z"
+     fill-rule="nonzero"
+     stroke="#000000"
+     stroke-linecap="round"
+     stroke-linejoin="round"
+     stroke-width="2.0625" />
+</svg>
