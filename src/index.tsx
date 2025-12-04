@@ -6,7 +6,7 @@ import { App } from './App.tsx'
 
 createRoot(document.getElementById('root')!).render(
     <Provider store={store}>
-        <BrowserRouter>
+        <BrowserRouter basename='/Golobe'>
             <App />
         </BrowserRouter>
     </Provider>
