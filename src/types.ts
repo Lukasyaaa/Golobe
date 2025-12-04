@@ -870,23 +870,23 @@ export const getAirlineSrcs = (desc : objType<typeof AIRLINES>) : Srcs => {
     switch(desc){
         case AIRLINES.emirated:
             return {
-                webp: "/public/img/flights/items/airlines/emirates.webp", 
-                jpeg: "/public/img/flights/items/airlines/emirates.png"
+                webp: "/img/flights/items/airlines/emirates.webp", 
+                jpeg: "/img/flights/items/airlines/emirates.png"
             };
         case AIRLINES.etihad:
             return {
-                webp: "/public/img/flights/items/airlines/etihad.webp", 
-                jpeg: "/public/img/flights/items/airlines/etihad.png"
+                webp: "/img/flights/items/airlines/etihad.webp", 
+                jpeg: "/img/flights/items/airlines/etihad.png"
             };
         case AIRLINES.qatar:
             return {
-                webp: "/public/img/flights/items/airlines/qatar.webp", 
-                jpeg: "/public/img/flights/items/airlines/qatar.png"
+                webp: "/img/flights/items/airlines/qatar.webp", 
+                jpeg: "/img/flights/items/airlines/qatar.png"
             };
         case AIRLINES.flyDubai:
             return {
-                webp: "/public/img/flights/items/airlines/flydubai.webp", 
-                jpeg: "/public/img/flights/items/airlines/flydubai.png"
+                webp: "/img/flights/items/airlines/flydubai.webp", 
+                jpeg: "/img/flights/items/airlines/flydubai.png"
             };
     }
 }

@@ -8,8 +8,8 @@ export const Choose : FC = () => {
         description : "Search Flights & Places Hire to our most popular destinations",
         button : "Show Filghts",
         background : { 
-            jpeg: "public/img/start/choose/flights/image.jpg", 
-            webp: "public/img/start/choose/flights/image.webp" 
+            jpeg: "/img/start/choose/flights/image.jpg", 
+            webp: "/img/start/choose/flights/image.webp" 
         }
     }
     const hotelsPart = {
@@ -17,8 +17,8 @@ export const Choose : FC = () => {
         description : "Search hotels & Places Hire to our most popular destinations",
         button : "Show Hotels",
         background : { 
-            jpeg: "public/img/start/choose/hotels/image.jpg", 
-            webp: "public/img/start/choose/hotels/image.webp" 
+            jpeg: "/img/start/choose/hotels/image.jpg", 
+            webp: "/img/start/choose/hotels/image.webp" 
         }
     }
 
