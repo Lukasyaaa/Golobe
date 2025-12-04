@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createFetchThunk, HOTELS_CHOOSE_TYPE} from "../types";
+import { createFetchFromDB, HOTELS_CHOOSE_TYPE} from "../types";
 import type { Catalog, Hotel, HotelReview, objType, Offer, RecentItem, Section, Travel } from "../types";
 
 interface HotelsStart{
@@ -35,9 +35,9 @@ const initialState : Hotels = {
     ]
 }
 
-export const fetchTravels = createFetchThunk<Travel[]>('hotelsTravels/fetchAll', 'hotelsTravels');
-export const fetchOffers = createFetchThunk<Offer[]>('hotelsOffers/fetchAll', 'hotelsOffers');
-export const fetchHotels = createFetchThunk<Hotel[]>('hotels/fetchAll', 'hotels');
+export const fetchTravels = createFetchFromDB<Travel[]>('hotelsTravels');
+export const fetchOffers = createFetchFromDB<Offer[]>('hotelsOffers');
+export const fetchHotels = createFetchFromDB<Hotel[]>('hotels');
 
 export const hotelsSlice = createSlice({
     name: "hotels",

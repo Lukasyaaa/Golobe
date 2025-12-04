@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createFetchThunk, FLIGHTS_CHOOSE_TYPE } from "../types";
+import { createFetchFromDB, FLIGHTS_CHOOSE_TYPE } from "../types";
 import type { Catalog, Flight, objType, Offer, Section, Submap, Travel} from "../types";
 
 interface FlightsStart{
@@ -33,10 +33,10 @@ const initialState : Flights = {
     }
 }
 
-export const fetchTravels = createFetchThunk<Travel[]>('flightsTravels/fetchAll', 'flightsTravels');
-export const fetchOffers = createFetchThunk<Offer[]>('flightsOffers/fetchAll', 'flightsOffers');
-export const fetchMap = createFetchThunk<Submap[]>('map/fetchAll', 'map');
-export const fetchFlights = createFetchThunk<Flight[]>('flights/fetchAll', 'flights');
+export const fetchTravels = createFetchFromDB<Travel[]>('flightsTravels');
+export const fetchOffers = createFetchFromDB<Offer[]>('flightsOffers');
+export const fetchMap = createFetchFromDB<Submap[]>('map');
+export const fetchFlights = createFetchFromDB<Flight[]>('flights');
 
 export const flightsSlice = createSlice({
     name: "flights",

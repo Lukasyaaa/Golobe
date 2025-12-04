@@ -7,13 +7,19 @@ export const Choose : FC = () => {
         heading : "Flights",
         description : "Search Flights & Places Hire to our most popular destinations",
         button : "Show Filghts",
-        background : { jpeg: "/img/start/choose/flights/image.jpg", webp: "/img/start/choose/flights/image.webp" }
+        background : { 
+            jpeg: "public/img/start/choose/flights/image.jpg", 
+            webp: "public/img/start/choose/flights/image.webp" 
+        }
     }
     const hotelsPart = {
         heading : "Hotels",
         description : "Search hotels & Places Hire to our most popular destinations",
         button : "Show Hotels",
-        background : { jpeg: "/img/start/choose/hotels/image.jpg", webp: "/img/start/choose/hotels/image.webp" }
+        background : { 
+            jpeg: "public/img/start/choose/hotels/image.jpg", 
+            webp: "public/img/start/choose/hotels/image.webp" 
+        }
     }
 
     return(

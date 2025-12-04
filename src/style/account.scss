@@ -649,7 +649,7 @@
         position: relative;
         &::after{
             content: "";
-            background-image: url("public/icons/visa.svg");
+            background-image: url("/public/icons/visa.svg");
             background-repeat: no-repeat; background-size: contain;
             position: absolute; right: variables.toRem(16); bottom: variables.toRem(30.49);
             width: variables.toRem(51.77); height: variables.toRem(32.51);

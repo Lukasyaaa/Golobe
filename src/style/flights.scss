@@ -42,7 +42,7 @@
         }
         &::before{
             content: "";
-            background: url("public/img/flights/home/map/background/image.png");
+            background: url("/public/img/flights/home/map/background/image.png");
             background-size: cover; background-repeat: no-repeat;
             background-position: center;
             position: absolute; z-index: 2; left: 50%; top: 0; transform: translateX(-50%);

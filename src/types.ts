@@ -6,13 +6,16 @@ import airports from "../airports.json";
 /*------------COMMON------------*/
 export type useStateReturned<T> = [T, Dispatch<SetStateAction<T>>]
 export type objType<T> = T[keyof T];
-export const createFetchThunk = <T>(typePrefix: string, endPoint: string) => {
-    return createAsyncThunk<T>(typePrefix, async () => {
-        const response = await fetch('http://localhost:5000/' + endPoint);
-        if (!response.ok) throw new Error(`Failed to load data!`);
-        return (await response.json()) as T;
-    });
-};
+export const createFetchFromDB = <T>(key: string) =>
+  createAsyncThunk<T>(`${key}/fetchAll`, async () => {
+    const response = await fetch('/Golobe/db.json');
+    if (!response.ok) throw new Error('Failed to load data!');
+    const data = await response.json();
+
+    if (!(key in data)) throw new Error(`Key "${key}" not found in db.json`);
+    return data[key] as T;
+});
+
 
 export const SITE_PARTS = {
     flights: "Flights",

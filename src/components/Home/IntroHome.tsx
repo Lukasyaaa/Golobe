@@ -9,8 +9,8 @@ export const IntroHome : FC = () => {
                 className="intro__inner" 
                 style={{
                     backgroundImage: `url(${document.body.classList.contains("webp") 
-                        ? "/img/start/intro/background.webp" 
-                        : "/img/start/intro/background.jpg"
+                        ? "public/img/start/intro/background.webp" 
+                        : "public/img/start/intro/background.jpg"
                     })`,
                     backgroundSize: "cover", backgroundRepeat: "no-repeat",
                     backgroundPosition: "center"

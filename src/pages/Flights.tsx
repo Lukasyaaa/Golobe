@@ -14,8 +14,8 @@ export const Flights : FC = () =>{
             heading: "Make your travel whishlist, we’ll do the rest",
             subheading: "Special offers to suit your plan",
             background: { 
-                jpeg: "/img/flights/home/banner/background.jpg", 
-                webp: "/img/flights/home/banner/background.webp" 
+                jpeg: "public/img/flights/home/banner/background.jpg", 
+                webp: "public/img/flights/home/banner/background.webp" 
             }
         }), []
     )

@@ -1,9 +1,9 @@
 @font-face {
     font-family: "TradeGothic";
     font-display: swap; font-weight: 700; font-style: normal;
-    src: url("public/fonts/TradeGothic.woff2") format("woff2"),
-    url("public/fonts/TradeGothic.woff") format("woff"),
-    url("public/fonts/TradeGothic.ttf") format("truetype");
+    src: url("/public/fonts/TradeGothic.woff2") format("woff2"),
+    url("/public/fonts/TradeGothic.woff") format("woff"),
+    url("/public/fonts/TradeGothic.ttf") format("truetype");
 }
 
 @function toPx($px){
@@ -975,7 +975,7 @@ label.button_green:not(:disabled):hover, button.button_green:not(:disabled):hove
             content: "";
             position: absolute; right: toRem(-16); top: 50%; 
             transform: translateY(-50%) translateX(50%) rotate(270deg);
-            background: url("public/icons/arrow_bottom.svg");
+            background: url("/public/icons/arrow_bottom.svg");
             background-repeat: no-repeat; background-size: contain;
             width: toRem(12); height: toRem(6);
         }
@@ -1677,7 +1677,7 @@ label.button_green:not(:disabled):hover, button.button_green:not(:disabled):hove
     
     @media (min-width: toEm(481, 16)) {
         &__schedule::after{
-            background-image: url("public/icons/appartments.svg");
+            background-image: url("/public/icons/appartments.svg");
             width: toRem(42); height: toRem(45);
         }
         @media (max-width: toEm(992, 16)) {
@@ -1785,7 +1785,7 @@ label.button_green:not(:disabled):hover, button.button_green:not(:disabled):hove
 
     @media (min-width: toEm(481, 16)) {
         &__schedule::after{
-            background-image: url("public/icon/plane.svg");
+            background-image: url("/public/icon/plane.svg");
             width: toRem(45); height: toRem(39);
         }
         @media (max-width: toEm(992, 16)) {
@@ -2865,7 +2865,7 @@ main._appear-modal .modal{
             flex-direction: column;
             position: relative;
             &::after{
-                content: ""; background-image: url("public/img/flights/items/details/line.png");
+                content: ""; background-image: url("/public/img/flights/items/details/line.png");
                 background-repeat: no-repeat; background-size: contain;
                 position: absolute; z-index: 1; left: 50%; top: 50%; transform: translateX(-50%) translateY(-50%);
                 width: toPercent(272.37, 375); padding-bottom: toPercent(122.68, 375);

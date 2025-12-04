@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createFetchThunk, type Review, type Section, type Trip } from "../types";
+import { createFetchFromDB, type Review, type Section, type Trip } from "../types";
 
 interface HomePage {
     trips: Section<Trip>,
@@ -15,8 +15,8 @@ const initialState: HomePage = {
     },
 };
 
-export const fetchTrips = createFetchThunk<Trip[]>('trips/fetchAll', 'trips');
-export const fetchReviews = createFetchThunk<Review[]>('reviews/fetchAll', 'reviews');
+export const fetchTrips = createFetchFromDB<Trip[]>('trips');
+export const fetchReviews = createFetchFromDB<Review[]>('reviews');
 
 export const homeSlice = createSlice({
     name: "home",
