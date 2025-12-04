@@ -7,7 +7,7 @@
             position: relative; z-index: 4;
         }
         &__newsletter::after{
-            content: ""; background: url("/public/img/footer/post.svg"); 
+            content: ""; background: url("public/img/footer/post.svg"); 
             background-repeat: no-repeat; background-size: contain;
             position: absolute; z-index: 3;
             right: variables.toRem(24); bottom: 0;

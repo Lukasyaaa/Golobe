@@ -42,7 +42,7 @@
         }
         &::before{
             content: "";
-            background: url("/public/img/flights/home/map/background/image.png");
+            background: url("public/img/flights/home/map/background/image.png");
             background-size: cover; background-repeat: no-repeat;
             background-position: center;
             position: absolute; z-index: 2; left: 50%; top: 0; transform: translateX(-50%);
@@ -979,7 +979,7 @@
                 content: "";
                 position: absolute; left: 50%; top: 50%; transform: translateY(-50%) translateX(-50%);
                 width: variables.toRem(45); height: variables.toRem(39);
-                background: url("../assets/icons/plane.svg");
+                background: url("public/icons/plane.svg");
                 background-size: contain; background-repeat: no-repeat;
             }
         }
