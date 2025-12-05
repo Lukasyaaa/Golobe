@@ -1,21 +1,38 @@
 
 import type { Dispatch, SetStateAction } from "react";
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import airports from "../airports.json";
+import airports from "./data/airports.json";
+import dataBase from "./data/db.json";
+import etihadJpeg from "./assets/flights/airlines/etihad.png";
+import etihadWebp from "./assets/flights/airlines/etihad.webp";
+import emiratesJpeg from "./assets/flights/airlines/emirates.png";
+import emiratesWebp from "./assets/flights/airlines/emirates.webp";
+import flydubaiJpeg from "./assets/flights/airlines/flydubai.png";
+import flydubaiWebp from "./assets/flights/airlines/flydubai.webp";
+import qatarJpeg from "./assets/flights/airlines/qatar.png";
+import qatarWebp from "./assets/flights/airlines/qatar.webp";
 
 /*------------COMMON------------*/
 export type useStateReturned<T> = [T, Dispatch<SetStateAction<T>>]
 export type objType<T> = T[keyof T];
-export const createFetchFromDB = <T>(key: string) =>
-  createAsyncThunk<T>(`${key}/fetchAll`, async () => {
-    const response = await fetch('/Golobe/db.json');
-    if (!response.ok) throw new Error('Failed to load data!');
-    const data = await response.json();
+interface DB {
+    trips: Trip[],
+    reviews: Review[],
+    hotels: Hotel[],
+    hotelsOffers: Offer[],
+    hotelsTravels: Travel[],
+    flights: Flight[],
+    flightsOffers: Offer[],
+    flightsTravels: Travel[],
+    map: Submap[]
+}
 
-    if (!(key in data)) throw new Error(`Key "${key}" not found in db.json`);
-    return data[key] as T;
+export const createFetchFromDB = <K extends keyof DB>(key: K) =>
+    createAsyncThunk<DB[K]>(`${key}/fetchAll`, async () => {
+        const data = dataBase as DB;
+        if (!(key in data)) throw new Error(`Key "${key}" not found in db.json`);
+        return data[key];
 });
-
 
 export const SITE_PARTS = {
     flights: "Flights",
@@ -869,38 +886,15 @@ export const getFlyDuration = (
 export const getAirlineSrcs = (desc : objType<typeof AIRLINES>) : Srcs => {
     switch(desc){
         case AIRLINES.emirated:
-            return {
-                webp: "/img/flights/items/airlines/emirates.webp", 
-                jpeg: "/img/flights/items/airlines/emirates.png"
-            };
+            return { webp: emiratesWebp, jpeg: emiratesJpeg };
         case AIRLINES.etihad:
-            return {
-                webp: "/img/flights/items/airlines/etihad.webp", 
-                jpeg: "/img/flights/items/airlines/etihad.png"
-            };
+            return { webp: etihadWebp, jpeg: etihadJpeg };
         case AIRLINES.qatar:
-            return {
-                webp: "/img/flights/items/airlines/qatar.webp", 
-                jpeg: "/img/flights/items/airlines/qatar.png"
-            };
+            return { webp: qatarWebp, jpeg: qatarJpeg };
         case AIRLINES.flyDubai:
-            return {
-                webp: "/img/flights/items/airlines/flydubai.webp", 
-                jpeg: "/img/flights/items/airlines/flydubai.png"
-            };
+            return { webp: flydubaiWebp, jpeg: flydubaiJpeg };
     }
 }
-
-/*export interface Airline{
-    description: objType<typeof AIRLINES>,
-    srcs: Srcs
-}*/
-/*export interface Airlines{
-    emirated: Srcs,
-    etihad: Srcs,
-    flyDubai: Srcs,
-    qatar: Srcs
-}*/
 
 export interface SeatVariant{
     images: Image[],

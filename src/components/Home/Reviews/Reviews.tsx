@@ -23,6 +23,7 @@ export const Reviews : FC = () => {
         )
     }
     if(error !== null){
+        console.log(error);
         return(
             <section className="reviews">
                 <div className="container">

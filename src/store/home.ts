@@ -15,8 +15,8 @@ const initialState: HomePage = {
     },
 };
 
-export const fetchTrips = createFetchFromDB<Trip[]>('trips');
-export const fetchReviews = createFetchFromDB<Review[]>('reviews');
+export const fetchTrips = createFetchFromDB('trips');
+export const fetchReviews = createFetchFromDB('reviews');
 
 export const homeSlice = createSlice({
     name: "home",
@@ -25,13 +25,16 @@ export const homeSlice = createSlice({
     extraReducers: builder => {
         builder
         .addCase(fetchTrips.pending, state => {
+            console.log("pending");
             state.trips.isLoading = true;
         })
         .addCase(fetchTrips.fulfilled, (state, action) => {
+            console.log("fulfilled");
             state.trips.isLoading = false;
             state.trips.items = action.payload;
         })
         .addCase(fetchTrips.rejected, (state, action) => {
+            console.log("error");
             let {message} = action.error;
             state.trips.isLoading = false;
             state.trips.error = (message === undefined) ? null : message;

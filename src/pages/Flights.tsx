@@ -5,6 +5,8 @@ import { SITE_PARTS } from "../types";
 import { Travels } from "../components/Common/InfoPage/Travels/Travels";
 import { Offers } from "../components/Common/InfoPage/Offers/Offers";
 import { Map } from "../components/Flights/Start/Map";
+import IntroJpeg from "../assets/flights/banner/background.jpg";
+import IntroWebp from "../assets/flights/banner/background.webp";
 
 export const Flights : FC = () =>{
     const about = useTypedSelector(state => state.flights.start);
@@ -14,8 +16,8 @@ export const Flights : FC = () =>{
             heading: "Make your travel whishlist, we’ll do the rest",
             subheading: "Special offers to suit your plan",
             background: { 
-                jpeg: "/img/flights/home/banner/background.jpg", 
-                webp: "/img/flights/home/banner/background.webp" 
+                jpeg: IntroJpeg, 
+                webp: IntroWebp 
             }
         }), []
     )

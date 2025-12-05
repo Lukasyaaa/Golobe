@@ -35,9 +35,9 @@ const initialState : Hotels = {
     ]
 }
 
-export const fetchTravels = createFetchFromDB<Travel[]>('hotelsTravels');
-export const fetchOffers = createFetchFromDB<Offer[]>('hotelsOffers');
-export const fetchHotels = createFetchFromDB<Hotel[]>('hotels');
+export const fetchTravels = createFetchFromDB('hotelsTravels');
+export const fetchOffers = createFetchFromDB('hotelsOffers');
+export const fetchHotels = createFetchFromDB('hotels');
 
 export const hotelsSlice = createSlice({
     name: "hotels",

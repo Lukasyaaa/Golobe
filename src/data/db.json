@@ -2653,7 +2653,10 @@
             "logo": {"webp": "img/hotels/items/4/logo/image.webp", "jpeg": "img/hotels/items/4/logo/image.png"},
             "location": {
                 "image": { 
-                    "srcs": { "jpeg": "img/hotels/items/3/location/image.jpg", "webp": "img/hotels/items/3/location/image.webp"}, 
+                    "srcs": { 
+                        "jpeg": "img/hotels/items/3/location/image.jpg", 
+                        "webp": "img/hotels/items/3/location/image.webp"
+                    }, 
                     "alt": "Hotel Location" 
                 },
                 "text": "Gümüssuyu Mah. Inönü Cad. No:8, Istanbul 34437"

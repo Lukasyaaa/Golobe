@@ -1,5 +1,10 @@
 @use "./settings/variables.scss";
 
+.body.webp .map{
+    &__items::before{
+        background-image: url("../assets/flights/map/image.webp");
+    }
+}
 .map{
     overflow: hidden;
     padding-top: variables.toRem(80);
@@ -42,7 +47,7 @@
         }
         &::before{
             content: "";
-            background: url("/img/flights/home/map/background/image.png");
+            background-image: url("../assets/flights/map/image.png");
             background-size: cover; background-repeat: no-repeat;
             background-position: center;
             position: absolute; z-index: 2; left: 50%; top: 0; transform: translateX(-50%);
@@ -979,7 +984,7 @@
                 content: "";
                 position: absolute; left: 50%; top: 50%; transform: translateY(-50%) translateX(-50%);
                 width: variables.toRem(45); height: variables.toRem(39);
-                background: url("/icons/plane.svg");
+                background: url("../assets/icons/plane.svg");
                 background-size: contain; background-repeat: no-repeat;
             }
         }

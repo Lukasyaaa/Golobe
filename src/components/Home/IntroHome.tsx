@@ -1,6 +1,8 @@
 import { type FC } from "react";
 import { Options } from "../Common/Options/Options";
 import { NEEDED_BLOCKS, SITE_PARTS } from "../../types";
+import IntroJpeg from "../../assets/start/banner/background.jpg";
+import IntroWebp from "../../assets/start/banner/background.webp";
 
 export const IntroHome : FC = () => {
     return(
@@ -9,8 +11,8 @@ export const IntroHome : FC = () => {
                 className="intro__inner" 
                 style={{
                     backgroundImage: `url(${document.body.classList.contains("webp") 
-                        ? "/img/start/intro/background.webp" 
-                        : "/img/start/intro/background.jpg"
+                        ? IntroWebp 
+                        : IntroJpeg
                     })`,
                     backgroundSize: "cover", backgroundRepeat: "no-repeat",
                     backgroundPosition: "center"

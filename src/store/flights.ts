@@ -33,10 +33,10 @@ const initialState : Flights = {
     }
 }
 
-export const fetchTravels = createFetchFromDB<Travel[]>('flightsTravels');
-export const fetchOffers = createFetchFromDB<Offer[]>('flightsOffers');
-export const fetchMap = createFetchFromDB<Submap[]>('map');
-export const fetchFlights = createFetchFromDB<Flight[]>('flights');
+export const fetchTravels = createFetchFromDB('flightsTravels');
+export const fetchOffers = createFetchFromDB('flightsOffers');
+export const fetchMap = createFetchFromDB('map');
+export const fetchFlights = createFetchFromDB('flights');
 
 export const flightsSlice = createSlice({
     name: "flights",

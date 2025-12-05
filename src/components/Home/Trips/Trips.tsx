@@ -39,6 +39,7 @@ export const Trips : FC = () =>{
         )
     }
     if(error !== null || countries.includes(null)){
+        console.log(error);
         return(
             <section className="trips">
                 <div className="container">

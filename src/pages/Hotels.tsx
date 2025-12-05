@@ -5,6 +5,8 @@ import { useTypedSelector } from "../store";
 import { SITE_PARTS } from "../types";
 import { Travels } from "../components/Common/InfoPage/Travels/Travels";
 import { Recent } from "../components/Hotels/Home/Recent";
+import IntroJpeg from "../assets/hotels/banner/background.jpg";
+import IntroWebp from "../assets/hotels/banner/background.webp";
 
 export const Hotels : FC = () =>{
     const about = useTypedSelector(state => state.hotels.start);
@@ -14,8 +16,8 @@ export const Hotels : FC = () =>{
             heading: "Make your travel whishlist, we’ll do the rest",
             subheading: "Special offers to suit your plan",
             background: { 
-                jpeg: "public/img/hotels/home/banner/background.jpg", 
-                webp: "public/img/hotels/home/banner/background.webp" 
+                jpeg: IntroJpeg, 
+                webp: IntroWebp 
             }
         }), []
     )
