@@ -23,6 +23,7 @@ interface AuthorizationProps{
 export const Authorization: FC<AuthorizationProps> = ({type}) => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
+    const users = JSON.parse(localStorage.getItem("users") || "[]") as User[];
 
     let [isAgree, setIsAgree] = useState<boolean>(false);
     const toggleIsAgree = () => setIsAgree(prev => !prev);
@@ -342,6 +343,9 @@ export const Authorization: FC<AuthorizationProps> = ({type}) => {
     };
     let [error, setError] = useState<string>("");
 
+    let [isHovered, setIsHovered] = useState<boolean>(false);
+    const makeUnHovered = () => setIsHovered(false);
+    const makeHovered = () => setIsHovered(true);
     return(
         <main 
             className={[
@@ -380,13 +384,20 @@ export const Authorization: FC<AuthorizationProps> = ({type}) => {
                             className={[
                                 "sign-in__checkbox", "authorization-page__checkbox",
                                 "checkbox-sign-in", "checkbox-authorization-page",
-                                isAgree ? "_checked" : ""
+                                isAgree ? "_checked" : "",
+                                isHovered ? "_hovered" : ""
                             ].filter(Boolean).join(" ")}
                         >
                             <div className="checkbox-sign-in__input-parent checkbox-authorization-page__input-parent">
                                 <input 
                                     className="checkbox-sign-in__input checkbox-authorization-page__input" 
                                     type="checkbox" id="is-agree" checked={isAgree} onChange={toggleIsAgree}
+                                    onClick={makeUnHovered} onMouseLeave={(e) => {
+                                        if(e.currentTarget !== document.activeElement){
+                                            makeUnHovered();
+                                        }
+                                    }} onMouseEnter={makeHovered} onFocus={makeHovered}
+                                    onBlur={makeUnHovered}
                                 />
                             </div>
                             <label className="checkbox-sign-in__subinput checkbox-authorization-page__subinput" htmlFor="is-agree">
@@ -397,12 +408,19 @@ export const Authorization: FC<AuthorizationProps> = ({type}) => {
                             <div className={[
                                 "login__checkbox", "authorization-page__checkbox",
                                 "checkbox-login", "checkbox-authorization-page", "in-row",
-                                isAgree ? "_checked" : ""
+                                isAgree ? "_checked" : "",
+                                isHovered ? "_hovered" : ""
                             ].filter(Boolean).join(" ")}>
                                 <div className="checkbox-login__input-parent checkbox-authorization-page__input-parent">
                                     <input 
                                         className="checkbox-login__input checkbox-authorization-page__input" 
                                         type="checkbox" id="is-agree" checked={isAgree} onChange={toggleIsAgree}
+                                        onClick={makeUnHovered} onMouseLeave={(e) => {
+                                            if(e.currentTarget !== document.activeElement){
+                                                makeUnHovered();
+                                            }
+                                        }} onMouseEnter={makeHovered} onFocus={makeHovered}
+                                        onBlur={makeUnHovered}
                                     />
                                 </div>
                                 <label className="checkbox-login__subinput checkbox-authorization-page__subinput" htmlFor="is-agree">
@@ -422,7 +440,11 @@ export const Authorization: FC<AuthorizationProps> = ({type}) => {
                         {error}
                     </div>
                     <div className={`${info.parentCl}__to-another authorization-page__to-another`}>
-                        {info.linkToAnother.pre} <NavLink to={info.linkToAnother.path}>{info.linkToAnother.main}</NavLink>
+                        {info.linkToAnother.pre} 
+                        {type === AUTHORIZATION_TYPE.signIn
+                            ? users.length !== 0 && <NavLink to={info.linkToAnother.path}>{info.linkToAnother.main}</NavLink>
+                            : <NavLink to={info.linkToAnother.path}>{info.linkToAnother.main}</NavLink>
+                        }
                     </div>
                     <div className={`${info.parentCl}__or authorization-page__or authorization-part__or`}><span>{info.or}</span></div>
                     <AuthorizationVariants parentCls={[info.parentCl, "authorization-page", "authorization-part"]} about={info.variants} />

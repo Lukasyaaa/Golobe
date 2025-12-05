@@ -137,15 +137,15 @@ export const Booking: FC<BookingProps> = ({contentType}) => {
                 image: flightPart.image, title: flightPart.airline + " " + flightPart.plane, 
                 suptitle: String(options),
                 shortReview: {countReviews: flight.countReviews, rating: flight.rating}, 
-                priceDetails: getSeatsGroup(seatsType as objType<typeof SEATS_TYPE>, flightPart).price,
+                priceDetails: getSeatsGroup((seatsType as string).replace("-", " ") as objType<typeof SEATS_TYPE>, flightPart).price,
                 heading: flightPart.airline + " " + flightPart.plane, 
-                price: transformPrice(getSeatsGroup(seatsType as objType<typeof SEATS_TYPE>, flightPart).price),
+                price: transformPrice(getSeatsGroup((seatsType as string).replace("-", " ") as objType<typeof SEATS_TYPE>, flightPart).price),
                 linkLogo: getAirlineSrcs(flightPart.airline), 
                 linkTitle: flightPart.airline, linkText: flightPart.plane, 
                 linkPath: flightPath + "/" + id + "/" + options + "/" + seatsType + "/Details",
                 linkOnClick: () => {
                     const newTicket: Ticket = {
-                        id: Number(flight.id), seatType: seatsType as objType<typeof SEATS_TYPE>,
+                        id: Number(flight.id), seatType: (seatsType as string).replace("-", " ") as objType<typeof SEATS_TYPE>,
                         airline: flightPart.airline, gate: flightPart.gate, seatNumber: seatsNumber,
                         departDate: flightPart.departTime, arrayDate: flightPart.arrayTime,
                         from: flightPart.startPoint, to: flightEndPoint,

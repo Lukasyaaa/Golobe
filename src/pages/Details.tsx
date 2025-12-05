@@ -120,14 +120,14 @@ export const Details : FC<DetailsProps> = ({contentType}) => {
                 locationText: data.fromAddress as string,
                 current: data.toAirport as string,
                 heading: flightPart.airline + " " + flightPart.plane,
-                price: transformPrice(getSeatsGroup(seatsType as objType<typeof SEATS_TYPE>, flightPart).price),
+                price: transformPrice(getSeatsGroup((seatsType as string).replace("-", " ") as objType<typeof SEATS_TYPE>, flightPart).price),
                 startDate: flightPart.departTime.year + "-" + addZero(flightPart.departTime.month) + addZero(flightPart.departTime.day),
                 startDescription: (data.fromCity as string) + "(" + flightPart.startPoint + ")",
                 startString: timeToString(flightPart.departTime.units),
                 endDate: flightPart.arrayTime.year + "-" + addZero(flightPart.arrayTime.month) + addZero(flightPart.arrayTime.day),
                 endDescription: data.city + "(" + flightEndPoint + ")",
                 endString: timeToString(flightPart.arrayTime.units),
-                serviceDescription: String(seatsType),
+                serviceDescription: (seatsType as string).replace("-", " "),
                 facts: [
                     {
                         description: "Date", 
@@ -151,7 +151,7 @@ export const Details : FC<DetailsProps> = ({contentType}) => {
                     },
                     {
                         description: "Seat", 
-                        value: String(getSeatsGroup(seatsType as objType<typeof SEATS_TYPE>, flightPart).count),
+                        value: String(getSeatsGroup((seatsType as string).replace("-", " ") as objType<typeof SEATS_TYPE>, flightPart).count),
                         iconValue: {viewbox: {minX: 0, minY: 0, width: 15.5, height: 19}, width: 15.5, height: 19, pathes: [
                             {fill: "#8dd3bb", fillRule: FILL_RULE.nonzero, stroke: "unset", strokeWidth: "unset", strokeLinecap: STROKE_LINECAP.butt, strokeLinejoin: STROKE_LINEJOIN.miter, d: "m 3.59,3.415 c -0.78,-0.78 -0.78,-2.05 0,-2.83 0.78,-0.78 2.05,-0.78 2.83,0 0.78,0.78 0.78,2.05 0,2.83 -0.79,0.79 -2.05,0.79 -2.83,0 z M 2,14.005 v -8 c 0,-0.55 -0.45,-1 -1,-1 -0.55,0 -1,0.45 -1,1 v 8 c 0,2.76 2.24,5 5,5 h 5 c 0.55,0 1,-0.45 1,-1 0,-0.55 -0.45,-1 -1,-1 H 5 c -1.66,0 -3,-1.34 -3,-3 z m 13.28,3.35 -3.77,-3.77 c -0.37,-0.37 -0.88,-0.58 -1.41,-0.58 H 7.5 v -3.68 c 1.09,0.89 2.66,1.7 4.2,2.02 0.67,0.14 1.3,-0.36 1.3,-1.04 0,-0.53 -0.39,-0.96 -0.92,-1.05 C 10.66,9.015 9.2,8.245 8.33,7.28499 L 6.93,5.735 C 6.74,5.525 6.5,5.355 6.24,5.23499 5.95,5.095 5.62,5.005 5.28,5.005 H 5.25 C 4.01,5.005 3,6.015 3,7.255 v 5.75 c 0,1.66 1.34,3 3,3 h 5.07 l 2.78,2.78 c 0.39,0.39 1.04,0.39 1.43,0 0.4,-0.39 0.4,-1.03 0,-1.43 z"}
                         ]}

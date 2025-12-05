@@ -100,8 +100,8 @@ export const App : FC = () =>  {
                 <Route path={logInPath} element={<Authorization type={AUTHORIZATION_TYPE.login} />} />
                 <Route path={signInPath} element={<Authorization type={AUTHORIZATION_TYPE.signIn} />} />
                 <Route path={forgotPasswordPath} element={<ForgotPassword />} />
-                <Route path={verifyCodePath} element={<VerifyCode />} />
-                <Route path={setPasswordPath} element={<SetPassword />} />
+                <Route path={verifyCodePath + "/:email"} element={<VerifyCode />} />
+                <Route path={setPasswordPath + "/:email"} element={<SetPassword />} />
 
                 <Route path={accountPath} element={<Account />} />
                 <Route path={favouritesPath} element={<Favoutires />} />

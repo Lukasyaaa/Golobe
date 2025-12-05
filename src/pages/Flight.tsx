@@ -156,7 +156,7 @@ export const Flight : FC = () => {
                     amenities={flightPart.amenities} 
                     airline={{srcs: getAirlineSrcs(flightPart.airline), alt: flightPart.airline}} 
                     plane={flightPart.plane} 
-                    path={flightPath + "/" + id + "/" + argOptions[choosedPart] + "/" + choosedSeats}
+                    path={flightPath + "/" + id + "/" + argOptions[choosedPart] + "/" + choosedSeats.replace(" ", "-")}
                 />
             </main>
         )

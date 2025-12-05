@@ -1,14 +1,16 @@
 import { useMemo, useState, type FC } from "react";
 import { AuthorizationImages } from "../../components/Authorization/Images";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { startPath, verifyCodePath } from "../../App";
 import { AuthorizationVariants } from "../../components/Common/Blocks/AuthorizationVariants";
-import { FILL_RULE, INPUT_VALIDATIONS, STROKE_LINECAP, STROKE_LINEJOIN, type AuthorizationVariant, type OneDataInputValidation } from "../../types";
+import { FILL_RULE, INPUT_VALIDATIONS, STROKE_LINECAP, STROKE_LINEJOIN, type AuthorizationVariant, type OneDataInputValidation, type User } from "../../types";
 import { AuthorizationBack } from "../../components/Authorization/Back";
 import { Input, type InputAnother } from "../../components/Common/Blocks/Interaction/Input";
 
 export const ForgotPassword: FC = () => {
+    const navigate = useNavigate();
     let [email, setEmail] = useState<string>("");
+    const users = JSON.parse(localStorage.getItem("users") || "[]") as User[];
     const emailAbout : InputAnother = {
         placeholder: "john.doe@gmail.com", subinput: "Email", id: "email", 
         isCanHide: false, state: email, setState: setEmail, 
@@ -17,7 +19,16 @@ export const ForgotPassword: FC = () => {
     }
 
     let [error, setError] = useState<string>("");
-    const checkinInput = () => setError(emailAbout.validation(email));
+    const checkinInput = () => {
+        const isHaveUser = users.some(user => user.email.includes(email));
+        if(emailAbout.validation(email) !== ""){
+            setError(emailAbout.validation(email));
+        } else if(!isHaveUser){
+            setError("Not have That user");
+        } else {
+            navigate(verifyCodePath + "/" + email);
+        }
+    }
 
     const variants: AuthorizationVariant[] = useMemo(() => [
         {
@@ -94,20 +105,12 @@ export const ForgotPassword: FC = () => {
                     <h1 className="forgot-password__heading authorization-part__heading">Forgot your password?</h1>
                     <div className="forgot-password__description authorization-part__description">Don’t worry, happens to all of us. Enter your email below to recover your password</div>
                     <Input about={emailAbout} parentCls={["forgot-password__field", "authorization-part__field"]} isBigger={false} isInMassive={false}/>
-                    {emailAbout.validation(emailAbout.state) === ""
-                        ? <NavLink 
-                            className="forgot-password__button authorization-part__button button_green" 
-                            to={verifyCodePath} onClick={checkinInput}
-                        >
-                            Submit
-                        </NavLink>
-                        : <button 
-                            className="forgot-password__button authorization-part__button button_green" 
-                            type="button" onClick={checkinInput}
-                        >
-                            Submit
-                        </button>
-                    }
+                    <button 
+                        className="forgot-password__button authorization-part__button button_green" 
+                        type="button" onClick={checkinInput}
+                    >
+                        Submit
+                    </button>
                     <div className="forgot-password__error authorization-part__error">
                         {error}
                     </div>

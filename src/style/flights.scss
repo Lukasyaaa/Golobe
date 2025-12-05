@@ -343,6 +343,11 @@
             }
         }
     }
+    &__image img{
+        background-color: variables.$darkGreen;
+        color: #fff; font-family: "Montserrat", sans-serif;
+        font-size: toRem(14); font-weight: 600;
+    }
     @media (max-width: variables.toEm(768, 16)) {
         &__images, &:not(._many-image) &__image{
             display: none;

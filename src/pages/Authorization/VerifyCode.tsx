@@ -1,13 +1,15 @@
 import { useState, type FC } from "react";
 import { AuthorizationImages } from "../../components/Authorization/Images";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { setPasswordPath, startPath } from "../../App";
 import { AuthorizationBack } from "../../components/Authorization/Back";
 import type { OneDataInputValidation } from "../../types";
 import { Input, type InputAnother } from "../../components/Common/Blocks/Interaction/Input";
 
 export const VerifyCode: FC = () => {
+    const { email } = useParams();
     let [code, setCode] = useState<string>("");
+    const navigate = useNavigate();
 
     const codeValidation: OneDataInputValidation = (value: string) => {
         if(value.length === 0) return "Fill Field";
@@ -22,7 +24,13 @@ export const VerifyCode: FC = () => {
     }
 
     let [error, setError] = useState<string>("");
-    const checkinInput = () => setError(codeValidation)
+    const checkinInput = () => {
+        if(codeAbout.validation(codeAbout.state) !== ""){
+            setError(codeValidation);
+        } else {
+            navigate(setPasswordPath + "/" +  email);
+        }
+    }
 
     return(
         <main 
@@ -49,20 +57,12 @@ export const VerifyCode: FC = () => {
                     <div className="verify-code__description authorization-part__description">An authentication code has been sent to your email.</div>
                     <Input about={codeAbout} parentCls={["verify-code__field", "authorization-part__field"]} isInMassive={false} isBigger={false} />
                     <div className="verify-code__resend">Didn’t receive a code? <button type="button">Resend</button></div>
-                    {codeAbout.validation(codeAbout.state) === ""
-                        ? <NavLink 
-                            className="verify-code__button authorization-part__button button_green" 
-                            to={setPasswordPath} onClick={checkinInput}
-                        >
-                            Submit
-                        </NavLink>
-                        : <button 
-                            className="verify-code__button authorization-part__button button_green" 
-                            type="button" onClick={checkinInput}
-                        >
-                            Submit
-                        </button>
-                    }
+                    <button 
+                        className="verify-code__button authorization-part__button button_green" 
+                        type="button" onClick={checkinInput}
+                    >
+                        Submit
+                    </button>
                     <div className="verify-code__error authorization-part__error">
                         {error}
                     </div>

@@ -1226,6 +1226,12 @@ label.button_green:not(:disabled):hover, button.button_green:not(:disabled):hove
         display: flex; align-items: center; justify-content: center; 
         height: toRem(56); width: toRem(48);
     }
+    &__show{
+        transition: filter 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+    }
+    &__show:hover, &__show:focus{
+        filter: drop-shadow(0 0 5px rgba($color: $darkGreen, $alpha: 0.5));
+    }
     &.without-subinput &__show, &.without-subinput &__error-icon,
     &.without-subinput &__icon-parent{
         top: 0;
@@ -3386,6 +3392,8 @@ main._appear-modal .modal{
     &__images{
         position: relative; padding-bottom: toPercent(816, $container);
         img{
+            color: #fff; font-family: "Montserrat", sans-serif;
+            font-size: toRem(14); font-weight: 600;
             border-radius: toRem(30); background-color: $mint; object-fit: cover;
             position: absolute; left: 0; top: 0; width: 100%; height: 100%;
         }
@@ -3407,6 +3415,10 @@ main._appear-modal .modal{
     &__logo{
         display: block;
         margin-bottom: toRem(64);
+        transition: filter 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+    }
+    &__logo:hover, &__logo:focus{
+        filter: drop-shadow(0 0 5px $mint);
     }
     @media (max-width: toEm($containerPaddings, 16)) {
         &__logo{ margin-bottom: toRem(48); }
@@ -3423,6 +3435,16 @@ main._appear-modal .modal{
 
     &__back{
         display: flex; align-items: center; margin-bottom: toRem(16);
+        transition: text-shadow 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+        svg{
+            transition: filter 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+        }
+    }
+    &__back:hover, &__back:focus{
+        text-shadow: 0 0 5px rgba($color: $darkGreen, $alpha: 0.5);
+        svg{
+            filter: drop-shadow(0 0 5px rgba($color: $darkGreen, $alpha: 0.5));
+        }
     }
     @media (max-width: toEm(480, 16)) {
         &__back{ margin-bottom: toRem(10); }
@@ -3580,11 +3602,17 @@ main._appear-modal .modal{
     &__to-another{
         text-align: center;
         color: $darkGreen;
-        a{ color: $red; }
+        a{ 
+            color: $red; 
+            transition: text-shadow 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+        }
         font-family: Montserrat; font-weight: 600;
         font-size: toRem(14); line-height: toEm(18, 14);
 
         margin: toRem(16) 0 toRem(40);
+    }
+    &__to-another a:hover, &__to-another a:focus{
+        text-shadow: 0 0 7.5px $red;
     }
     @media (max-width: toEm($containerPaddings, 16)) {
         &__to-another{ margin: toRem(16) 0 toRem(32); }
@@ -3612,6 +3640,9 @@ main._appear-modal .modal{
     &._checked &__input-parent::after{
         background-color: $darkGreen;
     }
+    &._hovered &__input-parent::after{
+        background-color: rgba($color: $darkGreen, $alpha: 0.5);
+    }
 
     &__input{
         width: toRem(20); height: toRem(20);
@@ -3623,7 +3654,11 @@ main._appear-modal .modal{
         font-size: toRem(14); line-height: toEm(18, 14);
         a{
             color: $red;
+            transition: text-shadow 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
         }
+    }
+    &__subinput a:hover, &__subinput a:focus{
+        text-shadow: 0 0 7.5px $red;
     }
 }
 
@@ -3676,6 +3711,10 @@ main._appear-modal .modal{
         color: $red;
         font-family: Montserrat; font-weight: 500;
         font-size: toRem(14); line-height: toEm(18, 14);
+        transition: text-shadow 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+    }
+    &__forgot:hover, &__forgot:focus{
+        text-shadow: 0 0 7.5px $red;
     }
 }
 .forgot-password{
@@ -3694,7 +3733,13 @@ main._appear-modal .modal{
         font-family: Montserrat; font-weight: 400;
         font-size: toRem(14); line-height: toEm(18, 14);
         margin: toRem(16) 0 toRem(32);
-        button{ color: $red; }
+        button{ 
+            color: $red; 
+            transition: text-shadow 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+        }
+    }
+    &__resend button:hover, &__resend button:focus{
+        text-shadow: 0 0 7.5px $red;
     }
     @media (max-width: toEm(992, 16)) {
         &__resend{ margin: toRem(16) 0 toRem(24); }

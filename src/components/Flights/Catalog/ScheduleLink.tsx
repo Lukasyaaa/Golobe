@@ -34,11 +34,11 @@ export const FlightSchedulePart : FC<FlightScheduleLinkProps> = ({
                     onChange={(e) => {
                         setChoosed(!e.currentTarget.checked ? (prev) => [...prev].filter(cId => cId !== id) : (prev) => [...prev, id])
                         e.currentTarget.blur();
-                        setHoveredId(-1);
+                        makeUnHoveredId();
                     }} checked={choosedValue.includes(id)}
                     onMouseEnter={makeHoveredId} onMouseLeave={(e) => {
                         if(e.currentTarget !== document.activeElement){
-                            setHoveredId(-1);
+                            makeUnHoveredId();
                         }
                     }} onFocus={makeHoveredId} onBlur={makeUnHoveredId}
                 />

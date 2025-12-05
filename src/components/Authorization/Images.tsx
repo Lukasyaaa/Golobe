@@ -1,6 +1,12 @@
 import { useMemo, useState, type FC } from "react";
 import type { Image } from "../../types";
 import { useInterval } from "../../hooks/useTimer";
+import AuthorizationFirstJpeg from "../../assets/authorization/1/image.jpg";
+import AuthorizationFirstWebp from "../../assets/authorization/1/image.webp";
+import AuthorizationSecondJpeg from "../../assets/authorization/2/image.jpg";
+import AuthorizationSecondWebp from "../../assets/authorization/2/image.webp";
+import AuthorizationThirdJpeg from "../../assets/authorization/3/image.jpg";
+import AuthorizationThirdWebp from "../../assets/authorization/3/image.webp";
 
 interface AuthorizationImagesProps{
     parentCls: string[]
@@ -11,15 +17,15 @@ export const AuthorizationImages : FC<AuthorizationImagesProps> = ({parentCls}) 
     let [hoveredId, setHoveredId] = useState<number>(-1);
     const images: Image[] = useMemo(() => 
         [{
-            srcs: {jpeg: "/img/authorization/1/image.jpg", webp: "/img/authorization/1/image.webp"},
+            srcs: {jpeg: AuthorizationFirstJpeg, webp: AuthorizationFirstWebp},
             alt: "Resort"
         },
         {
-            srcs: {jpeg: "/img/authorization/2/image.jpg", webp: "/img/authorization/2/image.webp"}, 
+            srcs: {jpeg: AuthorizationSecondJpeg, webp: AuthorizationSecondWebp}, 
             alt: "Airport"
         },
         {
-            srcs: {jpeg: "/img/authorization/3/image.jpg", webp: "/img/authorization/3/image.webp"}, 
+            srcs: {jpeg: AuthorizationThirdJpeg, webp: AuthorizationThirdWebp}, 
             alt: "Resort"
         }]
     , [])

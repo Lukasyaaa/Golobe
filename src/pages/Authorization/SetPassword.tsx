@@ -1,11 +1,18 @@
 import { useState, type FC } from "react";
 import { AuthorizationImages } from "../../components/Authorization/Images";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { logInPath, startPath } from "../../App";
-import { getInputValidation, INPUT_AUTHORIZATION_VALIDATION_TYPE, type OneDataInputValidation, type TwoDataInputValidation } from "../../types";
+import { getInputValidation, INPUT_AUTHORIZATION_VALIDATION_TYPE, type OneDataInputValidation, type TwoDataInputValidation, type User } from "../../types";
 import { Input, type InputAnother, type InputConfirm } from "../../components/Common/Blocks/Interaction/Input";
+import { useAppDispatch } from "../../store";
+import { userSlice } from "../../store/user";
 
 export const SetPassword: FC = () => {
+    const dispatch = useAppDispatch();
+    const { email } = useParams();
+    const users = JSON.parse(localStorage.getItem("users") || "[]") as User[];
+    const navigate = useNavigate();
+
     let [password, setPassword] = useState<string>("");
     let [confirm, setConfirm] = useState<string>("");
     const passwordAbout : InputAnother = {
@@ -35,7 +42,15 @@ export const SetPassword: FC = () => {
             const incorrectCount = validationResults.filter(item => item !== "Fill field").length - correctCount;
             errors.push("Incorrect input" + ((incorrectCount > 1) ? "s" : "")); 
         }
-        setError(errors.join(", "))
+        if(errors.length !== 0){
+            setError(errors.join(", "));
+        } else {
+            localStorage.setItem("users", JSON.stringify(users.map(u => 
+                u.email.includes(email as string) ? {...u, password} : u
+            )))
+            dispatch(userSlice.actions.updatePassword(password));
+            navigate(startPath);
+        }
     }
 
     return(
@@ -47,7 +62,7 @@ export const SetPassword: FC = () => {
             <div className="container">
                 <AuthorizationImages parentCls={["set-password", "authorization-part"]} />
                 <div className="set-password__subimages authorization-part__subimages">
-                    <NavLink className="set-password__logo" to={startPath}>
+                    <NavLink className="set-password__logo authorization-part__logo" to={startPath}>
                         <svg viewBox="0 0 110.35 36" width="110.35" height="36">
                             <path fill="rgb(17,34,17)" fillRule="nonzero" d="M14.7282 5.57672L17.9466 8.00816L15.9805 10.5097C17.3379 12.0457 17.8382 13.7984 17.8382 15.7295C17.8382 17.9092 17.0161 20.9844 14.1195 22.3068C17.0512 23.7727 17.7649 25.8823 17.7649 28.1353C17.7649 32.9982 14.0463 36 8.93505 36C3.82384 36 0 32.8898 0 28.1353L4.32413 28.1353C4.32413 30.4233 6.43362 31.9242 8.93505 31.9242C11.4365 31.9242 13.4026 30.5667 13.4026 28.1353C13.4026 25.7038 11.1146 24.5949 8.93505 24.5949C3.4319 24.5949 0 21.2361 0 15.7295C0 10.2229 4.00229 6.79085 8.93823 6.79085C10.3339 6.79085 11.7615 6.9693 12.9788 7.79147L14.7282 5.57672ZM4.32413 15.7295C4.32413 18.8047 6.39857 20.6274 8.93505 20.6274C11.4365 20.6274 13.5109 18.7696 13.5109 15.7295C13.5109 12.6894 11.4397 10.7615 8.93823 10.7615C6.39857 10.7615 4.32413 12.6544 4.32413 15.7295Z" />
                             <path fill="rgb(17,34,17)" fillRule="nonzero" d="M50.5673 0L50.5673 24.99L46.2432 24.99L46.2432 0L50.5673 0Z" />
@@ -64,20 +79,12 @@ export const SetPassword: FC = () => {
                         <Input about={passwordAbout} parentCls={["set-password__field", "authorization-part__field"]} isBigger={false} isInMassive={false}/>
                         <Input about={confirmAbout} parentCls={["set-password__field", "authorization-part__field"]} isBigger={false} isInMassive={false} />
                     </div>
-                    {passwordAbout.validation(password) === "" && confirmAbout.validation(confirm, password) === ""
-                        ? <NavLink 
-                            className="set-password__button authorization-part__button button_green" 
-                            to={logInPath} onClick={checkinInput}
-                        >
-                            Submit
-                        </NavLink>
-                        : <button 
-                            className="set-password__button authorization-part__button button_green" 
-                            type="button" onClick={checkinInput}
-                        >
-                            Submit
-                        </button>
-                    }
+                    <button 
+                        className="set-password__button authorization-part__button button_green" 
+                        type="button" onClick={checkinInput}
+                    >
+                        Submit
+                    </button>
                     <div className="set-password__error authorization-part__error">
                         {error}
                     </div>
