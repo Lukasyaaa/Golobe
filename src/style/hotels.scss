@@ -524,7 +524,7 @@
                 border-top-left-radius: variables.toRem(8);
             }
         }
-        &__image:not(.main){
+        &__image:not(.main) img{
             background-color: rgba($color: variables.$mint, $alpha: 0.4);
         }
         &__images:not(.three-more):not(.five-more) &__image.main:last-child{
